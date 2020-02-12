@@ -468,7 +468,7 @@ function serendipity_printCommentsByAuthor() {
     if (empty($serendipity['GET']['page'])) {
         $serendipity['GET']['page'] = 1;
     }
-    $sql_limit = $serendipity['fetchLimit'] * ($serendipity['GET']['page']-1) . ',' . $serendipity['fetchLimit'];
+    $sql_limit = (int)$serendipity['fetchLimit'] * ((int)$serendipity['GET']['page']-1) . ',' . (int)$serendipity['fetchLimit'];
     $c = serendipity_fetchComments(null, $sql_limit, 'co.entry_id DESC, co.id ASC', false, $type, $sql_where);
 
     $entry_comments = array();
@@ -722,7 +722,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
 
         serendipity_plugin_api::hook_event('backend_approvecomment', $rs);
     }
-
+    serendipity_cleanCache();
     if ($flip) {
         if ($moderate) return -1; // comment set to pending
         if (!$moderate) return 1; // comment set to approved
@@ -939,12 +939,10 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         }
     }
 
-    serendipity_purgeEntry($id, $t);
-
     if ($GLOBALS['tb_logging']) {
         fclose($fp);
     }
-
+    serendipity_cleanCache();
     return $cid;
 }
 
@@ -1003,6 +1001,11 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
 
     $commentInfo['type'] = $type;
     $commentInfo['source'] = $source;
+    
+    // Secure email addresses, only one [first] allowed to not mail to multiple recipients
+    $mailparts = explode(',', $commentInfo['email']);
+    $commentInfo['email'] = trim($mailparts[0]);
+
     serendipity_plugin_api::hook_event('frontend_saveComment', $ca, $commentInfo);
     if (!is_array($ca) || serendipity_db_bool($ca['allow_comments'])) {
         if ($GLOBALS['tb_logging']) {
@@ -1141,16 +1144,9 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
 
     // Check for using Tokens
     if ($serendipity['useCommentTokens']) {
-        $token = md5(uniqid(rand(),1));
+        $token = serendipity_generateCToken($comment_id);
         $path = $path . "_token_" . $token;
 
-        //Delete any comment tokens older than 1 week.
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                              WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
-
-        // Issue new comment moderation hash
-        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey)
-                              VALUES ('" . time() . "', '" . $token . "', 'comment_" . $comment_id ."')");
     }
 
     $deleteURI  = serendipity_rewriteURL(PATH_DELETE . '/'. $path .'/' . $comment_id . '/' . $id . '-' . serendipity_makeFilename($title)  . '.html', 'baseURL');
@@ -1159,7 +1155,7 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
     $eventData = array( 'comment_id'       => $comment_id,
                         'entry_id'         => $id,
                         'entryURI'         => $entryURI,
-                        '$path'            => $path,
+                        'path'             => $path,
                         'deleteURI'        => $deleteURI,
                         'approveURI'       => $approveURI,
                         'moderate_comment' => $moderate_comment,
@@ -1220,4 +1216,29 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
     }
 
     return serendipity_sendMail($to, $subject, $text, $fromEmail, null, $fromName);
+}
+
+/**
+ * Generates a token for E-Mail moderation of comments 
+ * and stores it in the database
+ *
+ * @access public
+ * @param  int      ID of the comment to generate the token for
+ * @return string   The generated token
+ */
+function serendipity_generateCToken($cid) {
+
+    global $serendipity;
+
+    $ctoken = md5(uniqid(rand(),1));
+    
+        //Delete any comment tokens older than 1 week.
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                              WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
+
+        // Issue new comment moderation hash
+        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey)
+                              VALUES ('" . time() . "', '" . $ctoken . "', 'comment_" . $cid ."')");
+    return $ctoken;
+                              
 }

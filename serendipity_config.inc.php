@@ -47,7 +47,7 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version'] = '2.1.2-beta1';
+$serendipity['version'] = '2.4-alpha1';
 
 
 // Setting this to 'false' will enable debugging output. All alpha/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
@@ -137,50 +137,68 @@ if (!isset($serendipity['template_backend'])) {
     $serendipity['template_backend'] = '2k11';
 }
 
+// The default page title of backend pages is "section | blog title | SERENDIPITY_ADMIN_SUITE"
+// If set to true (in serendipity_config_local.inc.php), the page title will be
+// "blog title | section | SERENDIPITY_ADMIN_SUITE" instead
+if (!isset($serendipity['backendBlogtitleFirst'])) {
+    $serendipity['backendBlogtitleFirst'] = false;
+}
+
+// Dashboard: set number of comments and drafts / future entries to be shown
+if (!isset($serendipity['dashboardCommentsLimit'])) {
+    $serendipity['dashboardCommentsLimit'] = 5;
+}
+
+if (!isset($serendipity['dashboardEntriesLimit'])) {
+    $serendipity['dashboardEntriesLimit'] = 5;
+}
+
 // Available languages
 if (!isset($serendipity['languages'])) {
     $serendipity['languages'] = array('en' => 'English',
-                                  'de' => 'German',
-                                  'da' => 'Danish',
-                                  'es' => 'Spanish',
-                                  'fr' => 'French',
-                                  'fi' => 'Finnish',
-                                  'cs' => 'Czech (Win-1250)',
-                                  'cz' => 'Czech (ISO-8859-2)',
-                                  'sk' => 'Slovak',
-                                  'nl' => 'Dutch',
-                                  'is' => 'Icelandic',
-                                  'tr' => 'Turkish',
-                                  'se' => 'Swedish',
-                                  'pt' => 'Portuguese Brazilian',
-                                  'pt_PT' => 'Portuguese European',
-                                  'bg' => 'Bulgarian',
-                                  'hu' => 'Hungarian',
-                                  'no' => 'Norwegian',
-                                  'pl' => 'Polish',
-                                  'ro' => 'Romanian',
-                                  'it' => 'Italian',
-                                  'ru' => 'Russian',
-                                  'fa' => 'Persian',
-                                  'tw' => 'Traditional Chinese (Big5)',
-                                  'tn' => 'Traditional Chinese (UTF-8)',
-                                  'zh' => 'Simplified Chinese (GB2312)',
-                                  'cn' => 'Simplified Chinese (UTF-8)',
-                                  'ja' => 'Japanese',
-                                  'ko' => 'Korean',
-                                  'sa' => 'Arabic',
-                                  'ta' => 'Tamil');
+                                  'de' => 'Deutsch',
+                                  'da' => 'Dansk',
+                                  'es' => 'Español',
+                                  'fr' => 'Français',
+                                  'fi' => 'Suomalainen',
+                                  'cs' => 'čeština (Win-1250)',
+                                  'cz' => 'čeština (ISO-8859-2)',
+                                  'sk' => 'Slovenský',
+                                  'nl' => 'Nederlands',
+                                  'is' => 'Íslensku',
+                                  'tr' => 'Türk',
+                                  'se' => 'svenska',
+                                  'pt' => 'português brasileiro',
+                                  'pt_PT' => 'português europeu',
+                                  'bg' => 'Български',
+                                  'hu' => 'magyar',
+                                  'no' => 'norsk',
+                                  'pl' => 'polski',
+                                  'ro' => 'limba română',
+                                  'it' => 'italiano',
+                                  'ru' => 'Русский язык',
+                                  'fa' => 'Fārsī',
+                                  'tw' => '正體字/繁體字 (Big5)',
+                                  'tn' => '正體字/繁體字 (UTF-8)',
+                                  'zh' => '简化字 (GB2312)',
+                                  'cn' => '简化字 (UTF-8)',
+                                  'ja' => '日本語',
+                                  'ko' => '한국어, 조선말',
+                                  'sa' => 'العربية',
+                                  'ta' => 'தமிழ்');
 }
 
 // Available Calendars
 $serendipity['calendars'] = array('gregorian'   => 'Gregorian',
                                   'persian-utf8' => 'Persian (utf8)');
 // Load main language file
+// if installed === false language autodetect or 'en', else nothing happens
+// because serendipity['lang'] is not defined yet
 include($serendipity['serendipityPath'] . 'include/lang.inc.php');
 
 $serendipity['charsets'] = array(
     'UTF-8/' => 'UTF-8',
-    ''        => CHARSET_NATIVE
+    ''        => (defined('CHARSET_NATIVE') ? CHARSET_NATIVE : 'CHARSET_NATIVE')
 );
 
 @define('PATH_SMARTY_COMPILE', 'templates_c'); // will be placed inside the template directory
@@ -357,8 +375,17 @@ if (IS_installed === true && php_sapi_name() !== 'cli') {
 
 if (isset($_SESSION['serendipityAuthorid'])) {
     serendipity_load_configuration($_SESSION['serendipityAuthorid']);
+    // load_configuration overwrites $serendipity['lang'], so roll back if another language was detected
+    // in the backend should always the user language be shown
+    // in the frontend logged in same as any other user, exept with fallback to user instead of default
     $serendipity['lang'] = serendipity_getPostAuthSessionLanguage();
 }
+
+// Ensure that these limits do not contain strings and have positive values
+$serendipity['fetchLimit'] = (int)$serendipity['fetchLimit'];
+if ($serendipity['fetchLimit'] < 1) $serendipity['fetchLimit'] = 1;
+$serendipity['RSSfetchLimit'] = (int)$serendipity['RSSfetchLimit'];
+if ($serendipity['RSSfetchLimit'] < 1) $serendipity['RSSfetchLimit'] = 1;
 
 // Try to fix some path settings. It seems common users have this setting wrong
 // when s9y is installed into the root directory, especially 0.7.1 upgrade users.
@@ -378,7 +405,7 @@ include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
 // Reset charset definition now that final language is known
 $serendipity['charsets'] = array(
     'UTF-8/' => 'UTF-8',
-    ''        => CHARSET_NATIVE
+    ''        => (defined('CHARSET_NATIVE') ? CHARSET_NATIVE : 'CHARSET_NATIVE')
 );
 
 // Set current locale, if any has been defined
@@ -404,6 +431,22 @@ if (function_exists('date_default_timezone_set')) {
 $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DESC,
                                          USERLEVEL_CHIEF => USERLEVEL_CHIEF_DESC,
                                          USERLEVEL_ADMIN => USERLEVEL_ADMIN_DESC);
+
+// Some stuff...
+if (!isset($_SESSION['serendipityAuthedUser'])) {
+    $_SESSION['serendipityAuthedUser'] = false;
+}
+
+if (isset($_SESSION['serendipityUser'])) {
+    $serendipity['user']  = $_SESSION['serendipityUser'];
+}
+
+# && maintenanceMode is on
+//if ( {
+if (($_SESSION['serendipityAuthedUser'] === false) && (serendipity_db_bool(serendipity_get_config_var("maintenanceMode", false)) === true) && time() < serendipity_get_config_var("maintenanceModeEnd", 0)) {
+    header('HTTP/1.1 503 Service Unavailable');
+    serendipity_die("Maintenance mode is on, please check back later");
+}
 
 // Redirect to the upgrader
 if (IS_up2date === false && !defined('IN_upgrader')) {
@@ -431,15 +474,6 @@ if (isset($serendipity['GET']['searchTerm'])) {
     $serendipity['GET']['searchTerm'] = (is_string($serendipity['GET']['searchTerm']) ? serendipity_specialchars(strip_tags($serendipity['GET']['searchTerm'])) : '');
 }
 
-// Some stuff...
-if (!isset($_SESSION['serendipityAuthedUser'])) {
-    $_SESSION['serendipityAuthedUser'] = false;
-}
-
-if (isset($_SESSION['serendipityUser'])) {
-    $serendipity['user']  = $_SESSION['serendipityUser'];
-}
-
 if (isset($_SESSION['serendipityEmail'])) {
     $serendipity['email'] = $_SESSION['serendipityEmail'];
 }
@@ -449,7 +483,7 @@ if (defined('IN_serendipity_admin') && !isset($serendipity['use_autosave'])) {
 }
 
 if (!isset($serendipity['useInternalCache'])) {
-    $serendipity['useInternalCache'] = false;
+    $serendipity['useInternalCache'] = true;
 }
 
 // You can set parameters which ImageMagick should use to generate the thumbnails

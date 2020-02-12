@@ -55,7 +55,7 @@ function distanceOfTimeInWords($fromTime, $toTime = 0) {
 // call from tpl as {elapsed_time_words from_time=$comment.timestamp}
 $serendipity['smarty']->register_function('elapsed_time_words', 'timeAgoInWords');
 
-function timeAgoInWords($params, &$smarty) {
+function timeAgoInWords($params, $smarty) {
         return distanceOfTimeInWords($params['from_time'], time());
     }
 
@@ -152,6 +152,12 @@ $template_config = array(
         'default'       => false,
     ),
     array(
+        'var'           => 'use_googlefonts',
+        'name'          => USE_GOOGLEFONTS,
+        'type'          => 'boolean',
+        'default'       => true,
+    ),
+    array(
         'var'           => 'use_corenav',
         'name'          => USE_CORENAV,
         'type'          => 'boolean',
@@ -203,7 +209,7 @@ $template_config = array(
         'var'           => 'copyright',
         'name'          => COPYRIGHT,
         'type'          => 'string',
-        'default'       => 'Copyright &copy; ' . $serendipity['blogTitle'] . ' ' . date(Y) . ' | <a href="' . $serendipity['baseURL'] . 'serendipity_admin.php">Admin</a>',
+        'default'       => 'Copyright &copy; ' . $serendipity['blogTitle'] . ' ' . date('Y') . ' | <a href="' . $serendipity['baseURL'] . 'serendipity_admin.php">Admin</a>',
     ),  
 );
 
@@ -220,7 +226,7 @@ for ($i = 0; $i < $template_loaded_config['amount']; $i++) {
 $template_config_groups = array(
     THEME_README        => array('theme_instructions'),
     THEME_HEADERS       => array('default_header_image', 'entry_default_header_image', 'staticpage_header_image', 'contactform_header_image', 'archive_header_image'),
-    THEME_PAGE_OPTIONS  => array('home_link_text', 'date_format', 'comment_time_format','subtitle_use_entrybody', 'entrybody_detailed_only', 'show_comment_link', 'categories_on_archive', 'tags_on_archive', 'copyright'),   
+    THEME_PAGE_OPTIONS  => array('use_googlefonts', 'home_link_text', 'date_format', 'comment_time_format','subtitle_use_entrybody', 'entrybody_detailed_only', 'show_comment_link', 'categories_on_archive', 'tags_on_archive', 'copyright'),   
     THEME_SOCIAL_LINKS  => array('twitter_url', 'facebook_url', 'rss_url', 'github_url', 'instagram_url', 'pinterest_url'),
     THEME_NAVIGATION    => $navlinks_collapse
 );

@@ -364,10 +364,10 @@
         if ($('#serendipity_imagecomment').val() != '') {
             var comment = f['serendipity[imagecomment]'].value;
 
-            var img = '<div class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
+            var img = '<figure class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
                   +     '<div class="serendipity_imageComment_img">' + img + '</div>'
-                  +     '<div class="serendipity_imageComment_txt">' + comment + '</div>'
-                  + '</div>';
+                  +     '<figcaption class="serendipity_imageComment_txt">' + comment + '</figcaption>'
+                  + '</figure>';
         }
 
         if (parent.self.opener.serendipity == undefined) {
@@ -562,7 +562,7 @@
 
     // Delete file from ML
     serendipity.deleteFromML = function(id, fname) {
-        if (confirm('{$CONST.DELETE}')) {
+        if (confirm('{$CONST.DELETE}?')) {
             var media_token_url = $('input[name*="serendipity[token]"]').val();
             $.post('?serendipity[adminModule]=images&serendipity[adminAction]=doDelete&serendipity[fid]='+ escape(id) +'&serendipity[token]='+ media_token_url)
             .done(function(jqXHR, textStatus) {
@@ -659,15 +659,33 @@
         }
     }
 
-    // ..?
+    // check that the entry is validated for saving, used mainly by serendipity_event_entrycheck
     serendipity.checkSave = function() {
         {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
         return true;
     }
 
+    // set a category to checked
+    serendipity.enableCategory = function(catNumber) {
+        $("#" + "serendipity_category_" + catNumber).prop("checked", true);
+    }
+
+    // is no category enabled?
+    serendipity.hasNoCategoryEnabled = function() {
+        var $source = $('#edit_entry_category');
+        var $selected = $source.find('input:checkbox:checked');
+
+        if ($selected.length > 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     // save in which directory the first uploaded files is stored (the default when only inserting one file)
     serendipity.rememberUploadOptions = function() {
-        serendipity.SetCookie("addmedia_directory", $('#target_directory_2').val());
+        serendipity.SetCookie("addmedia_directory", $('#target_directory_1').val());
     }
 
     // Clones the upload form template
@@ -1017,6 +1035,10 @@ $(function() {
         serendipity.serendipity_imageSelector_done();
     });
 
+    $('#serendipityEntry').submit(function() {
+        return serendipity.checkSave();
+    });
+
     // Click events
     //
     // Make the timestamp readable in browser not supporting datetime-local.
@@ -1328,7 +1350,7 @@ $(function() {
             e.preventDefault();
         });
 
-        $('.show_config_option_now').click();
+        $('.show_config_option:not(.show_config_option_now)').click();
     }
 
     $('.change_preview').change(function() {
@@ -1362,10 +1384,44 @@ $(function() {
     });
 
     // Selection for multidelete
-    $('.multidelete').click(function() {
+    $('.multidelete, .multiinsert').click(function() {
         var $el = $(this);
         serendipity.highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
+        var selectionAmount = $('.multidelete:checked, .multiinsert:checked').length;
+        if (selectionAmount > 0) {
+            $('#media_galleryinsert').fadeIn();
+        } else {
+            $('#media_galleryinsert').fadeOut();
+        }
     });
+
+    // Also marks checkbox when header is clicked
+    $('.media_file h3').on('click', function() {
+        $(this).parent().find('.multiinsert').click();
+    });
+
+    // When clicking the 'Insert all' button, check whether only one or multiple
+    // images are selected
+    $('#media_galleryinsert .image_insert').on('click', function(e) {
+        var selectionAmount = $('.multidelete:checked, .multiinsert:checked').length;
+        if (selectionAmount == 0) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Actually do a single insert
+        if (selectionAmount == 1) {
+            e.preventDefault();
+            var actualTargetElement = $('.multidelete:checked, .multiinsert:checked').closest('.media_file').find('.media_file_preview a').first();
+            // This below is a hack. Triggering actualTargetElement.click() does not work. Probably because MFP overrides click events within a modal popup.
+            // So we need to do something dirty and directly access the location href. Don't tell my mom.
+            location.href = actualTargetElement.attr('href');
+            return false;
+        }
+    });
+
+    // hide gallery insert button until an image is selected
+    $('#media_galleryinsert').hide();
 
     // Invert checkboxes
     $('.invert_selection').click(function() {

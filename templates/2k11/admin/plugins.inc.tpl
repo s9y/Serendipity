@@ -5,7 +5,7 @@
 
         <ul class="plainList">
         {foreach $save_errors as $save_error}
-            <li>$save_error</li>
+            <li>{$save_error}</li>
         {/foreach}
         </ul>
     </div>
@@ -79,7 +79,7 @@
         <span class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.NO_UPDATES}</span>
     {else}
         {foreach $pluggroups AS $pluggroup => $groupstack}
-            {if $only_group && $pluggroup != $only_group}{continue}{/if}
+            {if $only_group && $pluggroup != $only_group || empty($pluggroup)}{continue}{/if}
             <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
             {if $only_group == 'UPGRADE' && $pluggroups['UPGRADE']|@count > 1}
                 <button id="updateAll">Update All</button>
@@ -111,7 +111,10 @@
                             <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author}</li>
                         {/if}
                         {if ! empty($plug.version)}
-                            <li class="plugin_version"><b>{$CONST.VERSION}:</b> {$plug.version}</li>
+                            <li class="plugin_version"><b>{$CONST.VERSION|capitalize}:</b> {$plug.version}</li>
+                        {/if}
+                        {if ! empty($plug.pluginlocation) && $plug.pluginlocation != 'local'}
+                            <li class="plugin_link"><a href="http://spartacus.s9y.org/index.php?mode=bygroups_{$plug.plugintype}_{$lang}#{$plug.class_name|escape}">{$CONST.PLUGIN_LINK_SPARTACUS}</a></li>
                         {/if}
                         {if ! empty($plug.website)}
                             <li class="plugin_web"><a href="{$plug.website|escape}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
@@ -129,8 +132,8 @@
                     </div>
 
                     <div class="plugin_status">
-                    {if isset($requirements_failures.{$plug.class_name})}
-                        <span class="unmet_requirements msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
+                    {if isset($requirement_failures.{$plug.class_name})}
+                        <span class="unmet_requirements msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirement_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirement_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirement_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
                     {elseif $plug['upgradable'] == true}
                         <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug['customURI'])}{$plug.customURI}{/if}&amp;{$urltoken}" title="{$CONST.PLUGIN_EVENT_SPARTACUS_CHECK_HINT}">{$CONST.UPGRADE}</a>
                     {elseif $plug.installable == true}
@@ -163,7 +166,7 @@
         <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.ERROR}: {$CONST.PLUGIN_ALREADY_INSTALLED}</span>
     {/if}
     {if $updateAllMsg}
-        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}: All Plugins updated</span> {* i18n *}
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}: {$CONST.PLUGIN_ALL_UPDATED}</span>
     {/if}
     <div class="tabs" id="pluginlist_tabs">
         <section id="pluginlist_sidebar" class="panel">

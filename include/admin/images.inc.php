@@ -127,30 +127,26 @@ switch ($serendipity['GET']['adminAction']) {
             echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
-        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && empty($serendipity['POST']['newDir']) && isset($_POST['toggle_move'])) {
+        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && (! isset($serendipity['POST']['newDir'])) && isset($_POST['toggle_move'])) {
             echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_DIR, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
         // case bulk multimove (leave the fake oldDir being send as an empty dir)
-        if (isset($serendipity['POST']['oldDir']) && !empty($serendipity['POST']['newDir'])) {
+        if (!empty($serendipity['POST']['newDir'])) {
             $messages = array();
             $multiMoveImages = $serendipity['POST']['multiDelete']; // The 'multiDelete' key name should better be renamed to 'multiCheck', but this would need to change 2k11/admin/serendipity_editor.js, images.inc.tpl, media_items.tpl, media_pane.tpl and this file
             unset($serendipity['POST']['multiDelete']);
 
-            $oDir = ''; // oldDir is relative to Uploads/, since we can not specify a directory of a ML bulk move directly
-            $nDir = serendipity_specialchars((string)$serendipity['POST']['newDir'] . '/'); // relative to Uploads/
+            $nDir = serendipity_specialchars(serendipity_dirSlash('end', (string)$serendipity['POST']['newDir'])); // relative to Uploads/
 
-            if ($oDir != $nDir) {
-                foreach($multiMoveImages AS $mkey => $move_id) {
-                    $file = serendipity_fetchImageFromDatabase((int)$move_id);
-                    $oDir = $file['path']; // this now is the exact oldDir path of this ID
-                    if (serendipity_moveMediaDirectory($oDir, $nDir, 'file', (int)$move_id, $file)) {
-                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVED . "</span>\n", $nDir);
-                    } else {
-                        $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVE_ERROR . "</span>\n", $nDir);
-                    }
+            foreach($multiMoveImages AS $mkey => $move_id) {
+                if (serendipity_moveMediaDirectory('', $nDir, 'file', (int)$move_id)) {
+                    $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVED . "</span>\n", $nDir);
+                } else {
+                    $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVE_ERROR . "</span>\n", $nDir);
                 }
             }
+            
             $data['messages'] = $messages;
             unset($messages);
             // remember to return to last selected media library directory
@@ -182,21 +178,10 @@ switch ($serendipity['GET']['adminAction']) {
 
     case 'rename':
         $serendipity['GET']['fid'] = (int)$serendipity['GET']['fid'];
-        $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
-
-        if (LANG_CHARSET == 'UTF-8') {
-             // yeah, turn on content to be a real utf-8 string, which it isn't at this point! Else serendipity_makeFilename() can not work!
-             $serendipity['GET']['newname'] = utf8_encode($serendipity['GET']['newname']);
-        }
-        $serendipity['GET']['newname'] = str_replace(' ', '_', $serendipity['GET']['newname']); // keep serendipity_uploadSecure(URL) whitespace convert behaviour, when using serendipity_makeFilename()
-        $serendipity['GET']['newname'] = serendipity_uploadSecure(serendipity_makeFilename($serendipity['GET']['newname']), true);
-
-        if (!is_array($file) || !serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete') ||
-           (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
+        if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
             return;
         }
-        // since this is a javascript action only, all event success/error action messages have moved into js
-        serendipity_moveMediaDirectory(null, $serendipity['GET']['newname'], 'file', $serendipity['GET']['fid'], $file);
+        serendipity_renameFile($serendipity['GET']['fid'], $serendipity['GET']['newname']);
         break;
 
     case 'properties':
@@ -314,7 +299,7 @@ switch ($serendipity['GET']['adminAction']) {
                                 'thumbSize' => $serendipity['thumbSize'],
                                 'thumb'     => $serendipity['thumbSuffix']
                             ));
-                            serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
+                            serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs, $tfile);
 
                             foreach($thumbs as $thumb) {
                                 // Create thumbnail
@@ -351,6 +336,7 @@ switch ($serendipity['GET']['adminAction']) {
                 foreach($uploadfiles AS $uploadfile) {
                     $uploadFileCounter++;
                     $target_filename = $serendipity['POST']['target_filename'][$idx];
+                    
                     $uploadtmp  = $_FILES['serendipity']['tmp_name']['userfile'][$idx];
                     if (is_array($uploadtmp)) {
                         $uploadtmp = $uploadtmp[$uploadFileCounter];
@@ -365,6 +351,7 @@ switch ($serendipity['GET']['adminAction']) {
                     }
 
                     $tfile = str_replace(' ', '_', basename($tfile)); // keep serendipity_uploadSecure(URL) whitespace convert behaviour, when using serendipity_makeFilename()
+                    $tfile = serendipity_specialchars($tfile); # needed to prevent ability for uploader to inject javascript
                     $tfile = serendipity_uploadSecure(serendipity_makeFilename($tfile));
 
                     if (serendipity_isActiveFile($tfile)) {
@@ -389,7 +376,7 @@ switch ($serendipity['GET']['adminAction']) {
 
                     // Accept file
                     if (is_uploaded_file($uploadtmp) && serendipity_checkMediaSize($uploadtmp) && move_uploaded_file($uploadtmp, $target)) {
-                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . FILE_UPLOADED . "</span>\n", $uploadfile , $target);
+                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . FILE_UPLOADED . "</span>\n", $tfile, $target);
                         @umask(0000);
                         @chmod($target, 0664);
 
@@ -397,7 +384,7 @@ switch ($serendipity['GET']['adminAction']) {
                             'thumbSize' => $serendipity['thumbSize'],
                             'thumb'     => $serendipity['thumbSuffix']
                         ));
-                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
+                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs, $target);
 
                         foreach($thumbs as $thumb) {
                             // Create thumbnail
@@ -486,13 +473,13 @@ switch ($serendipity['GET']['adminAction']) {
             // preserve moving subdir directories to serendipity_makeFilename(), preserves dir/subdir/ for example
             $_newDir = $serendipity['POST']['newDir'];
             $newfile = serendipity_makeFilename(basename($_newDir));
-            $newDir  = (dirname($_newDir) != '.') ? dirname($_newDir) . '/' . $newfile : $newfile;
+            $newDir  = (dirname($_newDir) != '.') ? dirname($_newDir) . '/' . $newfile : $newfile . '/';
             $oldDir  = serendipity_uploadSecure($serendipity['POST']['oldDir']);
 
             if ($oldDir != $newDir) {
                 //is this possible? Ian: YES! Change an already set directory.
                 ob_start();
-                serendipity_moveMediaDirectory($oldDir, $newDir);
+                serendipity_renameDir($oldDir, $newDir);
                 $data['messages'] = ob_get_contents();
                 ob_end_clean();
                 $use_dir = $newDir;
@@ -741,29 +728,56 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'choose':
-        $file          = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
-        $media['file'] = &$file;
-        if (!is_array($file)) {
-            $media['perm_denied'] = true;
+        if ($serendipity['GET']['fid']) {
+            $file          = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
+            $media['file'] = &$file;
+            if (!is_array($file)) {
+                $media['perm_denied'] = true;
+                break;
+            }
+
+            serendipity_prepareMedia($file);
+
+            $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
+            serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
+
+            if ($file['is_image']) {
+                $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . serendipity_specialchars($serendipity['GET']['textarea']) . '\')';
+
+                if (!empty($serendipity['GET']['filename_only']) && $serendipity['GET']['filename_only'] !== 'true') {
+                    $file['fast_select'] = true;
+                }
+            }
+            $media = array_merge($serendipity['GET'], $media);
+            $serendipity['smarty']->assignByRef('media', $media);
+            echo serendipity_smarty_show('admin/media_choose.tpl', $data);
             break;
-        }
+        } else {
+            // TODO: Merge this with the codepath above?
+            if ($serendipity['GET']['fids']) {
+                $medias = [];
+                // that means the user wants to insert multiple images into the editor, which we will offer in media_choose.tpl, while preparing the urls here
+                $fids = $serendipity['GET']['fids'];
+                foreach($fids as $fid) {
+                    $media['file'] = serendipity_fetchImageFromDatabase($fid);;
+                    if (!is_array($media['file'])) {
+                        $media['perm_denied'] = true;
+                        $medias[] = $media;
+                        continue;
+                    }
 
-        serendipity_prepareMedia($file);
+                    serendipity_prepareMedia($media['file']);
 
-        $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
-        serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
-
-        if ($file['is_image']) {
-            $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . serendipity_specialchars($serendipity['GET']['textarea']) . '\')';
-
-            if (!empty($serendipity['GET']['filename_only']) && $serendipity['GET']['filename_only'] !== 'true') {
-                $file['fast_select'] = true;
+                    $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
+                    serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
+                    $medias[] = $media;
+                }
+                $serendipity['smarty']->assignByRef('medias', $medias);
+                $serendipity['smarty']->assign('textarea', $serendipity['GET']['textarea']);
+                echo serendipity_smarty_show('admin/media_choose.tpl', $data);
+                break;
             }
         }
-        $media = array_merge($serendipity['GET'], $media);
-        $serendipity['smarty']->assignByRef('media', $media);
-        echo serendipity_smarty_show('admin/media_choose.tpl', $data);
-        break;
 
     default:
         $data['case_default'] = true;

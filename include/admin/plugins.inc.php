@@ -18,9 +18,9 @@ if (!class_exists('Smarty')) {
     include_once SMARTY_DIR . 'Smarty.class.php';
 }
 
-if (isset($_GET['serendipity']['plugin_to_move']) && isset($_GET['submit']) && serendipity_checkFormToken()) {
+if (isset($serendipity['GET']['plugin_to_move']) && isset($serendipity['GET']['submit']) && serendipity_checkFormToken()) {
 
-    if (isset($_GET['serendipity']['event_plugin'])) {
+    if (isset($serendipity['GET']['event_plugin'])) {
         $plugins = serendipity_plugin_api::enum_plugins('event', false);
     } else {
         $plugins = serendipity_plugin_api::enum_plugins('event', true);
@@ -32,7 +32,7 @@ if (isset($_GET['serendipity']['plugin_to_move']) && isset($_GET['submit']) && s
     for($idx = 0; $idx < count($plugins); $idx++) {
         $plugins[$idx]['sort_order'] = $idx;
 
-        if ($plugins[$idx]['name'] == $_GET['serendipity']['plugin_to_move']) {
+        if ($plugins[$idx]['name'] == $serendipity['GET']['plugin_to_move']) {
             $idx_to_move = $idx;
         }
     }
@@ -60,10 +60,10 @@ if (isset($_GET['serendipity']['plugin_to_move']) && isset($_GET['submit']) && s
             It's a behavior which really has no meaning. */
 }
 
-if (isset($_GET['serendipity']['plugin_to_conf'])) {
+if (isset($serendipity['GET']['plugin_to_conf'])) {
 
     /* configure a specific instance */
-    $plugin =& serendipity_plugin_api::load_plugin($_GET['serendipity']['plugin_to_conf']);
+    $plugin =& serendipity_plugin_api::load_plugin($serendipity['GET']['plugin_to_conf']);
 
     if (!($plugin->protected === FALSE || $plugin->serendipity_owner == '0' || $plugin->serendipity_owner == $serendipity['authorid'] || serendipity_checkPermission('adminPluginsMaintainOthers'))) {
         return;
@@ -222,7 +222,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $props['installable']  = !($props['stackable'] === false && in_array($class_data['true_name'], $plugins));
             $props['requirements'] = unserialize($props['requirements']);
 
-            if (empty($props['changelog']) && @file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
+            if (empty($props['changelog']) && @file_exists(dirname($props['plugin_file']) . '/ChangeLog')) {
                 $props['changelog'] = 'plugins/' . $props['pluginPath'] . '/ChangeLog';
             }
 
@@ -308,7 +308,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
         }
     }
-    $data['requirements_failues'] = $requirement_failures;
+    $data['requirement_failures'] = $requirement_failures;
 } elseif ( $serendipity['GET']['adminAction'] == 'renderOverlay' ) {
     $data['adminAction'] = 'overlay';
 } else {
@@ -466,7 +466,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
     $data['event_plugins'] = show_plugins(true);
 
-    if (count($serendipity['memSnaps']) > 0) {
+    if ($serendipity['memSnaps'] && count($serendipity['memSnaps']) > 0) {
         $data['$memsnaps'] = $serendipity['memSnaps'];
     }
     $data['updateAllMsg'] = isset($serendipity['GET']['updateAllMsg']);

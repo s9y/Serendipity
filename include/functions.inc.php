@@ -538,7 +538,7 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         if (LANG_CHARSET == 'UTF-8') {
             if (function_exists('imap_8bit') && !$serendipity['forceBase64']) {
                 $maildata['headers'][] = 'Content-Transfer-Encoding: quoted-printable';
-                $maildata['message']   = imap_8bit($maildata['message']);
+                $maildata['message']   = str_replace("\r\n","\n",imap_8bit($maildata['message']));
             } else {
                 $maildata['headers'][] = 'Content-Transfer-Encoding: base64';
                 $maildata['message']   = chunk_split(base64_encode($maildata['message']));
@@ -1060,6 +1060,7 @@ function serendipity_addCategory($name, $desc, $authorid, $icon, $parentid) {
         'category_description' => $desc
     );
 
+    serendipity_plugin_api::hook_event('multilingual_strip_langs',$data, array('category_name','category_description'));
     serendipity_insertPermalink($data, 'category');
     return $cid;
 }
@@ -1101,6 +1102,7 @@ function serendipity_updateCategory($cid, $name, $desc, $authorid, $icon, $paren
         'category_description' => $desc
     );
 
+    serendipity_plugin_api::hook_event('multilingual_strip_langs',$data, array('category_name','category_description'));
     serendipity_updatePermalink($data, 'category');
 }
 
@@ -1372,6 +1374,58 @@ function serendipity_url_allowed($url) {
     }
  
     return true;
+}
+
+use voku\cache\Cache;
+// Configure voku/simple-cache to use templates_c as directory for the opcache files, the fallback
+// when Memcached and Redis are not used. Returns the configured cache object. Used internally by
+// the other cache functions, you most likely never need to call this.
+function serendipity_setupCache() {
+    $cacheManager = new \voku\cache\CacheAdapterAutoManager();
+
+    $cacheManager->addAdapter(
+        \voku\cache\AdapterOpCache::class,
+        static function () {
+            global $serendipity;
+            $cacheDir = $serendipity['serendipityPath'] . '/templates_c/simple_cache';
+
+            return $cacheDir;
+        }
+    );
+
+    $cacheManager->addAdapter(
+        \voku\cache\AdapterArray::class
+    );
+    
+    $cache = new Cache(
+        null,
+        null,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        '',
+        $cacheManager,
+        false
+    );
+    return $cache;
+}
+
+function serendipity_cleanCache() {
+    $cache = serendipity_setupCache();
+    return $cache->removeAll();
+}
+
+function serendipity_cacheItem($key, $item, $ttl = 3600) {
+    $cache = serendipity_setupCache();
+    return $cache->setItem($key, $item, $ttl);
+}
+
+function serendipity_getCacheItem($key) {
+    $cache = serendipity_setupCache();
+    return $cache->getItem($key);
 }
 
 define("serendipity_FUNCTIONS_LOADED", true);

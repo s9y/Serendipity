@@ -156,18 +156,18 @@ if (!function_exists('errorToExceptionHandler')) {
                 break;
         }
 
-        // NOTE: We do NOT use ini_get('error_reporting'), because that would return the global error reporting, 
+        // NOTE: We do NOT use ini_get('error_reporting'), because that would return the global error reporting,
         // and not the one in our current content. @-silenced errors would otherwise never be caught on.
         $rep  = error_reporting();
 
         // Bypass error processing because it's @-silenced.
-        if ($rep == 0) { 
-            return false; 
+        if ($rep == 0) {
+            return false;
         }
 
         // if not using Serendipity testing and user or ISP has set PHPs display_errors to show no errors at all, respect this:
-        if ($serendipity['production'] === true && ini_get('display_errors') == 0) { 
-            return false; 
+        if ($serendipity['production'] === true && ini_get('display_errors') == 0) {
+            return false;
         }
 
         // Several plugins might not adapt to proper style. This should not completely kill our execution.
@@ -178,7 +178,7 @@ if (!function_exists('errorToExceptionHandler')) {
 
         $args = func_get_args();
 
-        /* 
+        /*
          * $serendipity['production'] can be:
          *
          * (bool) TRUE:         Live-blog, conceal error messages
@@ -373,8 +373,26 @@ if (ini_get('magic_quotes_gpc')) {
 }
 
 // Merge get and post into the serendipity array
+// It is vital that also an empty array is mapped as a reference
+// because the s9y core actually sets new array key values sometimes in $_GET and
+// sometimes in $serendipity['GET'] (and POST/COOKIE).
+// TODO: This is being worked on currently to be unified see #650
+if (!array_key_exists('serendipity', $_GET) || !is_array($_GET['serendipity'])) {
+    $_GET['serendipity'] = array();
+}
+
 $serendipity['GET']    = &$_GET['serendipity'];
+
+if (!array_key_exists('serendipity', $_POST) || !is_array($_POST['serendipity'])) {
+    $_POST['serendipity'] = array();
+}
+
 $serendipity['POST']   = &$_POST['serendipity'];
+
+if (!array_key_exists('serendipity', $_COOKIE) || !is_array($_COOKIE['serendipity'])) {
+    $_COOKIE['serendipity'] = array();
+}
+
 $serendipity['COOKIE'] = &$_COOKIE['serendipity'];
 
 // Attempt to fix IIS compatibility
@@ -450,14 +468,15 @@ function serendipity_detectLang($use_include = false) {
             if (in_array($preferred_language, $supported_languages)) {
                 if ($use_include) {
                     @include_once(S9Y_INCLUDE_PATH . 'lang/' . $charset . 'serendipity_lang_' . $preferred_language . '.inc.php');
-                    $serendipity['autolang'] = $preferred_language;
+                    //$serendipity['autolang'] = $preferred_language; -> according to the documentation, it should remain on 'en'
                 }
                 return $preferred_language;
             } // endif
         } // endforeach
     } // endif
 
-    return $serendipity['lang'];
+    // negotiation failed
+    return null;
 }
 
 /**

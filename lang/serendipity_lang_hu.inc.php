@@ -223,7 +223,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Új hozzászólás érkezett az alábbi (feliratkozott) bejegyzéshez "%s"');
 @define('SUBSCRIPTION_MAIL', "Szia %s!\n\nÚj hozzászólás érkezett a \"%s\" bejegyzéshez, az alábbi címmel: \"%s\"\nAz új hozzászólás szerzõje: %s\n\nA bejegyzést itt találod: %s\n\nA leiratkozáshoz kattints az alábbi linkre: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nÚj visszahivatkozás került az általad megfigyelt bejegyzéshez, a \"%s\" blog-ban, a következõ címû bejegyzéshez \"%s\"\nA felirat neve: %s\n\nEz itt található: %s\n\nA figyelést törölheted ide kattintva: %s\n");
-@define('SIGNATURE', "\n-- \n%s a Serendipity motort használja.\nEz a legjobb blog, te is használhatod.\nItt megtudod, hogyan: <http://s9y.org>.");
+@define('SIGNATURE', "\n-- \n%s a Serendipity motort használja.\nEz a legjobb blog, te is használhatod.\nItt megtudod, hogyan: <https://s9y.org>.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 infó');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 infó');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 info');
@@ -495,7 +495,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'Válassza ki a feltöltendõ fájlt:');
 @define('SAVE_FILE_AS', 'Fájl mentése a következõ néven:');
 @define('STORE_IN_DIRECTORY', 'Tárolás a következõ könyvtárban: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Fájl hozzáadása a média tárolóhoz:</b><p>Itt tölthetsz fel médiafájlokat, vagy megmondhatod hogy honnan töltsem le õket! Ha nincs meg egy bizonyos kép, <a href="http://images.google.com" target="_blank">keress rá a google-t használva</a> az elképzelésednek megfelelõen. Az eredmények gyakran hasznosak és viccesek :) De vigyázz, a legtöbb kép szerzõi jogvédelem alatt áll, így mielõtt használnád kérdezz rá.</p><p><b>Válassz a lehetõségek közül:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Fájl hozzáadása a média tárolóhoz:</b><p>Itt tölthetsz fel médiafájlokat, vagy megmondhatod hogy honnan töltsem le õket! Ha nincs meg egy bizonyos kép, <a href="https://images.google.com/" target="_blank">keress rá a google-t használva</a> az elképzelésednek megfelelõen. Az eredmények gyakran hasznosak és viccesek :) De vigyázz, a legtöbb kép szerzõi jogvédelem alatt áll, így mielõtt használnád kérdezz rá.</p><p><b>Válassz a lehetõségek közül:</b></p><br/>');
 @define('MEDIA_RENAME', 'Fájl átnevezése');
 @define('IMAGE_RESIZE', 'Kép átméretezése');
 @define('MEDIA_DELETE', 'Fájl törlése');
@@ -580,7 +580,7 @@
 @define('INSTALL_SHOWFUTURE', 'Jövõbeli bejegyzések mutatása');
 @define('INSTALL_SHOWFUTURE_DESC', 'Ha ez engedélyezve van, akkor a jövõbeni bejegyzések is láthatóak lesznek. Alapértelmezésben ezeket elrejtjük, és cask akkor kerülnek megmutatásra, ha eljön a publikálási dátum.');
 @define('INSTALL_DBPERSISTENT', 'Állandó kapcsolat használata');
-@define('INSTALL_DBPERSISTENT_DESC', 'Engedélyezd az állandó adatábziskapcsolat használatához. <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">Itt olvashatsz errõl többet</a>. Normális esetben ez nem szükséges');
+@define('INSTALL_DBPERSISTENT_DESC', 'Engedélyezd az állandó adatábziskapcsolat használatához. <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">Itt olvashatsz errõl többet</a>. Normális esetben ez nem szükséges');
 @define('NO_IMAGES_FOUND', 'Nem található kép');
 @define('PERSONAL_SETTINGS', 'Személyes beállítások');
 @define('REFERER', 'Hivatkozó');
@@ -783,7 +783,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'Más felhasználók média fájljainak megtekintése');
 @define('CHARSET_NATIVE', 'Natív (beépített)');
 @define('INSTALL_CHARSET', 'Karakterkódolás választása');
-@define('INSTALL_CHARSET_DESC', 'Itt beállíthatod az UTF-8, vagy a natív (ISO, EUC, ...) karakterkódolást. Néhány nyelvnek csak UTF-8 leképezése létezik, így itt a natívot nem érdemes választani. Az UTF-8 ajánlott új telepítéskor. Ne változtasd meg ezt akkor, ha már vannak bejegyzéseid speciális karakterekkel - mert így hibás karakterek jelenhetnek meg. Itt olvashatsz errõl többet: http://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Itt beállíthatod az UTF-8, vagy a natív (ISO, EUC, ...) karakterkódolást. Néhány nyelvnek csak UTF-8 leképezése létezik, így itt a natívot nem érdemes választani. Az UTF-8 ajánlott új telepítéskor. Ne változtasd meg ezt akkor, ha már vannak bejegyzéseid speciális karakterekkel - mert így hibás karakterek jelenhetnek meg. Itt olvashatsz errõl többet: https://docs.s9y.org/docs/developers/internationalization.html.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Modul API hook (kampó) engedélyezése');
 @define('CALENDAR_EXTEVENT_DESC', 'Ha ezt engedélyezed, akkor a modulok megjeleníthetik a naptárban a saját eseményeiket. Akkor engedélyezd, ha van olyan modulod, amelyiknek szüksége van erre, különben csak rontja a teljesítményt.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Az XML-RPC API Interfész a Serendipity-hez, többé nincs használatban, mivel vannak biztonsági problémái, és nem sokan használják. Így telepítened kell az XML-RPC modult ahhoz hogy használd az XML-RPC API-t. Az alkalmazásban használandó URL nem változik - telepítés után használható.');
@@ -1117,3 +1117,15 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL', 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
+@define('PLUGIN_LINK_SPARTACUS', 'More information');
+@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

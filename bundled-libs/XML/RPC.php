@@ -721,7 +721,7 @@ class XML_RPC_Client extends XML_RPC_Base {
      *
      * @return void
      */
-    function XML_RPC_Client($path, $server, $port = 0,
+    function __construct($path, $server, $port = 0,
                             $proxy = '', $proxy_port = 0,
                             $proxy_user = '', $proxy_pass = '')
     {
@@ -1053,7 +1053,7 @@ class XML_RPC_Response extends XML_RPC_Base
     /**
      * @return void
      */
-    function XML_RPC_Response($val, $fcode = 0, $fstr = '')
+    function __construct($val, $fcode = 0, $fstr = '')
     {
         if ($fcode != 0) {
             $this->fn = $fcode;
@@ -1198,7 +1198,7 @@ class XML_RPC_Message extends XML_RPC_Base
     /**
      * @return void
      */
-    function XML_RPC_Message($meth, $pars = 0)
+    function __construct($meth, $pars = 0)
     {
         $this->methodname = $meth;
         if (is_array($pars) && sizeof($pars) > 0) {
@@ -1486,7 +1486,7 @@ class XML_RPC_Message extends XML_RPC_Base
         $data = substr($data, 0, strpos($data, "</methodResponse>") + 17);
         $this->response_payload = $data;
 
-        if (!xml_parse($parser_resource, $data, sizeof($data))) {
+        if (!xml_parse($parser_resource, $data)) {
             // thanks to Peter Kocks <peter.kocks@baygate.com>
             if (xml_get_current_line_number($parser_resource) == 1) {
                 $errstr = 'XML error at line 1, check URL';
@@ -1557,7 +1557,7 @@ class XML_RPC_Value extends XML_RPC_Base
     /**
      * @return void
      */
-    function XML_RPC_Value($val = -1, $type = '')
+    function __construct($val = -1, $type = '')
     {
         $this->me = array();
         $this->mytype = 0;
@@ -1756,7 +1756,9 @@ class XML_RPC_Value extends XML_RPC_Base
         }
         $ar = $o->me;
         reset($ar);
-        list($typ, $val) = each($ar);
+        $typ = key($ar);
+        $val = current($ar);
+        next($ar);
         return '<value>' .  $this->serializedata($typ, $val) .  "</value>\n";
     }
 
@@ -1781,7 +1783,7 @@ class XML_RPC_Value extends XML_RPC_Base
      */
     function structeach()
     {
-        return each($this->me['struct']);
+        return [key($this->me['struct']), current($this->me['struct'])];
     }
 
     /**
@@ -1860,9 +1862,8 @@ class XML_RPC_Value extends XML_RPC_Base
      */
     function arraysize()
     {
-        reset($this->me);
-        list($a, $b) = each($this->me);
-        return sizeof($b);
+        $typ = key($this->me);
+        return sizeof($typ);
     }
 
     /**

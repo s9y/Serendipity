@@ -104,11 +104,6 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
             serendipity_updatePermalink($pl_data, 'author');
             serendipity_plugin_api::hook_event('backend_users_edit', $pl_data);
         }
-        if ($serendipity['authorid'] === $_SESSION['serendipityAuthorid']) {
-            if (is_null($serendipity['detected_lang'])) {
-                $_SESSION['serendipityLanguage'] = $serendipity['lang'];
-            }
-        }
         $from = $_POST;
     }
 }

@@ -16,6 +16,9 @@
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Diesen Eintrag per E-Mail versenden');
 @define('PLUGIN_EVENT_MAILER_SENDTOALL', 'An alle Redakteure schicken');
 
-@define('PLUGIN_EVENT_MAILER_STRIPTAGS', 'Bilder und Hyperlinks beibehalten, wenn HTML entfernt wird?');
-@define('PLUGIN_EVENT_MAILER_STRIPTAGSDESC', 'Gilt nur, wenn HTML entfernt wird. Falls aktiviert, werden Bilder und Hyperlinks in der Mail enthalten bleiben (in eckigen Klammern). Falls deaktiviert, werden alle Bilder und Hyperlinks auch entfernt.');
+@define('PLUGIN_EVENT_MAILER_KEEPSTRIPTAGS', 'Bilder und Hyperlinks beibehalten, wenn HTML entfernt wird?');
+@define('PLUGIN_EVENT_MAILER_KEEPSTRIPTAGSDESC', 'Gilt nur, wenn HTML entfernt wird. Falls aktiviert, werden Bilder und Hyperlinks in der Mail enthalten bleiben (in eckigen Klammern). Falls deaktiviert, werden alle Bilder und Hyperlinks auch entfernt.');
 
+@define('PLUGIN_EVENT_MAILER_FORCESEND', 'E-Mail-Versand erzwingen');
+@define('PLUGIN_EVENT_MAILER_FORCESEND_DESC', 'Standardmäßig werden E-Mails nur beim erstmaligen Veröffentlichen eines Artikels versendet.');
+@define('PLUGIN_EVENT_MAILER_MAILTEXT', 'Optionaler Text am Anfang der E-Mail (z.B. eine Grußbotschaft oder Begründung, warum der Blog-Artikel per E-Mail geschickt wird)');

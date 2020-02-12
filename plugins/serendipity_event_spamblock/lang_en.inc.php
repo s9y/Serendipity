@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  @version 
+ *  @version
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -28,8 +28,10 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_TTL', 'Force captchas after how many days');
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_TTL_DESC', 'Captchas can be enforced depending on the age of your articles. Enter the amount of days after which entering a correct captcha is necessary. If set to 0, captchas will always be used.');
+@define('PLUGIN_EVENT_SPAMBLOCK_MODERATION_AUTO', 'Automatic moderation depending on age');
+@define('PLUGIN_EVENT_SPAMBLOCK_MODERATION_AUTO_DESC', 'All comments are moderated automatically, depending on the age of the entry');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION', 'Force comment moderation after how many days');
-@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_DESC', 'You can automatically set all comments for entries to be moderated. Enter the age of an entry in days, after which it should be auto-moderated. 0 means no auto-moderation.');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_DESC', 'Enter the age of an entry in days, after which it should be auto-moderated. 0 means all comments get moderated.');
 @define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE', 'How many links before a comment gets moderated');
 @define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE_DESC', 'When a comment reaches a certain amount of links, that comment can be set to be moderated. 0 means that no link-checking is done.');
 @define('PLUGIN_EVENT_SPAMBLOCK_LINKS_REJECT', 'How many links before a comment gets rejected');
@@ -46,7 +48,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_BODYCLONE', 'Duplicate comment');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPFLOOD', 'IP-block');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CAPTCHAS', 'Invalid captcha (Entered: %s, Expected: %s)');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_FORCEMODERATION', 'Auto-moderation after X days');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_FORCEMODERATION', 'Auto-moderation for old entries');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_REJECT', 'Too many hyperlinks');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_MODERATE', 'Too many hyperlinks');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL', 'Hide E-Mail addresses of commenting users');
@@ -145,3 +147,13 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_SPAM', 'Spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM', 'Not spam');
 
+@define('PLUGIN_EVENT_SPAMBLOCK_LOGFILE_VALIDATE', 'Only file extensions .log and .txt are allowed');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT', 'Timeout for commenting');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_DESC', 'Activate a timeout between displaying the article and accepting a comment');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE', 'Timeout type');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE_FIX', 'fixed amout of time');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE_ADAPTIVE', 'depending on the lengths of comment and article');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE', 'Value for timeout');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE_DESC', 'type fixed: timeout in seconds / type adaptive: reading in words per minute and typing in chars per minute, 500 is a good value even for fast readers');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_TIMEOUT','Sorry, but you are not a human or you should at least attempt to read the article before commenting');

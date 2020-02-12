@@ -43,7 +43,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     // {include} calls, we should only apply this workaround to fetch() calls.
     // Redirecting fetch() as our custom function is too risky and has too high a performance
     // impact.
-    public function isTrustedResourceDir($path) {
+    public function isTrustedResourceDir($path, $isConfig = NULL) {
         return true;
     }
 
@@ -121,15 +121,15 @@ class Serendipity_Smarty extends Smarty
 
         $template_engine = serendipity_get_config_var('template_engine');
         $template_dirs   = array();
-
+        
+        // first add template path
+        $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];
+        // then fallback engines (which should never be a comma separated list)
         if ($template_engine) {
             $p = explode(',', $template_engine);
             foreach($p AS $te) {
                 $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . trim($te) . '/';
             }
-        } else {
-            // this is tested without need actually, but it makes the directory setter fallback chain a little more precise
-            $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];
         }
         $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'];
         $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'];
@@ -154,7 +154,7 @@ class Serendipity_Smarty extends Smarty
 
         $this->setConfigDir(array(S9Y_TEMPLATE_USERDEFAULT));
 
-        if ( ( !is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir()) ) && IN_installer !== true) {
+        if ( ( !is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir()) ) && IS_installed === true) {
             if(ini_get('display_errors') == 0 || ini_get('display_errors') == 'off') printf(DIRECTORY_WRITE_ERROR, $this->getCompileDir());
             trigger_error(sprintf(DIRECTORY_WRITE_ERROR, $this->getCompileDir()), E_USER_ERROR);
         }

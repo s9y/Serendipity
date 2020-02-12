@@ -236,7 +236,7 @@ $i18n_filename_to = array (
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY',		'Nový komentár k sledovanému èlánku "%s"');
 @define('SUBSCRIPTION_MAIL',		"Dobrý deò %s,\n\nA k èláku, ktorý sledujete na \"%s\", s názvom \"%s\", bol práve pridaný nový komentár.\nMeno odosielateµa: %s\n\nOdkaz na èlánok: %s\n\nOdhlási» sledovanie èlánku: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL',		"Dobrý deò %s,\n\nA k èlánku, ktorý sledujete na \"%s\", s názvem \"%s\", bola práve pridaná nová odozva\nMeno odosielateµa: %s\n\nOdkaz na èlánok: %s\n\nOdhlási» sledovanie èlánku: %s\n");
-@define('SIGNATURE',		"\n-- \n%s je vytvorený pomocou Serendipity.\n Tento výborný voµný blogovací systém mô¾ete pou¾i» aj vy.\nViac informácií na webstránke <http://s9y.org>.");
+@define('SIGNATURE',		"\n-- \n%s je vytvorený pomocou Serendipity.\n Tento výborný voµný blogovací systém mô¾ete pou¾i» aj vy.\nViac informácií na webstránke <https://s9y.org>.");
 @define('SYNDICATION_PLUGIN_091',		'Kanál RSS 0.91');
 @define('SYNDICATION_PLUGIN_10',		'Kanál RSS 1.0');
 @define('SYNDICATION_PLUGIN_20',		'Kanál RSS 2.0');
@@ -507,7 +507,7 @@ $i18n_filename_to = array (
 @define('ENTER_MEDIA_UPLOAD',		'Vyberte súbor pre nahranie:');
 @define('SAVE_FILE_AS',		'Ulo¾i» súbor ako:');
 @define('STORE_IN_DIRECTORY',		'Ulo¾i» do tohto prieèinka: ');
-@define('ADD_MEDIA_BLAHBLAH',		'<b>Prida» súbor do schránky médií:</b><p>Tu mô¾ete uklada» mediálne súbory, alebo urèi», kde ich stiahnu» z WEBu! Ak nemáte odpovedajúci obrázok, <a href="http://images.google.com" target="_blank">hµadajte obrázok na Google</a>, toto hµadanie je dos» èasto úspe¹né a zábavné :). Ale pozor, väè¹ina obrázkov je chránených autorskými právami, tak¾e potrebujete na ich pou¾itie súhlas autora.<p><b>Vyberte metódu:</b><br>');
+@define('ADD_MEDIA_BLAHBLAH',		'<b>Prida» súbor do schránky médií:</b><p>Tu mô¾ete uklada» mediálne súbory, alebo urèi», kde ich stiahnu» z WEBu! Ak nemáte odpovedajúci obrázok, <a href="https://images.google.com/" target="_blank">hµadajte obrázok na Google</a>, toto hµadanie je dos» èasto úspe¹né a zábavné :). Ale pozor, väè¹ina obrázkov je chránených autorskými právami, tak¾e potrebujete na ich pou¾itie súhlas autora.<p><b>Vyberte metódu:</b><br>');
 @define('MEDIA_RENAME',		'Premenova» súbor');
 @define('IMAGE_RESIZE',		'Zmeni» rozmer obrázka');
 @define('MEDIA_DELETE',		'Vymaza» súbor');
@@ -527,7 +527,7 @@ $i18n_filename_to = array (
 @define('DELETE_SELECTED_COMMENTS',		'Zmaza» vybrané komentáre');
 @define('VIEW_COMMENT',		'Zobrazi» komentár');
 @define('VIEW_ENTRY',		'Zobrazi» èlánok');
-@define('DELETE_FILE_FAIL',		'Nepodarilo sa zmaza» súbor <b>%s</b>');
+@define('DELETE_FILE_FAIL',		'Súbor <b>%s</b> sa nepodarilo zmaza»');
 @define('DELETE_THUMBNAIL',		'Zmazaný náhµad obrázku s názvom <b>%s</b>');
 @define('DELETE_FILE',		'Vymaza» súbor s názvom <b>%s</b>');
 @define('ABOUT_TO_DELETE_FILE',		'Chcete zmaza» <b>%s</b><br />Ak pou¾ívate tento súbor v èlánkoch, spôsobí to neprítomnos» odkazov alebo obrázkov.<br />Napriek tomu pokraèova»?<br /><br />');
@@ -594,7 +594,7 @@ $i18n_filename_to = array (
 @define('INSTALL_SHOWFUTURE',		'Zobrazi» budúce èlánky');
 @define('INSTALL_SHOWFUTURE_DESC',		'Toto nastavenie zapne zobrazenie budúcích èlánkov weblogu. ©tandardne sú skryté a budú zobrazené a¾ v èase ich vydania.');
 @define('INSTALL_DBPERSISTENT',		'Pou¾i» trvalé pripojenie');
-@define('INSTALL_DBPERSISTENT_DESC',		'Zapnú» trvalé pripojenie do databázy, viac informácií nájdete <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">tu</a>. Nastavenie neodporúèame.');
+@define('INSTALL_DBPERSISTENT_DESC',		'Zapnú» trvalé pripojenie do databázy, viac informácií nájdete <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">tu</a>. Nastavenie neodporúèame.');
 @define('NO_IMAGES_FOUND',		'®iadne obrázky');
 @define('PERSONAL_SETTINGS',		'Osobné nastavenia');
 @define('REFERER',		'Odkazujúca stránka');
@@ -799,7 +799,7 @@ $i18n_filename_to = array (
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS',		'adminImagesViewOthers: Zobrazi» mediálne súbory (obrázky) ostatných pou¾ívateµov');
 @define('CHARSET_NATIVE',		'Národná');
 @define('INSTALL_CHARSET',		'Výber znakovej sady - Charset');
-@define('INSTALL_CHARSET_DESC',		'Tu mô¾ete vybra» medzi UTF-8 alebo národnou (ISO, EUC, ...) znakovou sadou. Niektoré jazyky majú iba UTF-8 preklady, tak¾e nastavenie znakovej sady na národnú nemá úèinok. UTF-8 je odporúèané pre nové in¹talácie. Nemente toto nastavenie, pokiaµ ste u¾ napísali èlánky s diakritikou - mô¾e to spôsobi» poru¹enie textu. O tomto probléme si mô¾ete preèíta» viac na adrese http://www.s9y.org/index.php?node=46 .');
+@define('INSTALL_CHARSET_DESC',		'Tu mô¾ete vybra» medzi UTF-8 alebo národnou (ISO, EUC, ...) znakovou sadou. Niektoré jazyky majú iba UTF-8 preklady, tak¾e nastavenie znakovej sady na národnú nemá úèinok. UTF-8 je odporúèané pre nové in¹talácie. Nemente toto nastavenie, pokiaµ ste u¾ napísali èlánky s diakritikou - mô¾e to spôsobi» poru¹enie textu. O tomto probléme si mô¾ete preèíta» viac na adrese https://docs.s9y.org/docs/developers/internationalization.html .');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS',		'Zapnú» Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC',		'Ak je zapnuté, doplnky sa mô¾u napoji» na kalendár a zvýrazòova» svoje vlastné udalosti. Zapnite iba ak máte doplnky, ktoré toto vy¾adujú, inak to zni¾uje výkon.');
 @define('XMLRPC_NO_LONGER_BUNDLED',		'XML-RPC API Interface u¾ nie je súèas»ou Serendipity kvôli bezpeènostným problémom s touto API a nízkemu poètu jeho pou¾ívateµov. Preto musíte nain¹talova» doplnok XML-RPC, ak chcete XML-RPC API pou¾íva». URL, ktorá sa pou¾ije vo Va¹ej aplikácii sa nezmení - hneï po in¹talácii doplnku mô¾ete API pou¾íva».');
@@ -1109,3 +1109,15 @@ $i18n_filename_to = array (
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL', 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
+@define('PLUGIN_LINK_SPARTACUS', 'More information');
+@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

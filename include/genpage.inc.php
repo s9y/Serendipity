@@ -24,7 +24,10 @@ if ((empty($uri_addData['uriargs']) || trim($uri_addData['uriargs']) == $serendi
 
 $serendipity['plugindata']['smartyvars'] = $uri_addData; // Plugins can change this global variable
 serendipity_plugin_api::hook_event('genpage', $uri, $uri_addData);
-serendipity_smarty_init($serendipity['plugindata']['smartyvars']);
+serendipity_smarty_init();
+if (count($serendipity['plugindata']['smartyvars']) > 0) {
+    $serendipity['smarty']->assign($serendipity['plugindata']['smartyvars']);
+}
 
 $leftSidebarElements  = serendipity_plugin_api::count_plugins('left');
 $rightSidebarElements = serendipity_plugin_api::count_plugins('right');
@@ -48,7 +51,7 @@ switch ($serendipity['GET']['action']) {
                 serendipity_header('HTTP/1.0 404 Not found');
                 serendipity_header('Status: 404 Not found');
             }
-
+            
             serendipity_printEntries($entry, 1);
         } else {
             serendipity_printEntries(serendipity_fetchEntries($serendipity['range'], true, $serendipity['fetchLimit']));
@@ -123,14 +126,7 @@ switch ($serendipity['GET']['action']) {
 
     // Welcome screen or whatever
     default:
-        if ($serendipity['useInternalCache']) {
-            $entries = serendipity_fetchEntries(null, true, $serendipity['fetchLimit']);
-            if (! serendipity_printEntriesCached($entries)) {
-                serendipity_printEntries($entries);
-            }
-        } else {
-            serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit']));
-        }
+        serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit']));
         break;
 }
 

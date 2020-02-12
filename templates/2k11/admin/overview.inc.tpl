@@ -37,6 +37,15 @@
         {/if}
     {/if}
 
+    {if $pluginUpdates}
+        <section id="dashboard_plugin_updates">
+            <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
+
+            <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$pluginUpdates}</span>
+        </section>
+        <hr class="separator">
+    {/if}
+
     {if $no_create !== true}
         <section id="dashboard_comments" class="equal_heights quick_list dashboard_widget">
             <h3>{if 'adminComments'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=comments">{/if}{$CONST.COMMENTS}{if 'adminComments'|checkPermission}</a>{/if}</h3>
@@ -122,10 +131,10 @@
             <h3>{$CONST.FURTHER_LINKS}</h3>
 
             <ul class="plainList">
-                <li><a href="http://www.s9y.org/">{$CONST.FURTHER_LINKS_S9Y}</a></li>
-                <li><a href="http://www.s9y.org/33.html">{$CONST.FURTHER_LINKS_S9Y_DOCS}</a></li>
-                <li><a href="http://blog.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_BLOG}</a></li>
-                <li><a href="http://www.s9y.org/forums/">{$CONST.FURTHER_LINKS_S9Y_FORUMS}</a></li>
+                <li><a href="https://www.s9y.org/">{$CONST.FURTHER_LINKS_S9Y}</a></li>
+                <li><a href="https://docs.s9y.org/docs/index.html">{$CONST.FURTHER_LINKS_S9Y_DOCS}</a></li>
+                <li><a href="https://blog.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_BLOG}</a></li>
+                <li><a href="https://board.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_FORUMS}</a></li>
                 <li><a href="http://spartacus.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_SPARTACUS}</a></li>
                 <li><a class="s9y_bookmarklet" href="{$bookmarklet}" title="{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}">{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET}</a></li>
             </ul>

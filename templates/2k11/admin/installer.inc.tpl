@@ -68,7 +68,7 @@
                             <td><span class="msg_hint">{$php_sapi_name}</span></td>
                         </tr>
                         <tr>
-                            <td>PHP version >= 5.3</td>
+                            <td>PHP version >= 7.0</td>
                             <td>{$installerResultDiagnose_VERSION}</td>
                         </tr>
                         <tr>

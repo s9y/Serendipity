@@ -354,7 +354,7 @@
                                           'title'       => INSTALL_SUBSCRIBE,
                                           'description' => INSTALL_SUBSCRIBE_DESC,
                                           'type'        => 'list',
-                                          'default'     => array('true' => YES, 'false' => NO, 'fulltext' => FULL_COMMENT_TEXT),
+                                          'default'     => array('fulltext' => FULL_COMMENT_TEXT, 'true' => YES, 'false' => NO),
                                           'permission'  => 'siteConfiguration'),
 
                                     array('var'         => 'allowSubscriptionsOptIn',
@@ -425,7 +425,7 @@
                                           'title'       => USE_CACHE,
                                           'description' => USE_CACHE_DESC,
                                           'type'        => 'bool',
-                                          'default'     => false,
+                                          'default'     => true,
                                           'permission'  => 'siteConfiguration'),
                             ));
 
@@ -450,7 +450,7 @@
                                           'title'       => ARCHIVE_SORT_STABLE,
                                           'description' => ARCHIVE_SORT_STABLE_DESC,
                                           'type'        => 'bool',
-                                          'default'     => false,
+                                          'default'     => true,
                                           'permission'  => 'blogConfiguration'),
 
                                     array('var'         => 'searchsort',

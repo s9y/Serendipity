@@ -1,3 +1,13 @@
+1.41.4:
+-------
+    * removed 'WHERE' keyword from fetchentries event hook, because that should be handled 
+      by the issuing sql
+
+
+1.41.3:
+-------
+    * Add missing English language constant.
+
 1.38:
 -----
     * Fixed preview of extended properties by 1.37

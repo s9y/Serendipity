@@ -65,7 +65,7 @@ CKEDITOR.editorConfig = function( config ) {
           - Allow <pre[*attributes](*classes)> for custom attributes/classes in code blocks
     */
     // protect
-    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);';
+    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);code;figure[*]{*}(*); figcaption[*]{*}(*);';
     // Do not use auto paragraphs, added to these allowed tags (only!). Please regard that this was marked deprecated by CKE 4.4.5, but is a need for (our use of) extraAllowedContent - check this again by future versions!
     config.autoParagraph = false; // defaults(true)
 
@@ -229,12 +229,13 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
         { name: 's9yml',       items : s9ymediabuttons },
         { name: 'insert',      items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' ] },
+        { name: 'codetag',     items:  [ 'Code' ] },
         { name: 'colors',      items : [ 'TextColor','BGColor' ] },
         { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
         { name: 'others',      items : s9ypluginbuttons },
         { name: 'tools',       items : [ 'Maximize', 'ShowBlocks','-','About' ] },
         { name: 'document',   groups : [ 'mode', 'document', 'doctools' ], items : [ 'Source' ] },
-        { name: 'cheatsheet',  items : ['CheatSheet'] }
+        { name: 'cheatsheet',  items : ['CheatSheet'] },
     ];
 //    console.log(JSON.stringify(config.toolbar_Full));
 
@@ -249,10 +250,11 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'insert',       items: [ 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar' ] },
         { name: 'clipboard',   groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
         { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
+        { name: 'codetag',      items: [ 'Code' ] },
         { name: 'mediaembed',   items: [ 'MediaEmbed' ] },
         { name: 'others',       items: s9ypluginbuttons },
         { name: 'document',    groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
-        { name: 'about',        items: [ 'About' ] }
+        { name: 'about',        items: [ 'About' ] },
     ];
 //    console.log(JSON.stringify(config.toolbar_s9y));
 

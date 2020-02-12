@@ -219,13 +219,13 @@ switch($serendipity['GET']['adminAction']) {
         $sort_import   = array('perPage', 'ordermode', 'order');
 
         foreach($filter_import AS $f_import) {
-            serendipity_restoreVar($serendipity['COOKIE']['entrylist_filter_' . $f_import], $serendipity['GET']['filter'][$f_import]);
-            $data["get_filter_$f_import"] = $serendipity['GET']['filter'][$f_import];
+            serendipity_restoreVar($serendipity['COOKIE']['entrylist_filter_' . $f_import], serendipity_specialchars($serendipity['GET']['filter'][$f_import]));
+            $data["get_filter_$f_import"] = serendipity_specialchars($serendipity['GET']['filter'][$f_import]);
         }
 
         foreach($sort_import AS $s_import) {
-            serendipity_restoreVar($serendipity['COOKIE']['entrylist_sort_' . $s_import], $serendipity['GET']['sort'][$s_import]);
-            $data["get_sort_$s_import"] = $serendipity['GET']['sort'][$s_import];
+            serendipity_restoreVar($serendipity['COOKIE']['entrylist_sort_' . $s_import], serendipity_specialchars($serendipity['GET']['sort'][$s_import]));
+            $data["get_sort_$s_import"] = serendipity_specialchars($serendipity['GET']['sort'][$s_import]);
         }
 
         $perPage = (!empty($serendipity['GET']['sort']['perPage']) ? $serendipity['GET']['sort']['perPage'] : $per_page[0]);
@@ -354,7 +354,8 @@ switch($serendipity['GET']['adminAction']) {
                     }
                 }
 
-                $smartentries[] = array(
+
+                $smartentry = array(
                     'id'            => $ey['id'],
                     'title'         => serendipity_specialchars($ey['title']),
                     'timestamp'     => (int)$ey['timestamp'],
@@ -368,6 +369,8 @@ switch($serendipity['GET']['adminAction']) {
                     'archive_link'  => serendipity_archiveURL($ey['id'], $ey['title'], 'serendipityHTTPPath', true, array('timestamp' => $ey['timestamp'])),
                     'preview_link'  => '?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;' . serendipity_setFormToken('url') . '&amp;serendipity[id]=' . $ey['id']
                 );
+                serendipity_plugin_api::hook_event('backend_view_entry', $smartentry);
+                $smartentries[] = $smartentry;
 
             }
 

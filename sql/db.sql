@@ -31,7 +31,7 @@ create table {PREFIX}groups (
 
 create table {PREFIX}groupconfig (
   id int(10) {UNSIGNED} not null default '0',
-  property varchar(128) default null,
+  property varchar(128) default '',
   value varchar(32) default null,
   {PRIMARY} (id, property)
 ) {UTF_8};

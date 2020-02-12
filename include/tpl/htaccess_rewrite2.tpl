@@ -5,6 +5,7 @@ DirectoryIndex {PREFIX}{indexFile}
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase {PREFIX}
+RewriteRule ^plugins/.+/documentation.*\.html - [L]
 RewriteRule ^serendipity_admin.php serendipity_admin.php [NC,L,QSA]
 RewriteRule ^({PAT_PERMALINK}) {indexFile}?/$1 [NC,L,QSA]
 RewriteRule ^({PAT_PERMALINK_AUTHORS}) {indexFile}?/$1 [NC,L,QSA]
@@ -27,7 +28,6 @@ RewriteRule ^{PAT_CSS} {indexFile}?url=/$1 [L,QSA]
 RewriteRule ^{PAT_JS}$ {indexFile}?url=/$1 [L,QSA] 
 RewriteRule ^index\.(html?|php.+) {indexFile}?url=index.html [L,QSA]
 RewriteRule ^htmlarea/(.*) htmlarea/$1 [L,QSA]
-#RewriteCond %{REQUEST_URI} !-U
 RewriteRule (.*\.html?) {indexFile}?url=/$1 [L,QSA]
 </IfModule>
 

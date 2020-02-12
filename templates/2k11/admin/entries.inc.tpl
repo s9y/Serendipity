@@ -175,6 +175,7 @@
                     {if $entry.isdraft}
                         <span class="entry_status status_draft">{$CONST.DRAFT}</span>
                     {/if}
+                    {$entry.info_more}
                     </div>
                 </li>
             {/foreach}

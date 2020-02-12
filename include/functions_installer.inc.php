@@ -83,7 +83,10 @@ function serendipity_updateLocalConfig($dbName, $dbPrefix, $dbHost, $dbUser, $db
                    . "\t/*\n"
                    . "\t  Serendipity configuration file\n";
     $file_mark     = "\n\t// End of Serendipity configuration file"
-                   . "\n\t// You can place your own special variables after here:\n";
+                   . "\n\t// You can place your own special variables here; see\n"
+                   . "\n\t// <https://docs.s9y.org/docs/developers/code-primer.html#docs-initializing-the-framework-serendipity_configincphp-and-serendipity_config_localincphp>\n"
+                   . "\n\t// for a list. All defaults from serendipity_config.inc.php\n"
+                   . "\n\t// can be changed by re-setting the variables after here:\n";
     $file_end      = "\n?>";
     $file_personal = '';
 
@@ -651,8 +654,7 @@ function serendipity_checkInstallation() {
     include_once(S9Y_INCLUDE_PATH . "include/db/{$serendipity['dbType']}.inc.php");
     // For shared installations, probe the file on include path
     //include_once(S9Y_INCLUDE_PATH . 'include/db/db.inc.php');
-
-    if (S9Y_DB_INCLUDED) {
+    if (function_exists('serendipity_db_query')) {
         serendipity_db_probe($_POST, $errs);
     }
 
@@ -1141,6 +1143,9 @@ function serendipity_FTPChecksum($filename, $type = null) {
             strcasecmp($ext, 'sh') &&
             strcasecmp($ext, 'html') &&
             strcasecmp($ext, 'htm') &&
+            strcasecmp($ext, 'xml') &&
+            strcasecmp($ext, 'inc') &&
+            strcasecmp($ext, 'svg') &&
             !empty($ext)) {
             if (!in_array($ext, array_keys($debug_exts))) {
                 $debug_exts[$ext] = $filename;

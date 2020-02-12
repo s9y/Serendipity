@@ -118,7 +118,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     $data['php_uname']     = php_uname('s') .' '. php_uname('r') .', '. php_uname('m');
     $data['php_sapi_name'] = php_sapi_name();
 
-    if ( version_compare(phpversion(), '5.3', '>=') ) {
+    if ( version_compare(phpversion(), '7.0', '>=') ) {
         $data['installerResultDiagnose_VERSION'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, YES .', '. phpversion());
     } else {
         $data['installerResultDiagnose_VERSION'] =  serendipity_installerResultDiagnose(S9Y_I_ERROR, NO);
@@ -325,7 +325,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         serendipity_installDatabase();
         $data['install_DB'] = true;
 
-        $authorid = serendipity_addAuthor($_POST['user'], $_POST['pass'], $_POST['realname'], $_POST['email'], USERLEVEL_ADMIN, 1);
+        $authorid = serendipity_addAuthor($_POST['user'], $_POST['pass'], $_POST['realname'], $_POST['email'], USERLEVEL_ADMIN, 2);
         $mail_comments =  (serendipity_db_bool($_POST['want_mail']) ? 1 : 0);
         serendipity_set_user_var('mail_comments', $mail_comments, $authorid);
         serendipity_set_user_var('mail_trackbacks', $mail_comments, $authorid);

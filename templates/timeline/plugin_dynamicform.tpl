@@ -5,13 +5,13 @@
             {if $is_contactform_error}
                  <div id="search-block" class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$plugin_contactform_error}</p>
+                        <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-exclamation fa-stack-1x"></i></span> {$plugin_contactform_error}</p>
                     </div>
                 </div>
                 {foreach from=$comments_messagestack item="message"}
                     <div id="search-block" class="row">
                         <div class="col-md-10 col-md-offset-1">
-                            <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$message}</p>
+                            <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-exclamation fa-stack-1x"></i></span> {$message}</p>
                         </div>
                     </div>
                 {/foreach}
@@ -20,7 +20,7 @@
                <div class="contactform_preface">{$plugin_contactform_preface}</div>
             {/if}
             {if $is_contactform_sent}
-                <p class="alert alert-success"><span class="fa-stack text-success" aria-hidden="true"></i><i class="fa fa-smile-o fa-2x"></i></span> {$plugin_contactform_sent}</p>
+                <p class="alert alert-success"><span class="fa-stack text-success" aria-hidden="true"></i><i class="far fa-smile fa-2x"></i></span> {$plugin_contactform_sent}</p>
             {else}
             <div id="serendipityCommentForm" class="serendipityCommentForm">
                 <a id="serendipity_CommentForm"></a>

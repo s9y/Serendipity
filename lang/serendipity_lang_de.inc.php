@@ -27,12 +27,10 @@
 @define('LOGOUT', 'Abmelden');
 @define('LOGGEDOUT', 'Abgemeldet.');
 @define('CREATE', 'Erstellen');
-@define('SAVE', 'Speichern');
-@define('NAME', 'Name');
 @define('CREATE_NEW_CAT', 'Neue Kategorie');
 @define('I_WANT_THUMB', 'Ich möchte die Vorschau im Eintrag haben.');
 @define('I_WANT_BIG_IMAGE', 'Ich möchte das große Bild im Eintrag haben.');
-@define('I_WANT_NO_LINK', 'Das Bild soll kein Link sein');
+@define('I_WANT_NO_LINK', 'Das Bild soll kein Link sein.');
 @define('I_WANT_IT_TO_LINK', 'Das Bild soll hierhin linken:');
 @define('BACK', 'Zurück');
 @define('FORWARD', 'Vorwärts');
@@ -75,7 +73,7 @@
 @define('EXTENDED_BODY', 'Erweiterter Eintrag');
 @define('CATEGORY', 'Kategorie');
 @define('EDIT', 'Bearbeiten');
-@define('NO_ENTRIES_BLAHBLAH', 'Bei der Suche nach "%s" konnte kein Eintrag gefunden werden:' . "\n");
+@define('NO_ENTRIES_BLAHBLAH', 'Bei der Suche nach "%s" konnte kein Eintrag gefunden werden.' . "\n");
 @define('YOUR_SEARCH_RETURNED_BLAHBLAH', 'Die Suche nach "%s" ergab %s Treffer:');
 @define('IMAGE', 'Bild');
 @define('ERROR_FILE_NOT_EXISTS', ' Alte Datei existiert nicht!');
@@ -89,7 +87,6 @@
 @define('RESIZE_BLAHBLAH', '<b>Größe von %s ändern</b>');
 @define('ORIGINAL_SIZE', 'Originalgröße: <i>%sx%s</i> Pixel');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Hier können Sie die Bildgröße ändern. Um die Proportionen beizubehalten, einfach einen der beiden Werte eingeben, und anschließend die TAB-Taste drücken, und Sie erhalten eine Vorschau mit korrekten Proportionen.');
-@define('DATE_FORMAT_1', 'd.m.Y');
 @define('QUICKJUMP_CALENDAR', 'QuickJump Kalender');
 @define('QUICKSEARCH', 'Suche');
 @define('SEARCH_FOR_ENTRY', 'Nach Einträgen suchen');
@@ -189,7 +186,6 @@
 @define('ENTER_NEW_NAME', 'Bitte einen neuen Namen eingeben für: ');
 @define('RESIZING', 'Anpassen der Bildgröße');
 @define('RESIZE_DONE', 'Fertig (%s Bildgrößen angepaßt).');
-@define('DELETE_IMAGE_FAIL' , 'Kann das Bild namens <b>%s</b> nicht löschen');
 @define('DELETE_THUMBNAIL', 'Vorschaubilder zu <b>%s</b> gelöscht');
 @define('FILE_NOT_FOUND', 'Die Datei namens <b>%s</b> kann nicht gefunden werden, vielleicht wurde diese schon gelöscht?');
 @define('ABORT_NOW', 'Abbrechen');
@@ -207,7 +203,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Benachrichtigung zu neuem Kommentar des Eintrags "%s"');
 @define('SUBSCRIPTION_MAIL', "Hallo %s,\n\nEin neuer Kommentar wurde dem Eintrag hinzugefügt, den Sie auf \"%s\" namens \"%s\" finden.\nDer Name des Autors ist: %s\n\nSie können den Eintrag hier finden: %s\n\nSie können diese Benachrichtung mit folgender URL kündigen: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hallo %s,\n\nEin neues Trackback wurde dem Eintrag hinzugefügt, den Sie auf \"%s\" namens \"%s\" finden.\nDer Name des Autors ist: %s\n\nSie können den Eintrag hier finden: %s\n\nSie können diese Benachrichtung mit folgender URL kündigen: %s\n");
-@define('SIGNATURE', "\n-- \n%s wird betrieben mit Serendipity.\nDas allerbeste Blog, Sie können es auch nutzen.\nWie das geht, sehen Sie auf <http://s9y.org>.");
+@define('SIGNATURE', "\n-- \n%s wird betrieben mit Serendipity.\nDas allerbeste Blog, Sie können es auch nutzen.\nWie das geht, sehen Sie auf <https://s9y.org>.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -581,7 +577,7 @@
 @define('INSTALL_SHOWFUTURE', 'Zukünftige Einträge zeigen');
 @define('INSTALL_SHOWFUTURE_DESC', 'Falls aktiviert, werden auch die Einträge angezeigt, deren Datum in der Zukunft liegt. Standardmäßig werden solche Einträge versteckt und erscheinen erst, wenn der entsprechende Zeitpunkt erreicht wird.');
 @define('INSTALL_DBPERSISTENT', 'Persistente Verbindungen nutzen');
-@define('INSTALL_DBPERSISTENT_DESC', 'Aktiviert die Nutzung einer persistenten Datenbankverbindung. Mehr dazu in der <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">PHP-Dokumentation</a>. Üblicherweise wird diese Einstellung nicht empfohlen.');
+@define('INSTALL_DBPERSISTENT_DESC', 'Aktiviert die Nutzung einer persistenten Datenbankverbindung. Mehr dazu in der <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">PHP-Dokumentation</a>. Üblicherweise wird diese Einstellung nicht empfohlen.');
 @define('NO_IMAGES_FOUND', 'Keine Mediendaten gefunden');
 @define('PERSONAL_SETTINGS', 'Eigene Einstellungen');
 @define('REFERER', 'Referrer');
@@ -645,7 +641,7 @@
 @define('NONE', 'keine');
 @define('USERCONF_CAT_DEFAULT_NEW_ENTRY', 'Voreinstellungen für neue Einträge');
 @define('UPGRADE', 'Aktualisieren');
-@define('UPGRADE_TO_VERSION', 'Aktuelle version %s');
+@define('UPGRADE_TO_VERSION', 'Aktualisierbar auf Version %s.');
 @define('DELETE_DIRECTORY', 'Verzeichnis löschen');
 @define('DELETE_DIRECTORY_DESC', 'Sie sind dabei, den Inhalt eines Verzeichnisses zu löschen, in welchem Dateien enthalten sind, die möglicherweise in Blog-Einträgen verwendet werden!');
 @define('FORCE_DELETE', 'ALLE Dateien dieses Verzeichnisses löschen, inklusive der Dateien, die Serendipity nicht katalogisiert hat');
@@ -785,7 +781,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Mediendaten anderer Benutzer ansehen');
 @define('CHARSET_NATIVE', 'Nationaler Zeichensatz');
 @define('INSTALL_CHARSET', 'Zeichensatz-Auswahl');
-@define('INSTALL_CHARSET_DESC', 'Hier können Sie zwischen UTF-8 oder dem nationalen Zeichensatz ("Native" - ISO, EUC, ...) wählen. Einige Sprachen sind sowieso nur in UTF-8 Zeichensätzen verfügbar, so dass die Option "Nationaler Zeichensatz" dort keine Auswirkungen hat. UTF-8 wird als Zeichensatz für Neuinstallation empfohlen. Ändern Sie diese Einstellung nicht, wenn Sie bereits Einträge erstellt haben - dies kann zu defekten Zeichen führen. Weitere Informationen finden Sie unter http://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Hier können Sie zwischen UTF-8 oder dem nationalen Zeichensatz ("Native" - ISO, EUC, ...) wählen. Einige Sprachen sind sowieso nur in UTF-8 Zeichensätzen verfügbar, so dass die Option "Nationaler Zeichensatz" dort keine Auswirkungen hat. UTF-8 wird als Zeichensatz für Neuinstallation empfohlen. Ändern Sie diese Einstellung nicht, wenn Sie bereits Einträge erstellt haben - dies kann zu defekten Zeichen führen. Weitere Informationen finden Sie unter https://docs.s9y.org/docs/developers/internationalization.html.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Plugin-Schnittstelle aktivieren');
 @define('CALENDAR_EXTEVENT_DESC', 'Falls aktiviert, so können andere Plugins in die Darstellung des Kalenders eingreifen. Aktivieren Sie diese Option nur, wenn Sie ein solches Plugin installiert haben, andernfalls haben Sie nur unnötige Performance-Einschränkungen.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Das XML-RPC Interface zu Serendipity wird nicht länger standardmäßig aktiviert, da häufige Sicherheitsprobleme mit der dafür verwendeten Bibliothek auftraten und da es nur von wenigen Personen benutzt wurde. Daher müssen Sie das XML-RPC Plugin installieren, um die XML-RPC API weiterhin zu nutzen. Die URL in Ihren Anwendungen wird sich dadurch nicht ändern. Sobald das genannte Plugin installiert ist, kann die XML-RPC API wieder vollständig genutzt werden.');
@@ -858,8 +854,8 @@
 
 @define('PLUGIN_AVAILABLE_COUNT', 'Gesamt: %d Plugins.');
 
-@define('SYNDICATION_RFC2616', 'Strikte RFC2616 RSS-Feed Kompatibilität');
-@define('SYNDICATION_RFC2616_DESC', 'Falls RFC2616 NICHT strikt ausgelegt wird, können alle Conditional GET Anfragen zu Serendipity die letzten Einträge seit dem letzten Client-Abruf zurückliefern - für Benutzer, die auch nach ihrem Urlaub alle Artikel lesen wollen, ist dies eine tolle Sache. Jedoch können dadurch einige spezielle Clients wie z.B. Planet aus dem Tritt gebracht werden, und neue Artikel ihres RSS-Feeds falsch interpretieren. Wenn diese Option also auf JA gesetzt wird, wird zwar die RFC befolgt, aber ihre RSS-Leser könnten Einträge verpassen wenn Sie länger nicht auf ihrer Seite waren. Wie auch immer sie sich entscheiden, entweder ärgern Sie damit Clients wie Planet oder Ihre Benutzer. Referenz: <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1461728&amp;group_id=75065&amp;atid=542822" target="_blank" rel="nofollow">SourceForge</a>');
+@define('SYNDICATION_RFC2616', 'Strikte RFC2616-RSS-Feed-Kompatibilität');
+@define('SYNDICATION_RFC2616_DESC', 'Falls RFC2616 NICHT strikt ausgelegt wird, können alle Conditional-GET-Anfragen zu Serendipity die letzten Einträge seit dem letzten Client-Abruf zurückliefern - für Benutzer, die auch nach ihrem Urlaub alle Artikel lesen wollen, ist dies eine tolle Sache. Jedoch können dadurch einige spezielle Clients, wie z.B. Planet, aus dem Tritt gebracht werden, und neue Artikel ihres RSS-Feeds falsch interpretieren. Wenn diese Option also auf JA gesetzt wird, wird zwar der RFC befolgt, aber ihre RSS-Leser könnten Einträge verpassen, wenn Sie länger nicht auf ihrer Seite waren. Wie auch immer sie sich entscheiden, entweder ärgern Sie damit Clients wie Planet oder Ihre Benutzer.');
 @define('MEDIA_PROPERTY_DATE', 'Verknüpftes Datum');
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Laufzeit');
 @define('FILENAME_REASSIGNED', 'Automagisch zugewiesener Dateiname: %s');
@@ -934,7 +930,7 @@
 @define('PLUGIN_DOCUMENTATION_LOCAL', 'Lokale Dokumentation');
 @define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Versionsgeschichte');
 @define('SYNDICATION_PLUGIN_BIGIMG', 'Großes Bild');
-@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Zeige ein (großes) Bild über den Feeds im Sidebar, volle oder absolute URL zur Bilddatei eingeben');
+@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Zeigt ein (großes) Bild oberhalb der Seitenleiste. Hier kann eine volle (oder absolut referenzierte) URL eingetragen werden oder "none" für einen Textlink (bisheriger Standard)');
 @define('SYNDICATION_PLUGIN_FEEDNAME', 'Angezeigter Name für "feed"');
 @define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Optional benutzerdefinierten Namen für die Feeds eingeben (Vorgabe ist "feed" wenn leer)');
 @define('SYNDICATION_PLUGIN_COMMENTNAME', 'Anzeigename für "Kommentar" feed');
@@ -953,27 +949,27 @@
 @define('MEDIA_PROPERTY_ALT', 'Bildinhalt (im ALT-Attribut)');
 @define('MEDIA_TITLE', 'TITLE-Attribut (wird beim Überfahren mit der Maus angezeigt)');
 
-@define('QUICKSEARCH_SORT', 'How should search-results be sorted?');
+@define('QUICKSEARCH_SORT', 'Wie sollen Suchergebnisse sortiert werden?');
 
-@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
+@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevanz');
 
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
-@define('SEARCH_FULLENTRY', 'Show full entry');
+@define('SEARCH_FULLENTRY', 'Gesamten Eintrag anzeigen');
 @define('NAVLINK_AMOUNT', 'Anzahl der Links in der Navigationsleiste (Themes verwalten-Seite muss danach neu geladen werden)');
 @define('NAV_LINK_TEXT', 'Text des Navigationsleisten-Links');
 @define('NAV_LINK_URL', 'URL des Navigationsleisten-Links');
 @define('MODERATE_SELECTED_COMMENTS', 'Markierte Kommentare freischalten');
 @define('WEBLOG', 'Weblog');
-@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
-@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
-@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
-@define('SUMMARY', 'Summary');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Abonniert');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Wartet auf Bestätigung');
+@define('NO_COMMENT_SUBSCRIPTION', 'Nicht abonniert');
+@define('SUMMARY', 'Übersicht');
 
 // Next lines were translated on 2012/05/29
 @define('ABOUT_TO_DELETE_FILES', 'Sie beabsichtigen mehrere Dateien auf einmal zu löschen.<br />Wenn Sie diese in ihren Einträgen verwenden, wird das Löschen Lücken erzeugen.<br />Soll trotzdem fortgefahren werden?<br /><br />');
-@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
-@define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
+@define('ARCHIVE_SORT_STABLE', 'Unveränderliche Archiv-Seiten');
+@define('ARCHIVE_SORT_STABLE_DESC', 'Archiv-Seiten absteigend sortieren, so dass die ältesten Einträge sich auf Seite 1 finden, so dass sich die Inhalte nicht mehr ändern und Suchmaschinen die Seiten nicht ständig neu indizieren müssen.');
 
 // added 2012-11-29
 @define('PLAIN_ASCII_NAMES', '(keine Sonderzeichen, Umlaute)');
@@ -1009,7 +1005,7 @@
 @define('PUBLISH_ERROR', 'Fehler bei der Veröffentlichung:');
 @define('UPDATE_NOTIFICATION', 'Update-Hinweis');
 @define('NEW_VERSION_AVAILABLE', 'Neue stabile Serendipity version verfügbar: ');
-@define('MOVE', 'Bewegen');
+@define('MOVE', 'Verschieben');
 @define('MOVE_UP', 'Nach oben');
 @define('MOVE_DOWN', 'Nach unten');
 @define('INSTALL_NEW_SIDEBAR_PLUGIN', 'Seitenleisten-Plugin installieren');
@@ -1050,7 +1046,6 @@
 @define('INSTALL_DBPREFIX_INVALID', 'Der Datenbank-Tabellenpräfix darf nicht leer sein und darf nur Zahlen, Nummern und den Unterstrich enthalten.');
 @define('SYNDICATION_PLUGIN_SUBTOME', 'subToMe');
 @define('SYNDICATION_PLUGIN_SUBTOME_DESC', 'Zeigt den subToMe button, mit dem Feed-Abonnements einfacher für Besucher verwaltet werden können.');
-@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Zeigt ein (großes) Bild oberhalb der Seitenleiste. Hier kann eine volle (oder absolut referenzierte) URL eingetragen werden oder "none" für einen Textlink (bisheriger Standard)');
 @define('INSTALL_BACKENDPOPUP', 'Popups für das Backend verwenden?');
 @define('INSTALL_BACKENDPOPUP_DESC', 'Sollen im Backend Popup-Fenster eingesetzt werden? Wenn deaktiviert (standard), werden eingebettete modale Dialoge z.b. für die Mediendatenbank und die Kategorieauswahl verwendet.');
 @define('UPDATE_STABLE', 'stabil');
@@ -1086,7 +1081,7 @@
 @define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Erzwingen: CKEditor Vollständig');
 
 @define('CATEGORY_PLUGIN_SHOWALL', 'Zeige einen Link zu "Alle Kategorien"?');
-@define('CATEGORY_PLUGIN_SHOWALL', 'Falls aktiviert wird Besuchern ein Link angezeigt, das Blog ohne Einschränkung der Kategorien darzustellen.');
+@define('CATEGORY_PLUGIN_SHOWALL_DESC', 'Falls aktiviert wird Besuchern ein Link angezeigt, um das Blog ohne Einschränkung der Kategorien darzustellen.');
 @define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity benötigt eine PHP-Version >= %2$s - Sie benutzen eine ältere Version (%1$s) und müssen auf eine neuere upgraden. Die meisten Provider gestatten den Wechsel auf neuere PHP-Versionen über einen Schalter in der Admin-Oberfläche oder eine Anweisung in der .htaccess.');
 @define('TOGGLE_VIEW', 'Darstellung der Kategorien wechseln');
 @define('PUBLISH_NOW', 'Diesen Eintrag jetzt veröffentlichen (setzt aktuelle Zeit)');
@@ -1121,3 +1116,16 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'Standardmäßig ist es aus Sicherheitsgründen verboten, Daten über lokale URLs abzurufen, um Server Side Request Forgers (SSRF) zu vermeiden. Wenn Sie ein lokales Intranet verwenden können sie die Datenabfrage über diese Option explizit erlauben.');
 @define('REMOTE_FILE_INVALID', 'Die angegebene URL scheint eine lokale zu sein und darf nicht abgerufen werden. Sie können dies explizit gestatten, indem Sie in der Konfiguration die Option "Erlaube, Daten über lokale URLs abzurufen" setzen.');
 @define('URL_NOT_FOUND', 'Die angeforderte Seite konnte nicht gefunden werden (404). Dies ist die Standardseite.');
+@define('INSERT_ALL', 'Alle einfügen');
+@define('COMMENT_NOT_DELETED', 'Kommentar #%s konnte nicht gelöscht werden.');
+@define('MAINTENANCE_MODE', 'Wartungsmodus');
+@define('MAINTENANCE_MODE_DESC', 'Der Wartungsmdous verhindert den Zugriff auf das Blog für alle nicht eingeloggten Benutzer.');
+@define('MAINTENANCE_MODE_WARNING', "Sie müssen eingeloggt bleiben, weil auch Sie sich sonst bis zum Ablauf des Wartungszeitraums nicht mehr einloggen können.");
+@define('MAINTENANCE_MODE_DURATION', 'Sperrzeit (in Stunden):');
+@define('MAINTENANCE_MODE_TIME', 'Wartungsmodus aktiv bis');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Aktivieren');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deaktivieren');
+
+@define('PLUGIN_LINK_SPARTACUS', 'Weitere Informationen');
+@define('PLUGIN_ALL_UPDATED', 'Alle Plugins aktualisiert');
+@define('MEDIA_DIRECTORY_MOVE', 'Dateien verschieben');

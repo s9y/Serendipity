@@ -47,7 +47,7 @@ function locateHiddenVariables($_args) {
         } elseif ($v[0] == 'A') { /* Author */
             $url_author = substr($v, 1);
             if (is_numeric($url_author)) {
-                $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
+                $serendipity['GET']['viewAuthor'] = (int)$url_author;
                 unset($_args[$k]);
             }
         } elseif ($v == 'summary') { /* Summary */
@@ -132,6 +132,10 @@ function serveJS($js_mode) {
     header('Content-type: application/javascript; charset=' . LANG_CHARSET);
 
     $out = "";
+    // FIXFIX: including genpage without any given action will generate the
+    // default page which is unneccessary, set action to empty to only make
+    // the fix below
+    $serendipity['GET']['action'] = 'empty';
 
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 
@@ -226,7 +230,7 @@ function serveCategory($matches) {
 
     $is_multicat = (isset($serendipity['POST']['isMultiCat']) && is_array($serendipity['POST']['multiCat']));
     if ($is_multicat) {
-        $serendipity['GET']['category'] = implode(';', $serendipity['POST']['multiCat']);
+        $serendipity['GET']['category'] = serendipity_specialchars(implode(';', $serendipity['POST']['multiCat']));
         $serendipity['uriArguments'][]  = PATH_CATEGORIES;
         $serendipity['uriArguments'][]  = serendipity_db_escape_string($serendipity['GET']['category']) . '-multi';
     } elseif (preg_match('@/([0-9;]+)@', $uri, $multimatch)) {
@@ -245,6 +249,7 @@ function serveCategory($matches) {
         $serendipity['GET']['category'] = $matches[1];
     }
     $cInfo = serendipity_fetchCategoryInfo($serendipity['GET']['category']);
+    serendipity_plugin_api::hook_event('multilingual_strip_langs',$cInfo, array('category_name'));
 
     if (!is_array($cInfo)) {
         $serendipity['view'] = '404';
@@ -366,8 +371,8 @@ function serveEntry($matches) {
         $id = false;
     }
 
-    $_GET['serendipity']['action'] = 'read';
-    $_GET['serendipity']['id']     = $id;
+    $serendipity['GET']['action'] = 'read';
+    $serendipity['GET']['id']     = $id;
 
     $title = serendipity_db_query("SELECT title FROM {$serendipity['dbPrefix']}entries WHERE id=$id AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : ''), true);
     if (is_array($title)) {

@@ -224,7 +224,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'New comment to subscribed entry "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nA new comment was made to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nA new trackback was added to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <http://s9y.org> to find out how.");
+@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <https://s9y.org> to find out how.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -496,7 +496,7 @@
 @define('ENTER_MEDIA_UPLOAD', '«Œ — «·„·› «·–Ì  —Ìœ —›⁄…:');
 @define('SAVE_FILE_AS', 'Õ›Ÿ «·„·› »√”„:');
 @define('STORE_IN_DIRECTORY', ' Œ“Ì‰Â ›Ì œ«Œ· Â–« «·„Ã·œ: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>√÷«›… „·› «·Ï «·„ÌœÌ«  Õ  „”∆Ê·Ì ﬂ:</b><p> Â‰« Ì„ﬂ‰ ·ﬂ —›⁄ „·›«  «·„ÌœÌ« ° √Ê «Œ»—‰« ⁄‰Â« ﬂÌ Ì „ Ã·»Â« „‰ √Ì „ﬂ«‰ ›Ì «·«‰ —‰ ! √‰ ·„ Ìﬂ‰ ·œÌﬂ «·’Ê—… «·„‰«”»… <a href="http://images.google.com" target="_blank"> «»ÕÀ ⁄‰ «·’Ê—… «·„ÿ·Ê»… ›Ì ﬁÊﬁ· ··’Ê— </a> «· Ì  ‰«”» ›ﬂ—… „Ê÷Ê⁄ﬂ ° Ê«·‰ ÌÃ… √ÕÌ«‰«  ﬂÊ‰ „÷Õﬂ… √Ê ⁄«œÌ… ° Ê·ﬂ‰ ⁄·Ìﬂ „—«⁄«… ÕﬁÊﬁ «·‰‘— ° ·–·ﬂ Ì ÊÃ» ⁄·Ìﬂ «·”ƒ«· ⁄‰Â« ﬁ»· √‰  √Œ–Â« „‰ „’œ—Â«<p><b> √Œ — «·ÿ—Ìﬁ… «· Ì  ‰«”»ﬂ:</b><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>√÷«›… „·› «·Ï «·„ÌœÌ«  Õ  „”∆Ê·Ì ﬂ:</b><p> Â‰« Ì„ﬂ‰ ·ﬂ —›⁄ „·›«  «·„ÌœÌ« ° √Ê «Œ»—‰« ⁄‰Â« ﬂÌ Ì „ Ã·»Â« „‰ √Ì „ﬂ«‰ ›Ì «·«‰ —‰ ! √‰ ·„ Ìﬂ‰ ·œÌﬂ «·’Ê—… «·„‰«”»… <a href="https://images.google.com/" target="_blank"> «»ÕÀ ⁄‰ «·’Ê—… «·„ÿ·Ê»… ›Ì ﬁÊﬁ· ··’Ê— </a> «· Ì  ‰«”» ›ﬂ—… „Ê÷Ê⁄ﬂ ° Ê«·‰ ÌÃ… √ÕÌ«‰«  ﬂÊ‰ „÷Õﬂ… √Ê ⁄«œÌ… ° Ê·ﬂ‰ ⁄·Ìﬂ „—«⁄«… ÕﬁÊﬁ «·‰‘— ° ·–·ﬂ Ì ÊÃ» ⁄·Ìﬂ «·”ƒ«· ⁄‰Â« ﬁ»· √‰  √Œ–Â« „‰ „’œ—Â«<p><b> √Œ — «·ÿ—Ìﬁ… «· Ì  ‰«”»ﬂ:</b><br/>');
 @define('MEDIA_RENAME', '√⁄«œ…  ”„Ì… «·„·›');
 @define('IMAGE_RESIZE', ' €ÌÌ— ﬁÌ«”«  Â–Â «·’Ê—…');
 @define('MEDIA_DELETE', 'Õ–› «·„·›');
@@ -581,7 +581,7 @@
 @define('INSTALL_SHOWFUTURE', '√⁄—÷ «·„Ê«÷Ì⁄ «·„” ﬁ»·Ì…');
 @define('INSTALL_SHOWFUTURE_DESC', '«‰  „  „ﬂÌ‰ Â–« ›≈‰Â ”Ê› Ì⁄—÷ „” ﬁ»·« Ã„Ì⁄ „Ê«÷Ì⁄ «·„Ã·…. «·ŒÌ«— «·«› —«÷Ì ÂÊ ≈Œ›«¡ «·„Ê«÷Ì⁄ Ê  ⁄—÷ ›ﬁÿ ⁄‰œ  «—ÌŒ «·‰‘—');
 @define('INSTALL_DBPERSISTENT', '√” Œœ«„ «·« »«ÿ «·Õ«·Ì');
-@define('INSTALL_DBPERSISTENT_DESC', ' „ﬂ‰ «” Œœ«„ «·« ’«· «·œ«∆„ ·ﬁ«⁄œ… «·»Ì«‰« . Ì„ﬂ‰ﬂ ﬁ—«¡… «·„“Ìœ Â‰« <a href="http://php.net/manual/features.persistent-connections.php" target="_blank"> Â‰‹‹« </a> Ì‰’Õ »Â–« «·«Ã—«¡');
+@define('INSTALL_DBPERSISTENT_DESC', ' „ﬂ‰ «” Œœ«„ «·« ’«· «·œ«∆„ ·ﬁ«⁄œ… «·»Ì«‰« . Ì„ﬂ‰ﬂ ﬁ—«¡… «·„“Ìœ Â‰« <a href="https://php.net/manual/features.persistent-connections.php" target="_blank"> Â‰‹‹« </a> Ì‰’Õ »Â–« «·«Ã—«¡');
 @define('NO_IMAGES_FOUND', '·„ Ì „ «·⁄ÀÊ— ⁄·Ï «·’Ê—…');
 @define('PERSONAL_SETTINGS', '«·«⁄œ«œ«  «·‘Œ’Ì…');
 @define('REFERER', 'Ì‘Ì— ≈·Ï');
@@ -786,7 +786,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: View other user\'s media files');
 @define('CHARSET_NATIVE', '„Õ·Ì');
 @define('INSTALL_CHARSET', ' —„Ì“ «·√Õ—›');
-@define('INSTALL_CHARSET_DESC', ' Â‰« Ì„ﬂ‰ ·ﬂ  √‰  €Ì— »Ì‰ «· —„Ì“ «·⁄«·„Ì UTF-8 Ê «· —„Ì“ «·„Õ·Ì ··€ ﬂ „À·  —„Ì“ (ISO, EUC, ...)  ° »⁄÷ «··€«  ·œÌÂ« ›ﬁÿ  —Ã„…  —„Ì“ UTF-8  ·–·ﬂ »«Œ Ì«—Ìﬂ  —„Ì“ ·€ ﬂ «·„Õ·Ì… ·‰ ÌﬂÊ‰ ·Â √À— ⁄·Ï √œ«¡ „œÊ‰ ﬂ ° ‰ﬁ —Õ «” Œœ«„ UTF-8 ·· —ﬂÌ» «·ÃœÌœ. √Õ–— . . .√Õ–— . . . √Õ–— . . .  ·«  ﬁ„ » €ÌÌ— «· —„Ì“ ≈–« ﬂ‰  ﬂ »  „Ê«÷Ì⁄ „‰ ﬁ»·. ·√‰ „« ﬂ » Â » —„Ì“ ·€… √Œ—Ï ”Ê› Ì’»Õ ⁄·Ï ‘ﬂ· ÿ·«”„. √ ÃÂ ≈·Ï Â–« «·„Êﬁ⁄ http://www.s9y.org/index.php?node=46   ··«ÿ·«⁄ ⁄·Ï «·„“Ìœ „‰ «·„⁄·Ê„« ');
+@define('INSTALL_CHARSET_DESC', ' Â‰« Ì„ﬂ‰ ·ﬂ  √‰  €Ì— »Ì‰ «· —„Ì“ «·⁄«·„Ì UTF-8 Ê «· —„Ì“ «·„Õ·Ì ··€ ﬂ „À·  —„Ì“ (ISO, EUC, ...)  ° »⁄÷ «··€«  ·œÌÂ« ›ﬁÿ  —Ã„…  —„Ì“ UTF-8  ·–·ﬂ »«Œ Ì«—Ìﬂ  —„Ì“ ·€ ﬂ «·„Õ·Ì… ·‰ ÌﬂÊ‰ ·Â √À— ⁄·Ï √œ«¡ „œÊ‰ ﬂ ° ‰ﬁ —Õ «” Œœ«„ UTF-8 ·· —ﬂÌ» «·ÃœÌœ. √Õ–— . . .√Õ–— . . . √Õ–— . . .  ·«  ﬁ„ » €ÌÌ— «· —„Ì“ ≈–« ﬂ‰  ﬂ »  „Ê«÷Ì⁄ „‰ ﬁ»·. ·√‰ „« ﬂ » Â » —„Ì“ ·€… √Œ—Ï ”Ê› Ì’»Õ ⁄·Ï ‘ﬂ· ÿ·«”„. √ ÃÂ ≈·Ï Â–« «·„Êﬁ⁄ https://docs.s9y.org/docs/developers/internationalization.html   ··«ÿ·«⁄ ⁄·Ï «·„“Ìœ „‰ «·„⁄·Ê„« ');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Enable Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'The XML-RPC API Interface to Serendipity is no longer bundled because of ongoing security issues with this API and not many people using it. Thus you need to install the XML-RPC Plugin to use the XML-RPC API. The URL to use in your applications will NOT change - as soon as you have installed the plugin, you will again be able to use the API.');
@@ -1038,3 +1038,15 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL', 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
+@define('PLUGIN_LINK_SPARTACUS', 'More information');
+@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

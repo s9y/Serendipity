@@ -120,3 +120,5 @@ jQuery(function() {
 if ($_SESSION['serendipityUseTemplate']) {
     $template_loaded_config['use_corenav'] = false;
 }
+
+$template_loaded_config['breakpoints'] = [1600, 1200, 600];

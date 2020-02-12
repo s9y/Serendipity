@@ -14,7 +14,7 @@ class serendipity_plugin_quicksearch extends serendipity_plugin
         $propbag->add('description',   SEARCH_FOR_ENTRY);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.2'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
         $propbag->add('configuration', array('fullentry'));
         $propbag->add('groups',        array('FRONTEND_ENTRY_RELATED'));
     }

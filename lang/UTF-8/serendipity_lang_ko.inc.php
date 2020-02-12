@@ -225,7 +225,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '구독한 글 "%s"에 새로운 덧글이 달림');
 @define('SUBSCRIPTION_MAIL', "%s님 안녕하십니까?\n\n\"%s\"에서 구독중인 \"%s\"(이)라는 글에 새로운 덧글이 달렸습니다.\n작성자 이름은 %s 입니다.\n\n여기로 가면 글을 볼 수 있습니다: %s\n\n이 링크를 누르면 구독 해지를 할 수 있습니다: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "%s님 안녕하십니까?\n\n\"%s\"에서 구독중인 \"%s\"(이)라는 글에 새로운 트랙백이 달렸습니다.\n작성자 이름은 %s 입니다.\n\n여기로 가면 글을 볼 수 있습니다: %s\n\n이 링크를 누르면 구독 해지를 할 수 있습니다: %s\n");
-@define('SIGNATURE', "\n-- \n%s(은)는 세렌디피티로 작성되었습니다.\n여려분도 쓸 수 있는 최고의 블로그!\n<http://s9y.org>에서 알아보세요.");
+@define('SIGNATURE', "\n-- \n%s(은)는 세렌디피티로 작성되었습니다.\n여려분도 쓸 수 있는 최고의 블로그!\n<https://s9y.org>에서 알아보세요.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 피드');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 피드');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 피드');
@@ -497,7 +497,7 @@
 @define('ENTER_MEDIA_UPLOAD', '업로드할 파일 선택:');
 @define('SAVE_FILE_AS', '저장할 파일 이름 지정:');
 @define('STORE_IN_DIRECTORY', '저장할 디렉토리 지정: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>미디어 보관함에 파일 추가:</b><p>여기서 미디어 파일을 업로드하거나 인터넷에서 파일을 불러올 수 있습니다. 적당한 그림을 가지고 있지 않으면 생각이 떠오른 대로 <a href="http://images.google.com" target="_blank">구글에서 그림을 검색</a>해보면 유용하고 재미있습니다. 단, 대부분의 그림은 저작권이 설정되어 있으므로 사용하기 전에 허락을 받는 것에 유의하십시오.</p><p><b>방법 선택:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>미디어 보관함에 파일 추가:</b><p>여기서 미디어 파일을 업로드하거나 인터넷에서 파일을 불러올 수 있습니다. 적당한 그림을 가지고 있지 않으면 생각이 떠오른 대로 <a href="https://images.google.com/" target="_blank">구글에서 그림을 검색</a>해보면 유용하고 재미있습니다. 단, 대부분의 그림은 저작권이 설정되어 있으므로 사용하기 전에 허락을 받는 것에 유의하십시오.</p><p><b>방법 선택:</b></p><br/>');
 @define('MEDIA_RENAME', '파일 이름 변경');
 @define('IMAGE_RESIZE', '그림 크기 조절');
 @define('MEDIA_DELETE', '파일 삭제');
@@ -584,7 +584,7 @@
 @define('INSTALL_SHOWFUTURE', '미래에 작성한 글 보이기');
 @define('INSTALL_SHOWFUTURE_DESC', '이 기능을 사용할 경우 작성 날짜가 미래인 글도 모두 블로그에 표시하게 됩니다. 기본값은 이러한 글을 작성 날짜가 다다를 때까지 숨기는 것입니다.');
 @define('INSTALL_DBPERSISTENT', '지속적인 접속 사용');
-@define('INSTALL_DBPERSISTENT_DESC', '지속적으로 데이터페이스에 접속하는 기능을 사용합니다. <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">여기에서</a> 자세한 정보를 읽을 수 있습니다. 일반적으로 추천하지 않습니다.');
+@define('INSTALL_DBPERSISTENT_DESC', '지속적으로 데이터페이스에 접속하는 기능을 사용합니다. <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">여기에서</a> 자세한 정보를 읽을 수 있습니다. 일반적으로 추천하지 않습니다.');
 @define('NO_IMAGES_FOUND', '그림이 없습니다');
 @define('PERSONAL_SETTINGS', '개인 설정');
 @define('REFERER', '진입 경로');
@@ -787,7 +787,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: 다른 사용자의 미디어 파일 보기');
 @define('CHARSET_NATIVE', '지역 전용');
 @define('INSTALL_CHARSET', '문자열 종류 선택');
-@define('INSTALL_CHARSET_DESC', '여기서 문자열을 UTF-8로 할 것인지 지역 전용 (ISO, EUC 등)으로 할 것인지 정할 수 있습니다. 일부 언어는 UTF-8 버전만 제공되므로 "지역 전용"을 설정해도 변화가 없습니다. 새로 설치한 경우 UTF-8을 권장합니다. 이미 특별 문자를 사용하여 글을 작성했을 경우 이 설정을 변경하지 마십시오. 글자가 깨질 수 있습니다. 이 설정에 대해서는 http://www.s9y.org/index.php?node=46 에 더 자세하게 소개가 되어 있습니다.');
+@define('INSTALL_CHARSET_DESC', '여기서 문자열을 UTF-8로 할 것인지 지역 전용 (ISO, EUC 등)으로 할 것인지 정할 수 있습니다. 일부 언어는 UTF-8 버전만 제공되므로 "지역 전용"을 설정해도 변화가 없습니다. 새로 설치한 경우 UTF-8을 권장합니다. 이미 특별 문자를 사용하여 글을 작성했을 경우 이 설정을 변경하지 마십시오. 글자가 깨질 수 있습니다. 이 설정에 대해서는 https://docs.s9y.org/docs/developers/internationalization.html 에 더 자세하게 소개가 되어 있습니다.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', '플러그인 API 훅 사용');
 @define('CALENDAR_EXTEVENT_DESC', '사용할 경우, 플러그인은 달력에 훅을 걸어서 자체적인 이벤트를 강조 표시할 수 있게 됩니다. 이 기능이 필요한 플러그인을 설치했을 때만 사용하십시오. 그냥 켜놓게 되면 성능만 떨어뜨립니다.');
 @define('XMLRPC_NO_LONGER_BUNDLED', '세렌디피티에 대한 XML-RPC API 인터페이스는 지속적으로 보안 상의 문제가 지적되고 있고 사용자 수가 적은 관계로 더 이상 기본적으로 포함되어 있지 않습니다. 그러므로 XML-RPC API를 사용하기 위해서는 XML-RPC 플러그인을 설치해야 합니다. 기존 어플리케이션에 사용하던 주소에는 변함이 없습니다. 플러그인을 설치하게 되면 곧바로 API를 사용할 수 있게 됩니다.');
@@ -1123,3 +1123,15 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL', 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
+@define('PLUGIN_LINK_SPARTACUS', 'More information');
+@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

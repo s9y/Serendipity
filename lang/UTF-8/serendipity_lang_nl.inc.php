@@ -225,7 +225,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Nieuwe reactie op geabonneerd artikel "%s"');
 @define('SUBSCRIPTION_MAIL', "Geachte %s,\n\nEen nieuwe reactie is geplaatst op \"%s\", op artikel \"%s\"\nDe persoon die gereageerd heeft is: %s\n\nU kunt de reactie hier vinden: %s\n\nU kunt zich uitschrijven door op deze hyperlink te klikken: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Geachte %s,\n\nEen nieuwe trackback is toegevoegd op\"%s\", op artikel \"%s\"\nDe persoon die gereageerd heeft is: %s\n\nU kunt het artikel hier vinden: %s\n\nU kunt zich uitschrijven door op deze hyperlink te klikken: %s\n");
-@define('SIGNATURE', "\n-- \n%s wordt aangedreven door Serendipity, één van de beste weblogs.\nU kunt het ook gebruiken: ga naar <http://s9y.org> om te ontdekken hoe.");
+@define('SIGNATURE', "\n-- \n%s wordt aangedreven door Serendipity, één van de beste weblogs.\nU kunt het ook gebruiken: ga naar <https://s9y.org> om te ontdekken hoe.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91-toevoer');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0-toevoer');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0-toevoer');
@@ -497,7 +497,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'Selecteer een bestand dat u wilt uploaden:');
 @define('SAVE_FILE_AS', 'Sla bestand op als:');
 @define('STORE_IN_DIRECTORY', 'Sla op in de volgende map: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Voeg een bestand toe aan uw mediaverzameling:</b><p>Hier kunt u mediabestanden uploaden, of aangeven waar ze zich op het Internet bevinden. Als u geen goede afbeelding kunt vinden, kunt u <a href="http://images.google.com" target="_blank">zoeken naar afbeeldingen met Google</a>. Bedenk wel dat de meeste afbeeldingen auteursrechtelijk beschermd zijn en u dus toestemming moet vragen om ze te mogen gebruiken.</p><p><b>Selectiemethode:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Voeg een bestand toe aan uw mediaverzameling:</b><p>Hier kunt u mediabestanden uploaden, of aangeven waar ze zich op het Internet bevinden. Als u geen goede afbeelding kunt vinden, kunt u <a href="https://images.google.com/" target="_blank">zoeken naar afbeeldingen met Google</a>. Bedenk wel dat de meeste afbeeldingen auteursrechtelijk beschermd zijn en u dus toestemming moet vragen om ze te mogen gebruiken.</p><p><b>Selectiemethode:</b></p><br/>');
 @define('MEDIA_RENAME', 'Hernoem dit bestand');
 @define('IMAGE_RESIZE', 'Wijzig formaat van de afbeelding');
 @define('MEDIA_DELETE', 'Verwijder dit bestand');
@@ -581,7 +581,7 @@
 @define('INSTALL_SHOWFUTURE', 'Toon toekomstige artikelen');
 @define('INSTALL_SHOWFUTURE_DESC', 'Als dit is ingeschakeld worden alle artikelen met een publicatiedatum in de toekomst weergeven. Standaard worden alleen artikelen weergegeven waarvan de publicatiedatum al bereikt werd.');
 @define('INSTALL_DBPERSISTENT', 'Gebruik altijd openstaande verbindingen');
-@define('INSTALL_DBPERSISTENT_DESC', 'Laat de verbinding met uw databank openstaan. Lees meer hierover op de (<a href="http://php.net/manual/features.persistent-connections.php" target="_blank">PHP-website</a>). Dit wordt niet aangeraden');
+@define('INSTALL_DBPERSISTENT_DESC', 'Laat de verbinding met uw databank openstaan. Lees meer hierover op de (<a href="https://php.net/manual/features.persistent-connections.php" target="_blank">PHP-website</a>). Dit wordt niet aangeraden');
 @define('NO_IMAGES_FOUND', 'Geen afbeeldingen gevonden');
 @define('PERSONAL_SETTINGS', 'Persoonlijke instellingen');
 @define('REFERER', 'Verwijzer');
@@ -784,7 +784,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Mediabestanden van anderen bekijken');
 @define('CHARSET_NATIVE', 'Taalafhankelijk');
 @define('INSTALL_CHARSET', 'Tekensetselectie');
-@define('INSTALL_CHARSET_DESC', 'Hier kunt u kiezen tussen UTF-8 en taalafhankelijke (ISO, EUC, ...) tekensets. Sommige talen hebben alleen een UTF-8-vertaling, dus kiezen voor "Taalafhankelijk" heeft dan geen effect. UTF-8 wordt aangeraden voor een nieuwe installatie. Verander deze instelling niet als u al artikelen gemaakt heeft met speciale tekens, dit kan leiden tot corrupte tekens. Lees meer hierover op http://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Hier kunt u kiezen tussen UTF-8 en taalafhankelijke (ISO, EUC, ...) tekensets. Sommige talen hebben alleen een UTF-8-vertaling, dus kiezen voor "Taalafhankelijk" heeft dan geen effect. UTF-8 wordt aangeraden voor een nieuwe installatie. Verander deze instelling niet als u al artikelen gemaakt heeft met speciale tekens, dit kan leiden tot corrupte tekens. Lees meer hierover op https://docs.s9y.org/docs/developers/internationalization.html.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Zet plugin-API-interface aan');
 @define('CALENDAR_EXTEVENT_DESC', 'Als deze optie aan staat, kunnen plugins de kalender gebruiken om hun eigen gebeurtenissen te laten zien. Zet dit alleen aan als u plugins geïnstalleerd heeft die dit gebruiken, anders vermindert het gewoon de performantie.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'De XML-RPC API-interface naar Serendipity wordt niet meer meegeleverd vanwege veiligheidsproblemen en omdat maar weinig mensen het gebruikten. Om hier gebruik van te maken moet u de XML-RPC-plugin installeren. De URL voor uw programma\'s verandert NIET. Zodra de plugin geïnstalleerd is, kunt u de API terug gebruiken.');
@@ -1121,3 +1121,15 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL', 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
+@define('PLUGIN_LINK_SPARTACUS', 'More information');
+@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

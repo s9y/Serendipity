@@ -474,6 +474,7 @@ function serendipity_buildPermalinks() {
     if (is_array($categories)) {
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}permalinks WHERE type = 'category'");
 
+        serendipity_plugin_api::hook_event('multilingual_strip_langs',$categories, array('category_name','category_description'));
         foreach($categories AS $category) {
             serendipity_insertPermalink($category, 'category');
         }

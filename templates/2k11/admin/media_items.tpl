@@ -55,10 +55,6 @@
             {$img_alt="{$file.mime}"}
         {/if}
     {/if}
-    {* builds a ML objects link for step 1, to pass to media_choose.tpl file section: passthrough media.filename_only scripts - do not use "empty($link) AND" here, since that would require a reset before! *}
-    {if (!$file.is_image OR $file.is_image == 0) AND $file.mediatype != 'image' AND $file.realfile}
-        {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[fid]={$file.id}&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[htmltarget]={$media.htmltarget}"}
-    {/if}
 
             <article id="media_{$file.id}" class="media_file {if $media.manage AND $media.multiperm}manage {/if}{cycle values="odd,even"}">
                 <header class="clearfix">
@@ -68,6 +64,13 @@
                         <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
                         <label for="multidelete_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                     </div>
+                    {else}
+                        {if NOT $media.manage}
+                            <div class="form_check">
+                                <input id="multiinsert_image{$file.id}" class="multiinsert" name="serendipity[fids][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
+                                <label for="multiinsert_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
+                            </div>
+                        {/if}
                     {/if}
 
                     <h3 title="{$file.realname}">{$file.realname|truncate:50:"&hellip;":true}{if $file.orderkey != ''}: {$file.orderkey|escape}{/if}</h3>
@@ -77,9 +80,23 @@
 
                 <div class="clearfix equal_heights media_file_wrap">
                     <div class="media_file_preview">
-                        <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
-                            <img src="{$img_src}" title="{$img_title}" alt="{$img_alt}">
-                        </a>
+                        {if $file.mediatype == 'video'}
+                            <video src="{$file.imgsrc}" controls>
+                                <img src="{$img_src}" title="{$img_title}" alt="{$img_alt}">
+                            </video>
+                            <br />
+                            {if NOT $media.manage}
+                                {* we need a link to go to the next step when inserting into an entry *}
+                                <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
+                                    {$CONST.VIDEO}
+                                </a>
+                            {/if}
+                        {else}
+                            <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
+                                {* even files that are not images get aplaceholder image from the backend *}    
+                                <img src="{$img_src}" title="{$img_title}" alt="{$img_alt}">
+                            </a>
+                        {/if}
                         <footer id="media_file_meta_{$file.id}" class="media_file_meta additional_info">
                             <ul class="plainList">
                             {if $file.hotlink}
@@ -234,8 +251,8 @@
                     <dl class="clearfix">
                         {foreach $meta_data AS $meta_value}
 
-                        <dt>{$meta_value@key}</dt>
-                        <dd>{if is_array($meta_value)}{$meta_value|print_r}{else}{$meta_value|formatTime:DATE_FORMAT_SHORT:false:$meta_value@key}{/if}</dd>
+                        <dt>{$meta_value@key|escape}</dt>
+                        <dd>{if is_array($meta_value)}{$meta_value|print_r}{else}{$meta_value|formatTime:DATE_FORMAT_SHORT:false:$meta_value@key|escape}{/if}</dd>
                         {/foreach}
 
                     </dl>

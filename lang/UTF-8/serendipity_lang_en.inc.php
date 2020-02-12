@@ -26,8 +26,6 @@
 @define('LOGOUT', 'Logout');
 @define('LOGGEDOUT', 'Logged out.');
 @define('CREATE', 'Create');
-@define('SAVE', 'Save');
-@define('NAME', 'Name');
 @define('CREATE_NEW_CAT', 'Create New Category');
 @define('I_WANT_THUMB', 'I want to use the thumbnail in my entry.');
 @define('I_WANT_BIG_IMAGE', 'I want to use the larger image in my entry.');
@@ -222,7 +220,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'New comment to subscribed entry "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nA new comment was made to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nA new trackback was added to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <http://s9y.org> to find out how.");
+@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <https://s9y.org> to find out how.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -494,7 +492,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'Select a file you wish to upload:');
 @define('SAVE_FILE_AS', 'Save the file as:');
 @define('STORE_IN_DIRECTORY', 'Store inside the following directory: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Add a file to your media repository:</b><p>Here you can upload media files, or tell me to fetch them from somewhere in the web! If you do not have an appropriate image, <a href="http://images.google.com" target="_blank">search for images on google</a> matching your thoughts, the results are often useful and funny :) But be careful, most images are copyrighted, so you should ask before using them.</p><p><b>Select method:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Add a file to your media repository:</b><p>Here you can upload media files, or tell me to fetch them from somewhere in the web! If you do not have an appropriate image, <a href="https://images.google.com/" target="_blank">search for images on google</a> matching your thoughts, the results are often useful and funny :) But be careful, most images are copyrighted, so you should ask before using them.</p><p><b>Select method:</b></p><br/>');
 @define('MEDIA_RENAME', 'Rename this file');
 @define('IMAGE_RESIZE', 'Resize this image');
 @define('MEDIA_DELETE', 'Delete this file');
@@ -514,7 +512,7 @@
 @define('DELETE_SELECTED_COMMENTS', 'Delete selected comments');
 @define('VIEW_COMMENT', 'View comment');
 @define('VIEW_ENTRY', 'View entry');
-@define('DELETE_FILE_FAIL' , 'Unable to delete file <b>%s</b>');
+@define('DELETE_FILE_FAIL', 'Unable to delete file <b>%s</b>');
 @define('DELETE_THUMBNAIL', 'Deleted the image thumbnail entitled <b>%s</b>');
 @define('DELETE_FILE', 'Deleted the file entitled <b>%s</b>');
 @define('ABOUT_TO_DELETE_FILE', 'You are about to delete <b>%s</b><br />If you are using this file in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
@@ -526,6 +524,7 @@
 @define('TRACKBACK_CHECKING', 'Checking <u>%s</u> for possible trackbacks...');
 @define('TRACKBACK_NO_DATA', 'Target contained no data');
 @define('TRACKBACK_SIZE', 'Target URI exceeded maximum filesize of %s bytes.');
+@define('VIEWMODE_THREADED', 'Show as tree');
 @define('COMMENTS_VIEWMODE_THREADED', 'Threaded');
 @define('COMMENTS_VIEWMODE_LINEAR', 'Linear');
 @define('DISPLAY_COMMENTS_AS', 'Display comments as');
@@ -581,7 +580,7 @@
 @define('INSTALL_SHOWFUTURE', 'Show future entries');
 @define('INSTALL_SHOWFUTURE_DESC', 'If enabled, this will show all entries in the future on your blog. Default is to hide those entries and only show them if the publish date has arrived.');
 @define('INSTALL_DBPERSISTENT', 'Use persistent connections');
-@define('INSTALL_DBPERSISTENT_DESC', 'Enable the usage of persistent database connections, read more <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. This is normally not recommended');
+@define('INSTALL_DBPERSISTENT_DESC', 'Enable the usage of persistent database connections, read more <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. This is normally not recommended');
 @define('NO_IMAGES_FOUND', 'No images found');
 @define('PERSONAL_SETTINGS', 'Personal Settings');
 @define('REFERER', 'Referer');
@@ -786,7 +785,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: View other user\'s media files');
 @define('CHARSET_NATIVE', 'Native');
 @define('INSTALL_CHARSET', 'Charset selection');
-@define('INSTALL_CHARSET_DESC', 'Here you can toggle UTF-8 or native (ISO, EUC, ...) charactersets. Some languages only have UTF-8 translations so that setting the charset to "Native" will have no effects. UTF-8 is suggested for new installations. Do not change this setting if you have already made entries with special characters - this may lead to corrupt characters. Be sure to read more on http://www.s9y.org/index.php?node=46 about this issue.');
+@define('INSTALL_CHARSET_DESC', 'Here you can toggle UTF-8 or native (ISO, EUC, ...) charactersets. Some languages only have UTF-8 translations so that setting the charset to "Native" will have no effects. UTF-8 is suggested for new installations. Do not change this setting if you have already made entries with special characters - this may lead to corrupt characters. Be sure to read more on https://docs.s9y.org/docs/developers/internationalization.html about this issue.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Enable Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'The XML-RPC API Interface to Serendipity is no longer bundled because of ongoing security issues with this API and not many people using it. Thus you need to install the XML-RPC Plugin to use the XML-RPC API. The URL to use in your applications will NOT change - as soon as you have installed the plugin, you will again be able to use the API.');
@@ -859,7 +858,7 @@
 @define('PLUGIN_AVAILABLE_COUNT', 'Total: %d plugins.');
 
 @define('SYNDICATION_RFC2616', 'Activate strict RFC2616 RSS-Feed compliance');
-@define('SYNDICATION_RFC2616_DESC', 'NOT Enforcing RFC2616 means that all Conditional GETs to Serendipity will return entries last modified since the time of the last request. With that setting to "false", your visitors will get all articles since their last request, which is considered a good thing. However, some Agents like Planet act weird, if that happens, at it also violates RFC2616. So if you set this option to "TRUE" you will comply with that RFC, but readers of your RSS feed might miss items in their holidays. So either way, either it hearts Aggregators like Planet, or it hurts actual readers of your blog. If you are facing complaints from either side, you can toggle this option. Reference: <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1461728&amp;group_id=75065&amp;atid=542822" target="_blank" rel="nofollow">SourceForge</a>');
+@define('SYNDICATION_RFC2616_DESC', 'NOT Enforcing RFC2616 means that all Conditional GETs to Serendipity will return entries last modified since the time of the last request. With that setting to "false", your visitors will get all articles since their last request, which is considered a good thing. However, some Agents like Planet act weird, if that happens, at it also violates RFC2616. So if you set this option to "TRUE" you will comply with that RFC, but readers of your RSS feed might miss items in their holidays. So either way, either it hearts Aggregators like Planet, or it hurts actual readers of your blog. If you are facing complaints from either side, you can toggle this option.');
 @define('MEDIA_PROPERTY_DATE', 'Associated Date');
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Run-Length');
 @define('FILENAME_REASSIGNED', 'Automagically assigned new file name: %s');
@@ -935,7 +934,7 @@
 @define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
 @define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');
 @define('SYNDICATION_PLUGIN_BIGIMG', 'Big Image');
-@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file.');
+@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file. Set to "none" to show a textlink (the old default)');
 @define('SYNDICATION_PLUGIN_FEEDNAME', 'Displayed name for "feed"');
 @define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Enter an optional custom name for the feeds (defaults to "feed" when empty)');
 @define('SYNDICATION_PLUGIN_COMMENTNAME', 'Displayed name for "comment" feed');
@@ -1048,7 +1047,6 @@
 @define('SYNDICATION_PLUGIN_SUBTOME', 'subToMe');
 @define('SYNDICATION_PLUGIN_SUBTOME_DESC', 'Show the subToMe button, a layer to make feed subscription easier');
 @define('SYNDICATE_THIS_BLOG', 'Subscribe');
-@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file. Set to "none" to show a textlink (the old default)');
 @define('INSTALL_BACKENDPOPUP', 'Enable use of popup windows for the backend');
 @define('INSTALL_BACKENDPOPUP_DESC', 'Do you want to use popup windows for some backend functionality? When disabled (default), inline modal dialogs will be used for e.g. the category selector and media library.');
 @define('UPDATE_STABLE', 'stable');
@@ -1085,7 +1083,7 @@
 @define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Force: CKEditor Full');
 
 @define('CATEGORY_PLUGIN_SHOWALL', 'Show a link to "All categories"?');
-@define('CATEGORY_PLUGIN_SHOWALL', 'If enabled, a link for the visitor to display the blog with no category restriction will be added.');
+@define('CATEGORY_PLUGIN_SHOWALL_DESC', 'If enabled, a link for the visitor to display the blog with no category restriction will be added.');
 @define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity requires a PHP version >= %2$s - you are running a lower version (%1$s) and need to upgrade your PHP version. Most providers offer you to switch to newer PHP versions through their admin panels or .htaccess directives.');
 @define('TOGGLE_VIEW', 'Switch category view mode');
 @define('PUBLISH_NOW', 'Publish this entry now (sets current time and date)');
@@ -1120,3 +1118,16 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL', 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
+
+@define('PLUGIN_LINK_SPARTACUS', 'More information');
+@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

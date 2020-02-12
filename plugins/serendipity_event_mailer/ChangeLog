@@ -1,0 +1,8 @@
+1.60:
+-----
+
+* Add new field to prepend a mail body message for each mail
+
+* Adds checkbox to allow force sending e-mails even when a blog entry is published already
+
+* Fixes missing "Keep stripped tags" description

@@ -3,7 +3,6 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 header('Content-Type: text/xml; charset=utf-8');
-session_cache_limiter('public');
 
 @define('IN_RSS', true);
 include('serendipity_config.inc.php');
@@ -101,7 +100,7 @@ switch ($_GET['type']) {
     case 'comments_and_trackbacks':
     case 'trackbacks':
     case 'comments':
-        $entries     = serendipity_fetchComments(isset($_GET['cid']) ? $_GET['cid'] : null, $serendipity['RSSfetchLimit'], 'co.id desc', false, $_GET['type']);
+        $entries     = serendipity_fetchComments(isset($_GET['cid']) ? $_GET['cid'] : null, (int)$serendipity['RSSfetchLimit'], 'co.id desc', false, $_GET['type']);
         $description = $title . ' - ' . $description;
         if (isset($_GET['cid'])) {
             $title   = $title . ' - ' . COMMENTS_FROM . ' "' . $latest_entry[0]['title'] . '"';

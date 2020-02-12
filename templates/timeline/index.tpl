@@ -28,8 +28,10 @@
         <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}">
     {/if} 
 {* CUSTOM FONTS *}   
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    {if $template_option.use_googlefonts}
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    {/if}
     {serendipity_hookPlugin hook="frontend_header"}
     <script src="{$head_link_script}"></script>
 {* SUBHEADER IMAGE *}    
@@ -234,7 +236,7 @@
                         <ul class="footer-socials list-inline">
                             {foreach from=$socialicons item="socialicon" name="social_networking"}
                                 <li>
-                                    <a href="{$socialicon.url}" title="{$socialicon.service}"><i class="fa fa-lg {service_icon from_service=$socialicon.service}"></i></a>
+                                    <a href="{$socialicon.url}" title="{$socialicon.service}"><i class="{service_icon from_service=$socialicon.service} fa-lg"></i></a>
                                 </li>        
                             {/foreach}         
                         </ul>

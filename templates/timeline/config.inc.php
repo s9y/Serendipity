@@ -78,7 +78,7 @@ function distanceOfTimeInWords($fromTime, $toTime = 0) {
 // call from tpl as {elapsed_time_words from_time=$comment.timestamp}
 $serendipity['smarty']->register_function('elapsed_time_words', 'timeAgoInWords');
 
-function timeAgoInWords($params, &$smarty) {
+function timeAgoInWords($params, $smarty) {
         return distanceOfTimeInWords($params['from_time'], time());
     }
 
@@ -146,6 +146,12 @@ $template_config = array(
         'default'       => serendipity_getTemplateFile('subheader.jpg', 'serendipityHTTPPath', true)
     ),
     array(
+        'var'           => 'use_googlefonts',
+        'name'          => USE_GOOGLEFONTS,
+        'type'          => 'boolean',
+        'default'       => true,
+    ),    
+    array(
         'var'           => 'date_format',
         'name'          => ENTRY_DATE_FORMAT . ' (http://php.net/strftime)',
         'type'          => 'string',
@@ -202,7 +208,7 @@ $template_config = array(
         'var'           => 'copyright',
         'name'          => COPYRIGHT,
         'type'          => 'string',
-        'default'       => 'Copyright &copy; ' . $serendipity['blogTitle'] . ' ' . date(Y) . '.  <a href="#">Link 1</a> | <a href="#">Link 2</a> | <a href="' . $serendipity['baseURL'] . 'serendipity_admin.php">Login</a>',
+        'default'       => 'Copyright &copy; ' . $serendipity['blogTitle'] . ' ' . date('Y') . '.  <a href="#">Link 1</a> | <a href="#">Link 2</a> | <a href="' . $serendipity['baseURL'] . 'serendipity_admin.php">Login</a>',
     ),
     array(
         'var'           => 'social_icons_amount',
@@ -247,30 +253,42 @@ for ($i = 0; $i < $template_loaded_config['social_icons_amount']; $i++) {
         'name'          => SOCIAL_NETWORK_SERVICE . ' #' .($i+1),
         'type'          => 'select',
         'default'       => 'RSS',
-        'select_values' => array('Amazon'      => 'Amazon',
-                                 'Digg'        => 'Digg',
-                                 'Dribbble'    => 'Dribbble',
-                                 'Dropbox'     => 'Dropbox',
-                                 'Facebook'    => 'Facebook',
-                                 'Flickr'      => 'Flickr',
-                                 'Github'      => 'Github',
-                                 'Google'      => 'Google',
-                                 'Google Plus' => 'Google Plus',
-                                 'Instagram'   => 'Instagram',
-                                 'LastFM'      => 'LastFM',
-                                 'Linkedin'    => 'Linkedin',
-                                 'Paypal'      => 'Paypal',
-                                 'Pinterest'   => 'Pinterest',
-                                 'RSS'         => 'RSS',
-                                 'Skype'       => 'Skype',
-                                 'Reddit'      => 'Reddit',
-                                 'Stumbleupon' => 'Stumbleupon',
-                                 'Tumblr'      => 'Tumblr',
-                                 'Twitter'     => 'Twitter',
-                                 'Vimeo'       => 'Vimeo',
-                                 'Vine'        => 'Vine',
-                                 'Xing'        => 'Xing',
-                                 'YouTube'     => 'YouTube')
+        'select_values' => array('Amazon'             => 'Amazon',
+                                 'Amazon Pay'         => 'Amazon Pay',
+                                 'Apple Pay'          => 'Apple Pay',
+                                 'Comment'            => 'Comment',
+                                 'Diaspora'           => 'Diaspora',
+                                 'Digg'               => 'Digg',
+                                 'Dribbble'           => 'Dribbble',
+                                 'Dropbox'            => 'Dropbox',
+                                 'Email'              => 'Email',
+                                 'Etsy'               => 'Etsy',
+                                 'Facebook'           => 'Facebook',
+                                 'Facebook-Messenger' => 'Facebook-Messenger',
+                                 'Flickr'             => 'Flickr',
+                                 'Github'             => 'Github',
+                                 'Google'             => 'Google',
+                                 'Home'               => 'Home',
+                                 'Instagram'          => 'Instagram',
+                                 'LastFM'             => 'LastFM',
+                                 'Linkedin'           => 'Linkedin',
+                                 'Mastodon'           => 'Mastodon',
+                                 'Mix'                => 'Mix',
+                                 'Mobile'             => 'Mobile',
+                                 'Patreon'            => 'Patreon',
+                                 'Paypal'             => 'Paypal',
+                                 'Pinterest'          => 'Pinterest',
+                                 'Reddit'             => 'Reddit',                                 
+                                 'RSS'                => 'RSS',
+                                 'Skype'              => 'Skype',
+                                 'Snapchat'           => 'Snapchat',
+                                 'StackOverflow'      => 'StackOverflow',
+                                 'Tumblr'             => 'Tumblr',
+                                 'Twitter'            => 'Twitter',
+                                 'Vimeo'              => 'Vimeo',
+                                 'Vine'               => 'Vine',
+                                 'Xing'               => 'Xing',
+                                 'YouTube'            => 'YouTube')
     );    
     $template_config[] = array(
         'var'           => 'social_icon' . $i . 'url',
@@ -286,13 +304,13 @@ for ($i = 0; $i < $template_loaded_config['social_icons_amount']; $i++) {
 $serendipity['smarty']->assign_by_ref('socialicons', $socialicons);
 
 function getIcon($service) {
-   $icons = array('Amazon' => 'fa-amazon', 'Digg' => 'fa-digg', 'Dribbble' => 'fa-dribbble', 'Dropbox' => 'fa-dropbox', 'Facebook' => 'fa-facebook', 'Flickr' => 'fa-flickr', 'Github' => 'fa-github', 'Google' =>'fa-google', 'Google Plus' => 'fa-google-plus', 'Instagram' => 'fa-instagram', 'LastFM' => 'fa-lastfm', 'Linkedin' => 'fa-linkedin', 'Paypal' => 'fa-paypal', 'Pinterest' => 'fa-pinterest', 'RSS' => 'fa-rss', 'Skype' => 'fa-skype', 'Reddit' => 'fa-reddit', 'Stumbleupon' => 'fa-stumbleupon', 'Tumblr' => 'fa-tumblr', 'Twitter' => 'fa-twitter', 'Vimeo' => 'fa-vimeo', 'Vine' => 'fa-vine', 'Xing' => 'fa-xing', 'YouTube' => 'fa-youtube',);
+   $icons = array('Amazon' => 'fab fa-amazon', 'Amazon Pay' =>'fab fa-amazon-pay', 'Apple Pay' => 'fab fa-apple-pay', 'Comment' => 'fas fa-comment', 'Diaspora' =>'fab fa-diaspora', 'Digg' => 'fab fa-digg', 'Dribbble' => 'fab fa-dribbble', 'Dropbox' => 'fab fa-dropbox', 'Email' => 'far fa-envelope', 'Etsy' =>'fab fa-etsy', 'Facebook' => 'fab fa-facebook', 'Facebook-Messenger' => 'fab fa-facebook-messenger', 'Flickr' => 'fab fa-flickr', 'Github' => 'fab fa-github', 'Google' =>'fab fa-google',  'Home' => 'fas fa-home', 'Instagram' => 'fab fa-instagram', 'LastFM' => 'fab fa-lastfm', 'Linkedin' => 'fab fa-linkedin', 'Mastodon' => 'fab fa-mastodon', 'Mix' => 'fab fa-mix', 'Mobile' => 'fas fa-mobile-alt', 'Patreon' => 'fab fa-patreon', 'Paypal' => 'fab fa-paypal', 'Pinterest' => 'fab fa-pinterest', 'Reddit' => 'fab fa-reddit', 'RSS' => 'fas fa-rss', 'Skype' => 'fab fa-skype', 'Snapchat' => 'fab fa-snapchat', 'StackOverflow' => 'fab fa-stack-overflow', 'Tumblr' => 'fab fa-tumblr', 'Twitter' => 'fab fa-twitter', 'Vimeo' => 'fab fa-vimeo', 'Vine' => 'fab fa-vine', 'Xing' => 'fab fa-xing', 'YouTube' => 'fab fa-youtube',);
    return $icons[$service];
 }
 
 $serendipity['smarty']->register_function('service_icon', 'getServiceIcon');
 
-function getServiceIcon ($params, &$smarty) {
+function getServiceIcon ($params, $smarty) {
     return getIcon($params['from_service']);
 }
 
@@ -309,7 +327,7 @@ for ($i = 0; $i < $template_loaded_config['social_icons_amount']; $i++) {
 
 $template_config_groups = array(
     THEME_README        => array('theme_instructions'),
-    THEME_IDENTITY      => array('sidebars', 'header_img', 'subheader_img', 'colorset', 'skinset', 'copyright'),
+    THEME_IDENTITY      => array('sidebars', 'header_img', 'subheader_img', 'colorset', 'skinset', 'use_googlefonts', 'copyright'),
     THEME_PAGE_OPTIONS  => array('date_format', 'comment_time_format', 'display_as_timeline', 'months_on_timeline', 'months_on_timeline_format', 'categories_on_archive', 'category_rss_archive', 'tags_on_archive'),   
     THEME_NAVIGATION    => $navlinks_collapse,
     THEME_SOCIAL_LINKS  => $sociallinks_collapse

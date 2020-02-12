@@ -22,7 +22,7 @@
                 {else}
                     <li class="{cycle values='left,timeline-inverted timeline-top-margin'}">
                 {/if}
-                    <div class="timeline-badge"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></div>
+                    <div class="timeline-badge"><i class="far fa-dot-circle" aria-hidden="true"></i></div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
                             {if $entry.properties.timeline_image|is_in_string:'<iframe,<embed,<object'}{* we assume this is a video, just emit the contents of the var *}
@@ -35,12 +35,12 @@
                             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
                             {$entry.body}
                             {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
-                                <p class="read_more"><a class="btn btn-md btn-default btn-readmore btn-theme clearfix" href="{$entry.link}#extended">{$CONST.READ_MORE} <i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
+                                <p class="read_more"><a class="btn btn-md btn-default btn-readmore btn-theme clearfix" href="{$entry.link}#extended">{$CONST.READ_MORE} <i class="fas fa-arrow-right" aria-hidden="true"></i></a></p>
                             {/if}
                         </div>
                         <div class="timeline-footer">
-                            <span class="timeline-footer-date"><i class="fa fa-clock-o"></i><time datetime="{$entry.timestamp|@serendipity_html5time}">{$entry.timestamp|@formatTime:$template_option.date_format}</time></span>
-                            <span class="timeline-footer-comments"><i class="fa {if $entry.comments == 0}fa-comment-o{elseif $entry.comments == 1}fa-comment{else}fa-comments-o{/if}" aria-hidden="true"></i> <a href="{$entry.link}#comments">{if $entry.comments == 0}{$CONST.NO_COMMENTS}{else}{$entry.comments} {$entry.label_comments}{/if}</a></span>
+                            <span class="timeline-footer-date"><i class="far fa-clock"></i><time datetime="{$entry.timestamp|@serendipity_html5time}">{$entry.timestamp|@formatTime:$template_option.date_format}</time></span>
+                            <span class="timeline-footer-comments"><i class="{if $entry.comments == 0}far fa-comment{elseif $entry.comments == 1}fas fa-comment{else}fas fa-comments{/if}" aria-hidden="true"></i> <a href="{$entry.link}#comments">{if $entry.comments == 0}{$CONST.NO_COMMENTS}{else}{$entry.comments} {$entry.label_comments}{/if}</a></span>
                         </div>
                     </div>
                     </li>
@@ -58,12 +58,12 @@
                         <div class="col-md-7 blogstyle-post-body">
                             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
                             <p class="post-info"><span class="sr-only">{$CONST.POSTED_BY}</span>
-                                <span class="sr-only"> {$CONST.ON}</span><span class="entry-timestamp"><i class="fa fa-clock-o" aria-hidden="true"></i><time datetime="{$entry.timestamp|serendipity_html5time}">{$entry.timestamp|formatTime:$template_option.date_format}</time></span>
-                                <span class="entry-comment-link"><i class="fa {if $entry.comments == 0}fa-comment-o{elseif $entry.comments == 1}fa-comment{else}fa-comments-o{/if}" aria-hidden="true"></i><a href="{$entry.link}#comments">{if $entry.comments == 0}{$CONST.NO_COMMENTS}{else}{$entry.comments} {$entry.label_comments}{/if}</a></span>                                
+                                <span class="sr-only"> {$CONST.ON}</span><span class="entry-timestamp"><i class="far fa-clock" aria-hidden="true"></i><time datetime="{$entry.timestamp|serendipity_html5time}">{$entry.timestamp|formatTime:$template_option.date_format}</time></span>
+                                <span class="entry-comment-link"><i class="{if $entry.comments == 0}far fa-comment{elseif $entry.comments == 1}fas fa-comment{else}fas fa-comments{/if}" aria-hidden="true"></i><a href="{$entry.link}#comments">{if $entry.comments == 0}{$CONST.NO_COMMENTS}{else}{$entry.comments} {$entry.label_comments}{/if}</a></span>                                
                             </p>
                             {$entry.body}
                             {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
-                                <p class="read_more"><a class="btn btn-md btn-default btn-readmore btn-theme clearfix" href="{$entry.link}#extended">{$CONST.READ_MORE} <i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
+                                <p class="read_more"><a class="btn btn-md btn-default btn-readmore btn-theme clearfix" href="{$entry.link}#extended">{$CONST.READ_MORE} <i class="fas fa-arrow-right" aria-hidden="true"></i></a></p>
                             {/if}
                         </div>
                     </div>
@@ -76,9 +76,9 @@
                 <p class="post-info clearfix">
                     <span class="sr-only">{$CONST.POSTED_BY}</span>
                     <span class="entry-author-link"><i class ="fa fa-user" aria-hidden="true"></i><a href="{$entry.link_author}">{$entry.author}</a></span>
-                    <span class="sr-only"> {$CONST.ON}</span><span class="entry-timestamp"><i class="fa fa-clock-o" aria-hidden="true"></i><time datetime="{$entry.timestamp|serendipity_html5time}">{$entry.timestamp|formatTime:$template_option.date_format}</time></span>
-                    <span class="entry-comment-link"><i class="fa {if $entry.comments == 0}fa-comment-o{elseif $entry.comments == 1}fa-comment{else}fa-comments-o{/if}" aria-hidden="true"></i><a href="{$entry.link}#comments">{if $entry.comments == 0}{$CONST.NO_COMMENTS}{else}{$entry.comments} {$entry.label_comments}{/if}</a></span>
-                    {if $entry.is_entry_owner and not $is_preview}<span class="entry-edit-link"><i class="fa fa-lg fa-edit"></i><a href="{$entry.link_edit}" title="{$CONST.EDIT_ENTRY}">{$CONST.EDIT_ENTRY}</a></span>{/if}
+                    <span class="sr-only"> {$CONST.ON}</span><span class="entry-timestamp"><i class="far fa-clock" aria-hidden="true"></i><time datetime="{$entry.timestamp|serendipity_html5time}">{$entry.timestamp|formatTime:$template_option.date_format}</time></span>
+                    <span class="entry-comment-link"><i class="{if $entry.comments == 0}far fa-comment{elseif $entry.comments == 1}fas fa-comment{else}fas fa-comments{/if}" aria-hidden="true"></i><a href="{$entry.link}#comments">{if $entry.comments == 0}{$CONST.NO_COMMENTS}{else}{$entry.comments} {$entry.label_comments}{/if}</a></span>
+                    {if $entry.is_entry_owner and not $is_preview}<span class="entry-edit-link"><i class="fas fa-lg fa-edit"></i><a href="{$entry.link_edit}" title="{$CONST.EDIT_ENTRY}">{$CONST.EDIT_ENTRY}</a></span>{/if}
                 </p>
                 {if $is_preview}
                     {append var='entry' value=$smarty.session.save_entry_POST.properties index='properties'}{* gives us access to entry properties in preview *}
@@ -92,7 +92,7 @@
                     {/if}
                 {/if}
                 <div class="serendipity_entry_body clearfix">            
-                    {if $entry.categories}{foreach from=$entry.categories item="entry_category"}{if $entry_category.category_icon}<a href="{$entry_category.category_link}"><img class="serendipity_entryIcon" title="{$entry_category.category_name|@escape}{$entry_category.category_description|@emptyPrefix}" alt="{$entry_category.category_name|@escape}" src="{$entry_category.category_icon}"></a>{/if}{/foreach}{/if}
+                    {if $entry.categories}{foreach from=$entry.categories item="entry_category"}{if $entry_category.category_icon}<a href="{$entry_category.category_link}"><img class="serendipity_entryIcon" title="{$entry_category.category_name|@escape}{$entry_category.category_description|@emptyPrefix}" alt="{$entry_category.category_name|@escape}" src="{$entry_category.category_icon|escape}"></a>{/if}{/foreach}{/if}
                     {$entry.body}
                 </div>
                 {if $entry.is_extended}
@@ -107,14 +107,14 @@
                     <footer class="entry-footer">
                         {if $entry.categories}
                             <span class="sr-only">{$CONST.CATEGORIES}: </span>
-                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <i class="fas fa-folder-open" aria-hidden="true"></i>
                             {foreach from=$entry.categories item="entry_category" name="categories"}<a class="btn btn-sm btn-default btn-theme" href="{$entry_category.category_link}" title="{$CONST.CATEGORY}: {$entry_category.category_name|@escape}">{$entry_category.category_name|@escape}</a>{if !$smarty.foreach.categories.last}&nbsp;{/if}{/foreach}
                         {/if}
                         {if isset($entry.freetag.extended) && $entry.freetag.extended == 1}
                             {if $entry.freetag.tags.tags}
                                 <div class="timeline_freeTag">
                                 <span class="sr-only">{$entry.freetag.tags.description}</span>
-                                <i class="fa fa-tags" aria-hidden="true"></i>
+                                <i class="fas fa-tags" aria-hidden="true"></i>
                                     {foreach from=$entry.freetag.tags.tags item="tag"}
                                         {$tag}
                                     {/foreach}
@@ -153,35 +153,35 @@
         {if $CONST.DATA_UNSUBSCRIBED}
             <div id="search-block" class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span> {$CONST.DATA_UNSUBSCRIBED|@sprintf:$CONST.UNSUBSCRIBE_OK}</p>
+                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-info fa-stack-1x"></i></span> {$CONST.DATA_UNSUBSCRIBED|@sprintf:$CONST.UNSUBSCRIBE_OK}</p>
                 </div>
             </div>
         {/if}
         {if $CONST.DATA_TRACKBACK_DELETED}
             <div id="search-block" class="row">
                 <div class="col-md-10 col-md-offset-1">        
-                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span> {$CONST.DATA_TRACKBACK_DELETED|@sprintf:$CONST.TRACKBACK_DELETED}</p>
+                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-info fa-stack-1x"></i></span> {$CONST.DATA_TRACKBACK_DELETED|@sprintf:$CONST.TRACKBACK_DELETED}</p>
                 </div>
             </div>
         {/if}
         {if $CONST.DATA_TRACKBACK_APPROVED}
             <div id="search-block" class="row">
                 <div class="col-md-10 col-md-offset-1">        
-                    <p class="alert alert-success"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-check fa-stack-1x"></i></span> {$CONST.DATA_TRACKBACK_APPROVED|@sprintf:$CONST.TRACKBACK_APPROVED}</p>
+                    <p class="alert alert-success"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-check fa-stack-1x"></i></span> {$CONST.DATA_TRACKBACK_APPROVED|@sprintf:$CONST.TRACKBACK_APPROVED}</p>
                 </div>
             </div>
         {/if}
         {if $CONST.DATA_COMMENT_DELETED}
             <div id="search-block" class="row">
                 <div class="col-md-10 col-md-offset-1">        
-                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span> {$CONST.DATA_COMMENT_DELETED|@sprintf:$CONST.COMMENT_DELETED}</p>
+                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-info fa-stack-1x"></i></span> {$CONST.DATA_COMMENT_DELETED|@sprintf:$CONST.COMMENT_DELETED}</p>
                 </div>
             </div>
         {/if}
         {if $CONST.DATA_COMMENT_APPROVED}
             <div id="search-block" class="row">
                 <div class="col-md-10 col-md-offset-1">        
-                    <p class="alert alert-success"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-check fa-stack-1x"></i></span> {$CONST.DATA_COMMENT_APPROVED|@sprintf:$CONST.COMMENT_APPROVED}</p>
+                    <p class="alert alert-success"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-check fa-stack-1x"></i></span> {$CONST.DATA_COMMENT_APPROVED|@sprintf:$CONST.COMMENT_APPROVED}</p>
                 </div>
             </div>
         {/if}
@@ -222,7 +222,7 @@
         {foreach from=$comments_messagestack item="message"}
             <div id="search-block" class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$message}</p>
+                    <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-exclamation fa-stack-1x"></i></span> {$message}</p>
                 </div>
             </div>
         {/foreach}
@@ -231,7 +231,7 @@
                 <div class="col-md-10 col-md-offset-1">        
                     <div class="alert alert-success alert-dismissible fade in" role="alert">
                         <button type="button" class="close" data-target="#search-block" data-dismiss="alert" aria-label="Close" title="{$CONST.CLOSE}"><span aria-hidden="true">&times;</span></button>                
-                        <span class="fa-stack text-success" aria-hidden="true"><i class="fa fa-smile-o fa-2x"></i></span> {$CONST.COMMENT_ADDED}
+                        <span class="fa-stack text-success" aria-hidden="true"><i class="far fa-smile fa-2x"></i></span> {$CONST.COMMENT_ADDED}
                     </div>
                 </div>
             </div>
@@ -240,15 +240,15 @@
                 <div class="col-md-10 col-md-offset-1">           
                     <div class="alert alert-warning alert-dismissible fade in" role="alert">
                         <button type="button" class="close" data-target="#search-block" data-dismiss="alert" aria-label="Close" title="{$CONST.CLOSE}"><span aria-hidden="true">&times;</span></button>
-                        <p class="text-success"><span class="fa-stack" aria-hidden="true"><i class="fa fa-smile-o fa-2x"></i></span> {$CONST.COMMENT_ADDED}</p>
-                        <p class="text-warning"><span class="fa-stack" aria-hidden="true"><i class="fa fa-info-circle fa-2x"></i></span>  {$CONST.THIS_COMMENT_NEEDS_REVIEW}</p>
+                        <p class="text-success"><span class="fa-stack" aria-hidden="true"><i class="far fa-smile fa-2x"></i></span> {$CONST.COMMENT_ADDED}</p>
+                        <p class="text-warning"><span class="fa-stack" aria-hidden="true"><i class="fas fa-info-circle fa-2x"></i></span>  {$CONST.THIS_COMMENT_NEEDS_REVIEW}</p>
                     </div>
                 </div>
             </div>
         {elseif not $entry.allow_comments}
             <div id="search-block" class="row">
                 <div class="col-md-10 col-md-offset-1">          
-                    <p class="alert alert-danger text-danger"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$CONST.COMMENTS_CLOSED}</p>
+                    <p class="alert alert-danger text-danger"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-exclamation fa-stack-1x"></i></span> {$CONST.COMMENTS_CLOSED}</p>
                 </div>
             </div>
         {else}
@@ -265,7 +265,7 @@
     {if not $plugin_clean_page}
         <div id="search-block" class="row">
             <div class="col-md-10 col-md-offset-1">    
-                <p class="alert alert-info noentries"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span> {$CONST.NO_ENTRIES_TO_PRINT}</p>
+                <p class="alert alert-info noentries"><span class="fa-stack"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-info fa-stack-1x"></i></span> {$CONST.NO_ENTRIES_TO_PRINT}</p>
             </div>
         </div>
     {/if}
@@ -293,7 +293,7 @@
                     {assign var="paginationStartPage" value="1"}
                 {/if}
                 {if $footer_prev_page}
-                    <a class="btn btn-md btn-default btn-theme" title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><i class="fa fa-arrow-left" aria-hidden="true"></i><span class="sr-only">{$CONST.PREVIOUS_PAGE}</span></a>
+                    <a class="btn btn-md btn-default btn-theme" title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><i class="fas fa-arrow-left" aria-hidden="true"></i><span class="sr-only">{$CONST.PREVIOUS_PAGE}</span></a>
                 {/if}
                 {if $paginationStartPage > 1}
                     <a class="btn btn-md btn-default btn-theme" href="{'1'|string_format:$footer_pageLink}">1</a>
@@ -315,7 +315,7 @@
                     <a class="btn btn-md btn-default btn-theme" href="{$footer_totalPages|string_format:$footer_pageLink}">{$footer_totalPages}</a>
                 {/if}
                 {if $footer_next_page}
-                    <a class="btn btn-md btn-default btn-theme" title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><i class="fa fa-arrow-right" aria-hidden="true"></i><span class="sr-only">{$CONST.NEXT_PAGE}</span></a>
+                    <a class="btn btn-md btn-default btn-theme" title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><i class="fas fa-arrow-right" aria-hidden="true"></i><span class="sr-only">{$CONST.NEXT_PAGE}</span></a>
                 {/if}
             </nav>
         {/if}

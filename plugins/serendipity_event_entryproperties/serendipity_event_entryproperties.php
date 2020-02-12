@@ -19,7 +19,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.40');
+        $propbag->add('version',       '1.41.4');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.27',
@@ -47,6 +47,21 @@ class serendipity_event_entryproperties extends serendipity_event
         ));
         $propbag->add('groups', array('BACKEND_EDITOR'));
         $propbag->add('configuration', array('cache', 'sequence', 'use_groups', 'use_users', 'use_ext_joins', 'default_read', 'customfields'));
+
+        $propbag->add('legal',    array(
+            'services' => array(),
+            'frontend' => array(
+                'If password protected entries are used, the password can be sent by the visitor and if access is granted, this is stored in a session variable.',
+            ),
+            'cookies' => array(
+                'Uses PHP session cookie for potential session storage whether access to a password-protected entry is granted'
+            ),
+            'stores_user_input'     => false,
+            'stores_ip'             => false,
+            'uses_ip'               => false,
+            'transmits_user_input'  => true
+        ));
+
     }
 
     function introspect_config_item($name, &$propbag)
@@ -96,7 +111,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        PLUGIN_EVENT_ENTRYPROPERTIES_CACHE);
                 $propbag->add('description', PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DESC);
-                $propbag->add('default',     'true');
+                $propbag->add('default',     'false');
                 break;
 
             case 'sequence':
@@ -113,11 +128,12 @@ class serendipity_event_entryproperties extends serendipity_event
                     'groups'       => array('display' => PERM_READ . ': ' . GROUP),
                     'authors'      => array('display' => PERM_READ . ': ' . AUTHOR),
                     'author'       => array('display' => AUTHOR),
+                    'multi_authors'=> array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_MULTI_AUTHORS),
                     'markup'       => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP),
                     'customfields' => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS),
                 );
                 $propbag->add('values',      $values);
-                $propbag->add('default',     'sticky,frontpage,hiderss,access,password,groups,authors,author,markup');
+                $propbag->add('default',     'sticky,frontpage,hiderss,access,password,groups,authors,author,multi_authors,markup');
                 break;
 
             default:
@@ -172,7 +188,7 @@ class serendipity_event_entryproperties extends serendipity_event
         static $supported_properties = null;
 
         if ($supported_properties === null) {
-            $supported_properties = array('is_sticky', 'access', 'access_groups', 'access_users', 'cache_body', 'cache_extended', 'no_frontpage', 'hiderss', 'entrypassword');
+            $supported_properties = array('is_sticky', 'access', 'access_groups', 'access_users', 'multi_authors', 'cache_body', 'cache_extended', 'no_frontpage', 'hiderss', 'entrypassword');
 
             // Capture special characters for "," and ":"
             $special_from = array('\\,', '\\:');
@@ -403,6 +419,41 @@ class serendipity_event_entryproperties extends serendipity_event
                 }
                 break;
 
+        case 'multi_authors':
+?>
+            <div class="entryproperties_access_author adv_opts_box form_multiselect">
+                <label for="properties_access_multi_authors"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_MULTI_AUTHORS; ?></label>
+                <select id="properties_access_multi_authors" name="serendipity[properties][multi_authors][]" multiple="multiple">
+                <?php                   
+                if (isset($serendipity['POST']['properties']['multi_authors'])) {
+                    $counter_multi_authors = 0;
+                    foreach($serendipity['POST']['properties']['multi_authors'] as $user) {
+                        $selected_users[$counter_multi_authors] = $user;
+                        $counter_multi_authors++;
+                    }
+                } elseif (!empty($eventData['properties']['ep_multi_authors'])) {
+                    $counter_multi_authors = 0;
+                    foreach($eventData['properties']['ep_multi_authors'] as $user) {
+                        $selected_users[$counter_multi_authors] = $user['author_id'];
+                        $counter_multi_authors++;
+                    }
+                } else {
+                    $selected_users = array();
+                }
+                            
+                $avail_users =& $this->getValidAuthors();
+                
+                echo '<option value="">- - -</option>' . "\n";
+                
+                foreach($avail_users AS $user) {
+                    echo '<option value="' . $user['authorid'] . '" ' . (in_array($user['authorid'], $selected_users) ? ' selected="selected"' : '') . '>' . htmlspecialchars($user['realname']) . '</option>' . "\n";
+                }
+                ?>
+                </select>
+            </div>
+<?php
+                break;
+
             case 'author':
 ?>
             <div class="entryproperties_access_author adv_opts_box form_select">
@@ -437,9 +488,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 $plugins = serendipity_plugin_api::get_event_plugins();
 
                 if (is_array($plugins)) {
-                    // foreach() operates on copies of values, but we want to operate on references, so we use while()
-                    @reset($plugins);
-                    while(list($plugin, $plugin_data) = each($plugins)) {
+                    foreach($plugins as $plugin => $plugin_data) {
                         if (!is_array($plugin_data['p']->markup_elements)) {
                             continue;
                         }
@@ -534,7 +583,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $hooks = &$bag->get('event_hooks');
 
         if ($is_cache === null) {
-            $is_cache   = serendipity_db_bool($this->get_config('cache', 'true'));
+            $is_cache   = serendipity_db_bool($this->get_config('cache', 'false'));
             $use_groups = serendipity_db_bool($this->get_config('use_groups'));
             $use_users  = serendipity_db_bool($this->get_config('use_users'));
             $ext_joins  = serendipity_db_bool($this->get_config('use_ext_joins'));
@@ -584,6 +633,15 @@ class serendipity_event_entryproperties extends serendipity_event
                         $access_groups = $serendipity['POST']['properties']['access_groups'];
                     } else {
                         $access_groups = array();
+                    }
+
+                    if (isset($eventData['properties']['ep_multi_authors'])) {
+                        //$eventData['properties']['ep_multi_authors'] = explode(';', $eventData['properties']['ep_multi_authors']);
+                    } elseif (isset($serendipity['POST']['properties']['multi_authors'])) {
+                        //$serendipity['POST']['properties']['multi_authors'] = explode(';', $serendipity['properties']['ep_multi_authors']);
+                        $eventData['properties']['ep_multi_authors'] = $serendipity['POST']['properties']['multi_authors'];
+                    } else {
+                        $eventData['properties']['ep_multi_authors'] = array();
                     }
 
                     if (isset($eventData['properties']['ep_access_users'])) {
@@ -768,7 +826,20 @@ class serendipity_event_entryproperties extends serendipity_event
                     }
 
                     foreach($properties AS $idx => $row) {
-                        $eventData[$addData[$row['entryid']]]['properties'][$row['property']] = $row['value'];
+                        if ($row['property'] == "ep_multi_authors") {
+                           $tmp = explode(";", $row['value']);
+                           $counter = 0;
+                           unset($eventData[$addData[$row['entryid']]]['properties'][$row['property']]);
+                           foreach($tmp as $key => $value) {
+                               $tmp_author_array = serendipity_fetchAuthor($value);
+                               $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_id'] = $value;
+                               $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_name'] = $tmp_author_array[0]['realname'];
+                               $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_url'] = serendipity_authorURL($tmp_author_array[0]);            
+                               $counter++;
+                           }
+                        } else {
+                            $eventData[$addData[$row['entryid']]]['properties'][$row['property']] = $row['value'];
+                        }
                     }
                     break;
 
@@ -844,9 +915,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
                     if (count($conds) > 0) {
                         $cond = implode(' AND ', $conds);
-                        if (empty($eventData['and'])) {
-                            $eventData['and'] = " WHERE $cond ";
-                        } else {
+                        if (!empty($eventData['and'])) {
                             $eventData['and'] .= " AND $cond ";
                         }
                     }
@@ -863,7 +932,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         $conds[] = 'ep_cache_body.value     AS ep_cache_body,';
                     }
 
-                    $cond = implode("\n", $conds);
+                    $cond = implode("\n", $conds) . "\n";
                     if (empty($eventData['addkey'])) {
                         $eventData['addkey'] = $cond;
                     } else {

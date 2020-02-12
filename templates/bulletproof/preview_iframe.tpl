@@ -40,6 +40,25 @@
     <body style="padding: 0px; margin: 0px;">
     <div id="wrapper" style="width: 100%; border: 0;">
     <div id="content" style="padding: 5px; margin: 0px;">
+    {if $mode == 'preview'}
+         <div class="clearfix">
+     {elseif $mode == 'save'}
+         <div class="clearfix">
+         <div style="float: left; height: 75px"></div>
+         {$updertHooks}
+         {if $res}
+             <div class="serendipity_msg_important">{$CONST.ERROR}: <b>{$res}</b></div>
+         {else}
+             {if $lastSavedEntry}
+                 <script type="text/javascript">$(document).ready(function() {
+                                                     parent.document.forms['serendipityEntry']['serendipity[id]'].value = "{$lastSavedEntry}";
+                 });
+                 </script>
+             {/if}
+             <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.ENTRY_SAVED}</span>
+             <a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>
+         {/if}
+     {/if}
     {$preview}
     </div>
     </div>

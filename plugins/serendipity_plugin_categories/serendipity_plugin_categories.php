@@ -15,7 +15,7 @@ class serendipity_plugin_categories extends serendipity_plugin
         $propbag->add('description', CATEGORY_PLUGIN_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.05');
+        $propbag->add('version',       '2.05.3');
         $propbag->add('configuration', array('title', 'authorid', 'parent_base', 'hide_parent', 'image', 'sort_order', 'sort_method', 'allow_select', 'hide_parallel', 'show_count', 'show_all', 'smarty'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
@@ -213,6 +213,9 @@ class serendipity_plugin_categories extends serendipity_plugin
 
         if (is_array($categories) && count($categories)) {
             $categories = serendipity_walkRecursive($categories, 'categoryid', 'parentid', VIEWMODE_THREADED);
+            // strip language tags if multilingual plugin is active
+            serendipity_plugin_api::hook_event('multilingual_strip_langs', $categories, 'category_name');
+
             foreach ($categories as $cid => $cat) {
                 // Hide parents not wanted
                 if ($use_parent && $use_parent != 'all') {

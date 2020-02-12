@@ -119,6 +119,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     }
 
     $template_vars['formToken'] = serendipity_setFormToken();
+    $template_vars['urlToken']  = serendipity_setFormToken('url');
 
     if (isset($serendipity['allowDateManipulation']) && $serendipity['allowDateManipulation']) {
         $template_vars['allowDateManipulation'] = true;
@@ -136,7 +137,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     $template_vars['errMsg']                  =  $errMsg;
     $template_vars['entry']                   =& $entry;
     $template_vars['targetURL']               =  $targetURL;
-    $template_vars['cat_count']               =  count($cats)+1;
+    $template_vars['cat_count']               =  is_array($cats) ? (count($cats)+1) : 1;
     $template_vars['wysiwyg']                 =  $serendipity['wysiwyg'];
     $template_vars['serendipityRightPublish'] =  $_SESSION['serendipityRightPublish'];
     $template_vars['wysiwyg_blocks']          =  array(

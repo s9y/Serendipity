@@ -17,7 +17,9 @@
 {if ($view == "start")}
     <link rel="canonical" href="{$serendipityBaseURL}">
 {/if}
+{if $template_option.use_googlefonts}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,300,600">
+{/if}
     <link rel="stylesheet" href="{$head_link_stylesheet}">
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
     <link rel="alternate" type="application/x.atom+xml" title="{$blogTitle} Atom feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml">
@@ -42,7 +44,7 @@
     <nav class="primary-nav" role="navigation">
         <div class="container">
             <div class="row">
-                <ul class="twelwe columsn plainList">{foreach from=$navlinks item="navlink" name="sbnav"}{if $navlink.title!=""&&$navlink.href!=""}<li>{if $currpage==$navlink.href or $currpage2==$navlink.href}<span>{else}<a href="{$navlink.href}">{/if}{$navlink.title}{if $currpage==$navlink.href or $currpage2==$navlink.href}</span>{else}</a>{/if}</li>{/if}{/foreach}</ul>
+                <ul class="twelwe columns plainList">{foreach from=$navlinks item="navlink" name="sbnav"}{if $navlink.title!=""&&$navlink.href!=""}<li>{if $currpage==$navlink.href or $currpage2==$navlink.href}<span>{else}<a href="{$navlink.href}">{/if}{$navlink.title}{if $currpage==$navlink.href or $currpage2==$navlink.href}</span>{else}</a>{/if}</li>{/if}{/foreach}</ul>
             </div>
         </div>
     </nav>

@@ -32,6 +32,12 @@ if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModul
         if (!serendipity_userLoggedIn()) {
             // Try again to log in, this time with enabled external authentication event hook
             serendipity_login(true);
+            if (serendipity_userLoggedIn()) {
+                // login with external authentication - reload page to set language settings correct for user
+                include_once S9Y_INCLUDE_PATH . 'include/functions_routing.inc.php';
+                gotoAdmin();
+                return true;
+            }
         }
     }
 }
@@ -227,9 +233,10 @@ if ($ajax) {
         $admin_vars[$poll_admin_var] =& $$poll_admin_var;
     }
 
-    $admin_vars['out']       = array();
-    $admin_vars['no_create'] = $serendipity['no_create'];
-    $admin_vars['title']     = $admin_section;
+    $admin_vars['out']         = array();
+    $admin_vars['no_create']   = $serendipity['no_create'];
+    $admin_vars['title']       = $admin_section;
+    $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
 
     if ($serendipity['expose_s9y']) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());

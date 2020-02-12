@@ -223,7 +223,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Uusi kommentti seurattuun merkintään "%s"');
 @define('SUBSCRIPTION_MAIL', "Moi %s,\n\nSeuraamaasi merkintään \"%s\" on uusi kommentti, otsikolla \"%s\"\nKommentoija on: %s\n\nMerkintä löytyy täältä: %s\n\nVoit peruuttaa seurannan tästä linkistä: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Moi %s,\n\nSeuraamaasi merkintään \"%s\", on uusi linkki \"%s\"\nViittaaja on: %s\n\nLöydät merkinnän linkistä: %s\n\nVoit peruuttaa seurantasi tästä linkistä: %s\n");
-@define('SIGNATURE', "\n-- \n%s ohjelmistovalinta on Serendipity.\nParas blogisofta mailla halmeilla..\nTsekkaa <http://s9y.org> saadaksesi lisätietoja.");
+@define('SIGNATURE', "\n-- \n%s ohjelmistovalinta on Serendipity.\nParas blogisofta mailla halmeilla..\nTsekkaa <https://s9y.org> saadaksesi lisätietoja.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 ');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 ');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 ');
@@ -494,7 +494,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'Valitse tiedosto, jonka haluat tuoda:');
 @define('SAVE_FILE_AS', 'Talleta nimellä:');
 @define('STORE_IN_DIRECTORY', 'Talleta hakemistoon: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Lisää tiedoston media kirjastoosi:</b><p>Voit tuoda tiedostoja tai käskeä minua hakemaan ne webistä. Jos et keksi sopivaa kuvaa, kokeile, <a href="http://images.google.com" target="_blank">googlea</a> mielikuvillasi, tulokset ovat yleensä käyttökelpoisia ja hauskoja :)</p><p><b>Valitse tapa:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Lisää tiedoston media kirjastoosi:</b><p>Voit tuoda tiedostoja tai käskeä minua hakemaan ne webistä. Jos et keksi sopivaa kuvaa, kokeile, <a href="https://images.google.com/" target="_blank">googlea</a> mielikuvillasi, tulokset ovat yleensä käyttökelpoisia ja hauskoja :)</p><p><b>Valitse tapa:</b></p><br/>');
 @define('MEDIA_RENAME', 'Uudelleennimeä tiedosto');
 @define('IMAGE_RESIZE', 'Muokkaa kuvan kokoa');
 @define('MEDIA_DELETE', 'Poista tiedosto');
@@ -578,7 +578,7 @@
 @define('INSTALL_SHOWFUTURE', 'Näytä tulevat merkinnät');
 @define('INSTALL_SHOWFUTURE_DESC', 'Näytä merkinnät, joiden julkistuspäivä on tulevaisuudessa. Oletusarvoisesti näytetään vain nykyhetken merkinnät.');
 @define('INSTALL_DBPERSISTENT', 'Käytä pysyviä kantayhteyksiä.');
-@define('INSTALL_DBPERSISTENT_DESC', 'Lue <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">kuvaus täältä</a>. Ei suositella');
+@define('INSTALL_DBPERSISTENT_DESC', 'Lue <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">kuvaus täältä</a>. Ei suositella');
 @define('NO_IMAGES_FOUND', 'Ei kuvia');
 @define('PERSONAL_SETTINGS', 'Omat asetuksesi');
 @define('REFERER', 'Viittaaja');
@@ -782,7 +782,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'ylläpitoKuvatKatsoToisten: Katsoo toisten kuvatiedostoja');
 @define('CHARSET_NATIVE', 'Kansallinen');
 @define('INSTALL_CHARSET', 'Merkistövalinta');
-@define('INSTALL_CHARSET_DESC', 'Voit valita UTF-8 tai kansallisen merkistön (ISO, EUC, ...). Joillekin kielille on olemassa vain UTF-8 käännös, jolloin "Kansallinen" valinta ei ole käytössä. UTF-8 merkistöä suositellaan uusille asennuksille. Älä vaihda merkistöä, jos olet jo tehnyt logimerkintöjä erityiskirjaimilla, vaihtaminen saattaa hajoittaa merkinnät. Lisätietoja http://www.s9y.org/index.php?node=46 aiheesta.');
+@define('INSTALL_CHARSET_DESC', 'Voit valita UTF-8 tai kansallisen merkistön (ISO, EUC, ...). Joillekin kielille on olemassa vain UTF-8 käännös, jolloin "Kansallinen" valinta ei ole käytössä. UTF-8 merkistöä suositellaan uusille asennuksille. Älä vaihda merkistöä, jos olet jo tehnyt logimerkintöjä erityiskirjaimilla, vaihtaminen saattaa hajoittaa merkinnät. Lisätietoja https://docs.s9y.org/docs/developers/internationalization.html aiheesta.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Ota käyttöön laajennoksen laajennos-API');
 @define('CALENDAR_EXTEVENT_DESC', 'Jos käytössä, voivat muut laajennokset korostaa omia merkintöjään kalenterissa. Ota käyttöön vain, jos olet asentanut laajennoksia, jotka tarvitsevat tätä, muutoin blogisi hidastuu tarpeettomasti.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Serendipityn XML-RPC API liittymä ei ole käytössä tietoturvaongelmien ja pienen käyttäjäkunnan takia. Joten käyttääksesi XML-RPC liittymää tarvitset XML-RPC-laajennoksen. URL, jota sovelluksesi käyttävät ei ole muuttunut. Saat liittymän takaisin käyttöösi, kun asennat laajennoksen.');
@@ -1119,3 +1119,15 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL', 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
+@define('PLUGIN_LINK_SPARTACUS', 'More information');
+@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

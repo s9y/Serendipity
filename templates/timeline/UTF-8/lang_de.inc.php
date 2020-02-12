@@ -22,6 +22,7 @@
 @define('THEME_DEMO_AVAILBLE', 'Eine komplette englische Anleitung zur <a href="http://www.optional-necessity.com/demo/timeline/archives/13-Using-the-Timeline-theme.html">Konfiguration und Benutzung von Timeline</a> findet sich in der <a href="http://www.optional-necessity.com/demo/timeline/">Timeline theme demo</a>.');
 
 //Page Options
+@define('USE_GOOGLEFONTS', 'Google Webfonts einbinden?');
 @define('THEME_COLORSET', 'Colorset');
 @define('THEME_SKINSET', 'Theme skin');
 @define('HEADER_IMG','Optional Header Image.   Leave blank to use Blog Name.');

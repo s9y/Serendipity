@@ -45,7 +45,7 @@ function &serendipity_fetchTrackbacks($id, $limit = null, $showAll = false) {
  * @param   array       The superarray of trackbacks to display
  * @return
  */
-function &serendipity_printTrackbacks(&$trackbacks) {
+function &serendipity_printTrackbacks($trackbacks) {
     global $serendipity;
 
     $serendipity['smarty']->assignByRef('trackbacks', $trackbacks);
@@ -171,7 +171,7 @@ function serendipity_ifRemember($name, $value, $isDefault = false, $att = 'check
  * @param   object      Smarty object
  * @return  string      The Smarty HTML response
  */
-function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
+function serendipity_smarty_fetchPrintEntries($params, $smarty) {
     global $serendipity;
     static $entrycount = 0;
     static $restore_var_GET_keys = array('category', 'viewAuthor', 'page', 'hide_category');
@@ -397,7 +397,7 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
  * @param   object  Smarty object
  * @return  void
  */
-function serendipity_smarty_showCommentForm($params, &$smarty) {
+function serendipity_smarty_showCommentForm($params, $smarty) {
     global $serendipity;
 
     if (!isset($params['id']) || !isset($params['entry'])) {
@@ -424,7 +424,6 @@ function serendipity_smarty_showCommentForm($params, &$smarty) {
     if (!isset($params['moderate_comments'])) {
         $params['moderate_comments'] = serendipity_db_bool($params['entry']['moderate_comments']);
     }
-
 
     $comment_add_data = array(
         'comments_messagestack' => (isset($serendipity['messagestack']['comments']) ? (array)$serendipity['messagestack']['comments'] : array()),
@@ -459,7 +458,7 @@ function serendipity_smarty_showCommentForm($params, &$smarty) {
  * @param   object  Smarty object
  * @return  string      The Smarty HTML response
  */
-function serendipity_smarty_showPlugin($params, &$smarty) {
+function serendipity_smarty_showPlugin($params, $smarty) {
     global $serendipity;
 
     if (!isset($params['class']) && !isset($params['id'])) {
@@ -496,7 +495,7 @@ function serendipity_smarty_showPlugin($params, &$smarty) {
  * @param   object      Smarty object
  * @return  string      The Smarty HTML response
  */
-function serendipity_smarty_getTotalCount($params, &$smarty) {
+function serendipity_smarty_getTotalCount($params, $smarty) {
     if (!isset($params['what'])) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'what' parameter", E_USER_WARNING);
         return;
@@ -521,7 +520,7 @@ function serendipity_smarty_getTotalCount($params, &$smarty) {
  * @param   object  Smarty object
  * @return null
  */
-function serendipity_smarty_hookPlugin($params, &$smarty) {
+function serendipity_smarty_hookPlugin($params, $smarty) {
     global $serendipity;
     static $hookable = array('frontend_header',
                              'entries_header',
@@ -552,7 +551,11 @@ function serendipity_smarty_hookPlugin($params, &$smarty) {
     }
 
     if (!isset($params['data'])) {
-        $params['data'] = &$serendipity;
+        if (isset($params['eventData'])) {
+            $params['data'] = &$params['eventData'];
+        } else {
+            $params['data'] = &$serendipity;
+        }
     }
 
     if (!isset($params['addData'])) {
@@ -575,7 +578,7 @@ function serendipity_smarty_hookPlugin($params, &$smarty) {
  * @param   mixed       Additional data
  * @return null
  */
-function serendipity_smarty_refhookPlugin(&$eventData, $hook, $addData = null) {
+function serendipity_smarty_refhookPlugin($eventData, $hook, $addData = null) {
     global $serendipity;
 
     if (!isset($hook)) {
@@ -608,7 +611,7 @@ function serendipity_smarty_refhookPlugin(&$eventData, $hook, $addData = null) {
  * @param   object  Smarty object
  * @return string       The HTML code of a plugin's output
  */
-function serendipity_smarty_printSidebar($params, &$smarty) {
+function serendipity_smarty_printSidebar($params, $smarty) {
     if ( !isset($params['side']) ) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'side' parameter", E_USER_WARNING);
         return;
@@ -630,7 +633,7 @@ function serendipity_smarty_printSidebar($params, &$smarty) {
  * @param   object  Smarty object
  * @return  string      The requested filename with full path
  */
-function serendipity_smarty_getFile($params, &$smarty) {
+function serendipity_smarty_getFile($params, $smarty) {
     if ( !isset($params['file']) ) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_WARNING);
         return;
@@ -638,7 +641,7 @@ function serendipity_smarty_getFile($params, &$smarty) {
     return serendipity_getTemplateFile($params['file'], 'serendipityHTTPPath', $params['frontend']);
 }
 
-function serendipity_smarty_getConfigVar($params, &$smarty) {
+function serendipity_smarty_getConfigVar($params, $smarty) {
     if ( !isset($params['key']) ) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'key' parameter", E_USER_WARNING);
         return;
@@ -646,7 +649,7 @@ function serendipity_smarty_getConfigVar($params, &$smarty) {
     return serendipity_get_config_var($params['key']);
 }
 
-function serendipity_smarty_setFormToken($params, &$smarty) {
+function serendipity_smarty_setFormToken($params, $smarty) {
     if ( isset($params['type']) ) {
         return serendipity_setFormToken($params['type']);
     }
@@ -665,7 +668,7 @@ function serendipity_smarty_setFormToken($params, &$smarty) {
  * @param   object       Smarty object
  * @return  string      The requested filename with full path
  */
-function serendipity_smarty_pickKey($params, &$smarty) {
+function serendipity_smarty_pickKey($params, $smarty) {
     if ( !isset($params['array']) ) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'array' parameter", E_USER_WARNING);
         return;
@@ -690,7 +693,7 @@ function serendipity_smarty_pickKey($params, &$smarty) {
  * @param   object  Smarty object
  * @return string       The permalink
  */
-function serendipity_smarty_rss_getguid($params, &$smarty) {
+function serendipity_smarty_rss_getguid($params, $smarty) {
     if ( !isset($params['entry']) ) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'entry' parameter", E_USER_WARNING);
         return;
@@ -736,7 +739,7 @@ function serendipity_smarty_formatTime($timestamp, $format, $useOffset = true, $
  * @param   object  Smarty object
  * @return  string      The HTML code with the comments
  */
-function &serendipity_smarty_printComments($params, &$smarty) {
+function &serendipity_smarty_printComments($params, $smarty) {
     global $serendipity;
 
     if (!isset($params['entry'])) {
@@ -795,7 +798,7 @@ function &serendipity_smarty_printComments($params, &$smarty) {
  * @param   object  Smarty object
  * @return
  */
-function &serendipity_smarty_printTrackbacks($params, &$smarty) {
+function &serendipity_smarty_printTrackbacks($params, $smarty) {
     if ( !isset($params['entry']) ) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'entry' parameter", E_USER_WARNING);
         return;
@@ -833,7 +836,7 @@ function &serendipity_smarty_printTrackbacks($params, &$smarty) {
  * @param   object      Smarty object
  * @return  string      Empty
  */
-function serendipity_smarty_getImageSize($params, &$smarty) {
+function serendipity_smarty_getImageSize($params, $smarty) {
     global $serendipity;
 
     if (!isset($params['file'])) {
@@ -871,7 +874,7 @@ function serendipity_smarty_getImageSize($params, &$smarty) {
  * @param   object  Smarty object
  * @return
  */
-function &serendipity_replaceSmartyVars($tpl_source, &$smarty) {
+function &serendipity_replaceSmartyVars($tpl_source, $smarty) {
     $tpl_source = str_replace('$CONST.', '$smarty.const.', $tpl_source);
     return $tpl_source;
 }
@@ -1002,7 +1005,7 @@ function serendipity_smarty_init($vars = array()) {
         if (!isset($serendipity['smarty_vars']['head_link_stylesheet'])) {
             $serendipity['smarty_vars']['head_link_stylesheet_frontend'] = serendipity_rewriteURL('serendipity.css');
 
-            if (IN_serendipity_admin === true) {
+            if (defined('IN_serendipity_admin') && IN_serendipity_admin === true) {
                 $serendipity['smarty_vars']['head_link_stylesheet'] = serendipity_rewriteURL('serendipity_admin.css');
             } else {
                 $serendipity['smarty_vars']['head_link_stylesheet'] = serendipity_rewriteURL('serendipity.css');
@@ -1019,7 +1022,7 @@ function serendipity_smarty_init($vars = array()) {
         }
 
         if (!isset($serendipity['smarty_vars']['head_link_script'])) {
-            if (IN_serendipity_admin === true) {
+            if (defined('IN_serendipity_admin') && IN_serendipity_admin === true) {
                 $serendipity['smarty_vars']['head_link_script'] = serendipity_rewriteURL('serendipity_admin.js');
             } else {
                 $serendipity['smarty_vars']['head_link_script'] = serendipity_rewriteURL('serendipity.js');

@@ -211,7 +211,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Нов коментар към абонирана статия "%s"');
 @define('SUBSCRIPTION_MAIL', "Здравей %s,\n\nДобавен е нов коментар към статията, която наблюдавате \"%s\", озаглавен \"%s\"\nКоментатор: %s\n\nМожете да намерите съдържанието тук: %s\n\nМожете да се отпишете, щраквайки на следната връзка: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Здравей %s,\n\nДобавено е ново проследяване към статията, която наблюдавате в \"%s\", озаглавена \"%s\"\nПроследил: %s\n\nМожете да намерите съдържанието тук: %s\n\nМожете да се отпишете, щраквайки на следната връзка: %s\n");
-@define('SIGNATURE', "\n-- \n%s се движи от Serendipity.\nНай-добрият блог, можете да го използвате и вие.\nПосетете <http://s9y.org> за подробности.");
+@define('SIGNATURE', "\n-- \n%s се движи от Serendipity.\nНай-добрият блог, можете да го използвате и вие.\nПосетете <https://s9y.org> за подробности.");
 @define('SYNDICATION_PLUGIN_091', 'Емисия на RSS 0.91');
 @define('SYNDICATION_PLUGIN_10', 'Емисия на RSS 1.0');
 @define('SYNDICATION_PLUGIN_20', 'Емисия на RSS 2.0');
@@ -506,7 +506,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('FIND_MEDIA', 'Търсене на медиа');
 @define('FILTER_DIRECTORY', 'Директория');
 @define('SORT_BY', 'Подреждане по');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Добавяне на файл към хранилището на медиа:</b><p>Тук можете да качвате файлове с медиа или да укажете място в мрежата, откъдето да се изтеглят! Ако нямате подходящо изображение, <a href="http://images.google.com" target="_blank">търсете изображения с Google</a>, които отговарят на целите ви. Резултатите често са полезни и забавни :)</p><p><b>Изберете начин:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Добавяне на файл към хранилището на медиа:</b><p>Тук можете да качвате файлове с медиа или да укажете място в мрежата, откъдето да се изтеглят! Ако нямате подходящо изображение, <a href="https://images.google.com/" target="_blank">търсете изображения с Google</a>, които отговарят на целите ви. Резултатите често са полезни и забавни :)</p><p><b>Изберете начин:</b></p><br/>');
 @define('XML_IMAGE_TO_DISPLAY_DESC', 'Връзките към емисии на XML ще бъдат показвани чрез това изображение. Оставете празно за стандартно изображение, въведете "none" за изключване.');
 @define('COMMENTS_FILTER_SHOW', 'Показване');
 @define('COMMENTS_FILTER_ALL', 'Всички');
@@ -570,7 +570,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALL_SHOWFUTURE', 'Показване на статии в бъдещето');
 @define('INSTALL_SHOWFUTURE_DESC', 'Ако е активирано, всички статии с време в бъдещето ще бъдат показвани. По подразбиране тези статии се скриват и се показват само когато времето на публикуване се премине.');
 @define('INSTALL_DBPERSISTENT', 'Използване на постоянни връзки');
-@define('INSTALL_DBPERSISTENT_DESC', 'Активиране на употребата на постоянни връзки към базата данни. Прочетете повече <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">тук</a>. Това обикновено не е препоръчително');
+@define('INSTALL_DBPERSISTENT_DESC', 'Активиране на употребата на постоянни връзки към базата данни. Прочетете повече <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">тук</a>. Това обикновено не е препоръчително');
 @define('NO_IMAGES_FOUND', 'Не са открити изображения');
 @define('PERSONAL_SETTINGS', 'Лични настройки');
 @define('REFERER', 'Насочваща страница');
@@ -776,7 +776,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Преглед на медийни файлове на друг потребител');
 @define('CHARSET_NATIVE', 'Местно');
 @define('INSTALL_CHARSET', 'Избор на кодиране на знаци');
-@define('INSTALL_CHARSET_DESC', 'Тук можете да превключвате между местно кодиране (ISO, EUC, ...) или UTF-8. Някои езици имат само превод в UTF-8 и задаването на "Местно" няма да има ефект. Препоръчва се UTF-8 за нови инсталации. Не променяйте тази настройка, ако вече имате статии със специални знаци - това може да доведе до развалени знаци. Добре е да прочетете повече за този проблем в http://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Тук можете да превключвате между местно кодиране (ISO, EUC, ...) или UTF-8. Някои езици имат само превод в UTF-8 и задаването на "Местно" няма да има ефект. Препоръчва се UTF-8 за нови инсталации. Не променяйте тази настройка, ако вече имате статии със специални знаци - това може да доведе до развалени знаци. Добре е да прочетете повече за този проблем в https://docs.s9y.org/docs/developers/internationalization.html.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Активиране на API за куки на приставки');
 @define('CALENDAR_EXTEVENT_DESC', 'Ако се активира, приставките ще могат да се закачат към календара и да показват техните събития като откроени. Активирайте само ако имате инсталирана приставка, която използва такива куки, иначе само ще намалява производителността.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Интерфейсът XML-RPC към Serendipity вече не се разпространява със Serendipity заради продължаващи проблеми със сигурноста, както и защото малко хора го ползват. Затова трябва да инсталирате приставката XML-RPC, за да използвате XML-RPC. URL-ът за употреба от приложения НЯМА да се промени - веднага след инсталиране на приставката ще можете отново да използвате API-то.');
@@ -1111,3 +1111,15 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL', 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
+@define('PLUGIN_LINK_SPARTACUS', 'More information');
+@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

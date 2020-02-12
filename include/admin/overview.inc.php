@@ -50,17 +50,16 @@ $data['updateCheck']  = $serendipity['updateCheck'];
 $data['curVersion']   = serendipity_getCurrentVersion();
 $data['update']       = version_compare($data['usedVersion'], $data['curVersion'], '<');
 serendipity_plugin_api::hook_event('plugin_dashboard_updater', $output, $data['curVersion']);
-$data['updateButton'] = $output;
-
-// Can be set through serendipity_config_local.inc.php
-if (!isset($serendipity['dashboardCommentsLimit'])) {
-    $serendipity['dashboardCommentsLimit'] = 5;
+if (is_array($output)) {
+    // the autoupdate plugin is not installed and it (and no other plugin) did set $output to html code we could display
+    $data['updateButton'] = '';
+} else {
+    $data['updateButton'] = $output;
 }
-if (!isset($serendipity['dashboardLimit'])) {
-    $serendipity['dashboardLimit'] = 5;
-}
-if (!isset($serendipity['dashboardDraftLimit'])) {
-    $serendipity['dashboardDraftLimit'] = 5;
+if (serendipity_plugin_api::hook_event('backend_plugins_upgradecount', $output)) {
+    $data['pluginUpdates'] = $output;
+} else {
+    $data['pluginUpdates'] = '';
 }
 
 $cjoin  = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? "
@@ -97,20 +96,23 @@ $efilter = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? ' AND e.
 $entries = serendipity_fetchEntries(
                      false,
                      false,
-                     (int)$serendipity['dashboardLimit'],
+                     (int)$serendipity['dashboardEntriesLimit'],
                      true,
                      false,
                      'timestamp DESC',
                      'e.timestamp >= ' . serendipity_serverOffsetHour() . $efilter
                    );
 
-$entriesAmount = count($entries);
-if ($entriesAmount < (int)$serendipity['dashboardDraftLimit']) {
+$entriesAmount = 0;
+if (is_array($entries)) {
+    $entriesAmount = count($entries);
+};
+if ($entriesAmount < (int)$serendipity['dashboardEntriesLimit']) {
     // there is still space for drafts
     $drafts = serendipity_fetchEntries(
                      false,
                      false,
-                     (int)$serendipity['dashboardDraftLimit'] - $entriesAmount,
+                     (int)$serendipity['dashboardEntriesLimit'] - $entriesAmount,
                      true,
                      false,
                      'timestamp DESC',

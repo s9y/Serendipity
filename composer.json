@@ -6,11 +6,25 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": "~7.0",
         "zendframework/zend-db": "2.*",
-        "katzgrau/klogger": "1.0.*"
+        "katzgrau/klogger": "1.0.*",
+        "voku/simple-cache": "4.*"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "config": {
+        "apcu-autoloader": true,
+        "optimize-autoloader": true,
+        "github-protocols": [
+            "git",
+            "https",
+            "http"
+        ],
+        "platform": {
+            "php": "7.0.99"
+        },
+        "sort-packages": true,
         "vendor-dir": "bundled-libs"
     }
 }
