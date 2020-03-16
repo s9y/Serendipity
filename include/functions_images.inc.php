@@ -1839,6 +1839,7 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
     static $serious = true;
 
     if ($handle = @opendir($basedir . $directory)) {
+        $filestack = [];
         while (false !== ($file = @readdir($handle))) {
             if ($file != '.' && $file != '..') {
                 if (is_dir($basedir . $directory . $file)) {

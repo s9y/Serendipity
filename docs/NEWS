@@ -1,6 +1,9 @@
 Version 2.3.3-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix serendipity_killPath().
+     Thanks to @surrim!
+
    * Don't allow requesting an archive page that doesn't exist.
      Thanks to @lotharsm!
 
