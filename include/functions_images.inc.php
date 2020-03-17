@@ -309,7 +309,7 @@ function serendipity_updateImageInDatabase($updates, $id) {
         foreach ($updates AS $k => $v) {
             $q[] = $k ." = '" . serendipity_db_escape_string($v) . "'";
         }
-        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images SET ". implode($q, ',') ." WHERE id = " . (int)$id . " $admin");
+        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images SET ". implode(',', $q) ." WHERE id = " . (int)$id . " $admin");
         $i++;
 
         // Check if this update changes important directory or filename attributes.
