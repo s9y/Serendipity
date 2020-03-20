@@ -21,6 +21,8 @@ Version 2.3.3-beta1 ()
 
    * Fix: Add valid HTTP referrer when trying to delete a
 
+   * Fix: Escape version string in update notifier to avoid XSS.
+
    * Fix: Prevent renaming a ML object into an existing file,
           resulting in deletion of both from disk and database.
 

@@ -30,7 +30,7 @@
             <section id="dashboard_update">
                 <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
 
-                <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion}</span>
+                <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion|escape}</span>
                 {$updateButton}
             </section>
             <hr class="separator">
