@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Prevent renaming a ML object into an existing file,
+          resulting in deletion of both from disk and database.
+
    * Fix invalid HTTP referrer error when trying to delete a
      trackback from the frontend
 

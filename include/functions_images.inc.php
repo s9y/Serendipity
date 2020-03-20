@@ -2260,6 +2260,10 @@ function serendipity_renameFile($id, $newName, $path = null) {
     $imgBase = $serendipity['serendipityPath'] . $serendipity['uploadPath'];
     
     $newPath = "{$imgBase}{$path}{$newName}.{$file['extension']}";
+
+    if (file_exists($newPath)) {
+        return false;
+    }
     
     rename("{$imgBase}{$file['path']}{$file['realname']}", $newPath);
     
