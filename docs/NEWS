@@ -20,6 +20,11 @@ Version 2.3.3-beta1 ()
      Also fixes missing "keep strip tags" configuration option
 
    * Fix: Add valid HTTP referrer when trying to delete a
+
+   * Fix: Prevent renaming a ML object into an existing file,
+          resulting in deletion of both from disk and database.
+
+   * Fix invalid HTTP referrer error when trying to delete a
      trackback from the frontend
 
    * Use the video tag for videos in the Medialibrary, also when
