@@ -1,0 +1,4 @@
+Version 1.16:
+------------------------------------------------------------------------
+* Fix: wordwrap at word boundaries instead of "truncating" the lines
+
