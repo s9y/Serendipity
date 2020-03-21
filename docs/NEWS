@@ -29,6 +29,7 @@ Version 2.3.3-beta1 ()
      otherisw the default page has been generated at every call.
 
    * Fix: Add valid HTTP referrer when trying to delete a
+     trackback from the frontend.
 
    * Fix: Wordwrap at word boundaries only in bundled plugin
           serendipity_plugin_comments.
@@ -39,9 +40,6 @@ Version 2.3.3-beta1 ()
 
    * Fix: Prevent renaming a ML object into an existing file,
           resulting in deletion of both from disk and database.
-
-   * Fix invalid HTTP referrer error when trying to delete a
-     trackback from the frontend
 
    * Fix: Items in Medialibrary that are not images now get
           the correct link
