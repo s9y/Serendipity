@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Wordwrap at word boundaries only in bundled plugin
+          serendipity_plugin_comments.
+
    * Fix: Force empty limit to "" in serendipity_fetchEntries().
 
    * Fix: Escape version string in update notifier to avoid XSS.
