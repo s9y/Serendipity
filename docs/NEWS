@@ -1,25 +1,6 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
-   * Fix: Wordwrap at word boundaries only in bundled plugin
-          serendipity_plugin_comments.
-
-   * Fix: Force empty limit to "" in serendipity_fetchEntries().
-
-   * Fix: Escape version string in update notifier to avoid XSS.
-
-   * Fix: Prevent renaming a ML object into an existing file,
-          resulting in deletion of both from disk and database.
-
-   * Fix invalid HTTP referrer error when trying to delete a
-     trackback from the frontend
-
-   * Use the video tag for videos in the Medialibrary, also when
-     inserting such a video into an entry
-
-   * Fix: Items in Medialibrary that are not images now get
-          the correct link
-
    * Plugin nl2br: Include figure and figcaption tags (2.21.3)
      Thanks to @stephanbrunker!
 
@@ -79,11 +60,58 @@ Version 2.4-alpha1 ()
        tagged translation of elements outside the sidebar (mostly
        categories in entry display).
 
+   * Add plugin update notifications to the plugin update button and
+     to the dashboard.
+
+Version 2.3.3 ()
+------------------------------------------------------------------------
+
    * #651: When using checkboxes to insert multiple media files, if only
      one asset has been selected, do not use the gallery mode,
      but instead single-asset view. Also improves to click the title
      of an asset to select its checkbox, and hides the 'Insert all'
      button when no assets are selected. (garvinhicking)
+
+   * Use the video tag for videos in the Medialibrary, also when
+     inserting such a video into an entry
+
+   * media_choose.tpl: Fixes bad usage of
+     {serendipity_hookPlugin eventData=...} to {serendipity_hookPlugin eventData=}
+     and allow plugins to skip HTML block insertion to use their own
+     markup
+
+   * Updates mailer event plugin to support force sending mails on
+     published blog entries and ability to prepend a mail body. 
+     Also fixes missing "keep strip tags" configuration option
+
+   * Fix serendipity_killPath().
+     Thanks to @surrim!
+
+   * Don't allow requesting an archive page that doesn't exist.
+     Thanks to @lotharsm!
+
+   * Fix: Set action to empty in functions_routing.php when serving JS;
+     otherisw the default page has been generated at every call.
+
+   * Fix: Add valid HTTP referrer when trying to delete a
+
+   * Fix: Wordwrap at word boundaries only in bundled plugin
+          serendipity_plugin_comments.
+
+   * Fix: Force empty limit to "" in serendipity_fetchEntries().
+
+   * Fix: Escape version string in update notifier to avoid XSS.
+
+   * Fix: Prevent renaming a ML object into an existing file,
+          resulting in deletion of both from disk and database.
+
+   * Fix invalid HTTP referrer error when trying to delete a
+     trackback from the frontend
+
+   * Fix: Items in Medialibrary that are not images now get
+          the correct link
+
+   * Fix: Remember where you stored images last (#652)
 
    * Fix: [bbcode] Get roman numerals working in bbcode plugin.
           Thanks to Fabien Chabreuil!
@@ -92,21 +120,6 @@ Version 2.4-alpha1 ()
           title page and in RSS feed. s9y doesn't work with 0 or
           negative numbers, so force our default (15) in this case,
           (#646)
-
-   * Add plugin update notifications to the plugin update button and
-     to the dashboard.
-
-Version 2.3.3 ()
-------------------------------------------------------------------------
-
-   * media_choose.tpl: Fixes bad usage of
-     {serendipity_hookPlugin eventData=...} to {serendipity_hookPlugin eventData=}
-     and allow plugins to skip HTML block insertion to use their own
-     markup
-
-   * Updates mailer event plugin to support force sending mails on
-     published blog entries and ability to prepend a mail body.
-     Also fixes missing "keep strip tags" configuration option
 
 Version 2.3.2 (October 16th, 2019)
 ------------------------------------------------------------------------
