@@ -21,6 +21,11 @@ Version 2.3.3-beta1 ()
 
    * Fix: Add valid HTTP referrer when trying to delete a
 
+   * Fix: Wordwrap at word boundaries only in bundled plugin
+          serendipity_plugin_comments.
+
+   * Fix: Force empty limit to "" in serendipity_fetchEntries().
+
    * Fix: Escape version string in update notifier to avoid XSS.
 
    * Fix: Prevent renaming a ML object into an existing file,

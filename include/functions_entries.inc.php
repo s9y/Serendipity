@@ -433,6 +433,15 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         }
 
         $limit = serendipity_db_limit_sql($limit);
+
+    } else {
+        # if $limit was empty(), no limit was set;
+        # but empty() may also mean FALSE, "" or 0,
+        # so set it to "" to remove the LIMIT
+        # statement completely; should catch errors
+        # with a limit of 0 and some database drivers
+        # see <https://github.com/s9y/Serendipity/issues/636>
+        $limit = '';
     }
 
     $query = "SELECT $select_key
