@@ -8,13 +8,12 @@ include S9Y_INCLUDE_PATH . 'include/admin/import.inc.php';
 $data['importMenu'] = ob_get_contents();
 ob_end_clean();
 
-<<<<<<< HEAD
 $data['dbUtf8mb4_ready']        = $serendipity['dbUtf8mb4_ready'];
 $data['dbUtf8mb4']              = $serendipity['dbUtf8mb4'];
 $data['dbUtf8mb4_converted']    = $serendipity['dbUtf8mb4_converted'];
 $data['urltoken']               = serendipity_setFormToken('url');
 $data['formtoken']              = serendipity_setFormToken();
-=======
+
 if ($_POST['adminAction'] == "maintenanceMode") {
     if (serendipity_db_bool(serendipity_get_config_var("maintenanceMode", false)) === true) {
         serendipity_set_config_var("maintenanceMode", false);
@@ -26,7 +25,6 @@ if ($_POST['adminAction'] == "maintenanceMode") {
         serendipity_set_config_var("maintenanceModeEnd", $activeTill);
     }
 }
->>>>>>> master
 
 switch($serendipity['GET']['adminAction']) {
     case 'integrity':
