@@ -1,14 +1,14 @@
 Version 2.3.3-beta1 ()
 ------------------------------------------------------------------------
 
-   * Fix serendipity_killPath().
-     Thanks to @surrim!
+   * #651: When using checkboxes to insert multiple media files, if only
+     one asset has been selected, do not use the gallery mode,
+     but instead single-asset view. Also improves to click the title
+     of an asset to select its checkbox, and hides the 'Insert all'
+     button when no assets are selected. (garvinhicking)
 
-   * Don't allow requesting an archive page that doesn't exist.
-     Thanks to @lotharsm!
-
-   * Fix: Set action to empty in functions_routing.php when serving JS;
-     otherisw the default page has been generated at every call.
+   * Use the video tag for videos in the Medialibrary, also when
+     inserting such a video into an entry
 
    * media_choose.tpl: Fixes bad usage of
      {serendipity_hookPlugin eventData=...} to {serendipity_hookPlugin eventData=}
@@ -18,6 +18,15 @@ Version 2.3.3-beta1 ()
    * Updates mailer event plugin to support force sending mails on
      published blog entries and ability to prepend a mail body. 
      Also fixes missing "keep strip tags" configuration option
+
+   * Fix serendipity_killPath().
+     Thanks to @surrim!
+
+   * Don't allow requesting an archive page that doesn't exist.
+     Thanks to @lotharsm!
+
+   * Fix: Set action to empty in functions_routing.php when serving JS;
+     otherisw the default page has been generated at every call.
 
    * Fix: Add valid HTTP referrer when trying to delete a
 
@@ -34,17 +43,8 @@ Version 2.3.3-beta1 ()
    * Fix invalid HTTP referrer error when trying to delete a
      trackback from the frontend
 
-   * Use the video tag for videos in the Medialibrary, also when
-     inserting such a video into an entry
-
    * Fix: Items in Medialibrary that are not images now get
           the correct link
-
-   * #651: When using checkboxes to insert multiple media files, if only
-     one asset has been selected, do not use the gallery mode,
-     but instead single-asset view. Also improves to click the title
-     of an asset to select its checkbox, and hides the 'Insert all'
-     button when no assets are selected. (garvinhicking)
 
    * Fix: Remember where you stored images last (#652)
 
