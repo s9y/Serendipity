@@ -106,9 +106,6 @@ Version 2.3.3 ()
    * Fix: Prevent renaming a ML object into an existing file,
           resulting in deletion of both from disk and database.
 
-   * Fix invalid HTTP referrer error when trying to delete a
-     trackback from the frontend
-
    * Fix: Items in Medialibrary that are not images now get
           the correct link
 
