@@ -459,8 +459,10 @@ function serendipity_upgrader_move_syndication_config() {
     }
 }
 
-# When mysql is used in a version new enough (at least 5.6/10.0.5), upgrade all UTF8 tables to utf8mb4. For that to work well
-# we also need to set the storage engine to InnoDB. Earlier version set it to MyISAM.
+/** When mysql is used in a version new enough (at least 5.6/10.0.5) and if ht edb engine runs with appropriate settings, upgrade all UTF8 tables to utf8mb4.
+* For that to work well we also need to set the storage engine to InnoDB. Earlier version set it to MyISAM.
+* return boolean true if successful, false if upgrade was not started
+*/
 function serendipity_upgradeUTF8_UTF8mb4() {
     global $serendipity;
 
@@ -471,8 +473,7 @@ function serendipity_upgradeUTF8_UTF8mb4() {
 
     if (serendipity_utf8mb4_ready()) {
         # get all core tables
-        //$tables = serendipity_db_query("SHOW TABLES LIKE '" . str_replace('_', '\_', serendipity_db_escape_string($prefix)) . "%'");
-        $tables = serendipity_db_query("SHOW TABLES LIKE 'serendipity_entries'");
+        $tables = serendipity_db_query("SHOW TABLES LIKE '" . str_replace('_', '\_', serendipity_db_escape_string($prefix)) . "%'");
         if (!is_array($tables)) {
             echo 'Could not analyze existing tables via SHOW TABLES, please check permissions.' . $tables;
             return false;
@@ -490,7 +491,7 @@ function serendipity_upgradeUTF8_UTF8mb4() {
         }
 
         # but before we can set them to utf8mb4, the storage engine needs to be set to innodb and the format to dynamic
-        # Without InnoDB the index size is just 1000 bytes, which would not work with our db schema
+        # Without both the index size is just 1000 bytes, which would not work with our db schema
         foreach ($tables AS $table) {
             $table = $table[0];
             serendipity_db_query('ALTER TABLE `' . $table . '` ENGINE=InnoDB');
