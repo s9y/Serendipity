@@ -1,6 +1,11 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Switch new installations with MySQL >= 5.6.4 or MariaDB >= 10.0.5
+     to the InooDB stoprage engine and utf8mb4 charset. This enables
+     proper unicode support plus fulltext indexes, something older
+     mysql databases were not capable of
+
    * Plugin nl2br: Include figure and figcaption tags (2.21.3)
      Thanks to @stephanbrunker!
 
