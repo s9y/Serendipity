@@ -323,17 +323,102 @@ function serendipity_utf8mb4_ready() {
         $mysql_version = str_replace('5.5.5-', '', $mysql_version);
     }
 
-    # With 10.02 (mariadb) and 5.7 (mysql) the defaults should enable large prefix with innodb. This might need to be changed based
-    # on testing feedback
-    if ((version_compare($mysql_version, '10.0.2', '>=') && $maria) || ((! $maria) && version_compare($mysql_version, '5.7.0', '>='))) {
+    if ($maria) {
+        # see https://mariadb.com/kb/en/innodb-file-format/ for when barracuda is available, and when it's the only option
+        # see https://docs.nextcloud.com/server/15/admin_manual/configuration_database/mysql_4byte_support.html for which
+        # variables we have to check to assume utf8mb4 it can work (with the large indexes we need)
+        if (version_compare($mysql_version, '10.3.1', '>=')) {
+            # see https://mariadb.com/kb/en/innodb-system-variables/#innodb_file_per_table
+            $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_file_per_table'");
+            try {
+                return $rows[0][1] == 'ON';
+            } catch (Exception $e) {
+                return false;
+            }
+        }
+
+        # see https://mariadb.com/kb/en/full-text-index-overview/. We need 10.0.5 to have fulltext indexes with innodb
+        if (version_compare($mysql_version, '10.0.5', '>=')) {
+            # see https://mariadb.com/kb/en/innodb-system-variables/#innodb_file_per_table
+            $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_file_per_table'");
+            try {
+                if ($rows[0][1] != 'ON') {
+                    return false;
+                }
+            } catch (Exception $e) {
+                return false;
+            }
+
+            # see https://mariadb.com/kb/en/innodb-system-variables/#innodb_file_format
+            $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_file_format'");
+            try {
+                if ($rows[0][1] != 'barracuda') {
+                    return false;
+                }
+            } catch (Exception $e) {
+                return false;
+            }
+
+            # see https://mariadb.com/kb/en/innodb-system-variables/#innodb_large_prefix
+            $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_large_prefix'");
+            try {
+                if ($rows[0][1] != 'ON') {
+                    return false;
+                }
+            } catch (Exception $e) {
+                return false;
+            }
+        }
+        return false;   # version too old
+    }
+
+    # now we know it is not mariadb, but "real" mysql
+
+    # These versions might need to be changed based on testing feedback
+    if (version_compare($mysql_version, '8.0.0', '>=')) {
         $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_file_per_table'");
         try {
             return $rows[0][1] == 'ON';
         } catch (Exception $e) {
             return false;
         }
-    } 
-    return false;
+    }
+
+    # see https://dev.mysql.com/doc/refman/5.6/en/innodb-fulltext-index.html. We need 5.6 for fulltext indexes
+    if (version_compare($mysql_version, '5.6', '>=')) {
+        # see https://mariadb.com/kb/en/innodb-system-variables/#innodb_file_per_table
+        $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_file_per_table'");
+        try {
+            if ($rows[0][1] != 'ON') {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+
+        # see https://mariadb.com/kb/en/innodb-system-variables/#innodb_file_format
+        $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_file_format'");
+        try {
+            if ($rows[0][1] != 'barracuda') {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+
+        # see https://mariadb.com/kb/en/innodb-system-variables/#innodb_large_prefix
+        $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_large_prefix'");
+        try {
+            if ($rows[0][1] != 'ON') {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+        return true;
+    }
+    
+    return false;    # version too old
 }
 
 /**
