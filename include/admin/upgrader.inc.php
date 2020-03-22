@@ -275,6 +275,11 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_upgrader_spamblock_moveForce',
                      'title'     => 'Swap value forcemoderation',
                      'desc'      => 'If force moderation of comments is activated, activate the new option moderation_auto'),
+                     
+               array('version'   => '2.4-alpha2',
+                     'function'  => 'serendipity_upgradeUTF8_UTF8mb4',
+                     'title'     => 'Enable full Unicode support for MySQL',
+                     'desc'      => 'Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, enabling full unicode input.'),
 );
 
 /* Fetch SQL files which needs to be run */

@@ -458,3 +458,50 @@ function serendipity_upgrader_move_syndication_config() {
         }
     }
 }
+
+# When mysql is used in a version new enough (at least 5.6.4/10.0.5), upgrade all UTF8 tables to utf8mb4. For that to work well
+# we also need to set the storage engine to InnoDB. Earlier version set it to MyISAM.
+function serendipity_upgradeUTF8_UTF8mb4() {
+    global $serendipity;
+
+    # are we even using mysql?
+    if ($serendipity['dbType'] != 'mysqli') {
+        return false;
+    }
+
+    if (serendipity_utf8mb4_ready()) {
+        # get all core tables
+        //$tables = serendipity_db_query("SHOW TABLES LIKE '" . str_replace('_', '\_', serendipity_db_escape_string($prefix)) . "%'");
+        $tables = serendipity_db_query("SHOW TABLES LIKE 'serendipity_entries'");
+        if (!is_array($tables)) {
+            echo 'Could not analyze existing tables via SHOW TABLES, please check permissions.' . $tables;
+            return false;
+        }
+        # now collect all their columns charsets
+        # they all need to be utf8 for us to be able to securely set them to utf8mb4
+        foreach ($tables as $table) {
+            $table = $table[0];
+            $columns = serendipity_db_query('SHOW FULL COLUMNS FROM ' . $table);
+            foreach($columns as $column) {
+                if ($column['Collation'] && ( ! ($column['Collation'] == 'utf8_unicode_ci' || $column['Collation'] == 'utf8_general_ci')) ) {
+                    return false;
+                }
+            }
+        }
+
+        # but before we can set them to utf8mb4, the storage engine needs to be set to innodb and the format to dynamic
+        # Without InnoDB the index size is just 1000 bytes, which would not work with our db schema
+        foreach ($tables AS $table) {
+            $table = $table[0];
+            serendipity_db_query('ALTER TABLE `' . $table . '` ENGINE=InnoDB');
+            serendipity_db_query('ALTER TABLE `' . $table . '` ROW_FORMAT=DYNAMIC');
+        }
+
+        # Good, now we can set it it utf8mb4. utf8mb4 is fully compatible with utf8, so there won't be broken chars
+        foreach ($tables AS $table) {
+            $table = $table[0];
+            serendipity_db_query('ALTER TABLE `' . $table . '` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci');
+        }
+        return true;
+    }
+}
