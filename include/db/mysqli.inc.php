@@ -310,6 +310,14 @@ function serendipity_db_schema_import($query) {
     }
 }
 
+
+/**
+ * Check if we think that it is safe to ugprade to utf8mb4. This checks version numbers and applied settings.
+ * Depending on the version of mariadb/mysql we need to check either one or three settings. We check for
+ * innodb being available with fulltext index and large index support, so that our database scheme can work
+ *
+ * @return boolean   Whether the database could support utf8mb4
+ */ 
 function serendipity_utf8mb4_ready() {
     global $serendipity;
 
@@ -327,6 +335,7 @@ function serendipity_utf8mb4_ready() {
         # see https://mariadb.com/kb/en/innodb-file-format/ for when barracuda is available, and when it's the only option
         # see https://docs.nextcloud.com/server/15/admin_manual/configuration_database/mysql_4byte_support.html for which
         # variables we have to check to assume utf8mb4 it can work (with the large indexes we need)
+        
         if (version_compare($mysql_version, '10.3.1', '>=')) {
             # see https://mariadb.com/kb/en/innodb-system-variables/#innodb_file_per_table
             $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_file_per_table'");
