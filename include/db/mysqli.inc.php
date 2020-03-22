@@ -273,15 +273,6 @@ function serendipity_db_schema_import($query) {
         'unsigned'  , 'FULLTEXT', 'FULLTEXT', 'enum (\'true\', \'false\') NOT NULL default \'true\'', 'LONGTEXT');
     static $is_utf8 = null;
     global $serendipity;
-    $mysql_version = mysqli_get_server_info($serendipity['dbConn']);
-    $maria = false;
-    if (strpos($mysql_version, 'MariaDB') !== false) {
-        $maria = true;
-    }
-    if ($maria) {
-        # maria trips up our version detection scheme by prepending 5.5.5 to newer versions
-        $mysql_version = str_replace('5.5.5-', '', $mysql_version);
-    }
     
     if ($is_utf8 === null) {
         $search[] = '{UTF_8}';
@@ -289,8 +280,8 @@ function serendipity_db_schema_import($query) {
               $serendipity['charset'] == 'UTF-8/' ||
               $serendipity['POST']['charset'] == 'UTF-8/' ||
               LANG_CHARSET == 'UTF-8' ) {
-            if ((version_compare($mysql_version, '10.0.5', '>=') && $maria) || ((! $maria) && version_compare($mysql_version, '5.6.4', '>='))) {
-                $replace[] = '/*!40100 CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci */';
+            if (serendipity_utf8mb4_ready()) {
+                $replace[] = 'ROW_FORMAT=DYNAMIC /*!40100 CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci */';
             } else {
                 # in old versions we stick to the three byte pseudo utf8 to not trip
                 # over the max index restriction of 1000 bytes
@@ -301,7 +292,7 @@ function serendipity_db_schema_import($query) {
         }
     }
 
-    if ((version_compare($mysql_version, '10.0.5', '>=') && $maria) || ((! $maria) && version_compare($mysql_version, '5.6.4', '>='))) {
+    if (serendipity_utf8mb4_ready()) {
         # InnoDB enables us to use utf8mb4 with the higher max index size
         serendipity_db_query("SET storage_engine=INNODB");
     } else {
@@ -317,6 +308,32 @@ function serendipity_db_schema_import($query) {
     } else {
         return serendipity_db_query($query);
     }
+}
+
+function serendipity_utf8mb4_ready() {
+    global $serendipity;
+
+    $mysql_version = mysqli_get_server_info($serendipity['dbConn']);
+    $maria = false;
+    if (strpos($mysql_version, 'MariaDB') !== false) {
+        $maria = true;
+    }
+    if ($maria) {
+        # maria trips up our version detection scheme by prepending 5.5.5 to newer versions
+        $mysql_version = str_replace('5.5.5-', '', $mysql_version);
+    }
+
+    # With 10.02 (mariadb) and 5.7 (mysql) the defaults should enable large prefix with innodb. This might need to be changed based
+    # on testing feedback
+    if ((version_compare($mysql_version, '10.0.2', '>=') && $maria) || ((! $maria) && version_compare($mysql_version, '5.7.0', '>='))) {
+        $rows = serendipity_db_query("SHOW VARIABLES LIKE 'innodb_file_per_table'");
+        try {
+            return $rows[0][1] == 'ON';
+        } catch (Exception $e) {
+            return false;
+        }
+    } 
+    return false;
 }
 
 /**
