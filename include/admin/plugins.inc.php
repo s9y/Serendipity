@@ -155,6 +155,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
 
+    # get plugin data from Spartacus
     $foreignPlugins = $pluginstack = $errorstack = array();
     serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPlugins);
     $pluginstack = array_merge((array)$foreignPlugins['pluginstack'], $pluginstack);
@@ -173,6 +174,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         $foreignPlugins = array_merge($foreignPlugins, $foreignPluginsTemp);
     }
 
+    # load cached / installed plugin data
     $plugins = serendipity_plugin_api::get_installed_plugins();
     $classes = serendipity_plugin_api::enum_plugin_classes(($serendipity['GET']['type'] === 'event'));
     if ($serendipity['GET']['only_group'] == 'UPGRADE') {
@@ -237,7 +239,15 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
                     $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/README';
                 }
             }
+            
+            # if data for this plugin has been fetched from Spartacus:
+            # add location ("Spartacus") as source field to cached / installe plugin data
+            if (array_key_exists($class_data['true_name'], $pluginstack)) {
+                $props['pluginsource'] = $pluginstack[$class_data['true_name']]['pluginlocation'];
+            }
 
+            # save cached / installed plugin data
+            # (overwriting data that may have been fetched from Spartacus)
             $pluginstack[$class_data['true_name']] = $props;
         } else {
             // False is returned if a plugin could not be instantiated
