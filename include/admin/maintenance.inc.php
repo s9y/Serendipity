@@ -20,6 +20,19 @@ if ($_POST['adminAction'] == "maintenanceMode") {
     }
 }
 
+
+if ($_POST['adminAction'] == 'nativetoutf8') {
+    # TODO: Check rights
+    include S9Y_INCLUDE_PATH . 'include/functions_upgrader.inc.php';
+    serendipity_upgrade_native_utf8();
+}
+
+if ($_POST['adminAction'] == 'utf8toutf8mb4') {
+    # TODO: Check rights
+    include S9Y_INCLUDE_PATH . 'include/functions_upgrader.inc.php';
+    echo serendipity_upgradeUTF8_UTF8mb4();
+}
+
 switch($serendipity['GET']['adminAction']) {
     case 'integrity':
         $data['action'] = "integrity";
@@ -42,6 +55,7 @@ switch($serendipity['GET']['adminAction']) {
             $data['cleanup_template'] = $serendipity['template'];
         }
         break;
+
 }
 
 $data['maintenance_mode'] = serendipity_db_bool(serendipity_get_config_var("maintenanceMode", false));

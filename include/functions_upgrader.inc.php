@@ -484,6 +484,11 @@ function serendipity_upgradeUTF8_UTF8mb4() {
             $table = $table[0];
             $columns = serendipity_db_query('SHOW FULL COLUMNS FROM ' . $table);
             foreach($columns as $column) {
+                if ($column['Collation'] && ( ! stristr($column['Collation'], 'utf8m4'))) {
+                    # if the column/table is already utf8mb4 we don't need to ugprade it, but we also do not need to stop the process. Some
+                    # other table might not be utf8mb4 already
+                    continue;
+                }
                 if ($column['Collation'] && ( ! ($column['Collation'] == 'utf8_unicode_ci' || $column['Collation'] == 'utf8_general_ci')) ) {
                     return false;
                 }
@@ -502,6 +507,42 @@ function serendipity_upgradeUTF8_UTF8mb4() {
         foreach ($tables AS $table) {
             $table = $table[0];
             serendipity_db_query('ALTER TABLE `' . $table . '` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
+        }
+        return true;
+    }
+}
+
+
+function serendipity_upgrade_native_utf8() {
+    global $serendipity;
+
+    # are we even using mysql?
+    if ($serendipity['dbType'] != 'mysqli') {
+        return false;
+    }
+
+    if (serendipity_utf8mb4_ready()) {
+        # get all core tables
+        $tables = serendipity_db_query("SHOW TABLES LIKE '" . str_replace('_', '\_', serendipity_db_escape_string($prefix)) . "%'");
+        if (!is_array($tables)) {
+            echo 'Could not analyze existing tables via SHOW TABLES, please check permissions.' . $tables;
+            return false;
+        }
+        # now collect all their columns charsets. We want to see which ones are not utf8 already
+        $targetTables = [];
+        foreach ($tables as $table) {
+            $table = $table[0];
+            $columns = serendipity_db_query('SHOW FULL COLUMNS FROM ' . $table);
+            foreach($columns as $column) {
+                if ($column['Collation'] && ( ! stristr($column['Collation'], 'utf8'))) {
+                    $targetTables[] = $table;
+                }
+            }
+        }
+
+        # Good, now we can set it it utf8
+        foreach ($targetTables AS $table) {
+            serendipity_db_query('ALTER TABLE `' . $table . '` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci');
         }
         return true;
     }
