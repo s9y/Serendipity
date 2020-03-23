@@ -113,7 +113,7 @@
                         {if ! empty($plug.version)}
                             <li class="plugin_version"><b>{$CONST.VERSION|capitalize}:</b> {$plug.version}</li>
                         {/if}
-                        {if ! empty($plug.pluginlocation) && $plug.pluginlocation != 'local'}
+                        {if ! empty($plug.pluginlocation) && ($plug.pluginlocation != 'local' || $plug.pluginsource == 'Spartacus')}
                             <li class="plugin_link"><a href="http://spartacus.s9y.org/index.php?mode=bygroups_{$plug.plugintype}_{$lang}#{$plug.class_name|escape}">{$CONST.PLUGIN_LINK_SPARTACUS}</a></li>
                         {/if}
                         {if ! empty($plug.website)}
