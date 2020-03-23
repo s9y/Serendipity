@@ -718,7 +718,6 @@ class serendipity_event_spartacus extends serendipity_event
         if (isset($cachedtype) && $cachedtype != $type) {
             // bust cache if called with other type
             $pluginlist = null;
-            $cachedtype = $type;
         }
 
         if ($pluginlist === null) {
