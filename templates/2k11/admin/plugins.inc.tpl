@@ -108,7 +108,7 @@
 
                         <ul class="plugin_info plainList">
                         {if ! empty($plug.author)}
-                            <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author}</li>
+                            <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author|escape}</li>
                         {/if}
                         {if ! empty($plug.version)}
                             <li class="plugin_version"><b>{$CONST.VERSION|capitalize}:</b> {$plug.version}</li>
