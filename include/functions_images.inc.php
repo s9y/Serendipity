@@ -2262,15 +2262,22 @@ function serendipity_renameFile($id, $newName, $path = null) {
     $newPath = "{$imgBase}{$path}{$newName}.{$file['extension']}";
 
     if (file_exists($newPath)) {
-        return false;
+        return sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n", $newName);
     }
     
-    rename("{$imgBase}{$file['path']}{$file['realname']}", $newPath);
+    if (rename("{$imgBase}{$file['path']}{$file['realname']}", $newPath)) {
+        # if renaming was successfull, rename thumbnails and update
+        # databases and entries
     
-    serendipity_renameThumbnails($id, "{$path}$newName");
+        serendipity_renameThumbnails($id, "{$path}$newName");
     
-    serendipity_updateImageInDatabase(array('name' => $newName, 'realname' => basename($newPath)), $id);
-    serendipity_updateImageInEntries($id, $file);
+        serendipity_updateImageInDatabase(array('name' => $newName, 'realname' => basename($newPath)), $id);
+        serendipity_updateImageInEntries($id, $file);
+    } else {
+        return '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_RENAME_FAILED . "</span>\n";
+    }
+
+    return TRUE;
 }
 
 /**

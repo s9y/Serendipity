@@ -79,7 +79,7 @@
 @define('YOUR_SEARCH_RETURNED_BLAHBLAH', 'Die Suche nach "%s" ergab %s Treffer:');
 @define('IMAGE', 'Bild');
 @define('ERROR_FILE_NOT_EXISTS', ' Alte Datei existiert nicht!');
-@define('ERROR_FILE_EXISTS', 'Fehler: Neuer Dateiname existiert schon, bitte einen anderen wählen.');
+@define('ERROR_FILE_EXISTS', 'Fehler: Neuer Dateiname "%s" existiert schon, bitte einen anderen wählen.');
 @define('ERROR_SOMETHING', 'Fehler: Irgend etwas stimmt nicht.');
 @define('ADDING_IMAGE', 'Bild hinzufügen ...');
 @define('THUMB_CREATED_DONE', 'Vorschau erstellt.<br />Fertig.');
@@ -1137,3 +1137,4 @@
 @define('SOURCE', 'Quelle');
 @define('PLUGIN_SOURCE_BUNDLED', 'mitgeliefertes Plugin');
 @define('PLUGIN_SOURCE_LOCAL', 'lokal installiert');
+@define('MEDIA_RENAME_FAILED', 'Umbenennen fehlgeschlagen!');

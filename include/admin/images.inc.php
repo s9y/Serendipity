@@ -181,7 +181,11 @@ switch ($serendipity['GET']['adminAction']) {
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
             return;
         }
-        serendipity_renameFile($serendipity['GET']['fid'], $serendipity['GET']['newname']);
+        $result = serendipity_renameFile($serendipity['GET']['fid'], $serendipity['GET']['newname']);
+        if (!empty($result) && $result !== TRUE) {
+          # serendipity_renameFile returned an error
+          $data['messages'] = $result;
+        }
         break;
 
     case 'properties':
