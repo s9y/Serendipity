@@ -1133,3 +1133,6 @@
 @define('PLUGIN_LINK_SPARTACUS', 'More information');
 @define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
 @define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');
+@define('SOURCE', 'Source');
+@define('PLUGIN_SOURCE_BUNDLED', 'bundled core plugin');
+@define('PLUGIN_SOURCE_LOCAL', 'locally installed');

@@ -165,7 +165,8 @@ function show_plugins($event_only = false, $sidebars = null)
                     $desc .= sprintf('<span class="block_level"><a href="http://spartacus.s9y.org/index.php?mode=bygroups_%s_%s#%s">%s</a></span>',
                              $spartacus_type, $serendipity['lang'], $plugin_data['path'], (defined('PLUGIN_LINK_SPARTACUS') ? PLUGIN_LINK_SPARTACUS : 'PLUGIN_LINK_SPARTACUS'));
                 }
-                $desc .= '<span class="block_level">' . ucfirst(VERSION)  . ': ' . $bag->get('version') . '</span>';
+                $desc .= '<span class="block_level"><b>' . ucfirst(AUTHOR)   . '</b>: ' . serendipity_specialchars($bag->get('author')) . '</span>';
+                $desc .= '<span class="block_level"><b>' . ucfirst(VERSION)  . '</b>: ' . $bag->get('version') . '</span>';
                 $desc .= '</details>';
 
                 $title = serendipity_plugin_api::get_plugin_title($plugin, '[' . $name . ']');

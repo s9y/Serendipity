@@ -1,7 +1,7 @@
 Version 2.3.4-beta1 ()
 ------------------------------------------------------------------------
 
-
+   * Display source of plugins (Spartacus, bundled or locally installed).
 
 Version 2.3.3 (March 22nd, 2020)
 ------------------------------------------------------------------------
@@ -31,7 +31,7 @@ Version 2.3.3 (March 22nd, 2020)
      Thanks to @lotharsm!
 
    * Fix: Set action to empty in functions_routing.php when serving JS;
-     otherisw the default page has been generated at every call.
+     otherwise the default page has been generated at every call.
 
    * Fix: Add valid HTTP referrer when trying to delete a
      trackback from the frontend.

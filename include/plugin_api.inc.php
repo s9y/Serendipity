@@ -7,6 +7,40 @@ if (IN_serendipity !== true) {
     die ('Don\'t hack!');
 }
 
+// List of bundled core plugins
+define('BUNDLED_PLUGINS',
+    array(
+    'serendipity_event_bbcode',
+    'serendipity_event_creativecommons',
+    'serendipity_event_emoticate',
+    'serendipity_event_entryproperties',
+    'serendipity_event_mailer',
+    'serendipity_event_nl2br',
+    'serendipity_event_responsiveimages',
+    'serendipity_event_s9ymarkup',
+    'serendipity_event_spamblock',
+    'serendipity_event_spartacus',
+    'serendipity_event_templatechooser',
+    'serendipity_event_textile',
+    'serendipity_event_xhtmlcleanup',
+    'serendipity_plugin_archives',
+    'serendipity_plugin_calendar',
+    'serendipity_plugin_categories',
+    'serendipity_plugin_comments',
+    'serendipity_plugin_creativecommons',
+    'serendipity_plugin_entrylinks',
+    'serendipity_plugin_eventwrapper',
+    'serendipity_plugin_history',
+    'serendipity_plugin_html_nugget',
+    'serendipity_plugin_plug',
+    'serendipity_plugin_recententries',
+    'serendipity_plugin_remoterss',
+    'serendipity_plugin_superuser',
+    'serendipity_plugin_syndication',
+    'serendipity_plugin_templatedropdown'
+    )
+);
+
 include_once S9Y_INCLUDE_PATH . 'include/functions.inc.php';
 
 /* Core API function mappings
@@ -997,6 +1031,18 @@ class serendipity_plugin_api
         }
 
         return $title;
+    }
+
+    /**
+     * Check if a plugin is bundled with s9y core
+     *
+     * @access public
+     * @param   string  Name of a plugin
+     * @return  boolean
+     */
+    static function is_bundled_plugin($name)
+    {   
+        return in_array ($name, BUNDLED_PLUGINS);
     }
 
     /**
