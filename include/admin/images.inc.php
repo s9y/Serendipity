@@ -181,7 +181,9 @@ switch ($serendipity['GET']['adminAction']) {
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
             return;
         }
-        serendipity_renameFile($serendipity['GET']['fid'], $serendipity['GET']['newname']);
+        if (!serendipity_renameFile($serendipity['GET']['fid'], $serendipity['GET']['newname'])) {
+          $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n", $serendipity['GET']['newname']);
+        }
         break;
 
     case 'properties':
