@@ -1129,3 +1129,6 @@
 @define('PLUGIN_LINK_SPARTACUS', 'Weitere Informationen');
 @define('PLUGIN_ALL_UPDATED', 'Alle Plugins aktualisiert');
 @define('MEDIA_DIRECTORY_MOVE', 'Dateien verschieben');
+@define('SOURCE', 'Quelle');
+@define('PLUGIN_SOURCE_BUNDLED', 'mitgeliefertes Plugin');
+@define('PLUGIN_SOURCE_LOCAL', 'lokal installiert');

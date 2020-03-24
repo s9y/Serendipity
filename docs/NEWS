@@ -1,6 +1,8 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Display source of plugins (Spartacus, bundled or locally installed).
+
    * Switch new installations with MySQL >= 5.6.4 or MariaDB >= 10.0.5
      to the InooDB stoprage engine and utf8mb4 charset. This enables
      proper unicode support plus fulltext indexes, something older

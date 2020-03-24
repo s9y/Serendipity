@@ -155,6 +155,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
 
+    # get plugin data from Spartacus
     $foreignPlugins = $pluginstack = $errorstack = array();
     serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPlugins);
     $pluginstack = array_merge((array)$foreignPlugins['pluginstack'], $pluginstack);
@@ -173,6 +174,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         $foreignPlugins = array_merge($foreignPlugins, $foreignPluginsTemp);
     }
 
+    # load data for installed plugins
     $plugins = serendipity_plugin_api::get_installed_plugins();
     $classes = serendipity_plugin_api::enum_plugin_classes(($serendipity['GET']['type'] === 'event'));
     if ($serendipity['GET']['only_group'] == 'UPGRADE') {
@@ -237,7 +239,6 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
                     $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/README';
                 }
             }
-
             $pluginstack[$class_data['true_name']] = $props;
         } else {
             // False is returned if a plugin could not be instantiated
@@ -249,6 +250,18 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $pluggroups     = array();
     $pluggroups[''] = array();
     foreach($pluginstack AS $plugname => $plugdata) {
+        # add pluginsource to pluginstack
+        if (isset($foreignPlugins['pluginstack'][$plugname])) {
+            # remote plugin
+            $pluginstack[$plugname]['pluginsource'] = 'Spartacus';
+        } elseif (serendipity_plugin_api::is_bundled_plugin($plugname)) {
+            # bundled plugin
+            $pluginstack[$plugname]['pluginsource'] = PLUGIN_SOURCE_BUNDLED;
+        } else {
+            # everything else must be "local"
+            $pluginstack[$plugname]['pluginsource'] = PLUGIN_SOURCE_LOCAL;
+        }
+        # create pluggroups
         if ($serendipity['GET']['only_group'] == 'ALL') {
             $pluggroups['ALL'][] = $plugdata;
         } elseif ($serendipity['GET']['only_group'] == 'UPGRADE' && $plugdata['upgradable']) {
