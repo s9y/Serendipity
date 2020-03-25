@@ -2261,6 +2261,10 @@ function serendipity_renameFile($id, $newName, $path = null) {
     
     $newPath = $imgBase . $path . $newName . (empty($File['extension']) ? '' : '.' . $File['extension']);
 
+    if (serendipity_isActiveFile($newName) || serendipity_isActiveFile($newPath)) {
+        return sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_FORBIDDEN . "</span>\n", $newName);
+    }
+
     if (file_exists($newPath)) {
         return sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n", $newName);
     }
