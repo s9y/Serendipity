@@ -182,7 +182,7 @@ switch ($serendipity['GET']['adminAction']) {
             return;
         }
         if (!serendipity_renameFile($serendipity['GET']['fid'], $serendipity['GET']['newname'])) {
-          $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n", $serendipity['GET']['newname']);
+          $data['messages'] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n", $serendipity['GET']['newname']);
         }
         break;
 
