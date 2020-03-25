@@ -1,6 +1,9 @@
 Version 2.3.4-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix: ML: Fixed filename generation when renaming and added
+          some error messages on rename failures.
+
    * Display source of plugins (Spartacus, bundled or locally installed).
 
 Version 2.3.3 (March 22nd, 2020)
