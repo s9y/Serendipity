@@ -1,14 +1,6 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
-   * Security: Fix RCE on Windows.
-     Thanks to Junyu Zhang <rgdz.eye@gmail.com>!
-
-   * Fix: ML: Fixed filename generation when renaming and added
-          some error messages on rename failures.
-
-   * Display source of plugins (Spartacus, bundled or locally installed).
-
    * Switch new installations with MySQL >= 5.6.4 or MariaDB >= 10.0.5
      to the InooDB stoprage engine and utf8mb4 charset. This enables
      proper unicode support plus fulltext indexes, something older
@@ -75,6 +67,17 @@ Version 2.4-alpha1 ()
 
    * Add plugin update notifications to the plugin update button and
      to the dashboard.
+
+Version 2.3.4 (March 25th, 2020)
+------------------------------------------------------------------------
+
+   * Security: Fix RCE on Windows.
+     Thanks to Junyu Zhang <rgdz.eye@gmail.com>!
+
+   * Fix: ML: Fixed filename generation when renaming and added
+          some error messages on rename failures.
+
+   * Display source of plugins (Spartacus, bundled or locally installed).
 
 Version 2.3.3 (March 22nd, 2020)
 ------------------------------------------------------------------------
