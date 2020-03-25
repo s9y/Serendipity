@@ -1134,3 +1134,4 @@
 @define('SOURCE', 'Source');
 @define('PLUGIN_SOURCE_BUNDLED', 'bundled core plugin');
 @define('PLUGIN_SOURCE_LOCAL', 'locally installed');
+@define('MEDIA_RENAME_FAILED', 'Renaming failed!');

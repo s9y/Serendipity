@@ -1132,3 +1132,4 @@
 @define('SOURCE', 'Quelle');
 @define('PLUGIN_SOURCE_BUNDLED', 'mitgeliefertes Plugin');
 @define('PLUGIN_SOURCE_LOCAL', 'lokal installiert');
+@define('MEDIA_RENAME_FAILED', 'Umbenennen fehlgeschlagen!');
