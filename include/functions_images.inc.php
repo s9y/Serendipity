@@ -2027,6 +2027,7 @@ function serendipity_uploadSecure($var, $strip_paths = true, $append_slash = fal
 
     $var = str_replace(' ', '_', $var);
     $var = preg_replace('@[^0-9a-z\._/-]@i', '', $var);
+    $var = preg_replace('@\.+$@i', '', $var); # remove trailing dots
     if ($strip_paths) {
         $var = preg_replace('@(\.+[/\\\\]+)@', '/', $var);
     }
@@ -2260,6 +2261,10 @@ function serendipity_renameFile($id, $newName, $path = null) {
     $imgBase = $serendipity['serendipityPath'] . $serendipity['uploadPath'];
     
     $newPath = $imgBase . $path . $newName . (empty($File['extension']) ? '' : '.' . $File['extension']);
+
+    if (serendipity_isActiveFile($newName) || serendipity_isActiveFile($newPath)) {
+        return sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_FORBIDDEN . "</span>\n", $newName);
+    }
 
     if (file_exists($newPath)) {
         return sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n", $newName);
