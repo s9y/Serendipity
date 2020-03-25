@@ -2262,7 +2262,7 @@ function serendipity_renameFile($id, $newName, $path = null) {
     
     $newPath = $imgBase . $path . $newName . (empty($file['extension']) ? '' : '.' . $file['extension']);
 
-    if (serendipity_isActiveFile($newName) || serendipity_isActiveFile($newPath)) {
+    if (serendipity_isActiveFile($newPath)) {
         return sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_FORBIDDEN . "</span>\n", $newName);
     }
 
