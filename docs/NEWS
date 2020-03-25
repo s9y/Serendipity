@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Security: Fix RCE on Windows.
+     Thanks to Junyu Zhang <rgdz.eye@gmail.com>!
+
    * Fix: ML: Fixed filename generation when renaming and added
           some error messages on rename failures.
 
