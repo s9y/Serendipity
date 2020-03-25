@@ -2260,7 +2260,7 @@ function serendipity_renameFile($id, $newName, $path = null) {
     $newName = serendipity_uploadSecure(serendipity_makeFilename($newName), true);
     $imgBase = $serendipity['serendipityPath'] . $serendipity['uploadPath'];
     
-    $newPath = $imgBase . $path . $newName . (empty($File['extension']) ? '' : '.' . $File['extension']);
+    $newPath = $imgBase . $path . $newName . (empty($file['extension']) ? '' : '.' . $file['extension']);
 
     if (serendipity_isActiveFile($newName) || serendipity_isActiveFile($newPath)) {
         return sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_FORBIDDEN . "</span>\n", $newName);
