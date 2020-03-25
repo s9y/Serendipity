@@ -2027,6 +2027,7 @@ function serendipity_uploadSecure($var, $strip_paths = true, $append_slash = fal
 
     $var = str_replace(' ', '_', $var);
     $var = preg_replace('@[^0-9a-z\._/-]@i', '', $var);
+    $var = preg_replace('@\.+$@i', '', $var); # remove trailing dots
     if ($strip_paths) {
         $var = preg_replace('@(\.+[/\\\\]+)@', '/', $var);
     }
