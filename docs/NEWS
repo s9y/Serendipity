@@ -1,6 +1,9 @@
 Version 2.3.5-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Truncate extension of media items to 5 chars (which ist the
+          max length of the corresponding database field).
+          Thanks to @mmitch!
 
 Version 2.3.4 (March 25th, 2020)
 ------------------------------------------------------------------------
