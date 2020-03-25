@@ -1094,6 +1094,10 @@ input[type=checkbox],
     clear: both;
 }
 
+.comment_summary {
+    overflow-wrap: break-word;
+}
+
 
 /* COMMON STYLES  */
 a,
