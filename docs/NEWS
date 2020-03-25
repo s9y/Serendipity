@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix: ML: Fixed filename generation when renaming and added
+          some error messages on rename failures.
+
    * Display source of plugins (Spartacus, bundled or locally installed).
 
    * Switch new installations with MySQL >= 5.6.4 or MariaDB >= 10.0.5
