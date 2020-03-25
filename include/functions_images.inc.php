@@ -2259,7 +2259,7 @@ function serendipity_renameFile($id, $newName, $path = null) {
     $newName = serendipity_uploadSecure(serendipity_makeFilename($newName), true);
     $imgBase = $serendipity['serendipityPath'] . $serendipity['uploadPath'];
     
-    $newPath = "{$imgBase}{$path}{$newName}.{$file['extension']}";
+    $newPath = $imgBase . $path . $newName . (empty($File['extension']) ? '' : '.' . $File['extension']);
 
     if (file_exists($newPath)) {
         return sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n", $newName);
@@ -2268,9 +2268,9 @@ function serendipity_renameFile($id, $newName, $path = null) {
     if (rename("{$imgBase}{$file['path']}{$file['realname']}", $newPath)) {
         # if renaming was successfull, rename thumbnails and update
         # databases and entries
-    
+
         serendipity_renameThumbnails($id, "{$path}$newName");
-    
+
         serendipity_updateImageInDatabase(array('name' => $newName, 'realname' => basename($newPath)), $id);
         serendipity_updateImageInEntries($id, $file);
     } else {
