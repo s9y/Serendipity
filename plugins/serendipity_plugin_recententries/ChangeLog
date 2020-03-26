@@ -1,3 +1,6 @@
+2.7.1 * because of changes in the multilingual plugin, 
+        get the options out of the plugin and hard code the SQL for the 
+        multilingual data set
 2.7
     * using the sql condition set aquired by event_hook::'frontend_fetchentries'
       to get the multilingual data set
