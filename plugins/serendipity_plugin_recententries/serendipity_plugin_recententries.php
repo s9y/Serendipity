@@ -19,7 +19,7 @@ class serendipity_plugin_recententries extends serendipity_plugin
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Christian Machmeier, Christian Brabandt, Judebert, Don Chambers');
-        $propbag->add('version',       '2.7');
+        $propbag->add('version',       '2.7.1');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -210,19 +210,28 @@ class serendipity_plugin_recententries extends serendipity_plugin
             $sql_condition['joins'] = ' LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid ' . $sql_condition['joins'];
         }
 
+        $addkey = '';
+        $joins = '';
+        $and = '';
         // get 'hide untranslated entries' option from multilingual plugin via SQL
-        serendipity_plugin_api::hook_event('frontend_fetchentries', $sql_condition, array('noSticky' => true));    
+        $rs = serendipity_plugin_api::find_plugin_id('serendipity_event_multilingual',0);
+        if (!empty($rs) && is_array($rs)) {
+            $hide_untranslated = serendipity_db_bool(serendipity_get_config_var('serendipity_event_multilingual:' . $rs[0] . '/' . 'hide_untranslated', ''));
+ 
+            $addkey = ", multilingual_title.value AS multilingual_title\n";
+            $joins = " LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties multilingual_title
+               ON (e.id = multilingual_title.entryid AND multilingual_title.property = 'multilingual_title_" . $serendipity['lang'] . "')";
 
-        $sql_condition['addkey'] = rtrim($sql_condition['addkey'],",\n");
-        if ( !empty($sql_condition['addkey'])) $sql_condition['addkey'] = ',' . $sql_condition['addkey'] . "\n";
+            if ($hide_untranslated && $serendipity['lang'] != $serendipity['default_lang']) $and = " AND multilingual_title.value IS NOT NULL";
+        }
 
         $entries_query = "SELECT DISTINCT id,
                                 title,
                                 timestamp
-                                {$sql_condition['addkey']}
+                                {$addkey}
                            FROM {$serendipity['dbPrefix']}entries AS e
-                                {$sql_condition['joins']}
-                          WHERE isdraft = 'false' {$sql_condition['and']}
+                                {$joins}
+                          WHERE isdraft = 'false' {$and}
                                 $sql_order
                                 $sql_number";
 
