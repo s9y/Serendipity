@@ -78,7 +78,7 @@ function serveComments() {
             continue;
         }
 
-        if (preg_match('@^(last|f|t|from|to)[\s_-]*([\d-/ ]+)$@', strtolower(urldecode($v)), $m)) {
+        if (preg_match('@^(last|f|t|from|to)[\s_-]*([\d/ -]+)$@', strtolower(urldecode($v)), $m)) {
             if ($m[1] == 'last') {
                 $usetime = time() - ($m[2]*86400);
                 $serendipity['GET']['commentStartTime'] = $usetime;
