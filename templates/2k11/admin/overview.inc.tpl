@@ -13,37 +13,26 @@
         <hr class="separator">
     {/if}
 
-    {if $updateCheck == "stable" || $updateCheck == "beta"}
-        {if $curVersion == -1}
-            <section id="dashboard_update">
-                <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
-
-                <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.UPDATE_FAILMSG}</span>
-                <form id="updateCheckDisable" method="POST">
-                    <input type="hidden" name="serendipity[adminAction]" value="updateCheckDisable" />
-                    {$token}
-                    <button type="submit">{$CONST.UPDATE_FAILACTION}</button>
-                </form>
-            </section>
-            <hr class="separator">
-        {else if $update}
-            <section id="dashboard_update">
-                <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
-
-                <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion|escape}</span>
-                {$updateButton}
-            </section>
-            <hr class="separator">
-        {/if}
-    {/if}
-
-    {if $pluginUpdates}
-        <section id="dashboard_plugin_updates">
+    {if (($updateCheck == "stable" || $updateCheck == "beta") && ($curVersion == -1 || $update)) || $pluginUpdates}
+        <section id="dashboard_update" class="dashboard_widget">
             <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
-
-            <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$pluginUpdates|escape}</span>
+            {if $updateCheck == "stable" || $updateCheck == "beta"}
+                {if $curVersion == -1}
+                    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.UPDATE_FAILMSG}</span>
+                    <form id="updateCheckDisable" method="POST">
+                        <input type="hidden" name="serendipity[adminAction]" value="updateCheckDisable" />
+                        {$token}
+                        <button type="submit">{$CONST.UPDATE_FAILACTION}</button>
+                    </form>
+                {else if $update}
+                    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion|escape}</span>
+                    {$updateButton}
+                {/if}
+            {/if}
+            {if $pluginUpdates}
+                <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$pluginUpdates}</span>
+            {/if}
         </section>
-        <hr class="separator">
     {/if}
 
     {if $no_create !== true}
