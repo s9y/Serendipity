@@ -1135,55 +1135,30 @@ class serendipity_event_spartacus extends serendipity_event
 
     function count_plugin_upgrades()
     {
+        // get installed plugins
+        $installedPlugins = serendipity_plugin_api::get_installed_plugins();
+
         // get a list of all installable sidebar and event plugins
         $foreignPlugins = $sidebarPlugins = $eventPlugins = array();
         $sidebarPlugins = $this->buildList($this->fetchOnline('sidebar'), 'sidebar');
         $eventPlugins   = $this->buildList($this->fetchOnline('event'), 'event');
         $foreignPlugins = array_merge($sidebarPlugins, $eventPlugins);
 
-        // get currently installed plugin versions
-        $currentVersions = [];
-        $plugins = serendipity_plugin_api::get_installed_plugins();
-        $classes = serendipity_plugin_api::enum_plugins();
-        foreach ($classes as $class_data) {
-            $plugin    =& serendipity_plugin_api::load_plugin($class_data['name']);
-            if (is_object($plugin)) {
-                // Object is returned when a plugin could not be cached.
-                $bag = new serendipity_property_bag;
-                $plugin->introspect($bag);
-                $pluginname = explode(':', $class_data['name'])[0];
-                $version    = $bag->get('version');
-            } elseif (is_array($plugin)) {
-                // Array is returned if a plugin could be fetched from info cache
-                $pluginname = $plugin['class_name'];
-                $version    = $plugin['version'];
-            } else {
-                #
-            }
-            $currentVersions[$pluginname] = $version;
-        }
-
         // count upgradable plugins
-        $upgradeCount = 0;
-        foreach ($foreignPlugins as $foreignPlugin) {
-            // plugin installed?
-            if (isset($currentVersions[$foreignPlugin['class_name']])) {
-                $currentVersion = $currentVersions[$foreignPlugin['class_name']];
-                // get current version on Spartacus
-                if (isset($foreignPlugin['upgrade_version']) && $foreignPlugin['upgrade_version']) {
-                    $upgradeVersion = $foreignPlugin['upgrade_version'];
-                } else {
-                    $upgradeVersion = $foreignPlugin['version'];
-                }
-                // compare versions and increase counter
+        foreach ($installedPlugins as $plugin) {
+            $infoplugin =& serendipity_plugin_api::load_plugin($plugin);
+            if (is_object($infoplugin)) {
+                $bag    = new serendipity_property_bag;
+                $infoplugin->introspect($bag);
+                $currentVersion = $bag->get('version');
+                $upgradeVersion = $foreignPlugins[$plugin]['upgrade_version'] ? $foreignPlugins[$plugin]['upgrade_version'] : $foreignPlugins[$plugin]['version'];
                 if (version_compare($currentVersion, $upgradeVersion, '<')) {
                     $upgradeCount++;
                 }
             }
         }
-        return $upgradeCount++;
+        return $upgradeCount;
     }
-
 
     function event_hook($event, &$bag, &$eventData, $addData = null)
     {
