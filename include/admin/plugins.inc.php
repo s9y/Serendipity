@@ -194,7 +194,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
             $plugin->introspect($bag);
 
             // If a foreign plugin is upgradable, keep the new version number.
-            if (isset($foreignPlugins['pluginstack'][$class_data['name']]) && $foreignPlugins['pluginstack'][$class_data['name']]['upgradable']) {
+            if (isset($foreignPlugins['pluginstack'][$class_data['name']]) && isset($foreignPlugins['pluginstack'][$class_data['name']]['upgrade_version'])) {
                 $class_data['upgrade_version'] = $foreignPlugins['pluginstack'][$class_data['name']]['upgrade_version'];
             }
 

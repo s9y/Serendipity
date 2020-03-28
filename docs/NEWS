@@ -1,6 +1,8 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Don't drop upgraded_version from local plugin cache.
+
    * Fix: Simplify count_plugin_upgrades() in event_spartacus.
 
    * Fix: Modified sql statement used for htaccess blocking to work in
