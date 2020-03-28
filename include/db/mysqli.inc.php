@@ -247,16 +247,17 @@ function serendipity_db_connect() {
 function serendipity_db_reconnect() {
     global $serendipity;
 
+    $use_charset = '';
     if (isset($serendipity['dbCharset']) && !empty($serendipity['dbCharset'])) {
         $use_charset = $serendipity['dbCharset'];
         @define('SQL_CHARSET_INIT', true);
     } elseif (defined('SQL_CHARSET') && $serendipity['dbNames'] && !defined('SQL_CHARSET_INIT')) {
         $use_charset = SQL_CHARSET;
-    } else {
-        $use_charset = 'utf8';
     }
 
-    mysqli_set_charset($serendipity['dbConn'], $use_charset);
+    if ($use_charset != '') {
+        mysqli_set_charset($serendipity['dbConn'], $use_charset);
+    }
 }
 
 /**
