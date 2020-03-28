@@ -1,3 +1,8 @@
+2.38.4
+-------
+    * Change dashboard upgrade notification to simple link
+      without button.
+
 2.38.3
 -------
     * Simplify count_plugin_upgrades().

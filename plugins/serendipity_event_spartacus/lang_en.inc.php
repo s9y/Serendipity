@@ -35,8 +35,8 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_EVENT', 'Update event plugins');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'You can upgrade multiple plugins at once by opening the update-link in a new tab (middle mouse button)');
 
-@define('PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATE', 'A plugin can be updated.');
-@define('PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATES', '%u plugins can be updated.');
+@define('PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATE', 'A plugin can be <a href="%s">updated</a>.');
+@define('PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATES', '%u plugins can be <a href="%s">updated</a>.');
 
 @define('PLUGIN_EVENT_SPARTACUS_TRYCURL', 'Trying to use cURL library as fallback...');
 @define('PLUGIN_EVENT_SPARTACUS_CURLFAIL', 'cURL library returned a failure, too.');

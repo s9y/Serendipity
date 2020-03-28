@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.38.3');
+        $propbag->add('version',       '2.38.4');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -1313,12 +1313,12 @@ class serendipity_event_spartacus extends serendipity_event
                     if (serendipity_db_bool($this->get_config('enable_plugins'))) {
                         $upgradeCount = $this->count_plugin_upgrades();
                         if ($upgradeCount > 0) {
+                            $updateLink = '?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;' . serendipity_setFormToken('url');
                             if ($upgradeCount > 1) {
-                                $eventData = sprintf(PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATES, $upgradeCount);
+                                $eventData = sprintf(PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATES, $upgradeCount, $updateLink);
                             } else {
-                                $eventData = PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATE;
+                                $eventData = sprintf(PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATE, $updateLink);
                             }
-                            $eventData .= '    <a id="upgrade_plugins" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE' . '&amp;' . serendipity_setFormToken('url') . '">'. PLUGIN_EVENT_SPARTACUS_CHECK .'</a>';
                             return true;
                         }
                     }

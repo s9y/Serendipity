@@ -28,8 +28,8 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_EVENT', 'Updates (Ereignis-Plugins)');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'Sie können mehrere Plugins auf einmal installieren indem sie diesen Link in einem neuen Tab öffnen (mittlerer Mausbutton)');
 
-@define('PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATE', 'Ein Plugin kann aktualisiert werden.');
-@define('PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATES', '%u Plugins können aktualisiert werden.');
+@define('PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATE', 'Ein Plugin kann <a href="%s">aktualisiert</a> werden.');
+@define('PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATES', '%u Plugins können <a href="%s">aktualisiert</a> werden.');
 
 @define('PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR', '<br />(Der Mirror-Speicherort antwortet mit Fehler %s.)<br />');
 @define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK', '<p>Die Daten des Spartacus-Speicherorts konnte nicht empfangen werden. Prüfe Verfügbarkeit der Quelle...</p>');
