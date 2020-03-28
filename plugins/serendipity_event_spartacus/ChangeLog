@@ -1,3 +1,7 @@
+2.38.3
+-------
+    * Simplify count_plugin_upgrades().
+
 2.38.2
 -------
     * Fix a call to NULL if no connection to the repositiory could 
