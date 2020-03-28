@@ -1,6 +1,8 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Merge s9y and plugin update notifications in dashboard.
+
    * Fix: Don't drop upgraded_version from local plugin cache.
 
    * Fix: Simplify count_plugin_upgrades() in event_spartacus.
