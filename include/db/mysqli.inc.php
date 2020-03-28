@@ -272,26 +272,24 @@ function serendipity_db_schema_import($query) {
         '{UNSIGNED}', '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', '{TEXT}');
     static $replace = array('int(11) not null auto_increment', 'primary key',
         'unsigned'  , 'FULLTEXT', 'FULLTEXT', 'enum (\'true\', \'false\') NOT NULL default \'true\'', 'LONGTEXT');
-    static $is_utf8 = null;
     global $serendipity;
     
-    if ($is_utf8 === null) {
-        $search[] = '{UTF_8}';
-        if (  $_POST['charset'] == 'UTF-8/' ||
-              $serendipity['charset'] == 'UTF-8/' ||
-              $serendipity['POST']['charset'] == 'UTF-8/' ||
-              LANG_CHARSET == 'UTF-8' ) {
-            if (serendipity_utf8mb4_ready()) {
-                $replace[] = 'ROW_FORMAT=DYNAMIC /*!40100 CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci */';
-            } else {
-                # in old versions we stick to the three byte pseudo utf8 to not trip
-                # over the max index restriction of 1000 bytes
-                $replace[] = '/*!40100 CHARACTER SET utf8 COLLATE utf8_unicode_ci */';
-            }
+    $search[] = '{UTF_8}';
+    if (  $_POST['charset'] == 'UTF-8/' ||
+          $serendipity['charset'] == 'UTF-8/' ||
+          $serendipity['POST']['charset'] == 'UTF-8/' ||
+          LANG_CHARSET == 'UTF-8' ) {
+        if (serendipity_utf8mb4_ready()) {
+            $replace[] = 'ROW_FORMAT=DYNAMIC /*!40100 CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci */';
         } else {
-            $replace[] = '';
+            # in old versions we stick to the three byte pseudo utf8 to not trip
+            # over the max index restriction of 1000 bytes
+            $replace[] = '/*!40100 CHARACTER SET utf8 COLLATE utf8_unicode_ci */';
         }
+    } else {
+        $replace[] = '';
     }
+    
 
     if (serendipity_utf8mb4_ready()) {
         # InnoDB enables us to use utf8mb4 with the higher max index size
