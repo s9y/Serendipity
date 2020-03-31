@@ -67,6 +67,7 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
     if (!$check && $serendipity['capabilities']['jquery']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
+    <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery-migrate.js"></script>
 <?php
         if ($serendipity['capabilities']['jquery-noconflict']) {
 ?>
@@ -88,6 +89,7 @@ function serendipity_plugin_api_backend_header($event_name, &$bag, &$eventData, 
     if (!$check && $serendipity['capabilities']['jquery_backend']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
+    <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery-migrate.js"></script>
 <?php
     }
 }
@@ -300,7 +302,7 @@ class serendipity_plugin_api
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}config  where name LIKE '$plugin_instance_id/%'");
         return;
-    
+
     }
 
     /**
@@ -1045,7 +1047,7 @@ class serendipity_plugin_api
      * @return  boolean
      */
     static function is_bundled_plugin($name)
-    {   
+    {
         return in_array ($name, BUNDLED_PLUGINS);
     }
 
@@ -1254,10 +1256,10 @@ class serendipity_plugin_api
 
         return $instance;
     }
-    
+
     /**
      * Find the plugin instances for a given classname
-     * 
+     *
      * @access public
      * @param   string      The classname of the plugin
      * @param   int         The owner author
@@ -1272,17 +1274,17 @@ class serendipity_plugin_api
 
         $where[] = "(name LIKE '@" . serendipity_db_escape_string($plugin_name) . "%' OR name LIKE '" . serendipity_db_escape_string($plugin_name) . "%') ";
         $where[] = "authorid='" . serendipity_db_escape_string($authorid) . "' ";
-        
+
         if ($ignore_hidden) $where[] = "NOT ( placement = 'hidden' OR placement = 'eventh') ";
-        
+
         if (count($where) > 0) {
             $sql .= ' WHERE ' . implode(' AND ', $where);
         }
-        
+
         $rs = serendipity_db_query($sql,false,'assoc');
         $ids = array();
-        
-        if (!empty($rs) & is_Array($rs)) { 
+
+        if (!empty($rs) & is_Array($rs)) {
             foreach($rs as $line) {
                 $ex = explode(':',$line['name']);
                 $ids[] = $ex[1];
@@ -1539,13 +1541,13 @@ class serendipity_plugin
                     break;
 
                 case 'url':
-                    if (!preg_match('§^' . $pattern_url . '$§', $value)) {
+                    if (!preg_match('ï¿½^' . $pattern_url . '$ï¿½', $value)) {
                         $valid = false;
                     }
                     break;
 
                 case 'mail':
-                    if (!preg_match('§^' . $pattern_mail . '$§', $value)) {
+                    if (!preg_match('ï¿½^' . $pattern_mail . '$ï¿½', $value)) {
                         $valid = false;
                     }
                     break;
@@ -1750,7 +1752,7 @@ class serendipity_plugin
     function &getFile($filename, $key = 'serendipityPath')
     {
         global $serendipity;
-        
+
         $path = serendipity_getTemplateFile($filename, $key, true);
         if (!$path) {
             if (file_exists(dirname($this->pluginFile) . '/' . $filename)) {
