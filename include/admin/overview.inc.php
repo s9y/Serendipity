@@ -56,6 +56,7 @@ if (is_array($output)) {
 } else {
     $data['updateButton'] = $output;
 }
+$output = '';
 if (serendipity_plugin_api::hook_event('backend_plugins_upgradecount', $output)) {
     $data['pluginUpdates'] = $output;
 } else {
