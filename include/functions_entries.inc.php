@@ -1271,7 +1271,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 $serendipity['smarty']->assign($comment_add_data);
                 serendipity_displayCommentForm(
                     $entry['id'],
-                    $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?url=' . $entry['commURL'],
+                    serendipity_rewriteURL($entry['commURL'],'baseURL'),
                     true,
                     $userData,
                     true,
