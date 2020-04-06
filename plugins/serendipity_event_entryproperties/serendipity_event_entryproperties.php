@@ -19,7 +19,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.41.4');
+        $propbag->add('version',       '1.41.5');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.27',
@@ -927,10 +927,11 @@ class serendipity_event_entryproperties extends serendipity_event
                         $conds[] = 'e.isdraft AS orderkey,';
                     }
 
+                    /*
                     if ($is_cache && (!isset($addData['noCache']) || !$addData['noCache'])) {
                         $conds[] = 'ep_cache_extended.value AS ep_cache_extended,';
                         $conds[] = 'ep_cache_body.value     AS ep_cache_body,';
-                    }
+                    } */
 
                     $cond = implode("\n", $conds) . "\n";
                     if (empty($eventData['addkey'])) {
@@ -955,12 +956,14 @@ class serendipity_event_entryproperties extends serendipity_event
                         $eventData['orderby'] = $cond . ', ' . $eventData['orderby'];
                     }
 
+                    /* the cache is already in the entries-entryproperties subarray, no need to double the information
                     if ($is_cache && (!isset($addData['noCache']) || !$addData['noCache'])) {
                         $joins[] = " LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties ep_cache_extended
                                                   ON (e.id = ep_cache_extended.entryid AND ep_cache_extended.property = 'ep_cache_extended')";
                         $joins[] = " LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties ep_cache_body
                                                   ON (e.id = ep_cache_body.entryid AND ep_cache_body.property = 'ep_cache_body')";
-                    }
+                    } */
+
                     $joins[] = " LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties ep_access
                                               ON (e.id = ep_access.entryid AND ep_access.property = 'ep_access')";
                     if ($use_groups) {

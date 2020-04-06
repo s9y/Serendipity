@@ -1,3 +1,9 @@
+1.41.5
+------
+    * removed cache SQL from fetchentries event hook, cache is already put in 
+      properties subarray by issuing calling function
+
+
 1.41.4:
 -------
     * removed 'WHERE' keyword from fetchentries event hook, because that should be handled 
