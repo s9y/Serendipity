@@ -412,7 +412,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
 
             // Do not allow requesting a page that doesn't exist
             // and do a fallback to the highest page number available
-            if ($serendipity['GET']['page'] > $totalPages) {
+            if ($totalPages > 0 && $serendipity['GET']['page'] > $totalPages) {
                 $serendipity['GET']['page'] = $totalPages;
             }
 
