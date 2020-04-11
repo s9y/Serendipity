@@ -762,6 +762,10 @@ class serendipity_event_spartacus extends serendipity_event
                 if ($bag->get('version') == $data['version']) {
                     $installable = false;
                 } elseif (version_compare($bag->get('version'), $data['version'], '<')) {
+                    // I'm not sure if setting 'upgrade_version' to 'version' is correct
+                    // for the context of pluginlocation = 'Spartacus', but leave it
+                    // for now.
+                    // See https://github.com/s9y/Serendipity/issues/685 for context.
                     $data['upgradable']      = true;
                     $data['upgrade_version'] = $data['version'];
                     $data['version']         = $bag->get('version');
