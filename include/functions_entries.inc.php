@@ -404,13 +404,26 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
 
     if (!empty($limit)) {
         if (isset($serendipity['GET']['page']) && ($serendipity['GET']['page'] > 1 || serendipity_db_bool($serendipity['archiveSortStable'])) && !strstr($limit, ',')) {
+
+            // serendipity_fetchEntries() is mostly called in page context to
+            // deliver a list of entries to display on archive, search result
+            // or other pages, where $limit means the number of entries to
+            // display on each page. This code depends on that notion,
+            // catches request for non-existing pages and applies
+            // pagination.
+            // If you don't work in a page context, e.g. you just want to fetch
+            // a list of entries to display in a sidebar, you should think
+            // about saving and unsetting $serendipity['GET']['page'] before
+            // calling serendipity_fetchEntries() and reset it to the saved
+            // value afterwards.
+            // See https://github.com/s9y/Serendipity/issues/693 for context.
             
             $totalEntries = serendipity_getTotalEntries();
             $totalPages = ceil($totalEntries / $limit);
 
             // Do not allow requesting a page that doesn't exist
             // and do a fallback to the highest page number available
-            if ($serendipity['GET']['page'] > $totalPages) {
+            if ($totalPages > 0 && $serendipity['GET']['page'] > $totalPages) {
                 $serendipity['GET']['page'] = $totalPages;
             }
 

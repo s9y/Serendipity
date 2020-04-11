@@ -1,6 +1,10 @@
 Version 2.3.5-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix: SQL error in serendipity_plugin_history present since we
+          "don't allow requesting an archive page that doesn't exist"
+          (2.3.3).
+
    * Fix: Entry title in backend list of entries was double escaped.
 
    * Fix: Don't drop upgraded_version from local plugin cache.
