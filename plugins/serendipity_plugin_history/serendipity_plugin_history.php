@@ -174,12 +174,19 @@ class serendipity_plugin_history extends serendipity_plugin
         }
 
         $oldLim = $serendipity['fetchLimit'];
+        if (isset($serendipity['GET']['page'])) {
+            $oldPage = $serendipity['GET']['page'];
+            unset($serendipity['GET']['page']);
+        }
         $nowts = serendipity_serverOffsetHour();
         $maxts = mktime(23, 59, 59,  date('m', $nowts), date('d', $nowts), date('Y', $nowts));
         $mints = mktime(0, 0, 0, date('m', $nowts), date('d', $nowts), date('Y', $nowts));
         $e     = serendipity_fetchEntries(array(($mints-$max_age*86400),
                                             ($maxts-$min_age*86400)), $full, $max_entries);
         $serendipity['fetchLimit'] = $oldLim;
+        if (isset($oldPage)) {
+            $serendipity['GET']['page'] = $oldPage;
+        }
         echo (empty($intro)) ? '' : '<div class="serendipity_history_intro">' . $intro . '</div>' . "\n";
 
         if (!is_array($e)) {
