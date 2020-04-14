@@ -25,7 +25,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.89.1');
+        $propbag->add('version',       '1.89.2');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -1290,7 +1290,7 @@ class serendipity_event_spamblock extends serendipity_event
                         echo serendipity_setFormToken('form');
                     }
 
-                    if ($timeout) $_SESSION['serendipity_comment_timeout'] = time();
+                    if ($timeout && !isset($serendipity['POST']['preview'])) $_SESSION['serendipity_comment_timeout'] = time();
 
 
                     // Check whether to allow comments from registered authors
