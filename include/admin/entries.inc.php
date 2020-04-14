@@ -277,19 +277,16 @@ switch($serendipity['GET']['adminAction']) {
                 } else {
                     $filter[] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
                 }
-                $full     = true;
             } elseif ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite' || $serendipity['dbType'] == 'sqlite3oo') {
                 $term = str_replace('*', '%', $term);
                 $term = serendipity_mb('strtolower', $term);
                 $filter[] = "(lower(title) LIKE '%$term%' OR lower(body) LIKE '%$term%' OR lower(extended) LIKE '%$term%')";
-                $full = true;
             } else {
                 if (preg_match('@["\+\-\*~<>\(\)]+@', $term)) {
                     $filter[] = "MATCH (title,body,extended) AGAINST ('" . $term . "' IN BOOLEAN MODE)";
                 } else {
                     $filter[] = "MATCH (title,body,extended) AGAINST ('" . $term . "')";
                 }
-                $full     = true;
             }
         }
 
