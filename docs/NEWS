@@ -1,6 +1,10 @@
 Version 2.3.5-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Don't delete extend properties from the entryproperties
+          plugin when publishing from dashboard (or sending
+          delayed trackbacks).
+
    * Fix: SQL error in serendipity_plugin_history present since we
           "don't allow requesting an archive page that doesn't exist"
           (2.3.3).
@@ -9,7 +13,7 @@ Version 2.3.5-beta1 ()
 
    * Fix: Don't drop upgraded_version from local plugin cache.
 
-   * Fix: Regular expression in functions_routing.incx.php
+   * Fix: Regular expression in functions_routing.inc.php
 
    * Fix: Truncate extension of media items to 5 chars (which ist the
           max length of the corresponding database field).

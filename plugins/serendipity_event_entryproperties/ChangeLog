@@ -1,3 +1,9 @@
+1.41.5:
+-------
+   * Fix accidental deletion of extended properties.
+
+[1.41.4 not backported]
+
 1.41.3:
 -------
     * Add missing English language constant.
