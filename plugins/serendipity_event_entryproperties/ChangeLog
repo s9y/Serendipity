@@ -1,8 +1,11 @@
+1.41.5:
+-------
+   * Fix accidental deletion of extended properties.
+
 1.41.4:
 -------
     * removed 'WHERE' keyword from fetchentries event hook, because that should be handled 
       by the issuing sql
-
 
 1.41.3:
 -------
