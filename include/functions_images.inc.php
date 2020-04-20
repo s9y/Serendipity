@@ -2041,11 +2041,11 @@ function serendipity_uploadSecure($var, $strip_paths = true, $append_slash = fal
     }
 
     # truncate extensions to 5 chars
-    # 1) (\.[^.]{0,5}+) five chars after a dot are captured (possessively)
+    # 1) (\.[^./\\\]{5}) up to five chars after a dot are captured
     # 2) expression matches only if followed by anything that is no dot
     #    and has no / or \ at the end
     # 3) if epxression matches, everything after the capture group is deleted
-    $var = preg_replace('@(\.[^.]{0,5}+)[^./\\\]*[^/\\\]{1,1}?$@', '$1', $var);
+    $var = preg_replace('@(\.[^./\\\]{5})[^./\\\]+$@', '$1', $var);
 
     return $var;
 }
