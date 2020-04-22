@@ -18,7 +18,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team, Stephan Brunker');
-        $propbag->add('version',       '2.21.4');
+        $propbag->add('version',       '2.21.5');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -294,9 +294,9 @@ class serendipity_event_nl2br extends serendipity_event
                                     //but with obligatory break because of the independent div-elements
                                     
                                     // rules for body <-> extended:
-                                    // no margins only if body ends with \n or no \n and extended starts without \n
+                                    // no margins only if body ends without \n and extended starts without \n
                                     // means: concatenate body and extended and there is no whiteline between them                                
-                                    if ($element == 'body' && isset($eventData['extended']) && !(strspn($text,"\n",-1) > 1) && strspn($eventData['extended'],"\n") )
+                                    if ($element == 'body' && isset($eventData['extended']) && !strspn($text,"\n",-1) && !strspn($eventData['extended'],"\n") )
                                     { 
                                         $text = "\n" . $text;
                                     }
@@ -892,7 +892,7 @@ p.wl_notopbottom {
                 {
 
                     // whiteline \n\n found: make paragraph with buffer and this line
-                    if ( ($j < count($textline) - 1 && empty($textline[$j+1]) ) )
+                    if ( ($j < count($textline) - 1 && empty(trim($textline[$j+1])) ) )
                     {
                         // p start tag, append buffer and empty buffer
                         if  ($firstp && !$startnl) { $content .= self::P_NOTOP . $buffer; }

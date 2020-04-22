@@ -1,5 +1,13 @@
-2.21.3: Include figure and figcaption tags.
-        Thanks to @stephanbrunker!
+2.21.5: * nl2p: if the double newline contains spaces, e.g. \n \n, these
+          spaces are now ignored
+        * fixed the direct concatenation: if the body ends without a newline
+          and the extended starts without, there is no margin between
+          the paragraphs (was broken)
+
 2.21.4: * changed <a> tags to html5 - can now include every block element
         * added a new function which processes html comments. Now everything
           inside an html comment is ignored
+
+2.21.3: Include figure and figcaption tags.
+        Thanks to @stephanbrunker!
+
