@@ -63,9 +63,10 @@ CKEDITOR.editorConfig = function( config ) {
           - Allowed <span> to make life a bit easier!
           - Reset <img[height,width]> Media Library image inserts to avoid ACF OFF removement of height attributes. (Dependency in ckeditor_s9y_plugin.js)
           - Allow <pre[*attributes](*classes)> for custom attributes/classes in code blocks
+          - Allow <details> and <summary>
     */
     // protect
-    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);code;figure[*]{*}(*); figcaption[*]{*}(*);';
+    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);code;figure[*]{*}(*);figcaption[*]{*}(*);details[*]{*}(*);summary[*]{*}(*);';
     // Do not use auto paragraphs, added to these allowed tags (only!). Please regard that this was marked deprecated by CKE 4.4.5, but is a need for (our use of) extraAllowedContent - check this again by future versions!
     config.autoParagraph = false; // defaults(true)
 
