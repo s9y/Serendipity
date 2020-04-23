@@ -1,6 +1,9 @@
 Version 2.3.5-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix: [CKE] Don't remove <details> and <summary> elements from
+          WYSIWYG editor.
+
    * Fix: Don't delete extend properties from the entryproperties
           plugin when publishing from dashboard (or sending
           delayed trackbacks).
