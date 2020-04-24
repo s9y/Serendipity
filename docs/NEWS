@@ -1,6 +1,8 @@
 Version 2.3.5-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix: CSS: Restrict block display of summary to trackbacks. (#703)
+
    * Fix: Don't strip HTML from comments body in serendipity_plugin_comments
           before serendipity_event_unstrip_tags can convert the HTML tags
           (being called via frontend_display hook). (#702)
