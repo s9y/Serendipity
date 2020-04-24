@@ -930,7 +930,7 @@
 @define('NOTIFICATION_CONFIRM_MAIL', 'A hozzászólásod megerõsítése sikeresen megtörtént.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'A hozzászólásokról szóló értesítésekre való feliratkozásodat nem sikerült igazolni. Kérlek ellenõrizd az ehhez kapott linket. Ha ezt 3 hétnél régebben kaptad, kérned kell egy új igazoló linket tartalmazó levelet.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'A hozzászólásod jóváhagyása nem sikerült. Kérlek ellenõrizd az erre használt linket. Ha ezt régebben kaptad mint 3 hét, kérned kell egy újat.');
-@define('PLUGIN_DOCUMENTATION', 'Dokumentáció');
+@define('PLUGIN_DOCUMENTATION', 'Website');
 @define('PLUGIN_DOCUMENTATION_LOCAL', 'Helyi dokumentáció');
 @define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Verzió történet');
 @define('SYNDICATION_PLUGIN_BIGIMG', 'Nagy kép');

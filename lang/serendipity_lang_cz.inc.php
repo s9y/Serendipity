@@ -960,7 +960,7 @@ $i18n_filename_to = array (
 @define('NOTIFICATION_CONFIRM_MAIL',		'Va¹e potvrzení komentáøe bylo úspì¹nì pøijato.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL',		'Va¹e potvrzení ¾ádosti o zasílání oznámení o nových komentáøích nemohlo být pøijato. Zkontrolujte prosím odkaz, na který jste kliknuli. Pokud je odkaz star¹í ne¾ 3 týdny, musíte po¾ádat o zasílání oznámení znovu.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL',		'Va¹e potvrzení komentáøe nemohlo být pøijato. Zkontrolujte prosím odkaz, na který jste kliknuli. Pokud je odkaz star¹í ne¾ 3 týdny, musíte poslat komentáø znovu.');
-@define('PLUGIN_DOCUMENTATION',		'Dokumentace');
+@define('PLUGIN_DOCUMENTATION',		'Website');
 @define('PLUGIN_DOCUMENTATION_LOCAL',		'Lokální dokumentace');
 @define('PLUGIN_DOCUMENTATION_CHANGELOG',		'Historie verzí');
 @define('SYNDICATION_PLUGIN_BIGIMG',		'Velký obrázek');

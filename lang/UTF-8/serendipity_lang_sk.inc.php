@@ -940,7 +940,7 @@ $i18n_filename_to = array (
 @define('NOTIFICATION_CONFIRM_MAIL', 'Vaše potvrdenie komentára bolo úspešne prijaté.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Vaše potvrdenie žiadosti o zasielanie oznámení o nových komentároch nemohlo byť prijaté. Skontrolujte prosím odkaz, na ktorý ste klikli. Ak je odkaz starší ako 3 týždne, musíte požiadať o zasielanie oznámení znova.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Vaše potvrdenie komentára nemohlo byť prijaté. Skontrolujte prosím odkaz, na ktorý ste klikli. Ak je odkaz starší ako 3 týždne, musíte požiadať o zasielanie oznámení znova.');
-@define('PLUGIN_DOCUMENTATION',		'Dokumentácia');
+@define('PLUGIN_DOCUMENTATION',		'Website');
 @define('PLUGIN_DOCUMENTATION_LOCAL',		'Lokálna dokumentácia');
 @define('PLUGIN_DOCUMENTATION_CHANGELOG',		'História verzií');
 @define('SYNDICATION_PLUGIN_BIGIMG',		'Veľký obrázok');
