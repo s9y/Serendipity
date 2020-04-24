@@ -1,3 +1,8 @@
+Version 1.17:
+------------------------------------------------------------------------
+* Fix: Don't strip HTML tags from comment body before truncating if 
+       serendipity_event_unstrip_tags is active, so it may actually
+       preserve the tags (and replace them with entities).
 Version 1.16:
 ------------------------------------------------------------------------
 * Fix: wordwrap at word boundaries instead of "truncating" the lines
