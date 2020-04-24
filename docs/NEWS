@@ -1,16 +1,20 @@
 Version 2.3.5-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Don't strip HTML from comments body in serendipity_plugin_comments
+          before serendipity_event_unstrip_tags can convert the HTML tags
+          (being called via frontend_display hook). (#702)
+
    * Fix: [CKE] Don't remove <details> and <summary> elements from
           WYSIWYG editor.
 
    * Fix: Don't delete extend properties from the entryproperties
           plugin when publishing from dashboard (or sending
-          delayed trackbacks).
+          delayed trackbacks). (#695)
 
    * Fix: SQL error in serendipity_plugin_history present since we
           "don't allow requesting an archive page that doesn't exist"
-          (2.3.3).
+          (2.3.3). (#694)
 
    * Fix: Entry title in backend list of entries was double escaped.
 
@@ -19,7 +23,7 @@ Version 2.3.5-beta1 ()
    * Fix: Regular expression in functions_routing.inc.php
 
    * Fix: Truncate extension of media items to 5 chars (which ist the
-          max length of the corresponding database field).
+          max length of the corresponding database field). (#609)
           Thanks to @mmitch!
 
 Version 2.3.4 (March 25th, 2020)
