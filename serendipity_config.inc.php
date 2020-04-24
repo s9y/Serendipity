@@ -10,9 +10,13 @@ if (defined('S9Y_FRAMEWORK')) {
 if (!headers_sent() && php_sapi_name() !== 'cli') {
     // Only set the session name, if no session has yet been issued.
     if (session_id() == '') {
-        $cookieParams = session_get_cookie_params();
-        $cookieParams['secure'] = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? true : false);
-        session_set_cookie_params($cookieParams['lifetime'], $cookieParams['path'], $cookieParams['domain'], $cookieParams['secure'], $cookieParams['httponly']);
+        $secure = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on');
+        if (PHP_VERSION_ID >= 70300) {
+            session_set_cookie_params(array("secure"=>$secure, "httponly"=>true, "samesite"=>"Lax"));
+        } else {
+            // Support for PHP before 7.3, can be removed at some point
+            session_set_cookie_params(0, '/', '', $secure, true);
+        }
         session_name('s9y_' . md5(dirname(__FILE__)));
         session_start();
     }
