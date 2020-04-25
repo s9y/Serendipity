@@ -1004,7 +1004,7 @@
 @define('ENTRY_PUBLISHED', 'Eintrag #%s veröffentlicht');
 @define('PUBLISH_ERROR', 'Fehler bei der Veröffentlichung:');
 @define('UPDATE_NOTIFICATION', 'Update-Hinweis');
-@define('NEW_VERSION_AVAILABLE', 'Neue stabile Serendipity version verfügbar: ');
+@define('NEW_VERSION_AVAILABLE', 'Neue stabile Serendipity-Version verfügbar: ');
 @define('MOVE', 'Verschieben');
 @define('MOVE_UP', 'Nach oben');
 @define('MOVE_DOWN', 'Nach unten');
