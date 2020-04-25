@@ -1,4 +1,4 @@
-Version 2.3.5-beta1 ()
+Version 2.3.5 (April 25th, 2020)
 ------------------------------------------------------------------------
 
    * Fix: CSS: Restrict block display of summary to trackbacks. (#703)
