@@ -3,16 +3,11 @@ Version 2.4-alpha1 ()
 
    * Merge s9y and plugin update notifications in dashboard.
 
-   * Fix: Don't drop upgraded_version from local plugin cache.
-
    * Fix: Simplify count_plugin_upgrades() in event_spartacus.
 
    * Fix: Modified sql statement used for htaccess blocking to work in
           MySQL 5.7.
           Thanks to @fasterit!
-
-   * Fix: Truncate extension of media items to 5 chars (which ist the
-          max length of the corresponding database field).
 
    * Switch new installations with MySQL >= 5.6.4 or MariaDB >= 10.0.5
      to the InooDB stoprage engine and utf8mb4 charset. This enables
@@ -80,6 +75,36 @@ Version 2.4-alpha1 ()
 
    * Add plugin update notifications to the plugin update button and
      to the dashboard.
+
+Version 2.3.5 (April 25th, 2020)
+------------------------------------------------------------------------
+
+   * Fix: CSS: Restrict block display of summary to trackbacks. (#703)
+
+   * Fix: Don't strip HTML from comments body in serendipity_plugin_comments
+          before serendipity_event_unstrip_tags can convert the HTML tags
+          (being called via frontend_display hook). (#702)
+
+   * Fix: [CKE] Don't remove <details> and <summary> elements from
+          WYSIWYG editor.
+
+   * Fix: Don't delete extend properties from the entryproperties
+          plugin when publishing from dashboard (or sending
+          delayed trackbacks). (#695)
+
+   * Fix: SQL error in serendipity_plugin_history present since we
+          "don't allow requesting an archive page that doesn't exist"
+          (2.3.3). (#694)
+
+   * Fix: Entry title in backend list of entries was double escaped.
+
+   * Fix: Don't drop upgraded_version from local plugin cache.
+
+   * Fix: Regular expression in functions_routing.inc.php
+
+   * Fix: Truncate extension of media items to 5 chars (which ist the
+          max length of the corresponding database field). (#609)
+          Thanks to @mmitch!
 
 Version 2.3.4 (March 25th, 2020)
 ------------------------------------------------------------------------
