@@ -575,7 +575,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
 
                         serendipity_db_query("UPDATE {$serendipity['dbPrefix']}authors
                                                  SET password = '" . ($is_hashed === false ? serendipity_hash($password) : $password) . "',
-                                                     hashtype = 1
+                                                     hashtype = 2
                                                WHERE authorid = '" . $row['authorid'] . "'");
                         if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Migrated user:' . $row['username'] . "\n");
                         $is_valid_user = true;
