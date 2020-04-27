@@ -13,63 +13,7 @@
  */
 CKEDITOR.editorConfig = function( config ) {
 
-    /** SECTION: ACF
-        Advanced Content Filter works in two modes:
-            automatic - the filter is configured by editor features (like plugins, buttons, and commands) that are enabled with configuration options
-                        such as CKEDITOR.config.plugins, CKEDITOR.config.extraPlugins, and CKEDITOR.config.toolbar,
-            custom    - the filter is configured by the CKEDITOR.config.allowedContent option and only features that match this setting are activated.
-        In both modes it is possible to extend the filter configuration by using the CKEDITOR.config.extraAllowedContent setting.
-        If you want to disable Advanced Content Filter, set CKEDITOR.config.allowedContent to true.
-        All available editor features will be activated and input data will not be filtered.
-        Allowed content rules. This setting is used when instantiating CKEDITOR.editor.filter.
-        The following values are accepted:
-            CKEDITOR.filter.allowedContentRules - defined rules will be added to the CKEDITOR.editor.filter.
-            true    - will disable the filter (data will not be filtered, all features will be activated).
-            default - the filter will be configured by loaded features (toolbar items, commands, etc.).
-            http://docs.ckeditor.com/?_escaped_fragment_=/guide/dev_allowed_content_rules-section-string-format#!/guide/dev_allowed_content_rules-section-string-format
-        In all cases filter configuration may be extended by extraAllowedContent. This option may be especially useful,
-        when you want to use the default allowedContent value along with some additional rules.
-        Read more of this here:
-            http://docs.ckeditor.com/?_escaped_fragment_=/guide/dev_acf#!/guide/dev_acf
-    */
-
-    /** List of regular expressions to be executed on ***input HTML***, indicating HTML source code, that, when matched, must not be available in the WYSIWYG mode for editing. */
-
-    // allow <script> tags
-    //config.protectedSource.push( /<(script)[^>]*>.*<\/script>/ig ); // already set as default in ckeditor.js, by [/<script[\s\S]*?<\/script>/gi,/<noscript[\s\S]*?<\/noscript>/gi]
-    // allow S9y imageselectorplus plugin mediainsert tag codes
-    config.protectedSource.push( /<(mediainsert)[^>]*>[\s\S]*?<\/mediainsert>/img );
-    // allow a Smarty like {} tag syntax without inner whitespace, which would be some other code part.
-    //config.protectedSource.push( /\{[a-zA-Z\$].*?\}/gi ); // Smarty markup protection disabled, since now being usable w/o setting ACF OFF
-    // allow [[mytag]] [[{$mytag}]] [s9y-include-entry:XXX:YYY] widget tags for a markup replacement by S9y plugins (eg by third example with the staticblock serendipity_event_includeentry plugin)
-    //config.protectedSource.push(/\[\[([^\[\]])+\]\]/g); // WP-Smarty like markup protection disabled, since now being usable w/o setting ACF OFF
-    /**
-     CKEDITOR.protectedSource patterns used regex Escape sequences
-                \s any whitespace character;
-                \S any character that is not a whitespace character
-                \t tab (hex 09);
-                \r carriage return (hex 0D);
-                \n newline (hex 0A);
-     Pattern Modifiers
-                /i caseless, match both upper and lower case letters
-                /m treat as multiline
-                /g be greedy
-    */
-
-    /** SECTION: Extra Allowed Content
-        Set placeholder tag cases - elements [attributes]{styles}(classes) to protect ACF removements.
-          - Allowed <mediainsert>, <gallery>, <media> tags (imageselectorplus galleries) - which tells ACF to not touch the code!
-          - Allowed <div> is a need for Media Library inserts - which tells ACF to not touch the code!
-          - Allowed <span> to make life a bit easier!
-          - Reset <img[height,width]> Media Library image inserts to avoid ACF OFF removement of height attributes. (Dependency in ckeditor_s9y_plugin.js)
-          - Allow <pre[*attributes](*classes)> for custom attributes/classes in code blocks
-          - Allow <details> and <summary>
-    */
-    // protect
-    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);code;figure[*]{*}(*);figcaption[*]{*}(*);details[*]{*}(*);summary[*]{*}(*);';
-    // Do not use auto paragraphs, added to these allowed tags (only!). Please regard that this was marked deprecated by CKE 4.4.5, but is a need for (our use of) extraAllowedContent - check this again by future versions!
-    config.autoParagraph = false; // defaults(true)
-
+    config.allowedContent = true;
 
     /** SECTION: Other behaviour config rules
 
