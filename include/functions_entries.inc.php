@@ -939,23 +939,6 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         }
         $search = array_merge($searchresults, $search);
     }
-    
-    //if * wasn't already appended and if there are none or not enough
-    //results, search again for entries containing the searchterm as a part
-    if (strpos($term, '*') === false && $serendipity['dbType'] != 'sqlite' && $serendipity['dbType'] != 'sqlite3' && $serendipity['dbType'] != 'pdo-sqlite' && $serendipity['dbType'] != 'sqlite3oo') {
-        if (! is_array($search)) {
-            return serendipity_searchEntries($term.'*', $orig_limit);
-        } else {
-            $ec = count($search);
-            $checkcount = 4;
-            if ($serendipity['fetchLimit'] < $checkcount) {
-                $checkcount = $serendipity['fetchLimit'];
-            }
-            if ($ec < $checkcount) {
-                return serendipity_searchEntries($term.'*', $orig_limit, $search);
-            }
-        }
-    }
 
     if (is_array($search)){
         serendipity_fetchEntryData($search);
