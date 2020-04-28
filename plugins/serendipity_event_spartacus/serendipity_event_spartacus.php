@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.38.4');
+        $propbag->add('version',       '2.39');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -66,6 +66,10 @@ class serendipity_event_spartacus extends serendipity_event
                 ),
                 'sourceforge.net' => array(
                     'url'  => 'http://www.sourceforget.net',
+                    'desc' => 'Package server for plugin downloads'
+                ),
+                'gitlab.com' => array(
+                    'url'  => 'http://www.gitlab.com',
                     'desc' => 'Package server for plugin downloads'
                 )
             ),
@@ -117,12 +121,14 @@ class serendipity_event_spartacus extends serendipity_event
             'xml' => array(
                 'github.com',
                 's9y.org',
+                'gitlab.com'
             ),
 
             'files' => array(
                 'github.com',
                 'SourceForge.net',
-                's9y.org'
+                's9y.org',
+                'gitlab.com'
             )
         );
 
@@ -130,18 +136,21 @@ class serendipity_event_spartacus extends serendipity_event
             'xml' => array(
                 'https://raw.github.com/s9y/additional_plugins/master/',
                 'http://s9y.org/mirror/',
+                'https://gitlab.com/s9y_blog/additional_plugins/-/raw/master/'
             ),
 
             'files' => array(
                 'https://raw.github.com/s9y/',
                 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/',
                 'http://s9y.org/mirror/',
+                'https://gitlab.com/s9y_blog/'
             ),
 
             'files_health' => array(
                 'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/serendipity/docs/LICENSE',
                 'http://s9y.org/'                       => 'http://s9y.org/',
                 'https://raw.github.com/'               => 'https://raw.github.com/',
+                'https://gitlab.com/'               => 'https://gitlab.com/',
             )
         );
 
@@ -900,6 +909,10 @@ class serendipity_event_spartacus extends serendipity_event
             $gitloc = 'master/';
         }
 
+        if (stristr($mirror, 'gitlab.com')) {
+            $gitloc = '-/raw/master/';
+        }
+
         $this->checkArray($tree);
 
         if (! file_exists($serendipity['serendipityPath'] . '/templates_c/template_cache')) {
@@ -1063,6 +1076,10 @@ class serendipity_event_spartacus extends serendipity_event
 
         if (stristr($mirror, 'github.com')) {
             $gitloc = 'master/';
+        }
+
+        if (stristr($mirror, 'gitlab.com')) {
+            $gitloc = '-/raw/master/';
         }
 
         foreach($files AS $file) {
