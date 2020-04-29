@@ -17,7 +17,7 @@
  //    Plugin Dependencies: widget      Add-on Dependencies: Line Utilities and Clipboard
  // mediaembed is a fast and simple YouTube code CKEditor-Plugin: v. 0.5+ (https://github.com/frozeman/MediaEmbed, 2013-09-12) to avoid ACF restrictions
  // procurator and cheatsheet are S9y only plugins
- var customplugins = 'mediaembed,procurator,cheatsheet,codeTag,';
+ var customplugins = 'mediaembed,procurator,cheatsheet,widget,dialog,codesnippet,';
 
  // for any new instance when it is created - listen on load
  CKEDITOR.on('instanceReady', function(evt){

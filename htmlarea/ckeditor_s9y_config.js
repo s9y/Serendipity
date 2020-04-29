@@ -111,7 +111,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.uiColor = '#FF2400'; // scarlet red
     config.uiColor = '#14B8C4'; // light turquoise
     */
-    config.skin    = 'moono'; // this is default
+    config.skin    = 'moono-lisa'; // this is default
     config.height  = 400; // dito
 
     /**
@@ -251,7 +251,7 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'insert',       items: [ 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar' ] },
         { name: 'clipboard',   groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
         { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
-        { name: 'codetag',      items: [ 'Code' ] },
+        { name: 'CodeSnippet',         items: [ 'CodeSnippet' ] },
         { name: 'mediaembed',   items: [ 'MediaEmbed' ] },
         { name: 'others',       items: s9ypluginbuttons },
         { name: 'document',    groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
