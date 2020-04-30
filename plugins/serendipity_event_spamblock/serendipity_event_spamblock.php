@@ -1536,7 +1536,7 @@ class serendipity_event_spamblock extends serendipity_event
                     if (empty($filter_body)) {
                         continue;
                     }
-                    if (preg_match('@(' . $filter_body . ')@i', $addData['comment'], $wordmatch)) {
+                    if (preg_match('@(' . preg_quote($filter_body) . ')@i', $addData['comment'], $wordmatch)) {
                         if ($filter_type == 'moderate') {
                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ': ' . $wordmatch[1], $addData);
                             $eventData['moderate_comments'] = true;
