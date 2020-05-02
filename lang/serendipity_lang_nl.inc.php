@@ -8,7 +8,7 @@
 
 @define('LANG_CHARSET', 'ISO-8859-1');
 @define('SQL_CHARSET', 'latin1');
-@define('DATE_LOCALES', 'nl_BE.ISO-8859-1, nl_BE.ISO-8859-1, dutch, nl_BE, nl');
+@define('DATE_LOCALES', 'nl_NL.ISO-8859-1, nl_NL.ISO-8859-1, dutch, nl_NL, nl');
 @define('DATE_FORMAT_ENTRY', '%A, %e %B %Y');
 @define('DATE_FORMAT_SHORT', '%d-%m-%Y %H:%M');
 @define('WYSIWYG_LANG', 'nl');
