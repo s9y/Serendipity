@@ -1,6 +1,10 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * templates/2k11/admin/comments.tpl: Stay on the same page after
+     approving a comment; truncate comments to the same length (200)
+     as given by /include/admin/comments.php
+
    * Merge s9y and plugin update notifications in dashboard.
 
    * Fix: Simplify count_plugin_upgrades() in event_spartacus.

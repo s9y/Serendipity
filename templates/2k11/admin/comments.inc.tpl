@@ -143,7 +143,7 @@
                             </dl>
                         </div>
 
-                        <div id="c{$comment.id}_summary" class="comment_summary">{$comment.fullBody|truncate:120:"&hellip;"}</div>
+                        <div id="c{$comment.id}_summary" class="comment_summary">{$comment.fullBody|truncate:200:"&hellip;"}</div>
 
                         <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody}</div>
 
@@ -152,7 +152,7 @@
                             <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                             <li><a class="button_link comments_reply" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;{$urltoken}" title="{$CONST.REPLY}"><span class="icon-chat" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.REPLY}</span></a></li>
                         {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
-                            <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-thumbs-up-alt" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
+                            <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;serendipity[page]={$page}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-thumbs-up-alt" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
                         {/if}
                         {if ($comment.status == 'approved')}
                             <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.SET_TO_MODERATED}"><span class="icon-thumbs-down-alt" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.SET_TO_MODERATED}</span></a></li>
