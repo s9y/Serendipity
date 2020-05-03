@@ -76,7 +76,6 @@ create table {PREFIX}comments (
   ip varchar(64) default null,
   body {TEXT},
   type varchar(100) default 'regular',
-  subscribed {BOOLEAN} not null default 'true',
   status varchar(50) not null,
   referer varchar(200) default null
 ) {UTF_8};
@@ -318,3 +317,20 @@ CREATE INDEX pluginlist_f_idx ON {PREFIX}pluginlist(plugin_file);
 CREATE INDEX pluginlist_cn_idx ON {PREFIX}pluginlist(class_name);
 CREATE INDEX pluginlist_pt_idx ON {PREFIX}pluginlist(plugintype);
 CREATE INDEX pluginlist_pl_idx ON {PREFIX}pluginlist(pluginlocation);
+
+create table {PREFIX}subscriptions (
+  id int(11) NOT NULL,
+  email varchar(200) NOT NULL,
+  type varchar(30) NOT NULL,
+  target_id int(11) DEFAULT NULL,
+  subscribed {BOOLEAN} NOT NULL DEFAULT 'false',
+  timestamp int(10) unsigned DEFAULT NULL,
+  token varchar(64) DEFAULT NULL,
+  lang varchar(5) DEFAULT NULL
+) {UTF-8};
+ALTER TABLE {PREFIX}subscriptions ADD PRIMARY KEY (id);
+ALTER TABLE {PREFIX}subscriptions MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE INDEX subscription_idx ON {PREFIX}subscriptions (id);
+CREATE INDEX subscription_emailx ON {PREFIX}subscriptions (email);
+CREATE INDEX subscription_typex ON {PREFIX}subscriptions (type);
