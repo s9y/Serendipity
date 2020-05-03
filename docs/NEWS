@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * template/bootstrap4/sidebar.tpl: fix usage of wrong template
+     variable which prevented the sidebar from being emitted.
+
    * templates/2k11/admin/comments.tpl: Stay on the same page after
      approving a comment; truncate comments to the same length (200)
      as given by /include/admin/comments.php
@@ -139,7 +142,7 @@ Version 2.3.3 (March 22nd, 2020)
      markup
 
    * Updates mailer event plugin to support force sending mails on
-     published blog entries and ability to prepend a mail body. 
+     published blog entries and ability to prepend a mail body.
      Also fixes missing "keep strip tags" configuration option
 
    * Fix serendipity_killPath().
