@@ -20,7 +20,7 @@ By default, Serendipity includes:
  1. Integrated anti-spam measures
  1. A collection of themes that can be selected in the backend
  1. A plugin management interface
- 1. Categores that can be applied to written blog entries
+ 1. Categories that can be applied to written blog entries
  1. Groups and user management
  
 Via plugins, additional functionality can easily be added. Some popular plugins add
