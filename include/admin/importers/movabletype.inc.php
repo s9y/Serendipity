@@ -212,7 +212,6 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
         $comment = array(
             'parent_id'  => 0,
             'status'     => 'approved',
-            'subscribed' => 'false',
             'type'       => $type,
             'body'       => ''
         );

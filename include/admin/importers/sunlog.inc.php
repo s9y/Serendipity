@@ -224,7 +224,6 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
                                      'ip'        => '',
                                      'status'    => 'approved',
                                      'body'      => $a['comment'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));

@@ -227,7 +227,6 @@ class Serendipity_Import_pMachine extends Serendipity_Import {
                                      'ip'        => $a['comment_ip'],
                                      'status'    => ($a['status'] == 'open' ? 'approved' : 'pending'),
                                      'body'      => $a['body'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));

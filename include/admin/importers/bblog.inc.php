@@ -210,7 +210,6 @@ class Serendipity_Import_bblog extends Serendipity_Import {
                                      'ip'        => $a['ip'],
                                      'status'    => 'approved',
                                      'body'      => $a['commenttext'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));
@@ -239,7 +238,6 @@ class Serendipity_Import_bblog extends Serendipity_Import {
                                      'ip'        => $a['ip'],
                                      'status'    => 'approved',
                                      'body'      => $a['commenttext'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'TRACKBACK');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($trackback));

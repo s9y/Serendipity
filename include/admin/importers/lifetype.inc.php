@@ -247,7 +247,6 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
                                      'ip'        => $a['comment_author_IP'],
                                      'status'    => ($a['comment_status'] == '2' ? 'pending' : 'approved'),
                                      'body'      => $a['comment_content'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));

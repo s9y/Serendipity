@@ -240,7 +240,6 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
                                      'ip'        => $a['comment_author_IP'],
                                      'status'    => ($a['comment_status'] == 'published' ? 'approved' : 'pending'),
                                      'body'      => $a['comment_content'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));

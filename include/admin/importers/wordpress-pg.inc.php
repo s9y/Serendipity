@@ -228,7 +228,6 @@ class Serendipity_Import_WordPress_PG extends Serendipity_Import {
                                      'url'       => $a['comment_author_url'],
                                      'ip'        => $a['comment_author_IP'],
                                      'status'    => (empty($a['comment_approved']) || $a['comment_approved'] == '1') ? 'approved' : 'pending',
-                                     'subscribed'=> 'false',
                                      'body'      => $a['comment_content'],
                                      'type'      => 'NORMAL');
 
