@@ -13,3 +13,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'Wonach sollen die eingehenden Links geordnet werden? (Standard: Häufigkeit)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Datum');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Häufigkeit');
+@define('TOP_REFERRER', 'Top Referrer');
+@define('SHOWS_TOP_SITES', 'Zeigt die Top-Seiten, die auf das Blog linken');
+@define('TOP_EXITS', 'Top Exits');
+@define('SHOWS_TOP_EXIT', 'Zeigt die Top-Exit-Links des Blogs');

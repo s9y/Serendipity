@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH',   'Podľa čoho majú byť odkazy zoaďované? (Prednastavené: Poradie v texte)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY',        'Dátum');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT',  'Poradie v texte');
-
+@define('TOP_REFERRER',		'Top odkazujúce stránky');
+@define('SHOWS_TOP_SITES',		'Najčastejšie odkazujúce stránky na tento weblog');
+@define('TOP_EXITS',		'Top výstupy');
+@define('SHOWS_TOP_EXIT',		'Nejčastejšie stránky odkazované z tohto weblogu');

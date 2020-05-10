@@ -13,3 +13,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', '以何种顺序排列来源链接(默认：链入次数)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '日期');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', '链入次数');
+@define('TOP_REFERRER', '主要来源');
+@define('SHOWS_TOP_SITES', '显示连接到你的网站');
+@define('TOP_EXITS', '主要出源');
+@define('SHOWS_TOP_EXIT', '显示网站的主要出源');

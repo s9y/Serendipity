@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'Hvad skal refererende links sorteres efter? (Standard: antal links)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Dato');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Antal links');
-
+@define('TOP_REFERRER', 'Referencer');
+@define('SHOWS_TOP_SITES', 'Viser de sites som oftest linker til din blog');
+@define('TOP_EXITS', 'Udgangssider');
+@define('SHOWS_TOP_EXIT', 'Viser de udgangssider der er klikket flest gange på');

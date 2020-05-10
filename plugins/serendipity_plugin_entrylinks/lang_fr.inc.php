@@ -26,4 +26,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'D\'après quel critère les liens doivent-ils être classés? Par défaut: le nombre de liens.');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Par date');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Par nombre de liens');
-
+@define('TOP_REFERRER', 'Top des liens entrants');
+@define('SHOWS_TOP_SITES', 'Montrer le top des sites qui affichent un lien vers votre blog');
+@define('TOP_EXITS', 'Top des liens sortants');
+@define('SHOWS_TOP_EXIT', 'Montrer le top des liens de sites qui sortent de votre blog');

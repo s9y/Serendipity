@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'By which key should the referring links be ordered? (Default: number of links)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Date');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Number of links');
-
+@define('TOP_EXITS', 'Top Exits');
+@define('TOP_REFERRER', 'Top Referrers');
+@define('SHOWS_TOP_SITES', 'Shows top sites that linked to your blogs');
+@define('SHOWS_TOP_EXIT', 'Shows top exit links from your blogs');

@@ -216,7 +216,7 @@ function serveAuthorPage($matches) {
         header('HTTP/1.0 404 Not found');
         header('Status: 404 Not found');
     } else {
-        $serendipity['head_title']    = sprintf(ENTRIES_BY, $uInfo[0]['realname']);
+        $serendipity['head_title']    = sprintf(ENTRIES_FOR, $uInfo[0]['realname']);
         $serendipity['head_subtitle'] = $serendipity['blogTitle'];
     }
 

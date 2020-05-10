@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', '¿Con respecto a qué clave deben ser ordenados los enlaces referenciados? (Por defecto: número de enlaces)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Fecha');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Número de enlaces');
-
+@define('TOP_REFERRER', 'Sitios asociados');
+@define('SHOWS_TOP_SITES', 'Muestra los sitios que enlazan a tu weblog');
+@define('TOP_EXITS', 'Salidas');
+@define('SHOWS_TOP_EXIT', 'Muestra los enlaces de salida más frecuentes desde tu weblog');

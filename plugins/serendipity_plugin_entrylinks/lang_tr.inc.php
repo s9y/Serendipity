@@ -6,17 +6,20 @@
  *  First public version: lang_tr.inc.php
  */
 
-@define('PLUGIN_ENTRYLINKS_NAME', 'Yazı-Makale\lerin Web bağlantıları');
-@define('PLUGIN_ENTRYLINKS_BLAHBLAH', 'Tüm web bağlantıları makalede/yazıda başvuru adresi olarak gösterilsin');
-@define('PLUGIN_ENTRYLINKS_NEWWIN', 'Web bağlantıları yeni pencerede açılsın mı?');
-@define('PLUGIN_ENTRYLINKS_NEWWIN_BLAHBLAH', 'Web bağlantılarının yeni pencerede açılmasını istediğinize emin misiniz? (Öntanımlı: Şimdiki sayfanın üstüne açılsın)');
-@define('PLUGIN_ENTRYLINKS_REFERERS', 'İlgili web bağlantıları');
-@define('PLUGIN_ENTRYLINKS_WORDWRAP', 'Kelime kaydır');
-@define('PLUGIN_ENTRYLINKS_WORDWRAP_BLAHBLAH', 'Kaç adet kelimeye kadar kelime kaydırma uygulanmasın? (Öntanımlı: 30)');
-@define('PLUGIN_ENTRYLINKS_MAXREF', 'Eklenebilecek en çok ilgili web bağlantısı sayısı');
-@define('PLUGIN_ENTRYLINKS_MAXREF_BLAHBLAH', 'Konuyla ilgili en çok kaç adet web bağlantısı gösterilsin? (Öntanımlı: 15)');
-@define('PLUGIN_ENTRYLINKS_ORDERBY', 'İlgili web bağlantılarını sırala');
-@define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'İlgili web bağlantılarının sıralanmasında hangi anahtar ifade kullanılsın? (Öntanımlı: Web Bağlantılarının sayısı)');
+@define('PLUGIN_ENTRYLINKS_NAME', 'YazÃ½-Makale\lerin Web baÃ°lantÃ½larÃ½');
+@define('PLUGIN_ENTRYLINKS_BLAHBLAH', 'TÃ¼m web baÃ°lantÃ½larÃ½ makalede/yazÃ½da baÃ¾vuru adresi olarak gÃ¶sterilsin');
+@define('PLUGIN_ENTRYLINKS_NEWWIN', 'Web baÃ°lantÃ½larÃ½ yeni pencerede aÃ§Ã½lsÃ½n mÃ½?');
+@define('PLUGIN_ENTRYLINKS_NEWWIN_BLAHBLAH', 'Web baÃ°lantÃ½larÃ½nÃ½n yeni pencerede aÃ§Ã½lmasÃ½nÃ½ istediÃ°inize emin misiniz? (Ã–ntanÃ½mlÃ½: Ãimdiki sayfanÃ½n Ã¼stÃ¼ne aÃ§Ã½lsÃ½n)');
+@define('PLUGIN_ENTRYLINKS_REFERERS', 'Ãlgili web baÃ°lantÃ½larÃ½');
+@define('PLUGIN_ENTRYLINKS_WORDWRAP', 'Kelime kaydÃ½r');
+@define('PLUGIN_ENTRYLINKS_WORDWRAP_BLAHBLAH', 'KaÃ§ adet kelimeye kadar kelime kaydÃ½rma uygulanmasÃ½n? (Ã–ntanÃ½mlÃ½: 30)');
+@define('PLUGIN_ENTRYLINKS_MAXREF', 'Eklenebilecek en Ã§ok ilgili web baÃ°lantÃ½sÃ½ sayÃ½sÃ½');
+@define('PLUGIN_ENTRYLINKS_MAXREF_BLAHBLAH', 'Konuyla ilgili en Ã§ok kaÃ§ adet web baÃ°lantÃ½sÃ½ gÃ¶sterilsin? (Ã–ntanÃ½mlÃ½: 15)');
+@define('PLUGIN_ENTRYLINKS_ORDERBY', 'Ãlgili web baÃ°lantÃ½larÃ½nÃ½ sÃ½rala');
+@define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'Ãlgili web baÃ°lantÃ½larÃ½nÃ½n sÃ½ralanmasÃ½nda hangi anahtar ifade kullanÃ½lsÃ½n? (Ã–ntanÃ½mlÃ½: Web BaÃ°lantÃ½larÃ½nÃ½n sayÃ½sÃ½)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Tarih');
-@define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Web Bağlantılarının sayısı');
-
+@define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Web BaÃ°lantÃ½larÃ½nÃ½n sayÃ½sÃ½');
+@define('TOP_REFERRER', 'En Ã§ok ziyaretÃ§i gÃ¶nderenler');
+@define('SHOWS_TOP_SITES', 'Siteye en Ã§ok baÄŸlantÄ± verenler');
+@define('TOP_EXITS', 'Siteden en Ã§ok Ã§Ä±kÄ±ÅŸ yapanlar');
+@define('SHOWS_TOP_EXIT', 'Siteden en Ã§ok Ã§Ä±kÄ±ÅŸ yapanlarÄ±n linkleri');

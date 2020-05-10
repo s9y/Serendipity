@@ -106,7 +106,7 @@
                 </select>
             </div>
         {else}
-            <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
+            <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.USERGROUPS_FORBIDDEN_ENABLE_DESC}</span>
         {/if}
             <div class="form_buttons">
                 {if $edit}

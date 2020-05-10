@@ -1,0 +1,6 @@
+<?php
+
+@define('TOP_REFERRER', 'ÃßËÑ ÇáÒíÇÑÇÊ ãä:');
+@define('SHOWS_TOP_SITES', 'ÃÚÑÖ ÇÝÖá ÇáãæÇÞÚ ÇáãÑÊÈØÉ ÈãÏæäÊß');
+@define('TOP_EXITS', 'ÇÚáì ÇáãÔÇÑßÇÊ');
+@define('SHOWS_TOP_EXIT', 'ÃÚÑÖ ÇÚáì ÇáÑæÇÈØ íã ÇáÎÑæÌ ãä ãÏæäÊß Åáíå');

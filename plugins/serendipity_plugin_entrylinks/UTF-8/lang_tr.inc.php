@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'İlgili web bağlantılarının sıralanmasında hangi anahtar ifade kullanılsın? (Öntanımlı: Web Bağlantılarının sayısı)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Tarih');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Web Bağlantılarının sayısı');
-
+@define('TOP_REFERRER', 'En çok ziyaretçi gönderenler');
+@define('SHOWS_TOP_SITES', 'Siteye en çok bağlantı verenler');
+@define('TOP_EXITS', 'Siteden en çok çıkış yapanlar');
+@define('SHOWS_TOP_EXIT', 'Siteden en çok çıkış yapanların linkleri');
