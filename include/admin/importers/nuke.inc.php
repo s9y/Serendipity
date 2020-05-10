@@ -270,7 +270,6 @@ class Serendipity_Import_nuke extends Serendipity_Import {
                                      'ip'        => '',
                                      'status'    => 'approved',
                                      'body'      => $a['comment_content'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));

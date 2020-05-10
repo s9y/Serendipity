@@ -221,7 +221,6 @@ class Serendipity_Import_Nucleus extends Serendipity_Import {
                                      'ip'        => $a['cip'],
                                      'status'    => 'approved',
                                      'body'      => $a['cbody'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));
