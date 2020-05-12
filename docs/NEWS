@@ -6,9 +6,98 @@ Version 2.4-alpha3 (subscription branch)
             add new subscriptions table
             delete subscribed colum from comments table
             move comment subscriptions to subscriptions table
+            init new option settings
         files:
             change rewrite rules for PAT_UNSUBSCRIBE and PAT_SUBSCRIBE
             in .htaccess template files
+   * removed the reference to the subscribed column of the comments table
+     in admin/importers where possible, changed subscriptions into new
+     subscription table when possible
+   * adding a completely new written subscription feature into the core
+     the original comment subscriptions are moved to a new subscriptions
+     table in the database. There are now four types of subscriptions
+     possible: entry = existing comment subscription; author, category
+     and blog. Regarding these types, subscribed readers will get an
+     email when the mailSubscribers() function is triggered in 
+     serendipity_upertEntry. (Feature request #692)
+   * re-routed the previous comment subscription and unsubscribe functions
+     according to the new table. The original permalink for unsubscribe
+     is still working to not kill the existing links, same for the optin
+     link in comment.php. The open optin requests are also moved to
+     the new subscription table. Because the complete routing is new,
+     that should take care of issue #673
+   * added a new permalink /subscribe which now leads to a new subscription
+     page, or displays and processes the optin with an confirmation message.
+     According to the options of the link, the reader can subscribe to
+     either the whole blog, category or author with or without optin
+     as given in the configuration.
+   * changed the existing /unsubscribe permalink which now shows an
+     unsubscribe page on which the reader sees all his subscriptions 
+     and where he can unsubscribe for each of them. To get on this page,
+     he has to use the link included in every mail which has an uniqID
+     to prevent abuse. By clicking on the unsubscribe links on this page,
+     the same page process that unsubscribe action, protected by token
+     and print a confirmation message.
+   * added a new sidebar plugin with an email-subscribe button, added 
+     optional buttons in the authors and category plugins which leads
+     to the subscription page
+   * expanded the serendipity_sendMail() function to be able to send
+     Html emails as multipart/alternative with a pure-text fallback. 
+   * added a mailSubscribers() function which sends an email to the users
+     in the subscriptions table. This can be as pure-text or HTML,
+     with only the title or title and body. The HTML output is generated
+     by an Smarty template /template/2k11/email.tpl. Because of the 
+     restrictions of html email, only a few classes will work, given in 
+     /templates/2k11/emailhead.txt as head and style part of the html. 
+     To produce the pure-text output, the html2text library was needed.
+   * added a new Subscriptions admin page in the backend. Similar to the
+     comments page, all the subscriptions can be shown, sorted, filtered
+     and deleted. This is neccessary to reduce the amount of bounce-
+     messages. The subscription feature will probably not work with
+     tens of thousands of subscribers because not every provider will 
+     accept that many emails at once, but if the user takes care of 
+     the bounced mails by deleting the subscriptions, it should work for
+     a reasonable amount of subscribers. This fixes issue #490
+   * added a new button 'subscribe to comments' on the commentform
+     template. Now it is possible to subscribe to comments without writing
+     one. Fixes issue #531
+   * added a new permission 'adminSubscriptions' to manage the subscriptions
+   * adapted the 'allowSubscriptions' and 'allowSubscriptionsOptIn' 
+     settings to the new feature, the string has changed and needs new
+     translations
+   * added new settings 'subscribeChunk' to specify how much of the 
+     new article to send and 'sendSubscriptionHtml' to switch between
+     text and html mail
+   * re-routed the subscribe and unsubscribe notifications to 
+     action = 'custom', removed DATA_UNSUBSCRIBED from entries.tpl files
+   * extended the spamblock plugin to block subscription attempts 
+     without reading something (timeout default 60 seconds,
+     configurable through options)
+   * changes in core functions: 
+     * removed serendipity_commentSubscriptionConfirm($hash), 
+       is now replaced with serendipity_subscriptionConfirm($hash)
+     * renamed serendipity_mailSubscribers() 
+        to serendipity_mailCommentSubscribers()
+     * deleted serendipity_cancelSubscription($email, $entry_id),
+       replaced with a new serendipity_cancelSubscription($token) function
+     all references to these functions were changed accordingly
+
+   This is the first draft of the feature, almost guaranteed to have bugs.
+   The most obvious are by converting the entries to html and pure-text
+   emails (html2text doesn't make ordered lists for example). Also if you have
+   both RSS and Subscribe buttons active, the sidebar looks ugly. I would
+   recommend to make a leading paragraph showing the category or author info
+   and the subscribe / feed buttons if a category or author is shown.
+   There were also some references to the deleted subscribe column in 
+   additional plugins which get also a feature branch
+   There is also the question of multilingual: To make it really good,
+   the language of the subscribers should be stored and the mail should
+   be sent in their language and only if their language version of a new
+   article is published. This goes along with an improvement of the 
+   cache for multilingual which is atm mostly disabled.
+   The new template pages also need to be transcripted to the other
+   templates, atm everything is only working for the 2k11 theme.
+   
 
 Version 2.4-alpha2 ()
 ------------------------------------------------------------------------
