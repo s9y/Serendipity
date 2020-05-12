@@ -292,10 +292,6 @@
         {$entry.plugin_display_dat}
 
         {if $is_single_entry and not $use_popups and not $is_preview}
-            {if $CONST.DATA_UNSUBSCRIBED}
-                <div class="serendipity_center serendipity_msg_notice">{$CONST.DATA_UNSUBSCRIBED|@sprintf:$CONST.UNSUBSCRIBE_OK}</div>
-            {/if}
-
             {if $CONST.DATA_TRACKBACK_DELETED}
                 <div class="serendipity_center serendipity_msg_notice">{$CONST.DATA_TRACKBACK_DELETED|@sprintf:$CONST.TRACKBACK_DELETED}</div>
             {/if}
