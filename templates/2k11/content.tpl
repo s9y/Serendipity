@@ -5,3 +5,5 @@
 {/if}
 {$ENTRIES}
 {$ARCHIVES}
+{$SUBSCRIBE}
+{$UNSUBSCRIBE}

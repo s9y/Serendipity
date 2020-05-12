@@ -150,13 +150,6 @@
         </rdf:RDF>
         -->
     {if $is_single_entry and not $is_preview}
-        {if $CONST.DATA_UNSUBSCRIBED}
-            <div id="search-block" class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-info fa-stack-1x"></i></span> {$CONST.DATA_UNSUBSCRIBED|@sprintf:$CONST.UNSUBSCRIBE_OK}</p>
-                </div>
-            </div>
-        {/if}
         {if $CONST.DATA_TRACKBACK_DELETED}
             <div id="search-block" class="row">
                 <div class="col-md-10 col-md-offset-1">        

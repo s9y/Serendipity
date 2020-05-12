@@ -62,9 +62,6 @@
         -->
 
     {if $is_single_entry and not $is_preview}
-        {if $CONST.DATA_UNSUBSCRIBED}
-        <p class="serendipity_msg_notice">{$CONST.DATA_UNSUBSCRIBED|@sprintf:$CONST.UNSUBSCRIBE_OK}</p>
-        {/if}
         {if $CONST.DATA_TRACKBACK_DELETED}
         <p class="serendipity_msg_notice">{$CONST.DATA_TRACKBACK_DELETED|@sprintf:$CONST.TRACKBACK_DELETED}</p>
         {/if}
