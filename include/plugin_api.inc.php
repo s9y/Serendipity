@@ -35,6 +35,7 @@ define('BUNDLED_PLUGINS',
     'serendipity_plugin_plug',
     'serendipity_plugin_recententries',
     'serendipity_plugin_remoterss',
+    'serendipity_plugin_subscribe',
     'serendipity_plugin_superuser',
     'serendipity_plugin_syndication',
     'serendipity_plugin_templatedropdown'
@@ -172,6 +173,7 @@ class serendipity_plugin_api
         serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_archives');
         serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_categories');
         serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_syndication');
+        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_subscribe');
         serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_superuser');
         serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_plug');
 
