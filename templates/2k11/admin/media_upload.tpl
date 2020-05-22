@@ -1,5 +1,9 @@
 <h2>{$CONST.ADD_MEDIA}</h2>
 
+{foreach $messages as $message}
+    {$message}
+{/foreach}
+
 <form id="uploadform" action="?{$media.extraParems}" method="POST" enctype="multipart/form-data">
 {if $media.max_file_size}
     <input name="MAX_FILE_SIZE" type="hidden" value="{$max_file_size}">
