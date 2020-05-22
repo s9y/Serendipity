@@ -18,7 +18,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team, Stephan Brunker');
-        $propbag->add('version',       '2.21.6');
+        $propbag->add('version',       '2.21.7');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -772,7 +772,7 @@ p.wl_notopbottom {
                 // concatenate closing tag if it's standard html
                 if (in_array($tag, $this->isolation_block_elements) )
                 {
-                    $content .= $textarray[$i];
+                    $content .= $textarray[$i] . "\n";
                 }
             }
             //closing blocktag or p parent - e.g. </table> or </td>
@@ -786,11 +786,11 @@ p.wl_notopbottom {
                         $content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start))) . "\n";
                     } else
                     {
-                        $content .= implode(array_slice($textarray,$start,$i-$start));
+                        $content .= implode(array_slice($textarray,$start,$i-$start)) . "\n";
                     }
                 }
                 //closing tag
-                $content .= $textarray[$i]; 
+                $content .= $textarray[$i] . "\n"; 
 
                 $start = $i+1;
                 array_shift($tagstack);
@@ -902,7 +902,7 @@ p.wl_notopbottom {
                         $bufferhastext = false;
 
                         //append textline
-                        $content .= $textline[$j];
+                        $content .= $textline[$j] . "\n";
 
                         //close open tags
                         foreach($tagstack as $ins_tag) { $content .= $this->html_end_tag($this->extract_tag($ins_tag)); }
