@@ -139,6 +139,8 @@ switch($serendipity['GET']['adminAction']) {
                     $entry['categories'][] = serendipity_fetchCategoryInfo($catid);
                 }
 
+                serendipity_plugin_api::hook_event('multilingual_strip_langs', $entry['categories'], 'category_name');
+
                 if (count($entry['categories']) < 1) {
                     unset($entry['categories']);
                 }
