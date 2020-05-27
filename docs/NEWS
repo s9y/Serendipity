@@ -1,5 +1,7 @@
 Version 2.4-alpha2 ()
 ------------------------------------------------------------------------
+   * db_schema_import: change {BOOLEAN} from 'null default true'
+     to simply 'boolean', user can add additional conditions
    * Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, 
      enabling full unicode input.
    * added type 'media' to configuration types,

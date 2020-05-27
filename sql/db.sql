@@ -76,7 +76,7 @@ create table {PREFIX}comments (
   ip varchar(64) default null,
   body {TEXT},
   type varchar(100) default 'regular',
-  subscribed {BOOLEAN},
+  subscribed {BOOLEAN} not null default 'true',
   status varchar(50) not null,
   referer varchar(200) default null
 ) {UTF_8};
@@ -101,10 +101,10 @@ create table {PREFIX}entries (
   exflag int(1) default null,
   author varchar(20) default null,
   authorid int(11) default null,
-  isdraft {BOOLEAN},
-  allow_comments {BOOLEAN},
+  isdraft {BOOLEAN} not null default 'true',
+  allow_comments {BOOLEAN} not null default 'true',
   last_modified int(10) {UNSIGNED} default null,
-  moderate_comments {BOOLEAN}
+  moderate_comments {BOOLEAN} not null default 'true'
 ) {UTF_8};
 
 # FULLTEXT_MYSQL is ignored on all Non-MySQL setups (SQLite, PostgreSQL)

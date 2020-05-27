@@ -336,7 +336,7 @@ function serendipity_db_probe($hash, &$errs)
 function serendipity_db_schema_import($query)
 {
     static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}', '{FULLTEXT}', '{BOOLEAN}', '{UTF_8}', '{TEXT}');
-    static $replace = array('INTEGER', 'PRIMARY KEY', '', '', 'BOOLEAN NOT NULL', '', 'LONGTEXT');
+    static $replace = array('INTEGER', 'PRIMARY KEY', '', '', 'BOOLEAN', '', 'LONGTEXT');
 
     if (stristr($query, '{FULLTEXT_MYSQL}')) {
         return true;
