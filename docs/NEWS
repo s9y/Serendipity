@@ -1,3 +1,9 @@
+   * Make it possible for plugins to let the core skip the check
+     whether trackbacks are already sent, with 
+     $serendipity['skip_trackback_check']
+   * Add the original image to the response images srcset when
+     the original image is small, to avoid upscaling
+
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
