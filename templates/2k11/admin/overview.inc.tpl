@@ -2,6 +2,10 @@
         <h2>{$CONST.WELCOME_BACK} {$username|escape}</h2>
         <a href="#s9y_links" class="button_link toggle_links"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.FURTHER_LINKS}</span></a>
     </div>
+    {if NOT $db_health}
+        <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> Error, database not writeable</span>
+        <hr class="separator">
+    {/if}
 {$backend_frontpage_display}
     <div id="dashboard">
     {if $published}

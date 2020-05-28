@@ -129,6 +129,16 @@ if ($entriesAmount < (int)$serendipity['dashboardEntriesLimit']) {
     }
 }
 
+$dbHealth = true;
+if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite') {
+    // we check that the database is writeable, because that's otherwise hard to detect for users
+    $dbFile = $serendipity['serendipityPath'] . $serendipity['dbName'] . '.db';
+    $dbHealth = is_writable($dbFile);
+    
+}
+
+$data['db_health'] = $dbHealth;
+
 $data['entries'] = $entries;
 
 $data['urltoken'] = serendipity_setFormToken('url');
