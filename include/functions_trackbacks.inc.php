@@ -298,7 +298,7 @@ function serendipity_reference_autodiscover($loc, $url, $author, $title, $text) 
 
     $fContent = $res->getBody();
     serendipity_request_end();
-
+    
     if (strlen($fContent) != 0) {
         $trackback_result = serendipity_trackback_autodiscover($fContent, $parsed_loc, $url, $author, $title, $text, $loc);
         if ($trackback_result == false) {
@@ -805,14 +805,16 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $names[$i] = $locations[$i];
         }
 
-        if ($row[0] > 0 && isset($saved_references[$locations[$i] . $names[$i]])) {
-            if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Found references for $id, skipping rest");
-            continue;
+        if (!isset($serendipity['skip_trackback_check']) || !$serendipity['skip_trackback_check']) {
+            if ($row[0] > 0 && isset($saved_references[$locations[$i] . $names[$i]])) {
+                if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Found references for $id, skipping rest");
+                continue;
+            }
         }
 
         if (!isset($serendipity['noautodiscovery']) || !$serendipity['noautodiscovery']) {
             if (!$dry_run) {
-                if (!isset($saved_urls[$locations[$i]])){
+                if (!isset($saved_urls[$locations[$i]]) || (isset($serendipity['skip_trackback_check']) && $serendipity['skip_trackback_check'])) {
                     if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Enabling autodiscovery");
                     serendipity_reference_autodiscover($locations[$i], $url, $author, $title, serendipity_trackback_excerpt($text));
                 } else {
