@@ -61,8 +61,8 @@
                     {if $media.manage AND $media.multiperm}
 
                     <div class="form_check">
-                        <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
-                        <label for="multidelete_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
+                        <input id="multicheck_image{$file.id}" class="multicheck" name="serendipity[multicheck][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
+                        <label for="multicheck_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                     </div>
                     {else}
                         {if NOT $media.manage}

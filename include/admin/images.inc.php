@@ -17,7 +17,7 @@ if (!is_object($serendipity['smarty'])) {
 // No echo output here, before the switch, since that matters renaming alerts!
 
 // unset adminAction type to default, if an image was bulkmoved and the origin page reloaded
-if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'multidelete') {
+if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'multicheck') {
     unset($serendipity['GET']['adminAction']);
 }
 // Listens on toggle_dir STRICT to list items per directory, or include all sub directory items
@@ -31,10 +31,10 @@ if (!empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
 $messages = array();
 
 // submitted media_upload.tpl: check for empty file field and redirect back to media_upload
-if ( $serendipity['GET']['adminAction'] == 'add' ) {
-    $serendipity['POST']['imageurl'] = serendipity_specialchars($serendipity['POST']['imageurl']);
+if ( $serendipity['GET']['adminAction'] == 'add' && !$serendipity['POST']['adminSubAction'] == 'properties') {
 
-    if (empty($serendipity['POST']['imageurl'])) {
+    if ((empty($serendipity['POST']['imageurl']) || $serendipity['POST']['imageurl'] == 'http://' )
+            && empty($_FILES['serendipity']['name']['userfile'][1])) {
         $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span>' . NO_FILE_SELECTED . "</span>\n";
         $serendipity['GET']['adminAction'] = 'addSelect';
     }
@@ -129,22 +129,21 @@ switch ($serendipity['GET']['adminAction']) {
         $data['newLoc']   = $newLoc;
         break;
 
-    case 'multidelete':
+    case 'multicheck':
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDirectories')) {
             return; // blank content page, but default token check parameter is presenting a XSRF message when false
         }
-        if (!is_array($serendipity['POST']['multiDelete']) && isset($_POST['toggle_move'])) {
+
+        // empty selection
+        if (!is_array($serendipity['POST']['multicheck'])) {
             echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
-        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && (! isset($serendipity['POST']['newDir'])) && isset($_POST['toggle_move'])) {
-            echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_DIR, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
-            break;
-        }
+        
         // case bulk multimove (leave the fake oldDir being send as an empty dir)
         if (!empty($serendipity['POST']['newDir'])) {
-            $multiMoveImages = $serendipity['POST']['multiDelete']; // The 'multiDelete' key name should better be renamed to 'multiCheck', but this would need to change 2k11/admin/serendipity_editor.js, images.inc.tpl, media_items.tpl, media_pane.tpl and this file
-            unset($serendipity['POST']['multiDelete']);
+            $multiMoveImages = $serendipity['POST']['multicheck'];
+            unset($serendipity['POST']['multicheck']);
 
             $nDir = serendipity_specialchars(serendipity_dirSlash('end', (string)$serendipity['POST']['newDir'])); // relative to Uploads/
 
@@ -170,7 +169,7 @@ switch ($serendipity['GET']['adminAction']) {
         $ids = '';
         $data['rip_image']        = array();
         $data['case_multidelete'] = true;
-        foreach($serendipity['POST']['multiDelete'] AS $idx => $id) {
+        foreach($serendipity['POST']['multicheck'] AS $idx => $id) {
             $ids .= (int)$id . ',';
             $image = serendipity_fetchImageFromDatabase($id);
             $data['rip_image'][] = sprintf(DELETE_SURE, $image['id'] . ' - ' . serendipity_specialchars($image['realname']));
@@ -226,9 +225,10 @@ switch ($serendipity['GET']['adminAction']) {
 
         $new_media = array();
 
+        $serendipity['POST']['imageurl'] = serendipity_specialchars($serendipity['POST']['imageurl']);
 
         // First find out whether to fetch a hotlink file or accept an upload
-        if ($serendipity['POST']['imageurl'] != 'http://') {
+        if ($serendipity['POST']['imageurl'] != '' && $serendipity['POST']['imageurl'] != 'http://') {
             if (!empty($serendipity['POST']['target_filename'][2])) {
                 // Faked hidden form 2 when submitting with JavaScript
                 $tfile   = $serendipity['POST']['target_filename'][2];

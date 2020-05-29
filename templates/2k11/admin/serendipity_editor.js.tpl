@@ -732,6 +732,16 @@
             }
             $box.trigger('click');
         });
+        $('#formMultiCheck .multicheck').each(function() {
+            var $box = $(this);
+            var boxId = $box.attr('id');
+            if($box.is(':checked')) {
+                $(boxId).prop('checked', false);
+            } else {
+                $(boxId).prop('checked', true);
+            }
+            $box.trigger('click');
+        });
     }
 
     // Highlight/dehighlight elements in lists
@@ -1384,10 +1394,10 @@ $(function() {
     });
 
     // Selection for multidelete
-    $('.multidelete, .multiinsert').click(function() {
+    $('.multidelete, .multiinsert, .multicheck').click(function() {
         var $el = $(this);
         serendipity.highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
-        var selectionAmount = $('.multidelete:checked, .multiinsert:checked').length;
+        var selectionAmount = $('.multidelete:checked, .multiinsert:checked, .multiselect:checked').length;
         if (selectionAmount > 0) {
             $('#media_galleryinsert').fadeIn();
         } else {
@@ -1403,7 +1413,7 @@ $(function() {
     // When clicking the 'Insert all' button, check whether only one or multiple
     // images are selected
     $('#media_galleryinsert .image_insert').on('click', function(e) {
-        var selectionAmount = $('.multidelete:checked, .multiinsert:checked').length;
+        var selectionAmount = $('.multidelete:checked, .multiinsert:checked, .multicheck:checked').length;
         if (selectionAmount == 0) {
             e.preventDefault();
             return false;
@@ -1412,7 +1422,7 @@ $(function() {
         // Actually do a single insert
         if (selectionAmount == 1) {
             e.preventDefault();
-            var actualTargetElement = $('.multidelete:checked, .multiinsert:checked').closest('.media_file').find('.media_file_preview a').first();
+            var actualTargetElement = $('.multidelete:checked, .multiinsert:checked, .multicheck:checked').closest('.media_file').find('.media_file_preview a').first();
             // This below is a hack. Triggering actualTargetElement.click() does not work. Probably because MFP overrides click events within a modal popup.
             // So we need to do something dirty and directly access the location href. Don't tell my mom.
             location.href = actualTargetElement.attr('href');
