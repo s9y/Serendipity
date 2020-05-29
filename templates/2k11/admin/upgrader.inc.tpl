@@ -118,6 +118,10 @@
         {if $showWritableNote}
             <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</span>
         {/if}
+
+        <h4>Plugins</h4>
+        {$upgraderResultDiagnosePlugins[0]}
+
         {if ($errorCount > 0)}
             <span class="msg_error"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.PROBLEM_DIAGNOSTIC}</span>
 

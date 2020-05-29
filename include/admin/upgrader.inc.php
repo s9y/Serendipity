@@ -453,7 +453,13 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
         }
     }
 
-    $data['showWritableNote'] = $showWritableNote;
+    $data['upgraderResultDiagnosePlugins'] = array();
+    serendipity_plugin_api::hook_event('backend_plugins_upgradecount', $pluginUpdates);
+    if (empty($pluginUpdates)) {
+        $data['upgraderResultDiagnosePlugins'][] = serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, 'Plugins current');
+    } else {
+        $data['upgraderResultDiagnosePlugins'][] = serendipity_upgraderResultDiagnose(S9Y_U_WARNING, 'Plugin updates available');
+    }
 
     $data['errorCount'] = $errorCount;
     if ($errorCount < 1) {
