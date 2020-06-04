@@ -65,7 +65,7 @@
                         <label for="multicheck_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                     </div>
                     {else}
-                        {if NOT $media.manage}
+                        {if NOT $media.manage && $media.multiselect}
                             <div class="form_check">
                                 <input id="multiinsert_image{$file.id}" class="multiinsert" name="serendipity[fids][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
                                 <label for="multiinsert_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>

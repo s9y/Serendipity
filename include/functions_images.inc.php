@@ -3242,6 +3242,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'nr_files'          => count($file),
         'keywords'          => explode(';', $serendipity['mediaKeywords']),
         'thumbSize'         => $serendipity['thumbSize'],
+        'multiselect'       => isset($serendipity['GET']['multiselect']) ? serendipity_db_bool($serendipity['GET']['multiselect']) : true,
         'sortParams'        => array('perpage', 'order', 'ordermode')
     );
 

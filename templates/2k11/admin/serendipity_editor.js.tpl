@@ -168,7 +168,7 @@
 
     // Opens media db image selection in new window
     serendipity.choose_media = function(id) {
-        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[showUpload]=true&serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true');
+        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[multiselect]=false&serendipity[showUpload]=true&serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true');
     }
 
     // "Transfer" value from media db popup to form element, used for example for selecting a category-icon
@@ -1159,7 +1159,7 @@ $(function() {
     });
 
     $('.wrap_insmedia').click(function() {
-        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[showUpload]=true&serendipity[textarea]=' + $(this).attr('data-tarea'));
+        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[multiselect]=true&serendipity[showUpload]=true&serendipity[textarea]=' + $(this).attr('data-tarea'));
     });
 
     // Entry metadata
