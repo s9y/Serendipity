@@ -363,9 +363,9 @@ function serendipity_walkRecursive($ary, $child_name = 'id', $parent_name = 'par
 function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
     global $serendipity;
 
-    $where = '';
+    $where = 'WHERE 1';
     if (!empty($user)) {
-        $where = "WHERE a.authorid = '" . (int)$user ."'";
+        $where .= " AND a.authorid = '" . (int)$user ."'";
     }
 
     $query_select   = '';
@@ -414,7 +414,7 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
         if ($group === 'hidden') {
             $query_join .= "LEFT OUTER JOIN {$serendipity['dbPrefix']}groupconfig AS gc
                                          ON (gc.property = 'hiddenGroup' AND gc.id = ag.groupid AND gc.value = 'true')";
-            $where .= " AND gc.id IS NULL ";
+            $where .= ' AND gc.id IS NULL';
         } elseif (is_array($group)) {
             foreach($group AS $idx => $groupid) {
                 $group[$idx] = (int)$groupid;
@@ -423,6 +423,8 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
         } else {
             $group_sql = (int)$group;
         }
+
+        if ($group_sql) $where .= ' AND ' . "g.id IN ($group_sql)";
 
         $querystring = "SELECT $query_distinct
                                a.authorid,
@@ -442,7 +444,6 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
                LEFT OUTER JOIN {$serendipity['dbPrefix']}groups AS g
                             ON ag.groupid  = g.id
                                $query_join
-                         WHERE " . ($group_sql ? "g.id IN ($group_sql)" : '1=1') . "
                                $where
                                $query_group
                       ORDER BY a.realname ASC";
