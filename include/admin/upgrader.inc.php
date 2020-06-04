@@ -286,6 +286,11 @@ $tasks = array(array('version'   => '0.5.1',
                      'title'     => 'add subscription table',
                      'desc'      => 'adds a new subscriptions table and copy the subscriptions from the comments table'),
 
+               array('version'   => '2.4-alpha4',
+                     'function'  => 'serendipity_upgrader_deleteCommentTokens',
+                     'title'     => 'rerouting comment actions',
+                     'desc'      => 'delete comment tokens'),
+
 );
 
 /* Fetch SQL files which needs to be run */

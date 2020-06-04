@@ -77,18 +77,6 @@
         </rdf:RDF>
         -->
     {if $is_single_entry and not $is_preview}
-        {if $CONST.DATA_TRACKBACK_DELETED}
-            <p class="alert-info"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span> {$CONST.DATA_TRACKBACK_DELETED|@sprintf:$CONST.TRACKBACK_DELETED}</p>
-        {/if}
-        {if $CONST.DATA_TRACKBACK_APPROVED}
-            <p class="alert-success"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-check fa-stack-1x"></i></span> {$CONST.DATA_TRACKBACK_APPROVED|@sprintf:$CONST.TRACKBACK_APPROVED}</p>
-        {/if}
-        {if $CONST.DATA_COMMENT_DELETED}
-            <p class="alert-info"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span> {$CONST.DATA_COMMENT_DELETED|@sprintf:$CONST.COMMENT_DELETED}</p>
-        {/if}
-        {if $CONST.DATA_COMMENT_APPROVED}
-            <p class="alert-success"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-check fa-stack-1x"></i></span> {$CONST.DATA_COMMENT_APPROVED|@sprintf:$CONST.COMMENT_APPROVED}</p>
-        {/if}
         <a id="feedback"></a>
         {if $entry.trackbacks != 0}
             <section id="trackbacks" class="serendipity_comments serendipity_section_trackbacks">

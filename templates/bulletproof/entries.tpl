@@ -292,22 +292,6 @@
         {$entry.plugin_display_dat}
 
         {if $is_single_entry and not $use_popups and not $is_preview}
-            {if $CONST.DATA_TRACKBACK_DELETED}
-                <div class="serendipity_center serendipity_msg_notice">{$CONST.DATA_TRACKBACK_DELETED|@sprintf:$CONST.TRACKBACK_DELETED}</div>
-            {/if}
-
-            {if $CONST.DATA_TRACKBACK_APPROVED}
-                <div class="serendipity_center serendipity_msg_notice">{$CONST.DATA_TRACKBACK_APPROVED|@sprintf:$CONST.TRACKBACK_APPROVED}</div>
-            {/if}
-
-            {if $CONST.DATA_COMMENT_DELETED}
-                <div class="serendipity_center serendipity_msg_notice">{$CONST.DATA_COMMENT_DELETED|@sprintf:$CONST.COMMENT_DELETED}</div>
-            {/if}
-
-            {if $CONST.DATA_COMMENT_APPROVED}
-                <div class="serendipity_center serendipity_msg_notice">{$CONST.DATA_COMMENT_APPROVED|@sprintf:$CONST.COMMENT_APPROVED}</div>
-            {/if}
-
             <div class="serendipity_comments serendipity_section_trackbacks">
                 <a id="trackbacks"></a>
                 <div class="serendipity_commentsTitle">{$CONST.TRACKBACKS}</div>

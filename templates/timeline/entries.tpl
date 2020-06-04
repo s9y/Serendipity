@@ -150,34 +150,6 @@
         </rdf:RDF>
         -->
     {if $is_single_entry and not $is_preview}
-        {if $CONST.DATA_TRACKBACK_DELETED}
-            <div id="search-block" class="row">
-                <div class="col-md-10 col-md-offset-1">        
-                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-info fa-stack-1x"></i></span> {$CONST.DATA_TRACKBACK_DELETED|@sprintf:$CONST.TRACKBACK_DELETED}</p>
-                </div>
-            </div>
-        {/if}
-        {if $CONST.DATA_TRACKBACK_APPROVED}
-            <div id="search-block" class="row">
-                <div class="col-md-10 col-md-offset-1">        
-                    <p class="alert alert-success"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-check fa-stack-1x"></i></span> {$CONST.DATA_TRACKBACK_APPROVED|@sprintf:$CONST.TRACKBACK_APPROVED}</p>
-                </div>
-            </div>
-        {/if}
-        {if $CONST.DATA_COMMENT_DELETED}
-            <div id="search-block" class="row">
-                <div class="col-md-10 col-md-offset-1">        
-                    <p class="alert alert-info"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-info fa-stack-1x"></i></span> {$CONST.DATA_COMMENT_DELETED|@sprintf:$CONST.COMMENT_DELETED}</p>
-                </div>
-            </div>
-        {/if}
-        {if $CONST.DATA_COMMENT_APPROVED}
-            <div id="search-block" class="row">
-                <div class="col-md-10 col-md-offset-1">        
-                    <p class="alert alert-success"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-check fa-stack-1x"></i></span> {$CONST.DATA_COMMENT_APPROVED|@sprintf:$CONST.COMMENT_APPROVED}</p>
-                </div>
-            </div>
-        {/if}
         <a id="feedback"></a>
         {if $entry.trackbacks != 0}
             <section id="trackbacks" class="serendipity_comments serendipity_section_trackbacks">

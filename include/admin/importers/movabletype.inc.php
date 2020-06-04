@@ -455,7 +455,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                         $comment['entry_id'] = $r;
                         if ($rc = serendipity_db_insert('comments', $comment)) {
                             $cid = serendipity_db_insert_id('comments', 'id');
-                            serendipity_approveComment($cid, $entry['id'], true);
+                            serendipity_approveComment($cid, true);
                         } else {
                             echo '<div class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $rc . '</div>';
                         }

@@ -313,7 +313,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                     serendipity_db_insert('comments', $s9y_comment);
                     $cid = serendipity_db_insert_id('comments', 'id');
                     if ($s9y_comment['status'] == 'approved') {
-                        serendipity_approveComment($cid, $id, true);
+                        serendipity_approveComment($cid, true);
                     }
                 }
                 $s9y_cid[$c_id] = $cid;

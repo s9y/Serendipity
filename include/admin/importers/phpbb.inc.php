@@ -290,7 +290,7 @@ class Serendipity_Import_phpbb extends Serendipity_Import {
 
                 serendipity_db_insert('comments', $this->strtrRecursive($comment));
                 $cid = serendipity_db_insert_id('comments', 'id');
-                serendipity_approveComment($cid, $entries[$x]['entryid'], true);
+                serendipity_approveComment($cid, true);
             }
         }
 

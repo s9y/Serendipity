@@ -285,8 +285,8 @@ function &serendipity_permalinkPatterns($return = false) {
 
     $PAT['UNSUBSCRIBE']              = '@/'  . $serendipity['permalinkUnsubscribePath'].'/(.*)@';
     $PAT['SUBSCRIBE']                = '@/'  . $serendipity['permalinkSubscribePath'].'/(.*)@';
-    $PAT['APPROVE']                  = '@/'  . $serendipity['permalinkApprovePath'].'/(.*)/(.*)/([0-9]+)@';
-    $PAT['DELETE']                   = '@/'  . $serendipity['permalinkDeletePath'].'/(.*)/(.*)/([0-9]+)@';
+    $PAT['APPROVE']                  = '@/'  . $serendipity['permalinkApprovePath'].'/(.*)@';
+    $PAT['DELETE']                   = '@/'  . $serendipity['permalinkDeletePath'].'/(.*)@';
     $PAT['ARCHIVES']                 = '@/'  . $serendipity['permalinkArchivesPath'].'([/A-Za-z0-9]+)\.html@';
     $PAT['FEEDS']                    = '@/'  . $serendipity['permalinkFeedsPath'].'/@';
     $PAT['ADMIN']                    = '@/(' . $serendipity['permalinkAdminPath'] . '|entries)(/.+)?$@';

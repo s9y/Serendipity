@@ -116,7 +116,7 @@
                 <ul id="serendipity_comments_list" class="clearfix plainList zebra_list">
                 {foreach $comments AS $comment}
                     <li id="comment_{$comment.id}" class="clearfix {cycle values="odd,even"} {if ($comment.status == 'pending') || ($comment.status == 'confirm')}pending{/if}"><div class="form_check">
-                            <input id="multidelete_comment{$comment.id}" class="multidelete" type="checkbox" name="serendipity[delete][{$comment.id}]" value="{$comment.entry_id}" data-multidelid="comment_{$comment.id}">
+                            <input id="multidelete_comment{$comment.id}" class="multidelete" type="checkbox" name="serendipity[delete]" value="{$comment.id}" data-multidelid="comment_{$comment.id}">
                             <label for="serendipity_multidelete_comment_{$comment.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                         </div>
 

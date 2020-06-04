@@ -369,7 +369,7 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                 serendipity_db_insert('comments', $this->strtrRecursive($comment));
                 if ($comment['status'] == 'approved') {
                     $cid = serendipity_db_insert_id('comments', 'id');
-                    serendipity_approveComment($cid, $assoc['entries'][$a['comment_post_ID']], true);
+                    serendipity_approveComment($cid, true);
                 }
             }
             if ($debug) echo "<span class='msg_success'>Imported comments.</span>";

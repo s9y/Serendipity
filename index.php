@@ -30,34 +30,24 @@ if (isset($_SERVER['HTTP_REFERER']) && empty($_SESSION['HTTP_REFERER'])) {
     $_SESSION['HTTP_REFERER'] = $_SERVER['HTTP_REFERER'];
 }
 
-serendipity_checkCommentTokenModeration($uri);
-
-if (preg_match(PAT_DELETE, $uri, $res) && $serendipity['serendipityAuthedUser'] === true) {
-    if ($res[1] == 'comment' && serendipity_deleteComment($res[2], $res[3], 'comments')) {
-        define('DATA_COMMENT_DELETED', sprintf(COMMENT_DELETED, $res[2]));
-    } elseif ( $res[1] == 'trackback' && serendipity_deleteComment($res[2], $res[3], 'trackbacks') ) {
-        define('DATA_TRACKBACK_DELETED', sprintf(TRACKBACK_DELETED, $res[2]));
-    }
-} else {
-    define('DATA_COMMENT_DELETED', false);
-    define('DATA_TRACKBACK_DELETED', false);
-}
-
-if (preg_match(PAT_APPROVE, $uri, $res) && $serendipity['serendipityAuthedUser'] === true) {
-    if ($res[1] == 'comment' && serendipity_approveComment($res[2], $res[3])) {
-        define('DATA_COMMENT_APPROVED', sprintf(COMMENT_APPROVED, $res[2]));
-        define('DATA_TRACKBACK_APPROVED', false);
-    } elseif ($res[1] == 'trackback' && serendipity_approveComment($res[2], $res[3])) {
-        define('DATA_COMMENT_APPROVED', false);
-        define('DATA_TRACKBACK_APPROVED', sprintf(TRACKBACK_APPROVED, $res[2]));
-    }
-} else {
-    define('DATA_COMMENT_APPROVED', false);
-    define('DATA_TRACKBACK_APPROVED', false);
-}
-
 if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range']) && is_numeric($serendipity['GET']['range'])) {
     serveArchives();
+} elseif (preg_match(PAT_APPROVE, $uri, $args)) {
+    if (preg_match('@([0-9]+)@', $args[1], $res) && $serendipity['serendipityAuthedUser'] === true ) {
+        // one argument: comment id
+        serveApproveComment($res[1]);
+    } elseif (preg_match('@([0-9]+)/([0-9a-f]{32})@', $args[1], $res)) {
+        // two arguments: comment id - token (for token-based moderation)
+        serveApproveComment($res[1], $res[2]);
+    } else { serve404; }
+} elseif (preg_match(PAT_DELETE, $uri, $res)) {
+    if (preg_match('@([0-9]+)@', $args[1], $res) && $serendipity['serendipityAuthedUser'] === true ) {
+        // one argument: comment id
+        serveDeleteComment($res[1]);
+    } elseif (preg_match('@([0-9]+)/([0-9a-f]{32})@', $args[1], $res)) {
+        // two arguments: comment id - token (for token-based moderation)
+        serveDeleteComment($res[1], $res[2]);
+    } else { serve404; }
 } elseif (preg_match(PAT_UNSUBSCRIBE, $uri, $args)) {
     $arg = urldecode($args[1]);
     if (preg_match('#([A-Za-z0-9._%+-]+%40[A-Za-z0-9.-]+\.[A-Za-z]{2,})/([0-9]+)#', $arg, $res)) {
@@ -71,8 +61,8 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         serveUnsubscribe($res[1]);
     } else { serve404; }
 } else if (preg_match(PAT_SUBSCRIBE, $uri, $args)) {
-    // two arguments: optin / token
     if (preg_match('@optin/([0-9a-f]{32})@', $args[1], $res)) {
+    // two arguments: optin / token
         serveOptin($res[1]);
     } elseif (preg_match('@(author|category|entry)/([0-9]+)@', $args[1], $res)) {
         // two arguments: subscription type and id (additional info in POST)

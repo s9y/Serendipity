@@ -1,3 +1,14 @@
+Version 2.4-alpha4 (subscription branch)
+------------------------------------------------------------------------
+
+   * reworked the routing for approving and deleting comments, with
+     or without tokens. Shows now in both cases the result as a 
+     notification on a custom page. Removed the previously used constants
+     from the templates and removed the now unneccesary 
+     serendipity_checkCommentTokenModeration function. Also removed the
+     entry id argument of approveComment and deleteComment, because the
+     comment data is fetched anyway. 
+
 Version 2.4-alpha3 (subscription branch)
 ------------------------------------------------------------------------
 

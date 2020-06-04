@@ -41,72 +41,6 @@ function serendipity_checkCommentToken($token, $cid) {
 }
 
 /**
- * Check if a comment token was submitted to the serendipity main framework.
- * This function can kill the workflow completely, if moderation was wanted.
- *
- * @param  string   The current base URI
- * @access public
- * @return null
- */
-function serendipity_checkCommentTokenModeration($uri) {
-    global $serendipity;
-
-    // token based comment moderation starts here
-    if ($serendipity['useCommentTokens'] === true && preg_match(PAT_DELETE, $uri, $res)) {
-        $return_msg = "Error.\n";
-        $tokenparse = explode("_",$res[1]);
-        // check that we got a 32 char token
-        if (is_array($tokenparse)) {
-            if (strlen($tokenparse[2]) == 32) {
-                if ($tokenparse[0] == 'comment') {
-                    if (serendipity_deleteComment($res[2], $res[3], 'comments', $tokenparse[2])) {
-                        $return_msg = sprintf (COMMENT_DELETED, $res[2])."\n";
-                    } else {
-                        $return_msg = sprintf (COMMENT_NOTOKENMATCH, $res[2])."\n";
-                    }
-                } elseif ($tokenparse[0] == 'trackback') {
-                    if (serendipity_deleteComment($res[2], $res[3], 'trackbacks', $tokenparse[2])) {
-                        $return_msg = sprintf (TRACKBACK_DELETED, $res[2])."\n";
-                    } else {
-                        $return_msg = sprintf (TRACKBACK_NOTOKENMATCH, $res[2])."\n";
-                    }
-                }
-            } else {
-                $return_msg = sprintf (BADTOKEN)."\n";
-            }
-            header('Content-Type: text/plain; charset='. LANG_CHARSET);
-            die($return_msg);
-        }
-    }
-    if ($serendipity['useCommentTokens'] === true && preg_match(PAT_APPROVE, $uri, $res)) {
-        $return_msg = "Error.\n";
-        $tokenparse = explode("_",$res[1]);
-        // check that we got a 32 char token
-        if (is_array($tokenparse)) {
-            if (strlen($tokenparse[2]) == 32) {
-                if ($tokenparse[0] == 'comment') {
-                    if (serendipity_approveComment($res[2], $res[3], false, false, $tokenparse[2])) {
-                        $return_msg = sprintf (COMMENT_APPROVED, $res[2])."\n";
-                    } else {
-                        $return_msg = sprintf (COMMENT_NOTOKENMATCH, $res[2])."\n";
-                    }
-                } elseif ($tokenparse[0] == 'trackback') {
-                    if (serendipity_approveComment($res[2], $res[3], false, false, $tokenparse[2])) {
-                        $return_msg = sprintf (TRACKBACK_APPROVED, $res[2])."\n";
-                    } else {
-                        $return_msg = sprintf (TRACKBACK_NOTOKENMATCH, $res[2])."\n";
-                    }
-                }
-            } else {
-                $return_msg = sprintf (BADTOKEN)."\n";
-            }
-            header('Content-Type: text/plain; charset='. LANG_CHARSET);
-            die($return_msg);
-        }
-    }
-}
-
-/**
  * Store the personal details of a commenting user in a cookie (or delete that cookie)
  *
  * @access public
@@ -520,23 +454,22 @@ function serendipity_printCommentsByAuthor() {
  *
  * @access public
  * @param   int     The ID of the comment to delete
- * @param   int     The ID of the entry the comment belongs to [safety]
- * @param   string  The type of a comment (comments/trackback)
  * @param   string  The 32 character token [if using token based moderation]
- * @return  boolean Return whether the action was successful)
+ * @return  string Return result)
  */
-function serendipity_deleteComment($id, $entry_id, $type='comments', $token=false) {
+function serendipity_deleteComment($id, $token = false) {
     global $serendipity;
 
     $id       = (int)$id;
-    $entry_id = (int)$entry_id;
-    if ($id < 1 OR $entry_id < 1) {
-        return false;
-    }
+    if ($id < 1 ) return false;
 
     $goodtoken = serendipity_checkCommentToken($token, $id);
 
     if ($_SESSION['serendipityAuthedUser'] === true || $goodtoken) {
+
+        // fetch data about the comment
+        $comment = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}comments WHERE id = {$id}", true, 'assoc');
+        if (!is_array($comment)) return 'no_commentId';
 
         $admin = '';
         if (!$goodtoken && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
@@ -544,19 +477,15 @@ function serendipity_deleteComment($id, $entry_id, $type='comments', $token=fals
 
             // Load articles author id and check it
             $sql = serendipity_db_query("SELECT authorid FROM {$serendipity['dbPrefix']}entries
-                                                WHERE id = ". $entry_id, true);
+                                                WHERE id = {$comment['entry_id']}", true);
             if ($sql['authorid'] != $serendipity['authorid']) {
-                return false; // wrong user having no adminEntriesMaintainOthers right
+                return 'access_denied'; // wrong user having no adminEntriesMaintainOthers right
             }
 
         }
 
         /* We have to figure out if the comment we are about to delete, is awaiting approval,
            if so - we should *not* subtract it from the entries table */
-        $sql = serendipity_db_query("SELECT type, status, parent_id, body FROM {$serendipity['dbPrefix']}comments
-                                            WHERE entry_id = ". $entry_id ."
-                                                    AND id = ". $id, true);
-
 
         /* Check to see if the comment has children
          * if it does, don't delete, but replace with "*(COMMENT DELETED)*"
@@ -566,7 +495,7 @@ function serendipity_deleteComment($id, $entry_id, $type='comments', $token=fals
                                              WHERE parent_id = ". $id . "
                                              LIMIT 1", true);
 
-        if (is_array($has_parent) && isset($has_parent['count']) && $has_parent['count'] > 0 && $sql['body'] != 'COMMENT_DELETED') {
+        if (is_array($has_parent) && isset($has_parent['count']) && $has_parent['count'] > 0 && $comment['body'] != 'COMMENT_DELETED') {
             // Comment has childs, so don't delete it.
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}comments
                                      SET body = 'COMMENT_DELETED'
@@ -574,27 +503,26 @@ function serendipity_deleteComment($id, $entry_id, $type='comments', $token=fals
         } else {
             // Comment has no childs or had already been deleted., it can be safely removed.
             serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}comments
-                                        WHERE entry_id = ". $entry_id ."
-                                                AND id = ". $id);
+                                        WHERE id = {$id}");
 
-            if (is_array($sql) && $sql['status'] !== 'pending') {
-                if (!empty($sql['type']) && $sql['type'] != 'NORMAL') {
+            if ($comment['status'] !== 'pending') {
+                if (!empty($comment['type']) && $comment['type'] != 'NORMAL') {
                     $type = 'trackbacks';
                 } else {
                     $type = 'comments';
                 }
-                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}entries SET $type = $type-1 WHERE id = ". $entry_id ." AND $type > 0 $admin");
+                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}entries SET $type = $type-1 WHERE id = {$comment['entry_id']} AND $type > 0 $admin");
             }
 
-            serendipity_db_query("UPDATE {$serendipity['dbPrefix']}comments SET parent_id = " . (int)$sql['parent_id'] . " WHERE parent_id = " . $id);
+            serendipity_db_query("UPDATE {$serendipity['dbPrefix']}comments SET parent_id = " . (int)$comment['parent_id'] . " WHERE parent_id = " . $id);
         }
 
-        $addData = array('cid' => $id, 'entry_id' => $entry_id);
-        serendipity_plugin_api::hook_event('backend_deletecomment', $sql, $addData);
+        $addData = array('cid' => $id, 'entry_id' => $comment['entry_id']);
+        serendipity_plugin_api::hook_event('backend_deletecomment', $comment, $addData);
 
-        return true;
+        return $comment['type'] == 'NORMAL' ? 'comment_deleted' : 'trackback_deleted';
     } else {
-        return false;
+        return 'bad_token';
     }
 }
 
@@ -640,99 +568,102 @@ function serendipity_allowCommentsToggle($entry_id, $switch = 'disable') {
  * @param  string     The 32 character token [if using token based moderation]
  * @return boolean     Success or failure
  */
-function serendipity_approveComment($cid, $entry_id, $force = false, $moderate = false, $token = false) {
+function serendipity_approveComment($cid, $force = false, $moderate = false, $token = false) {
     global $serendipity;
-
+    $cid = (int)$cid;
     $goodtoken = serendipity_checkCommentToken($token, $cid);
 
+    if ($_SESSION['serendipityAuthedUser'] === true || $goodtoken) {
     /* Get data about the comment, we need this query because this function can be called from anywhere */
     /* This also makes sure we are either the author of the comment, or a USERLEVEL_ADMIN */
     $sql = "SELECT c.*, e.title, a.email as authoremail, a.mail_comments, e.timestamp AS entry_timestamp, e.last_modified AS entry_last_modified, e.authorid AS entry_authorid
                 FROM {$serendipity['dbPrefix']}comments c
                 LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
                 LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
-                WHERE c.id = '". (int)$cid ."'
+                    WHERE c.id = {$cid}
                     ". ((!serendipity_checkPermission('adminEntriesMaintainOthers') && $force !== true && !$goodtoken) ? "AND e.authorid = '". (int)$serendipity['authorid'] ."'" : '') ."
                     ". (($force === true) ? "" : "AND status = 'pending'");
-    $rs  = serendipity_db_query($sql, true);
+        $comment  = serendipity_db_query($sql, true);
+
+        /* It's already approved, don't spam people (or invalid id) */
+        if (!is_array($comment)) return 'no_commentId';
 
     // Check for adminEntriesMaintainOthers
-    if (!$force && !$goodtoken && $rs['entry_authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
-        return false; // wrong user having no adminEntriesMaintainOthers right
+        if (!$force && !$goodtoken && $comment['entry_authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
+            return 'access_denied'; // wrong user having no adminEntriesMaintainOthers right
     }
 
     $flip = false;
     if ($moderate === 'flip') {
         $flip = true;
 
-        if ($rs['status'] == 'pending') {
-            $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'approved' WHERE id = ". (int)$cid;
+            if ($comment['status'] == 'pending') {
+                $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'approved' WHERE id = {$cid}";
             $moderate = false;
         } else {
-            $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'pending' WHERE id = ". (int)$cid;
+                $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'pending' WHERE id = {$cid}";
             $moderate = true;
         }
     } elseif ($moderate) {
-        $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'pending' WHERE id = ". (int)$cid;
+            $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'pending' WHERE id = {$cid}";
     } else {
-        $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'approved' WHERE id = ". (int)$cid;
+            $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'approved' WHERE id = {$cid}";
     }
     serendipity_db_query($sql);
 
-    $field = ($rs['type'] == 'NORMAL' ? 'comments' : 'trackbacks');
+        $field = ($comment['type'] == 'NORMAL' ? 'comments' : 'trackbacks');
     // Check when the entry was published. If it is older than max_last_modified allows, the last_modified date of that entry
     // will not be pushed. With this we make sure that an RSS feed will not be updated on a client's reader and marked as new
     // only because someone made an comment to an old entry.
-    if ($rs['entry_timestamp'] > time() - $serendipity['max_last_modified']) {
+        if ($comment['entry_timestamp'] > time() - $serendipity['max_last_modified']) {
         $lm = time();
     } else {
-        $lm = (int)$rs['entry_last_modified'];
+            $lm = (int)$comment['entry_last_modified'];
     }
 
     $counter_comments = serendipity_db_query("SELECT count(id) AS counter 
                                                 FROM {$serendipity['dbPrefix']}comments 
                                                WHERE status = 'approved' 
                                                  AND type   = 'NORMAL' 
-                                                 AND entry_id = " . (int)$entry_id . " 
+                                                     AND entry_id = {$comment['entry_id']} 
                                             GROUP BY entry_id", true);
 
     $counter_tb = serendipity_db_query("SELECT count(id) AS counter 
                                           FROM {$serendipity['dbPrefix']}comments 
                                          WHERE status = 'approved' 
                                            AND (type = 'TRACKBACK' or type = 'PINGBACK') 
-                                           AND entry_id = " . (int)$entry_id . " 
+                                               AND entry_id = {$comment['entry_id']}
                                       GROUP BY entry_id", true);
 
     $query = "UPDATE {$serendipity['dbPrefix']}entries 
                  SET comments      = " . (int)$counter_comments['counter'] . ", 
                      trackbacks    = " . (int)$counter_tb['counter'] . ", 
                      last_modified = ". $lm ." 
-               WHERE id = ". (int)$entry_id;
+                   WHERE id = {$comment['entry_id']}";
     serendipity_db_query($query);
-
-    /* It's already approved, don't spam people */
-    if ( $rs === false ) {
-        return false;
-    }
 
     if (!$moderate) {
         if ($serendipity['allowSubscriptions']) {
             if ($serendipity['subscribeChunk'] == 'med') {
-                serendipity_mailCommentSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid, $rs['body']);
+                    serendipity_mailCommentSubscribers($comment['entry_id'], $comment['author'], $comment['email'], $comment['title'], $comment['authoremail'], $cid, $comment['body']);
             } else {
-                serendipity_mailCommentSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid);
+                    serendipity_mailCommentSubscribers($comment['entry_id'], $comment['author'], $comment['email'], $comment['title'], $comment['authoremail'], $cid);
             }
         }
 
-        serendipity_plugin_api::hook_event('backend_approvecomment', $rs);
+            serendipity_plugin_api::hook_event('backend_approvecomment', $comment);
     }
     serendipity_cleanCache();
     if ($flip) {
-        if ($moderate) return -1; // comment set to pending
-        if (!$moderate) return 1; // comment set to approved
+            if ($comment['type'] == 'NORMAL') {
+                return $moderate ? 'comment_pending' : 'comment_approved';
+            } else { 
+                return $moderate ?  'trackback_pending' : 'trackback_approved';
+            }
+        }
+    } else { 
+        return 'bad_token';
     }
-
-    return true;
 }
 
 /**
@@ -770,7 +701,7 @@ function serendipity_confirmMail($cid, $hash) {
         }
         */
 
-        serendipity_approveComment($cid, $confirm['entry_id'], true);
+        serendipity_approveComment($cid, true);
         return $confirm;
     } else {
         return false;
@@ -896,7 +827,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         if ($GLOBALS['tb_logging']) {
             fwrite($fp, '[' . date('d.m.Y H:i') . '] Approving...' . "\n");
         }
-        serendipity_approveComment($cid, $id, true);
+        serendipity_approveComment($cid, true);
     } elseif ($GLOBALS['tb_logging']) {
         fwrite($fp, '[' . date('d.m.Y H:i') . '] No need to approve...' . "\n");
     }

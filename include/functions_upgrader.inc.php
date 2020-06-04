@@ -631,3 +631,12 @@ function serendipity_upgrader_subscriptions() {
     $insert_sql = "INSERT INTO {$serendipity['dbPrefix']}groupconfig (id, property, value) VALUES (3, 'adminSubscriptions', 'true')";
     serendipity_db_query($insert_sql);
 }
+
+function serendipity_upgrader_deleteCommentTokens() {
+    global $serendipity;
+    // update the .htaccess file with the new permalink rewrite rules for approve and delete
+    serendipity_installFiles();
+    // delete all comment tokens, link syntax has changed
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options WHERE okey LIKE 'comment_%'" );
+    return; 
+}

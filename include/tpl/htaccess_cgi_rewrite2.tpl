@@ -17,8 +17,8 @@ RewriteRule ^([0-9]+)[_\-][0-9a-z_\-]*\.html {indexFile}?url=$1-article.html [L,
 RewriteRule ^{PAT_FEEDS}/(.*) {indexFile}?url=/{PATH_FEEDS}/$1 [L,QSA]
 RewriteRule ^{PAT_SUBSCRIBE} {indexFile}?url=/{PATH_SUBSCRIBE}/$1 [L,QSA]
 RewriteRule ^{PAT_UNSUBSCRIBE} {indexFile}?url=/{PATH_UNSUBSCRIBE}/$1 [L,QSA]
-RewriteRule ^{PAT_APPROVE} {indexFile}?url={PATH_APPROVE}/$1/$2/$3 [L,QSA]
-RewriteRule ^{PAT_DELETE} {indexFile}?url={PATH_DELETE}/$1/$2/$3 [L,QSA]
+RewriteRule ^{PAT_APPROVE} {indexFile}?url={PATH_APPROVE}/$1 [L,QSA]
+RewriteRule ^{PAT_DELETE} {indexFile}?url={PATH_DELETE}/$1 [L,QSA]
 RewriteRule ^{PAT_ADMIN} {indexFile}?url={PATH_ADMIN}/ [L,QSA]
 RewriteRule ^{PAT_ARCHIVE} {indexFile}?url=/{PATH_ARCHIVE} [L,QSA]
 RewriteRule ^{PAT_FEED} rss.php?file=$1&ext=$2

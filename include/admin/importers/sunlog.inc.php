@@ -228,7 +228,7 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));
                     $cid = serendipity_db_insert_id('comments', 'id');
-                    serendipity_approveComment($cid, $entry['entryid'], true);
+                    serendipity_approveComment($cid, true);
                 }
             }
         }

@@ -45,18 +45,6 @@
         </rdf:RDF>
         -->
 {if $is_single_entry and not $use_popups and not $is_preview}
-    {if $CONST.DATA_TRACKBACK_DELETED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_TRACKBACK_DELETED|sprintf:$CONST.TRACKBACK_DELETED}</p>
-    {/if}
-    {if $CONST.DATA_TRACKBACK_APPROVED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_TRACKBACK_APPROVED|sprintf:$CONST.TRACKBACK_APPROVED}</p>
-    {/if}
-    {if $CONST.DATA_COMMENT_DELETED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_COMMENT_DELETED|sprintf:$CONST.COMMENT_DELETED}</p>
-    {/if}
-    {if $CONST.DATA_COMMENT_APPROVED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_COMMENT_APPROVED|sprintf:$CONST.COMMENT_APPROVED}</p>
-    {/if}
     <section id="trackbacks" class="clearfix">
         <h3>{$CONST.TRACKBACKS}</h3>
 
