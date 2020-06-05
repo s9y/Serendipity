@@ -1,3 +1,18 @@
+Version 2.4-alpha2 ()
+------------------------------------------------------------------------
+   * Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, 
+     enabling full unicode input.
+   * added type 'media' to configuration types,
+     this shows an input text with the button for the media library,
+     unified the CSS between this item and the plugin item,
+     hide the preview when no image is selected
+   * renamed 'multiDelete' in media selection to 'multicheck'
+     as suggested in the comments
+   * check for empty file input in media_upload
+   * stripped the multilingual tags from the preview iframe
+   * totally resorted the language files, added a new 'langsorter.php'
+     script which automatically sorts and completes the languages,
+     strings which doesn't seem in use are now in the 'orphaned' section
    * Make it possible for plugins to let the core skip the check
      whether trackbacks are already sent, with 
      $serendipity['skip_trackback_check']
