@@ -439,7 +439,7 @@ $i18n_unknown = 'tw';
 @define('SUBSCRIPTION_STATE', 'Subscription state');
 @define('SUBSCRIPTION_BLOG', 'Blog subscription');
 @define('SUBSCRIPTION_AUTHOR', 'Author subscription');
-@define('SUBSCRIPTION_CATEGORY', 'Author subscription');
+@define('SUBSCRIPTION_CATEGORY', 'Category subscription');
 @define('NO_SUBSCRIPTIONS_TO_PRINT', 'No subscriptions to print');
 @define('PAGE_BROWSE_SUBSCRIPTIONS', 'Page %s of %s, totally %s subscriptions');
 @define('OPTIN_PENDING', 'optin pending');
@@ -1022,7 +1022,7 @@ $i18n_unknown = 'tw';
 @define('TRACKBACK_COULD_NOT_CONNECT', '沒有送出引用: 無法開啟線路到 %s 用連接埠 %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1037,8 +1037,7 @@ $i18n_unknown = 'tw';
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '新迴響到訂閱的文章 "%s"');
 @define('SUBSCRIPTION_MAIL', "您好 %s,\n\n您訂閱的文章有了新的迴響在 \"%s\", 標題是 \"%s\"\n迴響的發表者是: %s\n\n您可以在這找到此文章: %s\n\n您可以點這個連結取消訂閱: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "您好 %s,\n\n您訂閱的文章有了新的引用在 \"%s\", 標題是 \"%s\"\n引用的作者是: %s\n\n您可以在這找到此文章: %s\n\n您可以點這個連結取消訂閱: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <https://s9y.org> to find out how.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out %s to find out how.");
 @define('A_NEW_COMMENT_BLAHBLAH', '新迴響已發表到您的網誌 "%s", 在這個文章裡面 "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', '您的網誌文章 "%s" 已有了新的引用.');
 @define('YOU_HAVE_THESE_OPTIONS', '您有以下選擇:');
@@ -1068,7 +1067,7 @@ $i18n_unknown = 'tw';
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your comment subscription has been successfully entered.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1078,7 +1077,7 @@ $i18n_unknown = 'tw';
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

@@ -1021,7 +1021,7 @@
 @define('TRACKBACK_COULD_NOT_CONNECT', '트랙백이 보내지지 않음: %s애서 %d번 포트를 열 수 없었음');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1036,8 +1036,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '구독한 글 "%s"에 새로운 덧글이 달림');
 @define('SUBSCRIPTION_MAIL', "%s님 안녕하십니까?\n\n\"%s\"에서 구독중인 \"%s\"(이)라는 글에 새로운 덧글이 달렸습니다.\n작성자 이름은 %s 입니다.\n\n여기로 가면 글을 볼 수 있습니다: %s\n\n이 링크를 누르면 구독 해지를 할 수 있습니다: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "%s님 안녕하십니까?\n\n\"%s\"에서 구독중인 \"%s\"(이)라는 글에 새로운 트랙백이 달렸습니다.\n작성자 이름은 %s 입니다.\n\n여기로 가면 글을 볼 수 있습니다: %s\n\n이 링크를 누르면 구독 해지를 할 수 있습니다: %s\n");
-@define('SIGNATURE', "\n-- \n%s(은)는 세렌디피티로 작성되었습니다.\n여려분도 쓸 수 있는 최고의 블로그!\n<https://s9y.org>에서 알아보세요.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s(은)는 세렌디피티로 작성되었습니다.\n여려분도 쓸 수 있는 최고의 블로그!\n%s에서 알아보세요.");
 @define('A_NEW_COMMENT_BLAHBLAH', '당신의 블로그 "%s"에 있는 글 "%s"에 새로운 덧글이 달렸습니다.');
 @define('A_NEW_TRACKBACK_BLAHBLAH', '블로그 글 "%s"에 새로운 트랙백이 생성되었습니다.');
 @define('YOU_HAVE_THESE_OPTIONS', '다음과 같은 옵션을 사용할 수 있습니다:');
@@ -1067,7 +1066,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', '덧글 구독에 대한 승인절차를 성공적으로 진행했습니다.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1077,7 +1076,7 @@
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

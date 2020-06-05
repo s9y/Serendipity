@@ -1022,7 +1022,7 @@
 @define('TRACKBACK_COULD_NOT_CONNECT', 'Intet trackback sendt: Kunne ikke åbne forbindelse til %s på port %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1037,8 +1037,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Ny kommentar på abonnerede artikel "%s"');
 @define('SUBSCRIPTION_MAIL', "Hej %s,\n\nEn ny kommentar er blevet lavet til en artikel du abonnerer på hos \"%s\", ved navn \"%s\"\nNavnet på skribenten er: %s\n\nDu kan finde artiklen her: %s\n\nDu kan stoppe dit abonnement ved at klikke på dette link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hej %s,\n\nEt nyt trackback er blevet lavet til en artikel du abonnerer på hos \"%s\", ved navn \"%s\"\nNavnet på skribenten er: %s\n\nDu kan finde artiklen her: %s\n\nDu kan stoppe dit abonnement ved at klikke på dette link: %s\n");
-@define('SIGNATURE', "\n-- \n%s bruger Serendipity.\nDen bedste blog på nettet, du kan også bruge den.\nKig nærmere på <https://s9y.org> for at finde mere information.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s bruger Serendipity.\nDen bedste blog på nettet, du kan også bruge den.\nKig nærmere på %s for at finde mere information.");
 @define('A_NEW_COMMENT_BLAHBLAH', 'En ny kommentar er blevet oprettet på din blog "%s", til artiklen ved navn "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'Et nyt trackback er blevet lavet til din artikel ved navn "%s".');
 @define('YOU_HAVE_THESE_OPTIONS', 'Du har følgende muligheder:');
@@ -1068,7 +1067,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your comment subscription has been successfully entered.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1078,7 +1077,7 @@
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

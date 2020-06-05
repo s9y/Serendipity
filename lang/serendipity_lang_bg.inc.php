@@ -442,7 +442,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SUBSCRIPTION_STATE', 'Subscription state');
 @define('SUBSCRIPTION_BLOG', 'Blog subscription');
 @define('SUBSCRIPTION_AUTHOR', 'Author subscription');
-@define('SUBSCRIPTION_CATEGORY', 'Author subscription');
+@define('SUBSCRIPTION_CATEGORY', 'Category subscription');
 @define('NO_SUBSCRIPTIONS_TO_PRINT', 'No subscriptions to print');
 @define('PAGE_BROWSE_SUBSCRIPTIONS', 'Page %s of %s, totally %s subscriptions');
 @define('OPTIN_PENDING', 'optin pending');
@@ -1025,7 +1025,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('TRACKBACK_COULD_NOT_CONNECT', 'Не е изпратено проследяване: Не може да бъде установена връзка с %s на порт %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1040,8 +1040,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Нов коментар към абонирана статия "%s"');
 @define('SUBSCRIPTION_MAIL', "Здравей %s,\n\nДобавен е нов коментар към статията, която наблюдавате \"%s\", озаглавен \"%s\"\nКоментатор: %s\n\nМожете да намерите съдържанието тук: %s\n\nМожете да се отпишете, щраквайки на следната връзка: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Здравей %s,\n\nДобавено е ново проследяване към статията, която наблюдавате в \"%s\", озаглавена \"%s\"\nПроследил: %s\n\nМожете да намерите съдържанието тук: %s\n\nМожете да се отпишете, щраквайки на следната връзка: %s\n");
-@define('SIGNATURE', "\n-- \n%s се движи от Serendipity.\nНай-добрият блог, можете да го използвате и вие.\nПосетете <https://s9y.org> за подробности.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s се движи от Serendipity.\nНай-добрият блог, можете да го използвате и вие.\nПосетете %s за подробности.");
 @define('A_NEW_COMMENT_BLAHBLAH', 'Добавен е нов коментар във вашия блог "%s", към статията "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'Добавено е ново проследяване на статията "%s".');
 @define('YOU_HAVE_THESE_OPTIONS', 'Имате на разположение следните възможности:');
@@ -1071,7 +1070,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Вашето потвърждение за абонамент за известия за коментари беше прието успешно.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1081,7 +1080,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

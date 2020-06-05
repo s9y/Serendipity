@@ -438,7 +438,7 @@
 @define('SUBSCRIPTION_STATE', 'Subscription state');
 @define('SUBSCRIPTION_BLOG', 'Blog subscription');
 @define('SUBSCRIPTION_AUTHOR', 'Author subscription');
-@define('SUBSCRIPTION_CATEGORY', 'Author subscription');
+@define('SUBSCRIPTION_CATEGORY', 'Category subscription');
 @define('NO_SUBSCRIPTIONS_TO_PRINT', 'No subscriptions to print');
 @define('PAGE_BROWSE_SUBSCRIPTIONS', 'Page %s of %s, totally %s subscriptions');
 @define('OPTIN_PENDING', 'optin pending');
@@ -1021,7 +1021,7 @@
 @define('TRACKBACK_COULD_NOT_CONNECT', 'هیچ دنبالکی ارسال نشد: توانایی ایجاد اتصال به %s روی پورت %d نمی باشد');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1036,8 +1036,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'توضیح جدیدی برای مطلب "%s" ارسال شد');
 @define('SUBSCRIPTION_MAIL', "سلام %s،\n\nA نظر جدیدی برای مطلب \"%s\"، با تیتر \"%s\" ارسال شده است\nنام ارسال کننده: %s\n\nمی توانید مطلب را در لینک روبرو مشاهده کنید: %s\n\nمی توانید با کلیک روی لینک روبرو این نظر را قبول نکنید: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "سلام %s،\n\nA دنبالک جدیدی برای مطلب \"%s\"، با تیتر \"%s\" ارسال شده است\nنام ارسال کننده: %s\n\nمی توانید مطلب را در لینک روبرو مشاهده کنید: %s\n\nمی توانید با کلیک روی لینک روبرو این دنبالک را قبول نکنید: %s\n");
-@define('SIGNATURE', "\n-- \n%s بر پایه سرندیپیتی بنا شده است.\nبهترین سیستم وبلاگ موجود، شما هم می توانید از این سیستم استفاده کنید.\nسایت <https://s9y.org> را بری روش نصب و استفاده مرور کنید.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s بر پایه سرندیپیتی بنا شده است.\nبهترین سیستم وبلاگ موجود، شما هم می توانید از این سیستم استفاده کنید.\nسایت %s را بری روش نصب و استفاده مرور کنید.");
 @define('A_NEW_COMMENT_BLAHBLAH', 'یک نظر جدید برای وبلاگ "%s"، در مورد "%s" ارسال شده است.');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'یک دنبالک جدید در مورد "%s" ساخته شد.');
 @define('YOU_HAVE_THESE_OPTIONS', 'گزینه های زیر وجود دارند:');
@@ -1067,7 +1066,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your comment subscription has been successfully entered.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1077,7 +1076,7 @@
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

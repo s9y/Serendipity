@@ -459,8 +459,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         $limit = '';
     }
 
-    $query = "SELECT $select_key
-                     $body
+    $query = "SELECT {$select_key} {$body}
                      {$serendipity['fullCountQuery']}
                      {$cond['group']}
                      {$cond['having']}
@@ -526,6 +525,7 @@ function serendipity_fetchEntryData(&$ret) {
 
     serendipity_plugin_api::hook_event('frontend_entryproperties', $ret, $assoc_ids);
 
+    // fetching all the categories in the category subarrays with one query
     $query = "SELECT
                      ec.entryid,
                      c.categoryid,
@@ -1073,6 +1073,8 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     
     if ($use_hooks) {
         $addData = array('extended' => $extended, 'preview' => $preview);
+
+        // forward the output to plugins, e.g. multilingual plugin
         serendipity_plugin_api::hook_event('entry_display', $entries, $addData);
 
         if (isset($entries['clean_page']) && $entries['clean_page'] === true) {
@@ -1132,6 +1134,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 $entry = &$dategroup[$dategroup_idx]['entries'][$x]; // PHP4 Compat
             }
 
+            // replace the body with the content of the cache
             if (!empty($entry['properties']['ep_cache_body'])) {
                 $entry['pre_body']  = $entry['body'];
                 $entry['body']      = &$entry['properties']['ep_cache_body'];
@@ -1481,6 +1484,7 @@ function serendipity_updertEntry($entry) {
     $entry['categories'] =& $categories;
     if (!serendipity_db_bool($entry['isdraft']) && ($newEntry || serendipity_db_bool($_entry['isdraft']))) {
         serendipity_plugin_api::hook_event('backend_publish', $entry, $newEntry);
+        serendipity_mailSubscribers($entry);
     } else {
         serendipity_plugin_api::hook_event('backend_save', $entry, $newEntry);
     }

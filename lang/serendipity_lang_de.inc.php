@@ -721,7 +721,7 @@
 @define('INSTALL_EMAIL_DESC', 'E-Mail des Administrators');
 @define('INSTALL_SENDMAIL', 'Sende E-Mails zum Admin?');
 @define('INSTALL_SENDMAIL_DESC', 'Soll der Administrator E-Mails erhalten, wenn Kommentare zum Blog geschrieben werden?');
-@define('INSTALL_SUBSCRIBE', 'Abonnments erlauben?');
+@define('INSTALL_SUBSCRIBE', 'Abonnements erlauben?');
 @define('INSTALL_SUBSCRIBE_DESC', 'Soll es den Besuchern des Blogs möglich sein, Inhalte zu abonnieren und so alle neuen Veröffentlichungen dazu per E-Mail erhalten?');
 @define('INSTALL_SUBSCRIBE_OPTIN', 'Benutze Double-Opt In für Abonnements?');
 @define('INSTALL_SUBSCRIBE_OPTIN_DESC', 'Falls aktiviert, wird einem Kommentator, der E-Mail-Benachrichtigung zu neuen Kommentaren oder Artikeln abonnieren möchte, eine E-Mail geschickt. Diese enthält einen Bestätigungslink nach dem z.B. für Deutsche Gesetze erforderlichen Opt-In-Schema.');
@@ -1020,7 +1020,7 @@
 @define('TRACKBACK_COULD_NOT_CONNECT', 'Kein Trackback: Konnte Verbindung zu %s auf Port %d nicht herstellen.');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sende emails an % Abonnenten ...');
+@define('MAILTO_SUBSCRIBERS', 'Sende emails an %s Abonnenten ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails versandt!');
 
 /* EMAIL TEMPLATES */
@@ -1035,8 +1035,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Benachrichtigung zu neuem Kommentar des Eintrags "%s"');
 @define('SUBSCRIPTION_MAIL', "Hallo %s,\n\nEin neuer Kommentar wurde dem Eintrag hinzugefügt, den Sie auf \"%s\" namens \"%s\" finden.\nDer Name des Autors ist: %s\n\nSie können den Eintrag hier finden: %s\n\nSie können diese Benachrichtung mit folgender URL kündigen: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hallo %s,\n\nEin neues Trackback wurde dem Eintrag hinzugefügt, den Sie auf \"%s\" namens \"%s\" finden.\nDer Name des Autors ist: %s\n\nSie können den Eintrag hier finden: %s\n\nSie können diese Benachrichtung mit folgender URL kündigen: %s\n");
-@define('SIGNATURE', "\n-- \n%s wird betrieben mit Serendipity.\nDas allerbeste Blog, Sie können es auch nutzen.\nWie das geht, sehen Sie auf <https://s9y.org>.");
-@define('SIGNATURE_HTML', "<hr><p>%s wird betrieben mit Serendipity.<br>Das allerbeste Blog, Sie können es auch nutzen.<br>Wie das geht, sehen Sie auf <a href='https://s9y.org'>s9y.org</a>.</p>");
+@define('SIGNATURE', "%s wird betrieben mit Serendipity.\nDas allerbeste Blog, Sie können es auch nutzen.\nWie das geht, sehen Sie auf %s.");
 @define('A_NEW_COMMENT_BLAHBLAH', 'Im Blog %s wurde ein neuer Kommentar zu Eintrag "%s" abgegeben!');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'Ein neues Trackback für den Blog-Eintrag namens "%s" wurde empfangen.');
 @define('YOU_HAVE_THESE_OPTIONS', 'Folgende Möglichkeiten stehen zur Verfügung:');
@@ -1066,7 +1065,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Das Abonnement konnte nicht bestätigt werden. Bitte prüfen Sie ob der angeklickte Link vollständig ist. Wenn der Link vor mehr als drei Wochen zugesandt wurde, musst Du eine neue Bestätigungsmail anfordern.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Die Bestätigung des Abonnements der Kommentarbenachrichtigung wurde erfolgreich verarbeitet.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Die Bestätigung des Abonnements der Kommentarbenachrichtigung wurde erfolgreich verarbeitet. Neue Kommentare werden an %s verschickt.');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', 'Das Abonnement für "%s" wurde erfolgreich gelöscht. Sie werden nicht mehr über neue Artikel informiert.');
@@ -1076,7 +1075,7 @@
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Die Anforderung für ein Blog-Abonnement wurde empfangen. Eine email wird an %s gesandt um das Abonnement zu bestätigen ("Double Opt In").');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'Das Abonnement für "%s" ist bestätigt. Eine Zusammenfassung eines neuen Artikels wird Ihnen zugesandt. Sie können das Abonnement jederzeit mit dem in jeder Mail befindlichen Link abbestellen.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'Das Abonnement für "%s" ist bestätigt. Eine Zusammenfassung eines neuen Artikels wird an %s gesandt. Sie können das Abonnement jederzeit mit dem in jeder Mail befindlichen Link abbestellen.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Das Abonnement ist fehlgeschlagen weil es bereits ein aktives Abonnement unter dieser Adresse für "%s" gibt.');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Das Abonnement ist fehlgeschlagen. Bitte prüfen Sie die eingegebene e-mail-Adresse.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email-Abonnement neuer Artikel');

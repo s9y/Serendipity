@@ -87,8 +87,8 @@ function synclang($dir, $lancode) {
 
     // make changes, e.g. delete translations which have to be changed
     //unset($tardefs['IFRAME_SAVE']); reset a string to be copied from default
-	//$tardefs['SIGNATURE'] = ' "' . trim($tardefs['SIGNATURE'], 'n- "\\'); the target definition includes everthing after the colon
-
+    $tardefs['SIGNATURE'] = ' "' . trim($tardefs['SIGNATURE'], 'n- "\\') . '"'; 
+    $tardefs['SIGNATURE'] = str_replace('<https://s9y.org>', '%s', $tardefs['SIGNATURE']);
     echo "OK\r\n";
     $output = array_slice($tararray, 0, $tarstart);
 

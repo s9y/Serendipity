@@ -15,8 +15,8 @@ class serendipity_plugin_categories extends serendipity_plugin
         $propbag->add('description', CATEGORY_PLUGIN_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.05.3');
-        $propbag->add('configuration', array('title', 'authorid', 'parent_base', 'hide_parent', 'image', 'sort_order', 'sort_method', 'allow_select', 'hide_parallel', 'show_count', 'show_all', 'smarty'));
+        $propbag->add('version',       '2.05.2');
+        $propbag->add('configuration', array('title', 'authorid', 'parent_base', 'hide_parent', 'image', 'imagemail', 'sort_order', 'sort_method', 'allow_select', 'hide_parallel', 'show_count', 'show_all', 'smarty'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
@@ -119,6 +119,13 @@ class serendipity_plugin_categories extends serendipity_plugin
                 $propbag->add('default',     serendipity_getTemplateFile('img/xml.gif'));
                 break;
 
+            case 'imagemail':
+                $propbag->add('type',         'string');
+                $propbag->add('name',         MAIL_IMAGE_TO_DISPLAY);
+                $propbag->add('description',  MAIL_IMAGE_TO_DISPLAY_DESC);
+                $propbag->add('default',     serendipity_getTemplateFile('img/mail.gif'));
+                break;
+
             case 'smarty':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        CATEGORY_PLUGIN_TEMPLATE);
@@ -204,6 +211,9 @@ class serendipity_plugin_categories extends serendipity_plugin
         $image = $this->get_config('image', serendipity_getTemplateFile('img/xml.gif'));
         $image = (($image == "'none'" || $image == 'none') ? '' : $image);
 
+        $imagemail = $this->get_config('imagemail', serendipity_getTemplateFile('img/mail.gif'));
+        $imagemail = (($imagemail == "'none'" || $imagemail == 'none') ? '' : $imagemail);
+
         $use_parent  = $this->get_config('parent_base');
         $hide_parent = serendipity_db_bool($this->get_config('hide_parent'));
         $parentdepth = 0;
@@ -278,6 +288,9 @@ class serendipity_plugin_categories extends serendipity_plugin
 
                     if ( !empty($image) ) {
                         $html .= '<a class="serendipity_xml_icon" href="'. $categories[$cid]['feedCategoryURL'] .'"><img src="'. $image .'" alt="XML" style="border: 0px" /></a> ';
+                    }
+                    if ( !empty($imagemail) ) {
+                        $html .= '    <a class="serendipity_mail_icon" href="'. serendipity_rewriteURL(PATH_SUBSCRIBE . '/category/' . $cat['categoryid'], 'baseURL') .'"><img src="'. $imagemail .'" alt="Mail" style="border: 0px" /></a> ';
                     }
                     $html .= '<a href="'. $categories[$cid]['categoryURL'] .'" title="'. serendipity_specialchars($cat['category_description']) .'" style="padding-left: '. $categories[$cid]['paddingPx'] .'px">'. serendipity_specialchars($categories[$cid]['category_name']) .'</a>';
                     $html .= '</li>' . "\n";
