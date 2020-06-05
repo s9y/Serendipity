@@ -70,21 +70,19 @@
     </div>
 {elseif $ctype == 'media'}
 
-    <div class="clearfix form_field media_choose{if $cdesc != ''} has_info{/if}">
+    <div class="clearfix form_field {if $cdesc != ''} has_info{/if}">
         <label for="serendipity[{$postKey}][{$config_item}]">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$postKey}_{$config_item}_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
-
-        <div class="media_chooser clearfix">
-            <input id="serendipity[{$postKey}][{$config_item}]" class="change_preview" name="serendipity[{$postKey}][{$config_item}]" type="text" data-configitem="{$config_item}" value="{$value}">
-
-            <button class="choose_media" type="button" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.MEDIA_LIBRARY}</span></button>
-        </div>
-
         {if $cdesc != ''}<span id="{$postKey}_{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
 
-        <figure id="{$config_item}_preview">
+        <div class="form_group">
+            <input id="serendipity[{$postKey}][{$config_item}]" class="form_media change_preview" name="serendipity[{$postKey}][{$config_item}]" type="text" data-configitem="{$config_item}" value="{$value}">
+            <button class="choose_media" type="button" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.MEDIA_LIBRARY}</span></button>
+
+            <figure id="{$config_item}_preview" {if $value == ''} style='display:none;'{/if}>
             <figcaption>{$CONST.PREVIEW}</figcaption>
             <img src="{$value}" alt="">
         </figure>
+        </div>
     </div>
 {elseif $ctype == 'sequence'}
 

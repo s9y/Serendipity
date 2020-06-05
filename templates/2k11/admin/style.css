@@ -537,6 +537,7 @@ label > span,
 .configuration_group .form_multiselect label,
 .configuration_group .form_field label,
 .configuration_group .form_area label,
+.configuration_group .form_group,
 #captchabox .captcha,
 #dashboard_entries li > a,
 #mediaPropertyForm .media_file_props label,
@@ -1067,8 +1068,6 @@ input[type=checkbox],
 
 .importer_data dd,
 .form_buttons > input,
-.js .media_choose label,
-.js .media_choose input,
 .quick_list ol > li,
 .filter_pane .form_field > label,
 .filter_pane .form_select > label,
@@ -1084,7 +1083,6 @@ input[type=checkbox],
 .serendipity_commentDirection,
 .entry_info,
 .pagination,
-.media_choose figure,
 .media_file_metadata h4,
 .media_file_metadata h5,
 .media_file_metadata dt,
@@ -1359,7 +1357,6 @@ summary {
 #filter_comments select,
 #serendipity_comment .form_field input,
 #serendipity_comment select,
-.js .configuration_group .media_choose input,
 .js #serendipity_category .form_field #category_icon,
 #dashboard_header h2 {
     width: 85%;
@@ -1373,6 +1370,7 @@ summary {
 .configuration_group .form_multiselect select,
 .configuration_group .form_field input,
 .configuration_group .form_area textarea,
+.configuration_group .form_group,
 #serendipity_category .form_field input,
 #serendipity_category .form_select select,
 #serendipity_category .form_multiselect select,
@@ -1390,6 +1388,15 @@ summary {
 .serendipity_statistics table {
     width: 100%;
 }
+
+.configuration_group input.form_media { 
+    width: calc(100% - 55px) !important; 
+    max-width: calc(100% - 55px) !important; 
+    float: none !important;
+}
+.configuration_group button.choose_media { float: right; }
+
+.configuration_group .form_group figure { margin-top: 0.75em; }
 
 #media_pane_filter input.reset_media_filters[type="reset"],
 #media_pane_filter input[type="submit"] {
@@ -2514,7 +2521,6 @@ label .perm_name,
 .no-js .toggle_comment_full,
 .no-js #add_upload,
 .no-js .choose_media,
-.no-js .media_choose figure,
 .no-js #category_preview figure,
 .no-js .media_show_info,
 .no-js .media_rename,
@@ -3116,6 +3122,7 @@ img.mfp-img {
     .configuration_group .form_select select,
     .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
+    .configuration_group .form_group,
     .configuration_group .form_area textarea {
         max-width: 320px;
     }
@@ -3230,8 +3237,7 @@ img.mfp-img {
     #serendipity_category > div > div,
     #serendipity_category #preview,
     #serendipity_category > div > fieldset,
-    #directory_permissions .form_multiselect,
-    .media_chooser {
+    #directory_permissions .form_multiselect {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
@@ -3297,12 +3303,7 @@ img.mfp-img {
         margin: 0 0 1em;
     }
 
-    .media_chooser {
-        margin-bottom: 0;
-    }
-
-    #maintenance > span,
-    .media_chooser + .field_info {
+    #maintenance > span {
         margin-top: 0;
     }
 
@@ -3353,6 +3354,7 @@ img.mfp-img {
     .configuration_group .form_select select,
     .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
+    .configuration_group .form_group,
     .configuration_group .form_area textarea,
     .configuration_group fieldset > fieldset legend,
     .configuration_group div > fieldset legend,
@@ -3402,15 +3404,11 @@ img.mfp-img {
     .configuration_group .form_select select,
     .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
+    .configuration_group .form_group,
     .configuration_group .form_area textarea,
     #uploadform .form_select select,
     #uploadform .form_field input {
         max-width: 48%;
-    }
-
-    .js .configuration_group .media_choose input {
-        margin-right: 1%;
-        max-width: none;
     }
 
     .info_expanded select,
@@ -3420,11 +3418,6 @@ img.mfp-img {
     .info_expanded .sequence_container {
         position: relative;
         top: -1.5em;
-    }
-
-    .media_choose .button_link {
-        position: relative;
-        top: 2px;
     }
 
     .configuration_group .form_select,
@@ -3735,9 +3728,7 @@ img.mfp-img {
 
 /* LARGER SCREENS */
 @media only screen and (min-width: 1280px) {
-    .js .configuration_group .media_choose input {
-        max-width: 42.5%;
-    }
+
     .manage h3 {
         width: 18em;
     }

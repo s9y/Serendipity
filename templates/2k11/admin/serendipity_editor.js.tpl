@@ -164,6 +164,8 @@
         var filename = document.getElementById(input).value;
         var $target = $('#' + output + '_preview > img');
         $target.attr('src', filename);
+        var $container = document.getElementById( output + '_preview');
+        $container.style.display = "block";
     }
 
     // Opens media db image selection in new window
