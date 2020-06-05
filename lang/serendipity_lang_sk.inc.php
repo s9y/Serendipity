@@ -448,7 +448,7 @@ $i18n_filename_to = array (
 @define('SUBSCRIPTION_STATE', 'Subscription state');
 @define('SUBSCRIPTION_BLOG', 'Blog subscription');
 @define('SUBSCRIPTION_AUTHOR', 'Author subscription');
-@define('SUBSCRIPTION_CATEGORY', 'Author subscription');
+@define('SUBSCRIPTION_CATEGORY', 'Category subscription');
 @define('NO_SUBSCRIPTIONS_TO_PRINT', 'No subscriptions to print');
 @define('PAGE_BROWSE_SUBSCRIPTIONS', 'Page %s of %s, totally %s subscriptions');
 @define('OPTIN_PENDING', 'optin pending');
@@ -1031,7 +1031,7 @@ $i18n_filename_to = array (
 @define('TRACKBACK_COULD_NOT_CONNECT', 'Odozva nebola odoslaná: nepodarilo sa spoji» s %s na porte %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1046,8 +1046,7 @@ $i18n_filename_to = array (
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Nový komentár k sledovanému èlánku "%s"');
 @define('SUBSCRIPTION_MAIL', "Dobrý deò %s,\n\nA k èláku, ktorý sledujete na \"%s\", s názvom \"%s\", bol práve pridaný nový komentár.\nMeno odosielateµa: %s\n\nOdkaz na èlánok: %s\n\nOdhlási» sledovanie èlánku: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Dobrý deò %s,\n\nA k èlánku, ktorý sledujete na \"%s\", s názvem \"%s\", bola práve pridaná nová odozva\nMeno odosielateµa: %s\n\nOdkaz na èlánok: %s\n\nOdhlási» sledovanie èlánku: %s\n");
-@define('SIGNATURE', "\n-- \n%s je vytvorený pomocou Serendipity.\n Tento výborný voµný blogovací systém mô¾ete pou¾i» aj vy.\nViac informácií na webstránke <https://s9y.org>.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s je vytvorený pomocou Serendipity.\n Tento výborný voµný blogovací systém mô¾ete pou¾i» aj vy.\nViac informácií na webstránke <https://s9y.org>.);
 @define('A_NEW_COMMENT_BLAHBLAH', 'Nový komentár vo weblogu "%s", k èlánku s názvom "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'Nová odozva na weblog/èlánok s názvom "%s".');
 @define('YOU_HAVE_THESE_OPTIONS', 'Máte k dispozícii tieto voµby:');
@@ -1077,7 +1076,7 @@ $i18n_filename_to = array (
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Va¹e potvrdenie ¾iadosti o zasielanie oznámení o nových komentároch bolo úspe¹ne prijaté.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1087,7 +1086,7 @@ $i18n_filename_to = array (
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

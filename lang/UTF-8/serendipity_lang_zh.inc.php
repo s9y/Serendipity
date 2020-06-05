@@ -1021,7 +1021,7 @@
 @define('TRACKBACK_COULD_NOT_CONNECT', '没有送出引用: 无法开启路径到 %s 用连接到 %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1036,8 +1036,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '新回复到订阅的文章 "%s"');
 @define('SUBSCRIPTION_MAIL', "你好 %s,\n\n你订阅的文章有了新的回复在 \"%s\", 标题是 \"%s\"\n回复的发表者是: %s\n\n你可以在这找到此文章: %s\n\n你可以点这个连接取消订阅: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "你好 %s,\n\n你订阅的文章有了新的引用在 \"%s\", 标题是 \"%s\"\n引用的作者是: %s\n\n你可以在这找到此文章: %s\n\n你可以点这个连接取消订阅: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\n <https://www.s9y.org>");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s is powered by Serendipity.\n <https://www.s9y.org>);
 @define('A_NEW_COMMENT_BLAHBLAH', '新回复已发表在网站 "%s", 在这个文章里面 "%s"。');
 @define('A_NEW_TRACKBACK_BLAHBLAH', '你的文章 "%s" 已有新的引用。');
 @define('YOU_HAVE_THESE_OPTIONS', '你有以下选择:');
@@ -1067,7 +1066,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your comment subscription has been successfully entered.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1077,7 +1076,7 @@
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

@@ -30,16 +30,6 @@ if (isset($_SERVER['HTTP_REFERER']) && empty($_SESSION['HTTP_REFERER'])) {
     $_SESSION['HTTP_REFERER'] = $_SERVER['HTTP_REFERER'];
 }
 
-if (preg_match(PAT_UNSUBSCRIBE, $uri, $res)) {
-    if (serendipity_cancelSubscription(urldecode($res[1]), $res[2])) {
-        define('DATA_UNSUBSCRIBED', sprintf(UNSUBSCRIBE_OK, urldecode($res[1])));
-    }
-
-    $uri = '/' . PATH_UNSUBSCRIBE . '/' . $res[2] . '-untitled.html';
-} else {
-    define('DATA_UNSUBSCRIBED', false);
-}
-
 serendipity_checkCommentTokenModeration($uri);
 
 if (preg_match(PAT_DELETE, $uri, $res) && $serendipity['serendipityAuthedUser'] === true) {
@@ -68,6 +58,28 @@ if (preg_match(PAT_APPROVE, $uri, $res) && $serendipity['serendipityAuthedUser']
 
 if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range']) && is_numeric($serendipity['GET']['range'])) {
     serveArchives();
+} elseif (preg_match(PAT_UNSUBSCRIBE, $uri, $args)) {
+    $arg = urldecode($args[1]);
+    if (preg_match('#([A-Za-z0-9._%+-]+%40[A-Za-z0-9.-]+\.[A-Za-z]{2,})/([0-9]+)#', $arg, $res)) {
+        // comments: two arguments - email address and article id to unsubscribe from
+        serveUnsubscribeLegacy($res[1], $res[2]);
+    } elseif (preg_match('@([0-9a-f]{32})/delete@', $args[1], $res)) {
+        // two arguments: unsubscribe token - action
+        serveUnsubscribe($res[1], 'delete');
+    } elseif (preg_match('@([0-9a-f]{32})@', $args[1], $res)) {
+        // one argument: unsubscribe token
+        serveUnsubscribe($res[1]);
+    } else { serve404; }
+} else if (preg_match(PAT_SUBSCRIBE, $uri, $args)) {
+    // two arguments: optin / token
+    if (preg_match('@optin/([0-9a-f]{32})@', $args[1], $res)) {
+        serveOptin($res[1]);
+    } elseif (preg_match('@(author|category|entry)/([0-9]+)@', $args[1], $res)) {
+        // two arguments: subscription type and id (additional info in POST)
+        serveSubscribe($res[1], $res[2]);
+    } elseif ($args[1] == 'blog') {
+        serveSubscribe('blog');
+    } else { serve404; }
 } else if (preg_match(PAT_PERMALINK, $uri, $matches) ||
            preg_match(PAT_COMMENTSUB, $uri, $matches) ||
            isset($serendipity['GET']['id']) ||

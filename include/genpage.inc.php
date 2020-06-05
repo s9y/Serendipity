@@ -119,6 +119,19 @@ switch ($serendipity['GET']['action']) {
         }
         break;
 
+    // show the subscription page
+    case 'subscribe':
+        $serendipity['head_subtitle'] = SUBSCRIBE;
+        $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']);
+        serendipity_printSubscriptionpage();
+        break;
+
+    case 'unsubscribe':
+        $serendipity['head_subtitle'] = UNSUBSCRIBE;
+        $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']);
+        serendipity_printUnsubscribepage();
+        break;
+
     case 'empty':
         break;
 

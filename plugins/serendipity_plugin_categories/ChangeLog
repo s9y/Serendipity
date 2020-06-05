@@ -1,2 +1,8 @@
+2.05.4
+        * add email subscription icon and link
+
+2.05.3  
+        * show description of show_all
+
 2.05.2
         * Strip the translation tags in the category links if multilingual plugin is active

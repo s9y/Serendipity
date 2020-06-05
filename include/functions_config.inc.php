@@ -1168,6 +1168,8 @@ function serendipity_getPermissionNames() {
             => array(USERLEVEL_ADMIN, USERLEVEL_CHIEF, USERLEVEL_EDITOR),
         'adminEntriesMaintainOthers'
             => array(USERLEVEL_ADMIN, USERLEVEL_CHIEF),
+        'adminSubscriptions'
+            => array(USERLEVEL_ADMIN, USERLEVEL_CHIEF),
 
         'adminImport'
             => array(USERLEVEL_ADMIN, USERLEVEL_CHIEF),

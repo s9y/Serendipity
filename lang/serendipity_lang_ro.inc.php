@@ -437,7 +437,7 @@
 @define('SUBSCRIPTION_STATE', 'Subscription state');
 @define('SUBSCRIPTION_BLOG', 'Blog subscription');
 @define('SUBSCRIPTION_AUTHOR', 'Author subscription');
-@define('SUBSCRIPTION_CATEGORY', 'Author subscription');
+@define('SUBSCRIPTION_CATEGORY', 'Category subscription');
 @define('NO_SUBSCRIPTIONS_TO_PRINT', 'No subscriptions to print');
 @define('PAGE_BROWSE_SUBSCRIPTIONS', 'Page %s of %s, totally %s subscriptions');
 @define('OPTIN_PENDING', 'optin pending');
@@ -1020,7 +1020,7 @@
 @define('TRACKBACK_COULD_NOT_CONNECT', 'Nu am trimis referinta: Nu am putut deschide o conexiune la %s pe portul %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1035,8 +1035,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Comentariu nou la însemnare "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nA fost adaugat un nou comentariu la o însemnare la care tu te-ai abonat pe \"%s\", cu titlul \"%s\"\nNumele celui care a lasat comentariul este: %s\n\nPoti citi comentariul aici: %s\n\nPoti renunta la abonamentul la aceasta însemnare cu un click aici: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Salut %s,\n\nO noua referinta a fost adaugata la o însemnare la care te-ai abonat pe \"%s\", cu titlul \"%s\"\nNumele celui care a facut referinta este: %s\n\nPoti gasi însemnarea aici: %s\n\nPoti renunta la abonamentul la aceasta însemnare cu un click aici: %s\n");
-@define('SIGNATURE', "\n-- \n%s e bazat pe Serendipity.\nCel mai bun blog din lume, îl poti folosi si tu.\nViziteaza <https://s9y.org> ca sa afli cum.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s e bazat pe Serendipity.\nCel mai bun blog din lume, îl poti folosi si tu.\nViziteaza <https://s9y.org> ca sa afli cum.);
 @define('A_NEW_COMMENT_BLAHBLAH', 'A fost adaugat un nou comentariu la blog-ul tau "%s", la însemnarea cu titlul "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'A fost adaugata o noua referinta la însemnarea din blog-ul tau cu titlul "%s".');
 @define('YOU_HAVE_THESE_OPTIONS', 'Ai urmatoarele optiuni:');
@@ -1066,7 +1065,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your comment subscription has been successfully entered.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1076,7 +1075,7 @@
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

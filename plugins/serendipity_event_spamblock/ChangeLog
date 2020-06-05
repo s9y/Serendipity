@@ -1,3 +1,5 @@
+1.90:  Added blocking of subscription attempts from bots without reading anything at all
+
 1.89.2: Dont refresh timeout when displaying comment preview
 
 1.89.1: Modified sql statement used for htaccess blocking to work in MySQL 5.7.
