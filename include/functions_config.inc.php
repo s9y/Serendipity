@@ -334,8 +334,8 @@ function serendipity_load_configuration($author = null) {
     }
     
     if (empty($author)) {
-    $serendipity['default_lang'] = $serendipity['lang'];
-}
+        $serendipity['default_lang'] = $serendipity['lang'];
+    }
 
 }
 

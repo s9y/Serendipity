@@ -672,7 +672,9 @@ class serendipity_event_spamblock extends serendipity_event
 
         $ret = false;
         require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
-        if (function_exists('serendipity_request_start')) serendipity_request_start();
+        if (function_exists('serendipity_request_start')) {
+            serendipity_request_start();
+        }
 
         // this switch statement is a leftover from blogg.de support (i.e. there were more options than just one). Leaving it in place in case we get more options again in the future.
         switch($where) {
@@ -700,7 +702,9 @@ class serendipity_event_spamblock extends serendipity_event
                 break;
         }
 
-        if (function_exists('serendipity_request_end')) serendipity_request_end();
+        if (function_exists('serendipity_request_end')) {
+            serendipity_request_end();
+        }
         return $ret;
     }
 
@@ -1478,7 +1482,9 @@ class serendipity_event_spamblock extends serendipity_event
         // Check for word filtering
         if ($filter_type = $this->get_config('contentfilter_activate', 'moderate')) {
 
-            if($ftc) $filter_type = 'reject';
+            if($ftc) {
+                $filter_type = 'reject';
+            }
 
             // Filter authors names
             $filter_authors = explode(';', $this->get_config('contentfilter_authors', $this->filter_defaults['authors']));
