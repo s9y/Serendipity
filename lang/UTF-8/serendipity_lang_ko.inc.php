@@ -619,6 +619,7 @@
 @define('FETCH_METHOD_HOTLINK', '서버로 핫링크 걸기');
 @define('GO_ADD_PROPERTIES', '등록정보 입력하러 가기');
 @define('PLAIN_ASCII_NAMES', '(특수 문자나 변이부호 등을 쓰지 마십시오)');
+@define('NO_FILE_SELECTED', 'For s9y to do something, you have to select a file first');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', '그림 크기 조절');

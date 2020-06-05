@@ -171,9 +171,9 @@
 @define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'The format of the entry\'s actual date, using PHPs strftime() variables. (Default: "%s")');
 @define('APPLY_MARKUP_TO', 'Apply markup to %s');
 @define('XML_IMAGE_TO_DISPLAY', 'XML Button');
-@define('XML_IMAGE_TO_DISPLAY_DESC','Links to XML Feeds will be displayed by this image. Leave empty for default, enter \'none\' to disable.');
+@define('XML_IMAGE_TO_DISPLAY_DESC', 'Links to XML Feeds will be displayed by this image. Leave empty for default, enter \'none\' to disable.');
 @define('MAIL_IMAGE_TO_DISPLAY', 'Subscribe Button');
-@define('MAIL_IMAGE_TO_DISPLAY_DESC','The email subscription page will be displayed by this image. Leave empty for default, enter \'none\' to disable.');
+@define('MAIL_IMAGE_TO_DISPLAY_DESC', 'The email subscription page will be displayed by this image. Leave empty for default, enter \'none\' to disable.');
 @define('DELETING_FILE', 'Deleting file %s...');
 @define('SETTINGS_SAVED_AT', 'The new settings have been saved at %s');
 @define('INVERT_SELECTIONS', 'Invert Selections');
@@ -586,7 +586,7 @@
 @define('ALIGN_RIGHT', 'Right');
 @define('IMAGE_AS_A_LINK', 'Image insertion');
 @define('MEDIA_TARGET', 'Target for this link');
-@define('MEDIA_TARGET_JS', 'Popup window (via JavaScript, adaptive size)'); q
+@define('MEDIA_TARGET_JS', 'Popup window (via JavaScript, adaptive size)');
 @define('MEDIA_ENTRY', 'Isolated Entry');
 @define('MEDIA_TARGET_BLANK', 'Popup window (via target=_blank)');
 @define('YOU_CHOSE', 'You chose %s');
@@ -618,6 +618,7 @@
 @define('FETCH_METHOD_HOTLINK', 'Hotlink to server');
 @define('GO_ADD_PROPERTIES', 'Go & enter properties');
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+@define('NO_FILE_SELECTED', 'For s9y to do something, you have to select a file first');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', 'Resize this image');
@@ -1027,9 +1028,9 @@
 @define('CONFIRMATION_MAIL_BLOGSUBSCRIPTION', "Hello %s,\n\nYou have requested to be notified for new articles to the blog \"%s\" (<%s>). To approve this subscription (\"Double Opt In\") please click this link:\n<%s>\n.");
 @define('CONFIRMATION_MAIL_ALWAYS', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n");
 @define('CONFIRMATION_MAIL_ONCE', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled one-time mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n\nAfter you have done that, you can always post comments on that blog with your username and e-mail address without receiving such notifications.");
-@define('SUBSCRIPTION_MAIL_INTRO','In the blog %s a new article was posted:');
-@define('SUBSCRIPTION_MAIL_OUTRO','You get this email because you have subscribed to receive new articles of the blog %s. To unsubscribe, click here.');
-@define('SUBSCRIPTION_NEW_ARTICLE','New article');
+@define('SUBSCRIPTION_MAIL_INTRO', 'In the blog %s a new article was posted:');
+@define('SUBSCRIPTION_MAIL_OUTRO', 'You get this email because you have subscribed to receive new articles of the blog %s. To unsubscribe, click here.');
+@define('SUBSCRIPTION_NEW_ARTICLE', 'New article');
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'New comment to subscribed entry "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nA new comment was made to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nA new trackback was added to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
@@ -1075,9 +1076,9 @@
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
-@define('NOTIFICATION_SUBSCRIBE_DUPE','Your subscription failed because there is already an active subscription for "%s".');
+@define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
-@define('BLOG_SUBSCRIPTION_TITLE','Email Subscription of new articles');
+@define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');
 @define('BLOG_SUBSCRIPTION_BLAHBLAH', 'To get informed of new articles, enter your email address here.');
 @define('BLOG_SUBSCRIPTION_AUTHOR', "To get informed of new articles from \"%s\", enter your email address here.");
 @define('BLOG_SUBSCRIPTION_CATEGORY', "To get informed of new articles in the category \"%s\", enter your email address here.");

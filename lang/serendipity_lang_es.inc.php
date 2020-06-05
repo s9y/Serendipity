@@ -630,6 +630,7 @@
 @define('FETCH_METHOD_HOTLINK', 'Enlazar externamente al servidor');
 @define('GO_ADD_PROPERTIES', 'Ir & ingresar propiedades');
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+@define('NO_FILE_SELECTED', 'For s9y to do something, you have to select a file first');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', 'Redimensionar esta imagen');

@@ -649,6 +649,7 @@ $i18n_filename_to = array (
 @define('FETCH_METHOD_HOTLINK', 'Odkaz na server');
 @define('GO_ADD_PROPERTIES', 'Zadej vlastnosti');
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+@define('NO_FILE_SELECTED', 'For s9y to do something, you have to select a file first');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', 'Změnit rozměr obrázku');

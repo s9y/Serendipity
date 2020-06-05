@@ -620,6 +620,7 @@
 @define('FETCH_METHOD_HOTLINK', 'Hotlink naar server');
 @define('GO_ADD_PROPERTIES', 'Wijzig afbeeldingseigenschappen');
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+@define('NO_FILE_SELECTED', 'For s9y to do something, you have to select a file first');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', 'Wijzig formaat van de afbeelding');

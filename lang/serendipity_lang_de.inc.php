@@ -171,9 +171,9 @@
 @define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'Das Datumsformat des Eintrages, mithilfe von PHPs strftime() Variablen. (Standard: "%s")');
 @define('APPLY_MARKUP_TO', 'Textformatierung auf %s anwenden');
 @define('XML_IMAGE_TO_DISPLAY', 'XML-Button');
-@define('XML_IMAGE_TO_DISPLAY_DESC','Bilddatei, um ein Icon für XML-Feeds darzustellen. Für das Standardbild leer lassen, oder \'none\' zum Deaktivieren.');
+@define('XML_IMAGE_TO_DISPLAY_DESC', 'Bilddatei, um ein Icon für XML-Feeds darzustellen. Für das Standardbild leer lassen, oder \'none\' zum Deaktivieren.');
 @define('MAIL_IMAGE_TO_DISPLAY', 'Abonnement Button');
-@define('MAIL_IMAGE_TO_DISPLAY_DESC','Die email-Abonnementsseite ist mit diesem Icon verlinkt. Für das Standardbild leer lassen, oder \'none\' zum Deaktivieren.');
+@define('MAIL_IMAGE_TO_DISPLAY_DESC', 'Die email-Abonnementsseite ist mit diesem Icon verlinkt. Für das Standardbild leer lassen, oder \'none\' zum Deaktivieren.');
 @define('DELETING_FILE', 'Lösche Datei \'%s\' ...');
 @define('SETTINGS_SAVED_AT', 'Die neuen Einstellungen wurden um %s gespeichert.');
 @define('INVERT_SELECTIONS', 'Auswahl umkehren');
@@ -263,7 +263,7 @@
 @define('SERENDIPITY_UPGRADER_WHY', 'Diese Seite erscheint, da gerade Serendipity %s installiert wurde, aber die Datenbank noch nicht an diese Version angepasst wurde.');
 @define('SERENDIPITY_UPGRADER_DATABASE_UPDATES', 'Datenbank-Aktualisierungen (%s)');
 @define('SERENDIPITY_UPGRADER_FOUND_SQL_FILES', 'Die folgenden SQL-Dateien wurden gefunden und müssen nun ausgeführt werden, bevor Serendipity wieder wie gewohnt funktioniert.');
-@define('SERENDIPITY_UPGRADER_VERSION_SPECIFIC',  'Versionsabhängige Funktionen');
+@define('SERENDIPITY_UPGRADER_VERSION_SPECIFIC', 'Versionsabhängige Funktionen');
 @define('SERENDIPITY_UPGRADER_NO_VERSION_SPECIFIC', 'Keine versionsabhängigen Funktionen gefunden');
 @define('SERENDIPITY_UPGRADER_PROCEED_QUESTION', 'Soll ich die aufgeführten Funktionen ausführen?');
 @define('SERENDIPITY_UPGRADER_PROCEED_ABORT', 'Nein, das werde ich manuell erledigen');
@@ -618,6 +618,7 @@
 @define('FETCH_METHOD_HOTLINK', 'Nur zum Quellserver linken');
 @define('GO_ADD_PROPERTIES', 'Los & Eigenschaften angeben');
 @define('PLAIN_ASCII_NAMES', '(keine Sonderzeichen, Umlaute)');
+@define('NO_FILE_SELECTED', 'Damit s9y etwas machen kann, musst du zuerst eine Datei auswählen');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', 'Dateiausmaße ändern');
@@ -805,8 +806,8 @@
 @define('SYNDICATION_PLUGIN_SHOW_MAIL', 'E-Mail-Adressen einbinden?');
 @define('SYNDICATION_PLUGIN_MANAGINGEDITOR', 'Feld "managingEditor"');
 @define('SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC', 'E-Mail-Adresse des verantwortlichen Editors, falls vorhanden (leer: nicht verwenden). [RSS 2.0]');
-@define('SYNDICATION_PLUGIN_WEBMASTER',  'Feld "webMaster"');
-@define('SYNDICATION_PLUGIN_WEBMASTER_DESC',  'E-Mail-Adresse des Webmasters, falls vorhanden (leer: nicht verwenden). [RSS 2.0]');
+@define('SYNDICATION_PLUGIN_WEBMASTER', 'Feld "webMaster"');
+@define('SYNDICATION_PLUGIN_WEBMASTER_DESC', 'E-Mail-Adresse des Webmasters, falls vorhanden (leer: nicht verwenden). [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_TTL', 'Feld "ttl" (time-to-live)');
 @define('SYNDICATION_PLUGIN_TTL_DESC', 'Anzahl der Minuten, nachdem das Blog von fremden Seiten nicht mehr gecached werden sollte (leer: nicht verwenden). [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_PUBDATE', 'Feld "pubDate"');

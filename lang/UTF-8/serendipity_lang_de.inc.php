@@ -618,6 +618,7 @@
 @define('FETCH_METHOD_HOTLINK', 'Nur zum Quellserver linken');
 @define('GO_ADD_PROPERTIES', 'Los & Eigenschaften angeben');
 @define('PLAIN_ASCII_NAMES', '(keine Sonderzeichen, Umlaute)');
+@define('NO_FILE_SELECTED', 'Damit s9y etwas machen kann, musst du zuerst eine Datei auswählen');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', 'Dateiausmaße ändern');
@@ -1075,9 +1076,9 @@
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Die Anforderung für ein Blog-Abonnement wurde empfangen. Eine email wird an %s gesandt um das Abonnement zu bestätigen ("Double Opt In").');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'Das Abonnement für "%s" ist bestätigt. Eine Zusammenfassung eines neuen Artikels wird Ihnen zugesandt. Sie können das Abonnement jederzeit mit dem in jeder Mail befindlichen Link abbestellen.');
-@define('NOTIFICATION_SUBSCRIBE_DUPE','Das Abonnement ist fehlgeschlagen weil es bereits ein aktives Abonnement unter dieser Adresse für "%s" gibt.');
+@define('NOTIFICATION_SUBSCRIBE_DUPE', 'Das Abonnement ist fehlgeschlagen weil es bereits ein aktives Abonnement unter dieser Adresse für "%s" gibt.');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Das Abonnement ist fehlgeschlagen. Bitte prüfen Sie die eingegebene e-mail-Adresse.');
-@define('BLOG_SUBSCRIPTION_TITLE','Email-Abonnement neuer Artikel');
+@define('BLOG_SUBSCRIPTION_TITLE', 'Email-Abonnement neuer Artikel');
 @define('BLOG_SUBSCRIPTION_BLAHBLAH', 'Um über neue Artikel informiert zu werden, bitte hier die email-Adresse eingeben.');
 @define('BLOG_SUBSCRIPTION_AUTHOR', 'Um über neue Artikel von "%s" informiert zu werden, bitte hier die email-Adresse eingeben.');
 @define('BLOG_SUBSCRIPTION_CATEGORY', 'Um über neue Artikel in der Kategorie "%s" informiert zu werden, bitte hier die email-Adresse eingeben.');

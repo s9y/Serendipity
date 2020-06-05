@@ -620,6 +620,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('FETCH_METHOD_HOTLINK', 'Привязать к серверу');
 @define('GO_ADD_PROPERTIES', 'Go & enter properties');
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+@define('NO_FILE_SELECTED', 'For s9y to do something, you have to select a file first');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', 'Изменить размер этого изображения');

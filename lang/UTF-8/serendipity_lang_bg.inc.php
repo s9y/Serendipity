@@ -623,6 +623,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('FETCH_METHOD_HOTLINK', 'Гореща връзка към друг сървър');
 @define('GO_ADD_PROPERTIES', 'Продължаване за въвеждане на свойства');
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+@define('NO_FILE_SELECTED', 'For s9y to do something, you have to select a file first');
 
 /* ADMIN - MEDIA_PANE.TPL */
 @define('IMAGE_RESIZE', 'Промяна на размера на това изображение');
