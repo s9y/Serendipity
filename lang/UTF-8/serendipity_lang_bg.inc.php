@@ -432,6 +432,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('PAGE_BROWSE_COMMENTS', 'Страница %s от %s, общо %s коментара');
 @define('COMMENT_IS_DELETED', '(Коментарът е премахнат)');
 @define('COMMENT_MODERATED', 'Коментар #%s успешно е установен като модериран');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1283,3 +1284,5 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('PREFERENCE_USE_JS_DESC', 'Ако е позволено комплексно използване на JavaScript, някои части от Serendipity ще бъдат с подобрена функционалност. Например при конфигурирането на приставките става възможно използването на drag-and-drop за пренареждане на приставките.');
 @define('PREFERENCE_USE_JS_WARNING', '(Тази страница използва JavaScript. Ако имате проблеми, моля забранете комплексното използване на JavaScript във вашата персонална конфигурация или забранете JavaScript в браузъра.)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

@@ -439,6 +439,7 @@
 @define('PAGE_BROWSE_COMMENTS', 'Página %s de %s, total %s comentarios');
 @define('COMMENT_IS_DELETED', '(Comentario eliminado)');
 @define('COMMENT_MODERATED', 'El comentario #%s ha sido marcado como moderado exitosamente');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1290,3 +1291,5 @@
 @define('PREFERENCE_USE_JS_DESC', 'Si lo activas, las secciones de JavaScript avanzado serán activadas para una mejor usabilidad, como la extensión de configuración donde puedes utilizar el método de arrastrar y soltar para reordenar las extensiones.');
 @define('PREFERENCE_USE_JS_WARNING', '(Esta página hace uso de JavaScripting avanzado. Si estás teniendo problemas de funcionalidad, por favor desactiva el uso de JS avanzado en tus preferencias personales o desactiva el soporte para JavaScript de tu navegador)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

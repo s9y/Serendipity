@@ -427,6 +427,7 @@
 @define('PAGE_BROWSE_COMMENTS', 'Sida %s av %s, sammanlagt %s kommentarer');
 @define('COMMENT_IS_DELETED', '(Kommentar borttagen)');
 @define('COMMENT_MODERATED', 'Kommentar #%s har angetts som modererad');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1278,3 +1279,5 @@
 @define('PREFERENCE_USE_JS_DESC', 'Om aktiv kommer avancerade JavaScript-sektioner att användas för större användbarhet, såsom att i sektionen för konfigurering av insticksmoduler kunna dra och släppa insticksmoduler för att ändra deras ordning.');
 @define('PREFERENCE_USE_JS_WARNING', '(Denna sida använder avancerad JavaScript. Om du upplever funktionsproblem stäng av användningen av avancerad JS-användning i dina personliga inställningar eller stäng av din webbläsares JavaScript)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

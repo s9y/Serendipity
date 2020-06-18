@@ -429,6 +429,7 @@ $i18n_unknown = 'tw';
 @define('PAGE_BROWSE_COMMENTS', '頁數 %s 共 %s, 總共 %s 個迴響');
 @define('COMMENT_IS_DELETED', '(迴響已被移除)');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1280,3 +1281,5 @@ $i18n_unknown = 'tw';
 @define('PREFERENCE_USE_JS_DESC', '如果開啟，進階的 JavaScript 將會提供更好的用途，例如類似外掛設定內的牽曳和移動功能。');
 @define('PREFERENCE_USE_JS_WARNING', '(這個頁面使用了進階的 JavaScript。如果您遇到問題，請將進階的 JS 用法或瀏覽器的 JavaScript 關閉。)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

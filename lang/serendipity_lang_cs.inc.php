@@ -458,6 +458,7 @@ $i18n_filename_to = array (
 @define('PAGE_BROWSE_COMMENTS', 'Stránka %s ze %s, celkem %s komentáøù');
 @define('COMMENT_IS_DELETED', '(Komentáø odstranìn)');
 @define('COMMENT_MODERATED', 'Komentáø è.%s byl úspìšnì nastaven jako schválený');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Odebíráno');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1309,3 +1310,5 @@ $i18n_filename_to = array (
 @define('PREFERENCE_USE_JS_DESC', 'Je-li toto povoleno, budou povoleny sekce s advanced JavaScript, aby se zlepšila použitelnost. Napø v sekci pro konfiguraci pluginù mùžete pro pøeskládání pluginù použít drag and drop (táhnout myší).');
 @define('PREFERENCE_USE_JS_WARNING', '(Tato stránka používá advanced JavaScripting. Jestliže máte problémy s fungováním, zakažte prosím používání  advanced JS ve svém osobním nastavení nebo zakažte javascript v prohlížeèi.)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Èeká na potvrzení');
+@define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');

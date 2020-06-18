@@ -428,6 +428,7 @@
 @define('PAGE_BROWSE_COMMENTS', 'صفحه %s از %s، در کل %s نظر');
 @define('COMMENT_IS_DELETED', '(نظر حذف شد)');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1279,3 +1280,5 @@
 @define('PREFERENCE_USE_JS_DESC', 'در صورت فعال بودن قسمت هایی که از جاوا اسکریپت پیشرفته استفاده می کنند فعال می شود، مانند بخش مدیریت افزونه ها که می توانید از drag and drop برای مرتب سازی افزونه ها کمک بگیرید.');
 @define('PREFERENCE_USE_JS_WARNING', '(این صفحه از جاوا اسکریپت پیشرفته استفاده می کند. اگر با این صفحه مشکل پیدا کردید، از بخش تنظیمات شخصی، استفاده پیشرفته از جاوا اسکریپت را غیر فعال کنید یا اینکه فعالیت جاوا اسکریپت را داخل مرورگر خود غیر فعال کنید)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

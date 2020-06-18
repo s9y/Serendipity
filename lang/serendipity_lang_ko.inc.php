@@ -428,6 +428,7 @@
 @define('PAGE_BROWSE_COMMENTS', '%s번째 페이지 | 총 %s 페이지 | 총 %s개 덧글');
 @define('COMMENT_IS_DELETED', '(덧글 삭제됨)');
 @define('COMMENT_MODERATED', '%s번 덧글을 성공적으로 중재하기로 설정함');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', '구독됨');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1279,3 +1280,5 @@
 @define('PREFERENCE_USE_JS_DESC', '사용할 경우 고급 자바스크립트 기능 부분을 활용하게 되어 사용성이 향상됩니다. 대표적으로 플러그인 설정에서 플러그인을 끌어서 이동하여 순서를 바꿀 수 있게 됩니다.');
 @define('PREFERENCE_USE_JS_WARNING', '(이 페이지는 고급 자바스크립트 기능을 사용합니다. 기능 사용에 문제가 있을 경우 개인 설정에서 고급 자바스크립트 기능을 끄거나 브라우저의 자바스크립트 기능을 끄도록 합니다)');
 @define('PLUGIN_GROUP_ALL', '모든 범주');
+@define('PENDING_COMMENT_SUBSCRIPTION', '구독 대기 중');
+@define('NO_COMMENT_SUBSCRIPTION', '구독되지 않음');

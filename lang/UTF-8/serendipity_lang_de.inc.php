@@ -427,6 +427,7 @@
 @define('PAGE_BROWSE_COMMENTS', 'Seite %s von %s, %s Kommentare insgesamt');
 @define('COMMENT_IS_DELETED', '(Kommentar entfernt)');
 @define('COMMENT_MODERATED', 'Kommentar #%s wurde erfolgreich auf Status "moderieren" zurückgesetzt.');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Abonniert');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Abonnements bearbeiten');
@@ -1278,3 +1279,5 @@
 @define('PREFERENCE_USE_JS_DESC', 'Falls aktiviert, werden erweiterte JavaScript Funktionalitäten in einigen Bereichen freigeschaltet. Z.B. in der Plugin-Konfiguration kann Drag+Drop benutzt werden, um leichter Änderungen vorzunehmen.');
 @define('PREFERENCE_USE_JS_WARNING', '(Diese Seite setzt fortgeschrittene JavaScripts ein. Falls dabei Probleme in der Benutzbarkeit auftreten, deaktivieren Sie bitte die Option zum Einsatz dieser JavaScripts im Menüpunkt "Eigene Einstellungen", oder deaktivieren Sie JavaScript in Ihrem Browser.)');
 @define('PLUGIN_GROUP_ALL', 'Alle Kategorien');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Wartet auf Bestätigung');
+@define('NO_COMMENT_SUBSCRIPTION', 'Nicht abonniert');

@@ -427,6 +427,7 @@
 @define('PAGE_BROWSE_COMMENTS', '%s oldal ennyiből: %s, összesen ennyi bejegyzés: %s');
 @define('COMMENT_IS_DELETED', '(Hozzászólás törölve)');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set back to state "moderate".');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1278,3 +1279,5 @@
 @define('PREFERENCE_USE_JS_DESC', 'Ha ezt engedélyezed, akkor haladó JavaScript-et használunk, például a modul beállításoknál áthelyezheted a modul dobozokat a fogd és vidd módszerrel.');
 @define('PREFERENCE_USE_JS_WARNING', '(Az oldal haladó JavaScript-et használ. Amennyiben funkcionális problémáid vannak, tiltsd le ezt a személyes beállításaidnál, vagy a böngésződ JavaScript használatát)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

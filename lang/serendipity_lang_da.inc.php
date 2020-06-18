@@ -429,6 +429,7 @@
 @define('PAGE_BROWSE_COMMENTS', 'Side %s af %s, i alt %s kommentarer');
 @define('COMMENT_IS_DELETED', '(Kommentar slettet)');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1280,3 +1281,5 @@
 @define('PREFERENCE_USE_JS_DESC', 'Hvis aktiveret, vil der blive anvendt advancerede Javascript funktioner for at give en forbedret brugeroplevelse, f.eks. i plugin konfigurationen, hvor drag & drop omrokering af plugins bliver mulig.');
 @define('PREFERENCE_USE_JS_WARNING', '(Denne side anvender advanceret JavaScript. Får du funktionalitetsproblemer, så slå advanceret JS brug fra i dine personlige indstillinger, eller deaktiver Javascript i din browser)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

@@ -439,6 +439,7 @@ $i18n_filename_to = array (
 @define('PAGE_BROWSE_COMMENTS', 'Stránka %s zo %s, spolu %s komentárov');
 @define('COMMENT_IS_DELETED', '(Komentár odstránený)');
 @define('COMMENT_MODERATED', 'Komentár è.%s bol úspe¹ne schválený');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1290,3 +1291,5 @@ $i18n_filename_to = array (
 @define('PREFERENCE_USE_JS_DESC', 'Ak je zapnuté, budú pre zlep¹enie pou¾iteµnosti aktivované oblasti s advanced JavaScript. Napr. v oblasti pre konfiguráciu doplnkov mô¾ete pre reorganizáciu doplnkov pou¾i» drag and drop (tiahnu» my¹ou).');
 @define('PREFERENCE_USE_JS_WARNING', '(Táto stránka pou¾íva advanced JavaScripting. Ak máte problémy s funkènos»ou, zaká¾te prosím pou¾ívanie advanced JS vo svojich osobných nastaveniach alebo zaká¾te javascript vo Va¹om prehliadaèi.)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

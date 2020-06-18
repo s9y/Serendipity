@@ -427,6 +427,7 @@
 @define('PAGE_BROWSE_COMMENTS', 'ページ %s/%s, 合計 %s コメント');
 @define('COMMENT_IS_DELETED', '(コメントは削除されました)');
 @define('COMMENT_MODERATED', 'コメント #%s をもでレート済みに設定することに成功しました');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1278,3 +1279,5 @@
 @define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
 @define('PREFERENCE_USE_JS_WARNING', '(このページは高度な JavaScript を使用しています。もし機能に問題がある場合、個人プリファレンスの高度な JS の使用を無効にするか、ブラウザーの JavaScript を無効にしてください)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

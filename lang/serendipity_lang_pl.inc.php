@@ -428,6 +428,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('PAGE_BROWSE_COMMENTS', 'Strona %s z %s, ³±cznie %s komentarzy');
 @define('COMMENT_IS_DELETED', '(Komentarz usuniêty)');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 
 /* ADMIN - SUBSCRIPTIONS.TPL */
 @define('EDIT_SUBSCRIPTIONS', 'Edit Subscriptions');
@@ -1279,3 +1280,5 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('PREFERENCE_USE_JS_DESC', 'Je¶li w³±czone, zaawansowane skrypty JavaScript bêd± uruchamiane dla zwiêkszenia komfortu u¿ywalno¶ci, np. w module Konfiguracji wtyczek mo¿esz administarowaæ wtyczkami za pomoc± myszy przez ich swobodne przesuwanie jak w technologii "drag and drop" (przeci±gnij i upu¶æ).');
 @define('PREFERENCE_USE_JS_WARNING', '(Ta strona u¿ywa zaawansowanych skryptów JavaScript. Je¶li masz problemy z funkcjonowaniem tej strony, wy³±cz u¿ywanie zaawansowanych skryptów JavaScript w swoich Ustawieniach osobistych lub wy³±cz wspracie dla JavaScript w swojej przegl±darce.)');
 @define('PLUGIN_GROUP_ALL', 'All categories');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
