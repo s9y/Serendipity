@@ -209,6 +209,14 @@
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('ifEmpty')),
 
+                                    array('var'         => 'permalinkSubscribePath',
+                                          'title'       => INSTALL_PERMALINK_SUBSCRIBEPATH,
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
+                                          'type'        => 'string',
+                                          'default'     => 'subscribe',
+                                          'permission'  => 'siteConfiguration',
+                                          'flags'       => array('ifEmpty')),
+
                                     array('var'         => 'permalinkUnsubscribePath',
                                           'title'       => INSTALL_PERMALINK_UNSUBSCRIBEPATH,
                                           'description' => CONFIG_PERMALINK_PATH_DESC,
@@ -353,8 +361,8 @@
                                     array('var'         => 'allowSubscriptions',
                                           'title'       => INSTALL_SUBSCRIBE,
                                           'description' => INSTALL_SUBSCRIBE_DESC,
-                                          'type'        => 'list',
-                                          'default'     => array('fulltext' => FULL_COMMENT_TEXT, 'true' => YES, 'false' => NO),
+                                          'type'        => 'bool',
+                                          'default'     => true,
                                           'permission'  => 'siteConfiguration'),
 
                                     array('var'         => 'allowSubscriptionsOptIn',
@@ -363,6 +371,20 @@
                                           'type'        => 'bool',
                                           'default'     => true,
                                           'permission'  => 'siteConfiguration'),
+
+                                    array('var'         => 'subscribeChunk',
+                                          'title'       => INSTALL_SUBSCRIBE_CHUNK,
+                                          'description' => INSTALL_SUBSCRIBE_CHUNK_DESC,
+                                          'type'        => 'list',
+                                          'default'     => array('min' => TITLE, 'med' => ENTRY_BODY),
+                                          'permission'  => 'siteConfiguration'),
+
+                                    array('var'         => 'sendSubscriptionHtml',
+                                          'title'       => SUBSCRIPTION_MAIL_FORMAT,
+                                          'description' => SUBSCRIPTION_MAIL_FORMAT_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'permission'  => 'blogConfiguration'),
 
                                     array('var'         => 'useCommentTokens',
                                           'title'       => COMMENT_TOKENS,

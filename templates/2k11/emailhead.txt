@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset={$CONST.LANG_CHARSET}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{$title}</title>
+    <!--[if gte mso 9]><xml>
+    <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+  </xml><![endif]-->
+    <style> 
+    body { 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        -webkit-text-size-adjust: 100% !important; 
+        -ms-text-size-adjust: 100% !important; 
+        -webkit-font-smoothing: antialiased !important;
+        }
+
+    table.frame { font-family: Helvetia, Arial, sans-serif; !important }
+
+    h1 { font-size: 2em; }
+
+    h2 {
+        font-size: 1.5em;
+        margin: 0 0 .6667em;
+    }
+
+    h1, h2 { line-height: 1.25; }
+
+    h3 {
+        font-size: 1.25em;
+        margin: 0 0 .8em;
+        line-height: 1.5;
+    }
+
+    h4, h5, h6 { 
+        font-size:1em; 
+        line-height: 1.5;
+    }
+
+    img { 
+        border: 0; 
+        outline: none; 
+        margin: 0; 
+    }
+
+    p { margin-top: 0px !important; 
+        margin-left: 0px !important;
+        margin-bottom: 1em !important;
+        margin-right: 0px !important;
+        padding: 0px !important;
+        line-height: 1.5; }
+
+    table { 
+        border-collapse: collapse; 
+        mso-table-lspace: 0px; 
+        mso-table-rspace: 0px; 
+        } 
+
+    td, a, span { border-collapse: collapse; mso-line-height-rule: exactly; }
+
+    .serendipity_imageComment_img { margin: 0; }
+
+    .serendipity_imageComment_center,
+    .serendipity_imageComment_left,
+    .serendipity_imageComment_right {
+        background: transparent;
+        border: 0 none;
+        padding: 0!important;
+    }
+
+    .serendipity_imageComment_left,
+    .serendipity_imageComment_right {
+        display: block;
+        float: none;
+        margin: 0 0 1em;
+    }
+
+    .serendipity_imageComment_center {
+        display: block;
+        text-align: center;
+        margin: 0 auto 1em auto;
+    }
+
+    .serendipity_imageComment_txt { 
+        font-size: 0.8em;
+        background: #ddd;
+        line-height: 1.8;
+        padding: 0.2em;
+        text-align: center;
+        margin: 0;
+    }
+
+    .serendipity_imageComment_left {
+        display: inline;
+        float: left;
+        margin: 0 2em 1em 0;
+    }
+
+    .serendipity_imageComment_right {
+        display: inline;
+        float: right;
+        margin: 0 0 1em 2em;
+    }
+    </style> 
+</head>

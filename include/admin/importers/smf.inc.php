@@ -307,7 +307,6 @@ class Serendipity_Import_smf extends Serendipity_Import {
                                  'ip'        => '',
                                  'status'    => 'approved',
                                  'body'      => $a['post_text'],
-                                 'subscribed'=> 'false',
                                  'type'      => 'NORMAL');
 
                 serendipity_db_insert('comments', $this->strtrRecursive($comment));

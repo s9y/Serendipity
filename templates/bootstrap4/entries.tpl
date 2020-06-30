@@ -54,9 +54,6 @@
         </rdf:RDF>
         -->
 {if $is_single_entry and not $use_popups and not $is_preview}
-    {if $CONST.DATA_UNSUBSCRIBED}
-        <p class="alert alert-success" role="alert">{$CONST.DATA_UNSUBSCRIBED|sprintf:$CONST.UNSUBSCRIBE_OK}</p>
-    {/if}
     {if $CONST.DATA_TRACKBACK_DELETED}
         <p class="alert alert-danger" role="alert">{$CONST.DATA_TRACKBACK_DELETED|sprintf:$CONST.TRACKBACK_DELETED}</p>
     {/if}

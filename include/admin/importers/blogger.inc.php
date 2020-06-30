@@ -236,7 +236,6 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
                                         'ip'        => '',
                                         'status'    => 'approved',
                                         'body'      => $this->strtr((string) $bEntry->content),
-                                        'subscribed'=> 'false',
                                         'type'      => 'NORMAL'
                                         );
                     serendipity_db_insert('comments', $sComment);

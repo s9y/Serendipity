@@ -1020,7 +1020,7 @@
 @define('TRACKBACK_COULD_NOT_CONNECT', 'Nem sikerült visszahivatkozást küldeni: nem sikerült a csatlakozás ide: %s ezen a porton: %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1035,8 +1035,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Új hozzászólás érkezett az alábbi (feliratkozott) bejegyzéshez "%s"');
 @define('SUBSCRIPTION_MAIL', "Szia %s!\n\nÚj hozzászólás érkezett a \"%s\" bejegyzéshez, az alábbi címmel: \"%s\"\nAz új hozzászólás szerzője: %s\n\nA bejegyzést itt találod: %s\n\nA leiratkozáshoz kattints az alábbi linkre: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nÚj visszahivatkozás került az általad megfigyelt bejegyzéshez, a \"%s\" blog-ban, a következő című bejegyzéshez \"%s\"\nA felirat neve: %s\n\nEz itt található: %s\n\nA figyelést törölheted ide kattintva: %s\n");
-@define('SIGNATURE', "\n-- \n%s a Serendipity motort használja.\nEz a legjobb blog, te is használhatod.\nItt megtudod, hogyan: <https://s9y.org>.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s a Serendipity motort használja.\nEz a legjobb blog, te is használhatod.\nItt megtudod, hogyan: %s.");
 @define('A_NEW_COMMENT_BLAHBLAH', 'Új hozzászólás érkezett a "%s" blog-ban ehhez a bejegyzéshez: "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'Új hivatkozás történt másik oldalról erre a blog bejegyzésre: "%s".');
 @define('YOU_HAVE_THESE_OPTIONS', 'A következő opciók érhetők el:');
@@ -1066,7 +1065,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'A hozzászólásokról szóló értesítésekre való feliratkozásodat sikeresen megerősítetted.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1076,7 +1075,7 @@
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

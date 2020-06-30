@@ -290,7 +290,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
  */
 function serendipity_db_schema_import($query) {
     static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}', '{FULLTEXT}', '{BOOLEAN}', '{UTF_8}', '{TEXT}');
-    static $replace = array('INTEGER AUTOINCREMENT', 'PRIMARY KEY', '', '', 'BOOLEAN NOT NULL', '', 'LONGTEXT');
+    static $replace = array('INTEGER AUTOINCREMENT', 'PRIMARY KEY', '', '', 'BOOLEAN', '', 'LONGTEXT');
 
     if (stristr($query, '{FULLTEXT_MYSQL}')) {
         return true;

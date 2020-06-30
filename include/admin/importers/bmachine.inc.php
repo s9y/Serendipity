@@ -232,7 +232,6 @@ class Serendipity_Import_bmachine extends Serendipity_Import {
                                      'ip'        => $a['auth_ip'],
                                      'status'    => 'approved',
                                      'body'      => $a['data'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));

@@ -185,6 +185,14 @@ if (!$use_installer && $is_logged_in) {
             $admin_section = COMMENTS;
             break;
 
+        case 'subscriptions':
+            if (!serendipity_checkPermission('adminSubscriptions')) {
+                break;
+            }
+            include S9Y_INCLUDE_PATH . 'include/admin/subscriptions.inc.php';
+            $admin_section = SUBSCRIPTIONS;
+            break;
+
         case 'category':
         case 'categories':
             if (!serendipity_checkPermission('adminCategories')) {

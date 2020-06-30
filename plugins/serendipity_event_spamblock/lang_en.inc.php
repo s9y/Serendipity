@@ -157,3 +157,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE', 'Value for timeout');
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE_DESC', 'type fixed: timeout in seconds / type adaptive: reading in words per minute and typing in chars per minute, 500 is a good value even for fast readers');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TIMEOUT','Sorry, but you are not a human or you should at least attempt to read the article before commenting');
+@define('PLUGIN_EVENT_SPAMBLOCK_SUBSCRIPTION_TIMEOUT', 'Timeout for subscribing');
+@define('PLUGIN_EVENT_SPAMBLOCK_SUBSCRIPTION_TIMEOUT_DESC', 'Activate a timeout between displaying any content and accepting a subscription');
+@define('PLUGIN_EVENT_SPAMBLOCK_SUBSCRIBE_TIMEOUT', 'It would make sense to actually read something of the stuff you want to subscribe to.');

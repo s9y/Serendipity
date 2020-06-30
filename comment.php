@@ -37,12 +37,13 @@ if (!empty($_REQUEST['c']) && !empty($_REQUEST['hash'])) {
     exit;
 }
 
+// legacy uri for subscription confirm. Re-routed to /subscribe/optin in 2.4
 if (!empty($_REQUEST['optin'])) {
-    $res = serendipity_commentSubscriptionConfirm($_REQUEST['optin']);
+    $res = serendipity_subscriptionConfirm($_REQUEST['optin']);
     $serendipity['view'] = 'notification';
     $serendipity['GET']['action'] = 'custom';
     $serendipity['smarty_custom_vars'] = array(
-        'content_message'       => ($res ? NOTIFICATION_CONFIRM_SUBMAIL : NOTIFICATION_CONFIRM_SUBMAIL_FAIL),
+        'content_message'       => ($res ? NOTIFICATION_CONFIRM_SUBMAIL : NOTIFICATION_OPTIN_FAIL),
         'subscribe_confirm_error'				=> !$res,
         'subscribe_confirm_success'				=> $res,
     );

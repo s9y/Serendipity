@@ -296,7 +296,7 @@ function serendipity_db_schema_import($query) {
     static $search  = array('{AUTOINCREMENT}', '{PRIMARY}',
         '{UNSIGNED}', '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', '{TEXT}');
     static $replace = array('int(11) not null auto_increment', 'primary key',
-        'unsigned'  , 'FULLTEXT', 'FULLTEXT', 'enum (\'true\', \'false\') NOT NULL default \'true\'', 'LONGTEXT');
+        'unsigned'  , 'FULLTEXT', 'FULLTEXT', 'enum (\'true\', \'false\')', 'LONGTEXT');
     static $is_utf8 = null;
     global $serendipity;
 

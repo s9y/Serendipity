@@ -16,7 +16,7 @@
         </ul>
 
         <fieldset id="filter_entries" class="additional_info filter_pane">
-            <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
+            <legend class="visuallyhidden">{$CONST.FILTERS} ({$CONST.FIND_ENTRIES})</legend>
 
             <div class="clearfix">
                 <div class="form_select">
@@ -205,8 +205,6 @@
     {/if}
 {/if}
 {if $no_entries}
-    <h2>{$CONST.FIND_ENTRIES}</h2>
-
     <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span>
 {/if}
 
@@ -231,7 +229,7 @@
     {/if}
     {if ($is_doDelete || $is_doMultiDelete )}
         {foreach $del_entry AS $delent}
-        <span class="msg_hint"><span class="icon-help-circled" aria-hidden="true"></span> {$delent}</span>
+        <span class="msg_hint"><span class="icon-info-circled" aria-hidden="true"></span> {$delent}</span>
         {/foreach}
     {/if}
     {if ( $is_delete || $is_multidelete )}

@@ -280,6 +280,12 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_upgradeUTF8_UTF8mb4',
                      'title'     => 'Enable full Unicode support for MySQL',
                      'desc'      => 'Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, enabling full unicode input. Warning: Make a database backup before running this!'),
+
+               array('version'   => '2.4-alpha3',
+                     'function'  => 'serendipity_upgrader_subscriptions',
+                     'title'     => 'add subscription table',
+                     'desc'      => 'adds a new subscriptions table and copy the subscriptions from the comments table'),
+
 );
 
 /* Fetch SQL files which needs to be run */

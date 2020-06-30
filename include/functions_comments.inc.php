@@ -199,9 +199,10 @@ function serendipity_displayCommentForm($id, $url = '', $comments = NULL, $data 
         'commentform_subscribe'      => isset($data['subscribe']) ? 'checked="checked"' : '',
         'commentform_data'           => isset($data['comment'])   ? serendipity_specialchars($data['comment']) : '',
         'is_commentform_showToolbar' => $showToolbar,
-        'is_allowSubscriptions'      => (serendipity_db_bool($serendipity['allowSubscriptions']) || $serendipity['allowSubscriptions'] === 'fulltext' ? true : false),
+        'is_allowSubscriptions'      => $serendipity['allowSubscriptions'],
         'is_moderate_comments'       => $moderate_comments,
-        'commentform_entry'          => $entry
+        'commentform_entry'          => $entry,
+        'subscription_url'           => serendipity_rewriteURL(PATH_SUBSCRIBE . '/entry/' . (int)$id, 'baseURL')
     );
 
     $serendipity['smarty']->assign($commentform_data);
@@ -261,7 +262,7 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
 
     $query = "SELECT $distinct
                     co.id,
-                    co.entry_id, co.timestamp, co.title AS ctitle, co.email, co.url, co.ip, co.body, co.type, co.subscribed,
+                    co.entry_id, co.timestamp, co.title AS ctitle, co.email, co.url, co.ip, co.body, co.type, 
                     co.author,
                     e.title,
                     e.timestamp AS entrytimestamp,
@@ -270,10 +271,13 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
                     e.author as entryauthor,
                     co.id AS commentid,
                     co.parent_id AS parent_id,
-                    co.status
+                    co.status,
+                    s.subscribed
               FROM
                     {$serendipity['dbPrefix']}comments AS co
                     LEFT JOIN {$serendipity['dbPrefix']}entries AS e ON (co.entry_id = e.id)
+                    LEFT JOIN {$serendipity['dbPrefix']}subscriptions AS s 
+                    ON (co.entry_id = s.target_id AND s.type = 'entry' AND co.email = s.email)
               WHERE co.type LIKE '" . $type . "' AND co.entry_id > 0 $and
               $group
               ORDER BY
@@ -403,15 +407,13 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
                 $comment['title']   = serendipity_specialchars($comment['title']);
             }
 
+            // display comment status: approved - confirm - pending
+            // if set to pending and confirm email arrives, it goes straight to approved without moderation
             if (serendipity_userLoggedIn()) {
-                if ($comment['subscribed'] == 'true') {
-                    if ($comment['status'] == 'approved') {
-                        $comment['body'] .= '<div class="serendipity_subscription_on"><em>' . ACTIVE_COMMENT_SUBSCRIPTION . '</em></div>';
-                    } else {
-                        $comment['body'] .= '<div class="serendipity_subscription_pending"><em>' . PENDING_COMMENT_SUBSCRIPTION . '</em></div>';
-                    }
-                } else {
-                    #$comment['body'] .= '<div class="serendipity_subscription_off"><em>' . NO_COMMENT_SUBSCRIPTION . '</em></div>';
+                if ($comment['status'] == 'pending') {
+                    $comment['body'] .= '<div class="serendipity_comment_pending"><em>' . PENDING_MODERATION . '</em></div>';
+                } elseif ($comment['status'] == 'confirm') {
+                    $comment['body'] .= '<div class="serendipity_comment_confirm"><em>' . PENDING_CONFIRMATION . '</em></div>';
                 }
             }
 
@@ -714,10 +716,12 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
     }
 
     if (!$moderate) {
-        if ($serendipity['allowSubscriptions'] === 'fulltext') {
-            serendipity_mailSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid, $rs['body']);
-        } elseif (serendipity_db_bool($serendipity['allowSubscriptions'])) {
-            serendipity_mailSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid);
+        if ($serendipity['allowSubscriptions']) {
+            if ($serendipity['subscribeChunk'] == 'med') {
+                serendipity_mailCommentSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid, $rs['body']);
+            } else {
+                serendipity_mailCommentSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid);
+            }
         }
 
         serendipity_plugin_api::hook_event('backend_approvecomment', $rs);
@@ -831,15 +835,14 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     }
 
     $send_optin = false;
+    $subscribe = false;
     if (isset($commentInfo['subscribe'])) {
         if (!isset($serendipity['allowSubscriptionsOptIn']) || $serendipity['allowSubscriptionsOptIn']) {
-            $subscribe = 'false';
+            $subscribe = true;
             $send_optin = true;
         } else {
-            $subscribe = 'true';
+            $subscribe = true;
         }
-    } else {
-        $subscribe = 'false';
     }
 
     $dbhash   = md5(uniqid(rand(), true));
@@ -864,8 +867,8 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         $dbstatus = $status;
     }
 
-    $query  = "INSERT INTO {$serendipity['dbPrefix']}comments (entry_id, parent_id, ip, author, email, url, body, type, timestamp, title, subscribed, status, referer)";
-    $query .= " VALUES ('". (int)$id ."', '$parentid', '$ip', '$name', '$email', '$url', '$commentsFixed', '$type', '$t', '$title', '$subscribe', '$dbstatus', '$referer')";
+    $query  = "INSERT INTO {$serendipity['dbPrefix']}comments (entry_id, parent_id, ip, author, email, url, body, type, timestamp, title, status, referer)";
+    $query .= " VALUES ('". (int)$id ."', '$parentid', '$ip', '$name', '$email', '$url', '$commentsFixed', '$type', '$t', '$title', '$dbstatus', '$referer')";
 
     if ($GLOBALS['tb_logging']) {
         $fp = fopen('trackback2.log', 'a');
@@ -898,44 +901,37 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         fwrite($fp, '[' . date('d.m.Y H:i') . '] No need to approve...' . "\n");
     }
 
-    if ($status == 'confirm') {
-        $subject = sprintf(NEW_COMMENT_TO_SUBSCRIBED_ENTRY, $row['title']);
-        $message = sprintf(CONFIRMATION_MAIL_ALWAYS,
-                            $name,
-                            $row['title'],
-                            $commentsFixed,
-                            $serendipity['baseURL'] . 'comment.php?c=' . $cid . '&hash=' . $dbhash);
-
-        serendipity_sendMail($email, $subject, $message, $serendipity['blogMail']);
-    } elseif ($status == 'confirm1') {
-        $subject = sprintf(NEW_COMMENT_TO_SUBSCRIBED_ENTRY, $row['title']);
-        $message = sprintf(CONFIRMATION_MAIL_ONCE,
-                            $name,
-                            $row['title'],
-                            $commentsFixed,
-                            $serendipity['baseURL'] . 'comment.php?c=' . $cid . '&hash=' . $dbhash);
-
-        serendipity_sendMail($email, $subject, $message, $serendipity['blogMail']);
-    }
-
-    if ($send_optin) {
-        $dupe_check = serendipity_db_query("SELECT count(entry_id) AS counter
-                                              FROM {$serendipity['dbPrefix']}comments
-                                             WHERE entry_id = " . (int)$id . "
-                                               AND email = '$email'
-                                               AND subscribed = 'true'", true);
-        if (!is_array($dupe_check) || $dupe_check['counter'] < 1) {
-            serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (okey, name, value)
-                                       VALUES ('commentsub_{$dbhash}', '" . time() . "', '{$cid}')");
-
+    
+    // simple filter check for email before all email based processes
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // send address confirmation mail to the commenter
+        if ($status == 'confirm') {
             $subject = sprintf(NEW_COMMENT_TO_SUBSCRIBED_ENTRY, $row['title']);
-            $message = sprintf(CONFIRMATION_MAIL_SUBSCRIPTION,
+            $message = sprintf(CONFIRMATION_MAIL_ALWAYS,
                                 $name,
                                 $row['title'],
-                                serendipity_archiveURL($id, $row['title'], 'baseURL'),
-                                $serendipity['baseURL'] . 'comment.php?optin=' . $dbhash);
+                                $commentsFixed,
+                                $serendipity['baseURL'] . 'comment.php?c=' . $cid . '&hash=' . $dbhash);
 
             serendipity_sendMail($email, $subject, $message, $serendipity['blogMail']);
+        } elseif ($status == 'confirm1') {
+            $subject = sprintf(NEW_COMMENT_TO_SUBSCRIBED_ENTRY, $row['title']);
+            $message = sprintf(CONFIRMATION_MAIL_ONCE,
+                                $name,
+                                $row['title'],
+                                $commentsFixed,
+                                $serendipity['baseURL'] . 'comment.php?c=' . $cid . '&hash=' . $dbhash);
+
+            serendipity_sendMail($email, $subject, $message, $serendipity['blogMail']);
+        }
+
+        // subscribe email to the entry, with or without optin mail
+        if ($subscribe) {
+            if ($send_optin) {
+                serendipity_sendConfirmationMail($email, 'entry', (int)$id, $name);
+            } else {
+                serendipity_subscription($email, 'entry', (int)$id);
+            }
         }
     }
 
@@ -944,43 +940,6 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     }
     serendipity_cleanCache();
     return $cid;
-}
-
-/**
- * Confirm a comment subscription
- *
- * @access public
- * @param   string  The confirmation hash
- * @return  boolean
- */
-function serendipity_commentSubscriptionConfirm($hash) {
-    global $serendipity;
-
-    // Delete possible current cookie. Also delete any confirmation hashs that smell like 3-week-old, dead fish.
-    if (stristr($serendipity['dbType'], 'sqlite')) {
-        $cast = "name";
-    } else {
-        // Adds explicits casting for mysql, postgresql and others.
-        $cast = "cast(name as integer)";
-    }
-
-    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                                WHERE okey LIKE 'commentsub_%' AND $cast < " . (time() - 1814400) . ")");
-
-    $hashinfo = serendipity_db_query("SELECT value
-                                        FROM {$serendipity['dbPrefix']}options
-                                       WHERE okey = 'commentsub_" . serendipity_db_escape_string($hash) . "'", true);
-    if (is_array($hashinfo) && $hashinfo['value'] > 0) {
-        $cid = (int)$hashinfo['value'];
-        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}comments
-                                 SET subscribed = 'true'
-                               WHERE id = $cid");
-
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                                    WHERE okey = 'commentsub_" . serendipity_db_escape_string($hash) . "'");
-
-        return $cid;
-    }
 }
 
 /**
@@ -1042,26 +1001,28 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
  * @param   string  The body of the comment that has been made
  * @return null
  */
-function serendipity_mailSubscribers($entry_id, $poster, $posterMail, $title, $fromEmail = 'none@example.com', $cid = null, $body = null) {
+function serendipity_mailCommentSubscribers($entry_id, $poster, $posterMail, $title, $fromEmail = 'none@example.com', $cid = null, $body = null) {
     global $serendipity;
 
     $entryURI = serendipity_archiveURL($entry_id, $title, 'baseURL') . ($cid > 0 ? '#c' . $cid : '');
     $subject =  sprintf(NEW_COMMENT_TO_SUBSCRIBED_ENTRY, $title);
+    $entry_id = (int)$entry_id;
 
     $pgsql_insert = '';
     $mysql_insert = '';
     if ($serendipity['dbType'] == 'postgres' ||
         $serendipity['dbType'] == 'pdo-postgres') {
-        $pgsql_insert = 'DISTINCT ON (email)';
+        $pgsql_insert = 'DISTINCT ON (s.email)';
     } else {
-        $mysql_insert = 'GROUP BY email';
+        $mysql_insert = 'GROUP BY s.email';
     }
 
-    $sql = "SELECT $pgsql_insert author, email, type
-            FROM {$serendipity['dbPrefix']}comments
-            WHERE entry_id = '". (int)$entry_id ."'
-              AND email <> '" . serendipity_db_escape_string($posterMail) . "'
-              AND email <> ''
+    $sql = "SELECT $pgsql_insert c.name, s.email, c.type
+            FROM {$serendipity['dbPrefix']}subscriptions s
+            LEFT JOIN {$serendipity['dbPrefix']}comments c ON (s.target_id = c.entry_id AND s.email = c.email)
+            WHERE s.type = 'entry'
+              AND s.target_id = {$entry_id}
+              AND s.email <> '" . serendipity_db_escape_string($posterMail) . "'
               AND subscribed = 'true' $mysql_insert";
     $subscribers = serendipity_db_query($sql);
 
@@ -1074,47 +1035,28 @@ function serendipity_mailSubscribers($entry_id, $poster, $posterMail, $title, $f
             $text = sprintf(
                       SUBSCRIPTION_TRACKBACK_MAIL,
 
-                      $subscriber['author'],
+                      $subscriber['name'],
                       $serendipity['blogTitle'],
                       $title,
                       $poster,
                       ($body ? "\n\n" . $body . "\n" : '') . $entryURI,
-                      serendipity_rewriteURL('unsubscribe/' . urlencode($subscriber['email']) . '/' . (int)$entry_id, 'baseURL')
+                      serendipity_rewriteURL(PATH_UNSUBSCRIBE . '/' . urlencode($subscriber['email']) . '/' . (int)$entry_id , 'baseURL')
             );
         } else {
             $text = sprintf(
                       SUBSCRIPTION_MAIL,
 
-                      $subscriber['author'],
+                      $subscriber['name'],
                       $serendipity['blogTitle'],
                       $title,
                       $poster,
                       ($body ? "\n\n" . $body . "\n" : '') . $entryURI,
-                      serendipity_rewriteURL('unsubscribe/' . urlencode($subscriber['email']) . '/' . (int)$entry_id, 'baseURL')
+                      serendipity_rewriteURL(PATH_UNSUBSCRIBE . '/' . urlencode($subscriber['email']) . '/' . (int)$entry_id , 'baseURL')
             );
         }
 
         serendipity_sendMail($subscriber['email'], $subject, $text, $fromEmail);
     }
-}
-
-/**
- * Cancel a subscription to an entry
- *
- * @access public
- * @param   string      E-Mail address to cancel subscription
- * @param   int         The entry ID to unsubscribe from
- * @return  int         Return number of unsubscriptions
- */
-function serendipity_cancelSubscription($email, $entry_id) {
-    global $serendipity;
-    $sql = "UPDATE {$serendipity['dbPrefix']}comments
-                SET subscribed = 'false'
-            WHERE entry_id = '". (int)$entry_id ."'
-                AND email = '" . serendipity_db_escape_string($email) . "'";
-    serendipity_db_query($sql);
-
-    return serendipity_db_affected_rows();
 }
 
 /**

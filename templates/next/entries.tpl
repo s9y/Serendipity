@@ -45,9 +45,6 @@
         </rdf:RDF>
         -->
 {if $is_single_entry and not $use_popups and not $is_preview}
-    {if $CONST.DATA_UNSUBSCRIBED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_UNSUBSCRIBED|sprintf:$CONST.UNSUBSCRIBE_OK}</p>
-    {/if}
     {if $CONST.DATA_TRACKBACK_DELETED}
         <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_TRACKBACK_DELETED|sprintf:$CONST.TRACKBACK_DELETED}</p>
     {/if}

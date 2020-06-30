@@ -25,7 +25,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.89.2');
+        $propbag->add('version',       '1.90');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -34,7 +34,8 @@ class serendipity_event_spamblock extends serendipity_event
             'backend_comments_top' => true,
             'backend_view_comment' => true,
             'backend_sidebar_admin_appearance' => true,
-            'entry_display'        => true
+            'entry_display'        => true,
+            'frontend_subscribe'   => true
         ));
         $propbag->add('configuration', array(
             'killswitch',
@@ -71,6 +72,8 @@ class serendipity_event_spamblock extends serendipity_event
             'comment_timeout',
             'timeout_type',
             'timeout_value',
+            'subscription_timeout',
+            'subscription_timeout_value',
             'automagic_htaccess',
             'logtype',
             'logfile'));
@@ -479,6 +482,20 @@ class serendipity_event_spamblock extends serendipity_event
                 $propbag->add('default', '30');
                 break;
 
+            case 'subscription_timeout':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_SUBSCRIPTION_TIMEOUT);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_SUBSCRIPTION_TIMEOUT_DESC);
+                $propbag->add('default', true);
+                break;
+
+            case 'subscription_timeout_value':
+                $propbag->add('type', 'string');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE_DESC);
+                $propbag->add('default', '60');
+                break;
+
             default:
                 return false;
         }
@@ -885,6 +902,8 @@ class serendipity_event_spamblock extends serendipity_event
             $timeout = $this->get_config('comment_timeout',false);
             $timeout_type = $this->get_config('timeout_type','fix');
             $timeout_value = intval($this->get_config('timeout_value',30));
+            $timeout_subscription = $this->get_config('timeout_subscription',true);
+            $timeout_subscription_value = intval($this->get_config('timeout_subscription_value', 60));
 
             if (function_exists('imagettftext') && function_exists('imagejpeg')) {
                 $max_char = 5;
@@ -907,6 +926,9 @@ class serendipity_event_spamblock extends serendipity_event
                     } else {
                         if (isset($_SESSION['serendipity_entry_wordcount'])) unset( $_SESSION['serendipity_entry_wordcount']);
                     }
+                    
+                    // save a timestamp that anything is displayed for reading in this session
+                    if (!isset($_SESSION['serendipity_display_time'])) $_SESSION['serendipity_display_time'] = time();
                     
                     break;
 
@@ -1461,6 +1483,24 @@ class serendipity_event_spamblock extends serendipity_event
 
                 case 'backend_sidebar_admin_appearance':
                         echo '<li><a href="serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance . '">' . PLUGIN_EVENT_SPAMBLOCK_TITLE . '</a></li>';
+                    break;
+
+                case 'frontend_subscribe':
+                    // Check for subscription timeout
+                    if ($timeout_subscription) {
+                        
+                        // time passed in seconds since displaying content
+                        $usedtime = time() - $_SESSION['serendipity_display_time'];
+                        if ($usedtime < $timeout_subscription_value) {
+                            $this->log($logfile, $eventData['email'], 'SUBSCRIPTION_BLOCKED', PLUGIN_EVENT_SPAMBLOCK_SUBSCRIBE_TIMEOUT, $eventData);
+                            $serendipity['messagestack']['subscribe']= PLUGIN_EVENT_SPAMBLOCK_SUBSCRIBE_TIMEOUT;
+                            $eventData['block_subscription'] = true;
+                            
+                            // reset blocking timer
+                            $_SESSION['serendipity_display_time'] = time();
+                            return false;
+                        }
+                    }
                     break;
 
                 default:

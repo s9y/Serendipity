@@ -200,7 +200,6 @@ class Serendipity_Import_textpattern extends Serendipity_Import {
                                      'ip'        => $a['ip'],
                                      'status'    => ($a['visible'] == '1' ? 'approved' : 'pending'),
                                      'body'      => $a['message'],
-                                     'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));

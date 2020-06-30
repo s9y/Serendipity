@@ -205,6 +205,10 @@ function serendipity_initPermalinks() {
         $serendipity['permalinkUnsubscribePath'] = 'unsubscribe';
     }
 
+    if (!isset($serendipity['permalinkSubscribePath'])) {
+        $serendipity['permalinkSubscribePath'] = 'subscribe';
+    }
+
     if (!isset($serendipity['permalinkDeletePath'])) {
         $serendipity['permalinkDeletePath'] = 'delete';
     }
@@ -241,6 +245,7 @@ function serendipity_initPermalinks() {
     @define('PATH_ARCHIVE',     $serendipity['permalinkArchivePath']);
     @define('PATH_CATEGORIES',  $serendipity['permalinkCategoriesPath']);
     @define('PATH_UNSUBSCRIBE', $serendipity['permalinkUnsubscribePath']);
+    @define('PATH_SUBSCRIBE',   $serendipity['permalinkSubscribePath']);
     @define('PATH_DELETE',      $serendipity['permalinkDeletePath']);
     @define('PATH_APPROVE',     $serendipity['permalinkApprovePath']);
     @define('PATH_FEEDS',       $serendipity['permalinkFeedsPath']);
@@ -278,7 +283,8 @@ function &serendipity_permalinkPatterns($return = false) {
 
     $PAT = array();
 
-    $PAT['UNSUBSCRIBE']              = '@/'  . $serendipity['permalinkUnsubscribePath'].'/(.*)/([0-9]+)@';
+    $PAT['UNSUBSCRIBE']              = '@/'  . $serendipity['permalinkUnsubscribePath'].'/(.*)@';
+    $PAT['SUBSCRIBE']                = '@/'  . $serendipity['permalinkSubscribePath'].'/(.*)@';
     $PAT['APPROVE']                  = '@/'  . $serendipity['permalinkApprovePath'].'/(.*)/(.*)/([0-9]+)@';
     $PAT['DELETE']                   = '@/'  . $serendipity['permalinkDeletePath'].'/(.*)/(.*)/([0-9]+)@';
     $PAT['ARCHIVES']                 = '@/'  . $serendipity['permalinkArchivesPath'].'([/A-Za-z0-9]+)\.html@';

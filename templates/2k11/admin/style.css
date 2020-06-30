@@ -499,6 +499,7 @@ form > button,
 .media_file .form_check,
 .media_file h3,
 #entries_list .entry_info span,
+#subscriptions_list .subscription_info span,
 .folder_name,
 .toggle_info,
 #serendipityScaleForm .form_field label,
@@ -521,6 +522,9 @@ label > span,
 #sort_entries .form_select label,
 #filter_entries .form_select label,
 #filter_entries .form_field label,
+#sort_subscriptions .form_select label,
+#filter_subscriptions .form_select label,
+#filter_subscriptions .form_field label,
 #media_pane_filter label,
 #media_pane_sort label,
 #karmafilters label,
@@ -1082,6 +1086,7 @@ input[type=checkbox],
 .comment_full,
 .serendipity_commentDirection,
 .entry_info,
+.subscription_info,
 .pagination,
 .media_file_metadata h4,
 .media_file_metadata h5,
@@ -1274,6 +1279,7 @@ summary {
 .template_info dt,
 .template_info dd,
 #entries_list .form_check,
+#subscriptions_list .form_check,
 .pagination .first,
 .pagination .prev,
 .serendipity_customfields textarea,
@@ -1300,13 +1306,15 @@ summary {
     margin: 0 .4em 0 0;
 }
 
-#entries_list h3 {
+#entries_list h3,
+#subscriptions_list h3 {
     float : left;
     margin: .75em 1em .75em 0;
 }
 
 .edit_actions,
 #entries_list .actions,
+#subscriptions_list .actions,
 .toggle_links {
     float: right;
 }
@@ -1378,6 +1386,9 @@ summary {
 #sort_entries .form_select select,
 #filter_entries .form_select select,
 #filter_entries .form_field input,
+#sort_subscriptions .form_select select,
+#filter_subscriptions .form_select select,
+#filter_subscriptions .form_field input,
 #media_pane_filter input,
 #media_pane_filter select,
 #uploadform .form_select select,
@@ -1556,6 +1567,7 @@ summary {
 .comments_pane .pagination,
 .media_pane .pagination,
 .entries_pane .pagination,
+.subscriptions_pane .pagination,
 .karma_pane .pagination,
 .plugin_data {
     position: relative;
@@ -1578,6 +1590,7 @@ summary {
 .comments_pane .pagination h3,
 .media_pane .pagination h3,
 .entries_pane .pagination h3,
+.subscriptions_pane .pagination h3,
 .karma_pane .pagination h3 {
     font-size: 1em;
     font-weight: normal;
@@ -1629,11 +1642,13 @@ fieldset p,
 
 #login .form_buttons,
 #entries_list .actions,
+#subscriptions_list .actions,
 .msg_hint > p:last-of-type {
     margin-bottom: 0;
 }
 
 #entries_list .actions,
+#subscriptions_list .actions,
 .serendipityCommentForm,
 #captchabox .captcha,
 .editor_toolbar {
@@ -2092,6 +2107,7 @@ form > .button_link:first-of-type,
 }
 
 #entries_list h3,
+#subscriptions_list h3,
 #serendipity_comments_list h4,
 .karmalog h4 {
     font-size: 1em;
@@ -2099,6 +2115,7 @@ form > .button_link:first-of-type,
 }
 
 #entries_list h3,
+#subscriptions_list h3,
 .karmalog h4 {
     max-width: 50%;
 }
@@ -2117,6 +2134,7 @@ form > .button_link:first-of-type,
 }
 
 #entries_list > li,
+#subscriptions_list > li,
 #serendipity_comments_list > li,
 .karmalog > li,
 #categories li > div,
@@ -2156,11 +2174,15 @@ form > .button_link:first-of-type,
     padding: 0;
 }
 
-#entries_list .entry_info span {
+#entries_list .entry_info span, 
+#subscriptions_list .subscription_info span {
     margin: 0 1em .75em 0;
 }
 
+#subscriptions_list .subscription_info span:
+
 .entry_status,
+.subscription_status,
 .comment_status,
 .field_info {
     background: #888;
@@ -2206,6 +2228,7 @@ form > .button_link:first-of-type,
 }
 
 #entries_list .entry_info .entry_status,
+#subscriptions_list .subscription_info .subscription_status,
 .comment_status {
     float: right;
 }
@@ -2223,13 +2246,18 @@ form > .button_link:first-of-type,
     color: #666;
 }
 
-#entries_list .entry_info .entry_status {
+#entries_list .entry_info .entry_status,
+#subscriptions_list .subscription_info .subscription_status {
     margin: 0 .4em .75em 0;
 }
 
 .status_timestamp {
     min-width: 11em;
 }
+
+.subscription_type {
+    width: 5em;
+    }
 
 .status_timestamp .icon-info-circled {
     color: #3e5f81;
@@ -3095,6 +3123,9 @@ img.mfp-img {
     #sort_entries .form_select label,
     #filter_entries .form_select label,
     #filter_entries .form_field label,
+    #sort_subscriptions .form_select label,
+    #filter_subscriptions .form_select label,
+    #filter_subscriptions .form_field label,
     #media_pane_filter label,
     #media_pane_sort label,
     #karmafilters label,
@@ -3106,7 +3137,10 @@ img.mfp-img {
 
     #sort_entries .form_select select,
     #filter_entries .form_select select,
-    #filter_entries .form_field input {
+    #filter_entries .form_field input,
+    #sort_subscriptions .form_select select,
+    #filter_subscriptions .form_select select,
+    #filter_subscriptions .form_field input {
         width: 79%;
     }
 
@@ -3130,6 +3164,7 @@ img.mfp-img {
 
 @media only screen and (min-width: 640px) {
     #entries_list h3,
+    #subscriptions_list h3,
     #serendipity_comments_list h4,
     .karmalog h4 {
         max-width: 75%;
@@ -3138,6 +3173,7 @@ img.mfp-img {
     .comments_pane .pagination h3,
     .media_pane .pagination h3,
     .entries_pane .pagination h3,
+    .subscriptions_pane .pagination h3,
     .karma_pane .pagination h3 {
         position: absolute;
         top: -60%;
@@ -3506,6 +3542,9 @@ img.mfp-img {
     #sort_entries .form_select label,
     #filter_entries .form_select label,
     #filter_entries .form_field label,
+    #sort_subscriptions .form_select label,
+    #filter_subscriptions .form_select label,
+    #filter_subscriptions .form_field label,
     #filter_comments label,
     #serendipity_comment label,
     #media_pane_filter label,
@@ -3519,6 +3558,9 @@ img.mfp-img {
     #sort_entries .form_select select,
     #filter_entries .form_select select,
     #filter_entries .form_field input,
+    #sort_subscriptions .form_select select,
+    #filter_subscriptions .form_select select,
+    #filter_subscriptions .form_field input,
     #media_filter input,
     #media_filter select,
     #media_pane_sort select,
@@ -3528,6 +3570,7 @@ img.mfp-img {
     }
 
     #sort_entries .form_select,
+    #sort_subscriptions .form_select,
     #filter_comments .inputs > div,
     #serendipity_comment .form_field,
     #media_filter > div,
@@ -3549,6 +3592,12 @@ img.mfp-img {
     #filter_entries .form_field {
         float: left;
         width: 25%;
+    }
+
+    #filter_subscriptions .form_select,
+    #filter_subscriptions .form_field {
+        float: left;
+        width: 33%;
     }
 
     #karmafilters .form_field,

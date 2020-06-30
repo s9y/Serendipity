@@ -298,7 +298,6 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                                  'url'       => (string)$comment->comment_author_url,
                                  'ip'        => (string)$comment->comment_author_IP,
                                  'status'    => (empty($comment->comment_approved) || $comment->comment_approved == '1') ? 'approved' : 'pending',
-                                 'subscribed'=> 'false',
                                  'body'      => (string)$comment->comment_content,
                                  'type'      => $c_type2);
 

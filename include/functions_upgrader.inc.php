@@ -545,3 +545,89 @@ function serendipity_upgrade_native_utf8() {
     }
     return true;
 }
+
+/* Implement the extended subscription functionality
+ */
+function serendipity_upgrader_subscriptions() {
+    global $serendipity;
+
+    // update the .htaccess file with the new permalink rewrite rules for subscribe and unsubscribe
+    serendipity_installFiles();
+
+    // move the comment subscriptions to a separate table
+    $subscribed_entries_sql = "SELECT DISTINCT email, entry_id FROM {$serendipity['dbPrefix']}comments WHERE subscribed = 'true'";
+    $res1 = serendipity_db_query($subscribed_entries_sql, false);
+    if (is_array($res1)) {
+        foreach ($res1 as $sub) {
+            // get the oldest timestamp for that combination (in case of multiple comments)
+            $timestamp_sql = "SELECT timestamp FROM {$serendipity['dbPrefix']}comments
+                                WHERE email = '{$sub['email']}' AND entry_id = {$sub['entry_id']}
+                                ORDER BY timestamp ASC";
+            $res2 = serendipity_db_query($timestamp_sql, false);
+            $dbhash   = md5(uniqid(rand(), true));
+            if (is_array($res2)) {
+                $insert_sql = "INSERT INTO {$serendipity['dbPrefix']}subscriptions (email, target_id, type, subscribed, timestamp, token)
+                        VALUES ( '{$sub['email']}', {$sub['entry_id']}, 'entry', 'true', {$res2[0]['timestamp']}, '{$dbhash}' )";
+                serendipity_db_query($insert_sql);
+            }
+        }
+    }
+
+    // move pending subscriptions
+    $res1 = serendipity_db_query("SELECT o.name, o.okey, c.entry_id, c.email, c.timestamp, c.id FROM {$serendipity['dbPrefix']}options o
+                            LEFT JOIN {$serendipity['dbPrefix']}comments c
+                            ON o.value = c.id
+                            WHERE o.okey LIKE 'commentsub_%'", false);
+
+    if (is_array($res1)) {
+        foreach ($res1 as $pending) {
+            // check for existing subscription
+            $dupecheck_sql = "SELECT id FROM {$serendipity['dbPrefix']}subscriptions
+                                            WHERE email = '{$pending['email']}' AND target_id = {$pending['entry_id']} AND type = 'entry' AND subscribed = 'true'";
+
+            $res2 = serendipity_db_query($dupecheck_sql, true);
+
+            if (!is_array($res2)) {
+                // no existing subscriptions, insert
+                $insert_sql = "INSERT INTO {$serendipity['dbPrefix']}subscriptions (email, target_id, type, subscribed, token, timestamp)
+                VALUES ( '{$pending['email']}', {$pending['entry_id']}, 'entry', 'false', '" . substr($pending['okey'], 11) . "',{$pending['timestamp']} )"; 
+                serendipity_db_query($insert_sql);
+            }
+        }
+    }
+
+    // delete pending subscriptions
+    $delete_sql = "DELETE FROM {$serendipity['dbPrefix']}options WHERE okey LIKE 'commentsub_%' ";
+    serendipity_db_query($delete_sql);
+
+    // drop column 'subscribed' from comments
+    $delete_sql = "ALTER TABLE {$serendipity['dbPrefix']}comments DROP COLUMN subscribed";
+    serendipity_db_query($delete_sql);
+
+    // set configuration default
+    $insert_sql = "INSERT INTO {$serendipity['dbPrefix']}config (name, value) VALUES ('subscribeChunk', 'min')";
+    serendipity_db_query($insert_sql);
+    $insert_sql = "INSERT INTO {$serendipity['dbPrefix']}config (name, value) VALUES ('sendSubscriptionHtml', 'false')";
+    serendipity_db_query($insert_sql);
+
+
+    // change value of allowSubscriptions, now true or false
+    $query_sql = "SELECT name, value FROM {$serendipity['dbPrefix']}config WHERE name = 'allowSubscriptions'";
+    $res3 = serendipity_db_query($query_sql, true, 'assoc');
+    if (is_array($res3)) { 
+        if ($res3['value'] == 'fulltext') { 
+            $update_sql = "UPDATE {$serendipity['dbPrefix']}config SET value = 'true' WHERE name = 'allowSubscriptions'";
+            serendipity_db_query($update_sql);
+            $update_sql = "UPDATE {$serendipity['dbPrefix']}config SET value = 'med' WHERE name = 'subscribeChunk'";
+            serendipity_db_query($update_sql);
+        }
+    }
+    
+    // add adminSubscriptions permission
+    $insert_sql = "INSERT INTO {$serendipity['dbPrefix']}groupconfig (id, property, value) VALUES (1, 'adminSubscriptions', 'false')";
+    serendipity_db_query($insert_sql);
+    $insert_sql = "INSERT INTO {$serendipity['dbPrefix']}groupconfig (id, property, value) VALUES (2, 'adminSubscriptions', 'true')";
+    serendipity_db_query($insert_sql);
+    $insert_sql = "INSERT INTO {$serendipity['dbPrefix']}groupconfig (id, property, value) VALUES (3, 'adminSubscriptions', 'true')";
+    serendipity_db_query($insert_sql);
+}

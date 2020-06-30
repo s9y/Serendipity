@@ -233,7 +233,6 @@ ENDPOST
                                  'ip'        => '',
                                  'status'    => 'approved',
                                  'body'      => $cbody,
-                                 'subscribed'=> 'false',
                                  'type'      => 'NORMAL');
 
                 serendipity_db_insert('comments', $icomment);

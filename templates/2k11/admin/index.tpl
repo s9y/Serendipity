@@ -134,6 +134,7 @@
                 <li><h3>{$CONST.MENU_ACTIVITY}</h3>
                     <ul>
                         <li><a href="serendipity_admin.php?serendipity[adminModule]=comments">{$CONST.COMMENTS}</a></li>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=subscriptions&amp;serendipity[adminAction]=show">{$CONST.SUBSCRIPTIONS}</a></li>
                     {if 'adminPlugins'|checkPermission AND $admin_vars.no_create !== true}
                         {serendipity_hookPlugin hook="backend_sidebar_admin_appearance" hookAll="true"}
                     {/if}

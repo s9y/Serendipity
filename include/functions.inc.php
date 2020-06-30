@@ -21,6 +21,7 @@ include_once(S9Y_INCLUDE_PATH . 'include/functions_images.inc.php');
 include_once(S9Y_INCLUDE_PATH . 'include/functions_installer.inc.php');
 include_once(S9Y_INCLUDE_PATH . 'include/functions_entries.inc.php');
 include_once(S9Y_INCLUDE_PATH . 'include/functions_comments.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/functions_subscriptions.inc.php');
 include_once(S9Y_INCLUDE_PATH . 'include/functions_permalinks.inc.php');
 include_once(S9Y_INCLUDE_PATH . 'include/functions_smarty.inc.php');
 
@@ -463,9 +464,10 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
  * @param   string  The sender mail address of the mail
  * @param   array   additional headers to pass to the E-Mail
  * @param   string  The name of the sender
+ * @param   string  Multipart html formatted message
  * @return  int     Return code of the PHP mail() function
  */
-function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NULL, $fromName = NULL) {
+function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NULL, $fromName = NULL, $multiparthtml = NULL) {
     global $serendipity;
 
     if (!is_null($headers) && !is_array($headers)) {
@@ -492,7 +494,7 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
     $subject = '['. $serendipity['blogTitle'] . '] '.  $subject;
 
     // Append signature to every mail
-    $message .= "\n" . sprintf(SIGNATURE, $serendipity['blogTitle']);
+    $message .= "\n\n-- \n" . sprintf(SIGNATURE, $serendipity['blogTitle'], '<https://s9y.org>');
 
     $maildata = array(
         'to'       => &$to,
@@ -503,7 +505,8 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         'version'  => 'Serendipity' . ($serendipity['expose_s9y'] ? '/' . $serendipity['version'] : ''),
         'legacy'   => true,
         'headers'  => &$headers,
-        'message'  => &$message
+        'message'  => &$message,
+        'htmlmessage' => &$multiparthtml
     );
 
     serendipity_plugin_api::hook_event('backend_sendmail', $maildata, LANG_CHARSET);
@@ -533,8 +536,42 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         $maildata['headers'][] = 'Message-ID: <'. md5(microtime() . uniqid(time())) .'@'. $_SERVER['HTTP_HOST'] .'>';
         $maildata['headers'][] = 'MIME-Version: 1.0';
         $maildata['headers'][] = 'Precedence: bulk';
-        $maildata['headers'][] = 'Content-Type: text/plain; charset=' . LANG_CHARSET;
         $maildata['headers'][] = 'Auto-Submitted: auto-generated';
+        
+        if ($maildata['htmlmessage'] != null) {
+            // multipart message
+            $boundary = uniqid();
+            $maildata['headers'][] = 'Content-Type: multipart/alternative;boundary=' . $boundary;
+            
+            if (LANG_CHARSET == 'UTF-8') {
+                if (function_exists('imap_8bit') && !$serendipity['forceBase64']) {
+                    $msg = imap_8bit($maildata['message']);
+                    $htmlmsg = imap_8bit($maildata['htmlmessage']);
+                    $encode = "Content-Transfer-Encoding: quoted-printable\r\n\r\n";
+                } else {
+                    $msg = chunk_split(base64_encode($maildata['message']));
+                    $htmlmsg = chunk_split(base64_encode($maildata['htmlmessage']));
+                    $encode = "Content-Transfer-Encoding: base64\r\n\r\n";
+                }
+            } else {
+                $msg = $maildata['message'];
+                $htmlmsg = $maildata['htmlmessage'];
+                $encode = "Content-Transfer-Encoding: 8bit";
+            }
+            
+            $maildata['message'] = $boundary . "\r\n";
+            $maildata['message'] .= 'Content-Type: text/plain; charset=' . LANG_CHARSET . "\r\n";
+            $maildata['message'] .= $encode;
+            $maildata['message'] .= $msg;
+            $maildata['message'] .=  "\r\n\r\n--" . $boundary . "\r\n";
+            $maildata['message'] .= 'Content-Type: text/html; charset=' . LANG_CHARSET . "\r\n";
+            $maildata['message'] .= $encode;
+            $maildata['message'] .= $htmlmsg;
+            $maildata['message'] .= "\r\n\r\n--" . $boundary . "--";
+
+        } else {
+            // simple plain/html version
+        $maildata['headers'][] = 'Content-Type: text/plain; charset=' . LANG_CHARSET;
 
         if (LANG_CHARSET == 'UTF-8') {
             if (function_exists('imap_8bit') && !$serendipity['forceBase64']) {
@@ -545,6 +582,8 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
                 $maildata['message']   = chunk_split(base64_encode($maildata['message']));
             }
         }
+        }
+            
     }
 
     if ($serendipity['dumpMail']) {

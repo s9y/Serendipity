@@ -19,6 +19,8 @@ $sort_order = array('timestamp'     => DATE,
 
 $data = array();
 
+//set flag for output notifications
+$data['switched_output'] = false;
 if (!empty($serendipity['GET']['editSubmit'])) {
     $serendipity['GET']['adminAction'] = 'edit'; // does this change smarty.get vars?
 }
@@ -216,7 +218,6 @@ switch($serendipity['GET']['adminAction']) {
         }
 
     case 'editSelect':
-        $data['switched_output'] = false;
         $filter_import = array('author', 'category', 'isdraft');
         $sort_import   = array('perPage', 'ordermode', 'order');
 

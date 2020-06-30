@@ -440,7 +440,7 @@
 @define('SUBSCRIPTION_STATE', 'Subscription state');
 @define('SUBSCRIPTION_BLOG', 'Blog subscription');
 @define('SUBSCRIPTION_AUTHOR', 'Author subscription');
-@define('SUBSCRIPTION_CATEGORY', 'Author subscription');
+@define('SUBSCRIPTION_CATEGORY', 'Category subscription');
 @define('NO_SUBSCRIPTIONS_TO_PRINT', 'No subscriptions to print');
 @define('PAGE_BROWSE_SUBSCRIPTIONS', 'Page %s of %s, totally %s subscriptions');
 @define('OPTIN_PENDING', 'optin pending');
@@ -1023,7 +1023,7 @@
 @define('TRACKBACK_COULD_NOT_CONNECT', 'Pas de rétrolien envoyé : la connexion n\'a pas pu être établie à %s sur le port %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
-@define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
+@define('MAILTO_SUBSCRIBERS', 'Sending emails to %s subscribers ...');
 @define('MAILTO_SUBSCRIBERS_SUCCESS', 'Emails sent');
 
 /* EMAIL TEMPLATES */
@@ -1038,8 +1038,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Nouveau commentaire posté à votre souscription du billet "%s"');
 @define('SUBSCRIPTION_MAIL', "Bonjour %s,\n\nUn nouveau commentaire a été posté au billet que vous surveillez \"%s\", intitulé \"%s\"\nLe pseudo de l\'auteur est : %s\n\nVous pouvez trouver le billet ici : %s\n\nVous pouvez vous désinscrire en cliquant sur ce lien : %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Bonjour %s,\n\nUn nouveau rétrolien a été ajouté au billet que vous surveillez \"%s\", intitulé \"%s\"\nLe pseudo de l\'auteur est : %s\n\nVous pouvez trouver le billet ici : %s\n\nVous pouvez vous désinscrire en cliquant sur ce lien : %s\n");
-@define('SIGNATURE', "\n-- \n%s est propulsé par Serendipity.\nLe blog des blogs que vous aussi pouvez utiliser !\nAllez sur <https://s9y.org>, le site officiel.");
-@define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
+@define('SIGNATURE', "%s est propulsé par Serendipity.\nLe blog des blogs que vous aussi pouvez utiliser !\nAllez sur %s, le site officiel.");
 @define('A_NEW_COMMENT_BLAHBLAH', 'Un nouveau commentaire a été posté sur votre blog "%s", pour le billet intitulé "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'Un nouveau rétrolien a été fait sur votre blog au billet intitulé "%s".');
 @define('YOU_HAVE_THESE_OPTIONS', 'Vous avez les possibilités suivantes :');
@@ -1069,7 +1068,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your comment subscription has been successfully entered.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered. New comments will be sent to %s');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
@@ -1079,7 +1078,7 @@
 
 /* SERVE SUBSCRIBE */
 @define('NOTIFICATION_OPTINMAIL_SENT', 'Your request for a blog subscription is recieved. An email will be sent to %s to approve this subscription ("Double Opt In") with a link to confirm your email address.');
-@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to you. You can unsubscribe with a link included in every mail.');
+@define('NOTIFICATION_SUBSCRIBE_CONFIRM', 'The subscription to "%s" is received. A summary of a new article will be sent to %s. You can unsubscribe with a link included in every mail.');
 @define('NOTIFICATION_SUBSCRIBE_DUPE', 'Your subscription failed because there is already an active subscription for "%s".');
 @define('NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL', 'Your subscription failed. Please check your email address.');
 @define('BLOG_SUBSCRIPTION_TITLE', 'Email Subscription of new articles');

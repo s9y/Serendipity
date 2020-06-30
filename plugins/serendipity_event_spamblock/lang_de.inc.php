@@ -151,3 +151,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE', 'Wert für Wartezeit');
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE_DESC', 'festgesetzt: Wartezeit in Sekunden / abhängig: Lesen in Wörtern pro Minute und Schreiben in Zeichen pro Minute. 500 ist hier ein guter Wert selbst für schnelle Leser');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TIMEOUT','Entschuldigung, aber du bist kein Mensch und solltest wenigstens versuchen den Artikel zu lesen bevor ein Kommentar verfasst wird');
+@define('PLUGIN_EVENT_SPAMBLOCK_SUBSCRIPTION_TIMEOUT', 'Wartezeit zum Abonnieren');
+@define('PLUGIN_EVENT_SPAMBLOCK_SUBSCRIPTION_TIMEOUT_DESC', 'Festsetzen einer Wartezeit zwischen der Anzeige eines Inhaltes auf der Seite und abonnieren eines Inhaltes');
+@define('PLUGIN_EVENT_SPAMBLOCK_SUBSCRIBE_TIMEOUT', 'Es würde Sinn machen vorher etwas von dem zu lesen was man abonnieren will.');

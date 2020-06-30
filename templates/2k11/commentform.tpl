@@ -57,4 +57,20 @@
         <input id="serendipity_submit" name="serendipity[submit]" type="submit" value="{$CONST.SUBMIT_COMMENT}">
     </div>
 </form>
+{if $is_allowSubscriptions}
+<div class="form_box">
+<hr>
+<form id="serendipity_subscribe" action="{$subscription_url}" method="post">
+    <p>{$CONST.SUBSCRIBE_COMMENT_BLAHBLAH}</p>
+    <fieldset class="form_toolbar">
+    <div class="form_field subscribe">
+        <label for="serendipity_commentform_email_sub">{$CONST.EMAIL}</label>
+        <input id="serendipity_commentform_email_sub" name="serendipity[email_sub]" type="email" value="{$commentform_email}" placeholder="{$CONST.TWOK11_PLACE_MAIL}" require>
 </div>
+    </fieldset>
+    <div class="form_button">
+        <input id="serendipity_submit" name="serendipity[subscribe]" type="submit" value="{$CONST.SUBSCRIBE_COMMENT}">
+    </div>
+</form>
+</div>
+{/if}

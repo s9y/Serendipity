@@ -298,6 +298,184 @@ function servePlugin($matches) {
     serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
 }
 
+function serveSubscribe($type, $id = NULL) {
+    global $serendipity;
+
+    $serendipity['smarty_custom_vars'] = array();
+    $notificationflag = false;
+
+    if (!$serendipity['allowSubscriptions']) {    
+        // Subscriptions aren't allowed, exit
+        $notificationflag = true;
+        $serendipity['smarty_custom_vars']['content_message'] = PERM_DENIED;
+    } else if ($serendipity['POST']['subscribe'] == SUBSCRIBE
+                || $serendipity['POST']['subscribe'] == SUBSCRIBE_COMMENT) {   
+        // subscribed to blog
+        // show confirmation result
+        $notificationflag = true;
+        // check for valid format of email address
+        if (array_key_exists('email_sub',$serendipity['POST'])
+            && filter_var($serendipity['POST']['email_sub'], FILTER_VALIDATE_EMAIL)) {
+
+            $email = serendipity_db_escape_string($serendipity['POST']['email_sub']);
+            if (!isset($serendipity['allowSubscriptionsOptIn']) || $serendipity['allowSubscriptionsOptIn']) {
+                // with option "double-opt-in" show normal index.tpl with message of email sent to confirm
+                $res = serendipity_sendConfirmationMail($email, $type, $id);
+                if ($res && $res != 'dupe' && $res != 'block') {
+                    // success, mail sent
+                    $serendipity['smarty_custom_vars']['content_message'] = 
+                        sprintf(NOTIFICATION_OPTINMAIL_SENT, $email);
+                } 
+            } else {
+                // without show message of subscription confirmation
+                $res = serendipity_subscription($email, $type, $id);
+                if ($res && $res != 'dupe' && $res != 'block') {
+                    // success, subscribed
+                    $info = serendipity_db_query("SELECT s.email, s.type, s.target_id, a.realname, c.category_name, e.title
+                            FROM {$serendipity['dbPrefix']}subscriptions s
+                            LEFT JOIN {$serendipity['dbPrefix']}authors a
+                            ON (s.type = 'author' AND s.target_id = a.authorid)
+                            LEFT JOIN {$serendipity['dbPrefix']}category c
+                            ON (s.type = 'category' AND s.target_id = c.categoryid)
+                            LEFT JOIN {$serendipity['dbPrefix']}entries e
+                            ON (s.type = 'entry' AND s.target_id = e.id)
+                            WHERE s.id = {$res}", true, 'assoc');
+
+                    if ($type == 'category') {
+                        serendipity_plugin_api::hook_event('multilingual_strip_langs', $info, array('category_name'));
+                        $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_SUBSCRIBE_CONFIRM, $serendipity['blogTitle'] . ' - ' . $info['category_name'], $email);
+                    } elseif ($type == 'entry') {
+                        $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_CONFIRM_SUBMAIL, $info['title'], $email);
+                    } elseif ($type == 'author') {
+                        $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_SUBSCRIBE_CONFIRM, $serendipity['blogTitle'] . ' - ' . $info['realname'], $email);
+                    } elseif ($type == 'blog') {
+                        $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_SUBSCRIBE_CONFIRM, $serendipity['blogTitle'], $email);
+                    }
+                }
+            }
+            if ($res === false) {
+                // fail - check mail
+                $serendipity['smarty_custom_vars']['content_message'] = 
+                NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL; 
+            } else if ($res == 'dupe') {
+                // return id - fail, already subscribed
+                $serendipity['smarty_custom_vars']['content_message'] = 
+                    sprintf(NOTIFICATION_SUBSCRIBE_DUPE, $email);
+            } else if ($res == 'block') {
+                $serendipity['smarty_custom_vars']['content_message'] =
+                    $serendipity['messagestack']['subscribe'];
+            }
+        } else {
+            // fail - check mail
+            $serendipity['smarty_custom_vars']['content_message'] = 
+            NOTIFICATION_SUBSCRIBE_CONFIRM_FAIL; 
+        }
+    } else {
+        $serendipity['GET']['subscribe'] = $type;
+        if ($id != NULL) $serendipity['GET']['subscribeID'] = $id;
+    }
+
+    if ($notificationflag) {
+        // show normal index.tpl with message
+        $serendipity['view'] = 'notification';
+        $serendipity['GET']['action'] = 'custom';
+    } else {
+        // show subscription page
+        $serendipity['view'] = 'subscribe';
+        $serendipity['GET']['action'] = 'subscribe';
+        
+    }
+        include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+    }
+
+function serveOptin($hash) {
+    global $serendipity;
+
+    // optin link clicked by user
+    // show email confirmation result
+    $id = serendipity_SubscriptionConfirm($hash);
+
+    if ($id) {
+        // get name and target    
+        $res = serendipity_db_query("SELECT s.email, s.type, s.target_id, a.realname, c.category_name, e.title
+                                    FROM {$serendipity['dbPrefix']}subscriptions s
+                                    LEFT JOIN {$serendipity['dbPrefix']}authors a
+                                    ON (s.type = 'author' AND s.target_id = a.authorid)
+                                    LEFT JOIN {$serendipity['dbPrefix']}category c
+                                    ON (s.type = 'category' AND s.target_id = c.categoryid)
+                                    LEFT JOIN {$serendipity['dbPrefix']}entries e
+                                    ON (s.type = 'entry' AND s.target_id = e.id)
+                                    WHERE s.id = {$id}", true, 'assoc');
+
+        if (!is_array($res)) {
+            $serendipity['smarty_custom_vars']['content_message'] = NOTIFICATION_OPTIN_FAIL;
+        } elseif ($res['type'] == 'category') {
+            serendipity_plugin_api::hook_event('multilingual_strip_langs',$res, array('category_name'));
+            $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_SUBSCRIBE_CONFIRM, $serendipity['blogTitle'] . ' - ' . $res['category_name'], $res['email']);
+        } elseif ($res['type'] == 'entry') {
+            $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_CONFIRM_SUBMAIL, $res['title'], $res['email']);
+        } elseif ($res['type'] == 'author') {
+            $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_SUBSCRIBE_CONFIRM, $serendipity['blogTitle'] . ' - ' . $res['realname'], $res['email']);
+        } elseif ($res['type'] == 'blog') {
+            $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_SUBSCRIBE_CONFIRM, $serendipity['blogTitle'], $res['email']);
+        } else {
+            $serendipity['smarty_custom_vars']['content_message'] = NOTIFICATION_OPTIN_FAIL;
+        }
+
+    } else {
+        $serendipity['smarty_custom_vars']['content_message'] = NOTIFICATION_OPTIN_FAIL;
+    }
+
+    // show normal index.tpl with message
+    $serendipity['view'] = 'notification';
+    $serendipity['GET']['action'] = 'custom';
+    include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+}
+
+function serveUnsubscribe($token, $action = 'show') {
+    global $serendipity;
+   
+    // check token
+    $info = serendipity_db_query("SELECT email, id FROM {$serendipity['dbPrefix']}subscriptions WHERE token = '" . serendipity_db_escape_string($token) . "'", true, 'assoc');
+    if (!is_array($info)) {
+        $serendipity['smarty_custom_vars']['content_message'] = NOTIFICATION_UNSUBSCRIBE_BAD_TOKEN;
+        include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+        $serendipity['smarty']->display(serendipity_getTemplateFile('index.tpl', 'serendipityPath'));
+        exit;
+    }
+
+    // show unsubscribe manager
+    $serendipity['view'] = 'unsubscribe';
+    $serendipity['GET']['action'] = 'unsubscribe';
+    $serendipity['GET']['unsubscribe'] = $token;
+    $serendipity['GET']['unsubscribeAction'] = $action;
+    $serendipity['GET']['email'] = $info['email'];
+    include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+}
+
+function serveUnsubscribeLegacy($email, $target_id) {
+    global $serendipity;
+    $serendipity['view'] = 'notification';
+    $serendipity['GET']['action'] = 'custom';
+    $res = serendipity_db_query("SELECT s.email, s.target_id, s.token, e.title
+                        FROM {$serendipity['dbPrefix']}subscriptions s
+                        LEFT JOIN {$serendipity['dbPrefix']}entries e
+                        ON (s.type = 'entry' AND s.target_id = e.id)
+                        WHERE s.type = 'entry'
+                        AND s.target_id = " . (int)$target_id . "
+                        AND s.email = '" . serendipity_db_escape_string($email) . "'", true);
+
+    if (is_array($res) && serendipity_cancelSubscription($res['token'])) {
+        $serendipity['smarty_custom_vars']['content_message'] = sprintf(NOTIFICATION_UNSUBSCRIBE_ENTRY_CONFIRM, $serendipity['blogTitle'] . ' - ' . $res['title'], $email);
+     } else {
+        sprintf(NOTIFICATION_UNSUBSCRIBE_FAIL, $email);
+    }
+
+    include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+    $serendipity['smarty']->display(serendipity_getTemplateFile('index.tpl', 'serendipityPath'));
+    exit;
+}
+
 function serveFeed($matches) {
     global $serendipity;
     $serendipity['view'] = 'feed';

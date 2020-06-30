@@ -308,6 +308,23 @@ fieldset,
 .serendipity_comment_captcha label,
 .serendipity_freeTag { display: block; }
 
+.subscribe label { display: inline-block; margin-right: 0.5em; }
+.subscribe input[type="submit"] { margin-top: 1em; margin-bottom: 1em; }
+
+div.unsubscribe_info { margin-bottom: 1em;}
+div.unsubscribe_info span { 
+    display: inline-block;
+}
+.unsubscribe_info .unsubscribe_icon { 
+    width: 30px; 
+    line-height: 2em;
+    vertical-align: top; 
+}
+.unsubscribe_info .unsubscribe_type,
+.unsubscribe_info .unsubscribe_date { display: block; }
+
+.unsubscribe_info .unsubscribe_date { font-size: 80%; }
+
 #primary-nav select {
     margin: .5em 1em;
     width: 90%;
