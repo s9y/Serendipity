@@ -1,3 +1,5 @@
+   * Improve performance of the media library by caching the file list
+
 Version 2.4-alpha2 ()
 ------------------------------------------------------------------------
    * Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, 

@@ -639,6 +639,7 @@ function serendipity_insertImageInDatabase($filename, $directory, $authorid = 0,
     $image_id = serendipity_db_insert_id('images', 'id');
     if ($image_id > 0) {
         return $image_id;
+        serendipity_cleanCache();
     }
 
     return 0;
@@ -1948,7 +1949,16 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
  * @return  array       Array of files/directories
  */
 function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern = NULL, $depth = 1, $max_depth = NULL, $apply_ACL = false, $aExcludeDirs = NULL) {
-
+    global $serendipity;
+    
+    if ($serendipity['useInternalCache']) {
+        $key = md5($basedir . $dir . $onlyDirs . $pattern . $depth . $max_depth . $apply_ACL . $aExcludeDirs . $serendipity['serendipityUser']);
+        $files = serendipity_getCacheItem($key);
+        if ($files && $files !== false) {
+            return unserialize($files);
+        }
+    }
+    
     if ($aExcludeDirs === null) {
         // add _vti_cnf to exclude possible added servers frontpage extensions
         // add ckeditor/kcfinders .thumb dir to exclude, since no hook
@@ -1992,6 +2002,12 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
 
     if ($depth == 1 && $apply_ACL !== FALSE) {
         serendipity_directoryACL($files, $apply_ACL);
+    }
+
+    if ($serendipity['useInternalCache']) {
+        $key = md5($basedir . $dir . $onlyDirs . $pattern . $depth . $max_depth . $apply_ACL . $aExcludeDirs . $serendipity['serendipityUser']);
+
+        serendipity_cacheItem($key, serialize($files));
     }
 
     return $files;
@@ -2255,7 +2271,7 @@ function serendipity_renameDir($oldDir, $newDir) {
             );
             serendipity_updateImageInEntries($image['id'], $image);
         }
-
+        serendipity_cleanCache();
         return true;
     }
     return false;
@@ -2310,7 +2326,7 @@ function serendipity_renameFile($id, $newName, $path = null) {
     } else {
         return '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_RENAME_FAILED . "</span>\n";
     }
-
+    serendipity_cleanCache();
     return TRUE;
 }
 
