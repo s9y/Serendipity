@@ -60,17 +60,22 @@ switch($serendipity['GET']['adminAction']) {
         }
 
         // Check if the user changed the timestamp.
-        if (isset($serendipity['allowDateManipulation']) && $serendipity['allowDateManipulation'] && isset($serendipity['POST']['new_timestamp']) && $serendipity['POST']['new_timestamp'] != date(DATE_FORMAT_2, $serendipity['POST']['chk_timestamp'])) {
-            // The user changed the timestamp, now set the DB-timestamp to the user's date
-            $entry['timestamp'] = strtotime($serendipity['POST']['new_timestamp']);
+        if (isset($serendipity['POST']['new_date']) && isset($serendipity['POST']['new_time'])) {
+            $newTimestamp = $serendipity['POST']['new_date'] . 'T' . $serendipity['POST']['new_time'];
+        
+            if (isset($serendipity['allowDateManipulation']) && $serendipity['allowDateManipulation'] && $newTimestamp != date(DATE_FORMAT_2, $serendipity['POST']['chk_timestamp'])) {
+                // The user changed the timestamp, now set the DB-timestamp to the user's date
+                $entry['timestamp'] = strtotime($newTimestamp);
 
-            if ($entry['timestamp'] == -1) {
-                $data['switched_output'] = true;
-                $data['dateval'] = false;
-                // The date given by the user is not convertable. Reset the timestamp.
-                $entry['timestamp'] = $serendipity['POST']['timestamp'];
+                if ($entry['timestamp'] == -1) {
+                    $data['switched_output'] = true;
+                    $data['dateval'] = false;
+                    // The date given by the user is not convertable. Reset the timestamp.
+                    $entry['timestamp'] = $serendipity['POST']['timestamp'];
+                }
             }
         }
+        
 
         // Save server timezone in database always, so substract the offset we added for display; otherwise it would be added time and again
         if (!empty($entry['timestamp'])) {

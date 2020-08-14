@@ -98,9 +98,13 @@
         {if $entry_vars.allowDateManipulation}
             <div id="edit_entry_timestamp" class="form_field">
                 <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp|escape}">
-
-                <label for="serendipityNewTimestamp">{$CONST.DATE}</label>
-                <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="datetime-local" value="{$entry_vars.timestamp|formatTime:'Y-m-d\TH:i':true:false:true}">
+                
+                <label for="serendipityNewDate">{$CONST.DATE}</label>
+                <input id="serendipityNewDate" name="serendipity[new_date]" type="date" value="{$entry_vars.timestamp|formatTime:'Y-m-d':true:false:true}">
+                
+                <label for="serendipityNewTime">{$CONST.TIME}</label>
+                <input id="serendipityNewTime" name="serendipity[new_time]" type="time" value="{$entry_vars.timestamp|formatTime:'H:i':true:false:true}">
+                
             </div>
         {/if}
             <div id="edit_entry_status" class="form_select">
