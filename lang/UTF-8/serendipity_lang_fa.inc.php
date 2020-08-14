@@ -22,6 +22,7 @@
 @define('TYPE', 'نوع');
 @define('PREVIEW', 'پیش نمایش');
 @define('DATE', 'تاریخ');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'ظاهر');
 @define('LOGIN', 'ورود');
 @define('LOGOUT', 'خروج');

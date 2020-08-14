@@ -20,6 +20,7 @@
 @define('TYPE', 'வகை');
 @define('PREVIEW', 'முன்காட்சி');
 @define('DATE', 'தேதி');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'தோற்றம்');
 @define('LOGIN', 'வலைக்குறிப்பு நிர்வாகத்திற்கு நல்வரவு');
 @define('LOGOUT', 'விடைபெறுங்கள்');

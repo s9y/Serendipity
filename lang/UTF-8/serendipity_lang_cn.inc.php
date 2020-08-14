@@ -23,6 +23,7 @@
 @define('TYPE', '类型');
 @define('PREVIEW', '预览');
 @define('DATE', '日期');
+@define('TIME', 'Time');
 @define('APPEARANCE', '主要配置');
 @define('LOGIN', '登入');
 @define('LOGOUT', '登出');

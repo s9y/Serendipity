@@ -33,6 +33,7 @@ $i18n_filename_to = array (
 @define('TYPE', 'Typ');
 @define('PREVIEW', 'Náhľad');
 @define('DATE', 'Dátum');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Vzhľad');
 @define('LOGIN', 'Prihlásenie');
 @define('LOGOUT', 'Odhlásenie');

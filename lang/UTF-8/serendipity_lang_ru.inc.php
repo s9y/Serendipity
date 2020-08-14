@@ -23,6 +23,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('TYPE', 'Тип');
 @define('PREVIEW', 'Предварительный просмотр');
 @define('DATE', 'Дата');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Внешний вид');
 @define('LOGIN', 'Войти');
 @define('LOGOUT', 'Выйти');

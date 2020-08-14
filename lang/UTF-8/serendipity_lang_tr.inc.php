@@ -22,6 +22,7 @@
 @define('TYPE', 'Türü');
 @define('PREVIEW', 'Önizleme');
 @define('DATE', 'Tarih');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Görünüm');
 @define('LOGIN', 'Bağlan');
 @define('LOGOUT', 'Çıkış');

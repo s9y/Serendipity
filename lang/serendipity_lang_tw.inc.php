@@ -23,6 +23,7 @@ $i18n_unknown = 'tw';
 @define('TYPE', '類型');
 @define('PREVIEW', '預覽');
 @define('DATE', '日期');
+@define('TIME', 'Time');
 @define('APPEARANCE', '外觀配置');
 @define('LOGIN', '登入');
 @define('LOGOUT', '登出');

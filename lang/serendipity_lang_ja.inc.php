@@ -21,6 +21,7 @@
 @define('TYPE', '種類');
 @define('PREVIEW', 'プレビュー');
 @define('DATE', '日付');
+@define('TIME', 'Time');
 @define('APPEARANCE', '外観');
 @define('LOGIN', 'ログイン');
 @define('LOGOUT', 'ログアウト');

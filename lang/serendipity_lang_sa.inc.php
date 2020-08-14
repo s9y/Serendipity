@@ -21,6 +21,7 @@
 @define('TYPE', 'äæÚ');
 @define('PREVIEW', 'ãÔÇåÏÉ ÇáãÔÇÑßÉ');
 @define('DATE', 'ÇáÊÇÑíÎ');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'ÙåæÑ');
 @define('LOGIN', 'ÊÓÌíá ÇáÏÎæá');
 @define('LOGOUT', 'ÎÑæÌ');

@@ -22,6 +22,7 @@
 @define('TYPE', 'Tip');
 @define('PREVIEW', 'Previzualizare');
 @define('DATE', 'Data');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Aspect');
 @define('LOGIN', 'Conectare');
 @define('LOGOUT', 'Deconectat');

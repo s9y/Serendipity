@@ -22,6 +22,7 @@
 @define('TYPE', '종류');
 @define('PREVIEW', '미리보기');
 @define('DATE', '날짜');
+@define('TIME', 'Time');
 @define('APPEARANCE', '외관');
 @define('LOGIN', '로그인');
 @define('LOGOUT', '로그아웃');
