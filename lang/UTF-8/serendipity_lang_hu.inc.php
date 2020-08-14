@@ -21,6 +21,7 @@
 @define('TYPE', 'Típus');
 @define('PREVIEW', 'Előnézet');
 @define('DATE', 'Dátum');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Kinézet');
 @define('LOGIN', 'Belépés');
 @define('LOGOUT', 'Kilépés');

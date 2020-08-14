@@ -21,6 +21,7 @@
 @define('TYPE', 'نوع');
 @define('PREVIEW', 'مشاهدة المشاركة');
 @define('DATE', 'التاريخ');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'ظهور');
 @define('LOGIN', 'تسجيل الدخول');
 @define('LOGOUT', 'خروج');

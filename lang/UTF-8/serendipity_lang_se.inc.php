@@ -21,6 +21,7 @@
 @define('TYPE', 'Typ');
 @define('PREVIEW', 'Förhandsgranska');
 @define('DATE', 'Datum');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Utseende');
 @define('LOGIN', 'Logga in');
 @define('LOGOUT', 'Logga ut');

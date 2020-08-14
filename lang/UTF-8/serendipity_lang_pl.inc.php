@@ -22,6 +22,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('TYPE', 'Typ');
 @define('PREVIEW', 'Podgląd');
 @define('DATE', 'Data');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Wygląd');
 @define('LOGIN', 'Login');
 @define('LOGOUT', 'Logout');

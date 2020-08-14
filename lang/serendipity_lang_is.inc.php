@@ -21,6 +21,7 @@
 @define('TYPE', 'Tegund');
 @define('PREVIEW', 'Skoða');
 @define('DATE', 'Dagsetning');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Útlit');
 @define('LOGIN', 'Skrá inn');
 @define('LOGOUT', 'Skrá út');

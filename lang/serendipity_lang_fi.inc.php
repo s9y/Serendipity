@@ -21,6 +21,7 @@
 @define('TYPE', 'Tyyppi');
 @define('PREVIEW', 'Esikatselu');
 @define('DATE', 'Päiväys');
+@define('TIME', 'Time');
 @define('APPEARANCE', 'Ulkoasu');
 @define('LOGIN', 'Kirjaudu');
 @define('LOGOUT', 'Poistu');
