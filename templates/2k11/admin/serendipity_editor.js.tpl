@@ -1056,9 +1056,6 @@ $(function() {
     // Make the timestamp readable in browser not supporting datetime-local.
     // Has no effect in those supporting it, as the timestamp is invalid in HTML5
     if($('#serendipityEntry').length > 0) {
-        if(!Modernizr.inputtypes.date) {
-            $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
-        }
         if(Modernizr.indexeddb && {$use_autosave}) {
             serendipity.startEntryEditorCache();
         }
@@ -1066,10 +1063,11 @@ $(function() {
 
     // Set entry timestamp
     $('#reset_timestamp').click(function(e) {
-        $('#serendipityNewTimestamp').val($(this).attr('data-currtime'));
-        if(!Modernizr.inputtypes.date) {
-            $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
-        }
+        var curDate = $(this).attr('data-currtime').replace(/T.*/, '');
+        var curTime = $(this).attr('data-currtime').replace(/.*T/, '');
+        $('#serendipityNewDate').val(curDate);
+        $('#serendipityNewTime').val(curTime);
+        
         e.preventDefault();
         // Inline notification, we might want to make this reuseable
         $('<span id="msg_timestamp" class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.TIMESTAMP_RESET} <a class="remove_msg" href="#msg_timestamp"><span class="icon-cancel" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
