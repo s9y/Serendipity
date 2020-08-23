@@ -160,6 +160,12 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         $data['installerResultDiagnose_MBSTR'] =  serendipity_installerResultDiagnose(S9Y_I_WARNING, NO);
     }
 
+    if ( extension_loaded('xml') ) {
+        $data['installerResultDiagnose_XML'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, YES);
+    } else {
+        $data['installerResultDiagnose_XML'] =  serendipity_installerResultDiagnose(S9Y_I_WARNING, NO);
+    }
+
     if ( extension_loaded('iconv') ) {
         $data['installerResultDiagnose_ICONV'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, YES);
     } else {
