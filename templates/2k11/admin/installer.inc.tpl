@@ -96,6 +96,10 @@
                             <td>{$installerResultDiagnose_MBSTR}</td>
                         </tr>
                         <tr>
+                            <td>xml extension</td>
+                            <td>{$installerResultDiagnose_XML}</td>
+                        </tr>
+                        <tr>
                             <td>iconv extension</td>
                             <td>{$installerResultDiagnose_ICONV}</td>
                         </tr>
