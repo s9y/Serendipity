@@ -363,7 +363,7 @@ function serendipity_walkRecursive($ary, $child_name = 'id', $parent_name = 'par
 function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
     global $serendipity;
 
-    $where = 'WHERE 1';
+    $where = 'WHERE 1=1';
     if (!empty($user)) {
         $where .= " AND a.authorid = '" . (int)$user ."'";
     }
