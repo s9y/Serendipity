@@ -3,6 +3,7 @@
 
 Version 2.4-alpha2 ()
 ------------------------------------------------------------------------
+   * Adds 'image_id' to event 'backend_image_add' in addData array
    * Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, 
      enabling full unicode input.
    * added type 'media' to configuration types,
