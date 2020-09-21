@@ -96,7 +96,7 @@
                                 <summary><var class="perm_name">{$plug.class_name}</var></summary>
 
                                 <div class="plugin_desc clearfix">
-                                {$plug.description}
+                                {$plug.description|escape:"html"}
                                 </div>
                             </details>
                         {else}
