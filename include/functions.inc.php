@@ -530,7 +530,7 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
             $maildata['headers'][] = 'X-Mailer: ' . $maildata['version'];
             $maildata['headers'][] = 'X-Engine: PHP/'. phpversion();
         }
-        $maildata['headers'][] = 'Message-ID: <'. md5(microtime() . uniqid(time())) .'@'. $_SERVER['HTTP_HOST'] .'>';
+        $maildata['headers'][] = 'Message-ID: <'. bin2hex(random_bytes(16)) .'@'. $_SERVER['HTTP_HOST'] .'>';
         $maildata['headers'][] = 'MIME-Version: 1.0';
         $maildata['headers'][] = 'Precedence: bulk';
         $maildata['headers'][] = 'Content-Type: text/plain; charset=' . LANG_CHARSET;

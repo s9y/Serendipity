@@ -842,7 +842,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         $subscribe = 'false';
     }
 
-    $dbhash   = md5(uniqid(rand(), true));
+    $dbhash = bin2hex(random_bytes(16));
 
     if ($status == 'confirm') {
         $dbstatus = 'confirm' . $dbhash;
@@ -1230,7 +1230,7 @@ function serendipity_generateCToken($cid) {
 
     global $serendipity;
 
-    $ctoken = md5(uniqid(rand(),1));
+    $ctoken = bin2hex(random_bytes(16));
     
         //Delete any comment tokens older than 1 week.
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options

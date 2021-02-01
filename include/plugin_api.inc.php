@@ -228,7 +228,7 @@ class serendipity_plugin_api
     {
         global $serendipity;
 
-        $id = md5(uniqid(''));
+        $id = bin2hex(random_bytes(16));
 
         $key = $plugin_class_id . ':' . $id;
         $key = serendipity_db_escape_string($key);
