@@ -502,7 +502,7 @@ function serendipity_checkAutologin($user) {
  * Set a session cookie which can identify a user across http/https boundaries
  */
 function serendipity_setAuthorToken() {
-    $hash = sha1(uniqid(rand(), true));
+    $hash = bin2hex(random_bytes(20));
     serendipity_setCookie('author_token', $hash);
     $_SESSION['author_token'] = $hash;
 }
