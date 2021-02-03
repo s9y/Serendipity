@@ -1,3 +1,4 @@
+   * Change backend_image_add hook to always contain same structure
    * Split date and time input in editor into two input fields
    * Improve performance of the media library by caching the file list
 
