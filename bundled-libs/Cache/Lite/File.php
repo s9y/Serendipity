@@ -65,6 +65,16 @@ class Cache_Lite_File extends Cache_Lite
             return $this->raiseError('Cache_Lite_File : Unable to read masterFile : '.$this->_masterFile, -3);
         }
     }
+
+    /**
+     * PHP4 constructor for backwards compatibility with older code
+     *
+     * @param array $options Options
+     */
+    function Cache_Lite_File($options = array(NULL))
+    {
+        self::__construct($options);
+    }
     
     /**
     * Test if a cache is available and (if yes) return it

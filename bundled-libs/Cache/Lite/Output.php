@@ -32,6 +32,16 @@ class Cache_Lite_Output extends Cache_Lite
     }
 
     /**
+     * PHP4 constructor for backwards compatibility with older code
+     *
+     * @param array $options Options
+     */
+    function Cache_Lite_Output($options = array(NULL))
+    {
+        self::__construct($options);
+    }
+
+    /**
     * Start the cache
     *
     * @param string $id cache id
