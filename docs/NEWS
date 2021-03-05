@@ -1,3 +1,4 @@
+   * Update Cache/Lite to 1.8.3 for better PHP 7.4 compat
    * Change backend_image_add hook to always contain same structure
    * Split date and time input in editor into two input fields
    * Improve performance of the media library by caching the file list
