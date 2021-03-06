@@ -1144,7 +1144,7 @@ class serendipity_plugin_api
         // skip the execution of any follow-up plugins.
         $plugins = serendipity_plugin_api::get_event_plugins();
 
-        if ($serendipity['core_events'][$event_name]) {
+        if (array_key_exists($event_name, $serendipity['core_events']) && $serendipity['core_events'][$event_name]) {
             foreach($serendipity['core_events'][$event_name] as $apifunc_key => $apifunc) {
                 $apifunc($event_name, $bag, $eventData, $addData);
             }
@@ -1308,9 +1308,9 @@ class serendipity_plugin_api
         $probelang = $path . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
         if (file_exists($probelang)) {
             include $probelang;
+        } else {
+            include $path . '/lang_en.inc.php';
         }
-
-        include $path . '/lang_en.inc.php';
     }
 }
 
@@ -1797,7 +1797,7 @@ class serendipity_event extends serendipity_plugin
      * @param   array       The entry superarray to get the reference from
      * @return  array       The value of the array for the fieldname (reference)
      */
-    function &getFieldReference($fieldname = 'body', &$eventData)
+    function &getFieldReference($fieldname = 'body', &$eventData = [])
     {
         // Get a reference to a content field (body/extended) of
         // $entries input data. This is a unifying function because

@@ -559,6 +559,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
 
         $rows =& serendipity_db_query($query, false, 'assoc');
         if (is_array($rows)) {
+            $is_valid_user = false;
             foreach($rows AS $row) {
                 if ($is_valid_user) continue;
                 $is_valid_user = false;
@@ -798,7 +799,7 @@ function serendipity_deleteCookie($name) {
 function serendipity_is_iframe() {
     global $serendipity;
 
-    if ($serendipity['GET']['is_iframe'] && is_array($_SESSION['save_entry'])) {
+    if ($serendipity['GET']['is_iframe'] ?? false && is_array($_SESSION['save_entry'])) {
         if (!is_object($serendipity['smarty'])) {
             // We need smarty also in the iframe to load a template's config.inc.php and register possible event hooks.
             serendipity_smarty_init();
@@ -1278,7 +1279,7 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
         }
     }
 
-    if ($authorid == $serendipity['authorid'] && $serendipity['no_create']) {
+    if ($authorid == ($serendipity['authorid'] ?? null) && ($serendipity['no_create'] ?? false)) {
         // This no_create user privilege overrides other permissions.
         return false;
     }
@@ -2144,7 +2145,7 @@ function &serendipity_loadThemeOptions(&$template_config, $okey = '', $bc_bool =
 
     foreach($template_config AS $key => $item) {
         if (!isset($template_vars[$item['var']])) {
-            $template_vars[$item['var']] = $item['default'];
+            $template_vars[$item['var']] = $item['default'] ?? null;
         }
     }
     if($bc_bool) {
@@ -2188,14 +2189,14 @@ function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded
         }
 
         // Check if we are currently inside the admin interface.
-        if ($serendipity['POST']['adminModule'] == 'templates' && $serendipity['POST']['adminAction'] == 'configure' && !empty($serendipity['POST']['template']['amount'])) {
+        if ($serendipity['POST']['adminModule'] ?? '' == 'templates' && $serendipity['POST']['adminAction'] == 'configure' && !empty($serendipity['POST']['template']['amount'])) {
             $template_loaded_config['amount'] = (int)$serendipity['POST']['template']['amount'];
         }
 
         for ($i = 0; $i < $template_loaded_config['amount']; $i++) {
             $navlinks[] = array(
-                'title' => $template_loaded_config['navlink' . $i . 'text'],
-                'href'  => $template_loaded_config['navlink' . $i . 'url']
+                'title' => $template_loaded_config['navlink' . $i . 'text'] ?? null,
+                'href'  => $template_loaded_config['navlink' . $i . 'url'] ?? null
             );
 
             $template_config[] = array(

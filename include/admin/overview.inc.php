@@ -7,7 +7,7 @@ if (IN_serendipity !== true) {
 global $serendipity;
 $data = array();
 
-switch($serendipity['POST']['adminAction']) {
+switch($serendipity['POST']['adminAction'] ?? '') {
     case 'publish':
         if (!serendipity_checkFormToken()) {
             break;
@@ -43,7 +43,7 @@ $data['js_failure_file'] = serendipity_getTemplateFile('admin/serendipity_editor
 
 $output = array();
 serendipity_plugin_api::hook_event('backend_frontpage_display', $output);
-$data['backend_frontpage_display'] = $output['more'];
+$data['backend_frontpage_display'] = $output['more'] ?? null;
 
 $data['usedVersion']  = $serendipity['version'];
 $data['updateCheck']  = $serendipity['updateCheck'];
@@ -144,7 +144,7 @@ $data['entries'] = $entries;
 $data['urltoken'] = serendipity_setFormToken('url');
 $data['token'] = serendipity_setFormToken();
 
-$data['no_create'] = $serendipity['no_create'];
+$data['no_create'] = $serendipity['no_create'] ?? null;
 
 echo serendipity_smarty_show('admin/overview.inc.tpl', $data);
 

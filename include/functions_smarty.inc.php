@@ -1037,7 +1037,7 @@ function serendipity_smarty_init($vars = array()) {
 
         $wysiwyg_customPlugin = $wysiwyg_customConfig = null;
 
-        if (defined('IN_serendipity_admin') && $serendipity['wysiwyg']) {
+        if (defined('IN_serendipity_admin') && array_key_exists('wysiwyg', $serendipity) && $serendipity['wysiwyg']) {
 
             // check force internal toolbar config file
             if (strpos($serendipity['wysiwygToolbar'], 'NOCC-') !== false) {
@@ -1054,7 +1054,11 @@ function serendipity_smarty_init($vars = array()) {
 
         }
 
-        $_force_backendpopups = explode(',', $serendipity['enableBackendPopupGranular']);
+        if (array_key_exists('enableBackendPopupGranular', $serendipity)) {
+            $_force_backendpopups = explode(',', $serendipity['enableBackendPopupGranular']);
+        } else {
+            $_force_backendpopups = [];
+        }
         $force_backendpopups  = array();
         foreach($_force_backendpopups AS $fbp_key => $fbp_val) {
             $fbp_val = trim($fbp_val);
@@ -1066,18 +1070,18 @@ function serendipity_smarty_init($vars = array()) {
             array(
                 'head_charset'              => LANG_CHARSET,
                 'head_version'              => $serendipity['version'],
-                'head_title'                => $serendipity['head_title'],
-                'head_subtitle'             => $serendipity['head_subtitle'],
+                'head_title'                => $serendipity['head_title'] ?? null,
+                'head_subtitle'             => $serendipity['head_subtitle'] ?? null,
                 'head_link_stylesheet'      => $serendipity['smarty_vars']['head_link_stylesheet'],
                 'head_link_script'          => $serendipity['smarty_vars']['head_link_script'],
                 'head_link_stylesheet_frontend' => $serendipity['smarty_vars']['head_link_stylesheet_frontend'],
 
                 'is_xhtml'                  => true,
-                'use_popups'                => $serendipity['enablePopup'],
-                'use_backendpopups'         => $serendipity['enableBackendPopup'],
+                'use_popups'                => $serendipity['enablePopup'] ?? null,
+                'use_backendpopups'         => $serendipity['enableBackendPopup'] ?? null,
                 'force_backendpopups'       => $force_backendpopups,
                 'is_embedded'               => (!$serendipity['embed'] || $serendipity['embed'] === 'false' || $serendipity['embed'] === false) ? false : true,
-                'is_raw_mode'               => $serendipity['smarty_raw_mode'],
+                'is_raw_mode'               => $serendipity['smarty_raw_mode'] ?? null,
                 'is_logged_in'              => serendipity_userLoggedIn(),
 
                 'entry_id'                  => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])) ? $serendipity['GET']['id'] : false,
@@ -1098,8 +1102,8 @@ function serendipity_smarty_init($vars = array()) {
                 'category'                  => $category,
                 'category_info'             => $category_info,
                 'template'                  => $serendipity['template'],
-                'template_backend'          => $serendipity['template_backend'],
-                'wysiwygToolbar'            => $serendipity['wysiwygToolbar'],
+                'template_backend'          => $serendipity['template_backend'] ?? null,
+                'wysiwygToolbar'            => $serendipity['wysiwygToolbar'] ?? null,
                 'wysiwyg_customPlugin'      => $wysiwyg_customPlugin,
                 'wysiwyg_customConfig'      => $wysiwyg_customConfig,
                 'use_autosave'              => (serendipity_db_bool($serendipity['use_autosave']) ? 'true' : 'false'),

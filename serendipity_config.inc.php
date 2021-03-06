@@ -210,9 +210,6 @@ $serendipity['charsets'] = array(
 @define('USERLEVEL_CHIEF', 1);
 @define('USERLEVEL_EDITOR', 0);
 
-@define('VIEWMODE_THREADED', 'threaded');
-@define('VIEWMODE_LINEAR', 'linear');
-
 if (!version_compare(phpversion(), '5.3', '>=')) {
     $serendipity['lang'] = 'en';
     include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
@@ -429,7 +426,7 @@ if (function_exists('date_default_timezone_set')) {
 }
 
 // Fallback charset, if none is defined in the language files
-@define('LANG_CHARSET', 'ISO-8859-1');
+defined('LANG_CHARSET') or @define('LANG_CHARSET', 'ISO-8859-1');
 
 // Create array of permission levels, with descriptions
 $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DESC,

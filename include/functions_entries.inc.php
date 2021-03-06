@@ -212,7 +212,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     $initial_args = array_values(func_get_args());
 
     if ($serendipity['useInternalCache']) {
-        $key = md5(serialize($initial_args) . $serendipity['short_archives'] . '||' . $serendipity['range'] . '||' . $serendipity['GET']['category'] . '||' . $serendipity['GET']['hide_category'] . '||' . $serendipity['GET']['viewAuthor'] . '||' .  $serendipity['GET']['page'] . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . $serendipity['GET']['adminModule'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . $serendipity['plugindata']['smartyvars']['uriargs'] );
+        $key = md5(serialize($initial_args) . ($serendipity['short_archives'] ?? '') . '||' . ($serendipity['range'] ?? '') . '||' . ($serendipity['GET']['category'] ?? '') . '||' . ($serendipity['GET']['hide_category'] ?? '') . '||' . ($serendipity['GET']['viewAuthor'] ?? '') . '||' .  ($serendipity['GET']['page'] ?? '') . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . $serendipity['GET']['adminModule'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . ($serendipity['plugindata']['smartyvars']['uriargs'] ?? '') );
         
         $entries = serendipity_getCacheItem($key);
         if ($entries && $entries !== false) {
@@ -459,6 +459,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         $limit = '';
     }
 
+    if (! array_key_exists('having', $cond)) {
+        $cond['having'] = '';
+    }
     $query = "SELECT $select_key
                      $body
                      {$serendipity['fullCountQuery']}
@@ -493,7 +496,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     }
 
     if ($serendipity['useInternalCache']) {
-        $key = md5(serialize($initial_args) . $serendipity['short_archives'] . '||' . $serendipity['range'] . '||' . $serendipity['GET']['category'] . '||' . $serendipity['GET']['hide_category'] . '||' . $serendipity['GET']['viewAuthor'] . '||' .  $serendipity['GET']['page'] . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . $serendipity['GET']['adminModule'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable']  . '||' . $serendipity['plugindata']['smartyvars']['uriargs']);
+        $key = md5(serialize($initial_args) . ($serendipity['short_archives'] ?? '') . '||' . ($serendipity['range'] ?? '') . '||' . ($serendipity['GET']['category'] ?? '') . '||' . ($serendipity['GET']['hide_category'] ?? '') . '||' . ($serendipity['GET']['viewAuthor'] ?? '') . '||' .  ($serendipity['GET']['page'] ?? '') . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . $serendipity['GET']['adminModule'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . ($serendipity['plugindata']['smartyvars']['uriargs'] ?? '') );
 
         serendipity_cacheItem($key, serialize($ret));
         serendipity_cacheItem($key . '_fullCountQuery', $serendipity['fullCountQuery']);
