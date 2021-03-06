@@ -471,7 +471,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                      $limit";
 
     // DEBUG:
-    // die($query);
+    //die($query);
     $fetch_single = ($returncode == 'single' ? true: false);
 
     if ($returncode == 'query') {
@@ -481,6 +481,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     $ret =& serendipity_db_query($query, $fetch_single, 'assoc');
 
     if (is_string($ret)) {
+        print($query);
         die("Query failed: $ret");
     }
 
@@ -990,6 +991,8 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
         $uriArguments = $serendipity['uriArguments'];
         $uriArguments[] = 'P'. ($serendipity['GET']['page'] - 1);
         $serendipity['smarty']->assign('footer_prev_page', serendipity_rewriteURL(str_replace('//', '/', implode('/', $uriArguments)) . $suffix));
+    } else {
+        $serendipity['smarty']->assign('footer_prev_page', false);
     }
 
     $uriArguments = $serendipity['uriArguments'];
@@ -1004,6 +1007,8 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
         $uriArguments = $serendipity['uriArguments'];
         $uriArguments[] = 'P'. ($serendipity['GET']['page'] + 1);
         $serendipity['smarty']->assign('footer_next_page', serendipity_rewriteURL(str_replace('//', '/', implode('/', $uriArguments)) . $suffix));
+    } else {
+        $serendipity['smarty']->assign('footer_next_page', false);
     }
 
 }

@@ -132,6 +132,49 @@ if ($serendipity['GET']['action'] != 'search' && !empty($serendipity['content_me
     $serendipity['smarty']->assign('content_message', $serendipity['content_message']);
 }
 
+
+if ($serendipity['smarty']->getTemplateVars('searchresult_tooShort') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'searchresult_tooShort' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('searchresult_error') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'searchresult_error' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('searchresult_noEntries') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'searchresult_noEntries' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('searchresult_results') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'searchresult_results' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('content_message') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'content_message' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('ARCHIVES') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'ARCHIVES' => ''
+                )
+            );    
+}
 serendipity_smarty_fetch('CONTENT', 'content.tpl');
 $serendipity['smarty']->assign('ENTRIES', '');
 
