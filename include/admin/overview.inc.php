@@ -19,8 +19,10 @@ switch($serendipity['POST']['adminAction'] ?? '') {
         ));
         if (is_numeric($success)) {
             $data['published'] = $success;
+            $data['error_publish'] = false;
         } else {
             $data['error_publish'] = $success;
+            $data['published'] = false;
         }
         break;
     case 'updateCheckDisable':
@@ -28,6 +30,10 @@ switch($serendipity['POST']['adminAction'] ?? '') {
             break;
         }
         serendipity_set_config_var('updateCheck', false);
+        break;
+    default:
+        $data['published'] = false;
+        $data['error_publish'] = false;
         break;
 }
 
@@ -87,6 +93,8 @@ if (is_array($comments) && count($comments) > 0) {
             // When summary is not the full body, strip HTML tags from summary, as it might break and leave unclosed HTML.
             $comment['fullBody'] = nl2br(serendipity_specialchars($comment['fullBody']));
             $comment['summary']  = nl2br(strip_tags($comment['summary']));
+        } else {
+            $comment['excerpt'] = false;
         }
     }
 }

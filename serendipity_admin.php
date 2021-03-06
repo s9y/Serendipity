@@ -84,7 +84,7 @@ $no_footer = (isset($serendipity['GET']['noFooter']) || isset($serendipity['POST
 
 $use_installer = (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false );
 
-$post_action = $serendipity['POST']['action'];
+$post_action = $serendipity['POST']['action'] ?? null;
 
 $main_content = '';
 if (!$use_installer && $is_logged_in) {
@@ -234,7 +234,7 @@ if ($ajax) {
     }
 
     $admin_vars['out']         = array();
-    $admin_vars['no_create']   = $serendipity['no_create'];
+    $admin_vars['no_create']   = $serendipity['no_create'] ?? null;
     $admin_vars['title']       = $admin_section;
     $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
 
