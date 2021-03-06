@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.39');
+        $propbag->add('version',       '2.39.1');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -429,6 +429,7 @@ class serendipity_event_spartacus extends serendipity_event
     function &fetchfile($url, $target, $cacheTimeout = 0, $decode_utf8 = false, $sub = 'plugins')
     {
         global $serendipity;
+        $serendipity['logger'] ?? $serendipity['logger'] = false;
         static $error = false;
 
         // Fix double URL strings.
@@ -1172,13 +1173,17 @@ class serendipity_event_spartacus extends serendipity_event
                 $bag    = new serendipity_property_bag;
                 $infoplugin->introspect($bag);
                 $currentVersion = $bag->get('version');
-                $upgradeVersion = $foreignPlugins[$plugin]['upgrade_version'] ? $foreignPlugins[$plugin]['upgrade_version'] : $foreignPlugins[$plugin]['version'];
+                if (array_key_exists($plugin, $foreignPlugins)) {
+                    $upgradeVersion = $foreignPlugins[$plugin]['upgrade_version'] ? $foreignPlugins[$plugin]['upgrade_version'] : $foreignPlugins[$plugin]['version'];
+                } else {
+                    $upgradeVersion = null;
+                }
                 if (version_compare($currentVersion, $upgradeVersion, '<')) {
                     $upgradeCount++;
                 }
             }
         }
-        return $upgradeCount;
+        return $upgradeCount ?? 0;
     }
 
     function event_hook($event, &$bag, &$eventData, $addData = null)
