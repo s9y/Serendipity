@@ -109,10 +109,10 @@ function serendipity_updateLocalConfig($dbName, $dbPrefix, $dbHost, $dbUser, $db
     fwrite($configfp, "\t\$serendipity['dbType']            = '" . addslashes($dbType) . "';\n");
     fwrite($configfp, "\t\$serendipity['dbPersistent']      = ". (serendipity_db_bool($dbPersistent) ? 'true' : 'false') .";\n");
     if ($serendipity['dbNames']) {
-        if (($dbType == 'mysqli' || $dbType == 'mysql') && SQL_CHARSET == 'utf8' && serendipity_utf8mb4_ready()) {
+        if (($dbType == 'mysqli' || $dbType == 'mysql') && serendipity_utf8mb4_ready()) {
             fwrite($configfp, "\t\$serendipity['dbCharset']         = 'utf8mb4';\n");
         } else {
-            fwrite($configfp, "\t\$serendipity['dbCharset']         = '" . addslashes(SQL_CHARSET) . "';\n");
+            fwrite($configfp, "\t\$serendipity['dbCharset']         = 'utf8';\n");
         }
     }
 
