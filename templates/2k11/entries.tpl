@@ -12,11 +12,11 @@
         <div class="clearfix content serendipity_entry_body">
         {if $entry.categories}{foreach from=$entry.categories item="entry_category"}{if $entry_category.category_icon}<a href="{$entry_category.category_link}"><img class="serendipity_entryIcon" title="{$entry_category.category_name|escape}{$entry_category.category_description|@emptyPrefix}" alt="{$entry_category.category_name|escape}" src="{$entry_category.category_icon|escape}"></a>{/if}{/foreach}{/if}
         {$entry.body}
-        {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
+        {if 'has_extended'|array_key_exists:$entry and $entry.has_extended and not $is_single_entry and not $entry.is_extended}
         <a class="read_more block_level" href="{$entry.link}#extended">{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title}</a>
         {/if}
         </div>
-        {if $entry.is_extended}
+        {if 'is_extended'|array_key_exists:$entry and $entry.is_extended}
         <div id="extended" class="clearfix content">
         {$entry.extended}
         </div>
@@ -29,24 +29,26 @@
         {if $entry.categories}
             <span class="visuallyhidden">{$CONST.CATEGORIES}: </span>{foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
         {/if}
-        {if $entry.categories and ($entry.has_comments or $entry.has_disqus)} | {/if}
-        {if ($entry.has_comments or $entry.has_disqus)}
-        {if $entry.has_disqus }
+        {if $entry.categories and ($entry.has_comments or ('has_disqus'|array_key_exists:$entry and $entry.has_disqus))} | {/if}
+        {if ($entry.has_comments or ('has_disqus'|array_key_exists:$entry and $entry.has_disqus))}
+        {if ('has_disqus'|array_key_exists:$entry and $entry.has_disqus) }
             {$entry.comments}{if $entry.has_trackbacks}, <a href="{$entry.link}#trackbacks">{$entry.trackbacks} {$entry.label_trackbacks}</a>{/if}
         {else}
             <a href="{$entry.link}#comments" title="{$entry.comments} {$entry.label_comments}{if $entry.has_trackbacks}, {$entry.trackbacks} {$entry.label_trackbacks}{/if}">{$entry.comments} {$entry.label_comments}</a>
         {/if}
         {/if}
-        {if $entry.url_tweetthis}
+        {if ('url_tweetthis'|array_key_exists:$entry and $entry.url_tweetthis)}
             | <a href="{$entry.url_tweetthis}" title="{$CONST.TWOK11_TWEET_THIS}">Twitter</a>
         {/if}
-        {if $entry.url_dentthis}
+        {if ('url_dentthis'|array_key_exists:$entry and $entry.url_dentthis)}
             | <a href="{$entry.url_dentthis}" title="{$CONST.TWOK11_DENT_THIS}">Identica</a>
         {/if}
-        {if $entry.url_shorturl}
+        {if ('url_shorturl'|array_key_exists:$entry and $entry.url_shorturl)}
             | <a href="{$entry.url_shorturl}" title="{$CONST.TWOK11_SHORT_URL_HINT}" class="short-url">{$CONST.TWOK11_SHORT_URL}</a>
         {/if}
-            {$entry.add_footer}
+            {if 'add_footer'|array_key_exists:$entry}
+                {$entry.add_footer}
+            {/if}
         </footer>
 
         <!--
@@ -125,7 +127,9 @@
         </section>
 
     {/if}
-    {$entry.backend_preview}
+    {if 'backend_preview'|array_key_exists:$entry}
+        {$entry.backend_preview}
+    {/if}
     </article>
     {/foreach}
 {foreachelse}
@@ -141,7 +145,7 @@
             {if $footer_info}
             <li class="info"><span>{$footer_info}</span></li>
             {/if}
-            <li class="prev">{if $footer_prev_page}<a href="{$footer_prev_page}">{/if}{if $footer_prev_page}&larr; {$CONST.PREVIOUS_PAGE}{else}&nbsp;{/if}{if $footer_prev_page}</a>{/if}</li>
+            <li class="prev">{if 'footer_prev_page'|array_key_exists and $footer_prev_page}<a href="{$footer_prev_page}">{/if}{if $footer_prev_page}&larr; {$CONST.PREVIOUS_PAGE}{else}&nbsp;{/if}{if $footer_prev_page}</a>{/if}</li>
             <li class="next">{if $footer_next_page}<a href="{$footer_next_page}">{/if}{if $footer_next_page}{$CONST.NEXT_PAGE} &rarr;{else}&nbsp;{/if}{if $footer_next_page}</a>{/if}</li>
         </ul>
     </nav>

@@ -78,7 +78,7 @@ function serendipity_smarty_html5time($timestamp) {
 function &serendipity_smarty_fetch($block, $file, $echo = false, $force_frontend = false) {
     global $serendipity;
 
-    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath', $force_frontend), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
+    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath', $force_frontend), null, null, null, ($echo === true && ($serendipity['smarty_raw_mode'] ?? null)));
 
     $serendipity['smarty']->assignByRef($block, $output);
 
@@ -1106,7 +1106,7 @@ function serendipity_smarty_init($vars = array()) {
                 'wysiwygToolbar'            => $serendipity['wysiwygToolbar'] ?? null,
                 'wysiwyg_customPlugin'      => $wysiwyg_customPlugin,
                 'wysiwyg_customConfig'      => $wysiwyg_customConfig,
-                'use_autosave'              => (serendipity_db_bool($serendipity['use_autosave']) ? 'true' : 'false'),
+                'use_autosave'              => (serendipity_db_bool($serendipity['use_autosave'] ?? false) ? 'true' : 'false'),
 
                 'dateRange'                 => (!empty($serendipity['range']) ? $serendipity['range'] : array())
             )

@@ -212,7 +212,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     $initial_args = array_values(func_get_args());
 
     if ($serendipity['useInternalCache']) {
-        $key = md5(serialize($initial_args) . ($serendipity['short_archives'] ?? '') . '||' . ($serendipity['range'] ?? '') . '||' . ($serendipity['GET']['category'] ?? '') . '||' . ($serendipity['GET']['hide_category'] ?? '') . '||' . ($serendipity['GET']['viewAuthor'] ?? '') . '||' .  ($serendipity['GET']['page'] ?? '') . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . $serendipity['GET']['adminModule'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . ($serendipity['plugindata']['smartyvars']['uriargs'] ?? '') );
+        $key = md5(serialize($initial_args) . ($serendipity['short_archives'] ?? '') . '||' . ($serendipity['range'] ?? '') . '||' . ($serendipity['GET']['category'] ?? '') . '||' . ($serendipity['GET']['hide_category'] ?? '') . '||' . ($serendipity['GET']['viewAuthor'] ?? '') . '||' .  ($serendipity['GET']['page'] ?? '') . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . ($serendipity['GET']['adminModule'] ?? '') . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . ($serendipity['plugindata']['smartyvars']['uriargs'] ?? '') );
         
         $entries = serendipity_getCacheItem($key);
         if ($entries && $entries !== false) {
@@ -496,7 +496,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     }
 
     if ($serendipity['useInternalCache']) {
-        $key = md5(serialize($initial_args) . ($serendipity['short_archives'] ?? '') . '||' . ($serendipity['range'] ?? '') . '||' . ($serendipity['GET']['category'] ?? '') . '||' . ($serendipity['GET']['hide_category'] ?? '') . '||' . ($serendipity['GET']['viewAuthor'] ?? '') . '||' .  ($serendipity['GET']['page'] ?? '') . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . $serendipity['GET']['adminModule'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . ($serendipity['plugindata']['smartyvars']['uriargs'] ?? '') );
+        $key = md5(serialize($initial_args) . ($serendipity['short_archives'] ?? '') . '||' . ($serendipity['range'] ?? '') . '||' . ($serendipity['GET']['category'] ?? '') . '||' . ($serendipity['GET']['hide_category'] ?? '') . '||' . ($serendipity['GET']['viewAuthor'] ?? '') . '||' .  ($serendipity['GET']['page'] ?? '') . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . ($serendipity['GET']['adminModule'] ?? '') . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . ($serendipity['plugindata']['smartyvars']['uriargs'] ?? '') );
 
         serendipity_cacheItem($key, serialize($ret));
         serendipity_cacheItem($key . '_fullCountQuery', $serendipity['fullCountQuery']);
@@ -1142,7 +1142,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             //--JAM: Highlight-span search terms
-            if ($serendipity['action'] == 'search') {
+            if ($serendipity['action'] ?? '' == 'search') {
                 $searchterms = str_replace('"', '', $serendipity['GET']['searchterms']);
                 $searchterms = explode($searchterms, ' ');
                 foreach($searchterms as $searchdx => $searchterm) {
@@ -1163,7 +1163,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             $addData = array('from' => 'functions_entries:printEntries');
-            if ($entry['is_cached']) {
+            if ($entry['is_cached'] ?? false) {
                 $addData['no_scramble'] = true;
             }
             serendipity_plugin_api::hook_event('frontend_display', $entry, $addData);
@@ -1196,14 +1196,20 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             $entry['link_allow_comments']    = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=enable&amp;serendipity[entry]=' . $entry['id'] . '&amp;' . $formToken;
             $entry['link_deny_comments']     = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=disable&amp;serendipity[entry]=' . $entry['id'] . '&amp;' . $formToken;
             $entry['allow_comments']         = serendipity_db_bool($entry['allow_comments']);
-            $entry['moderate_comments']      = serendipity_db_bool($entry['moderate_comments']);
-            $entry['viewmode']               = ($serendipity['GET']['cview'] == VIEWMODE_LINEAR ? VIEWMODE_LINEAR : VIEWMODE_THREADED);
+            $entry['moderate_comments']      = serendipity_db_bool($entry['moderate_comments'] ?? null);
+            if (defined('VIEWMODE_LINEAR')) {
+                $entry['viewmode']               = (($serendipity['GET']['cview'] ?? null) == VIEWMODE_LINEAR ? VIEWMODE_LINEAR : VIEWMODE_THREADED);
+            }
             $entry['link_popup_comments']    = $serendipity['serendipityHTTPPath'] .'comment.php?serendipity[entry_id]='. $entry['id'] .'&amp;serendipity[type]=comments';
             $entry['link_popup_trackbacks']  = $serendipity['serendipityHTTPPath'] .'comment.php?serendipity[entry_id]='. $entry['id'] .'&amp;serendipity[type]=trackbacks';
             $entry['link_edit']              = $serendipity['baseURL'] .'serendipity_admin.php?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]='. $entry['id'];
             $entry['link_trackback']         = $serendipity['baseURL'] .'comment.php?type=trackback&amp;entry_id='. $entry['id'];
-            $entry['link_viewmode_threaded'] = $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] .'?url='. $entry['commURL'] .'&amp;serendipity[cview]='. VIEWMODE_THREADED;
-            $entry['link_viewmode_linear']   = $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] .'?url='. $entry['commURL'] .'&amp;serendipity[cview]='. VIEWMODE_LINEAR;
+            if (defined('VIEWMODE_THREADED')) {
+                $entry['link_viewmode_threaded'] = $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] .'?url='. $entry['commURL'] .'&amp;serendipity[cview]='. VIEWMODE_THREADED;
+            }
+            if (defined('VIEWMODE_LINEAR')) {
+                $entry['link_viewmode_linear']   = $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] .'?url='. $entry['commURL'] .'&amp;serendipity[cview]='. VIEWMODE_LINEAR;
+            }
             $entry['link_author']            = serendipity_authorURL($authorData);
 
             if (is_array($entry['categories'])) {

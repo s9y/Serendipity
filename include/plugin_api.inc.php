@@ -526,7 +526,7 @@ class serendipity_plugin_api
         global $serendipity;
 
         // Can be shortcircuited via a $serendipity['prevent_sidebar_plugins_(left|right|event)'] variable!
-        if (!$negate && $serendipity['prevent_sidebar_plugins_' . $filter] == true) {
+        if (!$negate && ($serendipity['prevent_sidebar_plugins_' . $filter] ?? false) == true) {
             return 0;
         }
 

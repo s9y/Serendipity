@@ -1919,6 +1919,7 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
             $read_id_sql = 0;
         }
 
+        $cond['joins'] = '';
         if ($append_category) {
             if ($append_category !== 'limited') {
                 $cond['joins'] .= " LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
