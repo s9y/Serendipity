@@ -180,7 +180,7 @@
 @define('DELETING_FILE', '删除文件 %s...');
 @define('SETTINGS_SAVED_AT', '新设定已经被保存到 %s');
 @define('INVERT_SELECTIONS', '反勾选');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', '个人设置');
 @define('DO_MARKUP_DESCRIPTION', '套用自动化格式到文章内 (表情, 符号 *, /, _, ...)。关闭这项功能将会保存任何文章内出现的 HTML 语法。');
 @define('BASE_DIRECTORY', '基本目录');

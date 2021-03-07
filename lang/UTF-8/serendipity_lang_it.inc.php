@@ -179,7 +179,7 @@
 @define('DELETING_FILE', 'Cancellazione del file %s...');
 @define('SETTINGS_SAVED_AT', 'Le nuove impostazioni sono state salvate in %s');
 @define('INVERT_SELECTIONS', 'Inverti la selezione');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Impostazioni Personali');
 @define('DO_MARKUP_DESCRIPTION', 'Applica le trasformazioni del markup al testo (smilies, abbreviazionicon *, /, _, ...). Disabilitare questa opzione significa mantenere il codice HTML nel testo.');
 @define('BASE_DIRECTORY', 'Directory base');

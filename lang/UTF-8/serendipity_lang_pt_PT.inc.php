@@ -181,7 +181,7 @@
 @define('DELETING_FILE', 'Apagando ficheiro %s...');
 @define('SETTINGS_SAVED_AT', 'As novas configurações foram guardadas em %s');
 @define('INVERT_SELECTIONS', 'Inverter Seleção');
-@define('VIEWMODE_THREADED', 'Alternar para exibição por discussão');
+
 @define('PERSONAL_SETTINGS', 'Preferências pessoais');
 @define('DO_MARKUP_DESCRIPTION', 'Aplicar transformações nos códigos do texto (smilies, abreviaturas via *, /, _, ...). Desligando esta função irá preservará qualquer código HTML no texto.');
 @define('BASE_DIRECTORY', 'Directoria base');

@@ -179,7 +179,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('DELETING_FILE', 'Usuwanie plików %s...');
 @define('SETTINGS_SAVED_AT', 'Ustawienia zostały zapisane o %s');
 @define('INVERT_SELECTIONS', 'Odwróć wybór');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Ustawienie osobiste');
 @define('DO_MARKUP_DESCRIPTION', 'Zastosuj formatowania wtyczek Znaczników do tekstu (emotikonki, skróty znaczników tworzone przez użycie *, /, _, ...). Wyłączenie tej opcji spowoduje zachowanie kodu HTML w tekście.');
 @define('BASE_DIRECTORY', 'Katalog bazowy');

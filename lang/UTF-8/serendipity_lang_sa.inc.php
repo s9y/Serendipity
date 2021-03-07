@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'حذف الملف %s ...');
 @define('SETTINGS_SAVED_AT', 'تم حفظ الاعدادات الجديدة في  %s');
 @define('INVERT_SELECTIONS', 'ترتي عكسي');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'الاعدادات الشخصية');
 @define('DO_MARKUP_DESCRIPTION', 'يمكن تحويل الاحرف القياسية إلى علامات أو إبتسامات مثال (الابتسامات, الاختصارات بواسطة *, /, _, ...) عدم التمكين سوف يحتفظ بجميع أكواد HTML على انها نصوص فقط.');
 @define('BASE_DIRECTORY', 'مجلد قاعدة');

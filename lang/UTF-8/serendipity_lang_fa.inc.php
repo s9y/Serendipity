@@ -179,7 +179,7 @@
 @define('DELETING_FILE', 'حذف فایل %s...');
 @define('SETTINGS_SAVED_AT', 'تنظیمات جدید در %s ثبت شد');
 @define('INVERT_SELECTIONS', 'معکوس کردن انتخاب ها');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'تنظیمات شخصی');
 @define('DO_MARKUP_DESCRIPTION', 'آیا تغییرات روی متن اعمال شود (شکلک ها، میانبر کردن متن های *، /، _، ...). غیر فعال کردن این گزینه، تمامی کد های HTML را حفظ خواهد کرد و تغییری اعمال نخواهد شد.');
 @define('BASE_DIRECTORY', 'شاخه اصلی');

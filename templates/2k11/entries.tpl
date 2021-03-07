@@ -100,7 +100,7 @@
             </p>
 
             {serendipity_printComments entry=$entry.id mode=$entry.viewmode}
-        {if $entry.is_entry_owner}
+        {if 'is_entry_owner'|array_key_exists:$entry and $entry.is_entry_owner}
             <p class="manage_comments">
             {if $entry.allow_comments}
             <a href="{$entry.link_deny_comments}">{$CONST.COMMENTS_DISABLE}</a>
@@ -137,7 +137,7 @@
     <p class="nocontent">{$CONST.NO_ENTRIES_TO_PRINT}</p>
     {/if}
 {/foreach}
-{if $footer_info or $footer_prev_page or $footer_next_page}
+{if isset($footer_info) and $footer_info or isset($footer_prev_page) and $footer_prev_page or isset($footer_next_page) and $footer_next_page}
     <nav class="serendipity_pagination block_level">
         <h2 class="visuallyhidden">{$CONST.TWOK11_PAG_TITLE}</h2>
 

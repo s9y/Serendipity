@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'Fájlok törlése %s...');
 @define('SETTINGS_SAVED_AT', 'Az új beállításokat elmentettük ekkor: %s');
 @define('INVERT_SELECTIONS', 'Kijelölés megfordítása');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Személyes beállítások');
 @define('DO_MARKUP_DESCRIPTION', 'Szövegjelölések transzformálása (vigyorgó fejek, rövidítésre használt jelölések a következő módon: *, /, _, ...). Ezt tiltva, a szövegben nem lehet semmilyen HTML kód.');
 @define('BASE_DIRECTORY', 'Alap könyvtár');

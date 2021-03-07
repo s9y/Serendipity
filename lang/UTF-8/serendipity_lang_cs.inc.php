@@ -209,7 +209,7 @@ $i18n_filename_to = array (
 @define('DELETING_FILE', 'Vymazání souboru %s...');
 @define('SETTINGS_SAVED_AT', 'Nové nastavení bylo uloženo v %s');
 @define('INVERT_SELECTIONS', 'Obrátit výběr');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Osobní nastavení');
 @define('DO_MARKUP_DESCRIPTION', 'Převést značky na text (smajlíky, zkratky *, /, _, ...). Vypnutí této volby zajistí uložení HTML kódů v textu.');
 @define('BASE_DIRECTORY', 'Základní adresář');

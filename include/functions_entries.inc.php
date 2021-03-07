@@ -581,6 +581,16 @@ function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false
 
     serendipity_plugin_api::hook_event('frontend_fetchentry', $cond, array('noSticky' => true));
 
+    if (! array_key_exists('single_group', $cond)) {
+        $cond['single_group'] = '';
+    }
+    if (! array_key_exists('single_having', $cond)) {
+        $cond['single_having'] = '';
+    }
+    if (! array_key_exists('single_orderby', $cond)) {
+        $cond['single_orderby'] = '';
+    }
+
     $querystring = "SELECT  e.id,
                             e.title,
                             e.timestamp,
@@ -1266,7 +1276,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                     'is_comment_moderate'   => (isset($serendipity['GET']['csuccess']) && $serendipity['GET']['csuccess'] == 'moderate' ? true: false)
                 );
 
-                if ($serendipity['serendipityAuthedUser'] === true && !isset($serendipity['POST']['preview'])) {
+                if ($serendipity['serendipityAuthedUser'] ?? null === true && !isset($serendipity['POST']['preview'])) {
                     $userData = $serendipity['POST'];
                     if (empty($userData['name'])) {
                         $userData['name'] = $serendipity['serendipityRealname'];

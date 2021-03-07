@@ -210,6 +210,10 @@ $serendipity['charsets'] = array(
 @define('USERLEVEL_CHIEF', 1);
 @define('USERLEVEL_EDITOR', 0);
 
+@define('VIEWMODE_THREADED', 'threaded');
+@define('VIEWMODE_LINEAR', 'linear');
+
+
 if (!version_compare(phpversion(), '5.3', '>=')) {
     $serendipity['lang'] = 'en';
     include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');

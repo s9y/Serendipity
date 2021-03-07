@@ -755,7 +755,7 @@ function &serendipity_smarty_printComments($params, $smarty) {
         $params['order'] = 'ASC';
     }
 
-    $comments = serendipity_fetchComments($params['entry'], (int)$params['limit'], 'co.id ' . $params['order']);
+    $comments = serendipity_fetchComments($params['entry'], (int)($params['limit'] ?? null), 'co.id ' . ($params['order'] ?? null));
 
     if (!empty($serendipity['POST']['preview'])) {
         $comments[] =

@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'мпщ гАЦАщ %s ...');
 @define('SETTINGS_SAVED_AT', 'йЦ мщы гАгзогогй гАлоМои щМ  %s');
 @define('INVERT_SELECTIONS', 'йяйМ зъсМ');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'гАгзогогй гАтнуМи');
 @define('DO_MARKUP_DESCRIPTION', 'МЦъД ймФМА гАгмящ гАчМгсМи еАЛ зАгЦгй цФ ехйсгЦгй ЦкгА (гАгхйсгЦгй, гАгнйугягй хФгсьи *, /, _, ...) зоЦ гАйЦъМД сФщ Ммйщы хлЦМз цъФго HTML зАЛ гДЕг ДуФу щчь.');
 @define('BASE_DIRECTORY', 'ЦлАо чгзои');
