@@ -904,7 +904,7 @@ function serendipity_smarty_init($vars = array()) {
             }
 
             // Set a session variable if Smarty fails:
-            $prev_smarty = $_SESSION['no_smarty'];
+            $prev_smarty = $_SESSION['no_smarty'] ?? null;
             $_SESSION['no_smarty'] = true;
 
             if (LANG_CHARSET != 'UTF-8') {

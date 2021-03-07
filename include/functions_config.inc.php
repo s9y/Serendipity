@@ -387,7 +387,7 @@ function serendipity_login($use_external = true) {
     }
 
     // First try login via POST data. If true, the userinformation will be stored in a cookie (optionally)
-    if (serendipity_authenticate_author($serendipity['POST']['user'], $serendipity['POST']['pass'], false, $use_external)) {
+    if (serendipity_authenticate_author($serendipity['POST']['user'] ?? null, $serendipity['POST']['pass'] ?? null, false, $use_external)) {
         if (empty($serendipity['POST']['auto'])) {
             serendipity_deleteCookie('author_information');
             return false;
@@ -411,7 +411,7 @@ function serendipity_login($use_external = true) {
         }
     }
 
-    $data = array('ext' => $use_external, 'mode' => 2, 'user' => $serendipity['POST']['user'], 'pass' => $serendipity['POST']['pass']);
+    $data = array('ext' => $use_external, 'mode' => 2, 'user' => $serendipity['POST']['user'] ?? null, 'pass' => $serendipity['POST']['pass'] ?? null);
     if ($use_external) serendipity_plugin_api::hook_event('backend_loginfail', $data);
 }
 
@@ -1056,7 +1056,7 @@ function serendipity_getSessionLanguage() {
     }
 
         // cache the result
-        if ($lang) $serendipity['detected_lang'] = $lang;  
+        if ($lang ?? false) $serendipity['detected_lang'] = $lang;  
     
         // try configuration: blog default language
         if (empty($lang) && $serendipity['lang']) {
@@ -1264,7 +1264,7 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
     }
 
     if ($authorid === null) {
-        $authorid = $serendipity['authorid'];
+        $authorid = $serendipity['authorid'] ?? null;
     }
 
     if (!isset($group[$authorid])) {
@@ -1300,7 +1300,7 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
 
     // If the function did not yet return it means there's a check for a permission which is not defined anywhere.
     // Let's use a backwards compatible way.
-    if ($return && isset($permissions[$permName]) && in_array($serendipity['serendipityUserlevel'], $permissions[$permName])) {
+    if ($return && isset($permissions[$permName]) && in_array($serendipity['serendipityUserlevel'] ?? null, $permissions[$permName])) {
         return true;
     }
 
