@@ -70,7 +70,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     {
         $key = $this->get_key($template);
         $this->template_data[ $this->index ][ $key ][ 'total_time' ] +=
-            microtime(true) - $this->template_data[ $this->index ][ $key ][ 'start_template_time' ];
+            microtime(true) - ($this->template_data[ $this->index ][ $key ][ 'start_template_time' ] ?? null);
         //$this->template_data[$this->index][$key]['properties'] = $template->properties;
     }
 

@@ -133,7 +133,7 @@
     </article>
     {/foreach}
 {foreachelse}
-    {if not $plugin_clean_page}
+    {if isset($plugin_clean_page) and not $plugin_clean_page}
     <p class="nocontent">{$CONST.NO_ENTRIES_TO_PRINT}</p>
     {/if}
 {/foreach}
