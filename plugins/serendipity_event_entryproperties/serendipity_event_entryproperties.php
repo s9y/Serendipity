@@ -910,8 +910,9 @@ class serendipity_event_entryproperties extends serendipity_event
                     } else {
                         $conds[] = " (ep_access.property IS NULL OR ep_access.value = 'public')";
                     }
-
-                    if (!isset($serendipity['GET']['viewAuthor']) && !isset($serendipity['plugin_vars']['tag']) && !isset($serendipity['GET']['category']) && !isset($serendipity['GET']['adminModule']) && $event == 'frontend_fetchentries' && $addData['source'] != 'search') {
+                    
+                    if (!isset($serendipity['GET']['viewAuthor']) && !isset($serendipity['plugin_vars']['tag']) && !isset($serendipity['GET']['category']) && !isset($serendipity['GET']['adminModule']) && $event == 'frontend_fetchentries' && ($addData
+                    === null || $addData['source'] != 'search')) {
                         $conds[] = " (ep_no_frontpage.property IS NULL OR ep_no_frontpage.value != 'true') ";
                         $joins[] = " LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties ep_no_frontpage
                                                   ON (e.id = ep_no_frontpage.entryid AND ep_no_frontpage.property = 'ep_no_frontpage')";

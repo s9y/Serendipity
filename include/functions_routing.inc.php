@@ -52,6 +52,9 @@ function locateHiddenVariables($_args) {
             }
         } elseif ($v == 'summary') { /* Summary */
             $serendipity['short_archives'] = true;
+            if (! array_key_exists('head_subtitle', $serendipity)) {
+                $serendipity['head_subtitle'] = '';
+            }
             $serendipity['head_subtitle'] .= SUMMARY . ' - ';
             unset($_args[$k]);
         } elseif ($v[0] == 'C') { /* category */

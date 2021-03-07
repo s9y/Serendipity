@@ -1235,7 +1235,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 }
             }
 
-            if (strlen($entry['extended'])) {
+            if (strlen($entry['extended'] ?? null)) {
                 $entry['has_extended']      = true;
             }
 
@@ -1716,7 +1716,7 @@ function serendipity_printArchives() {
               ON ec.categoryid = c.categoryid" : "") . 
               $sql_condition['joins'] .
         " WHERE isdraft = 'false'"
-                . $sql_condition['and']
+                . ($sql_condition['and'] ?? '')
                 . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '')
                 . (!empty($cat_sql) ? ' AND ' . $cat_sql : '')
                 . (!empty($serendipity['GET']['viewAuthor']) ? ' AND e.authorid = ' . (int)$serendipity['GET']['viewAuthor'] : '')
@@ -1727,7 +1727,12 @@ function serendipity_printArchives() {
     $group = array();
     if (is_array($entries)) {
         foreach($entries AS $entry) {
-            $group[date('Ym', $entry['timestamp'])]++;
+            $grouptime = date('Ym', $entry['timestamp']);
+            if (array_key_exists($grouptime, $group)) {
+                $group[$grouptime]++;
+            } else {
+                $group[$grouptime] = 0;
+            }
         }
     }
 
@@ -1759,7 +1764,12 @@ function serendipity_printArchives() {
                     break;
             }
 
-            $entry_count = (int)$group[$y . (strlen($m) == 1 ? '0' : '') . $m];
+            $grouptime = $y . (strlen($m) == 1 ? '0' : '') . $m;
+            if (array_key_exists($grouptime, $group)) {
+                $entry_count = (int)$group[$grouptime];
+            } else {
+                $entry_count = 0;
+            }
 
             if ($entry_count > 0) {
                 

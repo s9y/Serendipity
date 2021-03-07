@@ -175,6 +175,14 @@ if ($serendipity['smarty']->getTemplateVars('ARCHIVES') == null) {
                 )
             );    
 }
+if ($serendipity['smarty']->getTemplateVars('ENTRIES') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'ENTRIES' => ''
+                )
+            );    
+}
+
 serendipity_smarty_fetch('CONTENT', 'content.tpl');
 $serendipity['smarty']->assign('ENTRIES', '');
 
