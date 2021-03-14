@@ -249,6 +249,8 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
     if ($showSubmit && $postKey != 'plugin') {
         $data['showSubmit_head'] = true;
+    } else {
+        $data['showSubmit_head'] = false;
     }
 
     if ($showTable) {
@@ -311,6 +313,8 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $data['hvalue']      = $hvalue;
         $data['postKey']     = $postKey;
         $data['config_item'] = $config_item;
+
+        if (! isset($data['backend_wysiwyg'])) { $data['backend_wysiwyg'] = null; }
 
         $assign_plugin_config = function($data) use (&$plugin_options, $tfile, $config_item) {
         $plugin_options[$config_item] = array(

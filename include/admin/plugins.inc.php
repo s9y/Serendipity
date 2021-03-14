@@ -120,6 +120,9 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         $plugin->cleanup();
     }
 
+    $data['save_errors'] = null;
+    $data['saveconf'] = null;
+    $data['timestamp'] = null;
     if ( isset($save_errors) && is_array($save_errors) && count($save_errors) > 0 ) {
         $data['save_errors'] = $save_errors;
     } elseif ( isset($_POST['SAVECONF'])) {
@@ -137,6 +140,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         $data['changelog'] = true;
     }
 
+    $data['documentation_local'] = null;
     if (@file_exists(dirname($plugin->pluginFile) . '/documentation_' . $serendipity['lang'] . '.html')) {
         $data['documentation_local'] = '/documentation_' . $serendipity['lang'] . '.html';
     } elseif (@file_exists(dirname($plugin->pluginFile) . '/documentation_en.html')) {
