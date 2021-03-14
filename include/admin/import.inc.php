@@ -230,6 +230,7 @@ if (isset($serendipity['GET']['importFrom']) && serendipity_checkFormToken()) {
         }
     }
 } else {
+    $data['importForm'] = false;
     $importpath = S9Y_INCLUDE_PATH . 'include/admin/importers/';
     $dir        = opendir($importpath);
     $list       = array();
