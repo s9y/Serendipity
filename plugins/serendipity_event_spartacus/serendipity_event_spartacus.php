@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.39.1');
+        $propbag->add('version',       '2.39.2');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -320,16 +320,16 @@ class serendipity_event_spartacus extends serendipity_event
                 case 'complete':
                     $children[] = array(
                         'tag'        => $vals[$i]['tag'],
-                        'attributes' => $vals[$i]['attributes'],
-                        'value'      => $vals[$i]['value']
+                        'attributes' => $vals[$i]['attributes'] ?? null,
+                        'value'      => $vals[$i]['value'] ?? null
                     );
                     break;
 
                 case 'open':
                     $children[] = array(
                         'tag'        => $vals[$i]['tag'],
-                        'attributes' => $vals[$i]['attributes'],
-                        'value'      => $vals[$i]['value'],
+                        'attributes' => $vals[$i]['attributes'] ?? null,
+                        'value'      => $vals[$i]['value'] ?? null,
                         'children'   => $this->GetChildren($vals, $i)
                     );
                     break;
@@ -485,7 +485,7 @@ class serendipity_event_spartacus extends serendipity_event
                     }
                 }
             }
-            if ($check_health) {
+            if (isset($check_health) && $check_health) {
                 /*--JAM: Useful for later, when we have a health monitor for SPARTACUS
                 $propbag = new serendipity_property_bag;
                 $this->introspect($propbag);
@@ -531,7 +531,7 @@ class serendipity_event_spartacus extends serendipity_event
                 }
             } else {
                 // Fetch file
-                if (!$data) {
+                if (! isset($data) || !$data) {
                     $data = $response->getBody();
                 }
                 if (is_object($serendipity['logger'])) $serendipity['logger']->debug(sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_URL, strlen($data), $target));
@@ -701,7 +701,6 @@ class serendipity_event_spartacus extends serendipity_event
             }
 
             xml_parser_set_option($p, XML_OPTION_CASE_FOLDING, 0);
-            @xml_parser_set_option($this->parser, XML_OPTION_TARGET_ENCODING, LANG_CHARSET);
             $xml_package = $xml_string . "\n" . $xml_package;
             xml_parse_into_struct($p, $xml_package, $vals);
             xml_parser_free($p);

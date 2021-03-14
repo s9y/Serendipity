@@ -131,7 +131,7 @@ if (is_array($template_config)) {
     serendipity_plugin_api::hook_event('backend_templates_configuration_top', $template_config);
     $data["has_config"] = true;
 
-    if ($serendipity['POST']['adminAction'] == 'configure' &&  serendipity_checkFormToken()) {
+    if (isset($serendipity['POST']['adminAction']) && $serendipity['POST']['adminAction'] == 'configure' &&  serendipity_checkFormToken()) {
         $storage = new template_option();
         $storage->import($template_config);
         foreach($serendipity['POST']['template'] AS $option => $value) {
@@ -184,7 +184,7 @@ ksort($stack);
 
 foreach ($stack as $theme => $info) {
     /* Sorry, but we don't display engines */
-    if ( strtolower($info['engine']) == 'yes') {
+    if ( isset($info['engine']) && strtolower($info['engine']) == 'yes') {
         continue;
     }
     $data['templates'][$theme]['info'] = $info;
@@ -209,11 +209,13 @@ foreach ($stack as $theme => $info) {
         if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview${backendId}${previewType}")) {
             $data["templates"][$theme]["preview${backendId}"] = $serendipity["templatePath"] . $theme . "/preview${backendId}${previewType}";
         } elseif (!empty($info["previewURL"])) {
-            $data["templates"][$theme]["preview${backendId}"] = $info["previewURL${backendId}"] ;
+            $data["templates"][$theme]["preview${backendId}"] = $info["previewURL${backendId}"] ?? null;
         }
 
-        if ($info['demoURL']) {
+        if (isset($info['demoURL']) && $info['demoURL']) {
             $data['templates'][$theme]['demoURL'] = $info['demoURL'];
+        } else {
+            $data['templates'][$theme]['demoURL'] = null;
         }
     }
 
@@ -223,7 +225,7 @@ foreach ($stack as $theme => $info) {
         $data['templates'][$theme]['unmetRequirements'] = sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements));
     }
 
-    if ($info['recommended']) {
+    if (isset($info['recommended']) && $info['recommended']) {
         $data['recommended_templates'][$theme] = $data['templates'][$theme];
         if ($theme != $serendipity['template'] && $theme != $serendipity['template_backend']) {
             unset($data['templates'][$theme]);
@@ -245,6 +247,10 @@ if ($serendipity['template'] != $serendipity['template_backend'] && isset($data[
     unset($data['templates'][$serendipity['template_backend']]);
 }
 unset($data['recommended_templates'][$serendipity['template']]);
+
+# php 8 compat section
+if (! isset($data['adminAction'])) { $data['adminAction'] = null; }
+if (! isset($data['deprecated'])) { $data['deprecated'] = null; }
 
 echo serendipity_smarty_show('admin/templates.inc.tpl', $data);
 

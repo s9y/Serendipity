@@ -287,7 +287,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
             }
         }
 
-        if (isset($_POST['serendipity'][$postkey][$config_item])) {
+        if (isset($postkey) && isset($_POST['serendipity'][$postkey][$config_item])) {
             if (is_array($_POST['serendipity'][$postkey][$config_item])) {
                 $hvalue = $_POST['serendipity'][$postkey][$config_item];
                 array_walk($hvalue, 'serendipity_specialchars');
@@ -660,6 +660,10 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         serendipity_plugin_api::hook_event('backend_wysiwyg_nuggets', $ev);
         $data['ev'] = $ev;
     }
+
+    # php 8 compat section
+    if (! isset($data['showExample'])) { $data['showExample'] = null; }
+    if (! isset($data['spawnNuggets'])) { $data['spawnNuggets'] = null; }
 
     return serendipity_smarty_show('admin/plugin_config.tpl', $data);
 }
