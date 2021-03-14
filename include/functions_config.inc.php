@@ -1955,7 +1955,7 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
                                       )";
 
         if (empty($cond['and'])) {
-            $cond['and'] .= ' WHERE ';
+            $cond['and'] = ' WHERE ';
         } else {
             $cond['and'] .= ' AND ';
         }

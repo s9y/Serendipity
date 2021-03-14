@@ -17,7 +17,7 @@ $sort_order = array('timestamp'     => DATE,
                     'title'         => TITLE,
                     'id'            => 'ID');
 
-$data = array();
+$data = array('no_entries' => false, 'iframe' => false);
 
 if (!empty($serendipity['GET']['editSubmit'])) {
     $serendipity['GET']['adminAction'] = 'edit'; // does this change smarty.get vars?
@@ -226,17 +226,17 @@ switch($serendipity['GET']['adminAction']) {
         $sort_import   = array('perPage', 'ordermode', 'order');
 
         foreach($filter_import AS $f_import) {
-            serendipity_restoreVar($serendipity['COOKIE']['entrylist_filter_' . $f_import], serendipity_specialchars($serendipity['GET']['filter'][$f_import]));
-            $data["get_filter_$f_import"] = serendipity_specialchars($serendipity['GET']['filter'][$f_import]);
+            serendipity_restoreVar($serendipity['COOKIE']['entrylist_filter_' . $f_import], serendipity_specialchars($serendipity['GET']['filter'][$f_import] ?? null));
+            $data["get_filter_$f_import"] = serendipity_specialchars($serendipity['GET']['filter'][$f_import] ?? null);
         }
 
         foreach($sort_import AS $s_import) {
-            serendipity_restoreVar($serendipity['COOKIE']['entrylist_sort_' . $s_import], serendipity_specialchars($serendipity['GET']['sort'][$s_import]));
-            $data["get_sort_$s_import"] = serendipity_specialchars($serendipity['GET']['sort'][$s_import]);
+            serendipity_restoreVar($serendipity['COOKIE']['entrylist_sort_' . $s_import], serendipity_specialchars($serendipity['GET']['sort'][$s_import] ?? null));
+            $data["get_sort_$s_import"] = serendipity_specialchars($serendipity['GET']['sort'][$s_import] ?? null);
         }
 
         $perPage = (!empty($serendipity['GET']['sort']['perPage']) ? $serendipity['GET']['sort']['perPage'] : $per_page[0]);
-        $page    = (int)$serendipity['GET']['page'];
+        $page    = (int)($serendipity['GET']['page'] ?? 0);
         $offSet  = $perPage*$page;
 
         if (empty($serendipity['GET']['sort']['ordermode']) || $serendipity['GET']['sort']['ordermode'] != 'ASC') {
@@ -330,7 +330,7 @@ switch($serendipity['GET']['adminAction']) {
         $data['page']       = $page;
 
         $data['totalEntries']  = serendipity_getTotalEntries();
-        $data['simpleFilters'] = $serendipity['simpleFilters'];
+        $data['simpleFilters'] = $serendipity['simpleFilters'] ?? null;
 
         if (is_array($entries)) {
             $data['is_entries'] = true;
@@ -340,8 +340,10 @@ switch($serendipity['GET']['adminAction']) {
             foreach ((array)$serendipity['GET']['sort'] as $k => $v) {
                 $qString .= '&amp;serendipity[sort]['. $k .']='. $v;
             }
-            foreach ((array)$serendipity['GET']['filter'] as $k => $v) {
-                $qString .= '&amp;serendipity[filter]['. $k .']='. $v;
+            if (isset($serendipity['GET']['filter'])) {
+                foreach ((array)$serendipity['GET']['filter'] as $k => $v) {
+                    $qString .= '&amp;serendipity[filter]['. $k .']='. $v;
+                }
             }
             $data['linkFirst']    = $qString . '&amp;serendipity[page]=' . 0;
             $data['linkPrevious'] = $qString . '&amp;serendipity[page]=' . ($page-1);
@@ -365,7 +367,7 @@ switch($serendipity['GET']['adminAction']) {
                     'timestamp'     => (int)$ey['timestamp'],
                     'last_modified' => (int)$ey['last_modified'],
                     'isdraft'       => serendipity_db_bool($ey['isdraft']),
-                    'ep_is_sticky'  => (serendipity_db_bool($ey['properties']['ep_is_sticky']) ? true : false),
+                    'ep_is_sticky'  => (serendipity_db_bool($ey['properties']['ep_is_sticky'] ?? null) ? true : false),
                     'pubdate'       => date("c", (int)$ey['timestamp']),
                     'author'        => serendipity_specialchars($ey['author']),
                     'cats'          => $entry_cats,
@@ -443,12 +445,13 @@ switch($serendipity['GET']['adminAction']) {
         );
 }
 
-$data['entryForm'] = $entryForm;
-$data['errors'] = $errors;
+$data['entryForm'] = $entryForm ?? null;
+$data['errors'] = $errors ?? null;
 $data['get'] = $serendipity['GET']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 // make sure we've got these
-if (!isset($data['urltoken']))  $data['urltoken']  = serendipity_setFormToken('url');
-if (!isset($data['formtoken'])) $data['formtoken'] = serendipity_setFormToken();
+if (!isset($data['urltoken'])) { $data['urltoken']  = serendipity_setFormToken('url'); }
+if (!isset($data['formtoken'])) { $data['formtoken'] = serendipity_setFormToken(); }
+if (!isset($data['get']['filter'])) { $data['get']['filter'] = []; }
 
 echo serendipity_smarty_show('admin/entries.inc.tpl', $data);
 
