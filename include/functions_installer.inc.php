@@ -469,7 +469,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
     foreach ($config as &$category) {
         foreach ($category['items'] as &$item) {
 
-            $value = $from[$item['var']];
+            $value = $from[$item['var']] ?? null;
 
             /* Calculate value if we are not installed, how clever :) */
             if ($from == false) {
@@ -485,7 +485,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
                 $value = '';
             }
 
-            if (!$showDangerous && $item['view'] == 'dangerous') {
+            if (!$showDangerous && isset($item['view']) && $item['view'] == 'dangerous') {
                 continue;
             }
 
@@ -503,6 +503,8 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
 
             if (in_array('ignore', $item['flags'])) {
                 $item['ignore'] = true;
+            } else {
+                $item['ignore'] = false;
             }
 
             if (in_array('ifEmpty', $item['flags']) && empty($value)) {
@@ -512,6 +514,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
         }
     }
     $data['config'] = $config;
+    $data['config_groupkeys'] = null;
     return serendipity_smarty_show('admin/config_template.tpl', $data);
 }
 

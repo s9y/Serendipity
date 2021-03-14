@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 
 umask(0000);
 $umask = 0775;
-@define('IN_installer', true);
+if (! defined('IN_installer')) { define('IN_installer', true); }
 
 if (!isset($_POST['installAction'])) {
     $_POST['installAction'] = '';
@@ -68,6 +68,10 @@ $data['config'] = serendipity_printConfigTemplate(serendipity_parseTemplate(S9Y_
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
+
+# php 8 compat section
+if (! isset($data['installAction'])) { $data['installAction'] = null; }
+if (! isset($data['adminAction'])) { $data['adminAction'] = null; }
 
 echo serendipity_smarty_show('admin/configuration.inc.tpl', $data);
 

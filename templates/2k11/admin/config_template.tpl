@@ -20,11 +20,11 @@
             {/if}
 
         {/if}
-            <div id="el{$category@index}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} option_list">
+            <div id="el{$category@index}" class="config_optiongroup{if is_array($config_groupkeys) and $config_groupkeys@last} config_optiongroup_last{/if} option_list">
                 <legend class="visuallyhidden">{$category.description}</legend>
         {foreach $category.items as $item}
             {cycle assign='zebra_class' values='odd,even'}
-            {if $item.guessedInput}
+            {if isset($item.guessedInput) and $item.guessedInput}
                 {if $item.type == 'bool'}
                 <fieldset class="clearfix {$zebra_class}{if $item.description != ''} has_info{/if}">
                     <span class="wrap_legend"><legend>{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled" aria-hidden="true"></span><b>i</b><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
@@ -44,7 +44,7 @@
                     {if $item.description != ''}
                     <span id="{$item.var}_info" class="field_info additional_info">{$item.description}</span>
                     {/if}
-                    {$item.guessedInput}
+                    {if isset($item.guessedInput)}{$item.guessedInput}{/if}
                 </div>
                 {/if}
             {/if}
