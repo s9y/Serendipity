@@ -1952,7 +1952,7 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
     global $serendipity;
     
     if ($serendipity['useInternalCache']) {
-        $key = md5($basedir . $dir . $onlyDirs . $pattern . $depth . $max_depth . $apply_ACL . $aExcludeDirs . $serendipity['serendipityUser']);
+        $key = md5($basedir . $dir . $onlyDirs . $pattern . $depth . $max_depth . $apply_ACL . serialize($aExcludeDirs) . $serendipity['serendipityUser']);
         $files = serendipity_getCacheItem($key);
         if ($files && $files !== false) {
             return unserialize($files);
@@ -2005,7 +2005,7 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
     }
 
     if ($serendipity['useInternalCache']) {
-        $key = md5($basedir . $dir . $onlyDirs . $pattern . $depth . $max_depth . $apply_ACL . $aExcludeDirs . $serendipity['serendipityUser']);
+        $key = md5($basedir . $dir . $onlyDirs . $pattern . $depth . $max_depth . $apply_ACL . serialize($aExcludeDirs) . $serendipity['serendipityUser']);
 
         serendipity_cacheItem($key, serialize($files));
     }
