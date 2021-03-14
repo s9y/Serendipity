@@ -17,7 +17,7 @@ $sort_order = array('timestamp'     => DATE,
                     'title'         => TITLE,
                     'id'            => 'ID');
 
-$data = array('no_entries' => false, 'iframe' => false);
+$data = array('no_entries' => false, 'iframe' => false, 'drawList' => false, 'switched_output' => false);
 
 if (!empty($serendipity['GET']['editSubmit'])) {
     $serendipity['GET']['adminAction'] = 'edit'; // does this change smarty.get vars?
@@ -441,7 +441,7 @@ switch($serendipity['GET']['adminAction']) {
             'serendipity[adminModule]' => 'entries',
             'serendipity[adminAction]' => 'save'
             ),
-            (isset($entry) ? $entry : array())
+            (isset($entry) ? $entry : array('entry_form' => null, 'id' => null, 'body' => null, 'extended' => null))
         );
 }
 

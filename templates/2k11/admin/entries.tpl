@@ -42,11 +42,11 @@
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[body]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[body]">{$CONST.MEDIA}</button>
             <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[body]">URL</button>
-            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_vars.entry hookAll="true"}
         </div>
     {else}
         <div id="tools_entry" class="editor_toolbar">
-            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_vars.entry hookAll="true"}
         </div>
     {/if}
         <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{$entry_vars.entry.body|escape}</textarea>
@@ -65,11 +65,11 @@
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[extended]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[extended]">{$CONST.MEDIA}</button>
             <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[extended]">URL</button>
-            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_vars.entry hookAll="true"}
         </div>
     {else}
         <div id="tools_extended" class="editor_toolbar">
-            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_vars.entry hookAll="true"}
         </div>
     {/if}
         <div id="extended_entry_editor">
