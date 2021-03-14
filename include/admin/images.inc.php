@@ -20,13 +20,6 @@ if (!is_object($serendipity['smarty'])) {
 if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'multicheck') {
     unset($serendipity['GET']['adminAction']);
 }
-// Listens on toggle_dir STRICT to list items per directory, or include all sub directory items
-if (empty($serendipity['GET']['toggle_dir']) && empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
-    $serendipity['GET']['toggle_dir'] = 'no'; // default
-}
-if (!empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
-    serendipity_restoreVar($serendipity['COOKIE']['serendipity_toggle_dir'], $serendipity['GET']['toggle_dir']);
-}
 
 $messages = array();
 
@@ -59,6 +52,7 @@ $data['case_scale'] = false;
 $data['case_scaleSelect'] = false;
 $data['case_default'] = false;
 $data['showMLbutton'] = false;
+$data['case_directorySelect'] = false;
 
 switch ($serendipity['GET']['adminAction']) {
 
