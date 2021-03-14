@@ -191,6 +191,9 @@ class serendipity_event_responsiveimages extends serendipity_event
         global $serendipity;
         
         $origImage = serendipity_fetchImageFromDatabase($id);
+        if (! $origImage) {
+            return '';
+        }
         $imagePath = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $origImage['path'] . $origImage['realname'];
         
         $thumbnails = serendipity_getThumbnails($id);
