@@ -675,7 +675,7 @@ function serendipity_load_userdata($username) {
  * @return boolean  TRUE when logged in, FALSE when not.
  */
 function serendipity_userLoggedIn() {
-    if ($_SESSION['serendipityAuthedUser'] === true && IS_installed) {
+    if (isset($_SESSION['serendipityAuthedUser']) && $_SESSION['serendipityAuthedUser'] === true && IS_installed) {
         return true;
     } else {
         return false;

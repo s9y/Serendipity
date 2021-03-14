@@ -233,9 +233,9 @@ if ($ajax) {
         $admin_vars[$poll_admin_var] =& $$poll_admin_var;
     }
 
-    $admin_vars['out']         = array();
+    $admin_vars['out']         = array('header' => null, 'table' => null, 'footer' => null);
     $admin_vars['no_create']   = $serendipity['no_create'] ?? null;
-    $admin_vars['title']       = $admin_section;
+    $admin_vars['title']       = $admin_section ?? null;
     $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
 
     if ($serendipity['expose_s9y']) {
@@ -247,7 +247,7 @@ if ($ajax) {
     if (!is_object($serendipity['smarty'])) {
         serendipity_smarty_init();
     }
-    $serendipity['smarty']->assignByRef('admin_vars', $admin_vars);
+    $serendipity['smarty']->assignByRef('admin_vars', $admin_vars); 
     $serendipity['smarty']->display(serendipity_getTemplateFile('admin/index.tpl', 'serendipityPath'));
 
 } else {
