@@ -215,6 +215,7 @@ function show_plugins($event_only = false, $sidebars = null)
     }
 
     $data['total'] = $i;
+    
     return serendipity_smarty_show('admin/show_plugins.fnc.tpl', $data);
 }
 

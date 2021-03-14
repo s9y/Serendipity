@@ -479,13 +479,24 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
 
     $data['event_plugins'] = show_plugins(true);
 
-    if ($serendipity['memSnaps'] && count($serendipity['memSnaps']) > 0) {
+    if (isset($serendipity['memSnaps']) && $serendipity['memSnaps'] && count($serendipity['memSnaps']) > 0) {
         $data['$memsnaps'] = $serendipity['memSnaps'];
+    } else {
+        $data['$memsnaps'] = null;
     }
+        
     $data['updateAllMsg'] = isset($serendipity['GET']['updateAllMsg']);
 }
 
 $data['urltoken']      = serendipity_setFormToken('url');
+
+# php 8 compat section
+if (! isset($data['plugin_to_conf'])) { $data['plugin_to_conf'] = null; }
+if (! isset($data['adminAction'])) { $data['adminAction'] = null; }
+if (! isset($data['new_plugin_failed'])) { $data['new_plugin_failed'] = null; }
+if (! isset($data['save'])) { $data['save'] = null; }
+if (! isset($data['memsnaps'])) { $data['memsnaps'] = null; }
+
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);
 
 
