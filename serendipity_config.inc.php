@@ -429,7 +429,7 @@ if (function_exists('date_default_timezone_set')) {
 }
 
 // Fallback charset, if none is defined in the language files
-@define('LANG_CHARSET', 'ISO-8859-1');
+defined('LANG_CHARSET') or @define('LANG_CHARSET', 'ISO-8859-1');
 
 // Create array of permission levels, with descriptions
 $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DESC,
