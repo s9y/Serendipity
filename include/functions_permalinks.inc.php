@@ -522,7 +522,7 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
                 }
             }
 
-            $ts = serendipity_serverOffsetHour($data['entry']['timestamp']);
+            $ts = serendipity_serverOffsetHour($data['entry']['timestamp'] ?? null);
 
             $ftitle  = serendipity_makeFilename($data['title']);
             $fltitle = strtolower($ftitle);
@@ -782,7 +782,7 @@ function serendipity_getUriArguments($uri, $wildcard = false) {
 
     /* Explode the path into sections, to later be able to check for arguments and add our own */
     preg_match('/^'. preg_quote($serendipity['serendipityHTTPPath'], '/') . '(' . preg_quote($serendipity['indexFile'], '/') . '\?\/)?(' . ($wildcard ? '.+' : '[!;,_a-z0-9\-*\/%\+]+') . ')/i', $uri, $_res);
-    if (strlen($_res[2]) != 0) {
+    if (strlen($_res[2] ?? null) != 0) {
         $args = explode('/', $_res[2]);
         if ($args[0] == $indexFile || $args[0] == $serendipity['indexFile']) {
             unset($args[0]);
@@ -793,4 +793,3 @@ function serendipity_getUriArguments($uri, $wildcard = false) {
         return array();
     }
 }
-
