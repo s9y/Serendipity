@@ -26,7 +26,7 @@ if (is_array($required_fieldlist)) {
     $serendipity['smarty']->assign('required_fields', $smarty_required_fields);
 }
 
-$serendipity['smarty']->assign('is_templatechooser', $_SESSION['serendipityUseTemplate']);
+$serendipity['smarty']->assign('is_templatechooser', $_SESSION['serendipityUseTemplate'] ?? null);
 
 $template_config = array(
     array(
@@ -96,7 +96,7 @@ $template_config = array(
 
 $template_config_groups = NULL;
 $template_global_config = array('navigation' => true);
-$template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
+$template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'] ?? '', true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
 
 // 2k11 shall be a re-usable frontend theme that other templates can inherit (through "Engine: 2k11" in their info.txt)
@@ -117,7 +117,7 @@ jQuery(function() {
 })\n\n";
 }
 
-if ($_SESSION['serendipityUseTemplate']) {
+if ($_SESSION['serendipityUseTemplate'] ?? false) {
     $template_loaded_config['use_corenav'] = false;
 }
 
