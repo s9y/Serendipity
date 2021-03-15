@@ -18,7 +18,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team, Stephan Brunker');
-        $propbag->add('version',       '2.21.7');
+        $propbag->add('version',       '2.21.9');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -224,10 +224,10 @@ class serendipity_event_nl2br extends serendipity_event
                 case 'frontend_display':
 
                     // check single entry for temporary disabled markups
-                    if ( !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
-                         @!in_array($this->instance, $serendipity['POST']['properties']['disable_markups']) &&
-                         !$eventData['properties']['ep_no_textile'] && !isset($serendipity['POST']['properties']['ep_no_textile']) &&
-                         !$eventData['properties']['ep_no_markdown'] && !isset($serendipity['POST']['properties']['ep_no_markdown'])) {
+                    if ( !($eventData['properties']['ep_disable_markup_' . $this->instance] ?? null) &&
+                         @!in_array($this->instance, ($serendipity['POST']['properties']['disable_markups'] ?? [])) &&
+                         !($eventData['properties']['ep_no_textile'] ?? null) && !isset(($serendipity['POST']['properties']['ep_no_textile'])) &&
+                         !($eventData['properties']['ep_no_markdown'] ?? null) && !isset($serendipity['POST']['properties']['ep_no_markdown'])) {
                         // yes, this markup shall be applied
                         $serendipity['nl2br']['entry_disabled_markup'] = false;
                     } else {
@@ -274,9 +274,9 @@ class serendipity_event_nl2br extends serendipity_event
 
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
-                                !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
-                                @!in_array($this->instance, $serendipity['POST']['properties']['disable_markups']) &&
-                                !$eventData['properties']['ep_no_nl2br'] &&
+                                !($eventData['properties']['ep_disable_markup_' . $this->instance] ?? null) &&
+                                @!in_array($this->instance, ($serendipity['POST']['properties']['disable_markups'] ?? [])) &&
+                                !($eventData['properties']['ep_no_nl2br'] ?? null) &&
                                 !isset($serendipity['POST']['properties']['ep_no_nl2br'])) {
 
                             $element = $temp['element'];
@@ -344,7 +344,7 @@ class serendipity_event_nl2br extends serendipity_event
                     if( $isobr ) {
                         $serendipity['nl2br']['iso2br'] = true; // include to global as also used by staticpages now
 
-                        if (!is_object($serendipity['smarty'])) {
+                        if (! array_key_exists('smarty', $serendipity) || !is_object($serendipity['smarty'])) {
                             serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
                         }
 
@@ -355,24 +355,18 @@ class serendipity_event_nl2br extends serendipity_event
 
                 case 'css':
                     $eventData .= '
-
 /* nl2br plugin start */
-
 p.wl_nobottom {
     margin-bottom: 0em;
 }
-
 p.wl_notop {
     margin-top: 0em;
 }
-
 p.wl_notopbottom {
     margin-top: 0em;
     margin-bottom: 0em;
 }
-
 /* nl2br plugin end */
-
 ';
                     break;
 
