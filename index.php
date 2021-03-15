@@ -113,6 +113,14 @@ if (empty($serendipity['smarty_file'])) {
 
 serendipity_gzCompression();
 
+if ($serendipity['smarty']->getTemplateVars('raw_data') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'raw_data' => ''
+                )
+            );    
+}
+
 $serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
 
 
