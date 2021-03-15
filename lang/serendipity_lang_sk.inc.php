@@ -190,7 +190,7 @@ $i18n_filename_to = array (
 @define('DELETING_FILE', 'Zmazanie súboru \'%s\'...');
 @define('SETTINGS_SAVED_AT', 'Nové nastavenia boli ulo¾ené v %s');
 @define('INVERT_SELECTIONS', 'Obráti» výber');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Osobné nastavenia');
 @define('DO_MARKUP_DESCRIPTION', 'Aplikova» transformácie na text (smajlíky, skratky *, /, _, ...). Vypnutie tohto nastavenia zabezpeèí ulo¾enie HTML kódov v texte.');
 @define('BASE_DIRECTORY', 'Koreòový prieèinok');

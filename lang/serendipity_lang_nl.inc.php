@@ -180,7 +180,7 @@
 @define('DELETING_FILE', 'Bestand %s aan het verwijderen...');
 @define('SETTINGS_SAVED_AT', 'De instellingen zijn opgeslagen in %s');
 @define('INVERT_SELECTIONS', 'Keer selectie om');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Persoonlijke instellingen');
 @define('DO_MARKUP_DESCRIPTION', 'Voer tekstopmaak uit (smilies, verkort opmaak via *, /, _, ...). Met het uitschakelen van deze optie behoudt u de HTML-code in de tekst.');
 @define('BASE_DIRECTORY', 'Basismap');

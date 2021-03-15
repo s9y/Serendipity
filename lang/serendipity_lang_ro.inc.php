@@ -179,7 +179,7 @@
 @define('DELETING_FILE', 'Sterg fisierul %s...');
 @define('SETTINGS_SAVED_AT', 'Noile preferinte au fost salvate în %s');
 @define('INVERT_SELECTIONS', 'Inverseaza selectia');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Optiuni Personale');
 @define('DO_MARKUP_DESCRIPTION', 'Aplica transformari pentru text (emoticonuri, scurtaturi via *, /, _, ...). Dezactivând asta vei pastra eventualul cod HTML din text intact.');
 @define('BASE_DIRECTORY', 'Director de baza');

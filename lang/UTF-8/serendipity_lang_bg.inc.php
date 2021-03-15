@@ -183,7 +183,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('DELETING_FILE', 'Изтриване на файла %s...');
 @define('SETTINGS_SAVED_AT', 'Новите настройки са записани в %s');
 @define('INVERT_SELECTIONS', 'Обръщане на отбелязаните');
-@define('VIEWMODE_THREADED', 'Превключване към нишковиден изглед');
+
 @define('PERSONAL_SETTINGS', 'Лични настройки');
 @define('DO_MARKUP_DESCRIPTION', 'Прилагане на преобразувания на маркапа към текста (усмивки, съкратен маркап чрез *, /, _, ...). Деактивирането на това ще съхрани всеки код на HTML в текста.');
 @define('BASE_DIRECTORY', 'Коренова директория');

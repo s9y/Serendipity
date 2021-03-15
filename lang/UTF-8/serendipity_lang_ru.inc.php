@@ -180,7 +180,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('DELETING_FILE', 'Удаление файла %s...');
 @define('SETTINGS_SAVED_AT', 'Новые настройки были сохранены в %s');
 @define('INVERT_SELECTIONS', 'Инвертировать отмеченное');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Личные настройки');
 @define('DO_MARKUP_DESCRIPTION', 'Применить к тексту трансформацию разметки (смайлы, разметка ссылок через *, /, _, ...).Отключение этой опции сохранит html код.');
 @define('BASE_DIRECTORY', 'Главная директория');

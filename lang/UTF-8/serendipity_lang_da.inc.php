@@ -180,7 +180,7 @@
 @define('DELETING_FILE', 'Sletter fil %s...');
 @define('SETTINGS_SAVED_AT', 'De nye indstillinger er blevet gemt kl %s');
 @define('INVERT_SELECTIONS', 'Inverter valgte elementer');
-@define('VIEWMODE_THREADED', 'Skift til trådet visning');
+
 @define('PERSONAL_SETTINGS', 'Personlige indstillinger');
 @define('DO_MARKUP_DESCRIPTION', 'Tilføj markup-transformationer på teksten (smilies, shortcut markups via *, /, _, ...). Hvis du slår dette fra vil al HTML-kode i teksten blive bibeholdt.');
 @define('BASE_DIRECTORY', 'Rodmappe');

@@ -179,7 +179,7 @@
 @define('DELETING_FILE', '파일 %s 삭제 중...');
 @define('SETTINGS_SAVED_AT', '새로운 설정이 %s에 저장되었습니다');
 @define('INVERT_SELECTIONS', '선택 반전');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', '개인 설정');
 @define('DO_MARKUP_DESCRIPTION', '텍스트에 마크업 변환(이모티콘, *, /, _ 등을 활용한 마크업)을 적용합니다. 사용하지 않으면 입력한 HTML 코드가 모두 보존됩니다.');
 @define('BASE_DIRECTORY', '기본 디렉토리');

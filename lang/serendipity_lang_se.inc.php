@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'Tar bort filen %s...');
 @define('SETTINGS_SAVED_AT', 'De nya inställningarna har sparats på %s');
 @define('INVERT_SELECTIONS', 'Invertera val');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Personliga inställningar');
 @define('DO_MARKUP_DESCRIPTION', 'Applicera förkortad textdekoration (smilies, snabbformatering med *, /, _, ...). Att avvaktivera detta kommer att bevara all HTML-kod i texten.');
 @define('BASE_DIRECTORY', 'Baskatalog');

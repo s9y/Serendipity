@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'Sletter fil %s...');
 @define('SETTINGS_SAVED_AT', 'De nye innstillgene er lagret kl %s');
 @define('INVERT_SELECTIONS', 'Inverter valgene');
-@define('VIEWMODE_THREADED', 'Bytt til trådet visning');
+ådet visning');
 @define('PERSONAL_SETTINGS', 'Personal Settings');
 @define('DO_MARKUP_DESCRIPTION', 'Tilføy markup-transformasjoner på teksten (smilies, shortcut markups via *, /, _, ...). Hvis du slår dette av vil all HTML-kode i teksten bli beholdt.');
 @define('BASE_DIRECTORY', 'Base directory');

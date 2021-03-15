@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'Poistetaan tiedostoa %s...');
 @define('SETTINGS_SAVED_AT', 'Uudet asetukset on tallettetu %s');
 @define('INVERT_SELECTIONS', 'Käännä valinnat');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Omat asetuksesi');
 @define('DO_MARKUP_DESCRIPTION', 'Tee tekstille notaatiomuutokset (hymiöt, lyhennelmät käyttäen *, /, _, ...). Kieltämällä tämä säilyy  HTML-koodi tekstissä sellaisenaan.');
 @define('BASE_DIRECTORY', 'Juurihakemisto');
