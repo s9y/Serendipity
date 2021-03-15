@@ -1263,7 +1263,7 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
     }
 
     if ($authorid === null) {
-        $authorid = $serendipity['authorid'];
+        $authorid = $serendipity['authorid'] ?? null;
     }
 
     if (!isset($group[$authorid])) {
@@ -1278,7 +1278,7 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
         }
     }
 
-    if ($authorid == $serendipity['authorid'] && $serendipity['no_create']) {
+    if ($authorid == ($serendipity['authorid'] ?? null) && (isset($serendipity['no_create']) && $serendipity['no_create'])) {
         // This no_create user privilege overrides other permissions.
         return false;
     }
@@ -1299,7 +1299,7 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
 
     // If the function did not yet return it means there's a check for a permission which is not defined anywhere.
     // Let's use a backwards compatible way.
-    if ($return && isset($permissions[$permName]) && in_array($serendipity['serendipityUserlevel'], $permissions[$permName])) {
+    if ($return && isset($permissions[$permName]) && in_array($serendipity['serendipityUserlevel'] ?? null, $permissions[$permName])) {
         return true;
     }
 
