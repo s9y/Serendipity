@@ -2144,7 +2144,7 @@ function &serendipity_loadThemeOptions(&$template_config, $okey = '', $bc_bool =
 
     foreach($template_config AS $key => $item) {
         if (!isset($template_vars[$item['var']])) {
-            $template_vars[$item['var']] = $item['default'];
+            $template_vars[$item['var']] = $item['default'] ?? null;
         }
     }
     if($bc_bool) {
@@ -2188,14 +2188,14 @@ function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded
         }
 
         // Check if we are currently inside the admin interface.
-        if ($serendipity['POST']['adminModule'] == 'templates' && $serendipity['POST']['adminAction'] == 'configure' && !empty($serendipity['POST']['template']['amount'])) {
+        if ($serendipity['POST']['adminModule'] ?? '' == 'templates' && $serendipity['POST']['adminAction'] == 'configure' && !empty($serendipity['POST']['template']['amount'])) {
             $template_loaded_config['amount'] = (int)$serendipity['POST']['template']['amount'];
         }
 
         for ($i = 0; $i < $template_loaded_config['amount']; $i++) {
             $navlinks[] = array(
-                'title' => $template_loaded_config['navlink' . $i . 'text'],
-                'href'  => $template_loaded_config['navlink' . $i . 'url']
+                'title' => $template_loaded_config['navlink' . $i . 'text'] ?? null,
+                'href'  => $template_loaded_config['navlink' . $i . 'url'] ?? null
             );
 
             $template_config[] = array(
