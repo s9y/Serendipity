@@ -190,7 +190,7 @@
 @define('DELETING_FILE', 'Borrando fichero %s...');
 @define('SETTINGS_SAVED_AT', 'La nueva configuración se ha guardado a la hora %s');
 @define('INVERT_SELECTIONS', 'Invertir selecciones');
-@define('VIEWMODE_THREADED', 'Cambiar a vista por hilos');
+
 @define('PERSONAL_SETTINGS', 'Configuración personal');
 @define('DO_MARKUP_DESCRIPTION', 'Aplicar transformaciones de marcas al texto (caras, marcas abreviadas como *. /, _, ...). Desactivando esto preservará cualquier código HTML en el texto.');
 @define('BASE_DIRECTORY', 'Directorio base');

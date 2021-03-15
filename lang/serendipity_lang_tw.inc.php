@@ -180,7 +180,7 @@ $i18n_unknown = 'tw';
 @define('DELETING_FILE', '刪除檔案 %s...');
 @define('SETTINGS_SAVED_AT', '新設定已經儲存於 %s');
 @define('INVERT_SELECTIONS', '顛倒勾選');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', '個人設定');
 @define('DO_MARKUP_DESCRIPTION', '套用自動格式化到文章內 (表情圖案, 符號 *, /, _, ...)。關閉這項功能將會保存任何文章內出現的 HTML 碼。');
 @define('BASE_DIRECTORY', '基本目錄');

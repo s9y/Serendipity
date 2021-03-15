@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'Eyði skrá %s...');
 @define('SETTINGS_SAVED_AT', 'Nýju stillingarnar voru vistaðar klukkan %s');
 @define('INVERT_SELECTIONS', 'Skipta út völdu fyrir óvalið');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Persónulegar stillingar');
 @define('DO_MARKUP_DESCRIPTION', 'Virkja breytinga rá texta út frá ákveðnum táknum (broskarlar, styttri leiðir í gegnum *, /, _, ...). Óvirking á þessu mun varðveita allan HTML-kóða í textanum. Sjálfgefið gildi er "Já".');
 @define('BASE_DIRECTORY', 'Grunnmappa');

@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'ファイル %s を削除中...');
 @define('SETTINGS_SAVED_AT', '新しい設定は %s に保存されました。');
 @define('INVERT_SELECTIONS', '選択を反転');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', '個人設定');
 @define('DO_MARKUP_DESCRIPTION', 'マークアップ変換をテキストに適用します (顔文字、「*」、「/」、「_」などのマークアップショートカット。無効にするとテキスト中のどんな HTML コードも保持します。デフォルトは「はい」です。');
 @define('BASE_DIRECTORY', 'ベースディレクトリー');

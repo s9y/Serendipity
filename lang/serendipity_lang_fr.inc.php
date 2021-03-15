@@ -181,7 +181,7 @@
 @define('DELETING_FILE', 'Suppression du fichier %s...');
 @define('SETTINGS_SAVED_AT', 'La nouvelle configuration a été enregistrée à %s');
 @define('INVERT_SELECTIONS', 'Inverser les sélections');
-@define('VIEWMODE_THREADED', 'Passer en mode vue groupée');
+ée');
 @define('PERSONAL_SETTINGS', 'Réglages personnels');
 @define('DO_MARKUP_DESCRIPTION', 'Transforme les balises dans le texte (smileys, raccourcis via *, /, _, ...). La désactiver préserva tout le code HTML dans le texte.');
 @define('BASE_DIRECTORY', 'Répertoire de base');

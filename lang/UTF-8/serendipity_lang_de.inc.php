@@ -178,7 +178,7 @@
 @define('DELETING_FILE', 'Lösche Datei \'%s\' ...');
 @define('SETTINGS_SAVED_AT', 'Die neuen Einstellungen wurden um %s gespeichert.');
 @define('INVERT_SELECTIONS', 'Auswahl umkehren');
-@define('VIEWMODE_THREADED', 'Als Baumstruktur anzeigen');
+
 @define('PERSONAL_SETTINGS', 'Eigene Einstellungen');
 @define('DO_MARKUP_DESCRIPTION', 'Textformatierung(en) durchführen, wie z.B. Smilies, Schnellformatierung via *, /, _, ... Wenn deaktiviert, wird der Inhalt 1:1 ausgegeben und jegliche HTML-Formatierung beibehalten. Wenn diese Option aktiviert ist, können andere Plugins den Inhalt des Klotzes modifizieren (falls benötigt).');
 @define('BASE_DIRECTORY', 'Stammverzeichnis');

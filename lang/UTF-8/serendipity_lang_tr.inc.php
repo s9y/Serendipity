@@ -179,7 +179,7 @@
 @define('DELETING_FILE', 'Dosya siliniyor %s...');
 @define('SETTINGS_SAVED_AT', 'Yeni ayarlarınız kaydedildi %s');
 @define('INVERT_SELECTIONS', 'Seçimleri tersine çevir');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'Kişisel Ayarlar');
 @define('DO_MARKUP_DESCRIPTION', ' Markup dönüşümünü yazılara uygula  (smilie işaretleri, kısayol işaretleri öreneğin *, /, _, ...). Bu kapalı olursa her türlü HTML-kodunu yazıda kullanabilirsiniz.');
 @define('BASE_DIRECTORY', 'Temel Dizin');

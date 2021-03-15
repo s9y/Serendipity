@@ -177,7 +177,7 @@
 @define('DELETING_FILE', 'Deleting file %s...');
 @define('SETTINGS_SAVED_AT', 'The new settings have been saved at %s');
 @define('INVERT_SELECTIONS', 'Invert Selections');
-@define('VIEWMODE_THREADED', 'Show as tree');
+
 @define('PERSONAL_SETTINGS', 'உங்கள் நிலைகள்');
 @define('DO_MARKUP_DESCRIPTION', 'Apply markup transformations to the text (smilies, shortcut markups via *, /, _, ...). Disabling this will preserve any HTML-code in the text.');
 @define('BASE_DIRECTORY', 'Base directory');
