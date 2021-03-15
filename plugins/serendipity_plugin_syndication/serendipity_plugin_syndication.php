@@ -13,7 +13,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.2.3');
+        $propbag->add('version',       '2.2.4');
         $propbag->add('configuration', array(
                                         'title',
                                         'big_img',
@@ -209,7 +209,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             if ($fbid != "") {
                 $mainFeed ='http://feeds.feedburner.com/' . $fbid;
             } else {
-                if ($useAtom && ! $useRss) {
+                if ((isset($useAtom) && $useAtom) && ! $useRss) {
                     $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml');
                 }
             }
@@ -223,7 +223,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         echo "\n".'<ul id="serendipity_syndication_list" class="plainList">';
         echo $this->generateFeedButton($mainFeed, ($icon == $small_icon ?  ($useRss ? "RSS $FEED" : "Atom $FEED") : ""), $onclick, $icon, $icon == $small_icon);
 
-        if ($useRss && $useAtom) {
+        if ($useRss && (isset($useAtom) && $useAtom)) {
             echo $this->generateFeedButton(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml'), "Atom $FEED",
                                             ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml')) : ""), $small_icon);
         }
