@@ -170,13 +170,13 @@ if (!function_exists('errorToExceptionHandler')) {
             return false;
         }
 
+        $args = func_get_args();
+
         // Several plugins might not adapt to proper style. This should not completely kill our execution.
         if ($serendipity['production'] !== 'debug' && preg_match('@Declaration.*should be compatible with@i', $args[1])) {
             #if (!headers_sent()) echo "<strong>Compatibility warning:</strong> Please upgrade file old '{$args[2]}', it contains incompatible signatures.<br/>Details: {$args[1]}<br/>";
             return false;
         }
-
-        $args = func_get_args();
 
         /*
          * $serendipity['production'] can be:
@@ -185,7 +185,6 @@ if (!function_exists('errorToExceptionHandler')) {
          * (bool) FALSE         Beta/alpha builds
          * (string) 'debug'     Developer build, specifically enabled.
          */
-
         if ($serendipity['production'] !== 'debug') {
             $debug_note = '<br />For more details set $serendipity[\'production\'] = \'debug\' in serendipity_config_local.inc.php to receive a stack-trace.';
         } else {
@@ -426,7 +425,7 @@ function serendipity_get_bool($item) {
 function serendipity_getCharset() {
     global $serendipity;
 
-    $charset = $serendipity['charset'];
+    $charset = $serendipity['charset'] ?? '';
     if (!empty($_POST['charset'])) {
         if ($_POST['charset'] == 'UTF-8/') {
             $charset = 'UTF-8/';
