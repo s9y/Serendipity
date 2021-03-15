@@ -273,7 +273,7 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force
     foreach ($directories as $directory) {
         $templateFile = $serendipity['templatePath'] . $directory . $file;
         if (file_exists($serendipity['serendipityPath'] . $templateFile)) {
-            return $serendipity[$key] . $templateFile;
+            return ($serendipity[$key] ?? '') . $templateFile;
         }
 
         if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl")) {
