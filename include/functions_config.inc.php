@@ -1941,6 +1941,10 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
                 break;
         }
 
+        if (! array_key_exists('joins', $cond) ) {
+            $cond['joins'] = '';
+        }
+
         $cond['joins'] .= " LEFT JOIN {$serendipity['dbPrefix']}authorgroups AS acl_a
                                    ON acl_a.authorid = " . $read_id . "
                             LEFT JOIN {$serendipity['dbPrefix']}access AS acl_acc
@@ -1950,7 +1954,7 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
                                       )";
 
         if (empty($cond['and'])) {
-            $cond['and'] .= ' WHERE ';
+            $cond['and'] = ' WHERE ';
         } else {
             $cond['and'] .= ' AND ';
         }
