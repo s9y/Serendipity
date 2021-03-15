@@ -12,7 +12,7 @@
 class Serendipity_Smarty_Security_Policy extends Smarty_Security
   {
     // these are the allowed functions only. - default as is
-    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists');
+    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists', );
     // to disable all PHP functions
     #public $php_functions = null;
 
@@ -20,7 +20,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     public $php_handling = Smarty::PHP_REMOVE; // = 2
 
     // set allowed modifiers only. (default = array( 'escape', 'count' );)
-    public $php_modifiers = array('escape', 'sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat', 'nl2br');
+    public $php_modifiers = array('escape', 'sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat', 'nl2br', 'array_key_exists');
 
     public $allow_constants = true;
 
