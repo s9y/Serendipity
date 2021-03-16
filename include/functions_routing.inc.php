@@ -52,6 +52,9 @@ function locateHiddenVariables($_args) {
             }
         } elseif ($v == 'summary') { /* Summary */
             $serendipity['short_archives'] = true;
+            if (! array_key_exists('head_subtitle', $serendipity)) {
+                $serendipity['head_subtitle'] = '';
+            }
             $serendipity['head_subtitle'] .= SUMMARY . ' - ';
             unset($_args[$k]);
         } elseif ($v[0] == 'C') { /* category */
@@ -395,7 +398,9 @@ function serveArchives() {
     $_args = locateHiddenVariables($serendipity['uriArguments']);
 
     /* We must always *assume* that Year, Month and Day are the first 3 arguments */
-    list(,$year, $month, $day) = $_args;
+    $year = $_args[0] ?? null;
+    $month = $_args[1] ?? null;
+    $day = $_args[2] ?? null;
     if ($year == "archives") {
         unset($year);
     }
