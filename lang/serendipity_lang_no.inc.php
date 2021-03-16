@@ -52,7 +52,7 @@
 @define('HIDE', 'Skjul');
 @define('WEEK', 'Uke');
 @define('WEEKS', 'Uker');
-@define('MONTHS', 'Måneder');
+@define('MONTHS', 'MÃ¥neder');
 @define('DAYS', 'Dager');
 @define('DEBUG', 'Debug');
 @define('SUCCESS', 'Suksess');
@@ -72,12 +72,12 @@
 @define('IN', 'i');
 @define('AT', 'kl');
 @define('LEFT', 'venstre');
-@define('RIGHT', 'høyre');
+@define('RIGHT', 'hÃ¸yre');
 @define('CENTER', 'center');
 @define('ARCHIVES', 'Arkiver');
 @define('SUBSCRIBE', 'Subscribe');
 @define('UNSUBSCRIBE', 'Unsubscribe');
-@define('QUICKSEARCH', 'Søk');
+@define('QUICKSEARCH', 'SÃ¸k');
 @define('TRACKBACKS', 'Trackbacks');
 @define('TRACKBACK', 'Trackback');
 @define('NO_TRACKBACKS', 'Ingen Trackbacks');
@@ -137,7 +137,7 @@
 @define('NOT_WRITABLE', 'Not writable');
 @define('WELCOME_BACK', 'Velkommen tilbake,');
 @define('USE_DEFAULT', 'Default');
-@define('SORT_BY', 'Sorter på');
+@define('SORT_BY', 'Sorter pÃ¥');
 @define('SORT_ORDER', 'Sorter etter');
 @define('SORT_ORDER_ASC', 'Stigende');
 @define('SORT_ORDER_DESC', 'Fallende');
@@ -145,19 +145,19 @@
 @define('RESET_FILTERS', 'Reset filters');
 @define('TOGGLE_ALL', 'Vis/Skjul alle');
 @define('TOGGLE_OPTION', 'Vis/Skjul denne opsjonen');
-@define('IN_REPLY_TO', 'Som svar på');
+@define('IN_REPLY_TO', 'Som svar pÃ¥');
 
 /* WIDELY USED */
 @define('FILTER_DIRECTORY', 'Katalog');
 @define('BACK_TO_BLOG', 'Tilbake til weblogg');
 @define('HTML_NUGGET', 'HTML Nugget');
-@define('TITLE_FOR_NUGGET', 'Tittel på din nugget');
+@define('TITLE_FOR_NUGGET', 'Tittel pÃ¥ din nugget');
 @define('COMMENT_ADDED', 'Din kommentar ble lagt til. ');
 @define('ENTRIES_FOR', 'Artikler fra %s');
-@define('NO_ENTRIES_TO_PRINT', 'Der er ingen artikler å vise');
-@define('COMMENT_DELETE_CONFIRM', 'Er du sikker på at du ønsker å slette kommentar #%d, skrevet av %s?');
-@define('DELETE_SURE', 'Er du sikker på du vil slette #%s permanent?');
-@define('MEDIA_FULLSIZE', 'Full størrelse');
+@define('NO_ENTRIES_TO_PRINT', 'Der er ingen artikler Ã¥ vise');
+@define('COMMENT_DELETE_CONFIRM', 'Er du sikker pÃ¥ at du Ã¸nsker Ã¥ slette kommentar #%d, skrevet av %s?');
+@define('DELETE_SURE', 'Er du sikker pÃ¥ du vil slette #%s permanent?');
+@define('MEDIA_FULLSIZE', 'Full stÃ¸rrelse');
 @define('SIDEBAR_PLUGIN', 'sidebar plugin');
 @define('EVENT_PLUGIN', 'event plugin');
 @define('PLUGIN_ITEM_DISPLAY', 'Hvor skal enheten vises?');
@@ -167,20 +167,19 @@
 @define('DIRECTORY_WRITE_ERROR', 'Kan ikke skrive til biblioteket %s. Sjekk filrettighederne.');
 @define('FILE_WRITE_ERROR', 'Kan ikke skrive til filen %s.');
 @define('INCLUDE_ERROR', 'serendipityfeil: Kunne ikke inkludere %s - Avbryter.');
-@define('DO_MARKUP', 'Utført Markup-transformasjon');
+@define('DO_MARKUP', 'UtfÃ¸rt Markup-transformasjon');
 @define('GENERAL_PLUGIN_DATEFORMAT', 'Datoformat');
-@define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'Formatet på artiklens faktiske dato, brug PHPs strftime()-variabler. (Standard: "%s")');
+@define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'Formatet pÃ¥ artiklens faktiske dato, brug PHPs strftime()-variabler. (Standard: "%s")');
 @define('APPLY_MARKUP_TO', 'Formater %s');
 @define('XML_IMAGE_TO_DISPLAY', 'XML-knapp');
-@define('XML_IMAGE_TO_DISPLAY_DESC', 'Linker til XML-feeder vil bli vist med dette bildet.  Etterlat tomt for standard, tast inn \'none\' for å deaktivere.');
+@define('XML_IMAGE_TO_DISPLAY_DESC', 'Linker til XML-feeder vil bli vist med dette bildet.  Etterlat tomt for standard, tast inn \'none\' for Ã¥ deaktivere.');
 @define('MAIL_IMAGE_TO_DISPLAY', 'Subscribe Button');
 @define('MAIL_IMAGE_TO_DISPLAY_DESC', 'The email subscription page will be displayed by this image. Leave empty for default, enter \'none\' to disable.');
 @define('DELETING_FILE', 'Sletter fil %s...');
 @define('SETTINGS_SAVED_AT', 'De nye innstillgene er lagret kl %s');
 @define('INVERT_SELECTIONS', 'Inverter valgene');
-ådet visning');
 @define('PERSONAL_SETTINGS', 'Personal Settings');
-@define('DO_MARKUP_DESCRIPTION', 'Tilføy markup-transformasjoner på teksten (smilies, shortcut markups via *, /, _, ...). Hvis du slår dette av vil all HTML-kode i teksten bli beholdt.');
+@define('DO_MARKUP_DESCRIPTION', 'TilfÃ¸y markup-transformasjoner pÃ¥ teksten (smilies, shortcut markups via *, /, _, ...). Hvis du slÃ¥r dette av vil all HTML-kode i teksten bli beholdt.');
 @define('BASE_DIRECTORY', 'Base directory');
 @define('PERM_READ', 'Read permission');
 @define('PERM_WRITE', 'Write permission');
@@ -199,7 +198,7 @@
 @define('WELCOME_TO_INSTALLATION', 'Welcome to the Serendipity Installation');
 @define('FIRST_WE_TAKE_A_LOOK', 'First we will take a look at your current setup and attempt to diagnose any compatibility problems');
 @define('ERRORS_ARE_DISPLAYED_IN', 'Errors are displayed in %s, recommendations in %s and success in %s');
-@define('RED', 'rød');
+@define('RED', 'rÃ¸d');
 @define('YELLOW', 'gul');
 @define('GREEN', 'green');
 @define('PRE_INSTALLATION_REPORT', 'Serendipity v%s pre-installation report');
@@ -228,7 +227,7 @@
 @define('THEY_DONT', 'they don\'t');
 @define('CHECK_DATABASE_EXISTS', 'Checking to see if the database and tables already exists');
 @define('CREATE_DATABASE', 'Oppretter standarddatabase-setup...');
-@define('ATTEMPT_WRITE_FILE', 'Forsøker å skrive til %s ...');
+@define('ATTEMPT_WRITE_FILE', 'ForsÃ¸ker Ã¥ skrive til %s ...');
 @define('CREATING_PRIMARY_AUTHOR', 'Creating primary author \'%s\'');
 @define('SETTING_DEFAULT_TEMPLATE', 'Setting default template');
 @define('INSTALLING_DEFAULT_PLUGINS', 'Installing default plugins');
@@ -244,36 +243,36 @@
 @define('USERLEVEL_EDITOR_DESC', 'Standard editor');
 @define('USERLEVEL_CHIEF_DESC', 'Chief editor');
 @define('USERLEVEL_ADMIN_DESC', 'Administrator');
-@define('WWW_USER', 'Endre www til den bruker som apache kører som (fx. nobody).');
+@define('WWW_USER', 'Endre www til den bruker som apache kÃ¸rer som (fx. nobody).');
 @define('INSTALL_PASSWORD_INVALID', 'Your entered passwords for the administrator user do not match.');
 @define('DIRECTORY_CREATE_ERROR', 'Biblioteket %s eksisterer ikke og kunne ikke op1prettes. Vennligst opprett biblioteket manuelt');
-@define('DIRECTORY_RUN_CMD', '&nbsp;-&gt; Kjør <i>%s %s</i>');
+@define('DIRECTORY_RUN_CMD', '&nbsp;-&gt; KjÃ¸r <i>%s %s</i>');
 @define('CANT_EXECUTE_BINARY', 'Kan ikke eksekvere %s');
 @define('FILE_CREATE_YOURSELF', 'Venligst opprett filen selv og sjekk dens rettigheter');
 @define('COPY_CODE_BELOW', '<br />* Kopier koden nedenunder og plasser den i %s i din %s mappe:<b><pre>%s</pre></b>' . "\n");
-@define('BROWSER_RELOAD', 'Når du har gjort dette, så tryk på browserens "oppdater"-knapp');
-@define('ERROR_TEMPLATE_FILE', 'Kunne ikke åpne malen, oppater Serendipity!');
-@define('HTACCESS_ERROR', 'For å kunne sjekke din lokale webservers installasjon, må Serendipity være i stand til å skrive til filen ".htaccess". Dette var ikke mulig pga. feil rettigheter. Endre rettighetene slik: <br />&nbsp;&nbsp;%s<br />og oppdater denne siden.');
+@define('BROWSER_RELOAD', 'NÃ¥r du har gjort dette, sÃ¥ tryk pÃ¥ browserens "oppdater"-knapp');
+@define('ERROR_TEMPLATE_FILE', 'Kunne ikke Ã¥pne malen, oppater Serendipity!');
+@define('HTACCESS_ERROR', 'For Ã¥ kunne sjekke din lokale webservers installasjon, mÃ¥ Serendipity vÃ¦re i stand til Ã¥ skrive til filen ".htaccess". Dette var ikke mulig pga. feil rettigheter. Endre rettighetene slik: <br />&nbsp;&nbsp;%s<br />og oppdater denne siden.');
 @define('EMPTY_SETTING', 'You did not specify a valid value for "%s"!');
 @define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
 
 /* UPGRADER.TPL */
-@define('SERENDIPITY_NEEDS_UPGRADE', 'Serendipity har opdaget at din nåværende konfigurasjon passer til versjon %s. Serendipity selv er installert som version %s, Det er nødvendig å oppgradere! <a href="%s">Klikk her!</a>');
+@define('SERENDIPITY_NEEDS_UPGRADE', 'Serendipity har opdaget at din nÃ¥vÃ¦rende konfigurasjon passer til versjon %s. Serendipity selv er installert som version %s, Det er nÃ¸dvendig Ã¥ oppgradere! <a href="%s">Klikk her!</a>');
 @define('SERENDIPITY_UPGRADER_WELCOME', 'Velkommen til Serendipitys oppgraderingsscript.');
-@define('SERENDIPITY_UPGRADER_PURPOSE', 'Scriptet vil hjelpe deg med å oppgradere Serendipity %s.');
-@define('SERENDIPITY_UPGRADER_WHY', 'Denne meldingen vises fordi Serendipity versjon %s er installert, men databasen er ennå ikke opgradert til denne versjonen.');
+@define('SERENDIPITY_UPGRADER_PURPOSE', 'Scriptet vil hjelpe deg med Ã¥ oppgradere Serendipity %s.');
+@define('SERENDIPITY_UPGRADER_WHY', 'Denne meldingen vises fordi Serendipity versjon %s er installert, men databasen er ennÃ¥ ikke opgradert til denne versjonen.');
 @define('SERENDIPITY_UPGRADER_DATABASE_UPDATES', 'Databasen oppdateringer (%s)');
-@define('SERENDIPITY_UPGRADER_FOUND_SQL_FILES', 'Følgende .sql-filer må kjøres før Serendipity igjen kan fungere normalt.');
+@define('SERENDIPITY_UPGRADER_FOUND_SQL_FILES', 'FÃ¸lgende .sql-filer mÃ¥ kjÃ¸res fÃ¸r Serendipity igjen kan fungere normalt.');
 @define('SERENDIPITY_UPGRADER_VERSION_SPECIFIC', 'Versjonsspesifikke oppgaver');
 @define('SERENDIPITY_UPGRADER_NO_VERSION_SPECIFIC', 'Ingen versjonsspesifikke oppgaver funnet');
-@define('SERENDIPITY_UPGRADER_PROCEED_QUESTION', 'Ønsker du at ovenstående opgaver utføres?');
-@define('SERENDIPITY_UPGRADER_PROCEED_ABORT', 'Nei, jeg utfører dem manuelt');
+@define('SERENDIPITY_UPGRADER_PROCEED_QUESTION', 'Ã˜nsker du at ovenstÃ¥ende opgaver utfÃ¸res?');
+@define('SERENDIPITY_UPGRADER_PROCEED_ABORT', 'Nei, jeg utfÃ¸rer dem manuelt');
 @define('SERENDIPITY_UPGRADER_PROCEED_DOIT', 'Ja takk!');
-@define('SERENDIPITY_UPGRADER_NO_UPGRADES', 'Det ser ut til at oppgradering ikke er nødvendig.');
+@define('SERENDIPITY_UPGRADER_NO_UPGRADES', 'Det ser ut til at oppgradering ikke er nÃ¸dvendig.');
 @define('SERENDIPITY_UPGRADER_CONSIDER_DONE', 'Serendipity er oppgradert');
-@define('SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED', 'Du har ignorert en del av oppgraderingen. Vennligst undersøk hvorvidt databasen er korrekt opdatert, og planlagte opgaver utført');
-@define('SERENDIPITY_UPGRADER_NOW_UPGRADED', 'Din Serendipity-installation er nå oppgradert til version %s');
-@define('SERENDIPITY_UPGRADER_RETURN_HERE', 'Du kan vende tilbake til din blog ved å klikke %sher%s');
+@define('SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED', 'Du har ignorert en del av oppgraderingen. Vennligst undersÃ¸k hvorvidt databasen er korrekt opdatert, og planlagte opgaver utfÃ¸rt');
+@define('SERENDIPITY_UPGRADER_NOW_UPGRADED', 'Din Serendipity-installation er nÃ¥ oppgradert til version %s');
+@define('SERENDIPITY_UPGRADER_RETURN_HERE', 'Du kan vende tilbake til din blog ved Ã¥ klikke %sher%s');
 @define('ADMIN_ENTRIES', 'Entries');
 
 /* ADMIN - IMPORTERS.TPL AND IMPORTERS */
@@ -301,7 +300,7 @@
 @define('RSS_IMPORT_BODYONLY', 'Put all imported text in the "body" section and do not split up into "extended entry" section.');
 @define('IMPORT_GENERIC_RSS', 'Generic RSS import');
 @define('ACTIVATE_AUTODISCOVERY', 'Send Trackbacks to links found in the entry');
-@define('RSS_IMPORT_CATEGORY', 'Bruk denne kategorien for kategoriløse artikler');
+@define('RSS_IMPORT_CATEGORY', 'Bruk denne kategorien for kategorilÃ¸se artikler');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
 @define('DOCUMENT_NOT_FOUND', 'Dokumentet %s kunne ikke finnes.');
 @define('CONVERT_HTMLENTITIES', 'Try to auto-convert HTML entities?');
@@ -324,7 +323,7 @@
 @define('MEDIA', 'Media');
 @define('MEDIA_LIBRARY', 'Media-bibliotek');
 @define('ADD_MEDIA', 'Legg til media');
-@define('MANAGE_DIRECTORIES', 'Håndter mapper');
+@define('MANAGE_DIRECTORIES', 'HÃ¥ndter mapper');
 @define('CONFIGURATION', 'Konfigurasjon');
 
 /* ADMIN - OVERVIEW.TPL */
@@ -388,23 +387,23 @@
 @define('IFRAME_SAVE_DRAFT', 'A draft of this entry has been saved');
 @define('IFRAME_PREVIEW', 'Serendipity is now creating the preview of your entry...');
 @define('IFRAME_WARNING', 'Your browser does not support the concept of iframes. Please open your serendipity_config.inc.php file and set $serendipity[\'use_iframe\'] variable to FALSE.');
-@define('DATE_INVALID', 'Advarsel: Den datoen du tastet inn var ugyldig. Den skal tastes inn i følgende format: ÅÅÅÅ-MM-DD TT:MM.');
+@define('DATE_INVALID', 'Advarsel: Den datoen du tastet inn var ugyldig. Den skal tastes inn i fÃ¸lgende format: Ã…Ã…Ã…Ã…-MM-DD TT:MM.');
 @define('ADVANCED_OPTIONS', 'Avanserte innstillinger');
 @define('TOGGLE_VIEW', 'Switch category view mode');
-@define('TRACKBACK_SPECIFIC_ON_CLICK', 'Det er ikke meningen at denne linken skal klikkes.  Den innholder trackback-URI-en for denne postingen.  Du kan bruke denne URI-en til å sende ping- og trackbacks fra din egen blog til denne posten.  For å kopiere linken, høyreklikk og velg "Kopier snarvei" i Internet Explorer eller "Copy Link Location" i Mozilla.');
+@define('TRACKBACK_SPECIFIC_ON_CLICK', 'Det er ikke meningen at denne linken skal klikkes.  Den innholder trackback-URI-en for denne postingen.  Du kan bruke denne URI-en til Ã¥ sende ping- og trackbacks fra din egen blog til denne posten.  For Ã¥ kopiere linken, hÃ¸yreklikk og velg "Kopier snarvei" i Internet Explorer eller "Copy Link Location" i Mozilla.');
 @define('RESET_DATE', 'Reset date');
 @define('RESET_DATE_DESC', 'Click here to reset the date to the current time');
 
 /* ADMIN - USERS.TPL */
-@define('MANAGE_USERS', 'Håndter brukere');
+@define('MANAGE_USERS', 'HÃ¥ndter brukere');
 @define('CREATE_NEW_USER', 'Opprett ny bruker');
-@define('CREATE_NOT_AUTHORIZED', 'Du kan ikke redigere brukere med det samme brukernivå som deg selv');
-@define('CREATE_NOT_AUTHORIZED_USERLEVEL', 'Du kan ikke opprette brukere med et høyere brukernivå enn deg selv');
+@define('CREATE_NOT_AUTHORIZED', 'Du kan ikke redigere brukere med det samme brukernivÃ¥ som deg selv');
+@define('CREATE_NOT_AUTHORIZED_USERLEVEL', 'Du kan ikke opprette brukere med et hÃ¸yere brukernivÃ¥ enn deg selv');
 @define('CREATED_USER', 'En ny bruker %s er opprettet');
 @define('MODIFIED_USER', 'Egenskapene for brukeren %s er endret');
-@define('USER_LEVEL', 'brukernivå');
+@define('USER_LEVEL', 'brukernivÃ¥');
 @define('WARNING_NO_GROUPS_SELECTED', 'Warning: You did not select any group memberships. This would effectively log you out of the usergroup management, and thus your group memberships werde not changed.');
-@define('DELETE_USER', 'Du er i ferd med å slette bruker #%d %s. Er du sikker? Dette vil forhindre visning av alle artikler skrevet av brukeren.');
+@define('DELETE_USER', 'Du er i ferd med Ã¥ slette bruker #%d %s. Er du sikker? Dette vil forhindre visning av alle artikler skrevet av brukeren.');
 @define('DELETED_USER', 'Bruker #%d %s er slettet.');
 
 /* ADMIN - GROUPS.TPL */
@@ -424,7 +423,7 @@
 @define('COMMENTS_FILTER_NEED_APPROVAL', 'Pending approval');
 @define('COMMENTS_FILTER_NEED_CONFIRM', 'Pending user confirmation');
 @define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
-@define('COMMENTS_DELETE_CONFIRM', 'Er du sikker på at du ønsker å slette de valgte kommentarene?');
+@define('COMMENTS_DELETE_CONFIRM', 'Er du sikker pÃ¥ at du Ã¸nsker Ã¥ slette de valgte kommentarene?');
 @define('PAGE_BROWSE_COMMENTS', 'Side %s av %s, totalt %s kommentarer');
 @define('COMMENT_IS_DELETED', '(Comment removed)');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
@@ -471,7 +470,7 @@
 @define('IMPORT_ENTRIES', 'Import data');
 @define('EXPORT_ENTRIES', 'Export entries');
 @define('EXPORT_FEED', 'Export full RSS feed');
-@define('CREATE_THUMBS', 'Lag minibilder på nytt');
+@define('CREATE_THUMBS', 'Lag minibilder pÃ¥ nytt');
 @define('WARNING_THIS_BLAHBLAH', "ADVARSEL:\\nDette kan ta lang tid hvis det er mange bilder uten minibilder.");
 @define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
 @define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
@@ -508,26 +507,26 @@
 /* ADMIN - IMAGES.TPL EDITOR.JS.TPL IMAGES.PHP FUNCTIONS_IMAGES */
 @define('SYNCING', 'Synkronisere databasen med bildemappen');
 @define('SYNC_DONE', 'Ferdig (Synkroniserte %s bilder).');
-@define('RESIZE_BLAHBLAH', '<b>Endre størrelse på %s</b>');
-@define('ORIGINAL_SIZE', 'Original størrelse: <i>%sx%s</i> pixel');
+@define('RESIZE_BLAHBLAH', '<b>Endre stÃ¸rrelse pÃ¥ %s</b>');
+@define('ORIGINAL_SIZE', 'Original stÃ¸rrelse: <i>%sx%s</i> pixel');
 @define('RESIZING', 'Endre dimensjoner');
 @define('RESIZE_DONE', 'Ferdig (Endret %s bilder).');
 @define('KEEP_PROPORTIONS', 'Bevar forholdet');
-@define('REALLY_SCALE_IMAGE', 'Er du sikker på at du vil endre størrelsen på dette bildet? Det er ingen vei tilbake!');
-@define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Her kan du justere bildets størrelse. Hvis du vil bevare proporsjonene, behøver du bare taste en av verdiene og trykke på TAB-tasten.  Jeg vil automatisk beregne den andre verdien:');
+@define('REALLY_SCALE_IMAGE', 'Er du sikker pÃ¥ at du vil endre stÃ¸rrelsen pÃ¥ dette bildet? Det er ingen vei tilbake!');
+@define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Her kan du justere bildets stÃ¸rrelse. Hvis du vil bevare proporsjonene, behÃ¸ver du bare taste en av verdiene og trykke pÃ¥ TAB-tasten.  Jeg vil automatisk beregne den andre verdien:');
 @define('MEDIA_RESIZE_EXISTS', 'File dimensions already exist!');
-@define('NEWSIZE', 'Ny størrelse: ');
-@define('SCALING_IMAGE', 'Endre størrelsen på %s til %s x %s px');
+@define('NEWSIZE', 'Ny stÃ¸rrelse: ');
+@define('SCALING_IMAGE', 'Endre stÃ¸rrelsen pÃ¥ %s til %s x %s px');
 @define('MEDIA_DIRECTORY_MOVED', 'Directory and files were successfully moved to %s');
 @define('MEDIA_DIRECTORY_MOVE_ERROR', 'Directory and files could not be moved to %s!');
 @define('DIRECTORY_INFO', 'Directory info');
 @define('DIRECTORY_INFO_DESC', 'Directories reflect their physical folder directory name. If you want to change or move directories which contain items, you have two choices. Either create the directory or subdirectory you want, then move the items to the new directory via the media library and afterwards, delete the empty old directory there. Or completely change the whole old directory via the edit directory button below and rename it to whatever you like (existing subdir/ + newname). This will move all directories and items and change referring blog entries.');
 @define('DIRECTORY_CREATED', 'Mappen <strong>%s</strong> er oprettet.');
 @define('PARENT_DIRECTORY', 'Hovedmappe');
-@define('CONFIRM_DELETE_DIRECTORY', 'Er du sikker på du vil slette alt innholdet i mappen %s?');
+@define('CONFIRM_DELETE_DIRECTORY', 'Er du sikker pÃ¥ du vil slette alt innholdet i mappen %s?');
 @define('ERROR_NO_DIRECTORY', 'Feil: Mappen %s eksisterer ikke');
-@define('ERROR_DIRECTORY_NOT_EMPTY', 'Kunne ikke fjerne en ikke-tom mappe. Afkryss "tving gjennom sletting"-feltet hvis du vil slette disse og trykk deretter på Submit igjen. Eksisterende filer er:');
-@define('DIRECTORY_DELETE_FAILED', 'Sletting av mappe %s mislyktes. Sjekk rettigheter eller ovenstående beskjeder.');
+@define('ERROR_DIRECTORY_NOT_EMPTY', 'Kunne ikke fjerne en ikke-tom mappe. Afkryss "tving gjennom sletting"-feltet hvis du vil slette disse og trykk deretter pÃ¥ Submit igjen. Eksisterende filer er:');
+@define('DIRECTORY_DELETE_FAILED', 'Sletting av mappe %s mislyktes. Sjekk rettigheter eller ovenstÃ¥ende beskjeder.');
 @define('DIRECTORY_DELETE_SUCCESS', 'Mappen %s er slettet.');
 @define('CHECKING_DIRECTORY', 'Sjekker filer i mappen %s');
 @define('DELETE_DIRECTORY', 'Delete directory');
@@ -536,12 +535,12 @@
 @define('CREATE_DIRECTORY', 'Create directory');
 @define('CREATE_NEW_DIRECTORY', 'Create new directory');
 @define('CREATE_DIRECTORY_DESC', 'Here you can create a new directory to place media files in. Choose the name for your new directory and select an optional parent directory to place it in.');
-@define('ABOUT_TO_DELETE_FILE', 'Du er i ferd med å slette <b>%s</b><br />Hvis du bruker denne filen i noen av postene dine vil dette forårsake døde lenker eller bilder<br />Er du sikker på at du vil gå videre?<br /><br />');
-@define('ERROR_FILE_EXISTS_ALREADY', 'Feil: Filen finnes allerede på din maskin!');
+@define('ABOUT_TO_DELETE_FILE', 'Du er i ferd med Ã¥ slette <b>%s</b><br />Hvis du bruker denne filen i noen av postene dine vil dette forÃ¥rsake dÃ¸de lenker eller bilder<br />Er du sikker pÃ¥ at du vil gÃ¥ videre?<br /><br />');
+@define('ERROR_FILE_EXISTS_ALREADY', 'Feil: Filen finnes allerede pÃ¥ din maskin!');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('FILE_NOT_FOUND', 'Kunne ikke finne filen ved navn <b>%s</b>, den er kanskje allerede slettet?');
 @define('ERROR_FILE_FORBIDDEN', 'You are not allowed to upload files with active content');
-@define('REMOTE_FILE_NOT_FOUND', 'Filen kunne ikke finnes på serveren, er du sikker på at URL-en: <b>%s</b> er korrekt?');
+@define('REMOTE_FILE_NOT_FOUND', 'Filen kunne ikke finnes pÃ¥ serveren, er du sikker pÃ¥ at URL-en: <b>%s</b> er korrekt?');
 @define('FILE_FETCHED', '%s hentet: %s');
 @define('FILE_UPLOADED', 'Filen %s er lastet opp: %s');
 @define('DELETE_FILE_FAIL', 'Unable to delete file <b>%s</b>');
@@ -557,11 +556,11 @@
 @define('MULTICHECK_NO_ITEM', 'No item selected, please check at least one. <a href="%s">Return to previous page</a>.');
 @define('MULTICHECK_NO_DIR', 'No directory selected, please choose one. <a href="%s">Return to previous page</a>.');
 @define('ADDING_IMAGE', 'Legg til et bilde...');
-@define('THUMB_CREATED_DONE', 'Minibilde er oprettet.<br>Utført.');
-@define('THUMBNAIL_USING_OWN', 'Bruker %s i seg selv som minibilde, fordi det allerede er så lite.');
+@define('THUMB_CREATED_DONE', 'Minibilde er oprettet.<br>UtfÃ¸rt.');
+@define('THUMBNAIL_USING_OWN', 'Bruker %s i seg selv som minibilde, fordi det allerede er sÃ¥ lite.');
 @define('THUMBNAIL_FAILED_COPY', 'Ville gjerne ha brukt %s som minibilde i seg selv, men kunne ikke kopiere!');
 @define('DELETE_THUMBNAIL', 'Slettet bildet med navn <b>%s</b>');
-@define('ERROR_UNKNOWN_NOUPLOAD', 'Det oppstod en ukjent feil, filen ble ikke lastet opp. Kanskje er din filstørrelse større end den maksimale størrelse tillatt av ditt serveroppsett. Spør din webtilbyder eller rediger din php.ini fil for å tillate uploads av større filer.');
+@define('ERROR_UNKNOWN_NOUPLOAD', 'Det oppstod en ukjent feil, filen ble ikke lastet opp. Kanskje er din filstÃ¸rrelse stÃ¸rre end den maksimale stÃ¸rrelse tillatt av ditt serveroppsett. SpÃ¸r din webtilbyder eller rediger din php.ini fil for Ã¥ tillate uploads av stÃ¸rre filer.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
 @define('HOTLINK_DONE', 'File hotlinked.<br />Done.');
@@ -581,7 +580,7 @@
 @define('I_WANT_IT_TO_LINK', 'Vis bildet med link');
 @define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
 @define('MEDIA_TITLE', 'TITLE-Attribute (will be displayed on mouse over)');
-@define('IMAGE_SIZE', 'Bildestørrelse');
+@define('IMAGE_SIZE', 'BildestÃ¸rrelse');
 @define('IMAGE_ALIGNMENT', 'Bildejustering');
 @define('ALIGN_TOP', 'Top');
 @define('ALIGN_LEFT', 'Left');
@@ -601,18 +600,18 @@
 @define('ORIGINAL_SHORT', 'Orig.');
 @define('SORT_ORDER_NAME', 'Filnavn');
 @define('SORT_ORDER_EXTENSION', 'Filtype');
-@define('SORT_ORDER_SIZE', 'Filstørrelse');
+@define('SORT_ORDER_SIZE', 'FilstÃ¸rrelse');
 @define('SORT_ORDER_WIDTH', 'Bildebredde');
-@define('SORT_ORDER_HEIGHT', 'Bildehøyde');
+@define('SORT_ORDER_HEIGHT', 'BildehÃ¸yde');
 @define('SORT_ORDER_DATE', 'Upload-dato');
 @define('SHOW_METADATA', 'Show metadata');
 
 /* ADMIN - MEDIA_UPLOAD.TPL */
-@define('ADD_MEDIA_BLAHBLAH', '<b>Legg til en fil til ditt mediabibliotek:</b><p>Her kan du laste opp mediafiler, eller be meg om å hente dem fra en adresse på nettet!  Hvis du ikke har et passende bilde, <a href="https://images.google.com/" target="_blank">søk etter bilder på Google</a> som passer til tankene dine.  Resultatene er ofte nyttige og morsomme :)</p><p><b>Velg metode:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Legg til en fil til ditt mediabibliotek:</b><p>Her kan du laste opp mediafiler, eller be meg om Ã¥ hente dem fra en adresse pÃ¥ nettet!  Hvis du ikke har et passende bilde, <a href="https://images.google.com/" target="_blank">sÃ¸k etter bilder pÃ¥ Google</a> som passer til tankene dine.  Resultatene er ofte nyttige og morsomme :)</p><p><b>Velg metode:</b></p><br/>');
 @define('ENTER_MEDIA_URL', 'Oppgi en URL til en fil som skal hentes:');
-@define('ENTER_MEDIA_UPLOAD', 'Velg en fil du ønsker å laste opp:');
+@define('ENTER_MEDIA_UPLOAD', 'Velg en fil du Ã¸nsker Ã¥ laste opp:');
 @define('SAVE_FILE_AS', 'Lagre filen som:');
-@define('STORE_IN_DIRECTORY', 'Lagre i følgende katalog: ');
+@define('STORE_IN_DIRECTORY', 'Lagre i fÃ¸lgende katalog: ');
 @define('IMAGE_MORE_INPUT', 'Add more images');
 @define('ENTER_MEDIA_URL_METHOD', 'Fetch method:');
 @define('ADD_MEDIA_BLAHBLAH_NOTE', 'Note: If you choose to hotlink to server, make sure you have permission to hotlink to the designated website, or the website is yours. Hotlink allows you to use off-site images without storing them locally.');
@@ -623,7 +622,7 @@
 @define('NO_FILE_SELECTED', 'For s9y to do something, you have to select a file first');
 
 /* ADMIN - MEDIA_PANE.TPL */
-@define('IMAGE_RESIZE', 'Endre størrelsen på dette bildet');
+@define('IMAGE_RESIZE', 'Endre stÃ¸rrelsen pÃ¥ dette bildet');
 @define('MEDIA_DELETE', 'Slett denne filen');
 @define('FILES_PER_PAGE', 'Antall filer per side');
 @define('HIDE_SUBDIR_FILES', 'Hide files in subdirectory');
@@ -636,7 +635,7 @@
 
 /* ADMIN - CONFIGURATION.TPL */
 @define('WRITTEN_N_SAVED', 'Konfigurasjon skrevet &amp; lagret');
-@define('DIAGNOSTIC_ERROR', 'Vi har opdaget noen feil mens vi kørte noen diagnostikker på dine oppgitte informasjoner:');
+@define('DIAGNOSTIC_ERROR', 'Vi har opdaget noen feil mens vi kÃ¸rte noen diagnostikker pÃ¥ dine oppgitte informasjoner:');
 @define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
 
 /* DATABASE SETTINGS */
@@ -647,13 +646,13 @@
 @define('INSTALL_DBHOST', 'Databaseserver');
 @define('INSTALL_DBHOST_DESC', 'Hostname til din databaseserver');
 @define('INSTALL_DBUSER', 'Databasebrukernavn');
-@define('INSTALL_DBUSER_DESC', 'Brukernavnet som er brukt til å koble til databasen din');
+@define('INSTALL_DBUSER_DESC', 'Brukernavnet som er brukt til Ã¥ koble til databasen din');
 @define('INSTALL_DBPASS', 'Databasepassord');
 @define('INSTALL_DBPASS_DESC', 'Passordet som passer til brukernavnet over');
 @define('INSTALL_DBNAME', 'Databasenavn');
-@define('INSTALL_DBNAME_DESC', 'Navnet på din database');
+@define('INSTALL_DBNAME_DESC', 'Navnet pÃ¥ din database');
 @define('INSTALL_DBPREFIX', 'Databasetabell-prefiks');
-@define('INSTALL_DBPREFIX_DESC', 'Prefiks på tabellnavn, f.eks. serendipity_');
+@define('INSTALL_DBPREFIX_DESC', 'Prefiks pÃ¥ tabellnavn, f.eks. serendipity_');
 @define('INSTALL_DBPERSISTENT', 'Use persistent connections');
 @define('INSTALL_DBPERSISTENT_DESC', 'Enable the usage of persistent database connections, read more <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. This is normally not recommended');
 @define('INSTAL_DB_UTF8', 'Enable DB-charset conversion');
@@ -661,7 +660,7 @@
 
 /* PATH SETTINGS */
 @define('INSTALL_CAT_PATHS', 'Baner');
-@define('INSTALL_CAT_PATHS_DESC', 'Forskjellige baner til forskjellige essensielle mapper og filer. Glem ikke etterfølgende slasher på biblioteker!');
+@define('INSTALL_CAT_PATHS_DESC', 'Forskjellige baner til forskjellige essensielle mapper og filer. Glem ikke etterfÃ¸lgende slasher pÃ¥ biblioteker!');
 @define('INSTALL_FULLPATH', 'Full bane');
 @define('INSTALL_FULLPATH_DESC', 'Den fulle og absolutte bane til din serendipity-installasjon');
 @define('INSTALL_UPLOADPATH', 'Upload-bane');
@@ -677,7 +676,7 @@
 @define('INSTALL_AUTODETECT_URL', 'Autodetect used HTTP-Host');
 @define('INSTALL_AUTODETECT_URL_DESC', 'If set to "true", Serendipity will ensure that the HTTP Host which was used by your visitor is used as your BaseURL setting. Enabling this will let you be able to use multiple domain names for your Serendipity Blog, and use the domain for all follow-up links which the user used to access your blog.');
 @define('INSTALL_INDEXFILE', 'Index-fil');
-@define('INSTALL_INDEXFILE_DESC', 'Navnet på din Serendipity index-fil');
+@define('INSTALL_INDEXFILE_DESC', 'Navnet pÃ¥ din Serendipity index-fil');
 
 /* PERMALINK SETTINGS */
 @define('INSTALL_CAT_PERMALINKS', 'Permalinks');
@@ -709,7 +708,7 @@
 
 /* GENERAL SETTINGS */
 @define('INSTALL_CAT_SETTINGS', 'Generelle innstillinger');
-@define('INSTALL_CAT_SETTINGS_DESC', 'Tilpass måten Serendipity oppfører seg på');
+@define('INSTALL_CAT_SETTINGS_DESC', 'Tilpass mÃ¥ten Serendipity oppfÃ¸rer seg pÃ¥');
 @define('INSTALL_USERNAME', 'Admin-brukernavn');
 @define('INSTALL_USERNAME_DESC', 'Brukernavn til admin-login');
 @define('INSTALL_PASSWORD', 'Admin-passord');
@@ -721,7 +720,7 @@
 @define('INSTALL_EMAIL', 'Admin-email');
 @define('INSTALL_EMAIL_DESC', 'E-mailadresse til eieren av bloggen');
 @define('INSTALL_SENDMAIL', 'Send e-mailer til admin?');
-@define('INSTALL_SENDMAIL_DESC', 'Vil du motta email når kommentare blir gitt til dine artikler?');
+@define('INSTALL_SENDMAIL_DESC', 'Vil du motta email nÃ¥r kommentare blir gitt til dine artikler?');
 @define('INSTALL_SUBSCRIBE', 'Allow users to subscribe?');
 @define('INSTALL_SUBSCRIBE_DESC', 'Allow users to subscribe and thereby receive a mail when new content is published to that subscription');
 @define('INSTALL_SUBSCRIBE_OPTIN', 'Use Double-Opt In for subscriptions?');
@@ -730,16 +729,16 @@
 @define('INSTALL_SUBSCRIBE_CHUNK_DESC', 'How much of the content will be included in the email');
 @define('SUBSCRIPTION_MAIL_FORMAT', 'Mail format Hmtl for Subscriptions');
 @define('SUBSCRIPTION_MAIL_FORMAT_DESC', 'Send mail to subscribers in multipart/alternative as Html or plain text');
-@define('INSTALL_BLOGNAME', 'Navn på blogg');
-@define('INSTALL_BLOGNAME_DESC', 'Tittelen på din blogg');
+@define('INSTALL_BLOGNAME', 'Navn pÃ¥ blogg');
+@define('INSTALL_BLOGNAME_DESC', 'Tittelen pÃ¥ din blogg');
 @define('INSTALL_BLOGDESC', 'Blogg-beskrivelse');
 @define('INSTALL_BLOGDESC_DESC', 'Beskrivelse av din blogg');
 @define('INSTALL_BLOG_EMAIL', 'Blog\'s E-Mail address');
 @define('INSTALL_BLOG_EMAIL_DESC', 'This configures the E-Mail address that is used as the "From"-Part of outgoing mails. Be sure to set this to an address that is recognized by the mailserver used on your host - many mailservers reject messages that have unknown From-addresses.');
 @define('COMMENT_TOKENS', 'Use Tokens for Comment Moderation?');
 @define('COMMENT_TOKENS_DESC', 'If tokens are used, comments can be approved and deleted by clicking the email links without requiring login access to the blog. Note that this is a convenience feature, and if your mails get hijacked, those people can approve/delete the referenced comment without further authentication.');
-@define('INSTALL_LANG', 'Språk');
-@define('INSTALL_LANG_DESC', 'Velg språket på din blogg');
+@define('INSTALL_LANG', 'SprÃ¥k');
+@define('INSTALL_LANG_DESC', 'Velg sprÃ¥ket pÃ¥ din blogg');
 @define('INSTALL_CHARSET', 'Charset selection');
 @define('INSTALL_CHARSET_DESC', 'Here you can toggle UTF-8 or native (ISO, EUC, ...) charactersets. Some languages only have UTF-8 translations so that setting the charset to "Native" will have no effects. UTF-8 is suggested for new installations. Do not change this setting if you have already made entries with special characters - this may lead to corrupt characters. Be sure to read more on https://docs.s9y.org/docs/developers/internationalization.html about this issue.');
 @define('INSTALL_CAL', 'Calendar Type');
@@ -760,7 +759,7 @@
 
 /* APPEARANCE AND OPTIONS SETTINGS */
 @define('INSTALL_CAT_DISPLAY', 'Utseende og innstillinger');
-@define('INSTALL_CAT_DISPLAY_DESC', 'Tilpass hvordan Serendipity ser ut og føles');
+@define('INSTALL_CAT_DISPLAY_DESC', 'Tilpass hvordan Serendipity ser ut og fÃ¸les');
 @define('INSTALL_FETCHLIMIT', 'Entries to display on frontpage');
 @define('INSTALL_FETCHLIMIT_DESC', 'Number of entries to display for each page on the frontend');
 @define('INSTALL_RSSFETCHLIMIT', 'Entries to display in Feeds');
@@ -773,19 +772,19 @@
 @define('INSTALL_USEGZIP', 'Use gzip compressed pages');
 @define('INSTALL_USEGZIP_DESC', 'To speed up delivery of pages, we can compress the pages we send to the visitor, given that his browser supports this. This is recommended');
 @define('INSTALL_XHTML11', 'Tving gjennom XHTML 1.1');
-@define('INSTALL_XHTML11_DESC', 'Ønsker du å kreve overholdelse av XHTML 1.1 (kan skape problemer i 4.-generasjonsbrowsere)');
+@define('INSTALL_XHTML11_DESC', 'Ã˜nsker du Ã¥ kreve overholdelse av XHTML 1.1 (kan skape problemer i 4.-generasjonsbrowsere)');
 @define('INSTALL_POPUP', 'Aktiver bruk av popup-vinduer');
-@define('INSTALL_POPUP_DESC', 'Vil du åpne kommentarer og trackbacks i et popupvindu?');
+@define('INSTALL_POPUP_DESC', 'Vil du Ã¥pne kommentarer og trackbacks i et popupvindu?');
 @define('INSTALL_EMBED', 'Er Serendipity embedded?');
-@define('INSTALL_EMBED_DESC', 'Hvis du ønsker å kapsle Serendipity inn i en normal side, aktiver da dette direktivet for å ignorere headere og kun skrive ut innholdet. Du kan benytte indexFile-direktivet til å lage en wrapper-fil hvor du plasserer din normale hjemmesides headere. Konsulter README filen for mer informasjon!');
-@define('INSTALL_SHOW_EXTERNAL_LINKS', 'Gjøre eksterne lenker klikkbare?');
-@define('INSTALL_SHOW_EXTERNAL_LINKS_DESC', '"no": Usjekkede eksterne lenker (topp utgangssider, referanser, brukerkommentarer) er ikke vist - vist som ren tekst hvor mulig, for å forhindre Google-spam (anbefalt).  "yes":  Usjekkede eksterne lenker blir vist som hyperlenker.  Kan bli overstyrt i sidebar plugin-konfigurasjon!');
+@define('INSTALL_EMBED_DESC', 'Hvis du Ã¸nsker Ã¥ kapsle Serendipity inn i en normal side, aktiver da dette direktivet for Ã¥ ignorere headere og kun skrive ut innholdet. Du kan benytte indexFile-direktivet til Ã¥ lage en wrapper-fil hvor du plasserer din normale hjemmesides headere. Konsulter README filen for mer informasjon!');
+@define('INSTALL_SHOW_EXTERNAL_LINKS', 'GjÃ¸re eksterne lenker klikkbare?');
+@define('INSTALL_SHOW_EXTERNAL_LINKS_DESC', '"no": Usjekkede eksterne lenker (topp utgangssider, referanser, brukerkommentarer) er ikke vist - vist som ren tekst hvor mulig, for Ã¥ forhindre Google-spam (anbefalt).  "yes":  Usjekkede eksterne lenker blir vist som hyperlenker.  Kan bli overstyrt i sidebar plugin-konfigurasjon!');
 @define('INSTALL_TRACKREF', 'Enable referrer tracking?');
 @define('INSTALL_TRACKREF_DESC', 'Enabling the referrer tracking will show you which sites refer to your articles. Today this is often abused for spamming, so you can disable it if you want.');
-@define('INSTALL_BLOCKREF', 'Blokkér referanser');
-@define('INSTALL_BLOCKREF_DESC', 'Er det noen spesielle hosts du ikke ønsker skal vises i referanselisten?  Seprarer listen av hostnavn med \';\' og merk deg at disse er blokkert med substring-masker!');
+@define('INSTALL_BLOCKREF', 'BlokkÃ©r referanser');
+@define('INSTALL_BLOCKREF_DESC', 'Er det noen spesielle hosts du ikke Ã¸nsker skal vises i referanselisten?  Seprarer listen av hostnavn med \';\' og merk deg at disse er blokkert med substring-masker!');
 @define('INSTALL_REWRITE', 'URL-omskrivning');
-@define('INSTALL_REWRITE_DESC', 'Velg hvilken regel du ønsker å bruke når du genererer URL-er. Aktivering av omskrivningsregler vil gjøre URL-ene dine flotte og gjøre din side mer egnet for indeksering av roboter som google. Webserveren må enten støtte mod_rewrite eller "AllowOverride All" for ditt Serendipity-bibliotek. Standardindstillingen er automatisk beregnet');
+@define('INSTALL_REWRITE_DESC', 'Velg hvilken regel du Ã¸nsker Ã¥ bruke nÃ¥r du genererer URL-er. Aktivering av omskrivningsregler vil gjÃ¸re URL-ene dine flotte og gjÃ¸re din side mer egnet for indeksering av roboter som google. Webserveren mÃ¥ enten stÃ¸tte mod_rewrite eller "AllowOverride All" for ditt Serendipity-bibliotek. Standardindstillingen er automatisk beregnet');
 @define('INSTALL_OFFSET_ON_SERVER_TIME', 'Base offset on server timezone?');
 @define('INSTALL_OFFSET_ON_SERVER_TIME_DESC', 'Offset entry times on server timezone or not. Select yes to base offset on server timezone and no to offset on GMT.');
 @define('INSTALL_OFFSET', 'Server time Offset');
@@ -803,17 +802,17 @@
 @define('SYNDICATION_PLUGIN_BANNERURL_DESC', 'URL til et bilde i GIF/JPEG/PNG format, hvis tilgjengelig. (tom: serendipity-logo)');
 @define('SYNDICATION_PLUGIN_BANNERWIDTH', 'Bildebredde');
 @define('SYNDICATION_PLUGIN_BANNERWIDTH_DESC', 'i pixels, max. 144');
-@define('SYNDICATION_PLUGIN_BANNERHEIGHT', 'Bildehøjde');
+@define('SYNDICATION_PLUGIN_BANNERHEIGHT', 'BildehÃ¸jde');
 @define('SYNDICATION_PLUGIN_BANNERHEIGHT_DESC', 'i pixels, max. 400');
 @define('SYNDICATION_PLUGIN_SHOW_MAIL', 'Show E-Mail addresses?');
-@define('SYNDICATION_PLUGIN_MANAGINGEDITOR', 'Feltet "Hovedredaktør"');
-@define('SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC', 'E-mailadressen til redaktøren, hvis tilgjengelig. (tom: skjult) [RSS 2.0]');
+@define('SYNDICATION_PLUGIN_MANAGINGEDITOR', 'Feltet "HovedredaktÃ¸r"');
+@define('SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC', 'E-mailadressen til redaktÃ¸ren, hvis tilgjengelig. (tom: skjult) [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_WEBMASTER', 'Feltet "webmaster"');
 @define('SYNDICATION_PLUGIN_WEBMASTER_DESC', 'Emailadressen til webmasteren, hvis tilgjengelig. (tom: skjult) [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_TTL', 'Feltet "ttl" (time-to-live)');
 @define('SYNDICATION_PLUGIN_TTL_DESC', 'Antallet minutter din blog skal caches av eksterne sider/programmer (tom: skjult) [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_PUBDATE', 'Feltet "pubDate"');
-@define('SYNDICATION_PLUGIN_PUBDATE_DESC', 'Skal "pubDate"-feltet være innkapslet til en RSS-kanal, for å vise datoen på den nyeste artikkelen?');
+@define('SYNDICATION_PLUGIN_PUBDATE_DESC', 'Skal "pubDate"-feltet vÃ¦re innkapslet til en RSS-kanal, for Ã¥ vise datoen pÃ¥ den nyeste artikkelen?');
 @define('FEED_CUSTOM', 'Custom feed URL');
 @define('FEED_CUSTOM_DESC', 'If set, a custom feed URL can be set to forward Feedreaders to a specific URL. Useful for statistical analyzers like Feedburner, in which case you would enter your Feedburner-URL here.');
 @define('FEED_FORCE', 'Force custom feed URL?');
@@ -821,15 +820,15 @@
 
 /* IMAGECONVERSION SETTINGS */
 @define('INSTALL_CAT_IMAGECONV', 'Bildekonverterings-innstillinger');
-@define('INSTALL_CAT_IMAGECONV_DESC', 'Generell informasjon om hvordan Serendipity skal håndtere bilder');
+@define('INSTALL_CAT_IMAGECONV_DESC', 'Generell informasjon om hvordan Serendipity skal hÃ¥ndtere bilder');
 @define('INSTALL_IMAGEMAGICK', 'Bruk Imagemagick');
-@define('INSTALL_IMAGEMAGICK_DESC', 'Har du ImageMagick installert og ønsker å bruke det til å endre størrelse på bilder?');
-@define('INSTALL_IMAGEMAGICKPATH', 'Bane til convert binærfil');
-@define('INSTALL_IMAGEMAGICKPATH_DESC', 'Full bane og navn på din ImageMagick convert binærfil');
+@define('INSTALL_IMAGEMAGICK_DESC', 'Har du ImageMagick installert og Ã¸nsker Ã¥ bruke det til Ã¥ endre stÃ¸rrelse pÃ¥ bilder?');
+@define('INSTALL_IMAGEMAGICKPATH', 'Bane til convert binÃ¦rfil');
+@define('INSTALL_IMAGEMAGICKPATH_DESC', 'Full bane og navn pÃ¥ din ImageMagick convert binÃ¦rfil');
 @define('INSTALL_THUMBSUFFIX', 'Thumbnail-suffiks');
-@define('INSTALL_THUMBSUFFIX_DESC', 'Thumbnails vil bli gitt navn etter følgende mønster: original.[suffix].ext');
+@define('INSTALL_THUMBSUFFIX_DESC', 'Thumbnails vil bli gitt navn etter fÃ¸lgende mÃ¸nster: original.[suffix].ext');
 @define('INSTALL_THUMBWIDTH', 'Thumbnail-dimensjoner');
-@define('INSTALL_THUMBWIDTH_DESC', 'Statisk maksimalbredde på en auto-genereret thumbnail');
+@define('INSTALL_THUMBWIDTH_DESC', 'Statisk maksimalbredde pÃ¥ en auto-genereret thumbnail');
 @define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
 @define('INSTALL_THUMBDIM_LARGEST', 'Largest');
 @define('INSTALL_THUMBDIM_WIDTH', 'Width');
@@ -861,9 +860,9 @@
 @define('USERCONF_CAT_PERSONAL', 'Dine personlige detaljer');
 @define('USERCONF_CAT_PERSONAL_DESC', 'Endre dine personlige detaljer');
 @define('USERCONF_USERNAME', 'Ditt brukernavn');
-@define('USERCONF_USERNAME_DESC', 'Brukernavnet du vil bruke for å logge inn i bloggen');
+@define('USERCONF_USERNAME_DESC', 'Brukernavnet du vil bruke for Ã¥ logge inn i bloggen');
 @define('USERCONF_PASSWORD', 'Ditt passord');
-@define('USERCONF_PASSWORD_DESC', 'Passordet du vil bruke for å logge inn i bloggen');
+@define('USERCONF_PASSWORD_DESC', 'Passordet du vil bruke for Ã¥ logge inn i bloggen');
 @define('USERCONF_CHECK_PASSWORD', 'Old Password');
 @define('USERCONF_CHECK_PASSWORD_DESC', 'If you change the password in the field above, you need to enter the current user password into this field.');
 @define('USERCONF_USERLEVEL', 'Access level');
@@ -887,9 +886,9 @@
 @define('USERCONF_WYSIWYG_PRESET_NOCC_STANDARD', 'Force: Alternate');
 @define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Force: CKEditor Full');
 @define('USERCONF_SENDCOMMENTS', 'Send beskjeder om nye kommentarer?');
-@define('USERCONF_SENDCOMMENTS_DESC', 'Ønsker du å motta en mail når nye kommentarer blir lagt til dine artikler?');
+@define('USERCONF_SENDCOMMENTS_DESC', 'Ã˜nsker du Ã¥ motta en mail nÃ¥r nye kommentarer blir lagt til dine artikler?');
 @define('USERCONF_SENDTRACKBACKS', 'Send bjeskeder om nye trackbacks?');
-@define('USERCONF_SENDTRACKBACKS_DESC', 'Ønsker du å motta en mail når nye trackbacks blir lagt til dine artikler?');
+@define('USERCONF_SENDTRACKBACKS_DESC', 'Ã˜nsker du Ã¥ motta en mail nÃ¥r nye trackbacks blir lagt til dine artikler?');
 @define('USERCONF_CREATE', 'Disable user / forbid activity?');
 @define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
 @define('USERCONF_ALLOWPUBLISH', 'Tillatelse: Publisere artikler?');
@@ -949,12 +948,12 @@
 @define('ENTRY_SAVED', 'Din artikkel ble lagret');
 
 /* ENTRIES.TPL */
-@define('COMMENTS_VIEWMODE_THREADED', 'Trådet');
-@define('COMMENTS_VIEWMODE_LINEAR', 'Lineær');
+@define('COMMENTS_VIEWMODE_THREADED', 'TrÃ¥det');
+@define('COMMENTS_VIEWMODE_LINEAR', 'LineÃ¦r');
 @define('DISPLAY_COMMENTS_AS', 'Vis kommentarer som');
 @define('COMMENTS_DISABLE', 'Tillat ikke kommentarer til denne artikkelen');
 @define('COMMENTS_ENABLE', 'Tillat kommentarer til denne artikkelen');
-@define('COMMENTS_CLOSED', 'Forfatteren har valgt ikke å tillate kommentarer til denne artikkelen');
+@define('COMMENTS_CLOSED', 'Forfatteren har valgt ikke Ã¥ tillate kommentarer til denne artikkelen');
 @define('VIEW_EXTENDED_ENTRY', 'Les resten av "%s"');
 @define('TRACKBACK_SPECIFIC', 'Trackback URI til denne artikkel');
 
@@ -973,7 +972,7 @@
 @define('SUBMIT_COMMENT', 'Legg til kommentar');
 @define('SUBSCRIBE_COMMENT', 'Subscribe comments');
 @define('SUBSCRIBE_COMMENT_BLAHBLAH', 'You can also subscribe to new comments without writing one. Please enter your email address down below.');
-@define('SUBSCRIBE_TO_THIS_ENTRY', 'Abonnér på denne artikkelen');
+@define('SUBSCRIBE_TO_THIS_ENTRY', 'AbonnÃ©r pÃ¥ denne artikkelen');
 
 /* FUNCTIONS_CONFIG */
 @define('ERROR_XSRF', 'Your browser did not sent a valid HTTP-Referrer string. This may have either been caused by a misconfigured browser/proxy or by a Cross Site Request Forgery (XSRF) aimed at you. The action you requested could not be completed.');
@@ -982,17 +981,17 @@
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
 
 /* FUNCTIONS_COMMENTS */
-@define('COMMENT_ALREADY_APPROVED', 'Kommentar #%s ser allerede ut til å være godkjent');
+@define('COMMENT_ALREADY_APPROVED', 'Kommentar #%s ser allerede ut til Ã¥ vÃ¦re godkjent');
 @define('COMMENT_EDITED', 'Den valgte kommentar er redigert');
-@define('COMMENTS_WILL_BE_MODERATED', 'Kommentarer på denne artikkelen vil først bli vist når de er blitt godkjendt.');
-@define('THIS_COMMENT_NEEDS_REVIEW', 'Advarsel: Denne kommentaren krever godkjennelse før den blir vist');
+@define('COMMENTS_WILL_BE_MODERATED', 'Kommentarer pÃ¥ denne artikkelen vil fÃ¸rst bli vist nÃ¥r de er blitt godkjendt.');
+@define('THIS_COMMENT_NEEDS_REVIEW', 'Advarsel: Denne kommentaren krever godkjennelse fÃ¸r den blir vist');
 @define('DELETE_COMMENT', 'Slett kommentar');
 @define('APPROVE_COMMENT', 'Godkjenn kommentar');
 @define('REQUIRES_REVIEW', 'Krever godkjennelse');
 @define('COMMENT_APPROVED', 'Kommentar #%s er godkjent');
 @define('COMMENT_DELETED', 'Kommentar #%s er slettet');
 @define('COMMENTS_MODERATE', 'Kommentarer og trackback til denne posten krever moderasjon.');
-@define('THIS_TRACKBACK_NEEDS_REVIEW', 'Advarsel:  Denne trackbacken trenger godkjennelse før den blir vist.');
+@define('THIS_TRACKBACK_NEEDS_REVIEW', 'Advarsel:  Denne trackbacken trenger godkjennelse fÃ¸r den blir vist.');
 @define('DELETE_TRACKBACK', 'Slett trackback');
 @define('APPROVE_TRACKBACK', 'Godkjenn trackback');
 @define('TRACKBACK_APPROVED', 'Trackback #%s har blitt godkjent');
@@ -1000,7 +999,7 @@
 @define('COMMENT_NOTOKENMATCH', 'Moderation link has expired or comment #%s has already been approved or deleted');
 @define('TRACKBACK_NOTOKENMATCH', 'Moderation link has expired or trackback #%s has already been approved or deleted');
 @define('BADTOKEN', 'Invalid Moderation Link');
-@define('TOP_LEVEL', 'Topnivå');
+@define('TOP_LEVEL', 'TopnivÃ¥');
 @define('VIEW_COMMENT', 'Se kommentar');
 @define('VIEW_ENTRY', 'Se posting');
 @define('LINK_TO_ENTRY', 'Link til artikkel');
@@ -1015,10 +1014,10 @@
 @define('TRACKBACK_SENT', 'Trackback suksess');
 @define('TRACKBACK_FAILED', 'Trackback slo feil: %s');
 @define('TRACKBACK_NOT_FOUND', 'Fant ingen trackback-URI.');
-@define('TRACKBACK_URI_MISMATCH', 'Den autofunnede trackback-URI-en stemmer ikke overens med vår mål-URI.');
+@define('TRACKBACK_URI_MISMATCH', 'Den autofunnede trackback-URI-en stemmer ikke overens med vÃ¥r mÃ¥l-URI.');
 @define('TRACKBACK_CHECKING', 'Sjekker <u>%s</u> for mulige trackbacks...');
-@define('TRACKBACK_NO_DATA', 'Mål inneholdt ingen data');
-@define('TRACKBACK_COULD_NOT_CONNECT', 'Ingen Trackback sendt:  Kunne ikke åpne tilkobling til %s på port %d');
+@define('TRACKBACK_NO_DATA', 'MÃ¥l inneholdt ingen data');
+@define('TRACKBACK_COULD_NOT_CONNECT', 'Ingen Trackback sendt:  Kunne ikke Ã¥pne tilkobling til %s pÃ¥ port %d');
 
 /* FUNCTIONS_SUBSCRIPTIONS */
 @define('MAILTO_SUBSCRIBERS', 'Sending emails to % subscribers ...');
@@ -1034,13 +1033,13 @@
 @define('SUBSCRIPTION_MAIL_OUTRO', 'You get this email because you have subscribed to receive new articles of the blog %s. To unsubscribe, click here.');
 @define('SUBSCRIPTION_NEW_ARTICLE', 'New article');
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Ny kommentar til abonnert artikkel "%s"');
-@define('SUBSCRIPTION_MAIL', "Hej %s,\n\nEn ny kommentar er blitt lagt til en artikkel du abonnerer på hos \"%s\", ved navn \"%s\"\nNavnet på skribenten er: %s\n\nDu kan finne artikkelen her: %s\n\nDu kan stoppe ditt abonnement ved å klikke på denne linken: %s\n");
-@define('SUBSCRIPTION_TRACKBACK_MAIL', "Hei %s,\n\nEn ny trackback er laget til en artikkel du abonnerer på hos \"%s\", ved navn \"%s\"\nNavnet på skribenten er: %s\n\nDu kan finne artiklen her: %s\n\nDu kan stoppe ditt abonnement ved å klikke på denne linken: %s\n");
-@define('SIGNATURE', "\n-- \n%s bruker Serendipity.\nDen bedste blogg på dette, du kan også bruke det.\nKikk nærmere på <https://s9y.org> for å finne mere informasjon.");
+@define('SUBSCRIPTION_MAIL', "Hej %s,\n\nEn ny kommentar er blitt lagt til en artikkel du abonnerer pÃ¥ hos \"%s\", ved navn \"%s\"\nNavnet pÃ¥ skribenten er: %s\n\nDu kan finne artikkelen her: %s\n\nDu kan stoppe ditt abonnement ved Ã¥ klikke pÃ¥ denne linken: %s\n");
+@define('SUBSCRIPTION_TRACKBACK_MAIL', "Hei %s,\n\nEn ny trackback er laget til en artikkel du abonnerer pÃ¥ hos \"%s\", ved navn \"%s\"\nNavnet pÃ¥ skribenten er: %s\n\nDu kan finne artiklen her: %s\n\nDu kan stoppe ditt abonnement ved Ã¥ klikke pÃ¥ denne linken: %s\n");
+@define('SIGNATURE', "\n-- \n%s bruker Serendipity.\nDen bedste blogg pÃ¥ dette, du kan ogsÃ¥ bruke det.\nKikk nÃ¦rmere pÃ¥ <https://s9y.org> for Ã¥ finne mere informasjon.");
 @define('SIGNATURE_HTML', "<hr><p>%s is powered by Serendipity.<br>The best blog around, you can use it too.<br>Check out <a href='https://s9y.org'>s9y.org</a> to find out how.</p>");
-@define('A_NEW_COMMENT_BLAHBLAH', 'En ny kommentar har blitt opprettet på din blog "%s", til artiklen med navnet "%s".');
+@define('A_NEW_COMMENT_BLAHBLAH', 'En ny kommentar har blitt opprettet pÃ¥ din blog "%s", til artiklen med navnet "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'En ny trackback har blitt laget til din artikkel ved navn "%s".');
-@define('YOU_HAVE_THESE_OPTIONS', 'Du har følgende muligheter:');
+@define('YOU_HAVE_THESE_OPTIONS', 'Du har fÃ¸lgende muligheter:');
 @define('NEW_TRACKBACK_TO', 'Ny trackback opprettet til');
 @define('NEW_COMMENT_TO', 'Ny kommentar opprettet til');
 
@@ -1050,12 +1049,12 @@
 
 /* GENPAGE */
 @define('NO_ENTRIES_BLAHBLAH', 'Ingen artikler ble funnet som inneholdt %s' . "\n");
-@define('YOUR_SEARCH_RETURNED_BLAHBLAH', 'Ditt søk på %s retunerte %s resultater:');
+@define('YOUR_SEARCH_RETURNED_BLAHBLAH', 'Ditt sÃ¸k pÃ¥ %s retunerte %s resultater:');
 @define('SEARCH_TOO_SHORT', 'Your search-query must be longer than 3 characters. You can try to append * to shorter words, like: s9y* to trick the search into using shorter words.');
 @define('SEARCH_ERROR', 'The search function did not work as expected. Notice for the administrator of this blog: This may happen because of missing index keys in your database. On MySQL systems your database user account needs to be privileged to execute this query: <pre>CREATE FULLTEXT INDEX entry_idx on %sentries (title,body,extended)</pre> The specific error returned by the database was: <pre>%s</pre>');
 
 /* SERVE ENTRY */
-@define('EMPTY_COMMENT', 'Din kommentar indeholdt ikke noe, vennligst gå %stilbage%s og prøv igjen');
+@define('EMPTY_COMMENT', 'Din kommentar indeholdt ikke noe, vennligst gÃ¥ %stilbage%s og prÃ¸v igjen');
 @define('COMMENT_NOT_ADDED', 'Din kommentar kunne ikke legges til fordi kommentarer til denne artikkelen er blitt deaktivert.');
 
 /* SERVE COMMENTS*/
@@ -1167,7 +1166,7 @@
 @define('ARCHIVE_COUNT_DESC', 'The total number of months, weeks or days to display');
 @define('ARCHIVE_FREQUENCY', 'Calendar item frequency');
 @define('ARCHIVE_FREQUENCY_DESC', 'The calendar interval to use between each item in the list');
-@define('BROWSE_ARCHIVES', 'Bla gjennom arkiv etter måneder');
+@define('BROWSE_ARCHIVES', 'Bla gjennom arkiv etter mÃ¥neder');
 
 /* PLUGIN_PLUG */
 @define('POWERED_BY_SHOW_TEXT', 'Vis "Serendipity" som tekst');
@@ -1178,22 +1177,22 @@
 
 /* PLUGIN_SUPERUSER */
 @define('PLUGIN_SUPERUSER_HTTPS', 'Bruk https ved innlogging');
-@define('PLUGIN_SUPERUSER_HTTPS_DESC', 'Peker login-linken til en https-adresse. Webserveren din må støtte dette!');
+@define('PLUGIN_SUPERUSER_HTTPS_DESC', 'Peker login-linken til en https-adresse. Webserveren din mÃ¥ stÃ¸tte dette!');
 @define('SUPERUSER', 'Blogg-administrasjon');
-@define('SUPERUSER_OPEN_ADMIN', 'Åpne administrasjon');
-@define('SUPERUSER_OPEN_LOGIN', 'Åpne login-skjerm');
+@define('SUPERUSER_OPEN_ADMIN', 'Ã…pne administrasjon');
+@define('SUPERUSER_OPEN_LOGIN', 'Ã…pne login-skjerm');
 @define('ALLOWS_YOU_BLAHBLAH', 'Legger en link til blogg-administrasjonen i sidebaren.');
 
 /* PLUGIN_CALENDAR */
 @define('CALENDAR', 'Kalender');
-@define('CALENDAR_BOW_DESC', 'Ukedagen som skal være starten på uken.  Standard er mandag');
+@define('CALENDAR_BOW_DESC', 'Ukedagen som skal vÃ¦re starten pÃ¥ uken.  Standard er mandag');
 @define('QUICKJUMP_CALENDAR', 'Hurtigkalender');
-@define('CALENDAR_BEGINNING_OF_WEEK', 'Starten på uken');
+@define('CALENDAR_BEGINNING_OF_WEEK', 'Starten pÃ¥ uken');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Enable Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 
 /* PLUGIN_QUICKSEARCH */
-@define('SEARCH_FOR_ENTRY', 'Søk etter en artikkel');
+@define('SEARCH_FOR_ENTRY', 'SÃ¸k etter en artikkel');
 @define('SEARCH_FULLENTRY', 'Show full entry');
 
 /* PLUGIN_HTML_NUGGET */
@@ -1204,8 +1203,8 @@
 
 /* ORPHANED CONSTANTS */
 @define('INSTALL_TOP_AS_LINKS', 'Vis topp utgangssider/referanser som links?');
-@define('INSTALL_TOP_AS_LINKS_DESC', '"no": Utgangssider og referanser blir vist som ren tekst for å forhindre Google-spam.  "yes": Utgangssider og referanser blir vist som hyperlinker.  "default": Bruk innstillinger fra global konfigurasjon (anbefalt).');
-@define('HAVE_TO_BE_LOGGED_ON', 'Du må være logget inn for å kunne se denne siden');
+@define('INSTALL_TOP_AS_LINKS_DESC', '"no": Utgangssider og referanser blir vist som ren tekst for Ã¥ forhindre Google-spam.  "yes": Utgangssider og referanser blir vist som hyperlinker.  "default": Bruk innstillinger fra global konfigurasjon (anbefalt).');
+@define('HAVE_TO_BE_LOGGED_ON', 'Du mÃ¥ vÃ¦re logget inn for Ã¥ kunne se denne siden');
 @define('WELCOME_TO_ADMIN', 'Welcome to the Serendipity Administration Suite.');
 @define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity requires a PHP version >= %2$s - you are running a lower version (%1$s) and need to upgrade your PHP version. Most providers offer you to switch to newer PHP versions through their admin panels or .htaccess directives.');
 @define('SYNDICATION_PLUGIN_BIGIMG', 'Big Image');
@@ -1218,16 +1217,16 @@
 @define('MEDIA_PROPERTY_ALT', 'Depiction (summary for ALT-Attribute)');
 @define('MEDIA_PROPERTY_DPI', 'DPI');
 @define('MEDIA_PROPERTY_TITLE', 'Title');
-@define('SERENDIPITY_NOT_INSTALLED', 'Serendipity er ennå ikke installert. Klikk <a href="%s">her for å installere</a> nå.');
-@define('COMMENT_ADDED_CLICK', 'Klik %her for å gå tilbake%s til kommentarene, og %sher for å lukke%s dette vinduet.');
-@define('COMMENT_NOT_ADDED_CLICK', 'Klikk %sher for å gå tilbake%s til kommentarene, og %sher for å lukke%s dette vinduet. ');
+@define('SERENDIPITY_NOT_INSTALLED', 'Serendipity er ennÃ¥ ikke installert. Klikk <a href="%s">her for Ã¥ installere</a> nÃ¥.');
+@define('COMMENT_ADDED_CLICK', 'Klik %her for Ã¥ gÃ¥ tilbake%s til kommentarene, og %sher for Ã¥ lukke%s dette vinduet.');
+@define('COMMENT_NOT_ADDED_CLICK', 'Klikk %sher for Ã¥ gÃ¥ tilbake%s til kommentarene, og %sher for Ã¥ lukke%s dette vinduet. ');
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Run-Length');
 @define('MEDIA_PROPERTY_DATE', 'Associated Date');
 @define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
-@define('TRACKBACK_SIZE', 'Mål-URI oversteg maksimum filstørrelse på %s bytes.');
-@define('CLICK_FILE_TO_INSERT', 'Klikk på filen du ønsker å sette inn:');
-@define('SELECT_FILE', 'Velg fil å sette inn');
+@define('TRACKBACK_SIZE', 'MÃ¥l-URI oversteg maksimum filstÃ¸rrelse pÃ¥ %s bytes.');
+@define('CLICK_FILE_TO_INSERT', 'Klikk pÃ¥ filen du Ã¸nsker Ã¥ sette inn:');
+@define('SELECT_FILE', 'Velg fil Ã¥ sette inn');
 @define('MANAGE_IMAGES', 'Administrer bilder');
 @define('WORD_NEW', 'New');
 @define('WORD_OR', 'eller');
@@ -1254,7 +1253,7 @@
 @define('BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS', 'Below is a list of installed plugins');
 @define('PENDING_CONFIRMATION', 'Pending confirmation');
 @define('PENDING_MODERATION', 'Pending moderation');
-@define('ABORT_NOW', 'Avbryt nå');
+@define('ABORT_NOW', 'Avbryt nÃ¥');
 @define('DELETE_SELECTED_COMMENTS', 'Slett valgte kommentarer');
 @define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
 @define('FIND_MEDIA', 'Finn media');
@@ -1266,10 +1265,10 @@
 @define('ERROR_FILE_NOT_EXISTS', 'Feil: Det gamle filnavnet finnes ikke!');
 @define('ERROR_SOMETHING', 'Feil: Der gikk noe galt');
 @define('DIRECT_LINK', 'Direktelink til denne artikkel');
-@define('SELECT_TEMPLATE', 'Velg den malen du ønsker å bruke til din blog');
+@define('SELECT_TEMPLATE', 'Velg den malen du Ã¸nsker Ã¥ bruke til din blog');
 @define('DATABASE_ERROR', 'serendipityfeil: Kunne ikke oprette forbindelse til databasen - Avbryter.');
 @define('LIMIT_TO_NUMBER', 'Hvor mange punkter skal vises?');
-@define('DIRECTORIES_AVAILABLE', 'I listen over tilgjengelige undermapper, kan du klikke på en ny mappe for å oprette en ny mappe innenfor den stukturen.');
+@define('DIRECTORIES_AVAILABLE', 'I listen over tilgjengelige undermapper, kan du klikke pÃ¥ en ny mappe for Ã¥ oprette en ny mappe innenfor den stukturen.');
 @define('CATEGORY_INDEX', 'Below is a list of categories available to your entries');
 @define('PAGE_BROWSE_PLUGINS', 'Page %s of %s, totalling %s plugins.');
 @define('CHARSET_NATIVE', 'Native');
