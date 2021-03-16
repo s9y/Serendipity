@@ -1055,7 +1055,9 @@ function serendipity_getSessionLanguage() {
     }
 
         // cache the result
-        if ($lang) $serendipity['detected_lang'] = $lang;  
+        if (isset($lang) && $lang) {
+            $serendipity['detected_lang'] = $lang;
+        }
     
         // try configuration: blog default language
         if (empty($lang) && $serendipity['lang']) {
@@ -1918,6 +1920,10 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
             $read_id_sql = 0;
         }
 
+        if (! array_key_exists('joins', $cond) ) {
+            $cond['joins'] = '';
+        }
+
         if ($append_category) {
             if ($append_category !== 'limited') {
                 $cond['joins'] .= " LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
@@ -1939,10 +1945,6 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
                 $sql_artifact_column = 'c.categoryid IS NULL';
                 $sql_artifact = 'AND acl_acc.artifact_id   = c.categoryid';
                 break;
-        }
-
-        if (! array_key_exists('joins', $cond) ) {
-            $cond['joins'] = '';
         }
 
         $cond['joins'] .= " LEFT JOIN {$serendipity['dbPrefix']}authorgroups AS acl_a
