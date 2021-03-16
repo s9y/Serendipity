@@ -160,7 +160,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
             }
 
             serendipity_plugin_api::hook_event($entry_hook, $entry);
-            $entry['per_entry_display_dat'] = $entry['display_dat'];
+            $entry['per_entry_display_dat'] = $entry['display_dat'] ?? null;
         }
     }
 

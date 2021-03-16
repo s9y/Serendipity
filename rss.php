@@ -298,8 +298,8 @@ switch($version) {
 }
 
 serendipity_plugin_api::hook_event($namespace_hook, $entries);
-$namespace_display_dat = $entries['display_dat'];
-$channel_display_dat = $entries['channel_dat'];
+$namespace_display_dat = $entries['display_dat'] ?? null;
+$channel_display_dat = $entries['channel_dat'] ?? null;
 unset($entries['display_dat']);
 unset($entries['channel_dat']);
 $serendipity['smarty']->assignByRef('metadata', $metadata);
