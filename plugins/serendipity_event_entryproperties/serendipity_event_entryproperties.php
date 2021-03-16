@@ -19,7 +19,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.41.5');
+        $propbag->add('version',       '1.41.6');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.27',
@@ -493,7 +493,8 @@ class serendipity_event_entryproperties extends serendipity_event
 
                 if (is_array($plugins)) {
                     foreach($plugins as $plugin => $plugin_data) {
-                        if (!is_array($plugin_data['p']->markup_elements)) {
+                        if (! isset($plugin_data['p']->markup_elements) ||
+                        ! is_array($plugin_data['p']->markup_elements)) {
                             continue;
                         }
 
@@ -505,7 +506,7 @@ class serendipity_event_entryproperties extends serendipity_event
                             $selected = false;
                         }
                         // automatically mark nl2br markup parser as disabled, when WYSIWYG is active
-                        if (!$selected && $serendipity['wysiwyg'] && $plugin_data['p']->act_pluginPath == 'serendipity_event_nl2br') {
+                        if (!$selected && isset($serendipity['wysiwyg']) && $serendipity['wysiwyg'] && $plugin_data['p']->act_pluginPath == 'serendipity_event_nl2br') {
                             $selected = true;
                         }
                         echo '<option ' . ($selected ? 'selected="selected"' : '') . ' value="' . $plugin_data['p']->instance . '">' . serendipity_specialchars($plugin_data['p']->title) . '</option>' . "\n";
@@ -910,8 +911,9 @@ class serendipity_event_entryproperties extends serendipity_event
                     } else {
                         $conds[] = " (ep_access.property IS NULL OR ep_access.value = 'public')";
                     }
-
-                    if (!isset($serendipity['GET']['viewAuthor']) && !isset($serendipity['plugin_vars']['tag']) && !isset($serendipity['GET']['category']) && !isset($serendipity['GET']['adminModule']) && $event == 'frontend_fetchentries' && $addData['source'] != 'search') {
+                    
+                    if (!isset($serendipity['GET']['viewAuthor']) && !isset($serendipity['plugin_vars']['tag']) && !isset($serendipity['GET']['category']) && !isset($serendipity['GET']['adminModule']) && $event == 'frontend_fetchentries' && ($addData
+                    === null || $addData['source'] != 'search')) {
                         $conds[] = " (ep_no_frontpage.property IS NULL OR ep_no_frontpage.value != 'true') ";
                         $joins[] = " LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties ep_no_frontpage
                                                   ON (e.id = ep_no_frontpage.entryid AND ep_no_frontpage.property = 'ep_no_frontpage')";
