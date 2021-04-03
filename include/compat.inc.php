@@ -7,7 +7,6 @@ if (IN_serendipity !== true) {
 }
 
 $serendipity = array();
-@ini_set('magic_quotes_runtime', 'off');
 
 if (!defined('PATH_SEPARATOR')) {
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -329,47 +328,6 @@ if (extension_loaded('filter') && function_exists('filter_id') && function_exist
         $_SESSION[$key] = filter_input(INPUT_SESSION, $key, FILTER_UNSAFE_RAW);
     }
     */
-}
-
-/*
- *  Avoid magic_quotes_gpc issues
- *  courtesy of iliaa@php.net
- */
-function serendipity_strip_quotes(&$var)
-{
-    if (is_array($var)) {
-        foreach ($var as $k => $v) {
-            if (is_array($v)) {
-                array_walk($var[$k], 'serendipity_strip_quotes');
-            } else {
-                $var[$k] = stripslashes($v);
-            }
-        }
-    } else {
-        $var = stripslashes($var);
-    }
-}
-
-if (ini_get('magic_quotes_gpc')) {
-    if (@count($_REQUEST)) {
-        array_walk($_REQUEST, 'serendipity_strip_quotes');
-    }
-
-    if (@count($_GET)) {
-        array_walk($_GET,     'serendipity_strip_quotes');
-    }
-
-    if (@count($_POST)) {
-        array_walk($_POST,    'serendipity_strip_quotes');
-    }
-
-    if (@count($_COOKIE)) {
-        array_walk($_COOKIE, 'serendipity_strip_quotes');
-    }
-
-    if (@count($_FILES) && strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
-        array_walk($_FILES,   'serendipity_strip_quotes');
-    }
 }
 
 // Merge get and post into the serendipity array
