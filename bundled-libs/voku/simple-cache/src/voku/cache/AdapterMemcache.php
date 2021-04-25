@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace voku\cache;
 
+use Memcache;
 use voku\cache\Exception\InvalidArgumentException;
 
 /**
@@ -17,7 +18,7 @@ class AdapterMemcache implements iAdapter
     public $installed = false;
 
     /**
-     * @var \Memcache
+     * @var Memcache
      */
     private $memcache;
 
@@ -29,19 +30,19 @@ class AdapterMemcache implements iAdapter
     /**
      * __construct
      *
-     * @param \Memcache|null $memcache
+     * @param Memcache|null $memcache
      */
     public function __construct($memcache = null)
     {
-        if ($memcache instanceof \Memcache) {
+        if ($memcache instanceof Memcache) {
             $this->setMemcache($memcache);
         }
     }
 
     /**
-     * @param \Memcache $memcache
+     * @param Memcache $memcache
      */
-    public function setMemcache(\Memcache $memcache)
+    public function setMemcache(Memcache $memcache)
     {
         $this->memcache = $memcache;
         $this->installed = true;

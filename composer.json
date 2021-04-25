@@ -22,9 +22,12 @@
             "http"
         ],
         "platform": {
-            "php": "7.0.99"
+            "php": "7.3"
         },
         "sort-packages": true,
         "vendor-dir": "bundled-libs"
+    },
+    "require-dev": {
+        "phan/phan": "3.x"
     }
 }

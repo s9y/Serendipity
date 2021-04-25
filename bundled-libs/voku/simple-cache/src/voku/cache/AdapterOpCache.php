@@ -79,6 +79,10 @@ class AdapterOpCache extends AdapterFileSimple
 
     /**
      * {@inheritdoc}
+     *
+     * @noinspection PhpUndefinedClassInspection
+     * @noinspection PhpUndefinedNamespaceInspection
+     * @noinspection BadExceptionsProcessingInspection
      */
     public function setExpired(string $key, $value, int $ttl = 0): bool
     {
@@ -86,17 +90,23 @@ class AdapterOpCache extends AdapterFileSimple
             'value' => $value,
             'ttl'   => $ttl ? $ttl + \time() : 0,
         ];
-        $content = \var_export($item, true);
+        if (\class_exists('\Symfony\Component\VarExporter\VarExporter')) {
+            try {
+                $content = \Symfony\Component\VarExporter\VarExporter::export($item);
+            } catch (\Symfony\Component\VarExporter\Exception\ExceptionInterface $e) {
+                $content = \var_export($item, true);
+            }
+        } else {
+            $content = \var_export($item, true);
+        }
 
         $content = '<?php return ' . $content . ';';
 
         $cacheFile = $this->getFileName($key);
 
-        $result = (bool) \file_put_contents(
+        $result = $this->writeFile(
             $cacheFile,
-            $content,
-            0,
-            $this->getContext()
+            $content
         );
 
         if (

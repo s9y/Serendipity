@@ -7,7 +7,7 @@ namespace voku\cache;
 class CacheChain implements iCache
 {
     /**
-     * @var array|iCache[]
+     * @var Cache[]
      */
     private $caches = [];
 
@@ -40,17 +40,13 @@ class CacheChain implements iCache
     /**
      * add cache
      *
-     * @param iCache $cache
-     * @param bool   $prepend
+     * @param Cache $cache
+     * @param bool  $prepend
      *
-     * @throws \InvalidArgumentException
+     * @return void
      */
-    public function addCache(iCache $cache, $prepend = true)
+    public function addCache(Cache $cache, $prepend = true)
     {
-        if ($this === $cache) {
-            throw new \InvalidArgumentException('loop-error, put into other cache');
-        }
-
         if ($prepend) {
             \array_unshift($this->caches, $cache);
         } else {
@@ -73,6 +69,22 @@ class CacheChain implements iCache
     }
 
     /**
+     * Get the "isReady" state.
+     *
+     * @return bool
+     */
+    public function getCacheIsReady(): bool
+    {
+        foreach ($this->caches as $cache) {
+            if (!$cache->getCacheIsReady()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setItem(string $key, $value, $ttl = null): bool
@@ -84,7 +96,7 @@ class CacheChain implements iCache
             $results[] = $cache->setItem($key, $value, $ttl);
         }
 
-        return !\in_array(false, $results, true);
+        return \in_array(true, $results, true);
     }
 
     /**
@@ -95,12 +107,27 @@ class CacheChain implements iCache
         // init
         $results = [];
 
-        /* @var $cache iCache */
         foreach ($this->caches as $cache) {
             $results[] = $cache->setItemToDate($key, $value, $date);
         }
 
-        return !\in_array(false, $results, true);
+        return \in_array(true, $results, true);
+    }
+
+    /**
+     * !!! Set the prefix. !!!
+     *
+     * WARNING: Do not use if you don't know what you do. Because this will overwrite the default prefix.
+     *
+     * @param string $prefix
+     *
+     * @return void
+     */
+    public function setPrefix(string $prefix)
+    {
+        foreach ($this->caches as $cache) {
+            $cache->setPrefix($prefix);
+        }
     }
 
     /**
@@ -115,7 +142,7 @@ class CacheChain implements iCache
             $results[] = $cache->removeItem($key);
         }
 
-        return !\in_array(false, $results, true);
+        return \in_array(true, $results, true);
     }
 
     /**
@@ -144,6 +171,6 @@ class CacheChain implements iCache
             $results[] = $cache->removeAll();
         }
 
-        return !\in_array(false, $results, true);
+        return \in_array(true, $results, true);
     }
 }

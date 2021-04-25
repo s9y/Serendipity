@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace voku\cache;
 
+use DateTimeInterface;
+
 /**
  * iCache: cache-global interface
  */
@@ -34,11 +36,11 @@ interface iCache
      *
      * @param string             $key
      * @param mixed              $value
-     * @param \DateTimeInterface $date
+     * @param DateTimeInterface $date
      *
      * @return bool
      */
-    public function setItemToDate(string $key, $value, \DateTimeInterface $date): bool;
+    public function setItemToDate(string $key, $value, DateTimeInterface $date): bool;
 
     /**
      * remove item

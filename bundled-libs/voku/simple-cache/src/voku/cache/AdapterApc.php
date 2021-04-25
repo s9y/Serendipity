@@ -43,6 +43,8 @@ class AdapterApc implements iAdapter
             &&
             \ini_get('apc.enable_cli')
         ) {
+            \ini_set('apc.use_request_time', '0');
+
             $this->installed = true;
         }
     }
@@ -85,12 +87,19 @@ class AdapterApc implements iAdapter
      * @param bool   $limited  - If $limited is TRUE, the return value will exclude the individual list of cache
      *                         entries. This is useful when trying to optimize calls for statistics gathering
      *
-     * @return array|false
-     *                    <p>Array of cached data (and meta-data) or FALSE on failure.</p>
+     * @return array
+     *               <p>Array of cached data (and meta-data) or empty array on failure.</p>
      */
     public function cacheInfo(string $type = '', bool $limited = false): array
     {
-        return \apc_cache_info($type, $limited);
+        /** @var array|false $return */
+        $return = \apc_cache_info($type, $limited);
+
+        if ($return === false) {
+            return [];
+        }
+
+        return $return;
     }
 
     /**

@@ -9,6 +9,9 @@ namespace voku\cache;
  */
 class AdapterXcache implements iAdapter
 {
+    /**
+     * @var bool
+     */
     public $installed = false;
 
     /**
