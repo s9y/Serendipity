@@ -1,378 +1,233 @@
-[
-    {
-        "name": "katzgrau/klogger",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/katzgrau/klogger.git",
-            "reference": "46cdd92a9b4a8443120cc955bf831450cb274813"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/katzgrau/klogger/zipball/46cdd92a9b4a8443120cc955bf831450cb274813",
-            "reference": "46cdd92a9b4a8443120cc955bf831450cb274813",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3",
-            "psr/log": "1.0.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.0.*"
-        },
-        "time": "2014-03-20T02:36:36+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Katzgrau\\KLogger\\": "src/"
+{
+    "packages": [
+        {
+            "name": "katzgrau/klogger",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/katzgrau/klogger.git",
+                "reference": "46cdd92a9b4a8443120cc955bf831450cb274813"
             },
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Dan Horrigan",
-                "email": "dan@dhorrigan.com",
-                "homepage": "http://dhorrigan.com",
-                "role": "Lead Developer"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/katzgrau/klogger/zipball/46cdd92a9b4a8443120cc955bf831450cb274813",
+                "reference": "46cdd92a9b4a8443120cc955bf831450cb274813",
+                "shasum": ""
             },
-            {
-                "name": "Kenny Katzgrau",
-                "email": "katzgrau@gmail.com"
-            }
-        ],
-        "description": "A Simple Logging Class",
-        "keywords": [
-            "logging"
-        ]
-    },
-    {
-        "name": "psr/log",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/log.git",
-            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-            "shasum": ""
-        },
-        "time": "2012-12-21T11:40:51+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Psr\\Log\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for logging libraries",
-        "keywords": [
-            "log",
-            "psr",
-            "psr-3"
-        ]
-    },
-    {
-        "name": "psr/simple-cache",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/simple-cache.git",
-            "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-            "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2017-10-23T01:57:42+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Psr\\SimpleCache\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interfaces for simple caching",
-        "keywords": [
-            "cache",
-            "caching",
-            "psr",
-            "psr-16",
-            "simple-cache"
-        ]
-    },
-    {
-        "name": "voku/simple-cache",
-        "version": "4.0.1",
-        "version_normalized": "4.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/voku/simple-cache.git",
-            "reference": "dfda1d803fd79d9ee918e1bac700c94a6f30659c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/voku/simple-cache/zipball/dfda1d803fd79d9ee918e1bac700c94a6f30659c",
-            "reference": "dfda1d803fd79d9ee918e1bac700c94a6f30659c",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=7.0.0",
-            "psr/simple-cache": "~1.0"
-        },
-        "provide": {
-            "psr/simple-cache-implementation": "1.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~6.0 || ~7.0"
-        },
-        "time": "2019-03-03T10:23:55+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "voku\\cache\\": "src/voku/cache/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Lars Moelleken",
-                "homepage": "http://www.moelleken.org/",
-                "role": "Developer"
-            }
-        ],
-        "description": "Simple Cache library",
-        "homepage": "https://github.com/voku/simple-cache",
-        "keywords": [
-            "cache",
-            "caching",
-            "php",
-            "simple cache"
-        ]
-    },
-    {
-        "name": "zendframework/zend-db",
-        "version": "2.10.0",
-        "version_normalized": "2.10.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-db.git",
-            "reference": "320f5faaa0f98ebc93be5476ec4eda28255935c4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://packages.zendframework.com/composer/zendframework-zend-db-2.10.0-5a43dc.zip",
-            "reference": "320f5faaa0f98ebc93be5476ec4eda28255935c4",
-            "shasum": "3f285fe0d475cac25e350787779019caa6ddb188"
-        },
-        "require": {
-            "php": "^5.6 || ^7.0",
-            "zendframework/zend-stdlib": "^2.7 || ^3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^5.7.25 || ^6.4.4",
-            "zendframework/zend-coding-standard": "~1.0.0",
-            "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-            "zendframework/zend-hydrator": "^1.1 || ^2.1 || ^3.0",
-            "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
-        },
-        "suggest": {
-            "zendframework/zend-eventmanager": "Zend\\EventManager component",
-            "zendframework/zend-hydrator": "Zend\\Hydrator component for using HydratingResultSets",
-            "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
-        },
-        "time": "2019-02-25T11:37:45+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.9-dev",
-                "dev-develop": "2.10-dev"
+            "require": {
+                "php": ">=5.3",
+                "psr/log": "1.0.0"
             },
-            "zf": {
-                "component": "Zend\\Db",
-                "config-provider": "Zend\\Db\\ConfigProvider"
-            }
+            "require-dev": {
+                "phpunit/phpunit": "4.0.*"
+            },
+            "time": "2014-03-20T02:36:36+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Katzgrau\\KLogger\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Horrigan",
+                    "email": "dan@dhorrigan.com",
+                    "homepage": "http://dhorrigan.com",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Kenny Katzgrau",
+                    "email": "katzgrau@gmail.com"
+                }
+            ],
+            "description": "A Simple Logging Class",
+            "keywords": [
+                "logging"
+            ],
+            "install-path": "../katzgrau/klogger"
         },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Db\\": "src/"
-            }
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "time": "2012-12-21T11:40:51+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "install-path": "../psr/log"
         },
-        "autoload-dev": {
-            "files": [
-                "test/autoload.php"
+        {
+            "name": "psr/simple-cache",
+            "version": "1.0.1",
+            "version_normalized": "1.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2017-10-23T01:57:42+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
             ],
-            "psr-4": {
-                "ZendTest\\Db\\": "test/unit",
-                "ZendIntegrationTest\\Db\\": "test/integration"
-            }
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "install-path": "../psr/simple-cache"
         },
-        "scripts": {
-            "check": [
-                "@cs-check",
-                "@test"
+        {
+            "name": "voku/simple-cache",
+            "version": "4.0.5",
+            "version_normalized": "4.0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/voku/simple-cache.git",
+                "reference": "416cf88902991f3bf6168b71c0683e6dabb3d5e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/voku/simple-cache/zipball/416cf88902991f3bf6168b71c0683e6dabb3d5e1",
+                "reference": "416cf88902991f3bf6168b71c0683e6dabb3d5e1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "psr/simple-cache": "~1.0"
+            },
+            "provide": {
+                "psr/simple-cache-implementation": "1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0 || ~7.0"
+            },
+            "suggest": {
+                "predis/predis": "~1.1",
+                "symfony/var-exporter": "~3.0 || ~4.0 || ~5.0"
+            },
+            "time": "2020-03-15T21:00:57+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "voku\\cache\\": "src/voku/cache/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
             ],
-            "cs-check": [
-                "phpcs"
+            "authors": [
+                {
+                    "name": "Lars Moelleken",
+                    "homepage": "http://www.moelleken.org/",
+                    "role": "Developer"
+                }
             ],
-            "cs-fix": [
-                "phpcbf"
+            "description": "Simple Cache library",
+            "homepage": "https://github.com/voku/simple-cache",
+            "keywords": [
+                "cache",
+                "caching",
+                "php",
+                "simple cache"
             ],
-            "test": [
-                "phpunit --colors=always --testsuite \"unit test\""
+            "support": {
+                "issues": "https://github.com/voku/simple-cache/issues",
+                "source": "https://github.com/voku/simple-cache/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/moelleken",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/voku",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/voku",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/voku/simple-cache",
+                    "type": "tidelift"
+                }
             ],
-            "test-coverage": [
-                "phpunit --colors=always --coverage-clover clover.xml"
-            ],
-            "test-integration": [
-                "phpunit --colors=always --testsuite \"integration test\""
-            ],
-            "upload-coverage": [
-                "coveralls -v"
-            ]
-        },
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "Database abstraction layer, SQL abstraction, result set abstraction, and RowDataGateway and TableDataGateway implementations",
-        "keywords": [
-            "db",
-            "zendframework",
-            "zf"
-        ],
-        "support": {
-            "docs": "https://docs.zendframework.com/zend-db/",
-            "issues": "https://github.com/zendframework/zend-db/issues",
-            "source": "https://github.com/zendframework/zend-db",
-            "rss": "https://github.com/zendframework/zend-db/releases.atom",
-            "slack": "https://zendframework-slack.herokuapp.com",
-            "forum": "https://discourse.zendframework.com/c/questions/components"
+            "install-path": "../voku/simple-cache"
         }
-    },
-    {
-        "name": "zendframework/zend-stdlib",
-        "version": "3.2.1",
-        "version_normalized": "3.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-stdlib.git",
-            "reference": "04e09d7f961b2271b0e1cbbb6f5f53ad23cf8562"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://packages.zendframework.com/composer/zendframework-zend-stdlib-3.2.1-90faf1.zip",
-            "reference": "04e09d7f961b2271b0e1cbbb6f5f53ad23cf8562",
-            "shasum": "36f654611fab0d6fe1ea1c72184a43f9810ce7c8"
-        },
-        "require": {
-            "php": "^5.6 || ^7.0"
-        },
-        "require-dev": {
-            "phpbench/phpbench": "^0.13",
-            "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
-            "zendframework/zend-coding-standard": "~1.0.0"
-        },
-        "time": "2018-08-28T21:34:05+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.2.x-dev",
-                "dev-develop": "3.3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Stdlib\\": "src/"
-            }
-        },
-        "autoload-dev": {
-            "psr-4": {
-                "ZendTest\\Stdlib\\": "test/",
-                "ZendBench\\Stdlib\\": "benchmark/"
-            }
-        },
-        "scripts": {
-            "check": [
-                "@cs-check",
-                "@test"
-            ],
-            "cs-check": [
-                "phpcs"
-            ],
-            "cs-fix": [
-                "phpcbf"
-            ],
-            "test": [
-                "phpunit --colors=always"
-            ],
-            "test-coverage": [
-                "phpunit --colors=always --coverage-clover clover.xml"
-            ]
-        },
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "SPL extensions, array utilities, error handlers, and more",
-        "keywords": [
-            "stdlib",
-            "zendframework",
-            "zf"
-        ],
-        "support": {
-            "docs": "https://docs.zendframework.com/zend-stdlib/",
-            "issues": "https://github.com/zendframework/zend-stdlib/issues",
-            "source": "https://github.com/zendframework/zend-stdlib",
-            "rss": "https://github.com/zendframework/zend-stdlib/releases.atom",
-            "slack": "https://zendframework-slack.herokuapp.com",
-            "forum": "https://discourse.zendframework.com/c/questions/components"
-        }
-    }
-]
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

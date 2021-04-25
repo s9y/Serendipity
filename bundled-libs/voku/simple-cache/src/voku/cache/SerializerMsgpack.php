@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace voku\cache;
 
 /**
- * SerializerIgbinary: serialize / unserialize
+ * SerializerMsgpack: serialize / unserialize
  */
-class SerializerIgbinary implements iSerializer
+class SerializerMsgpack implements iSerializer
 {
     /**
      * @var bool
      */
-    public static $_exists_igbinary;
+    public static $_exists_msgpack;
 
     /**
      * @var array|null
@@ -29,16 +29,16 @@ class SerializerIgbinary implements iSerializer
      */
     public function __construct()
     {
-        if (self::$_exists_igbinary === null) {
-            self::$_exists_igbinary = (
-                \function_exists('igbinary_serialize')
+        if (self::$_exists_msgpack === null) {
+            self::$_exists_msgpack = (
+                \function_exists('msgpack_pack')
                 &&
-                \function_exists('igbinary_unserialize')
+                \function_exists('msgpack_unpack')
             );
         }
 
-        if (self::$_exists_igbinary) {
-            $this->name = 'igbinary';
+        if (self::$_exists_msgpack) {
+            $this->name = 'msgpack';
         } else {
             $this->name = 'default';
         }
@@ -57,10 +57,9 @@ class SerializerIgbinary implements iSerializer
      */
     public function serialize($value)
     {
-        if (self::$_exists_igbinary === true) {
+        if (self::$_exists_msgpack === true) {
             /** @noinspection PhpUndefinedFunctionInspection */
-            /** @noinspection PhpComposerExtensionStubsInspection */
-            return \igbinary_serialize($value);
+            return \msgpack_pack($value);
         }
 
         // fallback
@@ -72,10 +71,9 @@ class SerializerIgbinary implements iSerializer
      */
     public function unserialize($value)
     {
-        if (self::$_exists_igbinary === true) {
+        if (self::$_exists_msgpack === true) {
             /** @noinspection PhpUndefinedFunctionInspection */
-            /** @noinspection PhpComposerExtensionStubsInspection */
-            return \igbinary_unserialize($value);
+            return \msgpack_unpack($value);
         }
 
         // fallback
