@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'JsonMapper' => array($vendorDir . '/netresearch/jsonmapper/src'),
 );
