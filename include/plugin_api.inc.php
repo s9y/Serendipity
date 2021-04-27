@@ -1134,7 +1134,7 @@ class serendipity_plugin_api
             return false;
         }
 
-        if ($serendipity['enablePluginACL'] && !serendipity_hasPluginPermissions($event_name)) {
+        if ($serendipity['enablePluginACL'] ?? false  && !serendipity_hasPluginPermissions($event_name)) {
             return false;
         }
 
@@ -1182,7 +1182,7 @@ class serendipity_plugin_api
                         }
                     }
 
-                    if ($serendipity['enablePluginACL'] && !serendipity_hasPluginPermissions($plugin)) {
+                    if ($serendipity['enablePluginACL'] ?? false && !serendipity_hasPluginPermissions($plugin)) {
                         continue;
                     }
                     $plugins[$plugin]['p']->event_hook($event_name, $bag, $eventData, $addData);

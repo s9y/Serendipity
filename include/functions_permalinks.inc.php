@@ -492,7 +492,7 @@ function serendipity_buildPermalinks() {
  */
 function serendipity_rewriteURL($path, $key='baseURL', $forceNone = false) {
     global $serendipity;
-    return $serendipity[$key] . ($serendipity['rewrite'] == 'none' || ($serendipity['rewrite'] != 'none' && $forceNone) ? $serendipity['indexFile'] . '?/' : '') . $path;
+    return ($serendipity[$key] ?? null) . ($serendipity['rewrite'] == 'none' || ($serendipity['rewrite'] != 'none' && $forceNone) ? $serendipity['indexFile'] . '?/' : '') . $path;
 }
 
 /**
