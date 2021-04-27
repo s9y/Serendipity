@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'af90c81a36a0cdaceb3c80a58bf7d0885996a528',
+    'reference' => '1e645f52d45985949359c49ab147bcd45d6554f8',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'af90c81a36a0cdaceb3c80a58bf7d0885996a528',
+      'reference' => '1e645f52d45985949359c49ab147bcd45d6554f8',
     ),
     'katzgrau/klogger' => 
     array (
