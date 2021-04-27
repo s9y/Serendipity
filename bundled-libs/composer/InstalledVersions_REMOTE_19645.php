@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '1e645f52d45985949359c49ab147bcd45d6554f8',
+    'reference' => '05f58f90d743fe9ade24f3fdfe9a934d0b87c6a1',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '1e645f52d45985949359c49ab147bcd45d6554f8',
+      'reference' => '05f58f90d743fe9ade24f3fdfe9a934d0b87c6a1',
     ),
     'katzgrau/klogger' => 
     array (
@@ -52,6 +52,33 @@ private static $installed = array (
       array (
       ),
       'reference' => '46cdd92a9b4a8443120cc955bf831450cb274813',
+    ),
+    'laminas/laminas-db' => 
+    array (
+      'pretty_version' => '2.11.4',
+      'version' => '2.11.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5b59413b8dd5d79e3fe58c2650c60b1730989f36',
+    ),
+    'laminas/laminas-stdlib' => 
+    array (
+      'pretty_version' => '3.2.1',
+      'version' => '3.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2b18347625a2f06a1a485acfbc870f699dbe51c6',
+    ),
+    'laminas/laminas-zendframework-bridge' => 
+    array (
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6ede70583e101030bcace4dcddd648f760ddf642',
     ),
     'psr/log' => 
     array (
@@ -86,6 +113,20 @@ private static $installed = array (
       array (
       ),
       'reference' => '416cf88902991f3bf6168b71c0683e6dabb3d5e1',
+    ),
+    'zendframework/zend-db' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '^2.11.0',
+      ),
+    ),
+    'zendframework/zend-stdlib' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '3.2.1',
+      ),
     ),
   ),
 );

@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '1e645f52d45985949359c49ab147bcd45d6554f8',
+    'reference' => 'ea886da10cdbdad164cd253003e862a0ec7ecd6c',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '1e645f52d45985949359c49ab147bcd45d6554f8',
+      'reference' => 'ea886da10cdbdad164cd253003e862a0ec7ecd6c',
     ),
     'katzgrau/klogger' => 
     array (

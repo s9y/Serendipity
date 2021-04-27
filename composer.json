@@ -7,7 +7,6 @@
     ],
     "require": {
         "php": "~7.0",
-        "laminas/laminas-db": "2.*",
         "katzgrau/klogger": "1.0.*",
         "voku/simple-cache": "4.*"
     },
