@@ -34,7 +34,7 @@ abstract class AdapterFileAbstract implements iAdapter
     protected $fileMode = '0755';
 
     /**
-     * @param \callable|string|null $cacheDir
+     * @param callable|string|null $cacheDir
      */
     public function __construct($cacheDir = null)
     {
@@ -204,6 +204,8 @@ abstract class AdapterFileAbstract implements iAdapter
      * e.g. '0777', or '0755' ...
      *
      * @param string $fileMode
+     *
+     * @return void
      */
     public function setFileMode($fileMode)
     {
@@ -239,6 +241,58 @@ abstract class AdapterFileAbstract implements iAdapter
             if (!\array_key_exists($missing, $data)) {
                 return false;
             }
+        }
+
+        return true;
+    }
+
+    /**
+     * copy&past from https://github.com/webimpress/safe-writer (thx @michalbundyra)
+     *
+     * @param string   $file
+     * @param string   $content
+     * @param int|null $chmod
+     *
+     * @return bool
+     */
+    protected function writeFile($file, $content, $chmod = null): bool
+    {
+        if (!$file) {
+            return false;
+        }
+
+        if ($chmod === null) {
+            $chmod = \intval($this->fileMode, 8);
+        }
+
+        $dir = \dirname($file);
+
+        $tmp = \tempnam($dir, 'wsw');
+        if ($tmp === false) {
+            throw Exception\RuntimeException::unableToCreateTemporaryFile($dir);
+        }
+
+        if (\file_put_contents($tmp, $content) === false) {
+            \unlink($tmp);
+
+            throw Exception\WriteContentException::unableToWriteContent($tmp);
+        }
+
+        if (\chmod($tmp, $chmod & ~\umask()) === false) {
+            \unlink($tmp);
+
+            throw Exception\ChmodException::unableToChangeChmod($tmp);
+        }
+
+        // On windows try again if rename was not successful but target file is writable.
+        /** @noinspection PhpUsageOfSilenceOperatorInspection */
+        while (@\rename($tmp, $file) === false) {
+            if (\is_writable($file) && \stripos(\PHP_OS, 'WIN') === 0) {
+                continue;
+            }
+            \unlink($tmp);
+
+            throw Exception\RenameException::unableToMoveFile($tmp, $file);
         }
 
         return true;

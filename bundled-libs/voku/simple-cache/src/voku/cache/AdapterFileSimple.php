@@ -11,6 +11,9 @@ class AdapterFileSimple extends AdapterFileAbstract
 {
     const CACHE_FILE_PREFIX = '__simple_';
 
+    /**
+     * @return resource
+     */
     protected function getContext()
     {
         static $CONTEXT_CACHE = null;
@@ -74,16 +77,14 @@ class AdapterFileSimple extends AdapterFileAbstract
      */
     public function setExpired(string $key, $value, int $ttl = 0): bool
     {
-        return (bool) \file_put_contents(
+        return $this->writeFile(
             $this->getFileName($key),
             $this->serializer->serialize(
                 [
                     'value' => $value,
                     'ttl'   => $ttl ? $ttl + \time() : 0,
                 ]
-            ),
-            0,
-            $this->getContext()
+            )
         );
     }
 }

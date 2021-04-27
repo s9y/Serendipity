@@ -14,7 +14,8 @@ interface iAdapter
      *
      * @param string $key
      *
-     * @return mixed|null <p>will return NULL if the key not exists</p>
+     * @return mixed|null
+     *                    <p>will return NULL if the key not exists</p>
      */
     public function get(string $key);
 

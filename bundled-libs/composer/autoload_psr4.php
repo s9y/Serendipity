@@ -7,8 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'voku\\cache\\' => array($vendorDir . '/voku/simple-cache/src/voku/cache'),
-    'Zend\\Stdlib\\' => array($vendorDir . '/zendframework/zend-stdlib/src'),
-    'Zend\\Db\\' => array($vendorDir . '/zendframework/zend-db/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'Laminas\\ZendFrameworkBridge\\' => array($vendorDir . '/laminas/laminas-zendframework-bridge/src'),
+    'Laminas\\Stdlib\\' => array($vendorDir . '/laminas/laminas-stdlib/src'),
+    'Laminas\\Db\\' => array($vendorDir . '/laminas/laminas-db/src'),
     'Katzgrau\\KLogger\\' => array($vendorDir . '/katzgrau/klogger/src'),
 );

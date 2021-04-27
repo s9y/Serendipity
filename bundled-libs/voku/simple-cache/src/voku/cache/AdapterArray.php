@@ -15,7 +15,7 @@ class AdapterArray implements iAdapter
     private static $values = [];
 
     /**
-     * @var array
+     * @var array<string, array<int>>
      */
     private static $expired = [];
 
@@ -89,7 +89,7 @@ class AdapterArray implements iAdapter
     {
         self::$values[$key] = $value;
 
-        if ($ttl !== null) {
+        if ($ttl !== 0) {
             self::$expired[$key] = [\time(), $ttl];
         }
 
@@ -114,6 +114,8 @@ class AdapterArray implements iAdapter
         }
 
         list($time, $ttl) = self::$expired[$key];
+        \assert(\is_int($time));
+        \assert(\is_int($ttl));
 
         if (\time() > ($time + $ttl)) {
             unset(self::$values[$key]);
