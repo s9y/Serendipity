@@ -84,7 +84,7 @@ $no_footer = (isset($serendipity['GET']['noFooter']) || isset($serendipity['POST
 
 $use_installer = (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false );
 
-$post_action = $serendipity['POST']['action'];
+$post_action = $serendipity['POST']['action'] ?? null;
 
 $main_content = '';
 if (!$use_installer && $is_logged_in) {

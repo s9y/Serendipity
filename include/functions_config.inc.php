@@ -266,7 +266,7 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force
     } else {
         $directories[] = $serendipity['template_backend'] . '/';    # Since 2.0 s9y can have a independent backend theme
     }
-    $directories[] = $serendipity['template_engine'] . '/'; # themes can set an engine, which will be used if they do not have the file
+    $directories[] = $serendipity['template_engine'] ?? null . '/'; # themes can set an engine, which will be used if they do not have the file
     $directories[] = $serendipity['defaultTemplate'] .'/';  # the default theme is the last place we will look in, serving as pure fallback
     $directories = array_unique($directories); # save performance by not checking for file existence multiple times in the same directory
 
@@ -674,7 +674,7 @@ function serendipity_load_userdata($username) {
  * @return boolean  TRUE when logged in, FALSE when not.
  */
 function serendipity_userLoggedIn() {
-    if ($_SESSION['serendipityAuthedUser'] === true && IS_installed) {
+    if ($_SESSION['serendipityAuthedUser'] ?? false === true && IS_installed) {
         return true;
     } else {
         return false;
@@ -798,7 +798,7 @@ function serendipity_deleteCookie($name) {
 function serendipity_is_iframe() {
     global $serendipity;
 
-    if ($serendipity['GET']['is_iframe'] && is_array($_SESSION['save_entry'])) {
+    if ($serendipity['GET']['is_iframe'] ?? false && is_array($_SESSION['save_entry'])) {
         if (!is_object($serendipity['smarty'])) {
             // We need smarty also in the iframe to load a template's config.inc.php and register possible event hooks.
             serendipity_smarty_init();

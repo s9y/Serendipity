@@ -890,7 +890,7 @@ function serendipity_smarty_init($vars = array()) {
 
     if (!isset($serendipity['smarty'])) {
 
-        $template_dir = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];
+        $template_dir = $serendipity['serendipityPath'] . $serendipity['templatePath'] . ($serendipity['template'] ?? null);
 
         if (!defined('IN_serendipity_admin') && file_exists($template_dir . '/template.inc.php')) {
             // If this file exists, a custom template engine will be loaded.
@@ -1013,8 +1013,8 @@ function serendipity_smarty_init($vars = array()) {
 
             // When templates are switched, append a specific version string to make sure the browser does not cache the CSS
             if (strstr($serendipity['smarty_vars']['head_link_stylesheet'], '?')) {
-                $serendipity['smarty_vars']['head_link_stylesheet'] .= '&amp;v=' . $serendipity['last_template_change'];
-                $serendipity['smarty_vars']['head_link_stylesheet_frontend'] .= '&amp;v=' . $serendipity['last_template_change'];
+                $serendipity['smarty_vars']['head_link_stylesheet'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? null);
+                $serendipity['smarty_vars']['head_link_stylesheet_frontend'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? null);
             } else {
                 $serendipity['smarty_vars']['head_link_stylesheet'] .= '?v=' . $serendipity['last_template_change'];
                 $serendipity['smarty_vars']['head_link_stylesheet_frontend'] .= '?v=' . $serendipity['last_template_change'];
@@ -1029,7 +1029,7 @@ function serendipity_smarty_init($vars = array()) {
             }
 
             if (strstr($serendipity['smarty_vars']['head_link_script'], '?')) {
-                $serendipity['smarty_vars']['head_link_script'] .= '&amp;v=' . $serendipity['last_template_change'];
+                $serendipity['smarty_vars']['head_link_script'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? null);
             } else {
                 $serendipity['smarty_vars']['head_link_script'] .= '?v=' . $serendipity['last_template_change'];
             }
@@ -1080,20 +1080,20 @@ function serendipity_smarty_init($vars = array()) {
                 'use_popups'                => $serendipity['enablePopup'] ?? null,
                 'use_backendpopups'         => $serendipity['enableBackendPopup'] ?? null,
                 'force_backendpopups'       => $force_backendpopups,
-                'is_embedded'               => (!$serendipity['embed'] || $serendipity['embed'] === 'false' || $serendipity['embed'] === false) ? false : true,
+                'is_embedded'               => $serendipity['embed'] ?? false,
                 'is_raw_mode'               => $serendipity['smarty_raw_mode'] ?? null,
                 'is_logged_in'              => serendipity_userLoggedIn(),
 
                 'entry_id'                  => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])) ? $serendipity['GET']['id'] : false,
                 'is_single_entry'           => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])),
 
-                'blogTitle'                 => $serendipity['blogTitle'],
+                'blogTitle'                 => $serendipity['blogTitle'] ?? null,
                 'blogSubTitle'              => (!empty($serendipity['blogSubTitle']) ? $serendipity['blogSubTitle'] : ''),
-                'blogDescription'           => $serendipity['blogDescription'],
+                'blogDescription'           => $serendipity['blogDescription'] ?? null,
 
-                'serendipityHTTPPath'       => $serendipity['serendipityHTTPPath'],
-                'serendipityDefaultBaseURL' => $serendipity['defaultBaseURL'],
-                'serendipityBaseURL'        => $serendipity['baseURL'],
+                'serendipityHTTPPath'       => $serendipity['serendipityHTTPPath'] ?? null,
+                'serendipityDefaultBaseURL' => $serendipity['defaultBaseURL'] ?? null,
+                'serendipityBaseURL'        => $serendipity['baseURL'] ?? null,
                 'serendipityRewritePrefix'  => $serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '',
                 'serendipityIndexFile'      => $serendipity['indexFile'],
                 'serendipityVersion'        => ($serendipity['expose_s9y'] ? $serendipity['version'] : ''),
@@ -1145,7 +1145,7 @@ function serendipity_smarty_init($vars = array()) {
         }
 
 
-        if (is_array($template_loaded_config)) {
+        if (is_array($template_loaded_config ?? null)) {
             $template_vars =& $template_loaded_config;
             $serendipity['smarty']->assignByRef('template_option', $template_vars);
         } elseif (is_array($template_config)) {
@@ -1217,7 +1217,7 @@ function serendipity_smarty_shutdown($serendipity_directory = '') {
 function serendipity_smarty_show($template, $data = null, $debugtype = null, $debug = null) {
     global $serendipity;
 
-    if (!is_object($serendipity['smarty'])) {
+    if (!is_object($serendipity['smarty'] ?? null)) {
         serendipity_smarty_init();
     }
 

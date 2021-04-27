@@ -123,7 +123,7 @@ class Serendipity_Smarty extends Smarty
         $template_dirs   = array();
         
         // first add template path
-        $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];
+        $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . ($serendipity['template'] ?? null);
         // then fallback engines (which should never be a comma separated list)
         if ($template_engine) {
             $p = explode(',', $template_engine);
