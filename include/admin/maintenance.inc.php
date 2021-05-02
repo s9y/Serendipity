@@ -8,6 +8,10 @@ include S9Y_INCLUDE_PATH . 'include/admin/import.inc.php';
 $data['importMenu'] = ob_get_contents();
 ob_end_clean();
 
+if (! isset($_POST['adminAction'])) {
+    $_POST['adminAction'] = null;
+}
+
 if ($_POST['adminAction'] == "maintenanceMode") {
     if (serendipity_db_bool(serendipity_get_config_var("maintenanceMode", false)) === true) {
         serendipity_set_config_var("maintenanceMode", false);
@@ -58,9 +62,18 @@ switch($serendipity['GET']['adminAction']) {
 
 }
 
+
+
 $data['maintenance_mode'] = serendipity_db_bool(serendipity_get_config_var("maintenanceMode", false));
 $data['maintenance_mode_end'] = strftime('%d.%m.%y %T', serendipity_get_config_var("maintenanceModeEnd"));
 $data['maintenance_mode_active'] = $data['maintenance_mode'] && time() < serendipity_get_config_var("maintenanceModeEnd", 0);
+
+# php 8 compat section
+if (! isset($data['action'])) { $data['action'] = null; }
+if (! isset($data['cleanup_finish'])) { $data['cleanup_finish'] = null; }
+if (! isset($data['cleanup_template'])) { $data['cleanup_template'] = null; }
+
+
 echo serendipity_smarty_show('admin/maintenance.inc.tpl', $data);
 
 /* vim: set sts=4 ts=4 expandtab : */

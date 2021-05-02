@@ -124,6 +124,13 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $ser
     $data['formToken'] = serendipity_setFormToken();
 }
 
+# php 8 compat section
+if (! isset($data['delete_yes'])) { $data['delete_yes'] = null; }
+if (! isset($data['save_new'])) { $data['save_new'] = null; }
+if (! isset($data['save_edit'])) { $data['save_edit'] = null; }
+if (! isset($data['edit'])) { $data['edit'] = null; }
+if (! isset($data['new'])) { $data['new'] = null; }
+
 echo serendipity_smarty_show('admin/groups.inc.tpl', $data);
 
 /* vim: set sts=4 ts=4 expandtab : */

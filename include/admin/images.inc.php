@@ -20,13 +20,6 @@ if (!is_object($serendipity['smarty'])) {
 if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'multicheck') {
     unset($serendipity['GET']['adminAction']);
 }
-// Listens on toggle_dir STRICT to list items per directory, or include all sub directory items
-if (empty($serendipity['GET']['toggle_dir']) && empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
-    $serendipity['GET']['toggle_dir'] = 'no'; // default
-}
-if (!empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
-    serendipity_restoreVar($serendipity['COOKIE']['serendipity_toggle_dir'], $serendipity['GET']['toggle_dir']);
-}
 
 $messages = array();
 
@@ -39,6 +32,27 @@ if ( $serendipity['GET']['adminAction'] == 'add' && !$serendipity['POST']['admin
         $serendipity['GET']['adminAction'] = 'addSelect';
     }
 }
+
+# php 8 compat array field initialization
+$data['case_doSync'] = false;
+$data['case_do_delete'] = false;
+$data['case_do_multidelete'] = false;
+$data['case_multidelete'] = false;
+$data['case_delete'] = false;
+$data['case_add'] = false;
+$data['case_directoryDoDelete'] = false;
+$data['case_directoryEdit'] = false;
+$data['case_directoryDelete'] = false;
+$data['case_directoryDoCreate'] = false;
+$data['case_directoryCreate'] = false;
+$data['case_addSelect'] = false;
+$data['case_rotateCW'] = false;
+$data['case_rotateCCW'] = false;
+$data['case_scale'] = false;
+$data['case_scaleSelect'] = false;
+$data['case_default'] = false;
+$data['showMLbutton'] = false;
+$data['case_directorySelect'] = false;
 
 switch ($serendipity['GET']['adminAction']) {
 
@@ -322,12 +336,12 @@ switch ($serendipity['GET']['adminAction']) {
 
                             // Insert into database
                             $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$tindex], $authorid, null, $realname);
+                            serendipity_plugin_api::hook_event('backend_image_add', $target, array('image_id' => $image_id));
                             $new_media[] = array(
                                 'image_id'          => $image_id,
                                 'target'            => $target,
                                 'created_thumbnail' => $created_thumbnail
                             );
-                            serendipity_plugin_api::hook_event('backend_image_add', $target, $new_media);
                         }
                     }
                     serendipity_request_end();
@@ -407,12 +421,12 @@ switch ($serendipity['GET']['adminAction']) {
 
                         // Insert into database
                         $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$idx], $authorid, null, $realname);
+                        serendipity_plugin_api::hook_event('backend_image_add', $target, $created_thumbnail);
                         $new_media[] = array(
                             'image_id'          => $image_id,
                             'target'            => $target,
                             'created_thumbnail' => $created_thumbnail
                         );
-                        serendipity_plugin_api::hook_event('backend_image_add', $target, $new_media);
                     } else {
                         // necessary for the ajax-uplaoder to show upload errors
                         header("Internal Server Error", true, 500);
@@ -810,8 +824,9 @@ if (! isset($data['showML'])) {
     }
 }
 
-$data['get']['fid']       = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
-$data['get']['only_path'] = $serendipity['GET']['only_path'];
+$data['get']['fid'] = $serendipity['GET']['fid'] ?? null; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+$data['get']['only_path'] = $serendipity['GET']['only_path'] ?? null;
+if (! isset($data['messages'])) { $data['messages'] = []; }
 
 echo serendipity_smarty_show('admin/images.inc.tpl', $data);
 

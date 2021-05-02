@@ -120,6 +120,9 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         $plugin->cleanup();
     }
 
+    $data['save_errors'] = null;
+    $data['saveconf'] = null;
+    $data['timestamp'] = null;
     if ( isset($save_errors) && is_array($save_errors) && count($save_errors) > 0 ) {
         $data['save_errors'] = $save_errors;
     } elseif ( isset($_POST['SAVECONF'])) {
@@ -137,6 +140,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         $data['changelog'] = true;
     }
 
+    $data['documentation_local'] = null;
     if (@file_exists(dirname($plugin->pluginFile) . '/documentation_' . $serendipity['lang'] . '.html')) {
         $data['documentation_local'] = '/documentation_' . $serendipity['lang'] . '.html';
     } elseif (@file_exists(dirname($plugin->pluginFile) . '/documentation_en.html')) {
@@ -479,13 +483,24 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
 
     $data['event_plugins'] = show_plugins(true);
 
-    if ($serendipity['memSnaps'] && count($serendipity['memSnaps']) > 0) {
+    if (isset($serendipity['memSnaps']) && $serendipity['memSnaps'] && count($serendipity['memSnaps']) > 0) {
         $data['$memsnaps'] = $serendipity['memSnaps'];
+    } else {
+        $data['$memsnaps'] = null;
     }
+        
     $data['updateAllMsg'] = isset($serendipity['GET']['updateAllMsg']);
 }
 
 $data['urltoken']      = serendipity_setFormToken('url');
+
+# php 8 compat section
+if (! isset($data['plugin_to_conf'])) { $data['plugin_to_conf'] = null; }
+if (! isset($data['adminAction'])) { $data['adminAction'] = null; }
+if (! isset($data['new_plugin_failed'])) { $data['new_plugin_failed'] = null; }
+if (! isset($data['save'])) { $data['save'] = null; }
+if (! isset($data['memsnaps'])) { $data['memsnaps'] = null; }
+
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);
 
 
