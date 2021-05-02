@@ -234,8 +234,8 @@ if ($ajax) {
     }
 
     $admin_vars['out']         = array();
-    $admin_vars['no_create']   = $serendipity['no_create'];
-    $admin_vars['title']       = $admin_section;
+    $admin_vars['no_create']   = $serendipity['no_create'] ?? null;
+    $admin_vars['title']       = $admin_section ?? '';
     $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
 
     if ($serendipity['expose_s9y']) {

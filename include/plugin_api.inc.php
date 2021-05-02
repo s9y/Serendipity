@@ -838,10 +838,10 @@ class serendipity_plugin_api
         // Only insert data keys that exist in the DB.
         $insertdata = array();
         foreach($dbfields AS $field) {
-            $insertdata[$field] = $data[$field];
+            $insertdata[$field] = $data[$field] ?? null;
         }
 
-        if ($data['upgradable']) {
+        if ($data['upgradable'] ?? false) {
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}pluginlist
                                      SET upgrade_version = '" . serendipity_db_escape_string($data['upgrade_version']) . "'
                                    WHERE plugin_class    = '" . serendipity_db_escape_string($data['plugin_class']) . "'");
