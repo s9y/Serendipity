@@ -42,7 +42,7 @@
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[body]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[body]">{$CONST.MEDIA}</button>
             <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[body]">URL</button>
-            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_vars.entry hookAll="true"}
         </div>
     {else}
         <div id="tools_entry" class="editor_toolbar">
