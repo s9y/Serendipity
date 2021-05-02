@@ -3,10 +3,9 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 // PHP 5.5 compat, no longer use deprecated mysql
-if (($serendipity['dbType'] ?? '') == 'mysql' && (version_compare(PHP_VERSION, '5.5.0') >= 0 || !function_exists('mysql_connect'))) {
+if (($serendipity['dbType'] ?? '') == 'mysql') {
     $serendipity['dbType'] = 'mysqli';
 }
-
 
 if (@include(S9Y_INCLUDE_PATH . "include/db/{$serendipity['dbType']}.inc.php")) {
     @define('S9Y_DB_INCLUDED', TRUE);
