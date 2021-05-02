@@ -166,6 +166,7 @@
     </header>
 
     <ul id="serendipity_image_folders" class="option_list">
+    {$priorDepth=0}
     {foreach $folders as $folder}
         {if ! $folder@first}
             {if ($folder.depth > $priorDepth)}
