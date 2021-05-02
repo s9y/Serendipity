@@ -1776,7 +1776,7 @@ function serendipity_generateImageSelectorParems($format = 'url') {
     $sortParams   = array('perpage', 'order', 'ordermode');
     $importParams = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords', 'noBanner', 'noSidebar', 'noFooter', 'showUpload','showMediaToolbar');
     $extraParems  = '';
-    $filterParams = $serendipity['GET']['filter'] ?: array(); // ?: elvis operator, see http://en.wikipedia.org/wiki/Elvis_operator and upcoming PHP 7 ?? (isset) operator
+    $filterParams = $serendipity['GET']['filter'] ?? array(); 
 
     $standaloneFilterParams = array('only_path', 'only_filename');
     $parems = array();
@@ -2005,7 +2005,7 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
     }
 
     if ($serendipity['useInternalCache']) {
-        $key = md5($basedir . $dir . $onlyDirs . $pattern . $depth . $max_depth . $apply_ACL . $aExcludeDirs . $serendipity['serendipityUser']);
+        $key = md5($basedir . $dir . $onlyDirs . $pattern . $depth . $max_depth . $apply_ACL . serialize($aExcludeDirs) . $serendipity['serendipityUser']);
 
         serendipity_cacheItem($key, serialize($files));
     }
