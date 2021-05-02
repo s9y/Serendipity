@@ -21,6 +21,13 @@ if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'mu
     unset($serendipity['GET']['adminAction']);
 }
 
+if (empty($serendipity['GET']['toggle_dir']) && empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
+    $serendipity['GET']['toggle_dir'] = 'no'; // default
+}
+if (!empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
+    serendipity_restoreVar($serendipity['COOKIE']['serendipity_toggle_dir'], $serendipity['GET']['toggle_dir']);
+}
+
 $messages = array();
 
 // submitted media_upload.tpl: check for empty file field and redirect back to media_upload
