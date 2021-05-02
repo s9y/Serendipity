@@ -264,6 +264,8 @@ function serendipity_fetchTemplateInfo($theme, $abspath = null) {
     if (@is_file($serendipity['templatePath'] . $theme . '/config.inc.php')) {
         $data['custom_config'] = YES;
         $data['custom_config_engine'] = $theme;
+    } else {
+        $data['custom_config'] = NO;
     }
 
     // Templates can depend on a possible "Engine" (i.e. "Engine: 2k11").
@@ -277,18 +279,24 @@ function serendipity_fetchTemplateInfo($theme, $abspath = null) {
             if (@is_file($serendipity['templatePath'] . $engine . '/config.inc.php')) {
                 $data['custom_config'] = YES;
                 $data['custom_config_engine'] = $engine;
+            } else {
+                $data['custom_config'] = NO;
             }
         }
     }
 
     if ( $theme != 'default' && $theme != 'default-rtl'
       && @is_dir($serendipity['templatePath'] . $theme . '/admin')
-      && strtolower($data['backend']) == 'yes' ) {
+      && strtolower($data['backend'] ?? '') == 'yes' ) {
 
         $data['custom_admin_interface'] = YES;
     } else {
         $data['custom_admin_interface'] = NO;
     }
+
+    # php 8 compat section
+    if (! isset($data['customURI'])) { $data['customURI'] = null; }
+    if (! isset($data['author'])) { $data['author'] = null; }
 
     return $data;
 }
