@@ -7,7 +7,7 @@ if (IN_serendipity !== true) {
 global $serendipity;
 $data = array();
 
-switch($serendipity['POST']['adminAction']) {
+switch($serendipity['POST']['adminAction'] ?? '') {
     case 'publish':
         if (!serendipity_checkFormToken()) {
             break;
@@ -19,8 +19,10 @@ switch($serendipity['POST']['adminAction']) {
         ));
         if (is_numeric($success)) {
             $data['published'] = $success;
+            $data['error_publish'] = false;
         } else {
             $data['error_publish'] = $success;
+            $data['published'] = false;
         }
         break;
     case 'updateCheckDisable':
@@ -28,6 +30,10 @@ switch($serendipity['POST']['adminAction']) {
             break;
         }
         serendipity_set_config_var('updateCheck', false);
+        break;
+    default:
+        $data['published'] = false;
+        $data['error_publish'] = false;
         break;
 }
 
@@ -43,7 +49,7 @@ $data['js_failure_file'] = serendipity_getTemplateFile('admin/serendipity_editor
 
 $output = array();
 serendipity_plugin_api::hook_event('backend_frontpage_display', $output);
-$data['backend_frontpage_display'] = $output['more'];
+$data['backend_frontpage_display'] = $output['more'] ?? null;
 
 $data['usedVersion']  = $serendipity['version'];
 $data['updateCheck']  = $serendipity['updateCheck'];
@@ -87,6 +93,8 @@ if (is_array($comments) && count($comments) > 0) {
             // When summary is not the full body, strip HTML tags from summary, as it might break and leave unclosed HTML.
             $comment['fullBody'] = nl2br(serendipity_specialchars($comment['fullBody']));
             $comment['summary']  = nl2br(strip_tags($comment['summary']));
+        } else {
+            $comment['excerpt'] = false;
         }
     }
 }
@@ -144,7 +152,7 @@ $data['entries'] = $entries;
 $data['urltoken'] = serendipity_setFormToken('url');
 $data['token'] = serendipity_setFormToken();
 
-$data['no_create'] = $serendipity['no_create'];
+$data['no_create'] = $serendipity['no_create'] ?? null;
 
 echo serendipity_smarty_show('admin/overview.inc.tpl', $data);
 

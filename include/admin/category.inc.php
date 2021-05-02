@@ -11,7 +11,7 @@ if (!serendipity_checkPermission('adminCategories')) {
 }
 
 $admin_category = (!serendipity_checkPermission('adminCategoriesMaintainOthers') ? "AND (authorid = 0 OR authorid = " . (int)$serendipity['authorid'] . ")" : '');
-$data = array();
+$data = array('post_save' => false, 'doDelete' => false, 'delete' => false, 'edit' => false, 'new' => false);
 /* Add a new category */
 if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
     $name = $serendipity['POST']['cat']['name'];
