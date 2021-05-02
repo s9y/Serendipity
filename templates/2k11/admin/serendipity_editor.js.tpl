@@ -752,7 +752,7 @@
     }
 
     serendipity.closeCommentPopup = function() {
-        {if $use_backendpopups || $force_backendpopups.comments}
+        {if $use_backendpopups || (isset($force_backendpopups.comments) && $force_backendpopups.comments)}
             parent.self.close();
         {else}
             window.parent.parent.$.magnificPopup.close();
@@ -760,7 +760,7 @@
     }
 
     serendipity.openPopup = function(url) {
-        {if $use_backendpopups || $force_backendpopups.images}
+        {if $use_backendpopups || (isset($force_backendpopups.images) && $force_backendpopups.images)}
             window.open(url,
                         'ImageSel',
                         'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
@@ -1173,7 +1173,7 @@ $(function() {
     }
 
     // Show category selector
-    {if $use_backendpopups || $force_backendpopups.categories}
+    {if $use_backendpopups || (isset($force_backendpopups.categories) && $force_backendpopups.categories)}
         if($('#serendipityEntry').length > 0) {
             $('#select_category').click(function(e) {
                 e.preventDefault();
@@ -1240,7 +1240,7 @@ $(function() {
     };
 
     // Show tag selector
-    {if $use_backendpopups || $force_backendpopups.tags}
+    {if $use_backendpopups || (isset($force_backendpopups.tags) && $force_backendpopups.tags)}
         if($('#serendipityEntry').length > 0) {
             $('#select_tags').click(function(e) {
                 e.preventDefault();
@@ -1489,7 +1489,7 @@ $(function() {
     });
 
     // Show further links
-    {if $use_backendpopups || $force_backendpopups.links}
+    {if $use_backendpopups || (isset($force_backendpopups.links) && $force_backendpopups.links)}
         if($('#dashboard').length > 0) {
             $('.toggle_links').click(function(e) {
                 $('#s9y_links').toggleClass('mfp-hide');
@@ -1505,7 +1505,7 @@ $(function() {
     {/if}
 
     // Media file actions
-    {if $use_backendpopups || $force_backendpopups.images}
+    {if $use_backendpopups || (isset($force_backendpopups.images) && $force_backendpopups.images)}
     $('.media_fullsize').click(function(e) {
         e.preventDefault();
         var $el = $(this);
