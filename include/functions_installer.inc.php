@@ -1235,7 +1235,7 @@ function serendipity_getCurrentVersion() {
 
     // Perform update check once a day. We use a suffix of the configured channel, so when
     // the user switches channels, it has its own timer.
-    if ($serendipity['last_update_check_' . $serendipity['updateCheck']] >= (time()-86400)) {
+    if (($serendipity['last_update_check_' . $serendipity['updateCheck']] ?? 0) >= (time()-86400)) {
         // Last update was performed less than a day ago. Return last result.
         return $serendipity['last_update_version_' . $serendipity['updateCheck']];
     }
