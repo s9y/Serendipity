@@ -453,6 +453,12 @@ if (!isset($data['urltoken'])) { $data['urltoken']  = serendipity_setFormToken('
 if (!isset($data['formtoken'])) { $data['formtoken'] = serendipity_setFormToken(); }
 if (!isset($data['get']['filter'])) { $data['get']['filter'] = []; }
 
+# php 8 compat section
+if (! isset($data['filter_import'])) { $data['filter_import'] = null; }
+if (! isset($data['sort_import'])) { $data['sort_import'] = null; }
+if (! isset($data['count'])) { $data['count'] = null; }
+if (! isset($data['is_entries'])) { $data['is_entries'] = null; }
+
 echo serendipity_smarty_show('admin/entries.inc.tpl', $data);
 
 /* vim: set sts=4 ts=4 expandtab : */

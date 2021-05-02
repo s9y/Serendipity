@@ -53,7 +53,7 @@
 
                 <div class="form_field">
                     <label for="filter_content">{$CONST.CONTENT}</label>
-                    <input id="filter_content" name="serendipity[filter][body]" type="text" value="{(isset($get.filter.body)) ? "{$get.filter.body|escape}" : ''}">
+                    <input id="filter_content" name="serendipity[filter][body]" type="text" value="{if isset($get.filter.body)}{$get.filter.body|escape}{/if}">
                 </div>
             </div>
         </fieldset>
