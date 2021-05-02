@@ -502,6 +502,8 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
 
             if (in_array('ignore', $item['flags'])) {
                 $item['ignore'] = true;
+            } else {
+                $item['ignore'] = false;
             }
 
             if (in_array('ifEmpty', $item['flags']) && empty($value)) {
@@ -511,6 +513,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
         }
     }
     $data['config'] = $config;
+    $data['config_groupkeys'] = null;
     return serendipity_smarty_show('admin/config_template.tpl', $data);
 }
 
