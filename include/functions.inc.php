@@ -424,7 +424,9 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
             $group_sql = (int)$group;
         }
 
-        if ($group_sql) $where .= ' AND ' . "g.id IN ($group_sql)";
+        if ($group_sql ?? false) {
+            $where .= ' AND ' . "g.id IN ($group_sql)";
+        }
 
         $querystring = "SELECT $query_distinct
                                a.authorid,
