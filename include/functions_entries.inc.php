@@ -1186,8 +1186,8 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
             $authorData = array(
                             'authorid' => $entry['authorid'],
-                            'username' => $entry['loginname'],
-                            'email'    => $entry['email'],
+                            'username' => $entry['loginname'] ?? null,
+                            'email'    => $entry['email'] ?? null,
                             'realname' => $entry['author']
             );
 
@@ -1221,12 +1221,14 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
             $entry['link_author']            = serendipity_authorURL($authorData);
 
-            if (is_array($entry['categories'])) {
+            if (is_array($entry['categories'] ?? null)) {
                 foreach ($entry['categories'] as $k => $v) {
                     if (!isset($entry['categories'][$k]['category_link'])) {
                         $entry['categories'][$k]['category_link'] =  serendipity_categoryURL($entry['categories'][$k]);
                     }
                 }
+            } else {
+                $entry['categories'] = null;
             }
 
             if (strlen($entry['extended'] ?? null)) {

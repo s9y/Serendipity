@@ -2195,7 +2195,7 @@ function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded
 
         // Check if we are currently inside the admin interface.
         if ($serendipity['POST']['adminModule'] ?? '' == 'templates' && $serendipity['POST']['adminAction'] == 'configure' && !empty($serendipity['POST']['template']['amount'])) {
-            $template_loaded_config['amount'] = (int)$serendipity['POST']['template']['amount'];
+            $template_loaded_config['amount'] = (int)($serendipity['POST']['template']['amount'] ?? 0);
         }
 
         for ($i = 0; $i < $template_loaded_config['amount']; $i++) {

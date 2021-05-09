@@ -204,6 +204,8 @@ function serendipity_displayCommentForm($id, $url = '', $comments = NULL, $data 
         'commentform_entry'          => $entry
     );
 
+    if (! isset($commentform_data['required_fields'])) { $commentform_data['required_fields'] = ['name' => false, 'comment' => false]; }
+
     $serendipity['smarty']->assign($commentform_data);
 
     serendipity_smarty_fetch('COMMENTFORM', 'commentform.tpl');

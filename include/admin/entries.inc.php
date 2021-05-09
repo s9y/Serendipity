@@ -39,12 +39,12 @@ switch($serendipity['GET']['adminAction']) {
                        'timestamp'          => $serendipity['POST']['timestamp'],
                        'body'               => $serendipity['POST']['body'],
                        'extended'           => $serendipity['POST']['extended'],
-                       'categories'         => $serendipity['POST']['categories'],
+                       'categories'         => $serendipity['POST']['categories'] ?? null,
                        'isdraft'            => $serendipity['POST']['isdraft'],
                        'allow_comments'     => $serendipity['POST']['allow_comments'],
-                       'moderate_comments'  => $serendipity['POST']['moderate_comments'],
+                       'moderate_comments'  => $serendipity['POST']['moderate_comments'] ?? null,
                        'exflag'             => (!empty($serendipity['POST']['extended']) ? true : false),
-                       'had_categories'     => $serendipity['POST']['had_categories']
+                       'had_categories'     => $serendipity['POST']['had_categories'] ?? null
                        // Messing with other attributes causes problems when entry is saved
                        // Attributes need to explicitly matched/addressed in serendipity_updertEntry!
 
@@ -69,7 +69,6 @@ switch($serendipity['GET']['adminAction']) {
 
                 if ($entry['timestamp'] == -1) {
                     $data['switched_output'] = true;
-                    $data['dateval'] = false;
                     // The date given by the user is not convertable. Reset the timestamp.
                     $entry['timestamp'] = $serendipity['POST']['timestamp'];
                 }
@@ -108,7 +107,7 @@ switch($serendipity['GET']['adminAction']) {
                 // Only display the preview
                 $serendipity['hidefooter'] = true;
                 // Advanced templates use this to show update status and elapsed time
-                if (!is_numeric($entry['last_modified'])) {
+                if (!is_numeric($entry['last_modified'] ?? null)) {
                     $entry['last_modified'] = time();
                 }
 
@@ -183,7 +182,7 @@ switch($serendipity['GET']['adminAction']) {
                   'serendipity[timestamp]'   => serendipity_specialchars($entry['timestamp'])
                 ),
                 $entry,
-                $errors
+                $errors ?? null
             );
         }
 
@@ -345,6 +344,7 @@ switch($serendipity['GET']['adminAction']) {
                     $qString .= '&amp;serendipity[filter]['. $k .']='. $v;
                 }
             }
+           
             $data['linkFirst']    = $qString . '&amp;serendipity[page]=' . 0;
             $data['linkPrevious'] = $qString . '&amp;serendipity[page]=' . ($page-1);
             $data['linkNext']     = $qString . '&amp;serendipity[page]=' . ($page+1);
@@ -458,6 +458,12 @@ if (! isset($data['filter_import'])) { $data['filter_import'] = null; }
 if (! isset($data['sort_import'])) { $data['sort_import'] = null; }
 if (! isset($data['count'])) { $data['count'] = null; }
 if (! isset($data['is_entries'])) { $data['is_entries'] = null; }
+if (! isset($data['is_draft'])) { $data['is_draft'] = null; }
+if (! isset($data['is_iframe'])) { $data['is_iframe'] = null; }
+if (! isset($data['is_doDelete'])) { $data['is_doDelete'] = null; }
+if (! isset($data['is_doMultiDelete'])) { $data['is_doMultiDelete'] = null; }
+if (! isset($data['is_delete'])) { $data['is_delete'] = null; }
+if (! isset($data['is_multidelete'])) { $data['is_multidelete'] = null; }
 
 echo serendipity_smarty_show('admin/entries.inc.tpl', $data);
 

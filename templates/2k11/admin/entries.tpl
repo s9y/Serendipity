@@ -2,7 +2,7 @@
 {if $entry_vars.errMsg}
     <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$entry_vars.errMsg}</span>
 {/if}
-<form id="serendipityEntry" name="serendipityEntry" {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post">
+<form id="serendipityEntry" name="serendipityEntry" {if isset($entry_vars.entry.entry_form)}$entry_vars.entry.entry_form{/if} action="{$entry_vars.targetURL}" method="post">
     {foreach $entry_vars.hiddens as $key => $value}
     <input type="hidden" name="{$key}" value="{$value}">
     {/foreach}
