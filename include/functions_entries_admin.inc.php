@@ -66,7 +66,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     }
 
     // Fix category list. If the entryForm is displayed after a POST request, the additional category information is lost.
-    if (is_array($entry['categories'] ?? null) && !is_array($entry['categories'][0])) {
+    if (is_array($entry['categories'] ?? null) && !is_array($entry['categories'][0] ?? null)) {
         $categories = (array)$entry['categories'];
         $entry['categories'] = array();
         foreach ($categories as $catid) {
@@ -108,13 +108,15 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
         $template_vars['category_options'] = [];
     }
 
-    if (!empty($serendipity['GET']['title'])) {
-        $entry['title'] = utf8_decode(urldecode($serendipity['GET']['title']));
-    } else {
-        if (!empty($serendipity['POST']['title'])) {
-            $entry['title'] = utf8_decode(urldecode($serendipity['POST']['title']));
+    if (! isset($entry['title']) || empty($entry['title'])) {
+        if (!empty($serendipity['GET']['title'])) {
+            $entry['title'] = utf8_decode(urldecode($serendipity['GET']['title']));
         } else {
-            $entry['title'] = null;
+            if (!empty($serendipity['POST']['title'])) {
+                $entry['title'] = utf8_decode(urldecode($serendipity['POST']['title']));
+            } else {
+                $entry['title'] = null;
+            }
         }
     }
 
