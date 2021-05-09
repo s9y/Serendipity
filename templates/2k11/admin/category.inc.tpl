@@ -11,7 +11,7 @@
         {/if}
         {/if}
     {/if}
-    {if $error_name}
+    {if isset($error_name) and $error_name}
          <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.CATEGORY_ALREADY_EXIST|sprintf:$category_name|escape}</span>
     {/if}
 {/if}
@@ -54,17 +54,17 @@
             <div id="category_basics" class="clearfix">
                 <div class="form_field">
                     <label for="category_name">{$CONST.NAME}</label>
-                    <input id="category_name" pattern="{if $new}^(?!({foreach $categories as $cat}{$cat.category_name|escape}|{/foreach})$).*{else}^(?!({foreach $categories as $cat}{if $this_cat.category_name != $cat.category_name}{$cat.category_name|escape}{/if}|{/foreach})$).*{/if}" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape}" title="{$CONST.CATEGORY}">
+                    <input id="category_name" pattern="{if $new}^(?!({foreach $categories as $cat}{$cat.category_name|escape}|{/foreach})$).*{else}^(?!({foreach $categories as $cat}{if $this_cat.category_name != $cat.category_name}{$cat.category_name|escape}{/if}|{/foreach})$).*{/if}" name="serendipity[cat][name]" type="text" value="{if isset($this_cat.category_name)}{$this_cat.category_name|escape}{/if}" title="{$CONST.CATEGORY}">
                 </div>
 
                 <div class="form_field">
                     <label for="category_description">{$CONST.DESCRIPTION}</label>
-                    <input id="category_description" name="serendipity[cat][description]" type="text" value="{$this_cat.category_description|default:""|escape}">
+                    <input id="category_description" name="serendipity[cat][description]" type="text" value="{if isset($this_cat.category_description)}{$this_cat.category_description|escape}{/if}">
                 </div>
             </div>
 
             <h3 class="toggle_headline">
-                <button class="show_config_option icon_link {if $newSub}show_config_option_now{/if}" type="button" data-href="#category_subcats" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir" aria-hidden="true"></span> {$CONST.PARENT_CATEGORY}</button>
+                <button class="show_config_option icon_link {if isset($newSub) and $newSub}show_config_option_now{/if}" type="button" data-href="#category_subcats" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir" aria-hidden="true"></span> {$CONST.PARENT_CATEGORY}</button>
             </h3>
 
             <div id="category_subcats" class="clearfix additional_info">
@@ -86,12 +86,12 @@
 
                     <div class="clearfix grouped">
                         <div class="form_radio">
-                            <input id="hide_sub_yes" name="serendipity[cat][hide_sub]" type="radio" value="1"{if $this_cat.hide_sub== 1} checked="checked"{/if}>
+                            <input id="hide_sub_yes" name="serendipity[cat][hide_sub]" type="radio" value="1"{if isset($this_cat.hide_sub) and $this_cat.hide_sub == 1} checked="checked"{/if}>
                             <label for="hide_sub_yes">{$CONST.YES}</label>
                         </div>
 
                         <div class="form_radio">
-                            <input id="hide_sub_no" name="serendipity[cat][hide_sub]" type="radio" value="0"{if $this_cat.hide_sub == 0} checked="checked"{/if}>
+                            <input id="hide_sub_no" name="serendipity[cat][hide_sub]" type="radio" value="0"{if isset($this_cat.hide_sub) and $this_cat.hide_sub == 0} checked="checked"{/if}>
                             <label for="hide_sub_no">{$CONST.NO}</label>
                         </div>
                     </div>
@@ -132,14 +132,14 @@
                 <div class="form_field">
                     <label for="category_icon">{$CONST.CATEGORY} {$CONST.IMAGE}</label>
 
-                    <input id="category_icon" class="change_preview" name="serendipity[cat][icon]" type="text" data-configitem="category_icon" value="{$this_cat.category_icon|default:""|escape}">
+                    <input id="category_icon" class="change_preview" name="serendipity[cat][icon]" type="text" data-configitem="category_icon" value="{if isset($this_cat.category_icon)}{$this_cat.category_icon|escape}{/if}">
 
                     <button class="choose_media" type="button" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>
                 </div>
 
                 <figure id="category_icon_preview">
                     <figcaption>{$CONST.PREVIEW}</figcaption>
-                    <img src="{$this_cat.category_icon|default:""|escape}" alt="">
+                    <img src="{if isset($this_cat.category_icon)}{$this_cat.category_icon|escape}{/if}" alt="">
                 </figure>
             </div>
 
@@ -149,7 +149,7 @@
             <input class="standalone" name="SAVE" type="submit" value="{$save}">
         </form>
 {/if}
-{if $view}
+{if isset($view) and $view}
     <h2>{$CONST.CATEGORIES}</h2>
     {if is_array($viewCats)}
         <ul id="categories" class="option_list">

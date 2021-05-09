@@ -146,6 +146,7 @@ if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminA
         $write_groups = serendipity_ACLGet($cid, 'category', 'write');
     } else {
         $data['new'] = true;
+        $data['category_name'] = null;
         $cid = false;
         $this_cat = array();
         echo '<h2>'. CREATE_NEW_CAT .'</h2>';
