@@ -46,7 +46,7 @@
             <div class="clearfix">
             <div style="float: left; height: 75px"></div>
             {$updertHooks}
-            {if $res}
+            {if isset($res) and $res}
                 <div class="serendipity_msg_important">{$CONST.ERROR}: <b>{$res}</b></div>
             {else}
                 {if $lastSavedEntry}
@@ -59,7 +59,9 @@
                 <a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>
             {/if}
         {/if}
-        {$preview}
+        {if isset($preview)}
+            {$preview}
+        {/if}
         </div>
         </main>
     </div>

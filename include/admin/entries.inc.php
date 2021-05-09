@@ -464,6 +464,7 @@ if (! isset($data['is_doDelete'])) { $data['is_doDelete'] = null; }
 if (! isset($data['is_doMultiDelete'])) { $data['is_doMultiDelete'] = null; }
 if (! isset($data['is_delete'])) { $data['is_delete'] = null; }
 if (! isset($data['is_multidelete'])) { $data['is_multidelete'] = null; }
+if (! isset($data['is_iframepreview'])) { $data['is_iframepreview'] = null; }
 
 echo serendipity_smarty_show('admin/entries.inc.tpl', $data);
 

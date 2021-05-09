@@ -229,7 +229,7 @@ class serendipity_event_entryproperties extends serendipity_event
     {
         global $serendipity;
 
-        if (is_array($properties['disable_markups'])) {
+        if (is_array($properties['disable_markups'] ?? null)) {
             foreach($properties['disable_markups'] AS $idx => $instance) {
                 $properties['disable_markup_' . $instance] = $instance;
             }
@@ -249,7 +249,7 @@ class serendipity_event_entryproperties extends serendipity_event
         // is set (which will only happen if the form has been submitted) - not just in the foreach() below
 
         // Cleanup properties first, if none disable_markups plugins were set, or a previous selected one was re-set
-        if (isset($serendipity['POST']['propertyform']) && is_array($serendipity['POST']['properties']) && !is_array($serendipity['POST']['properties']['disable_markups'])) {
+        if (isset($serendipity['POST']['propertyform']) && is_array($serendipity['POST']['properties']) && !is_array($serendipity['POST']['properties']['disable_markups'] ?? null)) {
             $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property LIKE 'ep_disable_markup_%'";
             serendipity_db_query($q);
         }
@@ -264,7 +264,7 @@ class serendipity_event_entryproperties extends serendipity_event
         }
 
         // Special case for disable markups.
-        if (isset($serendipity['POST']['propertyform']) && is_array($properties['disable_markups'])) {
+        if (isset($serendipity['POST']['propertyform']) && is_array($properties['disable_markups'] ?? null)) {
             $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property LIKE 'ep_disable_markup_%'";
             serendipity_db_query($q);
 
@@ -803,11 +803,11 @@ class serendipity_event_entryproperties extends serendipity_event
                         $serendipity['POST']['properties']['cache_extended'] = $eventData['extended'];
                     }
 
-                    if (is_array($serendipity['POST']['properties']['access_groups']) && $serendipity['POST']['properties']['access'] != 'member') {
+                    if (is_array($serendipity['POST']['properties']['access_groups'] ?? null) && $serendipity['POST']['properties']['access'] != 'member') {
                         unset($serendipity['POST']['properties']['access_groups']);
                     }
 
-                    if (is_array($serendipity['POST']['properties']['access_users']) && $serendipity['POST']['properties']['access'] != 'member') {
+                    if (is_array($serendipity['POST']['properties']['access_users'] ?? null) && $serendipity['POST']['properties']['access'] != 'member') {
                         unset($serendipity['POST']['properties']['access_users']);
                     }
 

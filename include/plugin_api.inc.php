@@ -129,7 +129,7 @@ function errorHandlerCreateDOM(htmlStr) {
         case 'backend_save':
         case 'backend_publish':
             // this is preview_iframe.tpl updertHooks [ NOT ONLY!! See freetags ]
-            if ($serendipity['GET']['is_iframe'] == 'true' && $serendipity['GET']['iframe_mode'] == 'save') {
+            if (($serendipity['GET']['is_iframe'] ?? false) == 'true' && ($serendipity['GET']['iframe_mode'] ?? '') == 'save') {
                 echo "\n".'<script>document.addEventListener("DOMContentLoaded", function() { window.parent.serendipity.eraseEntryEditorCache(); });</script>'."\n";
             }
             break;
