@@ -111,7 +111,11 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     if (!empty($serendipity['GET']['title'])) {
         $entry['title'] = utf8_decode(urldecode($serendipity['GET']['title']));
     } else {
-        $entry['title'] = null;
+        if (!empty($serendipity['POST']['title'])) {
+            $entry['title'] = utf8_decode(urldecode($serendipity['POST']['title']));
+        } else {
+            $entry['title'] = null;
+        }
     }
 
 
