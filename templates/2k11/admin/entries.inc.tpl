@@ -46,7 +46,7 @@
                     <select id="filter_category" name="serendipity[filter][category]">
                         <option value="">-</option>
                     {foreach $categories as $cat}
-                        <option value="{$cat.categoryid}"{($get.filter.category == $cat.categoryid) ? ' selected' : ''}>{'&nbsp;'|str_repeat:$cat.depth} {$cat.category_name|escape}</option>
+                        <option value="{$cat.categoryid}"{(isset($get.filter.category) and $get.filter.category == $cat.categoryid) ? ' selected' : ''}>{'&nbsp;'|str_repeat:$cat.depth} {$cat.category_name|escape}</option>
                     {/foreach}
                     </select>
                 </div>
