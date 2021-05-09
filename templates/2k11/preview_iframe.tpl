@@ -49,7 +49,7 @@
             {if isset($res) and $res}
                 <div class="serendipity_msg_important">{$CONST.ERROR}: <b>{$res}</b></div>
             {else}
-                {if $lastSavedEntry}
+                {if isset($lastSavedEntry) and $lastSavedEntry}
                     <script type="text/javascript">$(document).ready(function() {
                                                         parent.document.forms['serendipityEntry']['serendipity[id]'].value = "{$lastSavedEntry}";
                     });

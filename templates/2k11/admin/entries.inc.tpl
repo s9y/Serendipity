@@ -213,7 +213,7 @@
 {/if}
 
 {if $switched_output}
-    {if ($get.adminAction && $use_legacy)}
+    {if ($get.adminAction && isset($use_legacy) && $use_legacy)}
         {if $is_draft && ! $errors}
         <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
         {/if}
@@ -238,7 +238,7 @@
         <span class="msg_hint"><span class="icon-help-circled" aria-hidden="true"></span> {$ripent}</span>
         {/foreach}
         <div class="form_buttons">
-            <a class="button_link state_cancel icon_link" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a>
+            <a class="button_link state_cancel icon_link" {if isset($smarty.server.HTTP_REFERER)}href="{$smarty.server.HTTP_REFERER|escape}"{/if}{if ! isset($smarty.server.HTTP_REFERER)}href="javascript://" onclick="history.back();"{/if}>{$CONST.NOT_REALLY}</a>
             <a class="button_link state_submit icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
         </div>
     {/if}
