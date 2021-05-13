@@ -1726,7 +1726,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 
             serendipity_prepareMedia($serendipity['imageList'][$k], $url);
 
-            if ($serendipity['parseMediaOverview']) {
+            if ($serendipity['parseMediaOverview'] ?? false) {
                 $serendipity['imageList'][$k]['props'] =& $allprops[$file['id']];
                 if (!is_array($serendipity['imageList'][$k]['props']['base_metadata'])) {
                     $serendipity['imageList'][$k]['metadata'] =& serendipity_getMetaData($serendipity['imageList'][$k]['realfile'], $serendipity['imageList'][$k]['header']);

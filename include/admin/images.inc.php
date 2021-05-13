@@ -31,7 +31,7 @@ if (!empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
 $messages = array();
 
 // submitted media_upload.tpl: check for empty file field and redirect back to media_upload
-if ( $serendipity['GET']['adminAction'] == 'add' && !$serendipity['POST']['adminSubAction'] == 'properties') {
+if ( $serendipity['GET']['adminAction'] == 'add' && ! ($serendipity['POST']['adminSubAction'] ?? null) == 'properties') {
 
     if ((empty($serendipity['POST']['imageurl']) || $serendipity['POST']['imageurl'] == 'http://' )
             && empty($_FILES['serendipity']['name']['userfile'][1])) {
@@ -229,7 +229,7 @@ switch ($serendipity['GET']['adminAction']) {
         }
         $data['case_add'] = true;
 
-        if ($serendipity['POST']['adminSubAction'] == 'properties') {
+        if (($serendipity['POST']['adminSubAction'] ?? null) == 'properties') {
             serendipity_restoreVar($serendipity['COOKIE']['serendipity_only_path'], $serendipity['GET']['only_path']); // restore last set directory path, see true parameter
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
