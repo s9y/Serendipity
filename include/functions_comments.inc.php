@@ -367,7 +367,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
 
             $comment['comment'] = (is_string($comment['body']) ? serendipity_specialchars(strip_tags($comment['body'])) : '');
             $comment['url']     = (is_string($comment['url']) ? strip_tags($comment['url']) : '');
-            $comment['link_delete'] = $serendipity['baseURL'] . 'comment.php?serendipity[delete]=' . $comment['id'] . '&amp;serendipity[entry]=' . $comment['entry_id'] . '&amp;serendipity[type]=comments&amp;' . $formToken;
+            $comment['link_delete'] = $serendipity['baseURL'] . 'comment.php?serendipity[delete]=' . ($comment['id'] ?? '') . '&amp;serendipity[entry]=' . ($comment['entry_id'] ?? '') . '&amp;serendipity[type]=comments&amp;' . $formToken;
 
             /* Fix invalid cases in protocoll part */
             if (!empty($comment['url'])) {
@@ -406,7 +406,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
             }
 
             if (serendipity_userLoggedIn()) {
-                if ($comment['subscribed'] == 'true') {
+                if (($comment['subscribed'] ?? null) == 'true') {
                     if ($comment['status'] == 'approved') {
                         $comment['body'] .= '<div class="serendipity_subscription_on"><em>' . ACTIVE_COMMENT_SUBSCRIPTION . '</em></div>';
                     } else {
@@ -418,7 +418,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
             }
 
             $_smartyComments[] = $comment;
-            if ($comment['id'] && $parentid !== VIEWMODE_LINEAR ) {
+            if (isset($comment['id']) && $comment['id'] && $parentid !== VIEWMODE_LINEAR ) {
                 serendipity_printComments($comments, $comment['id'], ($depth+1), ($trace . $i . '.'), $smarty_block, $smarty_file);
             }
         }

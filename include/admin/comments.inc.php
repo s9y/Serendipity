@@ -13,7 +13,7 @@ $errormsg = array();
 $msg = array();
 
 if (isset($serendipity['POST']['formAction']) && $serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
-    if ($serendipity['POST']['togglemoderate'] != '') {
+    if (($serendipity['POST']['togglemoderate'] ?? null) != '') {
         foreach ( $serendipity['POST']['delete'] as $k => $v ) {
             $ac = serendipity_approveComment((int)$k, (int)$v, false, 'flip');
             if ($ac > 0) {
@@ -54,7 +54,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $comment['comment']   = trim($serendipity['POST']['comment']);
     $comment['name']      = $serendipity['POST']['name'];
     $comment['email']     = $serendipity['POST']['email'];
-    $comment['subscribe'] = $serendipity['POST']['subscribe'];
+    $comment['subscribe'] = $serendipity['POST']['subscribe'] ?? false;
     $comment['parent_id'] = $serendipity['POST']['replyTo'];
 
     if (!empty($comment['comment'])) {
@@ -131,7 +131,8 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
                       'body'      => $serendipity['POST']['comment'],
                       'url'       => $serendipity['POST']['url'],
                       'timestamp' => time(),
-                      'parent_id' => $serendipity['GET']['id']
+                      'parent_id' => $serendipity['GET']['id'],
+                      'id'        => null
             );
         }
 

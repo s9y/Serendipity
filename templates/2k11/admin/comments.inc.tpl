@@ -135,11 +135,11 @@
                                 <dt>{$CONST.EMAIL}:</dt>
                                 <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <i>({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</i>{/if}{/if} {$comment.action_email}</dd>
                                 <dt>IP:</dt>
-                                <dd>{if empty($comment.ip)}N/A{else}{$comment.ip|escape}{/if} {$comment.action_ip}</dd>
+                                <dd>{if empty($comment.ip)}N/A{else}{$comment.ip|escape}{/if} {if isset($comment.action_ip)}{$comment.action_ip}{/if}</dd>
                                 <dt>URL:</dt>
-                                <dd>{if empty($comment.url)}N/A{else}<a href="{$comment.url|escape}" title="{$comment.url|escape}">{$comment.url|escape|truncate:40:"&hellip;"}</a> {/if} {$comment.action_url}</dd>
+                                <dd>{if empty($comment.url)}N/A{else}<a href="{$comment.url|escape}" title="{$comment.url|escape}">{$comment.url|escape|truncate:40:"&hellip;"}</a> {/if} {if isset($comment.action_url)}{$comment.action_url}{/if}</dd>
                                 <dt>{$CONST.REFERER}:</dt>
-                                <dd>{if empty($comment.referer)}N/A{else}<a href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:40:"&hellip;"}</a>{/if} {$comment.action_referer}</dd>
+                                <dd>{if empty($comment.referer)}N/A{else}<a href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:40:"&hellip;"}</a>{/if} {if isset($comment.action_referer)}{$comment.action_referer}{/if}</dd>
                             </dl>
                         </div>
 
@@ -163,7 +163,9 @@
                             <li><button class="button_link toggle_comment_full" type="button" data-href="#c{$comment.id}_full" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button></li>
                         {/if}
                         </ul>
+                        {if isset($comment.action_more)}
                         {$comment.action_more}
+                        {/if}
                     </li>
                 {/foreach}
                 </ul>
