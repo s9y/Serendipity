@@ -3168,9 +3168,10 @@ function serendipity_prepareMedia(&$file, $url = '') {
     $file['diskname'] = $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
 
     $file['links'] = array('imagelinkurl' => $file['full_file']);
+    $file['realfile']  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
 
     $file['dim']       = @getimagesize($file['full_thumb'], $file['thumb_header']);
-    $file['dim_orig']  = @getimagesize($serendipity['serendipityPath'] . $file['full_file'], $file['header']);
+    $file['dim_orig']  = @getimagesize($file['realfile'], $file['header']);
     $file['is_image']  = serendipity_isImage($file);
 
     if ($file['is_image']) {
@@ -3188,8 +3189,6 @@ function serendipity_prepareMedia(&$file, $url = '') {
     } else {
         $file['mediatype'] = 'binary';
     }
-
-    $file['realfile']  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
 
     if ($full_perm || $serendipity['authorid'] == $file['authorid'] || $file['authorid'] == '0') {
         $file['is_editable'] = true;
