@@ -3253,6 +3253,18 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         }
     }
 
+    // Add variables to the hidden form, so they persist in the ML popup after an item as been uploaded and the
+    // form filter gets used
+    if ($serendipity['GET']['adminAction'] == 'add') {
+        $target_fields = ['textarea', 'htmltarget', 'filename_only', 'noBanner', 'noSidebar', 'noFooter', 'showMediaToolbar', 'multiselect', 'showUpload'];
+        foreach ($target_fields as $target_field) {
+            if (isset($serendipity['GET'][$target_field])) {
+                $form_hidden .= '        <input type="hidden" name="serendipity[' . $target_field . ']" value="' . serendipity_specialchars($serendipity['GET'][$target_field]) . '">'."\n";
+            }
+        }
+        $form_hidden .=  '        <input type="hidden" name="serendipity[adminModule]" value="media">'."\n";
+    }
+
     if (!is_object($serendipity['smarty'])) {
         serendipity_smarty_init();
     }
