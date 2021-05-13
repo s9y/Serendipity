@@ -73,6 +73,8 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
 
     if ($limit != 0) {
         $limitsql = serendipity_db_limit_sql(serendipity_db_limit($start, $limit));
+    } else {
+        $limitsql = '';
     }
 
     if ($hideSubdirFiles == false) {

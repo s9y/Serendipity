@@ -615,7 +615,7 @@ switch ($serendipity['GET']['adminAction']) {
         $data['case_directoryCreate'] = true;
         $data['formtoken'] = serendipity_setFormToken();
         $data['folders']   = $folders;
-        $data['dir']  = $serendipity['GET']['dir'];
+        $data['dir']  = $serendipity['GET']['dir'] ?? null;
         break;
 
     case 'directorySelect':

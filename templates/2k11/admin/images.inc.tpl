@@ -47,9 +47,9 @@
     {if isset($showML)}{$showML}{/if}
 {/if}
 {if $case_directoryDoDelete}
-    {if $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
+    {if isset($print_DIRECTORY_WRITE_ERROR) && $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
     {if isset($ob_serendipity_killPath)}{$ob_serendipity_killPath}{/if}
-    {if $print_ERROR_NO_DIRECTORY}<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$print_ERROR_NO_DIRECTORY}</span>{/if}
+    {if isset($print_ERROR_NO_DIRECTORY) && $print_ERROR_NO_DIRECTORY}<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$print_ERROR_NO_DIRECTORY}</span>{/if}
 {/if}
 {if $case_directoryEdit}
     {if !empty($smarty.post.serendipity.save)}
@@ -124,7 +124,7 @@
     {if $print_DIRECTORY_CREATED}
     <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$print_DIRECTORY_CREATED}</span>
     {/if}
-    {if $print_DIRECTORY_WRITE_ERROR}
+    {if isset($print_DIRECTORY_WRITE_ERROR) && $print_DIRECTORY_WRITE_ERROR}
     <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$print_DIRECTORY_WRITE_ERROR}</span>
     {/if}
     <a class="button_link state_submit" href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.BACK}</a>
