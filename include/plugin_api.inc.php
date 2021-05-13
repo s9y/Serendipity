@@ -740,7 +740,7 @@ class serendipity_plugin_api
             }
         }
 
-        if (is_array($pluginlist[$pluginFile]) && !preg_match('@plugin_internal\.inc\.php@', $pluginFile)) {
+        if (is_array($pluginlist[$pluginFile] ?? null) && !preg_match('@plugin_internal\.inc\.php@', $pluginFile)) {
             $data = $pluginlist[$pluginFile];
             if ((int) filemtime($pluginFile) == (int) $data['last_modified']) {
                 $data['stackable'] = serendipity_db_bool($data['stackable']);

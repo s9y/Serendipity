@@ -101,7 +101,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
                         $value = $_POST['serendipity']['plugin']['override'][$config_item];
                     }
 
-                    if (is_array($_POST['serendipity']['plugin']['activate'][$config_item])) {
+                    if (is_array($_POST['serendipity']['plugin']['activate'][$config_item] ?? null)) {
                         $active_values = array();
                         foreach($_POST['serendipity']['plugin']['activate'][$config_item] as $ordered_item_value) {
                             $ordered_item_value;
@@ -164,7 +164,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPlugins);
     $pluginstack = array_merge((array)$foreignPlugins['pluginstack'], $pluginstack);
     $errorstack  = array_merge((array)$foreignPlugins['errorstack'], $errorstack);
-    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+    if (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE') {
         // for upgrades, the distinction in sidebar and event-plugins is not useful. We will fetch both and mix the lists    
         if ($serendipity['GET']['type'] == 'event') {
             $serendipity['GET']['type'] = 'sidebar';
@@ -181,7 +181,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     # load data for installed plugins
     $plugins = serendipity_plugin_api::get_installed_plugins();
     $classes = serendipity_plugin_api::enum_plugin_classes(($serendipity['GET']['type'] === 'event'));
-    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+    if (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE') {
         $classes = array_merge($classes, serendipity_plugin_api::enum_plugin_classes(!($serendipity['GET']['type'] === 'event')));
         $data['type'] = 'both';
     }
@@ -266,9 +266,9 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
             $plugdata['pluginsource'] = PLUGIN_SOURCE_LOCAL;
         }
         # create pluggroups
-        if ($serendipity['GET']['only_group'] == 'ALL') {
+        if (($serendipity['GET']['only_group'] ?? null) == 'ALL') {
             $pluggroups['ALL'][] = $plugdata;
-        } elseif ($serendipity['GET']['only_group'] == 'UPGRADE' && $plugdata['upgradable']) {
+        } elseif (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE' && $plugdata['upgradable']) {
             $pluggroups['UPGRADE'][] = $plugdata;
         } elseif (is_array($plugdata['groups'])) {
             foreach($plugdata['groups'] AS $group) {
@@ -284,7 +284,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $data['count_pluginstack'] = count($pluginstack);
     $data['errorstack'] = $errorstack;
 
-    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+    if (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE') {
         serendipity_plugin_api::hook_event('backend_pluginlisting_header_upgrade', $pluggroups);
     }
 
@@ -297,7 +297,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $data['groupnames'] = $groupnames;
     $data['pluggroups'] = $pluggroups;
     $data['formToken'] = serendipity_setFormToken();
-    $data['only_group'] = $serendipity['GET']['only_group'];
+    $data['only_group'] = $serendipity['GET']['only_group'] ?? null;
     $data['available_upgrades'] = isset($pluggroups['UPGRADE']);
     $requirement_failures = array();
 

@@ -362,7 +362,7 @@ class serendipity_event_spartacus extends serendipity_event
         foreach($paths AS $pathid => $path) {
             $stack .= $path . '/';
 
-            if ($spaths[$pathid] == $path) {
+            if (($spaths[$pathid] ?? null) == $path) {
                 continue;
             }
 
@@ -1394,7 +1394,7 @@ class serendipity_event_spartacus extends serendipity_event
                                 $eventData['GET']['pluginPath'] = $eventData['GET']['install_plugin'];
                             }
 
-                            if ($eventData['GET']['spartacus_upgrade']) {
+                            if ($eventData['GET']['spartacus_upgrade'] ?? false) {
                                 $eventData['install'] = false;
                             }
                         }
