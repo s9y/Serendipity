@@ -1630,7 +1630,7 @@ function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv =
     }
 
     $storage =& serendipity_fetchGroup($groupid);
-
+    
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}groupconfig WHERE id = " . (int)$groupid);
     foreach ($perms AS $perm => $userlevels) {
         if (substr($perm, 0, 2) == 'f_') {
@@ -1688,7 +1688,7 @@ function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv =
 
     serendipity_db_query("UPDATE {$serendipity['dbPrefix']}groups SET name = '" . serendipity_db_escape_string($values['name']) . "' WHERE id = " . (int)$groupid);
 
-    if (is_array($values['members'])) {
+    if (is_array($values['members'] ?? null)) {
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}authorgroups WHERE groupid = " . (int)$groupid);
         foreach($values['members'] AS $member) {
             serendipity_db_query(

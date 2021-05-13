@@ -38,7 +38,7 @@
         <div class="clearfix odd form_field has_info">
             <label for="group_name">{$CONST.NAME} <button class="toggle_info button_link" type="button" data-href="#groupName_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button></label>
             <span id="groupName_info" class="field_info additional_info">{$CONST.GROUP_NAME_DESC}</span>
-            <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape}">
+            <input id="group_name" name="serendipity[name]" type="text" value="{if isset($from.name)}{$from.name|escape}{/if}">
         </div>
 
         <div class="clearfix even form_select">
@@ -80,7 +80,7 @@
                 <div><var class="perm_name">[{$perm.permission_name|escape}]</var>: <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
             {else}
                 <div class="form_check">
-                    <input id="{{$perm@key}|escape}" name="serendipity[{{$perm@key}|escape}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
+                    <input id="{{$perm@key}|escape}" name="serendipity[{{$perm@key}|escape}]" type="checkbox" value="true"{if {$perm@key}|array_key_exists:$from && {$from.{$perm@key}} === "true"} checked="checked"{/if}>
                     <label for="{{$perm@key}|escape}">{$perm.permission_note|escape} <var class="perm_name">[{$perm.permission_name|escape}]</var></label>
                 </div>
             {/if}
