@@ -111,7 +111,9 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
         if (! (isset($orderfields[$f]) || $f == "fileCategory") || empty($fval)) {
             continue;
         }
-
+        
+        $cond['parts']['filter'] = '';
+        
         if (is_array($fval)) {
             if (empty($fval['from']) || empty($fval['to'])) {
                 continue;
@@ -135,7 +137,7 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
                                     (i.authorid = " . (int)$fval . ")
                                 )\n";
             $cond['joinparts']['hiddenproperties'] = true;
-        } elseif ($orderfields[$f]['type'] == 'int') {
+        } elseif (($orderfields[$f]['type'] ?? null) == 'int') {
             if (substr($f, 0, 3) === 'bp.') {
                 $realf = substr($f, 3);
                 $cond['parts']['filter'] .= " AND (bp2.property = '$realf' AND bp2.value = '" . serendipity_db_escape_string(trim($fval)) . "')\n";
@@ -3300,6 +3302,8 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
     } else {
         $media['paths'] =& serendipity_getMediaPaths();
     }
+
+    if (! isset($media['filter']['fileCategory']) ) { $media['filter']['fileCategory'] = null; }
 
     $serendipity['smarty']->assignByRef('media', $media);
 

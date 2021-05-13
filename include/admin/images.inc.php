@@ -762,7 +762,7 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'choose':
-        if ($serendipity['GET']['fid']) {
+        if ($serendipity['GET']['fid'] ?? false) {
             $file          = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
             $media['file'] = &$file;
             if (!is_array($file)) {
@@ -802,7 +802,7 @@ switch ($serendipity['GET']['adminAction']) {
 
                     serendipity_prepareMedia($media['file']);
 
-                    $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
+                    $media['file']['props'] =& serendipity_fetchMediaProperties((int)($serendipity['GET']['fid'] ?? null));
                     serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
                     $medias[] = $media;
                 }
