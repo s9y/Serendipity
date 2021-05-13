@@ -13,6 +13,7 @@ if (!serendipity_checkPermission('personalConfiguration')) {
 }
 
 $from = array();
+$data['adminAction'] = null;
 
 if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()) {
     $config = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
@@ -83,7 +84,7 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
 
                 // Moved to group administration:
                 if ($item['var'] == 'userlevel') continue;
-                if ($item['view'] == 'dangerous') continue;
+                if (($item['view'] ?? null) == 'dangerous') continue;
 
                 if (serendipity_checkConfigItemFlags($item, 'local')) {
                     serendipity_set_user_var($item['var'], $_POST[$item['var']], $serendipity['authorid'], true);
@@ -95,8 +96,8 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
             }
 
             $pl_data = array(
-                'id'       => $serendipity['POST']['authorid'],
-                'authorid' => $serendipity['POST']['authorid'],
+                'id'       => $serendipity['POST']['authorid'] ?? null,
+                'authorid' => $serendipity['POST']['authorid'] ?? null,
                 'username' => $_POST['username'],
                 'realname' => $_POST['realname'],
                 'email'    => $_POST['email']
@@ -123,6 +124,10 @@ serendipity_plugin_api::hook_event('backend_sidebar_entries_event_display_profil
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
+
+if (! isset($data['not_authorized'])) { $data['not_authorized'] = null; }
+if (! isset($data['empty_username'])) { $data['empty_username'] = null; }
+if (! isset($data['password_check_fail'])) { $data['password_check_fail'] = null; }
 
 echo serendipity_smarty_show('admin/personal.inc.tpl', $data);
 
