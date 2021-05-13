@@ -2692,7 +2692,7 @@ function serendipity_showPropertyForm(&$new_media, $keywordsPerBlock = 3, $is_ed
         $show[$idx]['image_id'] = $media['image_id'];
 
         serendipity_prepareMedia($show[$idx]);
-        if (!is_array($props['base_metadata'])) {
+        if (!is_array($props['base_metadata'] ?? null)) {
             $show[$idx]['metadata'] =& serendipity_getMetaData($show[$idx]['realfile'], $show[$idx]['header']);
         } else {
             $show[$idx]['metadata'] = $props['base_metadata'];
@@ -2707,7 +2707,7 @@ function serendipity_showPropertyForm(&$new_media, $keywordsPerBlock = 3, $is_ed
         'keywordsPerBlock'  => $keywordsPerBlock,
         'keywords'          => $keywords,
         'dprops'            => $dprops,
-        'case_add'          => is_array($new_media[0]['created_thumbnail'])     // created_thumbnail is only set when viewing properties after adding an image
+        'case_add'          => is_array($new_media[0]['created_thumbnail'] ?? null)     // created_thumbnail is only set when viewing properties after adding an image
     );
 
     return serendipity_showMedia(
@@ -2794,9 +2794,9 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
         if (!$is_edit) {
             $type = 'readonly';
         }
-        $val = serendipity_mediaTypeCast($parts[0], $props['base_property'][$parts[0]], true);
+        $val = serendipity_mediaTypeCast($parts[0], $props['base_property'][$parts[0]] ?? null, true);
 
-        $propkey = serendipity_specialchars($parts[0]) . $idx;
+        $propkey = serendipity_specialchars($parts[0]) . ($idx ?? '');
 
         $media['base_property'][$propkey] = array(
             'label' => serendipity_specialchars(defined('MEDIA_PROPERTY_' . strtoupper($parts[0])) ? constant('MEDIA_PROPERTY_' . strtoupper($parts[0])) : $parts[0]),
@@ -2805,7 +2805,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
             'title' => serendipity_specialchars($parts[0])
         );
 
-        if (!is_array($GLOBALS['IPTC'])) {
+        if (!is_array($GLOBALS['IPTC'] ?? null)) {
             // Your templates config.inc.php or any of the language files can declare this variable,
             // if you want to use other default settings for this. No interface ability to declare this
             // yet, sorry.
@@ -3273,9 +3273,9 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'token'             => serendipity_setFormToken(),
         'form_hidden'       => $form_hidden,
         'blimit_path'       => empty($smarty_vars['limit_path']) ? '' : basename($smarty_vars['limit_path']),
-        'only_path'         => $serendipity['GET']['only_path'],
-        'only_filename'     => $serendipity['GET']['only_filename'],
-        'sortorder'         => $serendipity['GET']['sortorder'],
+        'only_path'         => $serendipity['GET']['only_path'] ?? null,
+        'only_filename'     => $serendipity['GET']['only_filename'] ?? null,
+        'sortorder'         => $serendipity['GET']['sortorder'] ?? null,
         'keywords_selected' => $serendipity['GET']['keywords'] ?? null,
         'filter'            => $serendipity['GET']['filter'] ?? ['fileCategory' => null],
         'sort_order'        => $order_fields,
