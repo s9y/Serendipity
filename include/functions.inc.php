@@ -557,7 +557,7 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         }
     }
 
-    if ($serendipity['dumpMail']) {
+    if ($serendipity['dumpMail'] ?? false) {
         $fp = fopen($serendipity['serendipityPath'] . '/templates_c/mail.log', 'a');
         fwrite($fp, date('Y-m-d H:i') . "\n" . print_r($maildata, true));
         fclose($fp);

@@ -350,7 +350,7 @@ function serveEntry($matches) {
         $comment['comment']   = (is_string($serendipity['POST']['comment']) ? trim($serendipity['POST']['comment']) : '');
         $comment['name']      = $serendipity['POST']['name'];
         $comment['email']     = $serendipity['POST']['email'];
-        $comment['subscribe'] = $serendipity['POST']['subscribe'];
+        $comment['subscribe'] = $serendipity['POST']['subscribe'] ?? false;
         $comment['parent_id'] = $serendipity['POST']['replyTo'];
 
         if (!empty($comment['comment'])) {

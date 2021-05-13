@@ -702,6 +702,9 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
                                            AND (type = 'TRACKBACK' or type = 'PINGBACK') 
                                            AND entry_id = " . (int)$entry_id . " 
                                       GROUP BY entry_id", true);
+    if (! is_array($counter_tb)) {
+        $counter_tb = ['counter' => 0];
+    }
 
     $query = "UPDATE {$serendipity['dbPrefix']}entries 
                  SET comments      = " . (int)$counter_comments['counter'] . ", 
@@ -869,7 +872,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     $query  = "INSERT INTO {$serendipity['dbPrefix']}comments (entry_id, parent_id, ip, author, email, url, body, type, timestamp, title, subscribed, status, referer)";
     $query .= " VALUES ('". (int)$id ."', '$parentid', '$ip', '$name', '$email', '$url', '$commentsFixed', '$type', '$t', '$title', '$subscribe', '$dbstatus', '$referer')";
 
-    if ($GLOBALS['tb_logging']) {
+    if ($GLOBALS['tb_logging'] ?? false) {
         $fp = fopen('trackback2.log', 'a');
         fwrite($fp, '[' . date('d.m.Y H:i') . '] SQL: ' . $query . "\n");
     }
@@ -887,16 +890,16 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     }
 
     // Approve with force, if moderation is disabled
-    if ($GLOBALS['tb_logging']) {
+    if ($GLOBALS['tb_logging'] ?? false) {
         fwrite($fp, '[' . date('d.m.Y H:i') . '] status: ' . $status . ', moderate: ' . $ca['moderate_comments'] . "\n");
     }
 
     if ($status != 'confirm' && (empty($ca['moderate_comments']) || serendipity_db_bool($ca['moderate_comments']) == false)) {
-        if ($GLOBALS['tb_logging']) {
+        if ($GLOBALS['tb_logging'] ?? false) {
             fwrite($fp, '[' . date('d.m.Y H:i') . '] Approving...' . "\n");
         }
         serendipity_approveComment($cid, $id, true);
-    } elseif ($GLOBALS['tb_logging']) {
+    } elseif ($GLOBALS['tb_logging'] ?? false) {
         fwrite($fp, '[' . date('d.m.Y H:i') . '] No need to approve...' . "\n");
     }
 
@@ -941,7 +944,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         }
     }
 
-    if ($GLOBALS['tb_logging']) {
+    if ($GLOBALS['tb_logging'] ?? false) {
         fclose($fp);
     }
     serendipity_cleanCache();
@@ -1010,7 +1013,7 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
 
     serendipity_plugin_api::hook_event('frontend_saveComment', $ca, $commentInfo);
     if (!is_array($ca) || serendipity_db_bool($ca['allow_comments'])) {
-        if ($GLOBALS['tb_logging']) {
+        if ($GLOBALS['tb_logging'] ?? false) {
             $fp = fopen('trackback2.log', 'a');
             fwrite($fp, '[' . date('d.m.Y H:i') . '] insert comment into DB' . "\n");
             fclose($fp);
@@ -1021,7 +1024,7 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
         serendipity_plugin_api::hook_event('frontend_saveComment_finish', $ca, $commentInfo);
         return true;
     } else {
-        if ($GLOBALS['tb_logging']) {
+        if ($GLOBALS['tb_logging'] ?? false) {
             $fp = fopen('trackback2.log', 'a');
             fwrite($fp, '[' . date('d.m.Y H:i') . '] discarding comment from DB' . "\n");
             fclose($fp);
