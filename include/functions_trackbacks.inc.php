@@ -769,13 +769,13 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     $checked_locations = array();
     serendipity_plugin_api::hook_event('backend_trackbacks', $locations);
     for ($i = 0, $j = count($locations); $i < $j; ++$i) {
-        if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Checking {$locations[$i]}...");
+        if (is_object($serendipity['logger'] ?? null)) $serendipity['logger']->debug("Checking {$locations[$i]}...");
         if ($locations[$i][0] == '/') {
             $locations[$i] = 'http' . (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . $locations[$i];
         }
 
         if (isset($checked_locations[$locations[$i]])) {
-            if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Already checked");
+            if (is_object($serendipity['logger'] ?? null)) $serendipity['logger']->debug("Already checked");
             continue;
         }
 
