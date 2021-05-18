@@ -1166,6 +1166,7 @@ class serendipity_event_spartacus extends serendipity_event
         $foreignPlugins = array_merge($sidebarPlugins, $eventPlugins);
 
         // count upgradable plugins
+        $upgradeCount = 0;
         foreach ($installedPlugins as $plugin) {
             $infoplugin =& serendipity_plugin_api::load_plugin($plugin);
             if (is_object($infoplugin)) {
