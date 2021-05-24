@@ -1,3 +1,4 @@
+   * Remove multitude of wysiwyg toolbars
    * PHP 8 compatibility for serendipity core
    * Fix: Using the ML filters in the selection popup after uploading
           no longer removes option to insert image into article

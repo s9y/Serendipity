@@ -1039,18 +1039,17 @@ function serendipity_smarty_init($vars = array()) {
 
         if (defined('IN_serendipity_admin') && array_key_exists('wysiwyg', $serendipity) && $serendipity['wysiwyg']) {
 
-            // check force internal toolbar config file
+            // backwards compatibility with removed force-settings
             if (strpos($serendipity['wysiwygToolbar'], 'NOCC-') !== false) {
                 $serendipity['wysiwygToolbar'] = substr($serendipity['wysiwygToolbar'], 5);
-                $force_internal_toolbar = true;
             }
             // check ckeditor custom plugin file
             $ccp = serendipity_getTemplateFile('admin/ckeditor_custom_plugin.js', 'serendipityHTTPPath', true);
-            $wysiwyg_customPlugin = (!empty($ccp) && !$force_internal_toolbar) ? $ccp : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_plugin.js';
+            $wysiwyg_customPlugin = (!empty($ccp)) ? $ccp : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_plugin.js';
 
             // check ckeditor custom config file
             $ccc = serendipity_getTemplateFile('admin/ckeditor_custom_config.js', 'serendipityHTTPPath', true);
-            $wysiwyg_customConfig = (!empty($ccc) && !$force_internal_toolbar) ? $ccc : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_config.js';
+            $wysiwyg_customConfig = (!empty($ccc)) ? $ccc : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_config.js';
 
         }
 
