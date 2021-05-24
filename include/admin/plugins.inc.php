@@ -155,7 +155,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $data['config'] = serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups);
 
 } elseif ( $serendipity['GET']['adminAction'] == 'addnew' && serendipity_checkFormToken()) {
-    $serendipity['GET']['type'] = $serendipity['GET']['type'] ?: 'sidebar';
+    $serendipity['GET']['type'] = $serendipity['GET']['type'] ?? 'sidebar';
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
 
@@ -222,7 +222,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
                 } else {
                     $baseURI = "&amp;serendipity[spartacus_fetch]=event";
                 }
-                $props['customURI'] .= $baseURI . $foreignPlugins['upgradeURI'];
+                $props['customURI'] = $baseURI . $foreignPlugins['upgradeURI'];
             }
 
             $props['installable']  = !($props['stackable'] === false && in_array($class_data['true_name'], $plugins));
@@ -268,7 +268,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         # create pluggroups
         if (($serendipity['GET']['only_group'] ?? null) == 'ALL') {
             $pluggroups['ALL'][] = $plugdata;
-        } elseif (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE' && $plugdata['upgradable']) {
+        } elseif (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE' && ($plugdata['upgradable'] ?? false)) {
             $pluggroups['UPGRADE'][] = $plugdata;
         } elseif (is_array($plugdata['groups'])) {
             foreach($plugdata['groups'] AS $group) {

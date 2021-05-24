@@ -995,7 +995,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 case 'frontend_entries_rss':
                     if (is_array($eventData)) {
                         foreach($eventData AS $idx => $entry) {
-                            if (is_array($entry['properties']) && isset($entry['properties']['ep_hiderss']) && $entry['properties']['ep_hiderss']) {
+                            if (is_array($entry['properties'] ?? null) && isset($entry['properties']['ep_hiderss']) && $entry['properties']['ep_hiderss']) {
                                 unset($eventData[$idx]['body']);
                                 unset($eventData[$idx]['extended']);
                                 unset($eventData[$idx]['exflag']);

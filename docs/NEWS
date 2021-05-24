@@ -1,5 +1,9 @@
    * Remove multitude of wysiwyg toolbars
+   * PHP 8 compatibility for serendipity core
+   * Fix: Using the ML filters in the selection popup after uploading
+          no longer removes option to insert image into article
    * Drop never fully integrated laminas-db powered database backend
+   * Drop legacy mysql database backend (long ago replaced by mysqli)
    * Update Cache/Lite to 1.8.3 for better PHP 7.4 compat
    * Change backend_image_add hook to always contain same structure
    * Split date and time input in editor into two input fields
