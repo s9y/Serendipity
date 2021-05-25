@@ -1174,7 +1174,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $infoplugin->introspect($bag);
                 $currentVersion = $bag->get('version');
                 if (array_key_exists($plugin, $foreignPlugins)) {
-                    $upgradeVersion = $foreignPlugins[$plugin]['upgrade_version'] ? $foreignPlugins[$plugin]['upgrade_version'] : $foreignPlugins[$plugin]['version'];
+                    $upgradeVersion = ($foreignPlugins[$plugin]['upgrade_version'] ?? false) ? ($foreignPlugins[$plugin]['upgrade_version'] ?? '0') : $foreignPlugins[$plugin]['version'] ?? '0';
                 } else {
                     $upgradeVersion = null;
                 }
