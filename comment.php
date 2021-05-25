@@ -83,7 +83,6 @@ if (!($type = @$_REQUEST['type'])) {
 
 if ($type == 'trackback') {
     if ($tb_logging) {
-        # PHP 4.2.2 way of doing things
         ob_start();
         print_r($_REQUEST);
         $tmp = ob_get_contents();

@@ -1039,7 +1039,7 @@ function serendipity_smarty_init($vars = array()) {
 
         if (defined('IN_serendipity_admin') && array_key_exists('wysiwyg', $serendipity) && $serendipity['wysiwyg']) {
 
-            // backwards compatibility with removed force-settings
+             // backwards compatibility with removed force-settings
             if (strpos($serendipity['wysiwygToolbar'], 'NOCC-') !== false) {
                 $serendipity['wysiwygToolbar'] = substr($serendipity['wysiwygToolbar'], 5);
             }
@@ -1050,7 +1050,6 @@ function serendipity_smarty_init($vars = array()) {
             // check ckeditor custom config file
             $ccc = serendipity_getTemplateFile('admin/ckeditor_custom_config.js', 'serendipityHTTPPath', true);
             $wysiwyg_customConfig = (!empty($ccc)) ? $ccc : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_config.js';
-
         }
 
         if (array_key_exists('enableBackendPopupGranular', $serendipity)) {

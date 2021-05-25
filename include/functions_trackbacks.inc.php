@@ -351,7 +351,7 @@ function add_trackback($id, $title, $url, $name, $excerpt) {
     // Decode HTML Entities
     $excerpt = trackback_body_strip($excerpt);
 
-    if ($tb_logging) {
+    if ($GLOBALS['tb_logging']) {
         $fp = fopen('trackback2.log', 'a');
         fwrite($fp, '[' . date('d.m.Y H:i') . '] Trackback body:' . $excerpt . "\n");
         fclose($fp);

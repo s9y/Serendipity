@@ -705,6 +705,9 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
     if (! is_array($counter_tb)) {
         $counter_tb = ['counter' => 0];
     }
+    if (! is_array($counter_comments)) {
+        $counter_comments = ['counter' => 0];
+    }
 
     $query = "UPDATE {$serendipity['dbPrefix']}entries 
                  SET comments      = " . (int)$counter_comments['counter'] . ", 
@@ -1008,7 +1011,7 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
     $commentInfo['source'] = $source;
     
     // Secure email addresses, only one [first] allowed to not mail to multiple recipients
-    $mailparts = explode(',', $commentInfo['email']);
+    $mailparts = explode(',', $commentInfo['email'] ?? '');
     $commentInfo['email'] = trim($mailparts[0]);
 
     serendipity_plugin_api::hook_event('frontend_saveComment', $ca, $commentInfo);
