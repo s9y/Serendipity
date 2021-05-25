@@ -324,20 +324,12 @@ function serendipity_reference_autodiscover($loc, $url, $author, $title, $text) 
 function add_trackback($id, $title, $url, $name, $excerpt) {
     global $serendipity;
 
-    if ($GLOBALS['tb_logging']) {
-        $fp = fopen('trackback2.log', 'a');
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] add_trackback:' . print_r(func_get_args(), true) . "\n");
-        fclose($fp);
-    }
+    log_trackback('add_trackback:' . print_r(func_get_args(), true));
 
     // We can't accept a trackback if we don't get any URL
     // This is a protocol rule.
     if (empty($url)) {
-        if ($GLOBALS['tb_logging']) {
-            $fp = fopen('trackback2.log', 'a');
-            fwrite($fp, '[' . date('d.m.Y H:i') . '] Empty URL.' . "\n");
-            fclose($fp);
-        }
+        log_trackback('Empty URL.');
 
         return 0;
     }
@@ -350,12 +342,7 @@ function add_trackback($id, $title, $url, $name, $excerpt) {
 
     // Decode HTML Entities
     $excerpt = trackback_body_strip($excerpt);
-
-    if ($GLOBALS['tb_logging']) {
-        $fp = fopen('trackback2.log', 'a');
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] Trackback body:' . $excerpt . "\n");
-        fclose($fp);
-    }
+    log_trackback('Trackback body:' . $excerpt);
 
     $comment = array(
         'title'   => $title,
@@ -365,49 +352,40 @@ function add_trackback($id, $title, $url, $name, $excerpt) {
     );
 
     $is_utf8 = strtolower(LANG_CHARSET) == 'utf-8';
-
-    if ($GLOBALS['tb_logging']) {
-        $fp = fopen('trackback2.log', 'a');
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] TRACKBACK TRANSCODING CHECK' . "\n");
-    }
+    log_trackback('TRACKBACK TRANSCODING CHECK');
 
     foreach($comment AS $idx => $field) {
         if (is_utf8($field)) {
             // Trackback is in UTF-8. Check if our blog also is UTF-8.
             if (!$is_utf8) {
-                if ($GLOBALS['tb_logging']) {
-                    fwrite($fp, '[' . date('d.m.Y H:i') . '] Transcoding ' . $idx . ' from UTF-8 to ISO' . "\n");
-                }
+                log_trackback('Transcoding ' . $idx . ' from UTF-8 to ISO');
                 $comment[$idx] = utf8_decode($field);
             }
         } else {
             // Trackback is in some native format. We assume ISO-8859-1. Check if our blog is also ISO.
             if ($is_utf8) {
-                if ($GLOBALS['tb_logging']) {
-                    fwrite($fp, '[' . date('d.m.Y H:i') . '] Transcoding ' . $idx . ' from ISO to UTF-8' . "\n");
-                }
+                log_trackback('Transcoding ' . $idx . ' from ISO to UTF-8');
                 $comment[$idx] = utf8_encode($field);
             }
         }
     }
 
-    if ($GLOBALS['tb_logging']) {
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] TRACKBACK DATA: ' . print_r($comment, true) . '...' . "\n");
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] TRACKBACK STORING...' . "\n");
-        fclose($fp);
-    }
+    log_trackback('TRACKBACK DATA: ' . print_r($comment, true) . '...');
+    log_trackback('TRACKBACK STORING...');
 
     if ($id>0) {
         // first check, if we already have this pingback
         $comments = serendipity_fetchComments($id,1,'co.id',true,'TRACKBACK'," AND co.url='" . serendipity_db_escape_string($url) . "'");
         if (is_array($comments) && sizeof($comments) == 1) {
-            log_pingback("We already have that TRACKBACK!");
+            log_trackback("We already have that TRACKBACK!");
             return 0; // We already have it!
         }
         // We don't have it, so save the pingback
+        log_trackback("SAVING TRACKBACK!");
         serendipity_saveComment($id, $comment, 'TRACKBACK');
         return 1;
     } else {
+        log_trackback("ID invalid");
         return 0;
     }
 }

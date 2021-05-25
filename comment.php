@@ -88,9 +88,8 @@ if ($type == 'trackback') {
         $tmp = ob_get_contents();
         ob_end_clean();
 
-        $fp = fopen('trackback2.log', 'a');
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] RECEIVED TRACKBACK' . "\n");
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] ' . $tmp . "\n");
+        log_trackback('RECEIVED TRACKBACK');
+        log_trackback($tmp);
     }
 
     $uri = $_SERVER['REQUEST_URI'];
@@ -103,28 +102,15 @@ if ($type == 'trackback') {
         $id = (int)$matches[1];
     }
 
-    if ($tb_logging) {
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] Match on ' . $uri . "\n");
-        fwrite($fp, '[' . date('d.m.Y H:i') . '] ID: ' . $id . "\n");
-        fclose($fp);
-    }
+    log_trackback('Match on ' . $uri);
+    log_trackback('ID: ' . $id);
 
     if (add_trackback($id, $_REQUEST['title'], $_REQUEST['url'], $_REQUEST['blog_name'], $_REQUEST['excerpt'])) {
-        if ($tb_logging) {
-            $fp = fopen('trackback2.log', 'a');
-            fwrite($fp, '[' . date('d.m.Y H:i') . '] TRACKBACK SUCCESS' . "\n");
-        }
+        log_trackback('TRACKBACK SUCCESS');
         report_trackback_success();
     } else {
-        if ($tb_logging) {
-            $fp = fopen('trackback2.log', 'a');
-            fwrite($fp, '[' . date('d.m.Y H:i') . '] TRACKBACK FAILURE' . "\n");
-        }
+        log_trackback('TRACKBACK FAILURE');
         report_trackback_failure();
-    }
-
-    if ($tb_logging) {
-        fclose($fp);
     }
 } else if ($type == 'pingback') {
     if ($pb_logging) {
@@ -234,6 +220,16 @@ function log_pingback($message){
     global $pb_logging;
     if ($pb_logging) {
         $fp = fopen('pingback.log', 'a');
+        fwrite($fp, '[' . date('d.m.Y H:i') . '] ' . $message . "\n");
+        fclose($fp);
+    }
+}
+
+// Debug logging for trackback receiving
+function log_trackback($message){
+    global $tb_logging;
+    if ($tb_logging) {
+        $fp = fopen('trackback2.log', 'a');
         fwrite($fp, '[' . date('d.m.Y H:i') . '] ' . $message . "\n");
         fclose($fp);
     }

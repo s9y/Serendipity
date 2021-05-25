@@ -983,7 +983,7 @@ class serendipity_event_spamblock extends serendipity_event
                             if (!is_array($auth)) {
                                 // Filter authors names, Filter URL, Filter Content, Filter Emails, Check for maximum number of links before rejecting
                                 // moderate false
-                                if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData)) {
+                                if(false === $this->wordfilter($logfile, $eventData, $wordmatch ?? null, $addData)) {
                                     // already there #$this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS, $addData);
                                     // already there #$eventData = array('allow_comments' => false);
                                     // already there #$serendipity['messagestack']['emails'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
@@ -1149,7 +1149,7 @@ class serendipity_event_spamblock extends serendipity_event
                             }
                         }
 
-                        if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData)) {
+                        if(false === $this->wordfilter($logfile, $eventData, $wordmatch ?? null, $addData)) {
                             return false;
                         }
 
@@ -1492,10 +1492,6 @@ class serendipity_event_spamblock extends serendipity_event
         // Check for word filtering
         if ($filter_type = $this->get_config('contentfilter_activate', 'moderate')) {
 
-            if($ftc) {
-                $filter_type = 'reject';
-            }
-
             // Filter authors names
             $filter_authors = explode(';', $this->get_config('contentfilter_authors', $this->filter_defaults['authors']));
             if (is_array($filter_authors)) {
@@ -1596,7 +1592,7 @@ class serendipity_event_spamblock extends serendipity_event
 
         // Check for maximum number of links in comment body to reject
         $link_count = substr_count(strtolower($addData['comment']), 'http://');
-        if ($links_reject > 0 && $link_count > $links_reject) {
+        if (($links_reject ?? 0) > 0 && ($link_count ?? 0) > $links_reject) {
             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_REJECT, $addData);
             $eventData = array('allow_comments' => false);
             $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
@@ -1604,7 +1600,7 @@ class serendipity_event_spamblock extends serendipity_event
         }
         
         // Check for maximum number of links before forcing moderation
-        if ($links_moderate > 0 && $link_count > $links_moderate) {
+        if (($links_moderate ?? 0) > 0 && ($link_count ?? 0) > ($links_moderate ?? 0)) {
             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_MODERATE, $addData);
             $eventData['moderate_comments'] = true;
             $serendipity['csuccess']        = 'moderate';

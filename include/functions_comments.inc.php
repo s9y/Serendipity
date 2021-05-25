@@ -799,7 +799,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         $commentInfo['status'] = $ca['status'];
     }
 
-    if ($serendipity['serendipityAuthedUser']) {
+    if ($serendipity['serendipityAuthedUser'] ?? false) {
         $authorReply = true;
         $authorEmail = $serendipity['serendipityEmail'];
     }
@@ -887,7 +887,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     if ($status != 'confirm' && (serendipity_db_bool($ca['moderate_comments'])
         || ($type == 'NORMAL' && serendipity_db_bool($row['mail_comments']))
         || (($type == 'TRACKBACK' || $type == 'PINGBACK') && serendipity_db_bool($row['mail_trackbacks'])))) {
-            if (! ($authorReply && $authorEmail == $row['email'])) {
+            if (! (($authorReply ?? false) && $authorEmail == $row['email'])) {
                 serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']), $referer);
             }
     }
@@ -1016,22 +1016,14 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
 
     serendipity_plugin_api::hook_event('frontend_saveComment', $ca, $commentInfo);
     if (!is_array($ca) || serendipity_db_bool($ca['allow_comments'])) {
-        if ($GLOBALS['tb_logging'] ?? false) {
-            $fp = fopen('trackback2.log', 'a');
-            fwrite($fp, '[' . date('d.m.Y H:i') . '] insert comment into DB' . "\n");
-            fclose($fp);
-        }
+        log_trackback('insert comment into DB');
 
         $commentInfo['comment_cid'] = serendipity_insertComment($id, $commentInfo, $type, $source, $ca);
         $commentInfo['comment_id'] = $id;
         serendipity_plugin_api::hook_event('frontend_saveComment_finish', $ca, $commentInfo);
         return true;
     } else {
-        if ($GLOBALS['tb_logging'] ?? false) {
-            $fp = fopen('trackback2.log', 'a');
-            fwrite($fp, '[' . date('d.m.Y H:i') . '] discarding comment from DB' . "\n");
-            fclose($fp);
-        }
+        log_trackback('discarding comment from DB');
 
         return false;
     }
