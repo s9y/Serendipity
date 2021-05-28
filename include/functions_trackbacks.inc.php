@@ -115,6 +115,9 @@ function _serendipity_send($loc, $data, $contenttype = null) {
     global $serendipity;
 
     $target = parse_url($loc);
+    if (! isset($target['query'])) {
+        $target['query'] = '';
+    }
     if ($target['query'] != '') {
         $target['query'] = '?' . str_replace('&amp;', '&', $target['query']);
     }
