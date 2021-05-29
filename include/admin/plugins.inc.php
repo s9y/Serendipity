@@ -93,7 +93,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         foreach ($config_names as $config_item) {
             $cbag = new serendipity_property_bag;
             if ($plugin->introspect_config_item($config_item, $cbag)) {
-                $value    = $_POST['serendipity']['plugin'][$config_item];
+                $value    = $_POST['serendipity']['plugin'][$config_item] ?? null;
 
                 $validate = $plugin->validate($config_item, $cbag, $value);
                 if ($validate === true) {
