@@ -15,3 +15,10 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC', '作者只允许他人复制、分发、演示和使用未被修改的该作品，而不是在此作品基础上修改后的作品。');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC', '如果别人也遵守创作共用协议的话，允许。');
 
+@define('PLUGIN_CREATIVECOMMONS_VERSION',     'License version');
+@define('PLUGIN_CREATIVECOMMONS_VERSION_DESC',     'Select which numbered version of the license you want to use.');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_GENERIC', 'generic');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_SMALL', 'small');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_BIG', 'big');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE', 'Image variant');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_DESC', 'Select which type of image to display.');
