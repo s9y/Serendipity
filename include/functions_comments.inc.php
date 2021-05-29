@@ -1016,15 +1016,11 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
 
     serendipity_plugin_api::hook_event('frontend_saveComment', $ca, $commentInfo);
     if (!is_array($ca) || serendipity_db_bool($ca['allow_comments'])) {
-        log_trackback('insert comment into DB');
-
         $commentInfo['comment_cid'] = serendipity_insertComment($id, $commentInfo, $type, $source, $ca);
         $commentInfo['comment_id'] = $id;
         serendipity_plugin_api::hook_event('frontend_saveComment_finish', $ca, $commentInfo);
         return true;
     } else {
-        log_trackback('discarding comment from DB');
-
         return false;
     }
 }
