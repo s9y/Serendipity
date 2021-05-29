@@ -973,7 +973,7 @@ function serendipity_commentSubscriptionConfirm($hash) {
     }
 
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                                WHERE okey LIKE 'commentsub_%' AND $cast < " . (time() - 1814400) . ")");
+                                WHERE okey LIKE 'commentsub_%' AND $cast < (" . (time() - 1814400) . ")");
 
     $hashinfo = serendipity_db_query("SELECT value
                                         FROM {$serendipity['dbPrefix']}options
