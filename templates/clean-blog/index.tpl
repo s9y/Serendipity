@@ -8,7 +8,7 @@
     <meta name="generator" content="Serendipity v.{$serendipityVersion}">
     <title>{$head_title|default:$blogTitle}{if $head_subtitle} | {$head_subtitle}{/if}</title>
 {* CANONICAL *}
-    {if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || $staticpage_pagetitle != "" || $robots_index == 'index')}
+    {if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || (isset($staticpage_pagetitle) && $staticpage_pagetitle != "") || $robots_index == 'index')}
        <meta name="robots" content="index,follow">
     {else}
        <meta name="robots" content="noindex,follow">
@@ -48,13 +48,13 @@
         {else}
             <style type="text/css">.intro-header {ldelim}background-image: url('{if $template_option.entry_default_header_image}{$template_option.entry_default_header_image}{else}{serendipity_getFile file="img/post-bg.jpg"}{/if}');{rdelim}</style> 
         {/if}
-    {elseif $staticpage_pagetitle && !$plugin_contactform_name}
+    {elseif (isset($staticpage_pagetitle) && $staticpage_pagetitle) && ! (isset($plugin_contactform_name) && $plugin_contactform_name)}
         {if $staticpage_custom.staticpage_header_image}
             <style type="text/css">.intro-header {ldelim}background-image: url('{$staticpage_custom.staticpage_header_image}');{rdelim}</style>           
         {else}
             <style type="text/css">.intro-header {ldelim}background-image: url('{if $template_option.staticpage_header_image}{$template_option.staticpage_header_image}{else}{serendipity_getFile file="img/about-bg.jpg"}{/if}');{rdelim}</style>
         {/if}
-    {elseif $plugin_contactform_name}
+    {elseif (isset($plugin_contactform_name) && $plugin_contactform_name)}
         <style type="text/css">.intro-header {ldelim}background-image: url('{if $template_option.contactform_header_image}{$template_option.contactform_header_image}{else}{serendipity_getFile file="img/contact-bg.jpg"}{/if}');{rdelim}</style>
     {elseif $view=="archive"}
         <style type="text/css">.intro-header {ldelim}background-image: url('{if $template_option.archive_header_image}{$template_option.archive_header_image}{else}{serendipity_getFile file="img/archive-bg.jpg"}{/if}');{rdelim}</style>    

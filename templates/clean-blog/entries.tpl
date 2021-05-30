@@ -5,7 +5,7 @@
     <article id="post_{$entry.id}" class="post{if !$is_single_entry and not $entry.is_extended and not $is_preview}-preview{/if} serendipity_entry{if $dategroup.is_sticky} sticky{/if}" role="article">
     {if !$is_single_entry and not $entry.is_extended and not $is_preview}
         <a href="{$entry.link}"><h2 class="post-title">{$entry.title}</h2>
-        {if $entry.properties.entry_subtitle}
+        {if isset($entry.properties.entry_subtitle) and $entry.properties.entry_subtitle}
             <h3 class="post-subtitle">{$entry.properties.entry_subtitle|escape}</h3>
         {elseif $template_option.subtitle_use_entrybody==true && $template_option.entrybody_detailed_only == true}
             <h3 class="post-subtitle">{$entry.body|@strip_tags|@strip|@truncate:70:" ..."}</h3>
