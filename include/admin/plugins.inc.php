@@ -369,7 +369,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
 
             serendipity_plugin_api::update_plugin_owner(
                 addslashes($plugin['id']),
-                addslashes($_POST['serendipity']['ownership'][$plugin['name']])
+                addslashes($_POST['serendipity']['ownership'][$plugin['name'] ?? null] ?? null)
             );
             $pos++;
         }
