@@ -86,7 +86,7 @@ class serendipity_event_responsiveimages extends serendipity_event
         if (!is_object($serendipity['smarty'])) {
             serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
         }
-        $this->breakpoints = $serendipity['smarty']->getTemplateVars('template_option')['breakpoints'];
+        $this->breakpoints = $serendipity['smarty']->getTemplateVars('template_option')['breakpoints'] ?? false;
         if (! $this->breakpoints) {
             $this->breakpoints = [1600, 1200, 600]; # This can be overwritten by the theme
         }
