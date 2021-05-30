@@ -1313,3 +1313,4 @@ $i18n_filename_to = array (
 @define('PLUGIN_GROUP_ALL', 'All categories');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Čeká na potvrzení');
 @define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');
+@define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Sorry, the confirmation of your subscription to new comments has failed.');

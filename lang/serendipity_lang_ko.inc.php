@@ -1283,3 +1283,4 @@
 @define('PLUGIN_GROUP_ALL', '모든 범주');
 @define('PENDING_COMMENT_SUBSCRIPTION', '구독 대기 중');
 @define('NO_COMMENT_SUBSCRIPTION', '구독되지 않음');
+@define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Sorry, the confirmation of your subscription to new comments has failed.');

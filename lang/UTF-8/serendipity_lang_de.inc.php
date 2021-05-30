@@ -1282,3 +1282,4 @@
 @define('PLUGIN_GROUP_ALL', 'Alle Kategorien');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Wartet auf Bestätigung');
 @define('NO_COMMENT_SUBSCRIPTION', 'Nicht abonniert');
+@define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Sorry, the confirmation of your subscription to new comments has failed.');
