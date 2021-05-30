@@ -499,7 +499,6 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         serendipity_cacheItem($key, serialize($ret));
         serendipity_cacheItem($key . '_fullCountQuery', $serendipity['fullCountQuery']);
     }
-
     return $ret;
 }
 
@@ -1237,6 +1236,8 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
             if (isset($entry['exflag']) && $entry['exflag'] && ($extended || $preview)) {
                 $entry['is_extended']       = true;
+            } else {
+                $entry['is_extended']       = false;
             }
 
             if (serendipity_db_bool($entry['allow_comments']) || !isset($entry['allow_comments']) || $entry['comments'] > 0) {
@@ -1262,6 +1263,8 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 serendipity_plugin_api::hook_event('backend_preview', $entry);
                 $entry['backend_preview'] = ob_get_contents();
                 ob_end_clean();
+            } else {
+                $entry['backend_preview'] = null;
             }
 
             /* IF WE ARE DISPLAYING A FULL ENTRY */
