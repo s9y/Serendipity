@@ -1,3 +1,5 @@
+   * New images added via the ML will set loading="lazy", improving
+     site performance for visitors (only if height and width known)
    * Remove multitude of wysiwyg toolbars
    * PHP 8 compatibility for serendipity core
    * Fix: Using the ML filters in the selection popup after uploading

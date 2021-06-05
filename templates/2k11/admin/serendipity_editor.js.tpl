@@ -331,7 +331,13 @@
         if (floating == "") {
             floating = "center";
         }
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\">";
+        
+        var lazyload = '';
+        if (imgWidth && imgHeight) {
+            lazyload = 'loading="lazy"';
+        }
+        
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " " + lazyload + " alt=\"" + alt + "\">";
 
         if ($(':input[name="serendipity[isLink]"]:checked').val() == "yes") {
             // wrap the img in a link to the image. TODO: The label in the media_chooser.tpl explains it wrong
