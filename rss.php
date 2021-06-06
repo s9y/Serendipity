@@ -12,13 +12,13 @@ if ($serendipity['cors']) {
     header('Access-Control-Allow-Origin: *'); // Allow RSS feeds to be read by javascript
 }
 
-$version     = $_GET['version'];
+$version     = $_GET['version'] ?? '';
 $description = $serendipity['blogDescription'];
 $title       = $serendipity['blogTitle'];
 $comments    = FALSE;
 
 if (empty($version)) {
-    list($version) = serendipity_discover_rss($_GET['file'], $_GET['ext']);
+    list($version) = serendipity_discover_rss($_GET['file'] ?? null, $_GET['ext'] ?? null);
 } else {
     # be sure it is an allowed version, to prevent attackers sniffing for unrelated files on the file system
     $allowed_versions = ['opml1.0', '0.91', '1.0',  '2.0', 'atom0.3', 'atom1.0'];
