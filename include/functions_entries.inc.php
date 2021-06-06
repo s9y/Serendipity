@@ -1358,8 +1358,10 @@ function serendipity_updertEntry($entry) {
     $categories = $entry['categories'];
     unset($entry['categories']);
 
-    $had_categories = $entry['had_categories'];
-    unset($entry['had_categories']);
+    if (isset($entry['had_categories'])) {
+        $had_categories = $entry['had_categories'];
+        unset($entry['had_categories']);
+    }
 
     $newEntry = 0;
     $exflag = 0;

@@ -1816,13 +1816,13 @@ class serendipity_event extends serendipity_plugin
             } else {
                 $key = &$eventData[0][$fieldname];
             }
-        } elseif (is_array($eventData) && is_array($eventData['properties'])) {
+        } elseif (is_array($eventData) && is_array($eventData['properties'] ?? null)) {
             if (!empty($eventData['properties']['ep_cache_' . $fieldname])) {
                 $key = &$eventData['properties']['ep_cache_' . $fieldname];
             } else {
                 $key = &$eventData[$fieldname];
             }
-        } elseif (is_array($eventData[0]) && isset($eventData[0][$fieldname])) {
+        } elseif (isset($eventData[0]) && isset($eventData[0][$fieldname])) {
             $key = &$eventData[0][$fieldname];
         } elseif (isset($eventData[$fieldname])) {
             $key = &$eventData[$fieldname];

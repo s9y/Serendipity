@@ -772,7 +772,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     break;
 
                 case 'backend_entry_presave':
-                    if (is_array($serendipity['POST']['properties'])) {
+                    if (is_array($serendipity['POST']['properties'] ?? null)) {
                         $this->applyProperties($serendipity['POST']['properties']);
                     }
                     break;
