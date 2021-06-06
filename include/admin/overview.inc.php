@@ -148,6 +148,8 @@ if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' ||
 $data['db_health'] = $dbHealth;
 
 $data['entries'] = $entries;
+$data['showFutureEntries'] = $serendipity['showFutureEntries'] ?? false;
+$data['serverOffsetHour'] = $serendipity['serverOffsetHour'] ?? 0;
 
 $data['urltoken'] = serendipity_setFormToken('url');
 $data['token'] = serendipity_setFormToken();
