@@ -83,7 +83,7 @@ class serendipity_event_responsiveimages extends serendipity_event
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
-        if (!is_object($serendipity['smarty'])) {
+        if (!isset($serendipity['smarty']) || ! is_object($serendipity['smarty'])) {
             serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
         }
         $this->breakpoints = $serendipity['smarty']->getTemplateVars('template_option')['breakpoints'] ?? false;
