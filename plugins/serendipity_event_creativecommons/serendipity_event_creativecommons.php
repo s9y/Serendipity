@@ -144,6 +144,9 @@ class serendipity_event_creativecommons extends serendipity_event
                 case 'frontend_display:html_layout':
                     $cc_visibility = 'visible';
                 case 'frontend_display:html:per_entry':
+                    if (! isset($eventData['display_dat'])) {
+                        $eventData['display_dat'] = '';
+                    }
                     $eventData['display_dat'] .= '<div style="text-align: center;">';
                     if ($license_string == '') {
                         if ($cc_visibility == 'visible') {
@@ -177,14 +180,24 @@ class serendipity_event_creativecommons extends serendipity_event
                     break;
 
                 case 'frontend_display:rss-2.0:per_entry':
+                    if (! isset($eventData['display_dat'])) {
+                        $eventData['display_dat'] = '';
+                    }
+                    
                     $eventData['display_dat'] .= '<creativeCommons:license>'.$license_uri.'</creativeCommons:license>';
                     break;
 
                 case 'frontend_display:rss-1.0:per_entry':
+                    if (! isset($eventData['display_dat'])) {
+                        $eventData['display_dat'] = '';
+                    }
                     $eventData['display_dat'] .= '<cc:license rdf:resource="'.$license_uri.'" />';
                     break;
 
                 case 'frontend_display:rss-1.0:once':
+                    if (! isset($eventData['display_dat'])) {
+                        $eventData['display_dat'] = '';
+                    }
                     $eventData['display_dat'] .= '<cc:License rdf:about="'.$license_uri.'">';
                     if (is_array($rdf)) {
                         foreach ($rdf as $rdf_t => $rdf_v) {
@@ -195,10 +208,16 @@ class serendipity_event_creativecommons extends serendipity_event
                     break;
 
                 case 'frontend_display:rss-2.0:namespace':
+                    if (! isset($eventData['display_dat'])) {
+                        $eventData['display_dat'] = '';
+                    }
                     $eventData['display_dat'] .= ' xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule" ';
                     break;
 
                 case 'frontend_display:rss-1.0:namespace':
+                    if (! isset($eventData['display_dat'])) {
+                        $eventData['display_dat'] = '';
+                    }
                     $eventData['display_dat'] .= ' xmlns:cc="http://web.resource.org/cc/" ';
                     break;
 
