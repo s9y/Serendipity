@@ -200,7 +200,7 @@ if (!$use_installer && $is_logged_in) {
             break;
 
         case 'event_display':
-            if ($serendipity['no_create'] !== true) {
+            if (($serendipity['no_create'] ?? false) !== true) {
                 serendipity_plugin_api::hook_event('backend_sidebar_entries_event_display_' . $serendipity['GET']['adminAction'], $serendipity);
             }
             break;
