@@ -75,9 +75,9 @@
     </form>
 {else}
     {if $delete}
-    <form action="?serendipity[adminModule]=users" method="post">
+    <form action="?serendipity[adminModule]=users" method="POST">
         {$formToken}
-        <input name="serendipity[user]" type="hidden" value="{$userid}">
+        <input name="serendipity[userid]" type="hidden" value="{$userid}">
 
         <div class="users_delete_action">
             <h2>{$CONST.MANAGE_USERS}</h2>
