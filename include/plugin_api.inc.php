@@ -1305,12 +1305,18 @@ class serendipity_plugin_api
     static function load_language($path) {
         global $serendipity;
 
+        // We deactivate error reporting here, because in PHP 8 setting constants twice always throws a warning.
+        // However, the language files of some plugins sometimes rely on constants being set only in the fallback
+        // language file, so we do have to set the other constants twice.
+        $oldReportingLevel = error_reporting();
+        error_reporting(0);
+        
         $probelang = $path . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
         if (file_exists($probelang)) {
             include $probelang;
-        } else {
-            include $path . '/lang_en.inc.php';
         }
+        include $path . '/lang_en.inc.php';
+        error_reporting($oldReportingLevel);
     }
 }
 
