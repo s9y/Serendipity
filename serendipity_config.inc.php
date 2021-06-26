@@ -60,7 +60,11 @@ if (!isset($serendipity['production'])) {
 }
 
 // Set error reporting
-error_reporting(E_ALL & ~(E_NOTICE|E_STRICT|E_DEPRECATED)); // is 22519 with 5.4+
+if ($serendipity['production']) {
+    error_reporting(E_ALL & ~(E_WARNING|E_NOTICE|E_STRICT|E_DEPRECATED));
+} else {
+    error_reporting(E_ALL & ~(E_NOTICE|E_STRICT|E_DEPRECATED));
+}
 
 if ($serendipity['production'] !== true) {
     @ini_set('display_errors', 'on');

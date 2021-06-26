@@ -1,3 +1,5 @@
+   * Hide more PHP warnings in production mode, to ease the migration
+     to PHP 8
    * Fix: Deleting a user was not possible
    * New images added via the ML will set loading="lazy", improving
      site performance for visitors (only if height and width known)
@@ -11,7 +13,7 @@
    * Change backend_image_add hook to always contain same structure
    * Split date and time input in editor into two input fields
    * Improve performance of the media library by caching the file list
-
+   
 Version 2.4-alpha2 ()
 ------------------------------------------------------------------------
    * Adds 'image_id' to event 'backend_image_add' in addData array
