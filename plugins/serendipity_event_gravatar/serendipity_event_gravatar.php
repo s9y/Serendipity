@@ -458,7 +458,7 @@ class serendipity_event_gravatar extends serendipity_event
         $useSmarty = serendipity_db_bool($this->get_config('smartyimage', 'false'));
 
         // comments sidebar plugin doesn't support smarty, so switch it off, if detected
-        if ($addData['from'] == 'serendipity_plugin_comments:generate_content') {
+        if (is_array($addData) && $addData['from'] == 'serendipity_plugin_comments:generate_content') {
            if (!serendipity_db_bool($this->get_config('recent_entries', 'true'))) {
                return false;
            }
