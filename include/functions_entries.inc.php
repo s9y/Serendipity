@@ -1364,9 +1364,9 @@ function serendipity_updertEntry($entry) {
     $categories = $entry['categories'];
     unset($entry['categories']);
 
-    if (isset($entry['had_categories'])) {
+    if (array_key_exists('had_categories', $entry)) {
         $had_categories = $entry['had_categories'];
-        unset($entry['had_categories']);
+        unset($entry['had_categories']);        
     }
 
     $newEntry = 0;
