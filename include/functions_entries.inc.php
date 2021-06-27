@@ -1232,6 +1232,12 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
             if (strlen($entry['extended'] ?? null)) {
                 $entry['has_extended']      = true;
+            } else {
+                $entry['has_extended']      = false;
+            }
+
+            if (! isset($entry['add_footer'])) {
+                $entry['add_footer']      = '';
             }
 
             if (isset($entry['exflag']) && $entry['exflag'] && ($extended || $preview)) {

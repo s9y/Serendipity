@@ -8,7 +8,7 @@
     <meta name="generator" content="Serendipity v.{$serendipityVersion}">
     <title>{$head_title|default:$blogTitle}{if $head_subtitle} | {$head_subtitle}{/if}</title>
 {* CANONICAL *}
-    {if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || (isset($staticpage_pagetitle) && $staticpage_pagetitle != "") || $robots_index == 'index')}
+    {if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || (isset($staticpage_pagetitle) && $staticpage_pagetitle != "") || isset($robots_index) and $robots_index == 'index')}
        <meta name="robots" content="index,follow">
     {else}
        <meta name="robots" content="noindex,follow">
@@ -43,7 +43,7 @@
    
 {* HEADER IMAGE *}
     {if $view=="entry"}
-        {if $entry.properties.entry_specific_header_image}
+        {if isset($entry.properties.entry_specific_header_image) and $entry.properties.entry_specific_header_image}
             <style type="text/css">.intro-header {ldelim}background-image: url('{$entry.properties.entry_specific_header_image}');{rdelim}</style>         
         {else}
             <style type="text/css">.intro-header {ldelim}background-image: url('{if $template_option.entry_default_header_image}{$template_option.entry_default_header_image}{else}{serendipity_getFile file="img/post-bg.jpg"}{/if}');{rdelim}</style> 
@@ -127,7 +127,7 @@
                             <hr class="small">
                             {if $head_subtitle}<span class="subheading">{$head_subtitle|@default:$blogDescription}</span>{else}{$blogDescription}{/if}
                         {else}
-                            {if $entry.properties.entry_subtitle}<h2 class="subheading">{$entry.properties.entry_subtitle|escape}</h2>{/if}                        
+                            {if isset($entry.properties.entry_subtitle) and $entry.properties.entry_subtitle}<h2 class="subheading">{$entry.properties.entry_subtitle|escape}</h2>{/if}                        
                             <p class="meta">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_html5time}">{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $template_option.show_comment_link == true}&nbsp;&nbsp;<a href="{$entry.link}#comments" title="{if $entry.comments == 0}{$CONST.NO_COMMENTS}{else}{$entry.comments} {$entry.label_comments}{/if}"><button class="btn btn-sm btn-default"><span class="badge">{$entry.comments}</span>&nbsp;<i class="fa fa-lg fa-comment-o"></i><span class="sr-only">{$entry.label_comments}</span></button></a>{/if}{if $entry.is_entry_owner and not $is_preview}&nbsp;&nbsp;<a href="{$entry.link_edit}"  title="{$CONST.EDIT_ENTRY}"><button class="btn btn-sm btn-default"><i class="fa fa-lg fa-edit"></i><span class="sr-only">{$CONST.EDIT_ENTRY}</span></button></a>{/if}</p>
                         {/if}
                     </div>

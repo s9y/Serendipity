@@ -42,7 +42,7 @@
                     {$preview}
                 {elseif $mode == 'save'}
                     {$updertHooks}
-                    {if $res}
+                    {if isset($res) && $res}
                         <div class="alert alert-danger"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$CONST.ERROR}: <b>{$res}</b></div>
                     {else}
                         {if $lastSavedEntry}
