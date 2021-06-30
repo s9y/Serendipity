@@ -205,8 +205,6 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] !== true) {
             // Display error (production: FALSE and production: 'debug')
             echo '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
-
-            echo '<pre style="white-space: pre-line;">';
             
             if ($serendipity['production'] === 'debug') {
                 // In debug mode, throwing an exception here will stop the code execution. Sometimes useful to catch all errors.
