@@ -839,7 +839,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     }
 
     $send_optin = false;
-    if (isset($commentInfo['subscribe'])) {
+    if (isset($commentInfo['subscribe']) && $commentInfo['subscribe']) {
         if (!isset($serendipity['allowSubscriptionsOptIn']) || $serendipity['allowSubscriptionsOptIn']) {
             $subscribe = 'false';
             $send_optin = true;
