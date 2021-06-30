@@ -207,7 +207,11 @@ if (!function_exists('errorToExceptionHandler')) {
             echo '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
 
             echo '<pre style="white-space: pre-line;">';
-            throw new \ErrorException($type . ': ' . $errStr, 0, $errNo, $errFile, $errLine); // tracepath = all, if not ini_set('display_errors', 0);
+            
+            if ($serendipity['production'] === 'debug') {
+                // In debug mode, throwing an exception here will stop the code execution. Sometimes useful to catch all errors.
+                throw new \ErrorException($type . ': ' . $errStr, 0, $errNo, $errFile, $errLine);
+            }
 
             if (!$serendipity['dbConn'] || $exit) {
                 exit; // make sure to exit in case of database connection errors or fatal errors.
