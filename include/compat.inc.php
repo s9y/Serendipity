@@ -214,27 +214,6 @@ if (!function_exists('errorToExceptionHandler')) {
             if (!$serendipity['dbConn'] || $exit) {
                 exit; // make sure to exit in case of database connection errors or fatal errors.
             }
-        } else {
-            // Only display error (production blog) if an admin is logged in, else we discard the error.
-
-            if ($serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN) {
-                $str  = " == SERENDIPITY ERROR == ";
-                $str .= '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
-
-                if (headers_sent()) {
-                    serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, or into streamed js files, which hardly isn't seen by many users
-                } else {
-                    // see global include of function in plugin_api.inc.php
-                    // this also reacts on non eye-displayed errors with following small javascript,
-                    // while being in tags like <select> to push on top of page, else return non javascript use $str just there
-                    // sadly we can not use HEREDOC notation here, since this does not execute the javascript after finished writing
-                    echo "\n".'<script>
-if (typeof errorHandlerCreateDOM == "function") {
-var fragment = window.top.errorHandlerCreateDOM("Error redirect: '.addslashes($str).'");
-document.body.insertBefore(fragment, document.body.childNodes[0]);
-}' . "\n</script>\n<noscript>" . $str . "</noscript>\n";
-                }
-            }
         }
     }
 }
