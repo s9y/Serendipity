@@ -24,7 +24,7 @@
     {if isset($entry) and 'is_entry_owner'|array_key_exists:$entry and $entry.is_entry_owner}
         | <a class="comment_source_ownerlink" href="{$comment.link_delete}" title="{$CONST.COMMENT_DELETE_CONFIRM|@sprintf:$comment.id:$comment.author}">{$CONST.DELETE}</a>
     {/if}
-{if $template_option.refcomments == true}
+{if isset($template_option.refcomments) and $template_option.refcomments == true}
     {if $comment.parent_id != '0'}
         | <a class="reply_origin" href="#c{$comment.parent_id}" title="{$CONST.TWOK11_REPLYORIGIN}: {$CONST.COMMENT} #c{$comment.parent_id}">{$CONST.TWOK11_REPLYORIGIN}</a>
     {/if}

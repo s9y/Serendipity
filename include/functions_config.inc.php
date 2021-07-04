@@ -359,6 +359,7 @@ function serendipity_logout() {
  * @return null
  */
 function serendipity_session_destroy() {
+    echo "session destroy";
     $no_smarty = $_SESSION['no_smarty'];
     @session_destroy();
     session_start();
@@ -2149,7 +2150,7 @@ function &serendipity_loadThemeOptions(&$template_config, $okey = '', $bc_bool =
     }
 
     foreach($template_config AS $key => $item) {
-        if (!isset($template_vars[$item['var']])) {
+        if (isset($item['var']) && !isset($template_vars[$item['var']])) {
             $template_vars[$item['var']] = $item['default'] ?? null;
         }
     }
