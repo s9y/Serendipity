@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Serendipity v.{$serendipityVersion}">
-    {if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || $staticpage_pagetitle != "" || $robots_index == 'index')}
+{if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || (isset($staticpage_pagetitle) and $staticpage_pagetitle != "") || (isset($robots_index) and $robots_index == 'index'))}
         <meta name="robots" content="index,follow">
     {else}
         <meta name="robots" content="noindex,follow">
@@ -112,7 +112,7 @@
                 {/if}
             </h2>
             
-            {if $footer_totalPages >1 && !isset($staticpage_pagetitle)}
+            {if isset($footer_totalPages) and $footer_totalPages > 1 && !isset($staticpage_pagetitle)}
                 <nav class="pagination pull-right">
                     {assign var="paginationStartPage" value="`$footer_currentPage-3`"}
                     {if $footer_currentPage+3 > $footer_totalPages}
@@ -154,7 +154,7 @@
 {* MAIN CONTENT *}
     <div class="container content">
         <div class="row">
-            <main class="{if ($rightSidebarElements > 0 && $staticpage_pagetitle =='') || ($rightSidebarElements > 0 && $staticpage_pagetitle !='' && $staticpage_custom.show_sidebars != 'false')}col-md-9{else}col-md-12{/if} mainpanel">
+            <main class="{if isset($rightSidebarElements) and ($rightSidebarElements > 0 && (!isset($staticpage_pagetitle) or $staticpage_pagetitle =='')) || isset($rightSidebarElements) and ($rightSidebarElements > 0 && (isset($staticpage_pagetitle) and $staticpage_pagetitle != '') && $staticpage_custom.show_sidebars != 'false')}col-md-9{else}col-md-12{/if} mainpanel">
                 {if $view=='404'}
                     <div id="search-block" class="row">
                         <div class="col-md-8 col-md-offset-2">
@@ -205,7 +205,7 @@
                     {$CONTENT}
                 {/if}
             </main>
-            {if ($rightSidebarElements > 0 && $staticpage_pagetitle =='') || ($rightSidebarElements > 0 && $staticpage_pagetitle !='' && $staticpage_custom.show_sidebars != 'false')}
+            {if isset($rightSidebarElements) && ($rightSidebarElements > 0 && (! isset($staticpage_pagetitle) or $staticpage_pagetitle == '')) || isset($rightSidebarElements) && ($rightSidebarElements > 0 && isset($staticpage_pagetitle) and $staticpage_pagetitle !='' && $staticpage_custom.show_sidebars != 'false')}
                 <aside class="col-md-3 RightSideBarContainer">
                     <div id="serendipityRightSideBar" class="RightSideBar">
                         {serendipity_printSidebar side="right"}

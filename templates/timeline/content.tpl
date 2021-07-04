@@ -67,7 +67,7 @@
     </div>
 </div>
 
-{elseif $subscribe_confirm_error}
+{elseif isset($subscribe_confirm_error) and $subscribe_confirm_error}
 <div id="search-block" class="row">
     <div class="col-md-8 col-md-offset-2">       
         <div id="search-response" class="panel panel-danger">
@@ -82,7 +82,7 @@
     </div>
 </div>
 
-{elseif $subscribe_confirm_success}
+{elseif isset($subscribe_confirm_success) and $subscribe_confirm_success}
 <div id="search-block" class="row">
     <div class="col-md-8 col-md-offset-2">
         <div id="search-response" class="panel panel-success">
@@ -96,7 +96,7 @@
         </div>    
     </div>
 </div>
-{elseif $content_message}
+{elseif isset($content_message) and $content_message}
 <div id="search-block" class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="alert alert-info alert-dismissible fade in" role="alert">
