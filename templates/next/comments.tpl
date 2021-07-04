@@ -1,8 +1,8 @@
 {foreach from=$comments item=comment name="comments"}
     <article id="c{$comment.id}" class="comment {cycle values="odd,even"}{if $comment.depth > 8} commentlevel-9{else} commentlevel-{$comment.depth}{/if}">
         <header class="clearfix">
-            <h4>{if $comment.url}<a href="{$comment.url}">{/if}{$comment.author|default:$CONST.ANONYMOUS}{if $comment.url}</a>{/if}{if $comment.spice_twitter_name and not $comment.spice_twitter_followme} (<a href="{$comment.spice_twitter_url}"{if $comment.spice_twitter_nofollow} rel="nofollow"{/if}>@{$comment.spice_twitter_name}</a>){/if} {$CONST.ON} <time datetime="{$comment.timestamp|serendipity_html5time}">{$comment.timestamp|formatTime:$template_option.date_format}</time>:</h4>
-        {if $comment.spice_twitter_name && $comment.spice_twitter_followme}
+            <h4>{if $comment.url}<a href="{$comment.url}">{/if}{$comment.author|default:$CONST.ANONYMOUS}{if $comment.url}</a>{/if}{if isset($comment.spice_twitter_name) and $comment.spice_twitter_name and not $comment.spice_twitter_followme} (<a href="{$comment.spice_twitter_url}"{if $comment.spice_twitter_nofollow} rel="nofollow"{/if}>@{$comment.spice_twitter_name}</a>){/if} {$CONST.ON} <time datetime="{$comment.timestamp|serendipity_html5time}">{$comment.timestamp|formatTime:$template_option.date_format}</time>:</h4>
+        {if isset($comment.spice_twitter_name) and $comment.spice_twitter_name && $comment.spice_twitter_followme}
             <div class="twitter_follow">
             {$comment.spice_twitter_followme}
             </div>
@@ -10,7 +10,7 @@
         </header>
 
         <div class="clearfix">
-            {if $comment.avatar}{$comment.avatar}{/if}
+            {if isset($comment.avatar) and $comment.avatar}{$comment.avatar}{/if}
         {if $comment.body == 'COMMENT_DELETED'}
             <p class="msg-warning"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.COMMENT_IS_DELETED}</p>
         {else}
@@ -19,7 +19,7 @@
         </div>
 
         <footer>
-        {if $comment.spice_article_name}
+        {if isset($comment.spice_article_name) and $comment.spice_article_name}
             <p>{$comment.spice_article_prefix}: <a{if $comment.spice_article_nofollow} rel="nofollow"{/if} href="{$comment.spice_article_url}">{$comment.spice_article_name}</a></p>
         {/if}
             <ul class="meta">

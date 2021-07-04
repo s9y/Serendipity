@@ -111,8 +111,8 @@
     <p class="msg-notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NO_ENTRIES_TO_PRINT}</p>
     {/if}
 {/foreach}
-{if not $is_preview}
-    {if $staticpage_pagetitle == ''}
+{if not $is_preview and not $is_single_entry}
+    {if ! isset($staticpage_pagetitle) || $staticpage_pagetitle == ''}
     <nav class="pagination clearfix">
         {if $footer_info}<h3>{$footer_info}</h3>{/if}
     {if $footer_prev_page||$footer_next_page}
