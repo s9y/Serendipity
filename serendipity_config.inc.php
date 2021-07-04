@@ -56,7 +56,7 @@ $serendipity['version'] = '2.4-alpha2';
 
 // Setting this to 'false' will enable debugging output. All alpha/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 if (!isset($serendipity['production'])) {
-    $serendipity['production'] = ! preg_match('@\-(alpha|beta|cvs|rc).*@', $serendipity['version']);
+    $serendipity['production'] = ! preg_match('@\-(alpha|cvs).*@', $serendipity['version']);
 }
 
 // Set error reporting
