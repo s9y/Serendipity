@@ -91,7 +91,7 @@ switch ($serendipity['GET']['action']) {
             array(
                 'content_message'      => sprintf(YOUR_SEARCH_RETURNED_BLAHBLAH, '<span class="searchterm">' . $serendipity['GET']['searchTerm'] . '</span>', '<span class="searchresults">' . serendipity_getTotalEntries() . '</span>'),
                 'searchresult_results' => true,
-                'searchresult_fullentry' => $serendipity['GET']['fullentry']
+                'searchresult_fullentry' => $serendipity['GET']['fullentry'] ?? null
             )
         );
 

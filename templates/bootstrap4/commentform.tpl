@@ -8,18 +8,18 @@
         <input type="hidden" name="serendipity[entry_id]" value="{$commentform_id}">
 
         <div class="form-group">
-            <label for="serendipity_commentform_name">{$CONST.NAME}{if $required_fields.name}*{/if}</label>
-            <input id="serendipity_commentform_name" class="form-control" type="text" name="serendipity[name]" value="{$commentform_name}"{if $required_fields.name} required{/if}>
+            <label for="serendipity_commentform_name">{$CONST.NAME}{if isset($required_fields.name) and $required_fields.name}*{/if}</label>
+            <input id="serendipity_commentform_name" class="form-control" type="text" name="serendipity[name]" value="{$commentform_name}"{if isset($required_fields.name) and $required_fields.name} required{/if}>
         </div>
 
         <div class="form-group">
-            <label for="serendipity_commentform_email">{$CONST.EMAIL}{if $required_fields.email}*{/if}</label>
-            <input id="serendipity_commentform_email" class="form-control" type="email" name="serendipity[email]" value="{$commentform_email}"{if $required_fields.email} required{/if}>
+            <label for="serendipity_commentform_email">{$CONST.EMAIL}{if isset($required_fields.email) and $required_fields.email}*{/if}</label>
+            <input id="serendipity_commentform_email" class="form-control" type="email" name="serendipity[email]" value="{$commentform_email}"{if isset($required_fields.email) and $required_fields.email} required{/if}>
         </div>
 
         <div class="form-group">
-            <label for="serendipity_commentform_url">{$CONST.HOMEPAGE}{if $required_fields.url}*{/if}</label>
-            <input id="serendipity_commentform_url" class="form-control" type="url" name="serendipity[url]" value="{$commentform_url}"{if $required_fields.url} required{/if}>
+            <label for="serendipity_commentform_url">{$CONST.HOMEPAGE}{if isset($required_fields.url) and $required_fields.url}*{/if}</label>
+            <input id="serendipity_commentform_url" class="form-control" type="url" name="serendipity[url]" value="{$commentform_url}"{if isset($required_fields.url) and $required_fields.url} required{/if}>
         </div>
 
         <div class="form-group">
@@ -28,8 +28,8 @@
         </div>
 
         <div class="form-group">
-            <label for="serendipity_commentform_comment">{$CONST.COMMENT}{if $required_fields.comment}*{/if}</label>
-            <textarea id="serendipity_commentform_comment" class="form-control" rows="10" name="serendipity[comment]"{if $required_fields.comment} required{/if}>{$commentform_data}</textarea>
+            <label for="serendipity_commentform_comment">{$CONST.COMMENT}{if isset($required_fields.comment) and $required_fields.comment}*{/if}</label>
+            <textarea id="serendipity_commentform_comment" class="form-control" rows="10" name="serendipity[comment]"{if isset($required_fields.comment) and $required_fields.comment} required{/if}>{$commentform_data}</textarea>
         </div>
         {serendipity_hookPlugin hook="frontend_comment" data=$commentform_entry}
     {if $is_commentform_showToolbar}

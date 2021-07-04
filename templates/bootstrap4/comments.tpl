@@ -13,7 +13,7 @@
         {/if}
         </div>
     {if $entry.allow_comments AND $comment.body != 'COMMENT_DELETED'}
-        <a id="serendipity_reply_{$comment.id}" class="comment_reply btn btn-outline-primary btn-sm" href="#serendipity_CommentForm" onclick="document.getElementById('serendipity_replyTo').value='{$comment.id}'; {$comment_onchange}">{$CONST.REPLY}</a>
+        <a id="serendipity_reply_{$comment.id}" class="comment_reply btn btn-outline-primary btn-sm" href="#serendipity_CommentForm" onclick="document.getElementById('serendipity_replyTo').value='{$comment.id}'; {if isset($comment_onchange)}{$comment_onchange}{/if}">{$CONST.REPLY}</a>
         <div id="serendipity_replyform_{$comment.id}"></div>
     {/if}
     </li>

@@ -834,7 +834,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     $limit = serendipity_db_limit_sql($limit);
 
     $term = serendipity_db_escape_string($term);
-    $cond = array();
+    $cond = array('having' => '');
     $relevance_enabled = false;
     if ($serendipity['dbType'] == 'postgres' ||
         $serendipity['dbType'] == 'pdo-postgres') {
