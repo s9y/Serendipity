@@ -187,6 +187,9 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
         $cond['orderkey'] = "''";
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     if ($cond['joinparts']['properties'] ?? false) {
         $cond['joins'] .= "\n LEFT OUTER JOIN {$serendipity['dbPrefix']}mediaproperties AS bp
                                         ON (bp.mediaid = i.id AND bp.property_group = 'base_property' AND bp.property = '{$cond['orderproperty']}')\n";
@@ -3202,8 +3205,8 @@ function serendipity_prepareMedia(&$file, $url = '') {
 
     /* If it is an image, and the thumbnail exists */
     if ($file['is_image'] && file_exists($file['full_thumb'])) {
-        $file['thumbWidth']  = $file['dim'][0];
-        $file['thumbHeight'] = $file['dim'][1];
+        $file['thumbWidth']  = $file['dim'][0] ?? null;
+        $file['thumbHeight'] = $file['dim'][1] ?? null;
     } elseif ($file['is_image'] && $file['hotlink']) {
         $sizes = serendipity_calculate_aspect_size($file['dimensions_width'], $file['dimensions_height'], $serendipity['thumbSize'], $serendipity['thumbConstraint']);
         $file['thumbWidth']  = $sizes[0];

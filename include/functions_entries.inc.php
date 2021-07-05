@@ -354,6 +354,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     }
 
     serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('noCache' => $noCache, 'noSticky' => $noSticky, 'source' => 'entries'));
+    if (!isset($cond['addkey'])) {
+        $cond['addkey'] = '';
+    }
 
     if (is_null($select_key)) {
         $select_key = "{$cond['distinct']}
@@ -394,6 +397,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                         ON ec.categoryid = c.categoryid";
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     if ($joinown) {
         $cond['joins'] .= $joinown;
     }
@@ -894,6 +900,12 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('source' => 'search', 'term' => $term));
     serendipity_ACL_SQL($cond, 'limited');
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
+    if (!isset($cond['addkey'])) {
+        $cond['addkey'] = '';
+    }
     $serendipity['fullCountQuery'] = "
                       FROM
                             {$serendipity['dbPrefix']}entries e

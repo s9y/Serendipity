@@ -473,9 +473,12 @@ function serveArchives() {
     $serendipity['range'] = array($ts, $te);
 
     if ($serendipity['GET']['action'] == 'read') {
-        if ($serendipity['GET']['category']) {
+        if ($serendipity['GET']['category'] ?? false) {
             $cInfo = serendipity_fetchCategoryInfo($serendipity['GET']['category']);
             $serendipity['head_title'] = $cInfo['category_name'];
+        }
+        if (!isset($serendipity['head_subtitle'])) {
+            $serendipity['head_subtitle'] = '';
         }
         $serendipity['head_subtitle'] .= sprintf(ENTRIES_FOR, $date);
     }
