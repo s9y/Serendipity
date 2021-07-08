@@ -218,7 +218,7 @@ class Serendipity_Import_textpattern extends Serendipity_Import {
         return true;
     }
 
-    function importCategories($parentname = 'root', $parentid = 0, $txpdb) {
+    function importCategories($parentname = 'root', $parentid = 0, $txpdb = null) {
         $res = $this->nativeQuery("SELECT * FROM {$this->data['prefix']}txp_category
                                      WHERE parent = '" . mysqli_escape_string($parentname) . "' AND type = 'article'", $txpdb);
         if (!$res) {
