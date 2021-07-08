@@ -107,13 +107,12 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
         $cond['parts']['keywords'] = " AND (mk.property IN ('" . serendipity_db_implode("', '", $keywords, 'string') . "'))\n";
         $cond['joinparts']['keywords'] = true;
     }
+    $cond['parts']['filter'] = '';
     foreach($filter AS $f => $fval) {
         if (! (isset($orderfields[$f]) || $f == "fileCategory") || empty($fval)) {
             continue;
         }
-        
-        $cond['parts']['filter'] = '';
-        
+
         if (is_array($fval)) {
             if (empty($fval['from']) || empty($fval['to'])) {
                 continue;
