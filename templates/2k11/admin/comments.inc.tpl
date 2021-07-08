@@ -133,7 +133,7 @@
                                 <dt>{$CONST.AUTHOR}:</dt>
                                 <dd>{$comment.author|escape|truncate:40:"&hellip;"} {$comment.action_author}</dd>
                                 <dt>{$CONST.EMAIL}:</dt>
-                                <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <i>({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</i>{/if}{/if} {$comment.action_email}</dd>
+                                <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <i>({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</i>{/if}{/if} {if isset($comment.action_email)}{$comment.action_email}{/if}</dd>
                                 <dt>IP:</dt>
                                 <dd>{if empty($comment.ip)}N/A{else}{$comment.ip|escape}{/if} {if isset($comment.action_ip)}{$comment.action_ip}{/if}</dd>
                                 <dt>URL:</dt>

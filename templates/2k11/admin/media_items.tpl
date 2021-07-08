@@ -15,7 +15,7 @@
                 {$img_alt="{$file.realname}"}
                 
             {elseif $file.is_image AND $file.hotlink}
-                {if $media.textarea}
+                {if (isset($media.textarea) && $media.textarea)}
                     {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[htmltarget]={$media.htmltarget}"}
                 {else}
                     {if $file.url}
@@ -26,7 +26,7 @@
                     {$img_title="{$file.path}"}
                     {$img_alt="{$file.realname}"}
             {else}
-                {if $media.textarea}
+                {if (isset($media.textarea) && $media.textarea)}
                     {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[htmltarget]={$media.htmltarget}"}
                 {else}
                     {if $file.url}

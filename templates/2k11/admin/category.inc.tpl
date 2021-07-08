@@ -17,7 +17,7 @@
 {/if}
 {if $doDelete}
   {if $deleteSuccess}
-        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {if $remainingCat}{$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}{else}{$cid|string_format:"{$CONST.CATEGORY_DELETED}"}{/if}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {if isset($remainingCat) && $remainingCat}{$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}{else}{$cid|string_format:"{$CONST.CATEGORY_DELETED}"}{/if}</span>
   {else}
         <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.INVALID_CATEGORY}</span>
   {/if}
