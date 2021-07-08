@@ -938,7 +938,9 @@ function serendipity_smarty_init($vars = array()) {
             #@define('MEMCACHE_EXTENSION_LOADED', (class_exists('Memcached',false) || class_exists('Memcache',false)) && (extension_loaded("memcached") || extension_loaded("memcache")));
 
             // Default Smarty Engine will be used
-            @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
+            if (!defined('SMARTY_DIR')) {
+                @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
+            }
             if (!class_exists('Smarty')) {
                 include_once SMARTY_DIR . 'Smarty.class.php';
             }
