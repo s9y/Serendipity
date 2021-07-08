@@ -418,7 +418,7 @@ function serendipity_deleteImage($id) {
                     $dfnThumb = $file['path'] . $file['name'] . (!empty($thumb['fthumb']) ? '.' . $thumb['fthumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
                     $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
 
-                    if (@unlink($dfThumb)) {
+                    if (file_exists($dfThumb) && @unlink($dfThumb)) {
                         $messages .= sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . DELETE_THUMBNAIL . "</span>\n", $dfnThumb);
                     }
                 }
