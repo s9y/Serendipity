@@ -37,33 +37,35 @@ function locateHiddenVariables($_args) {
             continue;
         }
 
-        if ($v[0] == 'P') { /* Page */
-            $page = substr($v, 1);
-            if (is_numeric($page)) {
-                $serendipity['GET']['page'] = $page;
-                unset($_args[$k]);
-                unset($serendipity['uriArguments'][$k]);
-            }
-        } elseif ($v[0] == 'A') { /* Author */
-            $url_author = substr($v, 1);
-            if (is_numeric($url_author)) {
-                $serendipity['GET']['viewAuthor'] = (int)$url_author;
-                unset($_args[$k]);
-            }
-        } elseif ($v == 'summary') { /* Summary */
-            $serendipity['short_archives'] = true;
-            if (! array_key_exists('head_subtitle', $serendipity)) {
-                $serendipity['head_subtitle'] = '';
-            }
-            $serendipity['head_subtitle'] .= SUMMARY . ' - ';
-            unset($_args[$k]);
-        } elseif ($v[0] == 'C') { /* category */
-            $cat = substr($v, 1);
-            if (is_numeric($cat)) {
-                $serendipity['GET']['category'] = $cat;
-                unset($_args[$k]);
-            }
-        }
+        if (strlen($v) > 0) {
+             if ($v[0] == 'P') { /* Page */
+                 $page = substr($v, 1);
+                 if (is_numeric($page)) {
+                     $serendipity['GET']['page'] = $page;
+                     unset($_args[$k]);
+                     unset($serendipity['uriArguments'][$k]);
+                 }
+             } elseif ($v[0] == 'A') { /* Author */
+                 $url_author = substr($v, 1);
+                 if (is_numeric($url_author)) {
+                     $serendipity['GET']['viewAuthor'] = (int)$url_author;
+                     unset($_args[$k]);
+                 }
+             } elseif ($v == 'summary') { /* Summary */
+                 $serendipity['short_archives'] = true;
+                 if (! array_key_exists('head_subtitle', $serendipity)) {
+                     $serendipity['head_subtitle'] = '';
+                 }
+                 $serendipity['head_subtitle'] .= SUMMARY . ' - ';
+                 unset($_args[$k]);
+             } elseif ($v[0] == 'C') { /* category */
+                 $cat = substr($v, 1);
+                 if (is_numeric($cat)) {
+                     $serendipity['GET']['category'] = $cat;
+                     unset($_args[$k]);
+                 }
+             }
+         }
     }
     return $_args;
 }
