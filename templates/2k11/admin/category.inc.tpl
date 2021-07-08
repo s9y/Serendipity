@@ -74,7 +74,7 @@
                         <option value="0"{if $cid == 0} selected{/if}>{$CONST.NO_CATEGORY}</option>
                     {foreach $categories as $cat}
                         {if $cat.categoryid == $cid}{continue}{/if}
-                        <option value="{$cat.categoryid}"{if $this_cat.parentid == $cat.categoryid} selected{/if}>{for $i=1 to $cat.depth}&nbsp{/for} {$cat.category_name|escape}</option>
+                        <option value="{$cat.categoryid}"{if isset($this_cat.parentid) && $this_cat.parentid == $cat.categoryid} selected{/if}>{for $i=1 to $cat.depth}&nbsp{/for} {$cat.category_name|escape}</option>
                     {/foreach}
                     </select>
                 </div>

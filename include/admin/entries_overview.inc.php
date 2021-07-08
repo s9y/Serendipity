@@ -4,7 +4,7 @@ if (IN_serendipity !== true) {
     die ('Don\'t hack!');
 }
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 

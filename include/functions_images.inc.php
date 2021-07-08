@@ -3268,7 +3268,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         $form_hidden .=  '        <input type="hidden" name="serendipity[adminModule]" value="media">'."\n";
     }
 
-    if (!is_object($serendipity['smarty'])) {
+    if (!is_object($serendipity['smarty'] ?? null)) {
         serendipity_smarty_init();
     }
     $order_fields = serendipity_getImageFields();

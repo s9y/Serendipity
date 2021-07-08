@@ -344,7 +344,7 @@ class serendipity_event_nl2br extends serendipity_event
                     if( $isobr ) {
                         $serendipity['nl2br']['iso2br'] = true; // include to global as also used by staticpages now
 
-                        if (! array_key_exists('smarty', $serendipity) || !is_object($serendipity['smarty'])) {
+                        if (!is_object($serendipity['smarty'] ?? null)) {
                             serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
                         }
 

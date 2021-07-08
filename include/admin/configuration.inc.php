@@ -65,7 +65,7 @@ if ($_POST['installAction'] == 'check' && serendipity_checkFormToken()) {
 
 $data['config'] = serendipity_printConfigTemplate(serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE), $serendipity, false, true);
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 
