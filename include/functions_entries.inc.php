@@ -41,7 +41,7 @@ function serendipity_fetchCategoryRange($categoryid) {
         $res = array(array('category_left' => 0, 'category_right' => 0));
     }
 
-    if ($res[0]['hide_sub'] == 1) {
+    if (($res[0]['hide_sub'] ?? null) == 1) {
         // Set ranges only to own category. Patch by netmorix
         return array('category_left' => $res[0]['category_left'], 'category_right' => $res[0]['category_left']);
     } else {
@@ -400,6 +400,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     if (!isset($cond['joins'])) {
         $cond['joins'] = '';
     }
+    if (!isset($cond['and'])) {
+        $cond['and'] = '';
+    }
     if ($joinown) {
         $cond['joins'] .= $joinown;
     }
@@ -593,6 +596,9 @@ function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false
         $cond['single_orderby'] = '';
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     $querystring = "SELECT  e.id,
                             e.title,
                             e.timestamp,
@@ -1156,7 +1162,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             if (!empty($entry['properties']['ep_cache_body'])) {
-                $entry['pre_body']  = $entry['body'];
+                $entry['pre_body']  = $entry['body'] ?? null;
                 $entry['body']      = &$entry['properties']['ep_cache_body'];
                 $entry['is_cached'] = true;
             }
@@ -1172,7 +1178,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             if (!empty($entry['properties']['ep_cache_extended'])) {
-                $entry['pre_extended']  = $entry['extended'];
+                $entry['pre_extended']  = $entry['extended'] ?? null;
                 $entry['extended']  = &$entry['properties']['ep_cache_extended'];
                 $entry['is_cached'] = true;
             }
@@ -1733,7 +1739,7 @@ function serendipity_printArchives() {
               ON e.id = ec.entryid
        LEFT JOIN {$serendipity['dbPrefix']}category c
               ON ec.categoryid = c.categoryid" : "") . 
-              $sql_condition['joins'] .
+              ($sql_condition['joins'] ?? '') .
         " WHERE isdraft = 'false'"
                 . ($sql_condition['and'] ?? '')
                 . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '')

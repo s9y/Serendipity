@@ -284,19 +284,40 @@ function serendipity_smarty_fetchPrintEntries($params, $smarty) {
         $serendipity['short_archives'] = $params['short_archives'];
     }
 
-    $old_var['skip_smarty_hooks']     = $serendipity['skip_smarty_hooks'];
+    $old_var['skip_smarty_hooks']     = $serendipity['skip_smarty_hooks'] ?? null;
     $serendipity['skip_smarty_hooks'] = $params['skip_smarty_hooks'];
 
-    $old_var['skip_smarty_hook']     = $serendipity['skip_smarty_hook'];
+    $old_var['skip_smarty_hook']     = $serendipity['skip_smarty_hook'] ?? null;
     $serendipity['skip_smarty_hook'] = $params['skip_smarty_hook'];
 
     foreach($restore_var_GET_keys AS $key) {
         if (!empty($params[$key])) {
-            $old_var['GET'][$key]     = $serendipity['GET'][$key];
+            $old_var['GET'][$key]     = $serendipity['GET'][$key] ?? null;
             $serendipity['GET'][$key] = $params[$key];
         }
     }
 
+    $param_keys = array(
+        'full',
+        'limit',
+        'fetchDrafts',
+        'modified_since',
+        'orderby',
+        'filter_sql',
+        'noCache',
+        'noSticky',
+        'select_key',
+        'group_by',
+        'returncode',
+        'joinauthors',
+        'joincategories',
+        'joinown'
+    );
+    foreach ($param_keys as $param_key) {
+        if (!isset($params[$param_key])) {
+            $params[$param_key] = null;
+        }
+    }
     if (!empty($params['id'])) {
         $entry = serendipity_fetchEntry(
             'id',
@@ -366,7 +387,7 @@ function serendipity_smarty_fetchPrintEntries($params, $smarty) {
         $serendipity['short_archives'] = $old_var['short_archives'];
     }
 
-    if (is_array($old_var['GET'])) {
+    if (is_array($old_var['GET'] ?? null)) {
         foreach($old_var['GET'] AS $key => $val) {
             $serendipity['GET'][$key] = $val;
         }

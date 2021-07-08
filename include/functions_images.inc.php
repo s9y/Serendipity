@@ -214,6 +214,9 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
         $cond['distinct'] = '';
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     $basequery = "FROM {$serendipity['dbPrefix']}images AS i
        LEFT OUTER JOIN {$serendipity['dbPrefix']}authors AS a
                     ON i.authorid = a.authorid
@@ -286,6 +289,9 @@ function serendipity_fetchImageFromDatabase($id, $mode = 'read') {
         serendipity_ACL_SQL($cond, false, 'directory', $mode);
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     $rs = serendipity_db_query("SELECT {$cond['distinct']} i.id, i.name, i.extension, i.mime, i.size, i.dimensions_width, i.dimensions_height, i.date, i.thumbnail_name, i.authorid, i.path, i.hotlink, i.realname
                                   FROM {$serendipity['dbPrefix']}images AS i
                                        {$cond['joins']}
@@ -1236,6 +1242,9 @@ function serendipity_syncThumbs($deleteThumbs = false) {
                             AND extension = '" . serendipity_db_escape_string($f[1]) . "'"
         );
         serendipity_ACL_SQL($cond, false, 'directory');
+        if (!isset($cond['joins'])) {
+            $cond['joins'] = '';
+        }
 
         $rs = serendipity_db_query("SELECT *
                                       FROM {$serendipity['dbPrefix']}images AS i

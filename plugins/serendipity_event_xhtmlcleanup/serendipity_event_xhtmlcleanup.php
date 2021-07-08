@@ -143,7 +143,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
                     $this->cleanup_parse = serendipity_db_bool($this->get_config('xhtml_parse', 'true'));
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], 'true')) && isset($eventData[$temp['element']]) &&
-                            !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
+                            (isset($eventData['properties']) && isset($eventData['properties']['ep_disable_markup_' . $this->instance]) && !$eventData['properties']['ep_disable_markup_' . $this->instance]) &&
                             !isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
                             $element = $temp['element'];
                             $this->cleanup_tag      = 'IMG';
