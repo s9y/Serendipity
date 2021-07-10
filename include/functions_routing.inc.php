@@ -398,14 +398,13 @@ function serveArchives() {
     $serendipity['view'] = 'archives';
 
     $_args = locateHiddenVariables($serendipity['uriArguments']);
-
     /* We must always *assume* that Year, Month and Day are the first 3 arguments */
-    $year = $_args[0] ?? null;
-    $month = $_args[1] ?? null;
-    $day = $_args[2] ?? null;
-    if ($year == "archives") {
-        unset($year);
-    }
+    $year = $_args[1] ?? null;
+    $month = $_args[2] ?? null;
+    $day = $_args[3] ?? null;
+    //if ($year == "archives") {
+    //    unset($year);
+    //}
 
     $serendipity['GET']['action']     = 'read';
     $serendipity['GET']['hidefooter'] = true;
