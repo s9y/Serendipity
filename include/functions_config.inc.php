@@ -359,7 +359,6 @@ function serendipity_logout() {
  * @return null
  */
 function serendipity_session_destroy() {
-    echo "session destroy";
     $no_smarty = $_SESSION['no_smarty'] ?? null;
     @session_destroy();
     session_start();
