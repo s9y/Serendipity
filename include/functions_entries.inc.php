@@ -1131,17 +1131,22 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     if ($use_grouped_array === false) {
         // Use grouping by date (default)
         $dategroup = array();
-        for ($x = 0, $num_entries = count($entries); $x < $num_entries; $x++) {
-            if (!empty($entries[$x]['properties']['ep_is_sticky']) && serendipity_db_bool($entries[$x]['properties']['ep_is_sticky'])) {
-                $entries[$x]['is_sticky'] = true;
-                $key = 'sticky';
-            } else {
-                $key = date('Ymd', serendipity_serverOffsetHour($entries[$x]['timestamp']));
-            }
+        $num_entries = count($entries);
+        foreach ($entries as $i => &$entry) {
+            if ($i !== 'id') {
+                if (!empty($entry['properties']['ep_is_sticky']) && serendipity_db_bool($entry['properties']['ep_is_sticky'])) {
+                    $entry['is_sticky'] = true;
+                    $key = 'sticky';
+                } else {
+                    $key = date('Ymd', serendipity_serverOffsetHour($entry['timestamp']));
+                }
 
-            $dategroup[$key]['date']        = $entries[$x]['timestamp'];
-            $dategroup[$key]['is_sticky']   = (isset($entries[$x]['is_sticky']) && (serendipity_db_bool($entries[$x]['is_sticky']) ? true : false));
-            $dategroup[$key]['entries'][]   = &$entries[$x];
+                $dategroup[$key]['date']        = $entry['timestamp'];
+                $dategroup[$key]['is_sticky']   = (isset($entry['is_sticky']) && (serendipity_db_bool($entry['is_sticky']) ? true : false));
+                $dategroup[$key]['entries'][]   = &$entry;
+            } else {
+                $num_entries--;
+            }
         }
     } elseif ($use_grouped_array === 'plugin') {
         // Let a plugin do the grouping
