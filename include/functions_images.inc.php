@@ -107,13 +107,12 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
         $cond['parts']['keywords'] = " AND (mk.property IN ('" . serendipity_db_implode("', '", $keywords, 'string') . "'))\n";
         $cond['joinparts']['keywords'] = true;
     }
+    $cond['parts']['filter'] = '';
     foreach($filter AS $f => $fval) {
         if (! (isset($orderfields[$f]) || $f == "fileCategory") || empty($fval)) {
             continue;
         }
-        
-        $cond['parts']['filter'] = '';
-        
+
         if (is_array($fval)) {
             if (empty($fval['from']) || empty($fval['to'])) {
                 continue;
@@ -187,6 +186,9 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
         $cond['orderkey'] = "''";
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     if ($cond['joinparts']['properties'] ?? false) {
         $cond['joins'] .= "\n LEFT OUTER JOIN {$serendipity['dbPrefix']}mediaproperties AS bp
                                         ON (bp.mediaid = i.id AND bp.property_group = 'base_property' AND bp.property = '{$cond['orderproperty']}')\n";
@@ -211,6 +213,9 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
         $cond['distinct'] = '';
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     $basequery = "FROM {$serendipity['dbPrefix']}images AS i
        LEFT OUTER JOIN {$serendipity['dbPrefix']}authors AS a
                     ON i.authorid = a.authorid
@@ -283,6 +288,9 @@ function serendipity_fetchImageFromDatabase($id, $mode = 'read') {
         serendipity_ACL_SQL($cond, false, 'directory', $mode);
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     $rs = serendipity_db_query("SELECT {$cond['distinct']} i.id, i.name, i.extension, i.mime, i.size, i.dimensions_width, i.dimensions_height, i.date, i.thumbnail_name, i.authorid, i.path, i.hotlink, i.realname
                                   FROM {$serendipity['dbPrefix']}images AS i
                                        {$cond['joins']}
@@ -409,7 +417,7 @@ function serendipity_deleteImage($id) {
                     $dfnThumb = $file['path'] . $file['name'] . (!empty($thumb['fthumb']) ? '.' . $thumb['fthumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
                     $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
 
-                    if (@unlink($dfThumb)) {
+                    if (file_exists($dfThumb) && @unlink($dfThumb)) {
                         $messages .= sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . DELETE_THUMBNAIL . "</span>\n", $dfnThumb);
                     }
                 }
@@ -1233,6 +1241,9 @@ function serendipity_syncThumbs($deleteThumbs = false) {
                             AND extension = '" . serendipity_db_escape_string($f[1]) . "'"
         );
         serendipity_ACL_SQL($cond, false, 'directory');
+        if (!isset($cond['joins'])) {
+            $cond['joins'] = '';
+        }
 
         $rs = serendipity_db_query("SELECT *
                                       FROM {$serendipity['dbPrefix']}images AS i
@@ -3202,8 +3213,8 @@ function serendipity_prepareMedia(&$file, $url = '') {
 
     /* If it is an image, and the thumbnail exists */
     if ($file['is_image'] && file_exists($file['full_thumb'])) {
-        $file['thumbWidth']  = $file['dim'][0];
-        $file['thumbHeight'] = $file['dim'][1];
+        $file['thumbWidth']  = $file['dim'][0] ?? null;
+        $file['thumbHeight'] = $file['dim'][1] ?? null;
     } elseif ($file['is_image'] && $file['hotlink']) {
         $sizes = serendipity_calculate_aspect_size($file['dimensions_width'], $file['dimensions_height'], $serendipity['thumbSize'], $serendipity['thumbConstraint']);
         $file['thumbWidth']  = $sizes[0];
@@ -3265,7 +3276,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         $form_hidden .=  '        <input type="hidden" name="serendipity[adminModule]" value="media">'."\n";
     }
 
-    if (!is_object($serendipity['smarty'])) {
+    if (!is_object($serendipity['smarty'] ?? null)) {
         serendipity_smarty_init();
     }
     $order_fields = serendipity_getImageFields();

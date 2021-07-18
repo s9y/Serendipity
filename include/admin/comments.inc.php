@@ -375,7 +375,7 @@ $data['formtoken']     = serendipity_setFormToken();
 $data['get']['filter'] = $serendipity['GET']['filter']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 $data['commentReplied'] = false;
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 

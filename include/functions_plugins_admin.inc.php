@@ -497,7 +497,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 // I can't get it to work unless there's a class of
                 // pluginmanager_container on the ol, either.
                 // The drag-n-drop returns the list of IDs in order.
-                $data['sequencejs_output'] = $sequencejs_output = $serendipity['sequencejs_output'];
+                $data['sequencejs_output'] = $sequencejs_output = $serendipity['sequencejs_output'] ?? null;
                 if (!$sequencejs_output) {
                     $serendipity['sequencejs_output'] = true;
                 }

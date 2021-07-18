@@ -41,7 +41,7 @@ function serendipity_fetchCategoryRange($categoryid) {
         $res = array(array('category_left' => 0, 'category_right' => 0));
     }
 
-    if ($res[0]['hide_sub'] == 1) {
+    if (($res[0]['hide_sub'] ?? null) == 1) {
         // Set ranges only to own category. Patch by netmorix
         return array('category_left' => $res[0]['category_left'], 'category_right' => $res[0]['category_left']);
     } else {
@@ -354,6 +354,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     }
 
     serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('noCache' => $noCache, 'noSticky' => $noSticky, 'source' => 'entries'));
+    if (!isset($cond['addkey'])) {
+        $cond['addkey'] = '';
+    }
 
     if (is_null($select_key)) {
         $select_key = "{$cond['distinct']}
@@ -394,6 +397,12 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                         ON ec.categoryid = c.categoryid";
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
+    if (!isset($cond['and'])) {
+        $cond['and'] = '';
+    }
     if ($joinown) {
         $cond['joins'] .= $joinown;
     }
@@ -587,6 +596,9 @@ function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false
         $cond['single_orderby'] = '';
     }
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
     $querystring = "SELECT  e.id,
                             e.title,
                             e.timestamp,
@@ -894,6 +906,12 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('source' => 'search', 'term' => $term));
     serendipity_ACL_SQL($cond, 'limited');
 
+    if (!isset($cond['joins'])) {
+        $cond['joins'] = '';
+    }
+    if (!isset($cond['addkey'])) {
+        $cond['addkey'] = '';
+    }
     $serendipity['fullCountQuery'] = "
                       FROM
                             {$serendipity['dbPrefix']}entries e
@@ -1078,7 +1096,7 @@ function serendipity_getTotalEntries() {
 function serendipity_printEntries($entries, $extended = 0, $preview = false, $smarty_block = 'ENTRIES', $smarty_fetch = true, $use_hooks = true, $use_footer = true, $use_grouped_array = false) {
     global $serendipity;
 
-    if (!is_object($serendipity['smarty'])) {
+    if (!is_object($serendipity['smarty'] ?? null)) {
         serendipity_smarty_init(); // if not set, start Smarty templating to avoid member function "method()" on a non-object errors (was draft preview error, now at line 1239)
     }
     
@@ -1113,17 +1131,22 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     if ($use_grouped_array === false) {
         // Use grouping by date (default)
         $dategroup = array();
-        for ($x = 0, $num_entries = count($entries); $x < $num_entries; $x++) {
-            if (!empty($entries[$x]['properties']['ep_is_sticky']) && serendipity_db_bool($entries[$x]['properties']['ep_is_sticky'])) {
-                $entries[$x]['is_sticky'] = true;
-                $key = 'sticky';
-            } else {
-                $key = date('Ymd', serendipity_serverOffsetHour($entries[$x]['timestamp']));
-            }
+        $num_entries = count($entries);
+        foreach ($entries as $i => &$entry) {
+            if ($i !== 'id') {
+                if (!empty($entry['properties']['ep_is_sticky']) && serendipity_db_bool($entry['properties']['ep_is_sticky'])) {
+                    $entry['is_sticky'] = true;
+                    $key = 'sticky';
+                } else {
+                    $key = date('Ymd', serendipity_serverOffsetHour($entry['timestamp']));
+                }
 
-            $dategroup[$key]['date']        = $entries[$x]['timestamp'];
-            $dategroup[$key]['is_sticky']   = (isset($entries[$x]['is_sticky']) && (serendipity_db_bool($entries[$x]['is_sticky']) ? true : false));
-            $dategroup[$key]['entries'][]   = &$entries[$x];
+                $dategroup[$key]['date']        = $entry['timestamp'];
+                $dategroup[$key]['is_sticky']   = (isset($entry['is_sticky']) && (serendipity_db_bool($entry['is_sticky']) ? true : false));
+                $dategroup[$key]['entries'][]   = &$entry;
+            } else {
+                $num_entries--;
+            }
         }
     } elseif ($use_grouped_array === 'plugin') {
         // Let a plugin do the grouping
@@ -1144,7 +1167,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             if (!empty($entry['properties']['ep_cache_body'])) {
-                $entry['pre_body']  = $entry['body'];
+                $entry['pre_body']  = $entry['body'] ?? null;
                 $entry['body']      = &$entry['properties']['ep_cache_body'];
                 $entry['is_cached'] = true;
             }
@@ -1160,7 +1183,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             if (!empty($entry['properties']['ep_cache_extended'])) {
-                $entry['pre_extended']  = $entry['extended'];
+                $entry['pre_extended']  = $entry['extended'] ?? null;
                 $entry['extended']  = &$entry['properties']['ep_cache_extended'];
                 $entry['is_cached'] = true;
             }
@@ -1721,7 +1744,7 @@ function serendipity_printArchives() {
               ON e.id = ec.entryid
        LEFT JOIN {$serendipity['dbPrefix']}category c
               ON ec.categoryid = c.categoryid" : "") . 
-              $sql_condition['joins'] .
+              ($sql_condition['joins'] ?? '') .
         " WHERE isdraft = 'false'"
                 . ($sql_condition['and'] ?? '')
                 . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '')

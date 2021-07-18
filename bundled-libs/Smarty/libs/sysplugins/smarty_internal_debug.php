@@ -69,8 +69,10 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     public function end_template(Smarty_Internal_Template $template)
     {
         $key = $this->get_key($template);
-        $this->template_data[ $this->index ][ $key ][ 'total_time' ] +=
-            microtime(true) - $this->template_data[ $this->index ][ $key ][ 'start_template_time' ];
+        if (isset($this->template_data[ $this->index ][ $key ][ 'start_template_time' ])) {
+            $this->template_data[ $this->index ][ $key ][ 'total_time' ] +=
+                microtime(true) - $this->template_data[ $this->index ][ $key ][ 'start_template_time' ];
+        }
         //$this->template_data[$this->index][$key]['properties'] = $template->properties;
     }
 
@@ -142,8 +144,10 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     public function end_render(Smarty_Internal_Template $template)
     {
         $key = $this->get_key($template);
-        $this->template_data[ $this->index ][ $key ][ 'render_time' ] +=
-            microtime(true) - $this->template_data[ $this->index ][ $key ][ 'start_time' ];
+        if (isset($this->template_data[ $this->index ][ $key ][ 'start_time' ])) {
+            $this->template_data[ $this->index ][ $key ][ 'render_time' ] +=
+                    microtime(true) - $this->template_data[ $this->index ][ $key ][ 'start_time' ];
+        }
     }
 
     /**

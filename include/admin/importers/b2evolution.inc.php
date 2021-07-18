@@ -258,7 +258,7 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
         return true;
     }
 
-    function importCategories($parentid = 0, $new_parentid = 0, $b2db) {
+    function importCategories($parentid = 0, $new_parentid = 0, $b2db = null) {
         if (is_null($parentid)) {
             $where = 'WHERE ISNULL(cat_parent_ID)';
         } else {

@@ -53,7 +53,7 @@ if (!defined('serendipity_MB_LOADED') && defined('serendipity_LANG_LOADED')) {
     // Needs to be included here because we need access to constant LANG_CHARSET definied in languages (not available for compat.inc.php)
 
     if (function_exists('mb_language')) {
-        @mb_language($serendipity['lang']);
+        @mb_language('uni'); // TODO: test for non-unicode installations
     }
 
     if (function_exists('mb_internal_encoding')) {

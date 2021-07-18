@@ -265,7 +265,7 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
         return true;
     }
 
-    function importCategories($parentid = 0, $new_parentid = 0, $ltdb) {
+    function importCategories($parentid = 0, $new_parentid = 0, $ltdb = null) {
         if (is_null($parentid)) {
             $where = 'WHERE parent_id = 0';
         } else {

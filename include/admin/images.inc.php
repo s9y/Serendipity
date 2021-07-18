@@ -10,7 +10,7 @@ if (!serendipity_checkPermission('adminImages')) {
 
 $data = array();
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 
@@ -518,8 +518,8 @@ switch ($serendipity['GET']['adminAction']) {
                 $use_dir = $newDir;
             }
 
-            serendipity_ACLGrant(0, 'directory', 'read', $serendipity['POST']['read_authors'], $use_dir);
-            serendipity_ACLGrant(0, 'directory', 'write', $serendipity['POST']['write_authors'], $use_dir);
+            serendipity_ACLGrant(0, 'directory', 'read', $serendipity['POST']['read_authors'] ?? null, $use_dir);
+            serendipity_ACLGrant(0, 'directory', 'write', $serendipity['POST']['write_authors'] ?? null, $use_dir);
             $data['print_SETTINGS_SAVED_AT'] = sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S'));
         }
 

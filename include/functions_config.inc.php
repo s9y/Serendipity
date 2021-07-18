@@ -359,8 +359,7 @@ function serendipity_logout() {
  * @return null
  */
 function serendipity_session_destroy() {
-    echo "session destroy";
-    $no_smarty = $_SESSION['no_smarty'];
+    $no_smarty = $_SESSION['no_smarty'] ?? null;
     @session_destroy();
     session_start();
     session_regenerate_id();
@@ -800,7 +799,7 @@ function serendipity_is_iframe() {
     global $serendipity;
 
     if ($serendipity['GET']['is_iframe'] ?? false && is_array($_SESSION['save_entry'])) {
-        if (!is_object($serendipity['smarty'])) {
+        if (!is_object($serendipity['smarty'] ?? null)) {
             // We need smarty also in the iframe to load a template's config.inc.php and register possible event hooks.
             serendipity_smarty_init();
         }

@@ -1,3 +1,4 @@
+2.21.10: * hotfixes for PHP 8
 2.21.7: * add some newlines in output to make it better humanly readable
 2.21.6: * add missing 'u' inline element
 2.21.5: * nl2p: if the double newline contains spaces, e.g. \n \n, these

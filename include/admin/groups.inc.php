@@ -32,7 +32,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
 /* Edit a group */
 if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     $perms = serendipity_getAllPermissionNames();
-    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
+    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, ($serendipity['POST']['forbidden_plugins'] ?? null), ($serendipity['POST']['forbidden_hooks'] ?? null));
     $data['save_edit'] = true;
     $data['name'] = $serendipity['POST']['name'];
 }

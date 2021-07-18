@@ -121,7 +121,7 @@ $data['config'] = serendipity_printConfigTemplate($template, $from, true, false)
 $add = array('internal' => true);
 serendipity_plugin_api::hook_event('backend_sidebar_entries_event_display_profiles', $from, $add);
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 

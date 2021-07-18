@@ -1,4 +1,5 @@
 {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
+{if isset($entries)}
 {foreach from=$entries item="dategroup"}
     {foreach from=$dategroup.entries item="entry"}
     {assign var="entry" value=$entry scope="parent"}
@@ -137,6 +138,11 @@
     <p class="nocontent">{$CONST.NO_ENTRIES_TO_PRINT}</p>
     {/if}
 {/foreach}
+{else}
+    {if isset($plugin_clean_page) and not $plugin_clean_page}
+    <p class="nocontent">{$CONST.NO_ENTRIES_TO_PRINT}</p>
+    {/if}
+{/if}
 {if isset($footer_info) and $footer_info or isset($footer_prev_page) and $footer_prev_page or isset($footer_next_page) and $footer_next_page}
     <nav class="serendipity_pagination block_level">
         <h2 class="visuallyhidden">{$CONST.TWOK11_PAG_TITLE}</h2>

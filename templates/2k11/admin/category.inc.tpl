@@ -17,7 +17,7 @@
 {/if}
 {if $doDelete}
   {if $deleteSuccess}
-        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {if $remainingCat}{$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}{else}{$cid|string_format:"{$CONST.CATEGORY_DELETED}"}{/if}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {if isset($remainingCat) && $remainingCat}{$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}{else}{$cid|string_format:"{$CONST.CATEGORY_DELETED}"}{/if}</span>
   {else}
         <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.INVALID_CATEGORY}</span>
   {/if}
@@ -74,7 +74,7 @@
                         <option value="0"{if $cid == 0} selected{/if}>{$CONST.NO_CATEGORY}</option>
                     {foreach $categories as $cat}
                         {if $cat.categoryid == $cid}{continue}{/if}
-                        <option value="{$cat.categoryid}"{if $this_cat.parentid == $cat.categoryid} selected{/if}>{for $i=1 to $cat.depth}&nbsp{/for} {$cat.category_name|escape}</option>
+                        <option value="{$cat.categoryid}"{if isset($this_cat.parentid) && $this_cat.parentid == $cat.categoryid} selected{/if}>{for $i=1 to $cat.depth}&nbsp{/for} {$cat.category_name|escape}</option>
                     {/foreach}
                     </select>
                 </div>
