@@ -1066,7 +1066,7 @@
 
 /* SERVE OPTIN */
 @define('NOTIFICATION_OPTIN_FAIL', 'Your subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments to "%s" has been successfully entered.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your subscription to new comments has been successfully entered.');
 
 /* SERVE UNSUBSCRIBE */
 @define('NOTIFICATION_UNSUBSCRIBE_CONFIRM', "Your subscription to \"%s\" is successfully deleted. You won't get informed about new articles.");
