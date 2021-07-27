@@ -38,7 +38,7 @@ The website contains helpful [documentation](https://docs.s9y.org/docs/index.htm
 
 Please visit [the forums](https://board.s9y.org/) for additional questions and discussions. If you are more comfortable with Github or the questions are more code related, you can also [open an issue](https://github.com/s9y). Please keep the [Code of Conduct](https://docs.s9y.org/docs/contributing/code-of-conduct.html) in mind when doing so.
 
-You can also join us in [the Gitter channel](https://gitter.im/s9y/lobby) to geyt help from other users or from developers.
+You can also join us in [the Gitter channel](https://gitter.im/s9y/lobby) to get help from other users or developers.
 
 ## Development
 
