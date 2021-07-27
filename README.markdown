@@ -38,10 +38,14 @@ The website contains helpful [documentation](https://docs.s9y.org/docs/index.htm
 
 Please visit [the forums](https://board.s9y.org/) for additional questions and discussions. If you are more comfortable with Github or the questions are more code related, you can also [open an issue](https://github.com/s9y). Please keep the [Code of Conduct](https://docs.s9y.org/docs/contributing/code-of-conduct.html) in mind when doing so.
 
+You can also join us in [the Gitter channel](https://gitter.im/s9y/lobby) to geyt help from other users or from developers.
+
 ## Development
 
-Serendipity is developed by an independent and open [team](https://docs.s9y.org/team.html). If you want to contribute changes, you can send in a pull request and we will work with you to bring the changes into the software. Do that a few times and we will offer you to join the team to get direct access to the repository. 
+Serendipity is developed by an independent and open [team](https://docs.s9y.org/team.html). Current development focus in on carefully modernizing the software while staying backwards compatible. If you want to contribute changes, you can send in a pull request and we will work with you to bring the changes into the software. Do that a few times and we will offer you to join the team to get direct access to the repository. 
 
 If you want to request features, you can open a thread [in the forum](https://board.s9y.org/) or open an issue on Github instead. Much of the development of Serendipity is user driven, feature requests are welcome.
+
+Join us in [the Gitter channel](https://gitter.im/s9y/lobby) to discuss with other developers.
 
 The [license of this project](https://github.com/s9y/Serendipity/blob/master/LICENSE) is the BSD 3-Clause license. It's a permissive license allowing free usage of the code and derived projects, including commercial and closed source usage.
