@@ -874,8 +874,9 @@ function serendipity_generateThumbs() {
     $msg_printed = false;
 
     foreach ($serendipity['imageList'] AS $k => $file) {
+        serendipity_prepareMedia($file);
         $is_image = serendipity_isImage($file);
-
+        
         if ($is_image && !$file['hotlink']) {
             $update   = false;
             $filename = $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
@@ -905,7 +906,7 @@ function serendipity_generateThumbs() {
                         echo "\n" . '<ul class="serendipityFileList">' . "\n";
                         $msg_printed = true;
                     }
-                    echo '<li>' . $sThumb . ': ' . $returnsize['width'] . 'x' . $returnsize['height'] . "</li>\n";
+                    echo '<li>' . $sThumb . ': ' . $returnsize[0] . 'x' . $returnsize[1] . "</li>\n";
                     if (!file_exists($newThumb)) {
                         printf('<li><span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . THUMBNAIL_FAILED_COPY . '</span></li>' . "\n", $sThumb);
                     } else {
@@ -914,7 +915,7 @@ function serendipity_generateThumbs() {
                 }
             } elseif (!file_exists($oldThumb) && !file_exists($newThumb) && $fdim[0] <= $serendipity['thumbSize'] && $fdim[1] <= $serendipity['thumbSize']) {
                 if (!$msg_printed) {
-                    $resizethumb = sprintf(RESIZE_BLAHBLAH, THUMB);
+                    $resizethumb = sprintf(RESIZE_BLAHBLAH, $sThumb);
                     printf('<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . $resizethumb . "</span>\n");
                     echo "\n" . '<ul class="serendipityFileList">' . "\n";
                     $msg_printed = true;
@@ -1211,7 +1212,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
             } else if ($deleteThumbs == 'checksize') {
                 // Find existing thumbnail dimensions
                 $tdim = serendipity_getimagesize($fthumb);
-                if ($tdim['noimage']) {
+                if (isset($tdim['noimage']) && $tdim['noimage']) {
                     // Delete it so it can be regenerated
                     if (@unlink($fthumb)) {
                         printf(DELETE_THUMBNAIL . "<br />\n", $sThumb);
@@ -3185,7 +3186,11 @@ function serendipity_prepareMedia(&$file, $url = '') {
     $file['links'] = array('imagelinkurl' => $file['full_file']);
     $file['realfile']  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
 
-    $file['dim']       = @getimagesize($file['full_thumb'], $file['thumb_header']);
+    if (file_exists($file['full_thumb'])) {
+        $file['dim']       = @getimagesize($file['full_thumb'], $file['thumb_header']);
+    } else {
+        $file['dim']       = null;
+    }
     $file['dim_orig']  = @getimagesize($file['realfile'], $file['header']);
     $file['is_image']  = serendipity_isImage($file);
 
