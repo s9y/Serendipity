@@ -139,6 +139,7 @@ if (is_array($template_config)) {
         }
         $data["adminAction"] = "configure";
         $data["save_time"] = sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S'));
+        serendipity_set_config_var('last_template_change', time());
     }
 
     $data["form_token"] = serendipity_setFormToken();
