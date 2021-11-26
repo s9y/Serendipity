@@ -326,6 +326,8 @@ if ( (int)($serendipity['GET']['step'] ?? null) == 0 ) {
         $data['authors_query'] = $t;
     } catch (PDOException $e) {
         $t = null;
+    } catch (mysqli_sql_exception $e) {
+        $t = null;
     }
 
     if ( is_array($t) ) {
