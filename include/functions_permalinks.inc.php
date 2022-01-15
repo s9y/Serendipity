@@ -121,13 +121,13 @@ function serendipity_makeFilename($str, $stripDots = false) {
             }
         } else {
             // Replace international chars not detected by every locale
+            $str = str_replace($from, $to, $str);
+
             if (LANG_CHARSET == 'UTF-8') {
                 // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
                 // characters, try to UTF8-decode the string first.
                 $str = utf8_decode($str);
             }
-
-            $str = str_replace($from, $to, $str);
         }
 
         // Nuke chars not allowed in our URI
