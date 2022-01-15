@@ -15,6 +15,64 @@ if (IN_serendipity !== true) {
  * @return  string  output string
  */
 function serendipity_makeFilename($str, $stripDots = false) {
+
+    // These are UTF-8 replacements happening regardless of selected locale
+    static $pre_from = array(
+                     '🇦',
+                     '🇧',
+                     '🇨',
+                     '🇩',
+                     '🇪',
+                     '🇫',
+                     '🇬',
+                     '🇭',
+                     '🇮',
+                     '🇯',
+                     '🇰',
+                     '🇱',
+                     '🇲',
+                     '🇳',
+                     '🇴',
+                     '🇵',
+                     '🇶',
+                     '🇷',
+                     '🇸',
+                     '🇹',
+                     '🇺',
+                     '🇻',
+                     '🇼',
+                     '🇽',
+                     '🇾',
+                     '🇿');
+
+    static $pre_to = array(
+                     'A',
+                     'B',
+                     'C',
+                     'D',
+                     'E',
+                     'F',
+                     'G',
+                     'H',
+                     'I',
+                     'J',
+                     'L',
+                     'M',
+                     'N',
+                     'O',
+                     'P',
+                     'Q',
+                     'R',
+                     'S',
+                     'T',
+                     'U',
+                     'V',
+                     'W',
+                     'X',
+                     'Y',
+                     'Z');
+
+    // These are replacements happening after all UTF-8 characters have been stripped away
     static $from = array(
                      ' ',
                      '%',
@@ -109,6 +167,9 @@ function serendipity_makeFilename($str, $stripDots = false) {
         $str = str_replace('/', '%2F', $str);
         $str = urlencode($str);
     } else {
+        // Replace some emojis and flags into latin characters before utf8_decode() strips them away
+        $str = str_replace($pre_from, $pre_to, $str);
+
         if (isset($GLOBALS['i18n_filename_from'])) {
             // Replace international chars not detected by every locale.
             // The array of chars is defined in the language file.
