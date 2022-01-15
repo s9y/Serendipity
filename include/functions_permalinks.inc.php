@@ -449,6 +449,8 @@ function serendipity_insertPermalink(&$data, $type = 'entry') {
 function serendipity_buildPermalinks() {
     global $serendipity;
 
+    serendipity_db_begin_transaction();
+
     $entries = serendipity_db_query("SELECT id, title, timestamp FROM {$serendipity['dbPrefix']}entries");
 
     if (is_array($entries)) {
@@ -479,6 +481,8 @@ function serendipity_buildPermalinks() {
             serendipity_insertPermalink($category, 'category');
         }
     }
+
+    serendipity_db_end_transaction(true);
 }
 
 /**
