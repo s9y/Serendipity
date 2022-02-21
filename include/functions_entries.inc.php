@@ -1761,7 +1761,7 @@ function serendipity_printArchives() {
             if (array_key_exists($grouptime, $group)) {
                 $group[$grouptime]++;
             } else {
-                $group[$grouptime] = 0;
+                $group[$grouptime] = 1;
             }
         }
     }
