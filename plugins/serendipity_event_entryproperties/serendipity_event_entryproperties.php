@@ -289,7 +289,14 @@ class serendipity_event_entryproperties extends serendipity_event
             $prop_key = 'ep_' . $prop_key;
 
             if (is_array($prop_val)) {
-                $prop_val = ";" . implode(';', $prop_val) . ";";
+                if ($prop_key !== 'multi_authors') {
+                    $prop_val = implode(';', $prop_val);
+                } else {
+                    // Note: Not sure if this prefix and suffix with ";" is a really good idea.
+                    // At least with multi_authors it's a problem, because it creates empty records.
+                    // Maybe other keys also need specific fixing.
+                    $prop_val = ";" . implode(';', $prop_val) . ";";
+                }
             }
 
             $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property = '" . serendipity_db_escape_string($prop_key) . "'";
@@ -836,6 +843,7 @@ class serendipity_event_entryproperties extends serendipity_event
                            $counter = 0;
                            unset($eventData[$addData[$row['entryid']]]['properties'][$row['property']]);
                            foreach($tmp as $key => $value) {
+                               if (empty($value)) continue;
                                $tmp_author_array = serendipity_fetchAuthor($value);
                                $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_id'] = $value;
                                $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_name'] = $tmp_author_array[0]['realname'];

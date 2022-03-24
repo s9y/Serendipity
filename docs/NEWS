@@ -1,3 +1,9 @@
+Version 2.4-beta2 ()
+------------------------------------------------------------------------
+
+   * Bugfix: Entryproperites plugin no longer insert empty records
+     for multiple authors (garvinhicking)
+
    * Improve permalink generation performance and enable more unicode
      replacements (thanks to mbirth!)
 
