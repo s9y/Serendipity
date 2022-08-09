@@ -212,10 +212,10 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_2.0c', false)) || serendipity_db_bool($this->get_config('show_comment_feed', false))) {
             if ($useRss) {
                 echo $this->generateFeedButton( serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2'),
-                                                $COMMENTS . ($useAtom ? " (RSS)": ""),
+                                                $COMMENTS . ((isset($useAtom) && $useAtom) ? " (RSS)": ""),
                                                 $small_icon);
             }
-            if ($useAtom) {
+            if (isset($useAtom) && $useAtom) {
                 echo $this->generateFeedButton( serendipity_rewriteURL(PATH_FEEDS .'/comments.atom10'),
                                                 $COMMENTS . ($useRss ? " (Atom)": ""),
                                                 $small_icon);
