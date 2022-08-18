@@ -13,7 +13,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.3.0');
+        $propbag->add('version',       '2.3.1');
         $propbag->add('configuration', array(
                                         'title',
                                         'big_img',
