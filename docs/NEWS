@@ -1,6 +1,9 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix: Avoid one more situation where responsive image upscaled
+          a small thumbnail
+
    * Bugfix: Entryproperites plugin no longer insert empty records
      for multiple authors (garvinhicking)
 
