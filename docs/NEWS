@@ -1,6 +1,9 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix: The calendar plugin threw a warning about $cond['join'] not
+          existing in some setups
+
    * Fix: Avoid one more situation where responsive image upscaled
           a small thumbnail
 

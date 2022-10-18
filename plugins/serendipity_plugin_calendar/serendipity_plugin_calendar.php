@@ -15,7 +15,7 @@ class serendipity_plugin_calendar extends serendipity_plugin
         $propbag->add('configuration', array('beginningOfWeek', 'enableExtEvents', 'category'));
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.2.1');
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
@@ -229,6 +229,9 @@ class serendipity_plugin_calendar extends serendipity_plugin
         }
 
         if (!isset($querystring)) {
+            if (! array_key_exists('joins', $cond)) {
+                $cond['joins'] = '';
+            }
             $querystring = "SELECT id, timestamp
                               FROM {$serendipity['dbPrefix']}entries e
                               {$cond['joins']}
