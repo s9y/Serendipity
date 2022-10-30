@@ -1,6 +1,8 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix: admin/entries.tpl: fix undefined variable iso2br
+
    * Fix: The calendar plugin threw a warning about $cond['join'] not
           existing in some setups
 
