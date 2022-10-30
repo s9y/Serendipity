@@ -49,7 +49,7 @@
             {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_vars.entry hookAll="true"}
         </div>
     {/if}
-        <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{$entry_vars.entry.body|escape}</textarea>
+        <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{if $entry_vars.entry.body}{$entry_vars.entry.body|escape}{else}{$CONST.NEW_ENTRY}{/if}</textarea>
     </div>
 
      <div class="form_area">
