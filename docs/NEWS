@@ -1,6 +1,8 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix: Editor autosave cached was not deleted when saving entry
+
    * Fix: Editor autosave was not on by default, despite the setting
           being active by default
 
