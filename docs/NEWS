@@ -1,6 +1,9 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
 
+   * Improve w3c compatibility be encode square brackets of comment
+     mode links (thanks @hannob)
+
    * Fix: Previewing comments warning threw a warning on PHP 8, when
           debug mode on (thanks @hannob)
 
