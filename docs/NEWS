@@ -1,8 +1,5 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
- 
-   * Fix: admin/entries.tpl: fill textarea with default text to prevent
-          Edge browser autofill the textarea
 
    * Fix: admin/entries.tpl: fix undefined variable iso2br
 
