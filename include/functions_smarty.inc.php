@@ -1127,7 +1127,7 @@ function serendipity_smarty_init($vars = array()) {
                 'wysiwygToolbar'            => $serendipity['wysiwygToolbar'] ?? null,
                 'wysiwyg_customPlugin'      => $wysiwyg_customPlugin,
                 'wysiwyg_customConfig'      => $wysiwyg_customConfig,
-                'use_autosave'              => (serendipity_db_bool($serendipity['use_autosave'] ?? false) ? 'true' : 'false'),
+                'use_autosave'              => (serendipity_db_bool($serendipity['use_autosave'] ?? true) ? 'true' : 'false'),
 
                 'dateRange'                 => (!empty($serendipity['range']) ? $serendipity['range'] : array())
             )

@@ -1,6 +1,9 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix: Editor autosave was not on by default, despite the setting
+          being active by default
+
    * Fix: admin/entries.tpl: fix undefined variable iso2br
 
    * Fix: The calendar plugin threw a warning about $cond['join'] not
