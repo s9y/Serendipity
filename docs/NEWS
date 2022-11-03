@@ -1,6 +1,9 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix: Previewing comments warning threw a warning on PHP 8, when
+          debug mode on (thanks @hannob)
+
    * Fix: Editor autosave cached was not deleted when saving entry
 
    * Fix: Editor autosave was not on by default, despite the setting
