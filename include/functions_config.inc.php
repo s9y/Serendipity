@@ -716,7 +716,7 @@ function serendipity_setCookie($name, $value, $securebyprot = true, $custom_time
 
     $host = $_SERVER['HTTP_HOST'];
     if ($securebyprot) {
-        $secure = (strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
+        $secure = (array_key_exists('HTTPS', $_SERVER) && strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
         if ($pos = strpos($host, ":")) {
             $host = substr($host, 0, $pos);
         }
