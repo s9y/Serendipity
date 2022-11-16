@@ -1059,31 +1059,32 @@ class serendipity_event_spamblock extends serendipity_event
                                 $tipval_method = ($trackback_ipvalidation_option == 'reject'?'REJECTED':'MODERATE');
                                 // Getting host from url successfully?
                                 if (!is_array($parts)) { // not a valid URL
-                                    $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url'], '', ''), $addData);
+                                    $this->log($logfile, $eventData['id'], $tipval_method, PLUGIN_EVENT_SPAMBLOCK_REASON_URLINVALID, $addData);
                                     if ($trackback_ipvalidation_option == 'reject') {
                                         $eventData = array('allow_comments' => false);
-                                        $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
+                                        $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_REASON_URLINVALID;
                                         return false;
                                     } else {
                                         $eventData['moderate_comments'] = true;
                                         $serendipity['csuccess']        = 'moderate';
-                                        $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
+                                        $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_REASON_URLINVALID;
                                     }
-                                }
-                                $trackback_ip = preg_replace('/[^0-9.]/', '', gethostbyname($parts['host']) );
-                                $sender_ip = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
-                                $sender_ua = ($debug ? ', ua="' . $_SERVER['HTTP_USER_AGENT'] . '"' : '') ;
-                                // Is host ip and sender ip matching?
-                                if ($trackback_ip != $sender_ip) {
-                                    $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip  . $sender_ua), $addData);
-                                    if ($trackback_ipvalidation_option == 'reject') {
-                                        $eventData = array('allow_comments' => false);
-                                        $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
-                                        return false;
-                                    } else {
-                                        $eventData['moderate_comments'] = true;
-                                        $serendipity['csuccess']        = 'moderate';
-                                        $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                } else {
+                                    $trackback_ip = preg_replace('/[^0-9.]/', '', gethostbyname($parts['host']) );
+                                    $sender_ip = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
+                                    $sender_ua = ($debug ? ', ua="' . $_SERVER['HTTP_USER_AGENT'] . '"' : '') ;
+                                    // Is host ip and sender ip matching?
+                                    if ($trackback_ip != $sender_ip) {
+                                        $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip  . $sender_ua), $addData);
+                                        if ($trackback_ipvalidation_option == 'reject') {
+                                            $eventData = array('allow_comments' => false);
+                                            $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                            return false;
+                                        } else {
+                                            $eventData['moderate_comments'] = true;
+                                            $serendipity['csuccess']        = 'moderate';
+                                            $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                        }
                                     }
                                 }
                             }
