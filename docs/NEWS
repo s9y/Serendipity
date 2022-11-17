@@ -1,6 +1,9 @@
 Version 2.4-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix: Avoid bad number of arguments to sprintf and fix logic error
+     in spamblock plugin.     
+
    * Improve w3c compatibility be encode square brackets of comment
      mode links (thanks @hannob)
 
