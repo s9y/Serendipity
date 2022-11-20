@@ -1,4 +1,4 @@
-Version 2.4-beta2 ()
+Version 2.4.0 (November 20th, 2022)
 ------------------------------------------------------------------------
 
    * Fix: Avoid bad number of arguments to sprintf and fix logic error
