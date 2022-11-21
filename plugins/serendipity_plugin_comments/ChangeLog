@@ -1,3 +1,7 @@
+Version 1.17.2:
+------------------------------------------------------------------------
+* Fix: hotfix for PHP 8, when comments are long enough to be wrapped
+
 Version 1.17.1:
 ------------------------------------------------------------------------
 * Fix: hotfixes for PHP 8

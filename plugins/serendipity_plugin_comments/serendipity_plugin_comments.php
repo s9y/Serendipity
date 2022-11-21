@@ -20,7 +20,7 @@ class serendipity_plugin_comments extends serendipity_plugin
         $propbag->add('description',   PLUGIN_COMMENTS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking, Tadashi Jokagi, Judebert, G. Brockhaus');
-        $propbag->add('version',       '1.17.1');
+        $propbag->add('version',       '1.17.2');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -249,7 +249,7 @@ class serendipity_plugin_comments extends serendipity_plugin
                         # do we still need to wrap this line or is it shorter than $wordwrap?
                         if ($comment_len - $pos > $wordwrap) {
                             # location of first space
-                            $spacepos = mb_strrpos(mb_substr($comment, $pos, $wordwrap, $enc), ' ', $enc);
+                            $spacepos = mb_strrpos(mb_substr($comment, $pos, $wordwrap, $enc), ' ', 0, $enc);
                             # wrap at word boundary if we have at least one space
                             $part = ( $spacepos > 0 ) ? mb_substr($comment, $pos, $spacepos, $enc) : mb_strimwidth($comment, $pos, $wordwrap, '', $enc);;
                         } else {
