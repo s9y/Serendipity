@@ -77,7 +77,7 @@
         <span class="comment-view">{$CONST.DISPLAY_COMMENTS_AS} {if $entry.viewmode eq $CONST.VIEWMODE_LINEAR}{$CONST.COMMENTS_VIEWMODE_LINEAR} | <a href="{$entry.link_viewmode_threaded}#comments" rel="nofollow">{$CONST.COMMENTS_VIEWMODE_THREADED}</a>{else}<a rel="nofollow" href="{$entry.link_viewmode_linear}#comments">{$CONST.COMMENTS_VIEWMODE_LINEAR}</a> | {$CONST.COMMENTS_VIEWMODE_THREADED}{/if}</span>
 
         {serendipity_printComments entry=$entry.id mode=$entry.viewmode}
-    {if $entry.is_entry_owner}
+    {if isset($entry.is_entry_owner) and $entry.is_entry_owner}
         {if $entry.allow_comments}
         <a class="comments-enable" href="{$entry.link_deny_comments}">{$CONST.COMMENTS_DISABLE}</a>
         {else}
