@@ -25,7 +25,7 @@
             <ul class="meta">
                 <li><time>{$comment.timestamp|formatTime:'%H:%M'}</time></li>
                 <li><a class="comment_source_trace" href="#c{$comment.id}" title="{$CONST.NEXT_PLINK_TITLE}">{$CONST.NEXT_PLINK_TEXT}</a></li>
-            {if $entry.is_entry_owner}
+            {if isset($entry.is_entry_owner) and $entry.is_entry_owner}
                 <li><a class="comment_source_ownerlink" href="{$comment.link_delete}" title="{$CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author}">{$CONST.DELETE}</a></li>
             {/if}
         {if $template_option.refcomments == true}
