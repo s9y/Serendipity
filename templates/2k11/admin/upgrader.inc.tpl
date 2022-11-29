@@ -52,7 +52,7 @@
     {elseif ($get.action == 'upgrade')}
         {foreach $call_tasks AS $ctask}
             {if $is_callable_task}
-                {$ctasks}
+                {$ctask}
             {/if}
         {/foreach}
         {if $errors}
