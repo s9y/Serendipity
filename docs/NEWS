@@ -1,6 +1,7 @@
-Version 2.5-aplha1 ()
+Version 2.5.0-alpha1 ()
 ------------------------------------------------------------------------
-
+   * Fix: Utilizes missing variables in Smarty admin upgrader
+     (garvinhicking)
 
 Version 2.4.0 (November 20th, 2022)
 ------------------------------------------------------------------------
