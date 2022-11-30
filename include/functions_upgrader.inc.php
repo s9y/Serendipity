@@ -484,7 +484,7 @@ function serendipity_upgradeUTF8_UTF8mb4() {
             $table = $table[0];
             $columns = serendipity_db_query('SHOW FULL COLUMNS FROM ' . $table);
             foreach($columns as $column) {
-                if ($column['Collation'] && ( ! stristr($column['Collation'], 'utf8m4'))) {
+                if ($column['Collation'] && ( ! stristr($column['Collation'], 'utf8mb4'))) {
                     # if the column/table is already utf8mb4 we don't need to ugprade it, but we also do not need to stop the process. Some
                     # other table might not be utf8mb4 already
                     continue;
