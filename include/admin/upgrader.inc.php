@@ -349,6 +349,8 @@ if ($serendipity['GET']['action'] == 'ignore') {
 
     if (sizeof($errors)) {
         $data['errors'] = $errors;
+    } else {
+        $data['errors'] = false;
     }
 
     /* I don't care what you told me, I will always nuke Smarty cache */
