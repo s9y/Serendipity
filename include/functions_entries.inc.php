@@ -1272,11 +1272,15 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             if (serendipity_db_bool($entry['allow_comments']) || !isset($entry['allow_comments']) || $entry['comments'] > 0) {
                 $entry['has_comments']      = true;
                 $entry['label_comments']    = $entry['comments'] == 1 ? COMMENT : COMMENTS;
+            } else {
+                $entry['has_comments']      = false;
             }
 
             if (serendipity_db_bool($entry['allow_comments']) || !isset($entry['allow_comments']) || $entry['trackbacks'] > 0) {
                 $entry['has_trackbacks']    = true;
                 $entry['label_trackbacks']  = $entry['trackbacks'] == 1 ? TRACKBACK : TRACKBACKS;
+            } else {
+                $entry['has_trackbacks']    = false;
             }
 
             if ($_SESSION['serendipityAuthedUser'] === true && ($_SESSION['serendipityAuthorid'] == $entry['authorid'] || serendipity_checkPermission('adminEntriesMaintainOthers'))) {
