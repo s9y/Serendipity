@@ -1036,11 +1036,11 @@ function serendipity_smarty_init($vars = array()) {
 
             // When templates are switched, append a specific version string to make sure the browser does not cache the CSS
             if (strstr($serendipity['smarty_vars']['head_link_stylesheet'], '?')) {
-                $serendipity['smarty_vars']['head_link_stylesheet'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? null);
-                $serendipity['smarty_vars']['head_link_stylesheet_frontend'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? null);
+                $serendipity['smarty_vars']['head_link_stylesheet'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? time());
+                $serendipity['smarty_vars']['head_link_stylesheet_frontend'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? time());
             } else {
-                $serendipity['smarty_vars']['head_link_stylesheet'] .= '?v=' . $serendipity['last_template_change'];
-                $serendipity['smarty_vars']['head_link_stylesheet_frontend'] .= '?v=' . $serendipity['last_template_change'];
+                $serendipity['smarty_vars']['head_link_stylesheet'] .= '?v=' . ($serendipity['last_template_change'] ?? time());
+                $serendipity['smarty_vars']['head_link_stylesheet_frontend'] .= '?v=' . ($serendipity['last_template_change'] ?? time());
             }
         }
 
@@ -1052,9 +1052,9 @@ function serendipity_smarty_init($vars = array()) {
             }
 
             if (strstr($serendipity['smarty_vars']['head_link_script'], '?')) {
-                $serendipity['smarty_vars']['head_link_script'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? null);
+                $serendipity['smarty_vars']['head_link_script'] .= '&amp;v=' . ($serendipity['last_template_change'] ?? time());
             } else {
-                $serendipity['smarty_vars']['head_link_script'] .= '?v=' . $serendipity['last_template_change'];
+                $serendipity['smarty_vars']['head_link_script'] .= '?v=' . ($serendipity['last_template_change'] ?? time());
             }
         }
 
