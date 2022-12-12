@@ -201,7 +201,7 @@ a:link { -webkit-tap-highlight-color: #d52; }
 
 .dserif, .dserif button,
 .dserif input, .dserif select,
-.dserif textarea { font-family: 'Droid Serif', serif; }
+.dserif textarea { font-family: 'Noto Serif', serif; }
 
 
 p {
