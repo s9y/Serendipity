@@ -126,7 +126,7 @@ function serendipity_plugin_api_pre_event_hook_css($event, &$bag, &$eventData, &
     global $serendipity;
     if (isset($serendipity['smarty']) &&
         isset($serendipity['smarty']->tpl_vars['template_option']) &&
-        isset($serendipity['smarty']->tpl_vars['template_option']->value['webfonts']) {
+        isset($serendipity['smarty']->tpl_vars['template_option']->value['webfonts'])) {
             
         switch ($serendipity['smarty']->tpl_vars['template_option']->value['webfonts']) {
             case 'droid':
