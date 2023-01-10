@@ -1,11 +1,11 @@
 {if $delete_yes}
-    {if $no_delete_permission}
+    {if isset($no_delete_permission) && $no_delete_permission}
             <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
     {else}
-        {if $no_delete_permission_userlevel}
+        {if isset($no_delete_permission_userlevel) && $no_delete_permission_userlevel}
             <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
         {else}
-            {if $delete_permission}
+            {if isset($delete_permission) && $delete_permission}
             <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DELETED_USER|sprintf:"{$user|escape}":"{$realname|escape}"}</span>
             {else}
             <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
@@ -14,23 +14,23 @@
     {/if}
 {/if}
 {if $save_new}
-    {if $no_save_permission}
+    {if isset($no_save_permission) && $no_save_permission}
             <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
     {else}
-        {if $no_group_selected}
+        {if isset($no_group_selected) && $no_group_selected}
             <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.WARNING_NO_GROUPS_SELECTED}</span>
         {/if}
             <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.CREATED_USER|sprintf:"# {$user|escape}":"{$realname|escape}"}</span>
     {/if}
 {/if}
 {if $save_edit}
-    {if $no_edit_permission}
+    {if isset($no_edit_permission) && $no_edit_permission}
             <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
     {else}
-        {if $no_edit_permission_userlevel}
+        {if isset($no_edit_permission_userlevel) && $no_edit_permission_userlevel}
             <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
         {else}
-            {if $no_group_selected}
+            {if isset($no_group_selected) && $no_group_selected}
             <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.WARNING_NO_GROUPS_SELECTED}</span>
             {/if}
             <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.MODIFIED_USER|sprintf:"{$realname|escape}"}</span>
@@ -56,14 +56,14 @@
     {/foreach}
     </ul>
     {if $new}
-        <a class="button_link" href="?serendipity[adminModule]=users&serendipity[adminAction]=new">{$CONST.CREATE_NEW_USER}</a>
+        <a class="button_link" href="?serendipity[adminModule]=users&serendipity[adminAction]=new#newform">{$CONST.CREATE_NEW_USER}</a>
     {/if}
 {/if}
 {if $show_form}
-    <form{if $adminAction == 'edit'} id="editform"{/if} action="?serendipity[adminModule]=users#editform" method="post">
+    <form{if $adminAction == 'edit'} id="editform"{else} id="newform"{/if} action="?serendipity[adminModule]=users#editform" method="post">
         {$formToken}
-        {if $adminAction == 'edit'}{if $create_permission}<input name="serendipity[user]" type="hidden" value="{$from.authorid}">{/if}{/if}
-        <h2>{if $adminAction == 'edit'}{if $no_create_permission}{$CONST.CREATE_NOT_AUTHORIZED}: {$CONST.EDIT}{else}{if $create_permission}{$CONST.EDIT}{else}{$CONST.CREATE_NOT_AUTHORIZED}: {$CONST.EDIT}{/if}{/if}{else}{$CONST.CREATE}{/if}</h2>
+        {if $adminAction == 'edit'}{if isset($create_permission) && $create_permission}<input name="serendipity[user]" type="hidden" value="{$from.authorid}">{/if}{/if}
+        <h2>{if $adminAction == 'edit'}{if isset($no_create_permission) && $no_create_permission}{$CONST.CREATE_NOT_AUTHORIZED}: {$CONST.EDIT}{else}{if isset($create_permission) && $create_permission}{$CONST.EDIT}{else}{$CONST.CREATE_NOT_AUTHORIZED}: {$CONST.EDIT}{/if}{/if}{else}{$CONST.CREATE}{/if}</h2>
         {$config}
         <div class="form_buttons">
         {if $adminAction == 'edit'}
