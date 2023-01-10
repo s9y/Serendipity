@@ -3,7 +3,7 @@
 
 {if $action == "integrity"}
     <h3 class="visuallyhidden">{$CONST.INTEGRITY}</h3>
-    {if $noChecksum == true}
+    {if isset($noChecksum) && $noChecksum == true}
         <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.CHECKSUMS_NOT_FOUND}</span>
     {else}
         {if $badsums|count == 0}

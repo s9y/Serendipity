@@ -1,5 +1,11 @@
 Version 2.5.0-alpha1 ()
 ------------------------------------------------------------------------
+
+   * Fix: Several uninitialized variable error notices in upgrader,
+          category management, maintenance (garvinhicking)
+
+   * Fix: 2k11 fonts now downloaded locally and included with template.
+
    * Fix: Utilizes missing variables in Smarty admin upgrader
      (garvinhicking)
 
