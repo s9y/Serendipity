@@ -1,6 +1,16 @@
 Version 2.5.0-alpha1 ()
 ------------------------------------------------------------------------
 
+   * [!] Bugfix: Fixes showing wrong values for Usergroup permission
+         configuration. All checkboxes where enabled instead of
+         only the ones really set, thus saving any usergroup with
+         these checkboxes would changer permissions as indicated
+         by the checked values. Please ensure after upgrading that
+         any possible custom usergroup configurations have the 
+         wanted permission settings. If you have never saved
+         a permission group setting, you will not be impacted.
+         (garvinhicking)
+
    * Fix: Several uninitialized variable error notices in upgrader,
           category management, maintenance (garvinhicking)
 

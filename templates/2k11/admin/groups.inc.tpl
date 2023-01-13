@@ -80,7 +80,7 @@
                 <div><var class="perm_name">[{$perm.permission_name|escape}]</var>: <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
             {else}
                 <div class="form_check">
-                    <input id="{{$perm@key}|escape}" name="serendipity[{{$perm@key}|escape}]" type="checkbox" value="true"{if {$perm@key}|array_key_exists:$from} {if $from.{$perm@key}} === "true"} checked="checked"{/if}{/if}>
+                    <input id="{{$perm@key}|escape}" name="serendipity[{{$perm@key}|escape}]" type="checkbox" value="true"{if {$perm@key}|array_key_exists:$from} {if {$from.{$perm@key}} === "true"} checked="checked"{/if}{/if}>
                     <label for="{{$perm@key}|escape}">{$perm.permission_note|escape} <var class="perm_name">[{$perm.permission_name|escape}]</var></label>
                 </div>
             {/if}
