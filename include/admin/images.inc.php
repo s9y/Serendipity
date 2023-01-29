@@ -343,12 +343,12 @@ switch ($serendipity['GET']['adminAction']) {
 
                             // Insert into database
                             $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$tindex], $authorid, null, $realname);
-                            serendipity_plugin_api::hook_event('backend_image_add', $target, array('image_id' => $image_id));
                             $new_media[] = array(
                                 'image_id'          => $image_id,
                                 'target'            => $target,
                                 'created_thumbnail' => $created_thumbnail
                             );
+                            serendipity_plugin_api::hook_event('backend_image_add', $target, $new_media);
                         }
                     }
                     serendipity_request_end();
@@ -428,12 +428,12 @@ switch ($serendipity['GET']['adminAction']) {
 
                         // Insert into database
                         $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$idx], $authorid, null, $realname);
-                        serendipity_plugin_api::hook_event('backend_image_add', $target, $created_thumbnail);
                         $new_media[] = array(
                             'image_id'          => $image_id,
                             'target'            => $target,
                             'created_thumbnail' => $created_thumbnail
                         );
+                        serendipity_plugin_api::hook_event('backend_image_add', $target, $new_media);
                     } else {
                         // necessary for the ajax-uplaoder to show upload errors
                         header("Internal Server Error", true, 500);
