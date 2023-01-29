@@ -348,7 +348,7 @@ switch ($serendipity['GET']['adminAction']) {
                                 'target'            => $target,
                                 'created_thumbnail' => $created_thumbnail
                             );
-                            serendipity_plugin_api::hook_event('backend_image_add', $target, $new_media);
+                            serendipity_plugin_api::hook_event('backend_image_add', $target, end($new_media));
                         }
                     }
                     serendipity_request_end();
@@ -433,7 +433,7 @@ switch ($serendipity['GET']['adminAction']) {
                             'target'            => $target,
                             'created_thumbnail' => $created_thumbnail
                         );
-                        serendipity_plugin_api::hook_event('backend_image_add', $target, $new_media);
+                        serendipity_plugin_api::hook_event('backend_image_add', $target, end($new_media));
                     } else {
                         // necessary for the ajax-uplaoder to show upload errors
                         header("Internal Server Error", true, 500);
