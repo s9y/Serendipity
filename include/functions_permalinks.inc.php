@@ -167,7 +167,7 @@ function serendipity_makeFilename($str, $stripDots = false) {
         $str = str_replace('/', '%2F', $str);
         $str = urlencode($str);
     } else {
-        // Replace some emojis and flags into latin characters before utf8_decode() strips them away
+        // Replace some emojis and flags into latin characters before mb_convert_encoding() strips them away
         $str = str_replace($pre_from, $pre_to, $str);
 
         if (isset($GLOBALS['i18n_filename_from'])) {
@@ -178,7 +178,7 @@ function serendipity_makeFilename($str, $stripDots = false) {
             if (LANG_CHARSET == 'UTF-8') {
                 // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
                 // characters, try to UTF8-decode the string first.
-                $str = utf8_decode($str);
+                $str = mb_convert_encoding($str, 'ISO-8859-1', 'UTF-8');
             }
         } else {
             // Replace international chars not detected by every locale
@@ -187,7 +187,7 @@ function serendipity_makeFilename($str, $stripDots = false) {
             if (LANG_CHARSET == 'UTF-8') {
                 // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
                 // characters, try to UTF8-decode the string first.
-                $str = utf8_decode($str);
+                $str = mb_convert_encoding($str, 'ISO-8859-1', 'UTF-8');
             }
         }
 

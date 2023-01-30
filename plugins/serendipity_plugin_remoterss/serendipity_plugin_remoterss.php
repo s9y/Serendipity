@@ -906,7 +906,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin
 
             case 'UTF-8':
             default:
-                $out = utf8_decode($string);
+                $out = mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8');
                 return $out;
         }
     }

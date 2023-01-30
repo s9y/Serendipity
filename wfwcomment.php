@@ -14,22 +14,22 @@ if ($_REQUEST['cid'] != '' && $raw_post_data != '') {
 
     if (isset($name[1]) && !empty($name[1])) {
         if (preg_match('@^(.*)\((.*)\)@i', $name[1], $names)) {
-            $comment['name'] = utf8_decode($names[2]);
-            $comment['email'] = utf8_decode($names[1]);
+            $comment['name'] = mb_convert_encoding($names[2], 'ISO-8859-1', 'UTF-8');
+            $comment['email'] = mb_convert_encoding($names[1], 'ISO-8859-1', 'UTF-8');
         } else {
-            $comment['name'] = utf8_decode($name[1]);
+            $comment['name'] = mb_convert_encoding($names[1], 'ISO-8859-1', 'UTF-8');
         }
     }
 
     if (preg_match('@<link[^>]*>(.*)</link[^>]*>@i', $raw_post_data, $link)) {
-        $comment['url'] = utf8_decode($link[1]);
+        $comment['url'] = mb_convert_encoding($link[1], 'ISO-8859-1', 'UTF-8');
     }
 
     if (preg_match('@<description[^>]*>(.*)</description[^>]*>@ims', $raw_post_data, $description)) {
         if (preg_match('@^<!\[CDATA\[(.*)\]\]>@ims', $description[1], $cdata)) {
-            $comment['comment'] = utf8_decode($cdata[1]);
+            $comment['comment'] = mb_convert_encoding($cdata[1], 'ISO-8859-1', 'UTF-8');
         } else {
-            $comment['comment'] = utf8_decode($description[1]);
+            $comment['comment'] = mb_convert_encoding($description[1], 'ISO-8859-1', 'UTF-8');
         }
 
         if (!empty($comment['comment'])) {

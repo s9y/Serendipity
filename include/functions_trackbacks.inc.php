@@ -362,7 +362,7 @@ function add_trackback($id, $title, $url, $name, $excerpt) {
             // Trackback is in UTF-8. Check if our blog also is UTF-8.
             if (!$is_utf8) {
                 log_trackback('Transcoding ' . $idx . ' from UTF-8 to ISO');
-                $comment[$idx] = utf8_decode($field);
+                $comment[$idx] = mb_convert_encoding($field, 'ISO-8859-1', 'UTF-8');
             }
         } else {
             // Trackback is in some native format. We assume ISO-8859-1. Check if our blog is also ISO.

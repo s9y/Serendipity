@@ -579,7 +579,7 @@ class serendipity_event_spartacus extends serendipity_event
                 break;
 
             case 'iso-8859-1':
-                $data = utf8_decode($data);
+                $data = mb_convert_encoding($data, 'ISO-8859-1', 'UTF-8');
                 break;
 
             default:
