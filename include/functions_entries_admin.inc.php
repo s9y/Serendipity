@@ -110,10 +110,10 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
 
     if (! isset($entry['title']) || empty($entry['title'])) {
         if (!empty($serendipity['GET']['title'])) {
-            $entry['title'] = utf8_decode(urldecode($serendipity['GET']['title']));
+            $entry['title'] = mb_convert_encoding(urldecode($serendipity['GET']['title']), 'ISO-8859-1', 'UTF-8');
         } else {
             if (!empty($serendipity['POST']['title'])) {
-                $entry['title'] = utf8_decode(urldecode($serendipity['POST']['title']));
+                $entry['title'] = mb_convert_encoding(urldecode($serendipity['POST']['title']), 'ISO-8859-1', 'UTF-8');
             } else {
                 $entry['title'] = null;
             }
@@ -122,11 +122,11 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
 
 
     if (!empty($serendipity['GET']['body'])) {
-        $entry['body'] = utf8_decode(urldecode($serendipity['GET']['body']));
+        $entry['body'] = mb_convert_encoding(urldecode($serendipity['GET']['body']), 'ISO-8859-1', 'UTF-8');
     }
 
     if (!empty($serendipity['GET']['url'])) {
-        $entry['body'] .= "\n" . '<a class="block_level" href="' . serendipity_specialchars(utf8_decode(urldecode($serendipity['GET']['url']))) . '">' . $entry['title'] . '</a>';
+        $entry['body'] .= "\n" . '<a class="block_level" href="' . serendipity_specialchars(mb_convert_encoding(urldecode($serendipity['GET']['url']), 'ISO-8859-1', 'UTF-8')) . '">' . $entry['title'] . '</a>';
     }
 
     $template_vars['formToken'] = serendipity_setFormToken();
