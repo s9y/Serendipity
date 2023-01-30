@@ -157,7 +157,7 @@ function serendipity_strftime($format, $timestamp = null, $useOffset = true, $us
     }
 
     if ($is_win_utf && (empty($serendipity['calendar']) || $serendipity['calendar'] == 'gregorian')) {
-        $out = utf8_encode($out);
+        $out = mb_convert_encoding($out, 'UTF-8', 'ISO-8859-1');
     }
 
     return $out;
@@ -593,21 +593,9 @@ function serendipity_fetchReferences($id) {
  */
 function serendipity_utf8_encode($string) {
     if (strtolower(LANG_CHARSET) != 'utf-8') {
-        if (function_exists('iconv')) {
-            $new = iconv(LANG_CHARSET, 'UTF-8', $string);
-            if ($new !== false) {
-                return $new;
-            } else {
-                return utf8_encode($string);
-            }
-        } else if (function_exists('mb_convert_encoding')) {
-            return mb_convert_encoding($string, 'UTF-8', LANG_CHARSET);
-        } else {
-            return utf8_encode($string);
-        }
-    } else {
-        return $string;
+        return mb_convert_encoding($string, 'UTF-8', LANG_CHARSET);
     }
+    return $string;
 }
 
 /**

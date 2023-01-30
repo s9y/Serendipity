@@ -2318,7 +2318,7 @@ function serendipity_renameFile($id, $newName, $path = null) {
     $oldName = $file['name'];
     
     if (LANG_CHARSET == 'UTF-8') {
-        $newName = utf8_encode($newName);
+        $newName = mb_convert_encoding($newName, 'UTF-8', 'ISO-8859-1');
     }
 
     if ($path === null) {
