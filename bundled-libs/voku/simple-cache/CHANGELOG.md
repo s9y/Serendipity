@@ -1,3 +1,8 @@
+# Changelog 4.1.0 (2020-03-15)
+
+- "Cache" -> add "getAdapter()" & "getSerializer()"
+- "AdapterArray" -> add "getStaticValues()" & "getStaticKeys()"
+
 # Changelog 4.0.5 (2020-03-15)
 
 - fix "symfony/var-exporter" for OpCache
