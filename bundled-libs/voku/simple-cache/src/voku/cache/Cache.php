@@ -200,6 +200,20 @@ class Cache implements iCache
     }
 
     /**
+     * @return iAdapter|null
+     */
+    public function getAdapter() {
+        return $this->adapter;
+    }
+
+    /**
+     * @return iSerializer|null
+     */
+    public function getSerializer() {
+        return $this->serializer;
+    }
+
+    /**
      * @param array $array
      *
      * @return void
@@ -224,6 +238,7 @@ class Cache implements iCache
         CacheAdapterAutoManager $cacheAdapterManagerForAutoConnect = null,
         bool $cacheAdapterManagerForAutoConnectOverwrite = false
     ): iAdapter {
+        /** @var null|iAdapter $AUTO_ADAPTER_STATIC_CACHE */
         static $AUTO_ADAPTER_STATIC_CACHE = null;
 
         if (
@@ -250,12 +265,12 @@ class Cache implements iCache
 
         foreach ($cacheAdapterManagerDefault->getAdapters() as $adapterTmp => $callableFunctionTmp) {
 
-            /** @var iAdapter $adapterTest */
             if ($callableFunctionTmp !== null) {
                 $adapterTest = new $adapterTmp($callableFunctionTmp);
             } else {
                 $adapterTest = new $adapterTmp();
             }
+            assert($adapterTest instanceof iAdapter);
 
             if ($adapterTest->installed()) {
                 $adapter = $adapterTest;
@@ -263,6 +278,8 @@ class Cache implements iCache
                 break;
             }
         }
+
+        assert($adapter instanceof iAdapter);
 
         // save to static cache
         $AUTO_ADAPTER_STATIC_CACHE = $adapter;

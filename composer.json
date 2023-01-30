@@ -8,6 +8,7 @@
     "require": {
         "php": "~7.0",
         "katzgrau/klogger": "1.0.*",
+        "smarty/smarty": "^4.3",
         "voku/simple-cache": "4.*"
     },
     "minimum-stability": "dev",

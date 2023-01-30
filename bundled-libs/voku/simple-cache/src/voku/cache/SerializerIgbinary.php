@@ -60,7 +60,7 @@ class SerializerIgbinary implements iSerializer
         if (self::$_exists_igbinary === true) {
             /** @noinspection PhpUndefinedFunctionInspection */
             /** @noinspection PhpComposerExtensionStubsInspection */
-            return \igbinary_serialize($value);
+            return (string)\igbinary_serialize($value);
         }
 
         // fallback

@@ -22,8 +22,6 @@ class ComposerAutoloaderInitcbda25b16bb8365467298ce193f0f30c
             return self::$loader;
         }
 
-        require __DIR__ . '/platform_check.php';
-
         spl_autoload_register(array('ComposerAutoloaderInitcbda25b16bb8365467298ce193f0f30c', 'loadClassLoader'), true, true);
         self::$loader = $loader = new \Composer\Autoload\ClassLoader(\dirname(\dirname(__FILE__)));
         spl_autoload_unregister(array('ComposerAutoloaderInitcbda25b16bb8365467298ce193f0f30c', 'loadClassLoader'));
@@ -50,7 +48,7 @@ class ComposerAutoloaderInitcbda25b16bb8365467298ce193f0f30c
             }
         }
 
-        $loader->setApcuPrefix('stPjNJ6R//PsoDT+nlxLT');
+        $loader->setApcuPrefix('Q2aWalD8hMcdF7tI0u+vK');
         $loader->register(true);
 
         return $loader;

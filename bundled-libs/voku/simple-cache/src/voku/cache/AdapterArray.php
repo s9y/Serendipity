@@ -10,7 +10,7 @@ namespace voku\cache;
 class AdapterArray implements iAdapter
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private static $values = [];
 
@@ -18,6 +18,20 @@ class AdapterArray implements iAdapter
      * @var array<string, array<int>>
      */
     private static $expired = [];
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getStaticValues() {
+        return self::$values;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getStaticKeys() {
+        return \array_keys(self::$values);
+    }
 
     /**
      * {@inheritdoc}

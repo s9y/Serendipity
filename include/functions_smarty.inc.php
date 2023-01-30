@@ -939,7 +939,7 @@ function serendipity_smarty_init($vars = array()) {
 
             // Default Smarty Engine will be used
             if (!defined('SMARTY_DIR')) {
-                @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
+                @define('SMARTY_DIR', S9Y_PEAR_PATH . 'smarty/smarty/libs/');
             }
             if (!class_exists('Smarty')) {
                 include_once SMARTY_DIR . 'Smarty.class.php';

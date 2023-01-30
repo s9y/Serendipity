@@ -1,5 +1,5 @@
 parameters:
-    level: max
+    level: 8
     paths:
         - %currentWorkingDirectory%/src/
     reportUnmatchedIgnoredErrors: false
@@ -7,8 +7,6 @@ parameters:
     excludes_analyse:
         - %currentWorkingDirectory%/vendor/*
         - %currentWorkingDirectory%/tests/*
-    autoload_files:
-        - %currentWorkingDirectory%/vendor/autoload.php
     ignoreErrors:
         - '/always false/'
         - '/always true/'
