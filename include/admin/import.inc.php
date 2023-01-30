@@ -87,7 +87,7 @@ class Serendipity_Import {
                 } elseif (function_exists('recode')) {
                     $out = recode('iso-8859-1..' . LANG_CHARSET, $string);
                 } elseif (LANG_CHARSET == 'UTF-8') {
-                    return utf8_encode($string);
+                    return mb_convert_encoding($string, 'UTF-8', 'ISO-8859-1');
                 } else {
                     return $string;
                 }
