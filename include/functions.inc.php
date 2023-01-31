@@ -140,7 +140,7 @@ function serendipity_strftime($format, $timestamp = null, $useOffset = true, $us
                 } elseif ($useOffset) {
                     $timestamp = serendipity_serverOffsetHour($timestamp);
                 }
-                $out = strftime($format, $timestamp);
+                $out = PHP81_BC\strftime($format, $timestamp);
                 break;
 
             case 'persian-utf8':
