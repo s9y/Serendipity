@@ -107,7 +107,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
 
     function fixUTFEntity(&$string)
     {
-        $string = preg_replace('/&amp;#(x[a-f0-9]{1,4}|[0-9]{1,5});/', '&#$1;', $string);
+        $string = preg_replace('/&amp;#(x[a-f0-9]{1,4}|[0-9]{1,5});/', '&#$1;', $string ?? '');
         return true;
     }
 
