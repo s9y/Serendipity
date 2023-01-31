@@ -28,6 +28,15 @@
             'reference' => '46cdd92a9b4a8443120cc955bf831450cb274813',
             'dev_requirement' => false,
         ),
+        'php81_bc/strftime' => array(
+            'pretty_version' => '0.5.0',
+            'version' => '0.5.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php81_bc/strftime',
+            'aliases' => array(),
+            'reference' => '4c1b56eaae4bb3f02f994ba47c2e5a225378e62f',
+            'dev_requirement' => false,
+        ),
         'psr/log' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',

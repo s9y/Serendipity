@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
 {
+    public static $files = array (
+        '9e71c1459ef1226520e4b26dac3a180d' => __DIR__ . '/..' . '/php81_bc/strftime/src/php-8.1-strftime.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'v' => 
         array (
