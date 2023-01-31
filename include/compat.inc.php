@@ -491,7 +491,7 @@ function serendipity_specialchars($string, $flags = null, $encoding = LANG_CHARS
         $encoding = 'UTF-8';
     }
 
-    return htmlspecialchars($string, $flags, $encoding, $double_encode);
+    return htmlspecialchars($string ?? '', $flags, $encoding, $double_encode);
 }
 
 /**

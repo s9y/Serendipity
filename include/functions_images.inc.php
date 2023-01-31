@@ -2936,7 +2936,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
 function serendipity_mediaTypeCast($key, $val, $invert = false) {
     if (stristr($key, 'date') !== FALSE) {
         if ($invert && is_numeric($val)) {
-            return serendipity_strftime(DATE_FORMAT_SHORT, $val, false);
+            return serendipity_strftime(DATE_FORMAT_SHORT, (int) $val, false);
         } elseif ($invert === false) {
             $tmp = strtotime($val);
             if ($tmp !== FALSE && $tmp > 1) {
