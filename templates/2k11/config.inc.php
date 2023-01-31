@@ -50,7 +50,18 @@ $template_config = array(
                                 '%a, %m/%d/%y' => '%a, %m/%d/%y',
                                 '%m/%d/%y' => '%m/%d/%y',
                                 '%m/%d/%Y' => '%m/%d/%Y',
-                                '%Y-%m-%d' => '%Y-%m-%d')
+                                '%Y-%m-%d' => '%Y-%m-%d',
+                                '%A, %e. %B %Y %H:%M' => '%A, %e. %B %Y %H:%M',
+                                '%a, %e. %B %Y %H:%M' => '%a, %e. %B %Y %H:%M',
+                                '%e. %B %Y %H:%M' => '%e. %B %Y %H:%M',
+                                '%d.%m.%y %H:%M' => '%d.%m.%y %H:%M',
+                                '%d.%m.%Y %H:%M' => '%d.%m.%Y %H:%M',
+                                '%A, %m/%d/%Y %H:%M' => '%A, %m/%d/%Y %H:%M',
+                                '%a, %m/%d/%y %H:%M' => '%a, %m/%d/%y %H:%M',
+                                '%m/%d/%y %H:%M' => '%m/%d/%y %H:%M',
+                                '%m/%d/%Y %H:%M' => '%m/%d/%Y %H:%M',
+                                '%Y-%m-%d %H:%M' => '%Y-%m-%d %H:%M'
+            )
     ),
     array(
         'var' => 'header_img',

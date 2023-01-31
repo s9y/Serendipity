@@ -11,6 +11,8 @@ Version 2.5.0-alpha1 ()
          a permission group setting, you will not be impacted.
          (garvinhicking)
 
+   * Adds new time formats to 2k11 frontend (using %H:%M for date output)
+
    * Fix: Several uninitialized variable error notices in upgrader,
           category management, maintenance (garvinhicking)
 
