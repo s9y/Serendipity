@@ -1,0 +1,50 @@
+<!doctype html>
+<html dir="ltr" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Tagged translation</title>
+</head>
+<body>
+<h1>Getagte Übersetzungen</h1>
+
+<p>Das multilingual Plugin kann Übesetzungen per tag mittels <code>{{!&lt;lang&gt;}}&lt;text&gt;{{--}}</code> bereitstellen. Will man&nbsp; zum Beispiel eine englische und eine dänische Version des Textes anbieten, so schreibt man: "<code>{{!en}}English version of text{{--}}{{!da}}Dansk version af tekst{{--}}</code>" in das input Feld.</p>
+
+<p>Getagte Übersetzungen haben den Vorteil, dass sie u.a. auch in der Seitenleiste verwendbar sind, so dass jeder editierbare Inhalt (in der Regel der Titel) von einem Seitenleisten Element auch übersetzt werden kann. Dies erstreckt sich per Option auch auf den Blog-Titel und Untertitel.</p>
+
+<p>Auch Theme eigene Optionen wie eine Navigationsleiste könnten so einfachst für verschiedenen Sprachen multilingual genutzt werden. Allerdings muss dann per Handarbeit der Smarty Modifier "|multilingual_lang" der entsprechenden Ausgabevariable in der Theme eigenen index.tpl per <code class="language-php">{$navlink.title|multilingual_lang}</code> hinzugefügt werden.</p>
+
+<p>Eine getagte Übersetzung für Blog Einträge kann ebenfalls benutzt werden, ist aber in den Plugin Optionen standardmäßig deaktiviert, da sie bereits im Plugin vorhandene Funktionalität dupliziert. Getagte Übersetzungung sind bereits durch die Verwendung eines Datenbank basierten Ansatzes implementiert, und sie sollten entscheiden, welche Vorgehensweise sie beim Erstellen ihrer Einträge bevorzugen. Mit der gleichzeitigen Benutzung von beiden Ansätzen könnten am Ende seltsame und verwirrende Funktionalitäten enstehen. Die per default genutzte Datenbank basierende Methode nutzt das entryproperties Plugin das installiert sein muss. Hier wird der Eintrag in der default Blogsprache wie bisher auch erstellt und gespeichert. Dann kann man <u>denselben</u> Eintrag nutzen, übersetzen und mittels des neuen Sprachauswahlfeldes in der neuen Sprache abspeichern. Die übersetzte Variante befindet sich nun als entryproperties Eintrag in der entryproperties Tabelle. Im Frontend kann ein einzelner Blogeintrag mittels eines "Footer Links" leicht in der Sprache gewechselt werden. Dieses Verfahren hat keine Auswirkungen auf die Darstellung des Blogs, so wie es das Sprachen-Auswahlfeld des Seitenleisten Plugins hat, außer man aktiviert dies als Option. Zugriff auf die übersetzte Variante des Eintrags im Backend erhält man, in dem der originale Default Sprach Eintrag wie gewohnt aufgerufen, dann aber mit Hilfe des Sprach-Auswahlfeldes und des Buttons "Sprache wechseln" in den bereits übersetzten Eintrag gewechselt wird.</p>
+
+<p>Beachten sie auch, dass eine getagte Übersetzung mittels des Multilinguial Plugins nur tatsächliche Sprachblöcke betrifft, andere Sprachen aber keinen Fallback haben, so dass dieser Sprachteil dann immer leer zurückgegeben wird. Das heißt, sie sollten immer nur so viele Sprachen im Seitenleisten Plugin erlauben, wie sie auch als tag zur Übersetzung tatsächlich zur Verfügung stellen.</p>
+
+<p>Für Staticpages nutzen sie bitte das dort eingebaute Sprachen Auswahl Feld und erstellen damit jeweils <u>eine</u> eigene Staticpage per Sprache! Diese wird bei der Darstellung im Frontend je nach eingestellter Sprache automatisch erkannt. Dies ist unterschiedlich zum oben genannten Blog Eintragsverfahren! Sprach: 'ALL' Felder in den statische Seiten werden überall angezeigt.</p>
+
+<h3>Zusammengefasst haben sie die folgenden Möglichkeiten mit diesem Plugin:</h3>
+
+<ol>
+    <li>Inhalte von input Feldern per "tag" automatisiert multilingual bereitstellen</li>
+    <li>Ausgewählte input Felder per "tag" und Smarty modifier automatisch übersetzbar machen</li>
+    <li>Blog Einträge per "tag" multilingual gestalten (per default deaktiviert, zugunsten von)</li>
+    <li>Blog Einträge via Datenbank und entryproperties event Plugin multilingual erstellen und verwalten</li>
+    <li>Andersprachige Staticpages geben sich generell unabhängig von Multilingual Plugin, sind aber abhängig von der verwendeten Blogsprache</li>
+    <li>Multilinguale nuggets können per eigenem Plugin (serendipity_plugin_nugget_multilingual) erstellt werden</li>
+</ol>
+
+<p>Abhängigkeiten für:</p>
+
+<ul>
+    <li>(4) - Installiertes serendipity_event_entryproperties Plugin.</li>
+    <li>(3) - Hier ist es sicher auch eine Notwendigkeit, das Markup Plugin: "NL2BR" für diese Einträge generell oder per Entry zu deaktivieren. Ansonsten werden Zeilenumbrüche außerhalb von Sprachblöcken zu &lt;br /&gt; tags umgewandelt und dargestellt.</li>
+</ul>
+
+<p>Bitte beachten sie auch:</p>
+
+<blockquote>
+<p>Wenn die Option "<em>Sprache des Browsers eines Besuchers verwenden</em>" in Serendipity aktiviert ist, überschreibt diese die aktuelle Spracheinstellung - und die aktuelle Spracheinstellung ist immer das, was Serendipity als "default" Spracheinstellung darstellt und auslegt. Es obliegt den Blog Autoren streng darauf zu achten, dass derjenige immer mit demselben Setup in der Spracheinstellung agiert, wenn ein Eintrag editiert wird. Ansonsten kann es zu unvorhergesehenen Problemen und sogar Eintragsverlusten führen.</p>
+</blockquote>
+<blockquote>
+<p>Zusätzlich sollten sie als Admin des Blogs, die "Globale Konfigurations" Blog Sprach-Variable und die "Persönliche Einstellungen" Sprach-Variable gleich setzen und weiterhin im Frontend keine andere Seitenleistes Sprach-Selektion durchführen. Ansonsten kann es durch das gesetzte Cookie zu unvorhergesehenen Problemen in der Sprachdarstellung kommen.</p>
+</blockquote>
+
+</body>
+</html>
