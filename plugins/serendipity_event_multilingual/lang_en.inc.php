@@ -29,6 +29,9 @@
 @define('PLUGIN_EVENT_MULTILINGUAL_LANGSWITCH', 'Force full language switch?');
 @define('PLUGIN_EVENT_MULTILINGUAL_LANGSWITCH_DESC', 'Choosing a translation for a blog entry will also switch the whole language of the blog?');
 
+@define('PLUGIN_EVENT_MULTILINGUAL_HIDEENTRIES', 'Hide untranslated articles on home page?');
+@define('PLUGIN_EVENT_MULTILINGUAL_HIDEENTRIES_DESC', 'show articles in the default language if a translation in the selected language doesnt exist'); 
+
 @define('PLUGIN_EVENT_MULTILINGUAL_ENTRY_RELOADED', 'Multilingual entry language &lt;%s&gt; reloaded');
 
 //
