@@ -41,7 +41,7 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
 /**
  * Perform a DB Layer SQL query.
  *
- * This function returns values dependin on the input parameters and the result of the query.
+ * This function returns values depending on the input parameters and the result of the query.
  * It can return:
  *   false or a string if there was an error (depends on $expectError),
  *   true if the query succeeded but did not generate any rows
@@ -447,12 +447,16 @@ function serendipity_db_probe($hash, &$errs) {
 
     $function = 'mysqli_connect';
     $connparts = explode(':', $hash['dbHost']);
-    if (!empty($connparts[1])) {
-        // A "hostname:port" connection was specified
-        $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass'], $hash['dbName'], $connparts[1]);
-    } else {
-        // Connect with default ports
-        $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass']);
+    try {
+        if (!empty($connparts[1])) {
+            // A "hostname:port" connection was specified
+            $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass'], $hash['dbName'], $connparts[1]);
+        } else {
+            // Connect with default ports
+            $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass']);
+        }
+    } catch (mysqli_sql_exception $e) {
+        return false;
     }
 
     if (!$c) {
