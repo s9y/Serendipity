@@ -7,10 +7,13 @@ if (defined('S9Y_FRAMEWORK')) {
 }
 
 @define('S9Y_FRAMEWORK', true);
+
+@define('S9Y_IS_HTTPS_SERVER', array_key_exists('HTTPS', $_SERVER) && strtolower($_SERVER['HTTPS']) == 'on');
+
 if (!headers_sent() && php_sapi_name() !== 'cli') {
     // Only set the session name, if no session has yet been issued.
     if (session_id() == '') {
-        $secure = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on');
+        $secure = S9Y_IS_HTTPS_SERVER;
         if (PHP_VERSION_ID >= 70300) {
             session_set_cookie_params(array("secure"=>$secure, "httponly"=>true, "samesite"=>"Lax"));
         } else {
@@ -228,7 +231,7 @@ if (!version_compare(phpversion(), '5.3', '>=')) {
 if ( !defined('IN_installer') && IS_installed === false ) {
     header('Status: 302 Found');
     header('X-RequireInstall: 1');
-    header('Location: ' . (strtolower($_SERVER['HTTPS']) == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])) . '/serendipity_admin.php');
+    header('Location: ' . (S9Y_IS_HTTPS_SERVER ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])) . '/serendipity_admin.php');
     serendipity_die(sprintf(SERENDIPITY_NOT_INSTALLED, 'serendipity_admin.php'));
 }
 
@@ -353,7 +356,7 @@ serendipity_initLog();
 
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
-    $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
+    $serendipity['baseURL'] = 'http' . (S9Y_IS_HTTPS_SERVER ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
 }
 
 // If a user is logged in, fetch his preferences. He possibly wants to have a different language
