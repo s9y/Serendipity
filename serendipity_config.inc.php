@@ -62,6 +62,7 @@ if (!isset($serendipity['production'])) {
 // Set error reporting
 if ($serendipity['production']) {
     error_reporting(E_ALL & ~(E_WARNING|E_NOTICE|E_STRICT|E_DEPRECATED));
+    @ini_set('display_errors', 'off');
 } else {
     error_reporting(E_ALL & ~(E_NOTICE|E_STRICT|E_DEPRECATED));
 }
