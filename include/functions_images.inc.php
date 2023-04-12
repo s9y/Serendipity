@@ -1309,7 +1309,6 @@ function serendipity_functions_gd($infilename) {
     case 'gif':
         $func['load'] = 'imagecreatefromgif';
         $func['save'] = 'imagegif';
-        $func['qual'] = 100;
         break;
 
     case 'jpeg':
@@ -1427,7 +1426,11 @@ function serendipity_resize_image_gd($infilename, $outfilename, $newwidth, $newh
     imagecopyresampled($out, $in, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
     @umask(0000);
     touch($outfilename); // safe_mode requirement
-    $func['save']($out, $outfilename, $func['qual']);
+    if ($func['save'] == 'imagegif') {
+        $func['save']($out, $outfilename);
+    } else {
+        $func['save']($out, $outfilename, $func['qual']);
+    }
     @chmod($outfilename, 0664);
     $out = null;
     $in  = null;
