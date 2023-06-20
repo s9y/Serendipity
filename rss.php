@@ -137,6 +137,12 @@ if (!empty($serendipity['GET']['category'])) {
 
 $description = serendipity_utf8_encode(serendipity_specialchars($description));
 
+$xslt = '';
+if (($xslt_file = serendipity_getTemplateFile('pretty-feed-v3.xsl', 'serendipityPath'))) {
+    $xslt_url = serendipity_getTemplateFile('pretty-feed-v3.xsl', 'baseURL');
+    $xslt = "<?xml-stylesheet type=\"text/xml\" href=\"$xslt_url\"?>";
+}
+
 $metadata = array(
     'title'             => $title,
     'description'       => $description,
@@ -146,7 +152,8 @@ $metadata = array(
     'email'             => $serendipity['blogMail'],
     'fullFeed'          => false,
     'showMail'          => false,
-    'version'           => $version
+    'version'           => $version,
+    'xslt'              => $xslt
 );
 
 if (serendipity_get_config_var('feedBannerURL') != '') {
