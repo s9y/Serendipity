@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
+{$metadata.xslt}
 <rss version="2.0" 
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:admin="http://webns.net/mvcb/"
