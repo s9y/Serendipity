@@ -4,10 +4,10 @@
  */
 
 CKEDITOR.plugins.setLang( 'codesnippet', 'ru', {
-	button: 'Вставить сниппет',
+	button: 'Вставить фрагмент кода',
 	codeContents: 'Содержимое кода',
-	emptySnippetError: 'Сниппет не может быть пустым',
+	emptySnippetError: 'Фрагмент не может быть пустым',
 	language: 'Язык',
-	title: 'Сниппет',
-	pathName: 'сниппет'
+	title: 'Фрагмент кода',
+	pathName: 'фрагмент'
 } );
