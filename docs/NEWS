@@ -1,6 +1,9 @@
 Version 2.5.0-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Improved and extended russian translation files, thanks to Vadim
+     Rakhmatullin
+
    * [!] Bugfix: Fixes showing wrong values for Usergroup permission
          configuration. All checkboxes where enabled instead of
          only the ones really set, thus saving any usergroup with
