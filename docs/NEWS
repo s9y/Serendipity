@@ -1,6 +1,8 @@
 Version 2.5.0-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Avoid warning under PHP 8.2 when using an SQLite database
+
    * Improved and extended russian translation files, thanks to Vadim
      Rakhmatullin
 
