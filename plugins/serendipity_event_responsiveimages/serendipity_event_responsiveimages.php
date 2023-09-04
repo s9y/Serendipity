@@ -9,6 +9,9 @@ if (IN_serendipity !== true) {
 class serendipity_event_responsiveimages extends serendipity_event
 {
     var $title = PLUGIN_EVENT_RESPONSIVE_NAME;
+    var $markup_elements;
+    var $breakpoints;
+    var $thumbWidths = [1200, 800, 400];
 
     function introspect(&$propbag)
     {
@@ -18,7 +21,7 @@ class serendipity_event_responsiveimages extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_RESPONSIVE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '0.5.3');
+        $propbag->add('version',       '0.5.4');
         $propbag->add('requirements',  array(
             'serendipity' => '2.2',
         ));
@@ -90,7 +93,6 @@ class serendipity_event_responsiveimages extends serendipity_event
         if (! $this->breakpoints) {
             $this->breakpoints = [1600, 1200, 600]; # This can be overwritten by the theme
         }
-        $this->thumbWidths = [1200, 800, 400];
 
         if (isset($hooks[$event])) {
 
