@@ -1,3 +1,4 @@
+2.21.11: * Avoid warnings under PHP 8.2
 2.21.10: * hotfixes for PHP 8
 2.21.7: * add some newlines in output to make it better humanly readable
 2.21.6: * add missing 'u' inline element

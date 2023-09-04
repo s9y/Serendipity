@@ -9,6 +9,8 @@ if (IN_serendipity !== true) {
 class serendipity_event_nl2br extends serendipity_event
 {
     var $title = PLUGIN_EVENT_NL2BR_NAME;
+    var $markup_elements;
+    var $isolationtags;
 
     function introspect(&$propbag)
     {
@@ -18,7 +20,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team, Stephan Brunker');
-        $propbag->add('version',       '2.21.10');
+        $propbag->add('version',       '2.21.11');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
