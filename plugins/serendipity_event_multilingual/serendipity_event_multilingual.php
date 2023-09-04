@@ -35,6 +35,8 @@ class serendipity_event_multilingual extends serendipity_event
     var $switch_keys = array('title', 'body', 'extended');
     var $langswitch = true;
     var $hide_untranslated = false;
+    var $supported_properties;
+    var $dependencies;
 
     function introspect(&$propbag)
     {
@@ -50,7 +52,7 @@ class serendipity_event_multilingual extends serendipity_event
             'php'         => '4.1.0'
         ));
         $propbag->add('groups',         array('FRONTEND_ENTRY_RELATED', 'BACKEND_EDITOR'));
-        $propbag->add('version',        '2.36.0');
+        $propbag->add('version',        '2.36.1');
         $propbag->add('configuration',  array('copytext', 'placement', 'tagged_title', 'tagged_entries', 'tagged_sidebar', 'langswitch', 'hide_untranslated'));
         $propbag->add('event_hooks',    array(
                 'frontend_fetchentries'     => true,
@@ -117,7 +119,9 @@ class serendipity_event_multilingual extends serendipity_event
         if (!defined('IN_serendipity_admin')) {
 
             // rewrite lang_selected = 'default' to default language
-            if ($serendipity['GET']['lang_selected'] == 'default') $serendipity['GET']['lang_selected'] = $serendipity['default_lang'];
+            if (isset($serendipity['GET']['lang_selected'] ) && $serendipity['GET']['lang_selected'] == 'default') {
+                $serendipity['GET']['lang_selected'] = $serendipity['default_lang'];
+            }
             
             // set $this->showlang to selected language if full language switch is not enforced
             if (!$this->langswitch && !empty($serendipity['languages'][$serendipity['GET']['lang_selected']])) {
@@ -476,7 +480,7 @@ class serendipity_event_multilingual extends serendipity_event
                     break;
 
                 case 'genpage':
-                    if (!is_object($serendipity['smarty'])) {
+                    if (! isset($serendipity['smarty']) || !is_object($serendipity['smarty'])) {
                         // never init in genpage without adding previously set $vars, which is $view etc!
                         serendipity_smarty_init($serendipity['plugindata']['smartyvars']);
                     }
@@ -730,7 +734,7 @@ class serendipity_event_multilingual extends serendipity_event
                     }
                     // for the search, we need the full multilingual join inside the query to create the index
                     // if we are in translated mode
-                    if ($addData['source'] == 'search' && isset($eventData['find_part'])
+                    if (isset($addData['source']) && $addData['source'] == 'search' && isset($eventData['find_part'])
                         && $this->showlang != $serendipity['default_lang']) {
 
                         if (empty($eventData['addkey'])) $eventData['addkey'] = '' ;                        
