@@ -900,6 +900,10 @@ function &serendipity_replaceSmartyVars($tpl_source, $smarty) {
     return $tpl_source;
 }
 
+function serendipity_smarty_sprintf($format, $values) {
+    return sprintf($format, $values);
+}
+
 /**
  * Initialize the Smarty framework for use in Serendipity
  *
@@ -990,6 +994,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('modifier', 'serendipity_refhookPlugin', 'serendipity_smarty_refhookPlugin');
             $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
             $serendipity['smarty']->registerPlugin('modifier', 'rewriteURL', 'serendipity_rewriteURL');
+            $serendipity['smarty']->registerPlugin('modifier', 'sprintf', 'serendipity_smarty_sprintf');
 
             $serendipity['smarty']->registerPlugin('function', 'serendipity_printSidebar', 'serendipity_smarty_printSidebar');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');
