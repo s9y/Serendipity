@@ -17,7 +17,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     #public $php_functions = null;
 
     // set allowed modifiers only. (default = array( 'escape', 'count' );)
-    public $php_modifiers = array('escape', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat', 'nl2br', 'array_key_exists');
+    public $php_modifiers = array('escape', 'sizeof', 'count', 'rand', 'str_repeat', 'nl2br', 'array_key_exists');
 
     public $allow_constants = true;
 
