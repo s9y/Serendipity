@@ -211,9 +211,9 @@ class Serendipity_Smarty extends Smarty
 
         // set smarty error reporting. General error_reporting is set in serendipity/serendipity_config.inc.php
         $this->error_reporting = E_ALL & ~(E_NOTICE|E_STRICT);
-
-        // we use our own error_handler and get in conflicts with smarty?
-        // $this->muteExpectedErrors();
+        // Avoid a multitude of warnings when using Smarty on a newer PHP version, liek when we jumped
+        // to PHP 8:
+        $this->muteUndefinedOrNullWarnings();
     }
 
     /*
