@@ -1,6 +1,8 @@
 Version 2.5.0-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix Onyx/RSS dependency under PHP >= 8.0
+
    * Address several warnings when using PHP 8.2
 
    * Update HTTP_Request2 to current version v2.5.1
