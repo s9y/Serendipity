@@ -48,11 +48,37 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
                 0 => __DIR__ . '/..' . '/psr/log',
             ),
         ),
+        'H' => 
+        array (
+            'HTTP_Request2' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/http_request2',
+            ),
+        ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'HTTP_Request2' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2.php',
+        'HTTP_Request2_Adapter' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/Adapter.php',
+        'HTTP_Request2_Adapter_Curl' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/Adapter/Curl.php',
+        'HTTP_Request2_Adapter_Mock' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/Adapter/Mock.php',
+        'HTTP_Request2_Adapter_Socket' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/Adapter/Socket.php',
+        'HTTP_Request2_ConnectionException' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/ConnectionException.php',
+        'HTTP_Request2_CookieJar' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/CookieJar.php',
+        'HTTP_Request2_Exception' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/Exception.php',
+        'HTTP_Request2_LogicException' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/LogicException.php',
+        'HTTP_Request2_MessageException' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/MessageException.php',
+        'HTTP_Request2_MultipartBody' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/MultipartBody.php',
+        'HTTP_Request2_NotImplementedException' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/NotImplementedException.php',
+        'HTTP_Request2_Observer_Log' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/Observer/Log.php',
+        'HTTP_Request2_Observer_UncompressingDownload' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/Observer/UncompressingDownload.php',
+        'HTTP_Request2_Response' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/Response.php',
+        'HTTP_Request2_SOCKS5' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/SOCKS5.php',
+        'HTTP_Request2_SocketWrapper' => __DIR__ . '/..' . '/pear/http_request2/HTTP/Request2/SocketWrapper.php',
         'Katzgrau\\KLogger\\Logger' => __DIR__ . '/..' . '/katzgrau/klogger/src/Logger.php',
+        'Net_URL2' => __DIR__ . '/..' . '/pear/net_url2/Net/URL2.php',
+        'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
