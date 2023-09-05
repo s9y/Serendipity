@@ -23,7 +23,7 @@
             "http"
         ],
         "platform": {
-            "php": "7.0.99"
+            "php": "7.1"
         },
         "sort-packages": true,
         "vendor-dir": "bundled-libs"
