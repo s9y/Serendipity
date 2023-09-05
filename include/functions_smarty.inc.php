@@ -30,7 +30,8 @@ function &serendipity_fetchTrackbacks($id, $limit = null, $showAll = false) {
 
     $comments = serendipity_db_query($query);
     if (!is_array($comments)) {
-        return array();
+        $temp = array();
+        return $temp;
     }
 
     return $comments;
