@@ -72,7 +72,7 @@ class ONYX_RSS
          $charset = LANG_CHARSET;
       }
       $this->parser = @xml_parser_create($charset);
-      if (!is_resource($this->parser))
+      if (! ($this->parser || is_resource($this->parser)))
       {
          $this->raiseError((__LINE__-3), ONYX_ERR_NO_PARSER);
          return false;
