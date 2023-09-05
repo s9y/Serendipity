@@ -1536,7 +1536,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     $extraParems = serendipity_generateImageSelectorParems();
 
     $serendipity['GET']['only_path']     = serendipity_uploadSecure($limit_path . $serendipity['GET']['only_path'], true);
-    $serendipity['GET']['only_filename'] = serendipity_specialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']));
+    $serendipity['GET']['only_filename'] = serendipity_specialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename'] ?? ''));
 
     $perPage = (!empty($serendipity['GET']['sortorder']['perpage']) ? (int)$serendipity['GET']['sortorder']['perpage'] : 8);
     while ($perPage % $lineBreak !== 0) {
@@ -2287,8 +2287,8 @@ function serendipity_renameDir($oldDir, $newDir) {
         }
     }
 
-    if (! file_exists("${imgBase}${newDir}")) {
-        rename("${imgBase}${oldDir}", "${imgBase}${newDir}");
+    if (! file_exists("{$imgBase}{$newDir}")) {
+        rename("{$imgBase}{$oldDir}", "{$imgBase}{$newDir}");
 
         foreach($images as $image) {
             serendipity_updateImageInDatabase(
