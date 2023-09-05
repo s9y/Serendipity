@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.39.2');
+        $propbag->add('version',       '2.39.3');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -1176,7 +1176,7 @@ class serendipity_event_spartacus extends serendipity_event
                 if (array_key_exists($plugin, $foreignPlugins)) {
                     $upgradeVersion = ($foreignPlugins[$plugin]['upgrade_version'] ?? false) ? ($foreignPlugins[$plugin]['upgrade_version'] ?? '0') : $foreignPlugins[$plugin]['version'] ?? '0';
                 } else {
-                    $upgradeVersion = null;
+                    $upgradeVersion = '';
                 }
                 if (version_compare($currentVersion, $upgradeVersion, '<')) {
                     $upgradeCount++;
