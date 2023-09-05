@@ -1744,7 +1744,8 @@ class serendipity_plugin
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }
 
-        return $serendipity['smarty']->fetch('file:'. $tfile);
+        $output = $serendipity['smarty']->fetch('file:'. $tfile);
+        return $output;
     }
 
     /**
