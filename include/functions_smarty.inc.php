@@ -901,8 +901,8 @@ function &serendipity_replaceSmartyVars($tpl_source, $smarty) {
     return $tpl_source;
 }
 
-function serendipity_smarty_sprintf($format, $values) {
-    return sprintf($format, $values);
+function serendipity_smarty_sprintf($format, ...$values) {
+    return sprintf($format, ...$values);
 }
 
 function serendipity_smarty_print_r($value, $return = false) {
