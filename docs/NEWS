@@ -1,6 +1,10 @@
 Version 2.5.0-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Update Net/DNS2 to v1.5.3
+     This dependency was also added to composer. A symlink was added for
+     backwards compatibility with the old include path.
+
    * Fix Onyx/RSS dependency under PHP >= 8.0
 
    * Address several warnings when using PHP 8.2
