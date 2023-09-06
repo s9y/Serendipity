@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'Net_DNS2' => array($vendorDir . '/pear/net_dns2'),
     'HTTP_Request2' => array($vendorDir . '/pear/http_request2'),
 );
