@@ -192,13 +192,13 @@ foreach ($stack as $theme => $info) {
 
     foreach(array('', '_backend') as $backendId) {
 
-        if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview${backendId}_fullsize.jpg")) {
-            $data["templates"][$theme]["fullsize${backendId}_preview"] = $serendipity["baseURL"] . $serendipity["templatePath"] . $theme . "/preview${backendId}_fullsize.jpg";
+        if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview{$backendId}_fullsize.jpg")) {
+            $data["templates"][$theme]["fullsize{$backendId}_preview"] = $serendipity["baseURL"] . $serendipity["templatePath"] . $theme . "/preview{$backendId}_fullsize.jpg";
         } elseif (!empty($info["preview{$backendId}_fullsizeURL"])) { // preview{$backendId}_fullsizeURL is not actually set in spartacus yet
             if (file_exists($serendipity["serendipityPath"] . "/templates_c/template_cache/". $theme ."{$backendId}.jpg")) {
-                $data["templates"][$theme]["fullsize${backendId}_preview"]  = $serendipity["baseURL"] . "templates_c/template_cache/". $theme ."{$backendId}.jpg";
+                $data["templates"][$theme]["fullsize{$backendId}_preview"]  = $serendipity["baseURL"] . "templates_c/template_cache/". $theme ."{$backendId}.jpg";
             } else {
-                $data["templates"][$theme]["fullsize${backendId}_preview"] = $info["preview{$backendId}_fullsizeURL"];
+                $data["templates"][$theme]["fullsize{$backendId}_preview"] = $info["preview{$backendId}_fullsizeURL"];
             }
         }
 
@@ -207,10 +207,10 @@ foreach ($stack as $theme => $info) {
             $previewType = '.jpg';
         }
 
-        if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview${backendId}${previewType}")) {
-            $data["templates"][$theme]["preview${backendId}"] = $serendipity["templatePath"] . $theme . "/preview${backendId}${previewType}";
+        if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview{$backendId}{$previewType}")) {
+            $data["templates"][$theme]["preview{$backendId}"] = $serendipity["templatePath"] . $theme . "/preview{$backendId}{$previewType}";
         } elseif (!empty($info["previewURL"])) {
-            $data["templates"][$theme]["preview${backendId}"] = $info["previewURL${backendId}"] ?? null;
+            $data["templates"][$theme]["preview{$backendId}"] = $info["previewURL{$backendId}"] ?? null;
         }
 
         if (isset($info['demoURL']) && $info['demoURL']) {
