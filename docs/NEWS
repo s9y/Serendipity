@@ -2,7 +2,7 @@ Version 2.5.0-alpha1 ()
 ------------------------------------------------------------------------
 
    * Update Net/DNS2 to v1.5.3
-     This dependency was also added to composer. A symlink was added for
+     This dependency was also added to composer. A wrapper was added for
      backwards compatibility with the old include path.
 
    * Fix Onyx/RSS dependency under PHP >= 8.0
@@ -10,11 +10,12 @@ Version 2.5.0-alpha1 ()
    * Address several warnings when using PHP 8.2
 
    * Update HTTP_Request2 to current version v2.5.1
-     This dependency was also added to composer. A symlink was added for
+     This dependency was also added to composer. A wrapper was added for
      backwards compatibility with the old include path.
-     Subsequently, the old HTTP_Request (without the 2) was dropped.
+     Subsequently, some files form bundled_libs/HTTP were dropped that
+     were not part of Request2.
 
-   * Update smart to current version v4.3.2.
+   * Update smarty to current version v4.3.2.
      Also enables a warning suppressor, which should avoid issues with
      old smarty templates when using PHP 8.0 or newer.
   
