@@ -909,6 +909,10 @@ function serendipity_smarty_print_r($value, $return = false) {
     return print_r($value, $return);
 }
 
+function serendipity_smarty_array_key_exists($key, $array) {
+    return array_key_exists($key, $array);
+}
+
 /**
  * Initialize the Smarty framework for use in Serendipity
  *
@@ -1001,6 +1005,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('modifier', 'rewriteURL', 'serendipity_rewriteURL');
             $serendipity['smarty']->registerPlugin('modifier', 'sprintf', 'serendipity_smarty_sprintf');
             $serendipity['smarty']->registerPlugin('modifier', 'print_r', 'serendipity_smarty_print_r');
+            $serendipity['smarty']->registerPlugin('modifier', 'array_key_exists', 'serendipity_smarty_array_key_exists');
 
             $serendipity['smarty']->registerPlugin('function', 'serendipity_printSidebar', 'serendipity_smarty_printSidebar');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');
