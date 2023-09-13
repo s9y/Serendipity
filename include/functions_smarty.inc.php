@@ -913,6 +913,10 @@ function serendipity_smarty_array_key_exists($key, $array) {
     return array_key_exists($key, $array);
 }
 
+function serendipity_smarty_count($value, $mode = COUNT_NORMAL) {
+    return count($value, $mode);
+}
+
 /**
  * Initialize the Smarty framework for use in Serendipity
  *
@@ -1006,6 +1010,8 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('modifier', 'sprintf', 'serendipity_smarty_sprintf');
             $serendipity['smarty']->registerPlugin('modifier', 'print_r', 'serendipity_smarty_print_r');
             $serendipity['smarty']->registerPlugin('modifier', 'array_key_exists', 'serendipity_smarty_array_key_exists');
+            $serendipity['smarty']->registerPlugin('modifier', 'sizeof', 'serendipity_smarty_count');
+            $serendipity['smarty']->registerPlugin('modifier', 'count', 'serendipity_smarty_count');
 
             $serendipity['smarty']->registerPlugin('function', 'serendipity_printSidebar', 'serendipity_smarty_printSidebar');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');
