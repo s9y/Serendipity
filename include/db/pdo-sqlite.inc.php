@@ -119,7 +119,7 @@ function serendipity_db_reconnect() {
  */
 function serendipity_db_escape_string($string) {
     global $serendipity;
-    return substr($serendipity['dbConn']->quote($string), 1, -1);
+    return substr($serendipity['dbConn']->quote($string ?? ''), 1, -1);
 }
 
 /**
