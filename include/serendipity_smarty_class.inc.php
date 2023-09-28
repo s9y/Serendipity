@@ -12,12 +12,12 @@
 class Serendipity_Smarty_Security_Policy extends Smarty_Security
   {
     // these are the allowed functions only. - default as is
-    public $php_functions = array('isset', 'empty', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists');
+    public $php_functions = array('isset', 'empty', 'sizeof', 'count', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists');
     // to disable all PHP functions
     #public $php_functions = null;
 
     // set allowed modifiers only. (default = array( 'escape', 'count' );)
-    public $php_modifiers = array('escape', 'sizeof', 'count', 'rand', 'str_repeat', 'nl2br');
+    public $php_modifiers = array('escape', 'rand', 'str_repeat', 'nl2br');
 
     public $allow_constants = true;
 
