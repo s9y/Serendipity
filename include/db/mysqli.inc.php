@@ -275,9 +275,9 @@ function serendipity_db_schema_import($query) {
     global $serendipity;
     
     $search[] = '{UTF_8}';
-    if (  $_POST['charset'] == 'UTF-8/' ||
-          $serendipity['charset'] == 'UTF-8/' ||
-          $serendipity['POST']['charset'] == 'UTF-8/' ||
+    if (  isset($_POST['charset']) && $_POST['charset'] == 'UTF-8/' ||
+          isset($serendipity['charset']) && $serendipity['charset'] == 'UTF-8/' ||
+          isset($serendipity['POST']['charset']) && $serendipity['POST']['charset'] == 'UTF-8/' ||
           LANG_CHARSET == 'UTF-8' ) {
         if (serendipity_utf8mb4_ready()) {
             $replace[] = 'ROW_FORMAT=DYNAMIC /*!40100 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */';
@@ -291,13 +291,17 @@ function serendipity_db_schema_import($query) {
     }
     
 
-    if (serendipity_utf8mb4_ready()) {
-        # InnoDB enables us to use utf8mb4 with the higher max index size
-        serendipity_db_query("SET storage_engine=INNODB");
-    } else {
-        # Before 5.6.4/10.0.5 InnoDB did not support fulltext indexes, which we use,
-        # thus we stay with MyISAM here
-        serendipity_db_query("SET storage_engine=MYISAM");
+    $mysql_version = mysqli_get_server_info($serendipity['dbConn']);
+    if (serendipity_is_maria() || version_compare($mysql_version, '5.7', '<')) {
+        # MySQL has dropped the storage_engine setting in 5.7, so we only need to set it in MariaDB or earlier MySQL version
+        if (serendipity_utf8mb4_ready()) {
+            # InnoDB enables us to use utf8mb4 with the higher max index size
+            serendipity_db_query("SET storage_engine=INNODB");
+        } else {
+            # Before 5.6.4/10.0.5 InnoDB did not support fulltext indexes, which we use,
+            # thus we stay with MyISAM here
+            serendipity_db_query("SET storage_engine=MYISAM");
+        }
     }
 
     $query = trim(str_replace($search, $replace, $query));
@@ -485,6 +489,17 @@ function serendipity_db_probe($hash, &$errs) {
  */
 function serendipity_db_concat($string) {
     return 'concat(' . $string . ')';
+}
+
+// Return true if database is MariaDB, false if it is MySQL
+function serendipity_is_maria() {
+    global $serendipity;
+    
+    $mysql_version = mysqli_get_server_info($serendipity['dbConn']);
+    if (strpos($mysql_version, 'MariaDB') !== false) {
+        return true;
+    }
+    return false;
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
