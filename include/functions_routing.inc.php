@@ -372,10 +372,6 @@ function serveEntry($matches) {
     }
 
     $id = (int)$matches[1];
-    if ($id === 0) {
-        $id = false;
-    }
-
     $serendipity['GET']['action'] = 'read';
     $serendipity['GET']['id']     = $id;
 
