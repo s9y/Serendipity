@@ -1380,6 +1380,12 @@ use voku\cache\Cache;
 // when Memcached and Redis are not used. Returns the configured cache object. Used internally by
 // the other cache functions, you most likely never need to call this.
 function serendipity_setupCache() {
+    global $serendipity;
+
+    if (!serendipity_db_bool($serendipity['useInternalCache'])) {
+        return false;
+    }
+
     $cacheManager = new \voku\cache\CacheAdapterAutoManager();
 
     $cacheManager->addAdapter(
@@ -1414,16 +1420,29 @@ function serendipity_setupCache() {
 
 function serendipity_cleanCache() {
     $cache = serendipity_setupCache();
+    if ($cache === false) {
+        return false;
+    }
+
     return $cache->removeAll();
 }
 
 function serendipity_cacheItem($key, $item, $ttl = 3600) {
     $cache = serendipity_setupCache();
+
+    if ($cache === false) {
+        return false;
+    }
+
     return $cache->setItem($key, $item, $ttl);
 }
 
 function serendipity_getCacheItem($key) {
     $cache = serendipity_setupCache();
+    if ($cache === false) {
+        return false;
+    }
+
     return $cache->getItem($key);
 }
 

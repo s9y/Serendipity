@@ -337,6 +337,11 @@ function serendipity_load_configuration($author = null) {
         $serendipity['default_lang'] = $serendipity['lang'];
     }
 
+    // Internal Cache relies on opcache features; disable when not available
+    if (serendipity_db_bool($serendipity['useInternalCache']) && !function_exists('opcache_get_status')) {
+        $serendipity['useInternalCache'] = false;
+    }
+
 }
 
 /**
