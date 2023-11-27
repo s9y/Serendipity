@@ -217,7 +217,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         $entries = serendipity_getCacheItem($key);
         if ($entries && $entries !== false) {
             $serendipity['fullCountQuery'] = serendipity_getCacheItem($key . '_fullCountQuery');
-            return unserialize($entries);
+            $unserialized = unserialize($entries);
+            // Only variables returned by references
+            return $unserialized;
         }
     }
     
