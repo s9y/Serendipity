@@ -52,7 +52,7 @@ class serendipity_event_multilingual extends serendipity_event
             'php'         => '4.1.0'
         ));
         $propbag->add('groups',         array('FRONTEND_ENTRY_RELATED', 'BACKEND_EDITOR'));
-        $propbag->add('version',        '2.36.1');
+        $propbag->add('version',        '2.36.2');
         $propbag->add('configuration',  array('copytext', 'placement', 'tagged_title', 'tagged_entries', 'tagged_sidebar', 'langswitch', 'hide_untranslated'));
         $propbag->add('event_hooks',    array(
                 'frontend_fetchentries'     => true,
@@ -124,14 +124,15 @@ class serendipity_event_multilingual extends serendipity_event
             }
             
             // set $this->showlang to selected language if full language switch is not enforced
-            if (!$this->langswitch && !empty($serendipity['languages'][$serendipity['GET']['lang_selected']])) {
+            if (!$this->langswitch && isset($serendipity['GET']['lang_selected']) && !empty($serendipity['languages'][$serendipity['GET']['lang_selected']])) {
                 $this->showlang = $serendipity['GET']['lang_selected'];
-            if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-ML-SL-1: ' . $this->cleanheader($this->showlang));
+
+                if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-ML-SL-1: ' . $this->cleanheader($this->showlang));
             } else {
                 // if lanuage switch is enforced, set to new blog language
                 $this->showlang = $serendipity['lang'];
-            if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-ML-SL-2: ' . $this->cleanheader($this->showlang));
-        }
+                if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-ML-SL-2: ' . $this->cleanheader($this->showlang));
+            }
 
             // set $this->lang_display when untranslated articles should be hidden
             if ($this->hide_untranslated) {

@@ -1,3 +1,9 @@
+2.36.2:
+    * Fix errors under PHP 8.1:
+        * catch sql error 'duplicate key' on CREATE INDEX fulltext_idx
+           in /include/db/mysqli.inc.php
+        * $serendipity['GET']['lang_selected'] empty
+
 2.36.1 & 1.16.1 (sidebar):
     * Avoid warnings under PHP 8.2
 
