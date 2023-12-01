@@ -307,7 +307,18 @@ function serendipity_db_schema_import($query) {
     $query = trim(str_replace($search, $replace, $query));
     if ($query[0] == '@') {
         // Errors are expected to happen (like duplicate index creation)
-        return serendipity_db_query(substr($query, 1), false, 'both', false, false, false, true);
+        // for PHP 8.1 and later, duplicate index creation throws a fatal Uncaught mysqli_sql_exception, so catch it 
+        try {
+            $result = serendipity_db_query(substr($query, 1), false, 'both', false, false, false, true);
+        } catch ( mysqli_sql_exception $e) {
+            $msg = $e->getMessage();
+            if (str_contains($msg, 'Duplicate key name') && str_contains($query, 'CREATE FULLTEXT INDEX')) {
+                return $result;
+            } else {
+                throw $e;
+            }
+        }
+        return $result;
     } else {
         return serendipity_db_query($query);
     }
