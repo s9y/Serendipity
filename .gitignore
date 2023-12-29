@@ -3,6 +3,7 @@ uploads/*
 templates_c/*
 serendipity_config_local.inc.php
 plugins/additional_plugins*
+vendor
 
 # ide / dev stuff
 .cvsignore

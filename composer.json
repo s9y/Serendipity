@@ -28,6 +28,6 @@
             "php": "7.1"
         },
         "sort-packages": true,
-        "vendor-dir": "bundled-libs"
+        "vendor-dir": "vendor"
     }
 }
