@@ -171,7 +171,7 @@ class Net_DNS2_RR_WKS extends Net_DNS2_RR
 
                 if ($n == 8) {
 
-                    $data .= chr(bindec($string));
+                    $data .= chr(intval(bindec($string)));
                     $string = '';
                     $n = 0;
                 }

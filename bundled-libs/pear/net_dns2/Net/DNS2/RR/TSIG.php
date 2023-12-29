@@ -198,8 +198,9 @@ class Net_DNS2_RR_TSIG extends Net_DNS2_RR
             //
             // expand the algorithm
             //
-            $offset = 0;
-            $this->algorithm    = Net_DNS2_Names::unpack($this->rdata, $offset);
+            $newoffset          = $packet->offset;
+            $this->algorithm    = Net_DNS2_Packet::expand($packet, $newoffset);
+            $offset             = $newoffset - $packet->offset;
 
             //
             // unpack time, fudge and mac_size
@@ -305,7 +306,7 @@ class Net_DNS2_RR_TSIG extends Net_DNS2_RR
             //
             // add the name without compressing
             //
-            $sig_data .= Net_DNS2_Names::pack($this->name);
+            $sig_data .= Net_DNS2_Names::canonical($this->name);
 
             //
             // add the class and TTL
@@ -317,7 +318,7 @@ class Net_DNS2_RR_TSIG extends Net_DNS2_RR
             //
             // add the algorithm name without compression
             //
-            $sig_data .= Net_DNS2_Names::pack(strtolower($this->algorithm));
+            $sig_data .= Net_DNS2_Names::canonical(strtolower($this->algorithm));
 
             //
             // add the rest of the values
@@ -342,7 +343,7 @@ class Net_DNS2_RR_TSIG extends Net_DNS2_RR
             //
             // compress the algorithm
             //
-            $data = Net_DNS2_Names::pack(strtolower($this->algorithm));
+            $data = $packet->compress(strtolower($this->algorithm), $offset);
 
             //
             // pack the time, fudge and mac size
@@ -362,6 +363,7 @@ class Net_DNS2_RR_TSIG extends Net_DNS2_RR
 
                     return null;
                 }
+
             } else {
 
                 $this->other_length = 0;

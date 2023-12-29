@@ -130,7 +130,7 @@ class Net_DNS2_RR_EUI48 extends Net_DNS2_RR
         $a = explode('-', $this->address);
         foreach ($a as $b) {
 
-            $data .= chr(hexdec($b));
+            $data .= chr(intval(hexdec($b)));
         }
 
         $packet->offset += 6;

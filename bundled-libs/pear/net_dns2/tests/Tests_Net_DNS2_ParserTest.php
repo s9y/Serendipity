@@ -296,13 +296,18 @@ class Tests_Net_DNS2_ParserTest extends PHPUnit\Framework\TestCase
 
             $response_authority[$id]->rdlength = '';
             $response_authority[$id]->rdata = '';
+
+            $a = print_r($request_authority[$id], true);
+            $b = print_r($object, true);
+
+            $this->assertSame($a, $b);
         }
 
         //
         // build the hashes
         //
-        $a = md5(print_r($request_authority, 1));
-        $b = md5(print_r($response_authority, 1));
+        $a = md5(print_r($request_authority, true));
+        $b = md5(print_r($response_authority, true));
 
         //
         // the new hashes should match.

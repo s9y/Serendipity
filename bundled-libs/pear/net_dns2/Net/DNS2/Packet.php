@@ -309,8 +309,8 @@ class Net_DNS2_Packet
     /**
      * parses a domain label from a DNS Packet at the given offset
      *
-     * @param Net_DNS2_Packet &$packet the DNS packet to look in for the domain name
-     * @param integer         &$offset the offset into the given packet object
+     * @param string    $rdata the DNS packet to look in for the domain name
+     * @param integer   &$offset the offset into the given packet object
      *
      * @return mixed either the domain name or null if it's not found.
      * @access public

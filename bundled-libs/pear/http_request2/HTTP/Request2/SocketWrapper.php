@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2022 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2023 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -55,7 +55,7 @@ class HTTP_Request2_SocketWrapper
     /**
      * Sum of start time and global timeout, exception will be thrown if request continues past this time
      *
-     * @var float
+     * @var float|null
      */
     protected $deadline;
 
@@ -119,7 +119,7 @@ class HTTP_Request2_SocketWrapper
             }
         }
         set_error_handler([$this, 'connectionWarningsHandler']);
-        $this->socket = stream_socket_client(
+        $socket = stream_socket_client(
             $address, $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $context
         );
         restore_error_handler();
@@ -128,16 +128,17 @@ class HTTP_Request2_SocketWrapper
         // with the warning text in this case as that connection is unlikely
         // to be what user wants and as Curl throws an error in similar case.
         if ($this->connectionWarnings) {
-            if ($this->socket) {
-                fclose($this->socket);
+            if ($socket) {
+                fclose($socket);
             }
-            $error = $errstr ? $errstr : implode("\n", $this->connectionWarnings);
+            $error = $errstr ?: implode("\n", $this->connectionWarnings);
             throw new HTTP_Request2_ConnectionException(
                 "Unable to connect to {$address}. Error: {$error}", 0, $errno
             );
         }
         // Run socket in non-blocking mode, to prevent possible problems with
         // HTTPS requests not timing out properly (see bug #21229)
+        $this->socket = $socket;
         stream_set_blocking($this->socket, false);
     }
 
@@ -201,6 +202,7 @@ class HTTP_Request2_SocketWrapper
                 $started  = microtime(true);
             } else {
                 $timeouts = $this->_getTimeoutsForStreamSelect();
+                $started  = 0.0;
             }
 
             $r = [$this->socket];
@@ -246,9 +248,10 @@ class HTTP_Request2_SocketWrapper
             if (stream_select($r, $w, $e, $timeouts[0], $timeouts[1])) {
                 set_error_handler(
                     static function ($errNo, $errStr) use (&$error) {
-                        if (0 !== (E_NOTICE | E_WARNING) & $errNo) {
+                        if (0 !== ((E_NOTICE | E_WARNING) & $errNo)) {
                             $error = $errStr;
                         }
+                        return true;
                     }
                 );
                 $written = fwrite($this->socket, $data);

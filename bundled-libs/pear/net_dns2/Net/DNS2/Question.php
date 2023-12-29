@@ -66,7 +66,7 @@ class Net_DNS2_Question
     /**
      * Constructor - builds a new Net_DNS2_Question object
      *
-     * @param mixed &$packet either a Net_DNS2_Packet object, or null to 
+     * @param Net_DNS2_Packet &$packet either a Net_DNS2_Packet object, or null to 
      *                       build an empty object
      *
      * @throws Net_DNS2_Exception
@@ -132,25 +132,26 @@ class Net_DNS2_Question
             ord($packet->rdata[$packet->offset++]);
 
         //
-        // validate it
+        // validate it          
         //
-        $type_name  = Net_DNS2_Lookups::$rr_types_by_id[$type];
-        $class_name = Net_DNS2_Lookups::$classes_by_id[$class];
-
-        if ( (!isset($type_name)) || (!isset($class_name)) ) {
-
+        if (isset(Net_DNS2_Lookups::$rr_types_by_id[$type]) == false)
+        {
             throw new Net_DNS2_Exception(
-                'invalid question section: invalid type (' . $type . 
-                ') or class (' . $class . ') specified.',
-                Net_DNS2_Lookups::E_QUESTION_INVALID
+                'invalid question section: invalid type (' . $type . ') specified.', Net_DNS2_Lookups::E_QUESTION_INVALID
             );
         }
+        if (isset(Net_DNS2_Lookups::$classes_by_id[$class]) == false)                
+        {
+            throw new Net_DNS2_Exception(
+                'invalid question section: invalid class (' . $class . ') specified.', Net_DNS2_Lookups::E_QUESTION_INVALID
+            );
+        }            
 
-        //
+        //          
         // store it
         //
-        $this->qtype     = $type_name;
-        $this->qclass    = $class_name;
+        $this->qtype  = Net_DNS2_Lookups::$rr_types_by_id[$type];
+        $this->qclass = Net_DNS2_Lookups::$classes_by_id[$class];
 
         return true;
     }
