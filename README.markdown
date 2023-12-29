@@ -30,6 +30,7 @@ You should not use this GIT branch, if you don't know what's going on. :-)
 
 * Adapt changes from bundled-libs/ to vendor/
 * Adapt changes from include/ to src/
+* Create basic ddev setup
 * Find remaining bundled-libs as composer packages and put them into vendor/
 * Adapt changes in code for root-dir-level templates_c, uploads, sql and
 other core directories

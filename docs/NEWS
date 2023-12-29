@@ -1,3 +1,14 @@
+Version 3.0 ()
+------------------------------------------------------------------------
+
+   * Reworked internal project structure for better development:
+     * CI/GitHub Actions
+     * PHPStan analysis
+     * composer integration (using Serendipity as a composer package,
+       using foreign packages as libraries instead of being baked-in)
+     * automatic release creation (bundling assets, creating the
+       project structure for deployment)
+
 Version 2.5-beta2 ()
 ------------------------------------------------------------------------
 
