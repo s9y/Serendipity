@@ -1,4 +1,22 @@
 {
+    "name": "Serendipity (s9y)",
+    "description": "A reliable, secure & extensible PHP blog - Not mainstream since 2002",
+    "keywords": ["serendipity", "serendipity-blog", "s9y", "weblog", "blog", "blogging"],
+    "homepage": "https://s9y.org/",
+    "type": "s9y-core",
+    "license": "bsd",
+    "authors": [
+        {
+            "name": "Serendipity Team",
+            "role": "Developer",
+            "homepage": "https://s9y.org"
+        }
+    ],
+    "support": {
+        "docs": "https://docs.s9y.org/",
+        "issues": "https://github.com/s9y/Serendipity/issues",
+        "source": "https://github.com/s9y/Serendipity/"
+    },
     "repositories": [
         {
             "type": "composer",
@@ -6,8 +24,15 @@
         }
     ],
     "require": {
-        "php": "~7.0",
-        "katzgrau/klogger": "1.0.*",
+        "php": "^8.0",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-mbstring": "*",
+        "ext-pcre": "*",
+        "ext-session": "*",
+        "ext-xml": "*",
+        "katzgrau/klogger": "^1.0.0",
         "pear/http_request2": "^2.5",
         "pear/net_dns2": "^1.5",
         "php81_bc/strftime": "^0.5.0",
@@ -25,9 +50,12 @@
             "http"
         ],
         "platform": {
-            "php": "7.1"
+            "php": "8.0.0"
         },
         "sort-packages": true,
-        "vendor-dir": "bundled-libs"
+        "vendor-dir": "bundled-libs",
+        "allow-plugins": {
+            "s9y/composer-installers": true
+        }
     }
 }
