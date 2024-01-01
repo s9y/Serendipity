@@ -4,7 +4,7 @@
     "keywords": ["serendipity", "serendipity-blog", "s9y", "weblog", "blog", "blogging"],
     "homepage": "https://s9y.org/",
     "type": "s9y-core",
-    "license": "bsd",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Serendipity Team",
