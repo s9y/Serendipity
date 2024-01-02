@@ -13,6 +13,7 @@ the project structure towards "usual" composer project defaults:
 * public is the document root with the PHP files
 * src instead of include
 * vendor instead of bundled-libs
+* move serendipity_config.inc.php to src/
 
 If you've used Serendipity from GIT before, you need to ideally point your document
 root to the `public/` subdirectory (or your browser), because the root of

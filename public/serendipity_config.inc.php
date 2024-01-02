@@ -36,8 +36,14 @@ if (!headers_sent() && php_sapi_name() !== 'cli') {
     }
 }
 
+// Can be set as an ENV variable
 if (!defined('S9Y_INCLUDE_PATH')) {
-    define('S9Y_INCLUDE_PATH', dirname(__FILE__) . '/');
+    if (isset($_ENV['S9Y_INCLUDE_PATH'])) {
+        define('S9Y_INCLUDE_PATH', $_ENV['S9Y_INCLUDE_PATH']);
+    } else {
+        // Directory outside of document root
+        define('S9Y_INCLUDE_PATH', dirname(__DIR__) . '/src/');
+    }    
 }
 define('S9Y_CONFIG_TEMPLATE',     S9Y_INCLUDE_PATH . 'include/tpl/config_local.inc.php');
 define('S9Y_CONFIG_USERTEMPLATE', S9Y_INCLUDE_PATH . 'include/tpl/config_personal.inc.php');
@@ -54,7 +60,7 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version'] = '2.5-beta2';
+$serendipity['version'] = '3.0-alpha1';
 
 
 // Setting this to 'false' will enable debugging output. All alpha/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
@@ -245,11 +251,12 @@ if (function_exists('get_include_path')) {
 }
 
 
-require_once("bundled-libs/autoload.php");
+require_once(S9Y_INCLUDE_PATH . '../vendor/autoload.php');
 
 $new_include = ($serendipity['use_PEAR'] ? $old_include . PATH_SEPARATOR : '')
+             . S9Y_INCLUDE_PATH . 'vendor/' . PATH_SEPARATOR
              . S9Y_INCLUDE_PATH . 'bundled-libs/' . PATH_SEPARATOR
-             . S9Y_INCLUDE_PATH . 'bundled-libs/smarty/smarty/libs/' . PATH_SEPARATOR
+             . S9Y_INCLUDE_PATH . 'vendor/smarty/smarty/libs/' . PATH_SEPARATOR
              . $serendipity['serendipityPath'] . PATH_SEPARATOR
              . (!$serendipity['use_PEAR'] ? $old_include . PATH_SEPARATOR : '');
 
