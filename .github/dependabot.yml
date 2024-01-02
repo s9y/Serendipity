@@ -1,0 +1,7 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    target-branch: "feature/composer"
+    schedule:
+      interval: "weekly"
