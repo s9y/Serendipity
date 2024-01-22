@@ -1,6 +1,8 @@
 Version 2.5-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix a PHP notice in User management ("isEditable") (garvinhicking)
+
    * Fix a bug when the p parameter given was set to 0 (@hannob)
 
    * Fix an incompatibility with MySQL 5.7 or later (@mariohommel)
