@@ -189,8 +189,10 @@ if ($serendipity['GET']['adminAction'] != 'delete') {
     if (is_array($users)) {
         foreach($users as $user => $userdata) {
             if ($userdata['userlevel'] < $serendipity['serendipityUserlevel'] || $userdata['authorid'] == $serendipity['authorid'] || $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
-                    $data['users'][$user]['isEditable'] = true;
-                    $data['users'][$user]['authorUrl'] = serendipity_authorURL($userdata);
+                $data['users'][$user]['isEditable'] = true;
+                $data['users'][$user]['authorUrl'] = serendipity_authorURL($userdata);
+            } else {
+                $data['users'][$user]['isEditable'] = false;
             }
             $data['users'][$user]['userlevel_name'] = $serendipity['permissionLevels'][$userdata['userlevel']];
         }
