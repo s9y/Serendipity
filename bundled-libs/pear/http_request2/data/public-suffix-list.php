@@ -232,6 +232,7 @@ return [
   ],
   'biz' => true,
   'info' => true,
+  '123webseite' => true,
   'priv' => true,
   'myspreadshop' => true,
   '12hp' => true,
@@ -345,6 +346,7 @@ return [
   'kuleuven' => [
    'ezproxy' => true
   ],
+  '123website' => true,
   'myspreadshop' => true,
   'transurl' => [
    '*' => true
@@ -408,6 +410,7 @@ return [
   'org' => true
  ],
  'biz' => [
+  'activetrail' => true,
   'cloudns' => true,
   'jozi' => true,
   'dyndns' => true,
@@ -424,9 +427,26 @@ return [
   'dscloud' => true
  ],
  'bj' => [
-  'asso' => true,
-  'barreau' => true,
-  'gouv' => true,
+  'africa' => true,
+  'agro' => true,
+  'architectes' => true,
+  'assur' => true,
+  'avocats' => true,
+  'co' => true,
+  'com' => true,
+  'eco' => true,
+  'econo' => true,
+  'edu' => true,
+  'info' => true,
+  'loisirs' => true,
+  'money' => true,
+  'net' => true,
+  'org' => true,
+  'ote' => true,
+  'resto' => true,
+  'restaurant' => true,
+  'tourism' => true,
+  'univ' => true,
   'blogspot' => true
  ],
  'bm' => [
@@ -519,11 +539,7 @@ return [
   'cnt' => true,
   'com' => [
    'blogspot' => true,
-   'virtualcloud' => [
-    'scale' => [
-     'users' => true
-    ]
-   ]
+   'simplesite' => true
   ],
   'contagem' => true,
   'coop' => true,
@@ -792,6 +808,7 @@ return [
   'linkyard-cloud' => true,
   'dnsking' => true,
   'gotdns' => true,
+  '123website' => true,
   'myspreadshop' => true,
   'firenet' => [
    '*' => true,
@@ -844,8 +861,46 @@ return [
   'ac' => true,
   'com' => [
    'amazonaws' => [
+    'cn-north-1' => [
+     'execute-api' => true,
+     'emrappui-prod' => true,
+     'emrnotebooks-prod' => true,
+     'emrstudio-prod' => true,
+     'dualstack' => [
+      's3' => true,
+      's3-accesspoint' => true,
+      's3-website' => true
+     ],
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-deprecated' => true,
+     's3-object-lambda' => true,
+     's3-website' => true
+    ],
+    'cn-northwest-1' => [
+     'execute-api' => true,
+     'emrappui-prod' => true,
+     'emrnotebooks-prod' => true,
+     'emrstudio-prod' => true,
+     'dualstack' => [
+      's3' => true,
+      's3-accesspoint' => true
+     ],
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-object-lambda' => true,
+     's3-website' => true
+    ],
     'compute' => [
      '*' => true
+    ],
+    'airflow' => [
+     'cn-north-1' => [
+      '*' => true
+     ],
+     'cn-northwest-1' => [
+      '*' => true
+     ]
     ],
     'eb' => [
      'cn-north-1' => true,
@@ -853,9 +908,16 @@ return [
     ],
     'elb' => [
      '*' => true
-    ],
+    ]
+   ],
+   'sagemaker' => [
     'cn-north-1' => [
-     's3' => true
+     'notebook' => true,
+     'studio' => true
+    ],
+    'cn-northwest-1' => [
+     'notebook' => true,
+     'studio' => true
     ]
    ]
   ],
@@ -901,7 +963,11 @@ return [
   'hk' => true,
   'mo' => true,
   'tw' => true,
-  'instantcloud' => true
+  'canva-apps' => true,
+  'instantcloud' => true,
+  'quickconnect' => [
+   'direct' => true
+  ]
  ],
  'co' => [
   'arts' => true,
@@ -928,6 +994,9 @@ return [
   'lpages' => true,
   'mypi' => true,
   'n4t' => true,
+  'firewalledreplit' => [
+   'id' => true
+  ],
   'repl' => [
    'id' => true
   ],
@@ -942,138 +1011,821 @@ return [
     '*' => true
    ]
   ],
+  'airkitapps' => true,
+  'airkitapps-au' => true,
+  'aivencloud' => true,
   'kasserver' => true,
   'amazonaws' => [
+   'af-south-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'ap-east-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'ap-northeast-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'ap-northeast-2' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'ap-northeast-3' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'ap-south-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'ap-south-2' => [
+    'execute-api' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'ap-southeast-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'ap-southeast-2' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'ap-southeast-3' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'ap-southeast-4' => [
+    'execute-api' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'ca-central-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-accesspoint-fips' => true,
+     's3-fips' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-accesspoint-fips' => true,
+    's3-fips' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'eu-central-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'eu-central-2' => [
+    'execute-api' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'eu-north-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'eu-south-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'eu-south-2' => [
+    'execute-api' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'eu-west-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-deprecated' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'eu-west-2' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'eu-west-3' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'il-central-1' => [
+    'execute-api' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'me-central-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'me-south-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'sa-east-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'us-east-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-accesspoint-fips' => true,
+     's3-fips' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-accesspoint-fips' => true,
+    's3-deprecated' => true,
+    's3-fips' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'us-east-2' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-accesspoint-fips' => true,
+     's3-fips' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-accesspoint-fips' => true,
+    's3-deprecated' => true,
+    's3-fips' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'us-gov-east-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-accesspoint-fips' => true,
+     's3-fips' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-accesspoint-fips' => true,
+    's3-fips' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'us-gov-west-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-accesspoint-fips' => true,
+     's3-fips' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-accesspoint-fips' => true,
+    's3-fips' => true,
+    's3-object-lambda' => true,
+    's3-website' => true
+   ],
+   'us-west-1' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-accesspoint-fips' => true,
+     's3-fips' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-accesspoint-fips' => true,
+    's3-fips' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
+   'us-west-2' => [
+    'execute-api' => true,
+    'emrappui-prod' => true,
+    'emrnotebooks-prod' => true,
+    'emrstudio-prod' => true,
+    'dualstack' => [
+     's3' => true,
+     's3-accesspoint' => true,
+     's3-accesspoint-fips' => true,
+     's3-fips' => true,
+     's3-website' => true
+    ],
+    's3' => true,
+    's3-accesspoint' => true,
+    's3-accesspoint-fips' => true,
+    's3-deprecated' => true,
+    's3-fips' => true,
+    's3-object-lambda' => true,
+    's3-website' => true,
+    'analytics-gateway' => true,
+    'aws-cloud9' => [
+     'webview-assets' => true
+    ],
+    'cloud9' => [
+     'vfs' => true,
+     'webview-assets' => true
+    ]
+   ],
    'compute' => [
     '*' => true
    ],
    'compute-1' => [
     '*' => true
    ],
-   'us-east-1' => [
-    'dualstack' => [
-     's3' => true
+   'airflow' => [
+    'ap-northeast-1' => [
+     '*' => true
+    ],
+    'ap-northeast-2' => [
+     '*' => true
+    ],
+    'ap-south-1' => [
+     '*' => true
+    ],
+    'ap-southeast-1' => [
+     '*' => true
+    ],
+    'ap-southeast-2' => [
+     '*' => true
+    ],
+    'ca-central-1' => [
+     '*' => true
+    ],
+    'eu-central-1' => [
+     '*' => true
+    ],
+    'eu-north-1' => [
+     '*' => true
+    ],
+    'eu-west-1' => [
+     '*' => true
+    ],
+    'eu-west-2' => [
+     '*' => true
+    ],
+    'eu-west-3' => [
+     '*' => true
+    ],
+    'sa-east-1' => [
+     '*' => true
+    ],
+    'us-east-1' => [
+     '*' => true
+    ],
+    'us-east-2' => [
+     '*' => true
+    ],
+    'us-west-2' => [
+     '*' => true
     ]
    ],
-   'elb' => [
-    '*' => true
-   ],
    's3' => true,
+   's3-1' => true,
+   's3-ap-east-1' => true,
    's3-ap-northeast-1' => true,
    's3-ap-northeast-2' => true,
+   's3-ap-northeast-3' => true,
    's3-ap-south-1' => true,
    's3-ap-southeast-1' => true,
    's3-ap-southeast-2' => true,
    's3-ca-central-1' => true,
    's3-eu-central-1' => true,
+   's3-eu-north-1' => true,
    's3-eu-west-1' => true,
    's3-eu-west-2' => true,
    's3-eu-west-3' => true,
    's3-external-1' => true,
+   's3-fips-us-gov-east-1' => true,
    's3-fips-us-gov-west-1' => true,
+   's3-global' => [
+    'accesspoint' => [
+     'mrap' => true
+    ]
+   ],
+   's3-me-south-1' => true,
    's3-sa-east-1' => true,
-   's3-us-gov-west-1' => true,
    's3-us-east-2' => true,
+   's3-us-gov-east-1' => true,
+   's3-us-gov-west-1' => true,
    's3-us-west-1' => true,
    's3-us-west-2' => true,
-   'ap-northeast-2' => [
-    's3' => true,
-    'dualstack' => [
-     's3' => true
-    ],
-    's3-website' => true
-   ],
-   'ap-south-1' => [
-    's3' => true,
-    'dualstack' => [
-     's3' => true
-    ],
-    's3-website' => true
-   ],
-   'ca-central-1' => [
-    's3' => true,
-    'dualstack' => [
-     's3' => true
-    ],
-    's3-website' => true
-   ],
-   'eu-central-1' => [
-    's3' => true,
-    'dualstack' => [
-     's3' => true
-    ],
-    's3-website' => true
-   ],
-   'eu-west-2' => [
-    's3' => true,
-    'dualstack' => [
-     's3' => true
-    ],
-    's3-website' => true
-   ],
-   'eu-west-3' => [
-    's3' => true,
-    'dualstack' => [
-     's3' => true
-    ],
-    's3-website' => true
-   ],
-   'us-east-2' => [
-    's3' => true,
-    'dualstack' => [
-     's3' => true
-    ],
-    's3-website' => true
-   ],
-   'ap-northeast-1' => [
-    'dualstack' => [
-     's3' => true
-    ]
-   ],
-   'ap-southeast-1' => [
-    'dualstack' => [
-     's3' => true
-    ]
-   ],
-   'ap-southeast-2' => [
-    'dualstack' => [
-     's3' => true
-    ]
-   ],
-   'eu-west-1' => [
-    'dualstack' => [
-     's3' => true
-    ]
-   ],
-   'sa-east-1' => [
-    'dualstack' => [
-     's3' => true
-    ]
-   ],
-   's3-website-us-east-1' => true,
-   's3-website-us-west-1' => true,
-   's3-website-us-west-2' => true,
    's3-website-ap-northeast-1' => true,
    's3-website-ap-southeast-1' => true,
    's3-website-ap-southeast-2' => true,
    's3-website-eu-west-1' => true,
-   's3-website-sa-east-1' => true
+   's3-website-sa-east-1' => true,
+   's3-website-us-east-1' => true,
+   's3-website-us-gov-west-1' => true,
+   's3-website-us-west-1' => true,
+   's3-website-us-west-2' => true,
+   'elb' => [
+    '*' => true
+   ]
+  ],
+  'amazoncognito' => [
+   'af-south-1' => [
+    'auth' => true
+   ],
+   'ap-northeast-1' => [
+    'auth' => true
+   ],
+   'ap-northeast-2' => [
+    'auth' => true
+   ],
+   'ap-northeast-3' => [
+    'auth' => true
+   ],
+   'ap-south-1' => [
+    'auth' => true
+   ],
+   'ap-southeast-1' => [
+    'auth' => true
+   ],
+   'ap-southeast-2' => [
+    'auth' => true
+   ],
+   'ap-southeast-3' => [
+    'auth' => true
+   ],
+   'ca-central-1' => [
+    'auth' => true
+   ],
+   'eu-central-1' => [
+    'auth' => true
+   ],
+   'eu-north-1' => [
+    'auth' => true
+   ],
+   'eu-south-1' => [
+    'auth' => true
+   ],
+   'eu-west-1' => [
+    'auth' => true
+   ],
+   'eu-west-2' => [
+    'auth' => true
+   ],
+   'eu-west-3' => [
+    'auth' => true
+   ],
+   'il-central-1' => [
+    'auth' => true
+   ],
+   'me-south-1' => [
+    'auth' => true
+   ],
+   'sa-east-1' => [
+    'auth' => true
+   ],
+   'us-east-1' => [
+    'auth' => true,
+    'auth-fips' => true
+   ],
+   'us-east-2' => [
+    'auth' => true,
+    'auth-fips' => true
+   ],
+   'us-gov-west-1' => [
+    'auth-fips' => true
+   ],
+   'us-west-1' => [
+    'auth' => true,
+    'auth-fips' => true
+   ],
+   'us-west-2' => [
+    'auth' => true,
+    'auth-fips' => true
+   ]
+  ],
+  'amplifyapp' => [
+   '*' => true
+  ],
+  'awsapprunner' => [
+   '*' => true
   ],
   'elasticbeanstalk' => [
+   'af-south-1' => true,
+   'ap-east-1' => true,
    'ap-northeast-1' => true,
    'ap-northeast-2' => true,
    'ap-northeast-3' => true,
    'ap-south-1' => true,
    'ap-southeast-1' => true,
    'ap-southeast-2' => true,
+   'ap-southeast-3' => true,
    'ca-central-1' => true,
    'eu-central-1' => true,
+   'eu-north-1' => true,
+   'eu-south-1' => true,
    'eu-west-1' => true,
    'eu-west-2' => true,
    'eu-west-3' => true,
+   'il-central-1' => true,
+   'me-south-1' => true,
    'sa-east-1' => true,
    'us-east-1' => true,
    'us-east-2' => true,
+   'us-gov-east-1' => true,
    'us-gov-west-1' => true,
    'us-west-1' => true,
    'us-west-2' => true
@@ -1089,6 +1841,7 @@ return [
   'boutir' => true,
   'bplaced' => true,
   'cafjs' => true,
+  'canva-apps' => true,
   'br' => true,
   'cn' => true,
   'de' => true,
@@ -1113,6 +1866,8 @@ return [
   'wpdevcloud' => true,
   'cloudcontrolled' => true,
   'cloudcontrolapp' => true,
+  'cf-ipfs' => true,
+  'cloudflare-ipfs' => true,
   'trycloudflare' => true,
   'customer-oci' => [
    '*' => true,
@@ -1136,6 +1891,8 @@ return [
    'instance' => true
   ],
   'ddns5' => true,
+  'discordsays' => true,
+  'discordsez' => true,
   'drayddns' => true,
   'dreamhosters' => true,
   'mydrobo' => true,
@@ -1302,6 +2059,7 @@ return [
   'theworkpc' => true,
   'mytuleap' => true,
   'tuleap-partners' => true,
+  'encoreapi' => true,
   'evennode' => [
    'eu-1' => true,
    'eu-2' => true,
@@ -1316,6 +2074,7 @@ return [
   'fbsbx' => [
    'apps' => true
   ],
+  'fastly-edge' => true,
   'fastly-terrarium' => true,
   'fastvps-server' => true,
   'mydobiss' => true,
@@ -1348,7 +2107,6 @@ return [
   'awsmppl' => true,
   'herokuapp' => true,
   'herokussl' => true,
-  'myravendb' => true,
   'impertrixcdn' => true,
   'impertrix' => true,
   'smushcdn' => true,
@@ -1356,9 +2114,7 @@ return [
   'wpmucdn' => true,
   'pixolino' => true,
   'amscompute' => true,
-  'clicketcloud' => true,
   'dopaas' => true,
-  'hidora' => true,
   'hosted-by-previder' => [
    'paas' => true
   ],
@@ -1387,6 +2143,7 @@ return [
     '*' => true
    ]
   ],
+  'ktistory' => true,
   'lpusercontent' => true,
   'lmpm' => [
    'app' => true
@@ -1472,6 +2229,7 @@ return [
   'observableusercontent' => [
    'static' => true
   ],
+  'simplesite' => true,
   'orsites' => true,
   'operaunite' => true,
   'authgear-staging' => true,
@@ -1496,6 +2254,7 @@ return [
    'eu' => true
   ],
   'qualifioapp' => true,
+  'ladesk' => true,
   'qbuser' => true,
   'qa2' => true,
   'dev-myqnapcloud' => true,
@@ -1510,6 +2269,22 @@ return [
    'app' => true
   ],
   'onrender' => true,
+  '180r' => true,
+  'dojin' => true,
+  'sakuratan' => true,
+  'sakuraweb' => true,
+  'x0' => true,
+  'code' => [
+   'builder' => [
+    '*' => true
+   ],
+   'dev-builder' => [
+    '*' => true
+   ],
+   'stg-builder' => [
+    '*' => true
+   ]
+  ],
   'logoip' => true,
   'scrysec' => true,
   'firewall-gateway' => true,
@@ -1525,6 +2300,7 @@ return [
    'alpha' => true,
    'beta' => true
   ],
+  'streamlitapp' => true,
   'try-snowplow' => true,
   'stackhero-network' => true,
   'playstation-cloud' => true,
@@ -1535,6 +2311,10 @@ return [
   'temp-dns' => true,
   'dsmynas' => true,
   'familyds' => true,
+  'mytabit' => true,
+  'tb-hosting' => [
+   'site' => true
+  ],
   'reservd' => true,
   'thingdustdata' => true,
   'bloxcms' => true,
@@ -1543,15 +2323,18 @@ return [
    'pro' => true
   ],
   'hk' => true,
+  'it' => true,
+  'vultrobjects' => [
+   '*' => true
+  ],
   'wafflecell' => true,
-  'idnblogger' => true,
-  'indowapblog' => true,
   'reserve-online' => true,
   'hotelwithflight' => true,
   'remotewd' => true,
   'wiardweb' => [
    'pages' => true
   ],
+  'messwithdns' => true,
   'woltlab-demo' => true,
   'wpenginepowered' => [
    'js' => true
@@ -1612,10 +2395,9 @@ return [
   'ekloges' => true,
   'gov' => true,
   'ltd' => true,
-  'name' => true,
+  'mil' => true,
   'net' => true,
   'org' => true,
-  'parliament' => true,
   'press' => true,
   'pro' => true,
   'tm' => true
@@ -1684,7 +2466,9 @@ return [
   'in-butter' => true,
   'in-dsl' => true,
   'in-vpn' => true,
+  'iservschule' => true,
   'mein-iserv' => true,
+  'schulplattform' => true,
   'schulserver' => true,
   'test-iserv' => true,
   'keymachine' => true,
@@ -1692,6 +2476,7 @@ return [
   'lcube-server' => true,
   'svn-repos' => true,
   'barsy' => true,
+  '123webseite' => true,
   'logoip' => true,
   'firewall-gateway' => true,
   'my-gateway' => true,
@@ -1733,6 +2518,7 @@ return [
   'reg' => true,
   'store' => true,
   'blogspot' => true,
+  '123hjemmeside' => true,
   'myspreadshop' => true
  ],
  'dm' => [
@@ -1825,6 +2611,7 @@ return [
   'org' => true,
   'gob' => true,
   'edu' => true,
+  '123miweb' => true,
   'myspreadshop' => true
  ],
  'et' => [
@@ -1838,6 +2625,7 @@ return [
   'net' => true
  ],
  'eu' => [
+  'airkitapps' => true,
   'mycd' => true,
   'cloudns' => true,
   'dogado' => [
@@ -1864,6 +2652,8 @@ return [
    'demo' => true,
    'paas' => true
   ],
+  'kapsi' => true,
+  '123kotisivu' => true,
   'myspreadshop' => true
  ],
  'fj' => [
@@ -1886,7 +2676,10 @@ return [
   'edu' => true,
   'net' => true,
   'org' => true,
-  'radio' => true
+  'radio' => true,
+  'user' => [
+   '*' => true
+  ]
  ],
  'fo' => true,
  'fr' => [
@@ -1896,21 +2689,10 @@ return [
   'nom' => true,
   'prd' => true,
   'tm' => true,
-  'aeroport' => true,
-  'avocat' => true,
   'avoues' => true,
   'cci' => true,
-  'chambagri' => true,
-  'chirurgiens-dentistes' => true,
-  'experts-comptables' => true,
-  'geometre-expert' => true,
   'greta' => true,
   'huissier-justice' => true,
-  'medecin' => true,
-  'notaires' => true,
-  'pharmacien' => true,
-  'port' => true,
-  'veterinaire' => true,
   'en-root' => true,
   'fbx-os' => true,
   'fbxos' => true,
@@ -1918,8 +2700,20 @@ return [
   'freeboxos' => true,
   'blogspot' => true,
   'goupile' => true,
+  '123siteweb' => true,
   'on-web' => true,
   'chirurgiens-dentistes-en-france' => true,
+  'dedibox' => true,
+  'aeroport' => true,
+  'avocat' => true,
+  'chambagri' => true,
+  'chirurgiens-dentistes' => true,
+  'experts-comptables' => true,
+  'medecin' => true,
+  'notaires' => true,
+  'pharmacien' => true,
+  'port' => true,
+  'veterinaire' => true,
   'myspreadshop' => true,
   'ynh' => true
  ],
@@ -1999,7 +2793,8 @@ return [
   'net' => true,
   'org' => true,
   'gov' => true,
-  'blogspot' => true
+  'blogspot' => true,
+  'simplesite' => true
  ],
  'gs' => true,
  'gt' => [
@@ -2152,9 +2947,7 @@ return [
   'sch' => true,
   'web' => true,
   'flap' => true,
-  'forte' => true,
-  'bloger' => true,
-  'wblog' => true
+  'forte' => true
  ],
  'ie' => [
   'gov' => true,
@@ -2166,7 +2959,8 @@ return [
   'co' => [
    'ravpage' => true,
    'blogspot' => true,
-   'tabitorder' => true
+   'tabitorder' => true,
+   'mytabit' => true
   ],
   'gov' => true,
   'idf' => true,
@@ -2174,6 +2968,12 @@ return [
   'muni' => true,
   'net' => true,
   'org' => true
+ ],
+ 'ישראל' => [
+  'אקדמיה' => true,
+  'ישוב' => true,
+  'צהל' => true,
+  'ממשל' => true
  ],
  'im' => [
   'ac' => true,
@@ -2189,18 +2989,47 @@ return [
   'ro' => true
  ],
  'in' => [
-  'co' => true,
-  'firm' => true,
-  'net' => true,
-  'org' => true,
-  'gen' => true,
-  'ind' => true,
-  'nic' => true,
+  '5g' => true,
+  '6g' => true,
   'ac' => true,
+  'ai' => true,
+  'am' => true,
+  'bihar' => true,
+  'biz' => true,
+  'business' => true,
+  'ca' => true,
+  'cn' => true,
+  'co' => true,
+  'com' => true,
+  'coop' => true,
+  'cs' => true,
+  'delhi' => true,
+  'dr' => true,
   'edu' => true,
-  'res' => true,
+  'er' => true,
+  'firm' => true,
+  'gen' => true,
   'gov' => true,
+  'gujarat' => true,
+  'ind' => true,
+  'info' => true,
+  'int' => true,
+  'internet' => true,
+  'io' => true,
+  'me' => true,
   'mil' => true,
+  'net' => true,
+  'nic' => true,
+  'org' => true,
+  'pg' => true,
+  'post' => true,
+  'pro' => true,
+  'res' => true,
+  'travel' => true,
+  'tv' => true,
+  'uk' => true,
+  'up' => true,
+  'us' => true,
   'web' => true,
   'cloudns' => true,
   'blogspot' => true,
@@ -2235,6 +3064,9 @@ return [
  ],
  'io' => [
   'com' => true,
+  'on-acorn' => [
+   '*' => true
+  ],
   'apigee' => true,
   'b-data' => true,
   'backplaneapp' => true,
@@ -2244,6 +3076,7 @@ return [
     '*' => true
    ]
   ],
+  'beagleboard' => true,
   'bitbucket' => true,
   'bluebite' => true,
   'boxfuse' => true,
@@ -2288,7 +3121,15 @@ return [
   'azurecontainer' => [
    '*' => true
   ],
-  'ngrok' => true,
+  'ngrok' => [
+   'ap' => true,
+   'au' => true,
+   'eu' => true,
+   'in' => true,
+   'jp' => true,
+   'sa' => true,
+   'us' => true
+  ],
   'nodeart' => [
    'stage' => true
   ],
@@ -2325,6 +3166,7 @@ return [
   'shiftcrypto' => true,
   'shiftedit' => true,
   'mo-siemens' => true,
+  'musician' => true,
   'lair' => [
    'apps' => true
   ],
@@ -2360,6 +3202,7 @@ return [
   '2038' => true,
   'wedeploy' => true,
   'editorx' => true,
+  'wixstudio' => true,
   'basicserver' => true,
   'virtualserver' => true
  ],
@@ -2800,6 +3643,8 @@ return [
   'vt' => true,
   'vv' => true,
   'blogspot' => true,
+  'ibxos' => true,
+  'iliadboxos' => true,
   'neen' => [
    'jc' => true
   ],
@@ -2813,6 +3658,7 @@ return [
   '16-b' => true,
   '32-b' => true,
   '64-b' => true,
+  '123homepage' => true,
   'myspreadshop' => true,
   'syncloud' => true
  ],
@@ -2848,7 +3694,15 @@ return [
    'aseinet' => [
     'user' => true
    ],
-   'gehirn' => true
+   'gehirn' => true,
+   'ivory' => true,
+   'mail-box' => true,
+   'mints' => true,
+   'mokuren' => true,
+   'opal' => true,
+   'sakura' => true,
+   'sumomo' => true,
+   'topaz' => true
   ],
   'or' => true,
   'aichi' => [
@@ -4700,7 +5554,148 @@ return [
   'supersale' => true,
   'theshop' => true,
   'usercontent' => true,
-  'blogspot' => true
+  'angry' => true,
+  'babyblue' => true,
+  'babymilk' => true,
+  'backdrop' => true,
+  'bambina' => true,
+  'bitter' => true,
+  'blush' => true,
+  'boo' => true,
+  'boy' => true,
+  'boyfriend' => true,
+  'but' => true,
+  'candypop' => true,
+  'capoo' => true,
+  'catfood' => true,
+  'cheap' => true,
+  'chicappa' => true,
+  'chillout' => true,
+  'chips' => true,
+  'chowder' => true,
+  'chu' => true,
+  'ciao' => true,
+  'cocotte' => true,
+  'coolblog' => true,
+  'cranky' => true,
+  'cutegirl' => true,
+  'daa' => true,
+  'deca' => true,
+  'deci' => true,
+  'digick' => true,
+  'egoism' => true,
+  'fakefur' => true,
+  'fem' => true,
+  'flier' => true,
+  'floppy' => true,
+  'fool' => true,
+  'frenchkiss' => true,
+  'girlfriend' => true,
+  'girly' => true,
+  'gloomy' => true,
+  'gonna' => true,
+  'greater' => true,
+  'hacca' => true,
+  'heavy' => true,
+  'her' => true,
+  'hiho' => true,
+  'hippy' => true,
+  'holy' => true,
+  'hungry' => true,
+  'icurus' => true,
+  'itigo' => true,
+  'jellybean' => true,
+  'kikirara' => true,
+  'kill' => true,
+  'kilo' => true,
+  'kuron' => true,
+  'littlestar' => true,
+  'lolipopmc' => true,
+  'lolitapunk' => true,
+  'lomo' => true,
+  'lovepop' => true,
+  'lovesick' => true,
+  'main' => true,
+  'mods' => true,
+  'mond' => true,
+  'mongolian' => true,
+  'moo' => true,
+  'namaste' => true,
+  'nikita' => true,
+  'nobushi' => true,
+  'noor' => true,
+  'oops' => true,
+  'parallel' => true,
+  'parasite' => true,
+  'pecori' => true,
+  'peewee' => true,
+  'penne' => true,
+  'pepper' => true,
+  'perma' => true,
+  'pigboat' => true,
+  'pinoko' => true,
+  'punyu' => true,
+  'pupu' => true,
+  'pussycat' => true,
+  'pya' => true,
+  'raindrop' => true,
+  'readymade' => true,
+  'sadist' => true,
+  'schoolbus' => true,
+  'secret' => true,
+  'staba' => true,
+  'stripper' => true,
+  'sub' => true,
+  'sunnyday' => true,
+  'thick' => true,
+  'tonkotsu' => true,
+  'under' => true,
+  'upper' => true,
+  'velvet' => true,
+  'verse' => true,
+  'versus' => true,
+  'vivian' => true,
+  'watson' => true,
+  'weblike' => true,
+  'whitesnow' => true,
+  'zombie' => true,
+  'blogspot' => true,
+  '2-d' => true,
+  'bona' => true,
+  'crap' => true,
+  'daynight' => true,
+  'eek' => true,
+  'flop' => true,
+  'halfmoon' => true,
+  'jeez' => true,
+  'matrix' => true,
+  'mimoza' => true,
+  'netgamers' => true,
+  'nyanta' => true,
+  'o0o0' => true,
+  'rdy' => true,
+  'rgr' => true,
+  'rulez' => true,
+  'sakurastorage' => [
+   'isk01' => [
+    's3' => true
+   ],
+   'isk02' => [
+    's3' => true
+   ]
+  ],
+  'saloon' => true,
+  'sblo' => true,
+  'skr' => true,
+  'tank' => true,
+  'uh-oh' => true,
+  'undo' => true,
+  'webaccel' => [
+   'rs' => true,
+   'user' => true
+  ],
+  'websozai' => true,
+  'xii' => true
  ],
  'ke' => [
   'ac' => true,
@@ -4816,11 +5811,10 @@ return [
   'org' => true
  ],
  'ky' => [
-  'edu' => true,
-  'gov' => true,
   'com' => true,
-  'org' => true,
-  'net' => true
+  'edu' => true,
+  'net' => true,
+  'org' => true
  ],
  'kz' => [
   'org' => true,
@@ -4907,7 +5901,8 @@ return [
   'blogspot' => true
  ],
  'lu' => [
-  'blogspot' => true
+  'blogspot' => true,
+  '123website' => true
  ],
  'lv' => [
   'com' => true,
@@ -4964,8 +5959,6 @@ return [
    'localhost' => true
   ],
   'edgestack' => true,
-  'couk' => true,
-  'ukco' => true,
   'filegear' => true,
   'filegear-au' => true,
   'filegear-de' => true,
@@ -4994,8 +5987,9 @@ return [
   'i234' => true,
   'myds' => true,
   'synology' => true,
-  'tbits' => true,
-  'wbq' => true,
+  'transip' => [
+   'site' => true
+  ],
   'wedeploy' => true,
   'yombo' => true,
   'nohost' => true
@@ -5086,554 +6080,7 @@ return [
   'co' => true,
   'or' => true
  ],
- 'museum' => [
-  'academy' => true,
-  'agriculture' => true,
-  'air' => true,
-  'airguard' => true,
-  'alabama' => true,
-  'alaska' => true,
-  'amber' => true,
-  'ambulance' => true,
-  'american' => true,
-  'americana' => true,
-  'americanantiques' => true,
-  'americanart' => true,
-  'amsterdam' => true,
-  'and' => true,
-  'annefrank' => true,
-  'anthro' => true,
-  'anthropology' => true,
-  'antiques' => true,
-  'aquarium' => true,
-  'arboretum' => true,
-  'archaeological' => true,
-  'archaeology' => true,
-  'architecture' => true,
-  'art' => true,
-  'artanddesign' => true,
-  'artcenter' => true,
-  'artdeco' => true,
-  'arteducation' => true,
-  'artgallery' => true,
-  'arts' => true,
-  'artsandcrafts' => true,
-  'asmatart' => true,
-  'assassination' => true,
-  'assisi' => true,
-  'association' => true,
-  'astronomy' => true,
-  'atlanta' => true,
-  'austin' => true,
-  'australia' => true,
-  'automotive' => true,
-  'aviation' => true,
-  'axis' => true,
-  'badajoz' => true,
-  'baghdad' => true,
-  'bahn' => true,
-  'bale' => true,
-  'baltimore' => true,
-  'barcelona' => true,
-  'baseball' => true,
-  'basel' => true,
-  'baths' => true,
-  'bauern' => true,
-  'beauxarts' => true,
-  'beeldengeluid' => true,
-  'bellevue' => true,
-  'bergbau' => true,
-  'berkeley' => true,
-  'berlin' => true,
-  'bern' => true,
-  'bible' => true,
-  'bilbao' => true,
-  'bill' => true,
-  'birdart' => true,
-  'birthplace' => true,
-  'bonn' => true,
-  'boston' => true,
-  'botanical' => true,
-  'botanicalgarden' => true,
-  'botanicgarden' => true,
-  'botany' => true,
-  'brandywinevalley' => true,
-  'brasil' => true,
-  'bristol' => true,
-  'british' => true,
-  'britishcolumbia' => true,
-  'broadcast' => true,
-  'brunel' => true,
-  'brussel' => true,
-  'brussels' => true,
-  'bruxelles' => true,
-  'building' => true,
-  'burghof' => true,
-  'bus' => true,
-  'bushey' => true,
-  'cadaques' => true,
-  'california' => true,
-  'cambridge' => true,
-  'can' => true,
-  'canada' => true,
-  'capebreton' => true,
-  'carrier' => true,
-  'cartoonart' => true,
-  'casadelamoneda' => true,
-  'castle' => true,
-  'castres' => true,
-  'celtic' => true,
-  'center' => true,
-  'chattanooga' => true,
-  'cheltenham' => true,
-  'chesapeakebay' => true,
-  'chicago' => true,
-  'children' => true,
-  'childrens' => true,
-  'childrensgarden' => true,
-  'chiropractic' => true,
-  'chocolate' => true,
-  'christiansburg' => true,
-  'cincinnati' => true,
-  'cinema' => true,
-  'circus' => true,
-  'civilisation' => true,
-  'civilization' => true,
-  'civilwar' => true,
-  'clinton' => true,
-  'clock' => true,
-  'coal' => true,
-  'coastaldefence' => true,
-  'cody' => true,
-  'coldwar' => true,
-  'collection' => true,
-  'colonialwilliamsburg' => true,
-  'coloradoplateau' => true,
-  'columbia' => true,
-  'columbus' => true,
-  'communication' => true,
-  'communications' => true,
-  'community' => true,
-  'computer' => true,
-  'computerhistory' => true,
-  'comunicações' => true,
-  'contemporary' => true,
-  'contemporaryart' => true,
-  'convent' => true,
-  'copenhagen' => true,
-  'corporation' => true,
-  'correios-e-telecomunicações' => true,
-  'corvette' => true,
-  'costume' => true,
-  'countryestate' => true,
-  'county' => true,
-  'crafts' => true,
-  'cranbrook' => true,
-  'creation' => true,
-  'cultural' => true,
-  'culturalcenter' => true,
-  'culture' => true,
-  'cyber' => true,
-  'cymru' => true,
-  'dali' => true,
-  'dallas' => true,
-  'database' => true,
-  'ddr' => true,
-  'decorativearts' => true,
-  'delaware' => true,
-  'delmenhorst' => true,
-  'denmark' => true,
-  'depot' => true,
-  'design' => true,
-  'detroit' => true,
-  'dinosaur' => true,
-  'discovery' => true,
-  'dolls' => true,
-  'donostia' => true,
-  'durham' => true,
-  'eastafrica' => true,
-  'eastcoast' => true,
-  'education' => true,
-  'educational' => true,
-  'egyptian' => true,
-  'eisenbahn' => true,
-  'elburg' => true,
-  'elvendrell' => true,
-  'embroidery' => true,
-  'encyclopedic' => true,
-  'england' => true,
-  'entomology' => true,
-  'environment' => true,
-  'environmentalconservation' => true,
-  'epilepsy' => true,
-  'essex' => true,
-  'estate' => true,
-  'ethnology' => true,
-  'exeter' => true,
-  'exhibition' => true,
-  'family' => true,
-  'farm' => true,
-  'farmequipment' => true,
-  'farmers' => true,
-  'farmstead' => true,
-  'field' => true,
-  'figueres' => true,
-  'filatelia' => true,
-  'film' => true,
-  'fineart' => true,
-  'finearts' => true,
-  'finland' => true,
-  'flanders' => true,
-  'florida' => true,
-  'force' => true,
-  'fortmissoula' => true,
-  'fortworth' => true,
-  'foundation' => true,
-  'francaise' => true,
-  'frankfurt' => true,
-  'franziskaner' => true,
-  'freemasonry' => true,
-  'freiburg' => true,
-  'fribourg' => true,
-  'frog' => true,
-  'fundacio' => true,
-  'furniture' => true,
-  'gallery' => true,
-  'garden' => true,
-  'gateway' => true,
-  'geelvinck' => true,
-  'gemological' => true,
-  'geology' => true,
-  'georgia' => true,
-  'giessen' => true,
-  'glas' => true,
-  'glass' => true,
-  'gorge' => true,
-  'grandrapids' => true,
-  'graz' => true,
-  'guernsey' => true,
-  'halloffame' => true,
-  'hamburg' => true,
-  'handson' => true,
-  'harvestcelebration' => true,
-  'hawaii' => true,
-  'health' => true,
-  'heimatunduhren' => true,
-  'hellas' => true,
-  'helsinki' => true,
-  'hembygdsforbund' => true,
-  'heritage' => true,
-  'histoire' => true,
-  'historical' => true,
-  'historicalsociety' => true,
-  'historichouses' => true,
-  'historisch' => true,
-  'historisches' => true,
-  'history' => true,
-  'historyofscience' => true,
-  'horology' => true,
-  'house' => true,
-  'humanities' => true,
-  'illustration' => true,
-  'imageandsound' => true,
-  'indian' => true,
-  'indiana' => true,
-  'indianapolis' => true,
-  'indianmarket' => true,
-  'intelligence' => true,
-  'interactive' => true,
-  'iraq' => true,
-  'iron' => true,
-  'isleofman' => true,
-  'jamison' => true,
-  'jefferson' => true,
-  'jerusalem' => true,
-  'jewelry' => true,
-  'jewish' => true,
-  'jewishart' => true,
-  'jfk' => true,
-  'journalism' => true,
-  'judaica' => true,
-  'judygarland' => true,
-  'juedisches' => true,
-  'juif' => true,
-  'karate' => true,
-  'karikatur' => true,
-  'kids' => true,
-  'koebenhavn' => true,
-  'koeln' => true,
-  'kunst' => true,
-  'kunstsammlung' => true,
-  'kunstunddesign' => true,
-  'labor' => true,
-  'labour' => true,
-  'lajolla' => true,
-  'lancashire' => true,
-  'landes' => true,
-  'lans' => true,
-  'läns' => true,
-  'larsson' => true,
-  'lewismiller' => true,
-  'lincoln' => true,
-  'linz' => true,
-  'living' => true,
-  'livinghistory' => true,
-  'localhistory' => true,
-  'london' => true,
-  'losangeles' => true,
-  'louvre' => true,
-  'loyalist' => true,
-  'lucerne' => true,
-  'luxembourg' => true,
-  'luzern' => true,
-  'mad' => true,
-  'madrid' => true,
-  'mallorca' => true,
-  'manchester' => true,
-  'mansion' => true,
-  'mansions' => true,
-  'manx' => true,
-  'marburg' => true,
-  'maritime' => true,
-  'maritimo' => true,
-  'maryland' => true,
-  'marylhurst' => true,
-  'media' => true,
-  'medical' => true,
-  'medizinhistorisches' => true,
-  'meeres' => true,
-  'memorial' => true,
-  'mesaverde' => true,
-  'michigan' => true,
-  'midatlantic' => true,
-  'military' => true,
-  'mill' => true,
-  'miners' => true,
-  'mining' => true,
-  'minnesota' => true,
-  'missile' => true,
-  'missoula' => true,
-  'modern' => true,
-  'moma' => true,
-  'money' => true,
-  'monmouth' => true,
-  'monticello' => true,
-  'montreal' => true,
-  'moscow' => true,
-  'motorcycle' => true,
-  'muenchen' => true,
-  'muenster' => true,
-  'mulhouse' => true,
-  'muncie' => true,
-  'museet' => true,
-  'museumcenter' => true,
-  'museumvereniging' => true,
-  'music' => true,
-  'national' => true,
-  'nationalfirearms' => true,
-  'nationalheritage' => true,
-  'nativeamerican' => true,
-  'naturalhistory' => true,
-  'naturalhistorymuseum' => true,
-  'naturalsciences' => true,
-  'nature' => true,
-  'naturhistorisches' => true,
-  'natuurwetenschappen' => true,
-  'naumburg' => true,
-  'naval' => true,
-  'nebraska' => true,
-  'neues' => true,
-  'newhampshire' => true,
-  'newjersey' => true,
-  'newmexico' => true,
-  'newport' => true,
-  'newspaper' => true,
-  'newyork' => true,
-  'niepce' => true,
-  'norfolk' => true,
-  'north' => true,
-  'nrw' => true,
-  'nyc' => true,
-  'nyny' => true,
-  'oceanographic' => true,
-  'oceanographique' => true,
-  'omaha' => true,
-  'online' => true,
-  'ontario' => true,
-  'openair' => true,
-  'oregon' => true,
-  'oregontrail' => true,
-  'otago' => true,
-  'oxford' => true,
-  'pacific' => true,
-  'paderborn' => true,
-  'palace' => true,
-  'paleo' => true,
-  'palmsprings' => true,
-  'panama' => true,
-  'paris' => true,
-  'pasadena' => true,
-  'pharmacy' => true,
-  'philadelphia' => true,
-  'philadelphiaarea' => true,
-  'philately' => true,
-  'phoenix' => true,
-  'photography' => true,
-  'pilots' => true,
-  'pittsburgh' => true,
-  'planetarium' => true,
-  'plantation' => true,
-  'plants' => true,
-  'plaza' => true,
-  'portal' => true,
-  'portland' => true,
-  'portlligat' => true,
-  'posts-and-telecommunications' => true,
-  'preservation' => true,
-  'presidio' => true,
-  'press' => true,
-  'project' => true,
-  'public' => true,
-  'pubol' => true,
-  'quebec' => true,
-  'railroad' => true,
-  'railway' => true,
-  'research' => true,
-  'resistance' => true,
-  'riodejaneiro' => true,
-  'rochester' => true,
-  'rockart' => true,
-  'roma' => true,
-  'russia' => true,
-  'saintlouis' => true,
-  'salem' => true,
-  'salvadordali' => true,
-  'salzburg' => true,
-  'sandiego' => true,
-  'sanfrancisco' => true,
-  'santabarbara' => true,
-  'santacruz' => true,
-  'santafe' => true,
-  'saskatchewan' => true,
-  'satx' => true,
-  'savannahga' => true,
-  'schlesisches' => true,
-  'schoenbrunn' => true,
-  'schokoladen' => true,
-  'school' => true,
-  'schweiz' => true,
-  'science' => true,
-  'scienceandhistory' => true,
-  'scienceandindustry' => true,
-  'sciencecenter' => true,
-  'sciencecenters' => true,
-  'science-fiction' => true,
-  'sciencehistory' => true,
-  'sciences' => true,
-  'sciencesnaturelles' => true,
-  'scotland' => true,
-  'seaport' => true,
-  'settlement' => true,
-  'settlers' => true,
-  'shell' => true,
-  'sherbrooke' => true,
-  'sibenik' => true,
-  'silk' => true,
-  'ski' => true,
-  'skole' => true,
-  'society' => true,
-  'sologne' => true,
-  'soundandvision' => true,
-  'southcarolina' => true,
-  'southwest' => true,
-  'space' => true,
-  'spy' => true,
-  'square' => true,
-  'stadt' => true,
-  'stalbans' => true,
-  'starnberg' => true,
-  'state' => true,
-  'stateofdelaware' => true,
-  'station' => true,
-  'steam' => true,
-  'steiermark' => true,
-  'stjohn' => true,
-  'stockholm' => true,
-  'stpetersburg' => true,
-  'stuttgart' => true,
-  'suisse' => true,
-  'surgeonshall' => true,
-  'surrey' => true,
-  'svizzera' => true,
-  'sweden' => true,
-  'sydney' => true,
-  'tank' => true,
-  'tcm' => true,
-  'technology' => true,
-  'telekommunikation' => true,
-  'television' => true,
-  'texas' => true,
-  'textile' => true,
-  'theater' => true,
-  'time' => true,
-  'timekeeping' => true,
-  'topology' => true,
-  'torino' => true,
-  'touch' => true,
-  'town' => true,
-  'transport' => true,
-  'tree' => true,
-  'trolley' => true,
-  'trust' => true,
-  'trustee' => true,
-  'uhren' => true,
-  'ulm' => true,
-  'undersea' => true,
-  'university' => true,
-  'usa' => true,
-  'usantiques' => true,
-  'usarts' => true,
-  'uscountryestate' => true,
-  'usculture' => true,
-  'usdecorativearts' => true,
-  'usgarden' => true,
-  'ushistory' => true,
-  'ushuaia' => true,
-  'uslivinghistory' => true,
-  'utah' => true,
-  'uvic' => true,
-  'valley' => true,
-  'vantaa' => true,
-  'versailles' => true,
-  'viking' => true,
-  'village' => true,
-  'virginia' => true,
-  'virtual' => true,
-  'virtuel' => true,
-  'vlaanderen' => true,
-  'volkenkunde' => true,
-  'wales' => true,
-  'wallonie' => true,
-  'war' => true,
-  'washingtondc' => true,
-  'watchandclock' => true,
-  'watch-and-clock' => true,
-  'western' => true,
-  'westfalen' => true,
-  'whaling' => true,
-  'wildlife' => true,
-  'williamsburg' => true,
-  'windmill' => true,
-  'workshop' => true,
-  'york' => true,
-  'yorkshire' => true,
-  'yosemite' => true,
-  'youth' => true,
-  'zoological' => true,
-  'zoology' => true,
-  'ירושלים' => true,
-  'иком' => true
- ],
+ 'museum' => true,
  'mv' => [
   'aero' => true,
   'biz' => true,
@@ -5726,7 +6173,25 @@ return [
  'ne' => true,
  'net' => [
   'adobeaemcloud' => true,
+  'adobeio-static' => true,
+  'adobeioruntime' => true,
+  'akadns' => true,
+  'akamai' => true,
+  'akamai-staging' => true,
+  'akamaiedge' => true,
+  'akamaiedge-staging' => true,
+  'akamaihd' => true,
+  'akamaihd-staging' => true,
+  'akamaiorigin' => true,
+  'akamaiorigin-staging' => true,
+  'akamaized' => true,
+  'akamaized-staging' => true,
+  'edgekey' => true,
+  'edgekey-staging' => true,
+  'edgesuite' => true,
+  'edgesuite-staging' => true,
   'alwaysdata' => true,
+  'myamaze' => true,
   'cloudfront' => true,
   't3l3p0rt' => true,
   'appudo' => true,
@@ -5827,6 +6292,7 @@ return [
   'edgeapp' => true,
   'flynnhosting' => true,
   'cdn-edges' => true,
+  'heteml' => true,
   'cloudfunctions' => true,
   'moonscale' => true,
   'in-dsl' => true,
@@ -5872,6 +6338,13 @@ return [
   'azure-mobile' => true,
   'cloudapp' => true,
   'azurestaticapps' => [
+   '1' => true,
+   '2' => true,
+   '3' => true,
+   '4' => true,
+   '5' => true,
+   '6' => true,
+   '7' => true,
    'centralus' => true,
    'eastasia' => true,
    'eastus2' => true,
@@ -5912,6 +6385,7 @@ return [
   'bar1' => true,
   'bar2' => true,
   'rackmaze' => true,
+  'squares' => true,
   'schokokeks' => true,
   'firewall-gateway' => true,
   'seidat' => true,
@@ -5939,7 +6413,6 @@ return [
   'torproject' => [
    'pages' => true
   ],
-  'fastblog' => true,
   'reserve-online' => true,
   'community-pro' => true,
   'meinforum' => true,
@@ -6000,7 +6473,9 @@ return [
   'co' => true,
   'hosting-cluster' => true,
   'blogspot' => true,
+  'gov' => true,
   'khplay' => true,
+  '123website' => true,
   'myspreadshop' => true,
   'transurl' => [
    '*' => true
@@ -6807,6 +7282,7 @@ return [
   ],
   'co' => true,
   'blogspot' => true,
+  '123hjemmeside' => true,
   'myspreadshop' => true
  ],
  'np' => [
@@ -7038,6 +7514,7 @@ return [
   'zapto' => true,
   'httpbin' => true,
   'pubtls' => true,
+  'jpn' => true,
   'my-firewall' => true,
   'myfirewall' => true,
   'spdns' => true,
@@ -7148,52 +7625,60 @@ return [
   'turystyka' => true,
   'gov' => [
    'ap' => true,
+   'griw' => true,
    'ic' => true,
    'is' => true,
-   'us' => true,
    'kmpsp' => true,
+   'konsulat' => true,
    'kppsp' => true,
-   'kwpsp' => true,
-   'psp' => true,
-   'wskr' => true,
    'kwp' => true,
+   'kwpsp' => true,
+   'mup' => true,
    'mw' => true,
-   'ug' => true,
-   'um' => true,
-   'umig' => true,
-   'ugim' => true,
-   'upow' => true,
-   'uw' => true,
-   'starostwo' => true,
+   'oia' => true,
+   'oirm' => true,
+   'oke' => true,
+   'oow' => true,
+   'oschr' => true,
+   'oum' => true,
    'pa' => true,
+   'pinb' => true,
+   'piw' => true,
    'po' => true,
+   'pr' => true,
+   'psp' => true,
    'psse' => true,
    'pup' => true,
    'rzgw' => true,
    'sa' => true,
+   'sdn' => true,
+   'sko' => true,
    'so' => true,
    'sr' => true,
-   'wsa' => true,
-   'sko' => true,
+   'starostwo' => true,
+   'ug' => true,
+   'ugim' => true,
+   'um' => true,
+   'umig' => true,
+   'upow' => true,
+   'uppo' => true,
+   'us' => true,
+   'uw' => true,
    'uzs' => true,
+   'wif' => true,
    'wiih' => true,
    'winb' => true,
-   'pinb' => true,
    'wios' => true,
    'witd' => true,
-   'wzmiuw' => true,
-   'piw' => true,
    'wiw' => true,
-   'griw' => true,
-   'wif' => true,
-   'oum' => true,
-   'sdn' => true,
-   'zp' => true,
-   'uppo' => true,
-   'mup' => true,
+   'wkz' => true,
+   'wsa' => true,
+   'wskr' => true,
+   'wsse' => true,
    'wuoz' => true,
-   'konsulat' => true,
-   'oirm' => true
+   'wzmiuw' => true,
+   'zp' => true,
+   'zpisdn' => true
   ],
   'augustow' => true,
   'babia-gora' => true,
@@ -7327,6 +7812,7 @@ return [
   'poniatowa' => true,
   'swidnik' => true,
   'co' => true,
+  'simplesite' => true,
   'art' => true,
   'gliwice' => true,
   'krakow' => true,
@@ -7341,7 +7827,8 @@ return [
   'sopot' => true
  ],
  'pm' => [
-  'own' => true
+  'own' => true,
+  'name' => true
  ],
  'pn' => [
   'gov' => true,
@@ -7402,7 +7889,8 @@ return [
   'publ' => true,
   'com' => true,
   'nome' => true,
-  'blogspot' => true
+  'blogspot' => true,
+  '123paginaweb' => true
  ],
  'pw' => [
   'co' => true,
@@ -7528,6 +8016,7 @@ return [
   'net' => true,
   'org' => true,
   'pp' => true,
+  '123sait' => true,
   'lk3' => true,
   'ras' => true
  ],
@@ -7618,6 +8107,7 @@ return [
   'blogspot' => true,
   'conf' => true,
   'iopsys' => true,
+  '123minsida' => true,
   'itcouldbewor' => true,
   'myspreadshop' => true,
   'paba' => [
@@ -7711,6 +8201,7 @@ return [
   'principe' => true,
   'saotome' => true,
   'store' => true,
+  'kirara' => true,
   'noho' => true
  ],
  'su' => [
@@ -7799,7 +8290,9 @@ return [
   'blogspot' => true
  ],
  'tel' => true,
- 'tf' => true,
+ 'tf' => [
+  'sch' => true
+ ],
  'tg' => true,
  'th' => [
   'ac' => true,
@@ -7869,6 +8362,7 @@ return [
   '611' => true,
   'oya' => true,
   'rdv' => true,
+  'x0' => true,
   'vpnplus' => true,
   'quickconnect' => [
    'direct' => true
@@ -7926,7 +8420,9 @@ return [
   'dyndns' => true,
   'better-than' => true,
   'on-the-web' => true,
-  'worse-than' => true
+  'worse-than' => true,
+  'from' => true,
+  'sakura' => true
  ],
  'tw' => [
   'edu' => true,
@@ -7996,6 +8492,7 @@ return [
   'kirovograd' => true,
   'km' => true,
   'kr' => true,
+  'kropyvnytskyi' => true,
   'krym' => true,
   'ks' => true,
   'kv' => true,
@@ -8003,6 +8500,7 @@ return [
   'lg' => true,
   'lt' => true,
   'lugansk' => true,
+  'luhansk' => true,
   'lutsk' => true,
   'lv' => true,
   'lviv' => true,
@@ -8026,11 +8524,13 @@ return [
   'ternopil' => true,
   'uz' => true,
   'uzhgorod' => true,
+  'uzhhorod' => true,
   'vinnica' => true,
   'vinnytsia' => true,
   'vn' => true,
   'volyn' => true,
   'yalta' => true,
+  'zakarpattia' => true,
   'zaporizhzhe' => true,
   'zaporizhzhia' => true,
   'zhitomir' => true,
@@ -8041,6 +8541,7 @@ return [
   'inf' => true,
   'ltd' => true,
   'cx' => true,
+  'ie' => true,
   'biz' => true,
   'co' => true,
   'pp' => true,
@@ -8077,11 +8578,12 @@ return [
    'no-ip' => true,
    'wellbeingzone' => true,
    'adimo' => true,
-   'myspreadshop' => true,
-   'gwiddle' => true
+   'myspreadshop' => true
   ],
   'gov' => [
+   'campaign' => true,
    'service' => true,
+   'api' => true,
    'homeoffice' => true
   ],
   'ltd' => true,
@@ -8104,6 +8606,13 @@ return [
   'conn' => true,
   'copro' => true,
   'hosp' => true,
+  'independent-commission' => true,
+  'independent-inquest' => true,
+  'independent-inquiry' => true,
+  'independent-panel' => true,
+  'independent-review' => true,
+  'public-inquiry' => true,
+  'royal-commission' => true,
   'pymnt' => true,
   'barsy' => true
  ],
@@ -8159,7 +8668,6 @@ return [
    'lib' => true
   ],
   'de' => [
-   'k12' => true,
    'cc' => true,
    'lib' => true
   ],
@@ -8472,18 +8980,84 @@ return [
   'org' => true
  ],
  'vn' => [
+  'ac' => true,
+  'ai' => true,
+  'biz' => true,
   'com' => true,
-  'net' => true,
-  'org' => true,
   'edu' => true,
   'gov' => true,
-  'int' => true,
-  'ac' => true,
-  'biz' => true,
-  'info' => true,
-  'name' => true,
-  'pro' => true,
   'health' => true,
+  'id' => true,
+  'info' => true,
+  'int' => true,
+  'io' => true,
+  'name' => true,
+  'net' => true,
+  'org' => true,
+  'pro' => true,
+  'angiang' => true,
+  'bacgiang' => true,
+  'backan' => true,
+  'baclieu' => true,
+  'bacninh' => true,
+  'baria-vungtau' => true,
+  'bentre' => true,
+  'binhdinh' => true,
+  'binhduong' => true,
+  'binhphuoc' => true,
+  'binhthuan' => true,
+  'camau' => true,
+  'cantho' => true,
+  'caobang' => true,
+  'daklak' => true,
+  'daknong' => true,
+  'danang' => true,
+  'dienbien' => true,
+  'dongnai' => true,
+  'dongthap' => true,
+  'gialai' => true,
+  'hagiang' => true,
+  'haiduong' => true,
+  'haiphong' => true,
+  'hanam' => true,
+  'hanoi' => true,
+  'hatinh' => true,
+  'haugiang' => true,
+  'hoabinh' => true,
+  'hungyen' => true,
+  'khanhhoa' => true,
+  'kiengiang' => true,
+  'kontum' => true,
+  'laichau' => true,
+  'lamdong' => true,
+  'langson' => true,
+  'laocai' => true,
+  'longan' => true,
+  'namdinh' => true,
+  'nghean' => true,
+  'ninhbinh' => true,
+  'ninhthuan' => true,
+  'phutho' => true,
+  'phuyen' => true,
+  'quangbinh' => true,
+  'quangnam' => true,
+  'quangngai' => true,
+  'quangninh' => true,
+  'quangtri' => true,
+  'soctrang' => true,
+  'sonla' => true,
+  'tayninh' => true,
+  'thaibinh' => true,
+  'thainguyen' => true,
+  'thanhhoa' => true,
+  'thanhphohochiminh' => true,
+  'thuathienhue' => true,
+  'tiengiang' => true,
+  'travinh' => true,
+  'tuyenquang' => true,
+  'vinhlong' => true,
+  'vinhphuc' => true,
+  'yenbai' => true,
   'blogspot' => true
  ],
  'vu' => [
@@ -8496,7 +9070,10 @@ return [
   'dev' => true,
   'me' => true
  ],
- 'wf' => true,
+ 'wf' => [
+  'biz' => true,
+  'sch' => true
+ ],
  'ws' => [
   'com' => true,
   'net' => true,
@@ -8656,7 +9233,6 @@ return [
  ],
  'aaa' => true,
  'aarp' => true,
- 'abarth' => true,
  'abb' => true,
  'abbott' => true,
  'abbvie' => true,
@@ -8672,7 +9248,6 @@ return [
  'accountants' => true,
  'aco' => true,
  'actor' => true,
- 'adac' => true,
  'ads' => true,
  'adult' => true,
  'aeg' => true,
@@ -8686,7 +9261,6 @@ return [
  'airforce' => true,
  'airtel' => true,
  'akdn' => true,
- 'alfaromeo' => true,
  'alibaba' => true,
  'alipay' => true,
  'allfinanz' => true,
@@ -8708,11 +9282,17 @@ return [
  'aol' => true,
  'apartments' => true,
  'app' => [
+  'beget' => [
+   '*' => true
+  ],
   'clerk' => true,
   'clerkstage' => true,
   'wnext' => true,
   'platform0' => true,
+  'deta' => true,
   'ondigitalocean' => true,
+  'easypanel' => true,
+  'encr' => true,
   'edgecompute' => true,
   'fireweb' => true,
   'onflashdrive' => true,
@@ -8723,7 +9303,10 @@ return [
   'web' => true,
   'hasura' => true,
   'loginline' => true,
+  'messerli' => true,
   'netlify' => true,
+  'ngrok' => true,
+  'ngrok-free' => true,
   'developer' => [
    '*' => true
   ],
@@ -8731,7 +9314,13 @@ return [
   'northflank' => [
    '*' => true
   ],
+  'snowflake' => [
+   'privatelink' => true
+  ],
+  'streamlit' => true,
+  'storipress' => true,
   'telebit' => true,
+  'typedream' => true,
   'vercel' => true,
   'bookonline' => true
  ],
@@ -8756,7 +9345,133 @@ return [
  'auto' => true,
  'autos' => true,
  'avianca' => true,
- 'aws' => true,
+ 'aws' => [
+  'sagemaker' => [
+   'af-south-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-east-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-northeast-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-northeast-2' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-northeast-3' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-south-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-south-2' => [
+    'notebook' => true
+   ],
+   'ap-southeast-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-southeast-2' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-southeast-3' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'ap-southeast-4' => [
+    'notebook' => true
+   ],
+   'ca-central-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'eu-central-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'eu-central-2' => [
+    'notebook' => true
+   ],
+   'eu-north-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'eu-south-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'eu-south-2' => [
+    'notebook' => true
+   ],
+   'eu-west-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'eu-west-2' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'eu-west-3' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'il-central-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'me-central-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'me-south-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'sa-east-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'us-east-1' => [
+    'notebook' => true,
+    'notebook-fips' => true,
+    'studio' => true
+   ],
+   'us-east-2' => [
+    'notebook' => true,
+    'notebook-fips' => true,
+    'studio' => true
+   ],
+   'us-gov-east-1' => [
+    'notebook' => true,
+    'notebook-fips' => true,
+    'studio' => true,
+    'studio-fips' => true
+   ],
+   'us-gov-west-1' => [
+    'notebook' => true,
+    'notebook-fips' => true,
+    'studio' => true,
+    'studio-fips' => true
+   ],
+   'us-west-1' => [
+    'notebook' => true,
+    'studio' => true
+   ],
+   'us-west-2' => [
+    'notebook' => true,
+    'notebook-fips' => true,
+    'studio' => true
+   ]
+  ]
+ ],
  'axa' => true,
  'azure' => true,
  'baby' => true,
@@ -8827,8 +9542,6 @@ return [
  'broker' => true,
  'brother' => true,
  'brussels' => true,
- 'budapest' => true,
- 'bugatti' => true,
  'build' => true,
  'builders' => [
   'cloudsite' => true
@@ -8847,7 +9560,6 @@ return [
  'cam' => true,
  'camera' => true,
  'camp' => true,
- 'cancerresearch' => true,
  'canon' => true,
  'capetown' => true,
  'capital' => true,
@@ -8872,7 +9584,6 @@ return [
  'cba' => true,
  'cbn' => true,
  'cbre' => true,
- 'cbs' => true,
  'center' => true,
  'ceo' => true,
  'cern' => true,
@@ -8895,7 +9606,6 @@ return [
  'citi' => true,
  'citic' => true,
  'city' => true,
- 'cityeats' => true,
  'claims' => true,
  'cleaning' => true,
  'click' => true,
@@ -8960,6 +9670,46 @@ return [
   'on-rancher' => [
    '*' => true
   ],
+  'scw' => [
+   'baremetal' => [
+    'fr-par-1' => true,
+    'fr-par-2' => true,
+    'nl-ams-1' => true
+   ],
+   'fr-par' => [
+    'fnc' => [
+     'functions' => true
+    ],
+    'k8s' => [
+     'nodes' => true
+    ],
+    's3' => true,
+    's3-website' => true,
+    'whm' => true
+   ],
+   'instances' => [
+    'priv' => true,
+    'pub' => true
+   ],
+   'k8s' => true,
+   'nl-ams' => [
+    'k8s' => [
+     'nodes' => true
+    ],
+    's3' => true,
+    's3-website' => true,
+    'whm' => true
+   ],
+   'pl-waw' => [
+    'k8s' => [
+     'nodes' => true
+    ],
+    's3' => true,
+    's3-website' => true
+   ],
+   'scalebook' => true,
+   'smartlabeling' => true
+  ],
   'sensiosite' => [
    '*' => true
   ],
@@ -8970,8 +9720,7 @@ return [
  'club' => [
   'cloudns' => true,
   'jele' => true,
-  'barsy' => true,
-  'pony' => true
+  'barsy' => true
  ],
  'clubmed' => true,
  'coach' => true,
@@ -9000,7 +9749,6 @@ return [
  'contact' => true,
  'contractors' => true,
  'cooking' => true,
- 'cookingchannel' => true,
  'cool' => [
   'elementor' => true,
   'de' => true
@@ -9019,7 +9767,6 @@ return [
  'crs' => true,
  'cruise' => true,
  'cruises' => true,
- 'csc' => true,
  'cuisinella' => true,
  'cymru' => true,
  'cyou' => true,
@@ -9044,11 +9791,11 @@ return [
  'democrat' => true,
  'dental' => true,
  'dentist' => true,
- 'desi' => true,
  'design' => [
   'bss' => true
  ],
  'dev' => [
+  'autocode' => true,
   'lcl' => [
    '*' => true
   ],
@@ -9062,18 +9809,27 @@ return [
    '*' => true
   ],
   'pages' => true,
+  'r2' => true,
   'workers' => true,
   'curv' => true,
   'deno' => true,
   'deno-staging' => true,
+  'deta' => true,
   'fly' => true,
   'githubpreview' => true,
   'gateway' => [
    '*' => true
   ],
   'iserv' => true,
+  'localcert' => [
+   'user' => [
+    '*' => true
+   ]
+  ],
   'loginline' => true,
   'mediatech' => true,
+  'ngrok' => true,
+  'ngrok-free' => true,
   'platter-app' => true,
   'shiftcrypto' => true,
   'vercel' => true,
@@ -9169,15 +9925,12 @@ return [
   'storj' => true
  ],
  'farmers' => true,
- 'fashion' => [
-  'of' => true
- ],
+ 'fashion' => true,
  'fast' => true,
  'fedex' => true,
  'feedback' => true,
  'ferrari' => true,
  'ferrero' => true,
- 'fiat' => true,
  'fidelity' => true,
  'fido' => true,
  'film' => true,
@@ -9201,7 +9954,6 @@ return [
  'fly' => true,
  'foo' => true,
  'food' => true,
- 'foodnetwork' => true,
  'football' => true,
  'ford' => true,
  'forex' => true,
@@ -9213,7 +9965,6 @@ return [
  'fresenius' => true,
  'frl' => true,
  'frogans' => true,
- 'frontdoor' => true,
  'frontier' => true,
  'ftr' => true,
  'fujitsu' => true,
@@ -9298,7 +10049,6 @@ return [
  'helsinki' => true,
  'here' => true,
  'hermes' => true,
- 'hgtv' => true,
  'hiphop' => true,
  'hisamitsu' => true,
  'hitachi' => true,
@@ -9317,6 +10067,7 @@ return [
  'host' => [
   'cloudaccess' => true,
   'freesite' => true,
+  'easypanel' => true,
   'fastvps' => true,
   'myfast' => true,
   'tempurl' => true,
@@ -9330,7 +10081,6 @@ return [
   'opencraft' => true
  ],
  'hot' => true,
- 'hoteles' => true,
  'hotels' => true,
  'hotmail' => true,
  'house' => true,
@@ -9414,7 +10164,6 @@ return [
  'lamborghini' => true,
  'lamer' => true,
  'lancaster' => true,
- 'lancia' => true,
  'land' => [
   'static' => [
    'dev' => true,
@@ -9447,7 +10196,6 @@ return [
  'limited' => true,
  'limo' => true,
  'lincoln' => true,
- 'linde' => true,
  'link' => [
   'cyon' => true,
   'mypep' => true,
@@ -9466,14 +10214,10 @@ return [
  'loans' => true,
  'locker' => true,
  'locus' => true,
- 'loft' => true,
  'lol' => [
   'omg' => true
  ],
- 'london' => [
-  'in' => true,
-  'of' => true
- ],
+ 'london' => true,
  'lotte' => true,
  'lotto' => true,
  'love' => true,
@@ -9484,7 +10228,6 @@ return [
  'lundbeck' => true,
  'luxe' => true,
  'luxury' => true,
- 'macys' => true,
  'madrid' => true,
  'maif' => true,
  'maison' => true,
@@ -9496,27 +10239,22 @@ return [
  'mango' => true,
  'map' => true,
  'market' => true,
- 'marketing' => [
-  'from' => true,
-  'with' => true
- ],
+ 'marketing' => true,
  'markets' => true,
  'marriott' => true,
  'marshalls' => true,
- 'maserati' => true,
  'mattel' => true,
  'mba' => true,
  'mckinsey' => true,
  'med' => true,
- 'media' => true,
+ 'media' => [
+  'framer' => true
+ ],
  'meet' => true,
  'melbourne' => true,
  'meme' => true,
  'memorial' => true,
- 'men' => [
-  'for' => true,
-  'repair' => true
- ],
+ 'men' => true,
  'menu' => [
   'barsy' => true
  ],
@@ -9534,10 +10272,7 @@ return [
  'moda' => true,
  'moe' => true,
  'moi' => true,
- 'mom' => [
-  'and' => true,
-  'for' => true
- ],
+ 'mom' => true,
  'monash' => true,
  'money' => true,
  'monster' => true,
@@ -9552,7 +10287,6 @@ return [
  'mtn' => true,
  'mtr' => true,
  'music' => true,
- 'mutual' => true,
  'nab' => true,
  'nagoya' => true,
  'natura' => true,
@@ -9588,7 +10322,6 @@ return [
  'nissan' => true,
  'nissay' => true,
  'nokia' => true,
- 'northwesternmutual' => true,
  'norton' => true,
  'now' => true,
  'nowruz' => true,
@@ -9610,8 +10343,6 @@ return [
   'onred' => [
    'staging' => true
   ],
-  'for' => true,
-  'under' => true,
   'service' => true,
   'homelink' => true
  ],
@@ -9625,7 +10356,9 @@ return [
  'ooo' => true,
  'open' => true,
  'oracle' => true,
- 'orange' => true,
+ 'orange' => [
+  'tech' => true
+ ],
  'organic' => true,
  'origins' => true,
  'osaka' => true,
@@ -9637,9 +10370,12 @@ return [
  'page' => [
   'hlx' => true,
   'hlx3' => true,
+  'translated' => true,
+  'codeberg' => true,
   'pdns' => true,
   'plesk' => true,
   'prvcy' => true,
+  'rocky' => true,
   'magnet' => true
  ],
  'panasonic' => true,
@@ -9650,7 +10386,6 @@ return [
  'party' => [
   'ybo' => true
  ],
- 'passagens' => true,
  'pay' => true,
  'pccw' => true,
  'pet' => true,
@@ -9661,7 +10396,9 @@ return [
  'phone' => true,
  'photo' => true,
  'photography' => true,
- 'photos' => true,
+ 'photos' => [
+  'framer' => true
+ ],
  'physio' => true,
  'pics' => true,
  'pictet' => true,
@@ -9673,7 +10410,9 @@ return [
  'ping' => true,
  'pink' => true,
  'pioneer' => true,
- 'pizza' => true,
+ 'pizza' => [
+  'ngrok' => true
+ ],
  'place' => [
   'co' => true
  ],
@@ -9762,10 +10501,21 @@ return [
   'development' => true,
   'ravendb' => true,
   'servers' => true,
+  'build' => [
+   '*' => true
+  ],
   'code' => [
    '*' => true
   ],
-  'repl' => true
+  'database' => [
+   '*' => true
+  ],
+  'migration' => [
+   '*' => true
+  ],
+  'onporter' => true,
+  'repl' => true,
+  'wix' => true
  ],
  'rwe' => true,
  'ryukyu' => true,
@@ -9773,9 +10523,7 @@ return [
  'safe' => true,
  'safety' => true,
  'sakura' => true,
- 'sale' => [
-  'for' => true
- ],
+ 'sale' => true,
  'salon' => true,
  'samsclub' => true,
  'samsung' => true,
@@ -9816,7 +10564,6 @@ return [
  'services' => [
   'loginline' => true
  ],
- 'ses' => true,
  'seven' => true,
  'sew' => true,
  'sex' => true,
@@ -9837,7 +10584,6 @@ return [
  'shopping' => true,
  'shouji' => true,
  'show' => true,
- 'showtime' => true,
  'silk' => true,
  'sina' => true,
  'singles' => true,
@@ -9959,7 +10705,6 @@ return [
  'tiaa' => true,
  'tickets' => true,
  'tienda' => true,
- 'tiffany' => true,
  'tips' => true,
  'tires' => true,
  'tirol' => true,
@@ -9989,7 +10734,6 @@ return [
  'trading' => true,
  'training' => true,
  'travel' => true,
- 'travelchannel' => true,
  'travelers' => true,
  'travelersinsurance' => true,
  'trust' => true,
@@ -10034,7 +10778,6 @@ return [
  'voting' => true,
  'voto' => true,
  'voyage' => true,
- 'vuelos' => true,
  'wales' => true,
  'walmart' => true,
  'walter' => true,
@@ -10046,27 +10789,26 @@ return [
  'weatherchannel' => true,
  'webcam' => true,
  'weber' => true,
- 'website' => true,
+ 'website' => [
+  'framer' => true
+ ],
  'wedding' => true,
  'weibo' => true,
  'weir' => true,
  'whoswho' => true,
  'wien' => true,
- 'wiki' => true,
- 'williamhill' => true,
- 'win' => [
-  'that' => true
+ 'wiki' => [
+  'framer' => true
  ],
+ 'williamhill' => true,
+ 'win' => true,
  'windows' => true,
  'wine' => true,
  'winners' => true,
  'wme' => true,
  'wolterskluwer' => true,
  'woodside' => true,
- 'work' => [
-  'from' => true,
-  'to' => true
- ],
+ 'work' => true,
  'works' => true,
  'world' => true,
  'wow' => true,
@@ -10130,7 +10872,6 @@ return [
  '网络' => true,
  'ком' => true,
  '亚马逊' => true,
- '诺基亚' => true,
  '食品' => true,
  '飞利浦' => true,
  '手机' => true,

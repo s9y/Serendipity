@@ -14,7 +14,11 @@ define('LIST_URL',    'https://publicsuffix.org/list/public_suffix_list.dat');
 /** Name of PHP file to write */
 define('OUTPUT_FILE', __DIR__ . '/public-suffix-list.php');
 
-require_once 'HTTP/Request2.php';
+if (file_exists('../vendor/autoload.php')) {
+    require_once '../vendor/autoload.php';
+} else {
+    require_once 'HTTP/Request2.php';
+}
 
 function buildSubdomain(&$node, $tldParts)
 {

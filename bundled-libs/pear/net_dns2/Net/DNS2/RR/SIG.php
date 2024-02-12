@@ -251,8 +251,8 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
             $this->algorithm,
             $this->labels,
             $this->origttl,
-            gmmktime($e[4], $e[5], $e[6], $e[2], $e[3], $e[1]),
-            gmmktime($i[4], $i[5], $i[6], $i[2], $i[3], $i[1]),
+            gmmktime(intval($e[4]), intval($e[5]), intval($e[6]), intval($e[2]), intval($e[3]), intval($e[1])),
+            gmmktime(intval($i[4]), intval($i[5]), intval($i[6]), intval($i[2]), intval($i[3]), intval($i[1])),
             $this->keytag
         );
 
@@ -267,7 +267,7 @@ class Net_DNS2_RR_SIG extends Net_DNS2_RR
             $data .= $name;
         }
 
-        $data .= chr('0');
+        $data .= chr(0);
 
         //
         // if the signature is empty, and $this->private_key is an instance of a 

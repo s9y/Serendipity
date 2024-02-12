@@ -452,9 +452,8 @@ abstract class Net_DNS2_RR
             (class_exists(Net_DNS2_Lookups::$rr_types_id_to_class[$object['type']]) == true) ) {
 
             $o = new Net_DNS2_Lookups::$rr_types_id_to_class[$object['type']]($packet, $object);
-            if ($o) {
-                $packet->offset += $object['rdlength'];            
-            }
+
+            $packet->offset += $object['rdlength'];            
 
             return $o;
         }
@@ -579,31 +578,22 @@ abstract class Net_DNS2_RR
         if (isset($class_name)) {
 
             $o = new $class_name;
-            if (!is_null($o)) {
 
-                //
-                // set the parsed values
-                //
-                $o->name    = $name;
-                $o->class   = $class;
-                $o->ttl     = $ttl;
+            //
+            // set the parsed values
+            //
+            $o->name    = $name;
+            $o->class   = $class;
+            $o->ttl     = $ttl;
 
-                //
-                // parse the rdata
-                //
-                if ($o->rrFromString($values) === false) {
-
-                    throw new Net_DNS2_Exception(
-                        'failed to parse rdata for config: ' . $line,
-                        Net_DNS2_Lookups::E_PARSE_ERROR
-                    );
-                }
-
-            } else {
+            //
+            // parse the rdata
+            //
+            if ($o->rrFromString($values) === false) {
 
                 throw new Net_DNS2_Exception(
-                    'failed to create new RR record for type: ' . $type,
-                    Net_DNS2_Lookups::E_RR_INVALID
+                    'failed to parse rdata for config: ' . $line,
+                    Net_DNS2_Lookups::E_PARSE_ERROR
                 );
             }
 

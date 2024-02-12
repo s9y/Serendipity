@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'voku\\cache\\' => array($vendorDir . '/voku/simple-cache/src/voku/cache'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Katzgrau\\KLogger\\' => array($vendorDir . '/katzgrau/klogger/src'),
 );

@@ -26,7 +26,7 @@ class Net_DNS2_Resolver extends Net_DNS2
     /**
      * Constructor - creates a new Net_DNS2_Resolver object
      *
-     * @param mixed $options either an array with options or null
+     * @param array $options either an array with options or null
      *
      * @access public
      *
@@ -232,7 +232,7 @@ class Net_DNS2_Resolver extends Net_DNS2
      *
      * @param Net_DNS2_RR $rr the RR object to lookup
      * 
-     * @return Net_DNS2_RR object
+     * @return Net_DNS2_Packet_Response
      * @throws Net_DNS2_Exception
      * @access public
      *

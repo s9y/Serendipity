@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2022 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2023 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -177,7 +177,7 @@ class HTTP_Request2_CookieJar implements Serializable
             }
             if (empty($cookie['domain'])) {
                 if ($host = $setter->getHost()) {
-                    $cookie['domain'] = $host;
+                    $cookie['domain'] = (string)$host;
                 } else {
                     throw new HTTP_Request2_LogicException(
                         'Setter URL does not contain host part, can\'t set cookie domain',
@@ -187,11 +187,13 @@ class HTTP_Request2_CookieJar implements Serializable
             }
             if (empty($cookie['path'])) {
                 $path = $setter->getPath();
-                $cookie['path'] = empty($path)? '/': substr($path, 0, strrpos($path, '/') + 1);
+                $cookie['path'] = empty($path)
+                    ? '/'
+                    : substr($path, 0, (int)strrpos($path, '/') + 1);
             }
         }
 
-        if ($setter && !$this->domainMatch($setter->getHost(), $cookie['domain'])) {
+        if ($setter && !$this->domainMatch((string)$setter->getHost(), $cookie['domain'])) {
             throw new HTTP_Request2_MessageException(
                 "Domain " . $setter->getHost() . " cannot set cookies for "
                 . $cookie['domain']
@@ -283,12 +285,13 @@ class HTTP_Request2_CookieJar implements Serializable
      * @param bool     $asString Whether to return cookies as string for "Cookie: " header
      *
      * @return array|string Matching cookies
+     * @psalm-return ($asString is true ? string : array)
      */
     public function getMatching(Net_URL2 $url, $asString = false)
     {
-        $host   = $url->getHost();
+        $host   = (string)$url->getHost();
         $path   = $url->getPath();
-        $secure = 0 == strcasecmp($url->getScheme(), 'https');
+        $secure = 0 === strcasecmp((string)$url->getScheme(), 'https');
 
         $matched = $ret = [];
         foreach (array_keys($this->cookies) as $domain) {

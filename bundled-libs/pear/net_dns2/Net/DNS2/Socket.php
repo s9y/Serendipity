@@ -180,9 +180,6 @@ class Net_DNS2_Socket
         //
         // create socket
         //
-        $errno;
-        $errstr;
-
         switch($this->type) {
         case Net_DNS2_Socket::SOCK_STREAM:
 
@@ -246,7 +243,7 @@ class Net_DNS2_Socket
         //
         // set it to non-blocking and set the timeout
         //
-        @stream_set_blocking($this->sock, 0);
+        @stream_set_blocking($this->sock, false);
         @stream_set_timeout($this->sock, $this->timeout);
 
         return true;
@@ -362,7 +359,7 @@ class Net_DNS2_Socket
         //
         // make sure our socket is non-blocking
         //
-        @stream_set_blocking($this->sock, 0);
+        @stream_set_blocking($this->sock, false);
 
         //
         // select on read
@@ -394,8 +391,8 @@ class Net_DNS2_Socket
                 $this->last_error = 'failed on fread() for data length';
                 return false;
             }
-            if (strlen($data) == 0)
-            {
+            if (strlen($data) < 2) {
+
                 $this->last_error = 'failed on fread() for data length';
                 return false;
             }
@@ -414,7 +411,7 @@ class Net_DNS2_Socket
         // so the easiest thing to do, is just turn off socket blocking, and
         // wait for the data.
         //
-        @stream_set_blocking($this->sock, 1);
+        @stream_set_blocking($this->sock, true);
 
         //
         // read the data from the socket
@@ -438,7 +435,7 @@ class Net_DNS2_Socket
             //
             while (1) {
 
-                $chunk = fread($this->sock, $chunk_size);
+                $chunk = fread($this->sock, max(0, $chunk_size));
                 if ($chunk === false) {
             
                     $this->last_error = 'failed on fread() for data';
@@ -459,8 +456,8 @@ class Net_DNS2_Socket
             // if it's UDP, it's a single fixed-size frame, and the streams library
             // doesn't seem to have a problem reading it.
             //
-            $data = fread($this->sock, $length);
-            if ($length === false) {
+            $data = fread($this->sock, max(0, $length));
+            if ($data === false) {
             
                 $this->last_error = 'failed on fread() for data';
                 return false;

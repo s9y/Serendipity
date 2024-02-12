@@ -1,7 +1,9 @@
 
 # HTTP_Request2
 
-[![Build Status](https://github.com/pear/HTTP_Request2/workflows/Continuous%20Integration/badge.svg?branch=trunk)](https://github.com/pear/HTTP_Request2/actions?query=branch%3Atrunk+workflow%3A%22Continuous+Integration%22)
+[![Build Status](https://github.com/pear/HTTP_Request2/actions/workflows/continuous-integration.yml/badge.svg?branch=trunk)](https://github.com/pear/HTTP_Request2/actions?query=branch%3Atrunk+workflow%3A%22Continuous+Integration%22)
+
+[![Static Analysis](https://github.com/pear/HTTP_Request2/actions/workflows/static-analysis.yml/badge.svg?branch=trunk)](https://github.com/pear/HTTP_Request2/actions?query=branch%3Atrunk+workflow%3A%22Static+Analysis%22)
 
 Provides an easy way to perform HTTP requests, uses pluggable adapters
 

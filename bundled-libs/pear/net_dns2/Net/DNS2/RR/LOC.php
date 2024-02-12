@@ -139,9 +139,9 @@ class Net_DNS2_RR_LOC extends Net_DNS2_RR
             //
             // latitude
             //
-            $latdeg     = $x[1];
-            $latmin     = (isset($x[3])) ? $x[3] : 0;
-            $latsec     = (isset($x[5])) ? $x[5] : 0;
+            $latdeg     = floatval($x[1]);
+            $latmin     = floatval((isset($x[3])) ? $x[3] : 0);
+            $latsec     = floatval((isset($x[5])) ? $x[5] : 0);
             $lathem     = strtoupper($x[6]);
 
             $this->latitude = $this->_dms2d($latdeg, $latmin, $latsec, $lathem);
@@ -149,9 +149,9 @@ class Net_DNS2_RR_LOC extends Net_DNS2_RR
             //
             // longitude
             //
-            $londeg     = $x[7];
-            $lonmin     = (isset($x[9])) ? $x[9] : 0;
-            $lonsec     = (isset($x[11])) ? $x[11] : 0;
+            $londeg     = floatval($x[7]);
+            $lonmin     = floatval((isset($x[9])) ? $x[9] : 0);
+            $lonsec     = floatval((isset($x[11])) ? $x[11] : 0);
             $lonhem     = strtoupper($x[12]);
 
             $this->longitude = $this->_dms2d($londeg, $lonmin, $lonsec, $lonhem);
@@ -309,7 +309,7 @@ class Net_DNS2_RR_LOC extends Net_DNS2_RR
     {
         $mantissa = $prec >> 4;
 
-        return $mantissa * $this->_powerOfTen[$prec & 0x0F];
+        return strval($mantissa * $this->_powerOfTen[$prec & 0x0F]);
     }
 
     /**
@@ -339,10 +339,10 @@ class Net_DNS2_RR_LOC extends Net_DNS2_RR
     /**
      * convert lat/lng in deg/min/sec/hem to decimal value
      *
-     * @param integer $deg the degree value
-     * @param integer $min the minutes value
-     * @param integer $sec the seconds value
-     * @param string  $hem the hemisphere (N/E/S/W)
+     * @param float  $deg the degree value
+     * @param float  $min the minutes value
+     * @param float  $sec the seconds value
+     * @param string $hem the hemisphere (N/E/S/W)
      *
      * @return float the decinmal value
      * @access private

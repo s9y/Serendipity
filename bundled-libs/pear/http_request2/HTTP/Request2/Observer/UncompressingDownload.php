@@ -14,7 +14,7 @@
  * @package   HTTP_Request2
  * @author    Delian Krustev <krustev@krustev.net>
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2022 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2023 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -110,7 +110,7 @@ class HTTP_Request2_Observer_UncompressingDownload implements SplObserver
     /**
      * 'zlib.inflate' filter possibly added to stream
      *
-     * @var resource
+     * @var resource|null
      */
     private $_streamFilter;
 
@@ -178,15 +178,17 @@ class HTTP_Request2_Observer_UncompressingDownload implements SplObserver
     /**
      * Called when the request notifies us of an event.
      *
-     * @param SplSubject $request The HTTP_Request2 instance
+     * @param HTTP_Request2 $subject The HTTP_Request2 instance
      *
      * @return void
      * @throws HTTP_Request2_MessageException
      */
-    public function update(SplSubject $request)
+    public function update(SplSubject $subject)
     {
-        /* @var $request HTTP_Request2 */
-        $event   = $request->getLastEvent();
+        if (!$subject instanceof HTTP_Request2) {
+            return;
+        }
+        $event   = $subject->getLastEvent();
         $encoded = false;
 
         /* @var $event['data'] HTTP_Request2_Response */

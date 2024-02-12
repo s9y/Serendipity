@@ -32,7 +32,7 @@ class Net_DNS2
     /*
      * the current version of this library
      */
-    const VERSION = '1.5.3';
+    const VERSION = '1.5.4';
 
     /*
      * the default path to a resolv.conf file
@@ -222,7 +222,7 @@ class Net_DNS2
     /**
      * Constructor - base constructor for the Resolver and Updater
      *
-     * @param mixed $options array of options or null for none
+     * @param array $options array of options or null for none
      *
      * @throws Net_DNS2_Exception
      * @access public
@@ -858,8 +858,8 @@ class Net_DNS2
     /**
      * sends a standard Net_DNS2_Packet_Request packet
      *
-     * @param Net_DNS2_Packet $request a Net_DNS2_Packet_Request object
-     * @param boolean         $use_tcp true/false if the function should
+     * @param Net_DNS2_Packet_Request $request a Net_DNS2_Packet_Request object
+     * @param boolean                 $use_tcp true/false if the function should
      *                                 use TCP for the request
      *
      * @return Net_DNS2_Packet_Response
@@ -867,7 +867,7 @@ class Net_DNS2
      * @access protected
      *
      */
-    protected function sendPacket(Net_DNS2_Packet $request, $use_tcp)
+    protected function sendPacket(Net_DNS2_Packet_Request $request, $use_tcp)
     {
         //
         // get the data from the packet
@@ -1039,10 +1039,11 @@ class Net_DNS2
     /**
      * cleans up a failed socket and throws the given exception
      *
-     * @param string  $_proto the protocol of the socket
+     * @param integer $_proto the protocol of the socket
      * @param string  $_ns    the name server to use for the request
-     * @param string  $_error the error message to throw at the end of the function
+     * @param integer $_error the error message to throw at the end of the function
      *
+     * @return void
      * @throws Net_DNS2_Exception
      * @access private
      *
@@ -1349,7 +1350,7 @@ class Net_DNS2
         $result = $this->sock[Net_DNS2_Socket::SOCK_DGRAM][$_ns]->read($size, 
             ($this->dnssec == true) ? $this->dnssec_payload_size : Net_DNS2_Lookups::DNS_MAX_UDP_SIZE);
 
-        if (( $result === false) || ($size < Net_DNS2_Lookups::DNS_HEADER_SIZE)) {
+        if ( ($result === false) || ($size < Net_DNS2_Lookups::DNS_HEADER_SIZE) ) {
 
             $this->generateError(Net_DNS2_Socket::SOCK_DGRAM, $_ns, Net_DNS2_Lookups::E_NS_SOCKET_FAILED);
         }
