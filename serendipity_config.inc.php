@@ -54,7 +54,7 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version'] = '2.5.0';
+$serendipity['version'] = '2.6-alpha1';
 
 
 // Setting this to 'false' will enable debugging output. All alpha/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
