@@ -9,8 +9,19 @@ Version 3.0 ()
      * automatic release creation (bundling assets, creating the
        project structure for deployment)
 
-Version 2.5-beta2 ()
+Version 2.5.0 (13.02.2024)
 ------------------------------------------------------------------------
+
+   * Restore compatibility with PHP 7.4
+
+   * Remove bundled composer.phar (thanks to hboeck)
+
+   * Update composer dependencies (mostly for PHP 8.3 compatibility):
+      katzgrau/klogger (1.0.0 => 1.2.2)
+      pear/http_request2 (v2.5.1 => v2.6.0)
+      pear/net_dns2 (v1.5.3 => v1.5.4)
+      psr/log (1.0.0 => 1.1.4)
+      smarty/smarty (v4.3.2 => v4.3.5)
 
    * Fix a PHP notice in User management ("isEditable") (garvinhicking)
 
