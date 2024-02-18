@@ -36,4 +36,4 @@ jobs:
     - name: Run Tests
       run: |
         cd tests
-        phpunit --configuration config.xml.dist --coverage-html report include/*
+        phpunit --configuration config.xml.dist include/*
