@@ -25,7 +25,7 @@ class functionsTest extends PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function serverOffsetHourDataProvider()
+    public static function serverOffsetHourDataProvider()
     {
         return array(
             array(0, 0, false, 0),
@@ -63,7 +63,7 @@ class functionsTest extends PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function serverOffsetHourWithTimestampNullDataProvider()
+    public static function serverOffsetHourWithTimestampNullDataProvider()
     {
         return array(
             array(null, false),
