@@ -22,11 +22,11 @@ class functionsConfigTest extends PHPUnit\Framework\TestCase
         $serendipity['template_backend'] = '2k11';
         $serendipity['serendipityPath'] = realpath('../');
         $serendipity['serendipityHTTPPath'] = realpath('/');
-        
-        $this->assertContains('next/index.tpl', serendipity_getTemplateFile('index.tpl'));
+
+        $this->assertStringEndsWith('next/index.tpl', serendipity_getTemplateFile('index.tpl'));
         define('IN_serendipity_admin', true);
-        $this->assertContains('2k11/admin/index.tpl', serendipity_getTemplateFile('admin/index.tpl'));
-        $this->assertContains('next/index.tpl', serendipity_getTemplateFile('index.tpl', 'serendipityHTTPPath', true));
+        $this->assertStringEndsWith('2k11/admin/index.tpl', serendipity_getTemplateFile('admin/index.tpl'));
+        $this->assertStringEndsWith('next/index.tpl', serendipity_getTemplateFile('index.tpl', 'serendipityHTTPPath', true));
     }
 
 }
