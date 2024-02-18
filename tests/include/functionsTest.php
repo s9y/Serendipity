@@ -2,6 +2,7 @@
 
 $serendipity['dbType'] = 'pdo-sqlite';
 define('IN_serendipity', true);
+define('S9Y_INCLUDE_PATH', dirname(__FILE__) . '/../../');
 require_once dirname(__FILE__) . '/../../include/functions.inc.php';
 
 /**
