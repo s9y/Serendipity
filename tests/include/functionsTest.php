@@ -5,15 +5,16 @@ define('IN_serendipity', true);
 define('S9Y_INCLUDE_PATH', dirname(__FILE__) . '/../../');
 require_once dirname(__FILE__) . '/../../include/functions.inc.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+
 /**
  * Class functionsTest
  */
 class functionsTest extends PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     * @dataProvider serverOffsetHourDataProvider
-     */
+    #[Test]
+    #[DataProvider("serverOffsetHourDataProvider")]
     public function test_serendipity_serverOffsetHour($serverOffsetHours, $timestamp, $negative, $expected)
     {
         global $serendipity;
@@ -39,10 +40,8 @@ class functionsTest extends PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @test
-     * @dataProvider serverOffsetHourWithTimestampNullDataProvider
-     */
+    #[Test]
+    #[DataProvider("serverOffsetHourWithTimestampNullDataProvider")]
     public function test_serendipity_serverOffsetHourWithTimestampNull($serverOffsetHours, $negative)
     {
         global $serendipity;
