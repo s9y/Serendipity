@@ -1,0 +1,40 @@
+# This workflow will run the tests on various versions of PHP.
+
+name: PHP Tests
+
+on:
+  push:
+  pull_request:
+    types: [opened]
+# TODO: enable to run once a week regardless of commits, but this will expire if repo is inactive for a longer time
+#  schedule:
+#    - cron: '12 3 4 * *'
+
+jobs:
+  test-php:
+    name: Run PHP Tests
+
+    runs-on: ubuntu-22.04
+
+    # for available versions see https://github.com/marketplace/actions/setup-php-action#tada-php-support
+    strategy:
+      matrix:
+        phpversion: ['8.1', '8.2', '8.3']
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup PHP and dependencies
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.phpversion }}
+        extensions: pdo-sqlite
+        tools: phpunit
+        # TODO: enable coverage check
+        coverage: none
+      env:
+        fail-fast: true
+    - name: Check that PHP works
+      shell: php {0}
+      run: |
+        <?php
+        echo "Hello world from PHP " . PHP_VERSION;    
