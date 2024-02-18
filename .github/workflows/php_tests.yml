@@ -33,8 +33,7 @@ jobs:
         coverage: none
       env:
         fail-fast: true
-    - name: Check that PHP works
-      shell: php {0}
+    - name: Run Tests
       run: |
-        <?php
-        echo "Hello world from PHP " . PHP_VERSION;    
+        cd tests
+        phpunit --configuration config.xml.dist --coverage-html report include/*
