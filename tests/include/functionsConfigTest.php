@@ -7,7 +7,7 @@ require_once dirname(__FILE__) . '/../../include/functions_config.inc.php';
 /**
  * Class functionsTest
  */
-class functionsConfigTest extends PHPUnit_Framework_TestCase
+class functionsConfigTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @test
