@@ -2,17 +2,19 @@
 
 $serendipity['dbType'] = 'pdo-sqlite';
 define('IN_serendipity', true);
+define('S9Y_INCLUDE_PATH', dirname(__FILE__) . '/../../');
 require_once dirname(__FILE__) . '/../../include/functions.inc.php';
+
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class functionsTest
  */
-class functionsTest extends PHPUnit_Framework_TestCase
+class functionsTest extends PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     * @dataProvider serverOffsetHourDataProvider
-     */
+    #[Test]
+    #[DataProvider("serverOffsetHourDataProvider")]
     public function test_serendipity_serverOffsetHour($serverOffsetHours, $timestamp, $negative, $expected)
     {
         global $serendipity;
@@ -24,7 +26,7 @@ class functionsTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function serverOffsetHourDataProvider()
+    public static function serverOffsetHourDataProvider()
     {
         return array(
             array(0, 0, false, 0),
@@ -38,10 +40,8 @@ class functionsTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @test
-     * @dataProvider serverOffsetHourWithTimestampNullDataProvider
-     */
+    #[Test]
+    #[DataProvider("serverOffsetHourWithTimestampNullDataProvider")]
     public function test_serendipity_serverOffsetHourWithTimestampNull($serverOffsetHours, $negative)
     {
         global $serendipity;
@@ -62,7 +62,7 @@ class functionsTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function serverOffsetHourWithTimestampNullDataProvider()
+    public static function serverOffsetHourWithTimestampNullDataProvider()
     {
         return array(
             array(null, false),
