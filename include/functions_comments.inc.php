@@ -20,8 +20,9 @@ function serendipity_checkCommentToken($token, $cid) {
     $goodtoken = false;
     if ($serendipity['useCommentTokens']) {
         // Delete any comment tokens older than 1 week.
+        $oneWeekAgo = time() - 604800;
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                              WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
+                              WHERE okey LIKE 'comment_%' AND name < '{$oneWeekAgo}'");
         // Get the token for this comment id
         $tokencheck = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options
                                              WHERE okey = 'comment_" . (int)$cid . "' LIMIT 1", true, 'assoc');
@@ -1229,8 +1230,9 @@ function serendipity_generateCToken($cid) {
     $ctoken = bin2hex(random_bytes(16));
     
         //Delete any comment tokens older than 1 week.
+        $oneWeekAgo = time() - 604800;
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                              WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
+                              WHERE okey LIKE 'comment_%' AND name < '{$oneWeekAgo}'");
 
         // Issue new comment moderation hash
         serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey)
