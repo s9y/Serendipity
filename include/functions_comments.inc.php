@@ -19,10 +19,8 @@ function serendipity_checkCommentToken($token, $cid) {
 
     $goodtoken = false;
     if ($serendipity['useCommentTokens']) {
-        // Delete any comment tokens older than 1 week.
-        $oneWeekAgo = time() - 604800;
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                              WHERE okey LIKE 'comment_%' AND name < '{$oneWeekAgo}'");
+        serendipity_cleanCTokens();
+
         // Get the token for this comment id
         $tokencheck = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options
                                              WHERE okey = 'comment_" . (int)$cid . "' LIMIT 1", true, 'assoc');
@@ -965,16 +963,11 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
 function serendipity_commentSubscriptionConfirm($hash) {
     global $serendipity;
 
-    // Delete possible current cookie. Also delete any confirmation hashs that smell like 3-week-old, dead fish.
-    if (stristr($serendipity['dbType'], 'sqlite')) {
-        $cast = "name";
-    } else {
-        // Adds explicits casting for mysql, postgresql and others.
-        $cast = "cast(name as integer)";
-    }
-
+    // Delete possible current cookie. Also delete any confirmation hashes that smell like dead fish.
+    $threeWeeksAgo = time() - 1814400;
+    $nameCast = serendipity_db_cast('name', 'integer');
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                                WHERE okey LIKE 'commentsub_%' AND $cast < (" . (time() - 1814400) . ")");
+                                WHERE okey LIKE 'commentsub_%' AND $nameCast < {$threeWeeksAgo}");
 
     $hashinfo = serendipity_db_query("SELECT value
                                         FROM {$serendipity['dbPrefix']}options
@@ -1227,16 +1220,27 @@ function serendipity_generateCToken($cid) {
 
     global $serendipity;
 
-    $ctoken = bin2hex(random_bytes(16));
-    
-        //Delete any comment tokens older than 1 week.
-        $oneWeekAgo = time() - 604800;
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                              WHERE okey LIKE 'comment_%' AND name < '{$oneWeekAgo}'");
+    serendipity_cleanCTokens();
 
-        // Issue new comment moderation hash
-        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey)
-                              VALUES ('" . time() . "', '" . $ctoken . "', 'comment_" . $cid ."')");
+    // Issue new comment moderation hash
+    $ctoken = bin2hex(random_bytes(16));
+    serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey)
+                          VALUES ('" . time() . "', '" . $ctoken . "', 'comment_" . $cid ."')");
+
     return $ctoken;
-                              
+}
+
+/**
+ * Clean over week-old comment tokens from DB
+ *
+ * @return null
+ */
+function serendipity_cleanCTokens() {
+    global $serendipity;
+
+    //Delete any comment tokens older than 1 week.
+    $oneWeekAgo = time() - 604800;
+    $nameCast = serendipity_db_cast('name', 'integer');
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                          WHERE okey LIKE 'comment_%' AND $nameCast < {$oneWeekAgo}");
 }
