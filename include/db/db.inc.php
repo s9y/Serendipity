@@ -196,6 +196,12 @@ function serendipity_db_cast($columnName, $type) {
         return $columnName;
     }
 
+    // MySQL (and variants) have unsigned integer. ANSI SQL does not.
+    if ($type == 'unsigned') {
+        if (!stristr($serendipity['dbType'], 'mysqli'))
+            $type = 'integer';
+    }
+
     // Adds explicits casting for ANSI SQL -compliant DBs, like mysql and postgresql.
     return "cast($columnName as $type)";
 }
