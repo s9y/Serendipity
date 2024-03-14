@@ -14,7 +14,7 @@
  * @package   HTTP_Request2
  * @author    David Jean Louis <izi@php.net>
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2022 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2023 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -72,11 +72,11 @@ class HTTP_Request2_Observer_Log implements SplObserver
     // properties {{{
 
     /**
-     * The log target, it can be a a resource or a PEAR Log instance.
+     * The log target, it can be a resource or a PEAR Log instance.
      *
      * @var resource|Log $target
      */
-    protected $target = null;
+    protected $target;
 
     /**
      * The events to log.
@@ -98,9 +98,9 @@ class HTTP_Request2_Observer_Log implements SplObserver
     /**
      * Constructor.
      *
-     * @param mixed $target Can be a file path (default: php://output), a resource,
-     *                      or an instance of the PEAR Log class.
-     * @param array $events Array of events to listen to (default: all events)
+     * @param string|resource|Log $target Can be a file path (default: php://output), a resource,
+     *                                    or an instance of the PEAR Log class.
+     * @param array               $events Array of events to listen to (default: all events)
      *
      * @return void
      */
@@ -129,6 +129,9 @@ class HTTP_Request2_Observer_Log implements SplObserver
      */
     public function update(SplSubject $subject)
     {
+        if (!$subject instanceof HTTP_Request2) {
+            return;
+        }
         $event = $subject->getLastEvent();
         if (!in_array($event['name'], $this->events)) {
             return;

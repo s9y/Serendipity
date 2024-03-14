@@ -42,7 +42,7 @@ class Net_DNS2_Updater extends Net_DNS2
      * dynamic DNS updates
      *
      * @param string $zone    the domain name to use for DNS updates
-     * @param mixed  $options an array of config options or null
+     * @param array  $options an array of config options or null
      *
      * @throws Net_DNS2_Exception
      * @access public

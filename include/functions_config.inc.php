@@ -445,19 +445,11 @@ function serendipity_issueAutologin($user) {
     
 
     // Delete possible current cookie. Also delete any autologin keys that smell like 3-week-old, dead fish.
-    if (stristr($serendipity['dbType'], 'sqlite')) {
-        $cast = "okey";
-    } elseif (stristr($serendipity['dbType'], 'mysqli')) {
-        // Adds explicit casting for mysql.
-        $cast = "cast(okey as unsigned)";
-    } else {
-        // Adds explicit casting for postgresql and others.
-        $cast = "cast(okey as integer)";
-    }
-
+    $threeWeeksAgo = time() - 1814400;
+    $okeyCast = serendipity_db_cast('okey', 'unsigned');
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options 
                                 WHERE name = 'autologin_" . serendipity_db_escape_string($user) . "'
-                                   OR (name LIKE 'autologin_%' AND $cast < " . (time() - 1814400) . ")");
+                                   OR (name LIKE 'autologin_%' AND $okeyCast < {$threeWeeksAgo}");
 
     // Issue new autologin cookie
     serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey) VALUES ('autologin_" . serendipity_db_escape_string($user) . "', '" . $rnd  . "', '" . time() . "')");
@@ -473,18 +465,14 @@ function serendipity_issueAutologin($user) {
 function serendipity_checkAutologin($user) {
     global $serendipity;
 
-    if (stristr($serendipity['dbType'], 'sqlite')) {
-        $cast = "okey";
-    } elseif (stristr($serendipity['dbType'], 'mysqli')) {
-        // Adds explicit casting for mysql.
-        $cast = "cast(okey as unsigned)";
-    } else {
-        // Adds explicit casting for postgresql and others.
-        $cast = "cast(okey as integer)";
-    }
+    $threeWeeksAgo = time() - 1814400;
+    $okeyCast = serendipity_db_cast('okey', 'unsigned');
 
     // Fetch autologin data from DB
-    $autologin_stored = serendipity_db_query("SELECT name, value, okey FROM {$serendipity['dbPrefix']}options WHERE name = 'autologin_" . serendipity_db_escape_string($user) . "' AND $cast > " . (time() - 1814400) . " LIMIT 1", true, 'assoc');
+    $autologin_stored = serendipity_db_query("SELECT name, value, okey FROM {$serendipity['dbPrefix']}options
+                                WHERE name = 'autologin_" . serendipity_db_escape_string($user) . "'
+                                   AND $okeyCast > {$threeWeeksAgo} LIMIT 1",
+                                   true, 'assoc');
     
     if (!is_array($autologin_stored)) {
         return false;

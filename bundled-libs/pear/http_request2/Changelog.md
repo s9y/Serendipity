@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.0 - 2023-11-01
+* Tested on PHP 8.2 and 8.3
+* Use [psalm] for static analysis, several minor issues fixed
+* Correctly parse HTTP status line with an empty reason-phrase (see [pull request #26])
+* Updated Public Suffix List
+
 ## 2.5.1 - 2022-01-06
 
 * The package runs under PHP 8.1 without `E_DEPRECATED` messages (see [issue #25])
@@ -51,3 +57,5 @@ no longer uses include-path and does not contain require_once statements
 [issue #20]: https://github.com/pear/HTTP_Request2/issues/20
 [issue #23]: https://github.com/pear/HTTP_Request2/issues/23
 [issue #25]: https://github.com/pear/HTTP_Request2/issues/25
+[psalm]: https://psalm.dev/
+[pull request #26]: https://github.com/pear/HTTP_Request2/pull/26

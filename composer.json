@@ -24,7 +24,6 @@
         }
     ],
     "require": {
-        "php": "^8.0",
         "ext-intl": "*",
         "ext-json": "*",
         "ext-libxml": "*",
@@ -50,7 +49,7 @@
             "http"
         ],
         "platform": {
-            "php": "8.0.0"
+            "php": "7.4"
         },
         "sort-packages": true,
         "vendor-dir": "bundled-libs",

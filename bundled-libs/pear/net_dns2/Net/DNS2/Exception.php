@@ -30,11 +30,11 @@ class Net_DNS2_Exception extends Exception
      * Constructor - overload the constructor so we can pass in the request
      *               and response object (when it's available)
      *
-     * @param string $message  the exception message
-     * @param int    $code     the exception code
-     * @param object $previous the previous Exception object
-     * @param object $request  the Net_DNS2_Packet_Request object for this request
-     * @param object $response the Net_DNS2_Packet_Response object for this request
+     * @param string                   $message  the exception message
+     * @param int                      $code     the exception code
+     * @param object                   $previous the previous Exception object
+     * @param Net_DNS2_Packet_Request  $request  the Net_DNS2_Packet_Request object for this request
+     * @param Net_DNS2_Packet_Response $response the Net_DNS2_Packet_Response object for this request
      *
      * @access public
      *

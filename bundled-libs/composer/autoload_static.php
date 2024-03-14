@@ -18,6 +18,7 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
+            'Psr\\Log\\' => 8,
         ),
         'K' => 
         array (
@@ -34,6 +35,10 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Katzgrau\\KLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/katzgrau/klogger/src',
@@ -41,13 +46,6 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
     );
 
     public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'Psr\\Log\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/psr/log',
-            ),
-        ),
         'N' => 
         array (
             'Net_DNS2' => 

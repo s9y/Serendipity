@@ -120,8 +120,11 @@ class Net_DNS2_BitMap
             //
             // get the type id for the RR
             //
-            $type = @Net_DNS2_Lookups::$rr_types_by_name[$rr];
-            if (isset($type)) {
+            $type = null;
+
+            if (isset(Net_DNS2_Lookups::$rr_types_by_name[$rr]) == true) {
+
+                $type = Net_DNS2_Lookups::$rr_types_by_name[$rr];
 
                 //
                 // skip meta types or qtypes
@@ -138,8 +141,12 @@ class Net_DNS2_BitMap
                 // if it's not found, then it must be defined as TYPE<id>, per
                 // RFC3845 section 2.2, if it's not, we ignore it.
                 //
-                list($name, $type) = explode('TYPE', $rr);
-                if (!isset($type)) {
+                list($name, $index) = explode('TYPE', $rr);
+                
+                if ( (strlen($index) > 0) && (is_numeric($index) == true) ) {
+
+                    $type = $index;
+                } else {
 
                     continue;
                 }

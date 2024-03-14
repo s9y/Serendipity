@@ -86,7 +86,7 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
                 ];
 
                 $address = $this->_trimZeros(
-                    $i['address_family'], $i['afd_part']
+                    intval($i['address_family']), $i['afd_part']
                 );
                     
                 $i['afd_length'] = count(explode('.', $address));
@@ -217,7 +217,7 @@ class Net_DNS2_RR_APL extends Net_DNS2_RR
                     );
 
                     foreach ($address as $b) {
-                        $data .= chr($b);
+                        $data .= chr(intval($b));
                     }
                     break;
                 case 2:
