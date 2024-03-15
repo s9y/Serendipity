@@ -1,8 +1,13 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix admin dashboard link in menu not showing tool tips
+     (thanks to HQJaTu Jari Turkia)
 
-Version 2.5.0 (13.02.2024)
+   * Fix token cleanup SQL statement in PostgreSQL environments
+     (thanks to HQJaTu Jari Turkia)
+
+Version 2.5.0 (February 13th, 2024)
 ------------------------------------------------------------------------
 
    * Restore compatibility with PHP 7.4
@@ -23,7 +28,7 @@ Version 2.5.0 (13.02.2024)
    * Fix an incompatibility with MySQL 5.7 or later (@mariohommel)
 
 
-Version 2.5-beta1 (28.09.2023)
+Version 2.5-beta1 (September 28th, 2023)
 ------------------------------------------------------------------------
 
    * Update Net/DNS2 to v1.5.3
