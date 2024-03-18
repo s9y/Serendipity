@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8367246d5bd8b2d7d46be171ad49a288",
+    "content-hash": "c55c15aac639375a80565314ca6f6b57",
     "packages": [
         {
             "name": "katzgrau/klogger",
@@ -299,16 +299,16 @@
         },
         {
             "name": "php81_bc/strftime",
-            "version": "0.6.0",
+            "version": "0.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alphp/strftime.git",
-                "reference": "f5e1ece8a84171d52ef9fc2cd7fb9e9f52e49c58"
+                "reference": "10c13faf2f65bfaec17dfa769918e0c7a4c9b3cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alphp/strftime/zipball/f5e1ece8a84171d52ef9fc2cd7fb9e9f52e49c58",
-                "reference": "f5e1ece8a84171d52ef9fc2cd7fb9e9f52e49c58",
+                "url": "https://api.github.com/repos/alphp/strftime/zipball/10c13faf2f65bfaec17dfa769918e0c7a4c9b3cc",
+                "reference": "10c13faf2f65bfaec17dfa769918e0c7a4c9b3cc",
                 "shasum": ""
             },
             "require": {
@@ -339,7 +339,7 @@
                 "issues": "https://github.com/alphp/strftime/issues",
                 "source": "https://github.com/alphp/strftime"
             },
-            "time": "2023-12-18T21:03:36+00:00"
+            "time": "2024-03-12T11:46:29+00:00"
         },
         {
             "name": "psr/log",
