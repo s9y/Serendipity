@@ -1316,7 +1316,7 @@ function serendipity_functions_gd($infilename) {
     case 'jfif':
         $func['load'] = 'imagecreatefromjpeg';
         $func['save'] = 'imagejpeg';
-        $func['qual'] = 80;
+        $func['qual'] = 85;
         break;
 
     case 'png':
