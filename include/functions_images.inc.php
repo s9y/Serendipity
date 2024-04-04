@@ -6,8 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-use Spatie\ImageOptimizer\OptimizerChainFactory;
-
 /**
  * Check if an uploaded file is "evil"
  *
@@ -749,18 +747,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
             unset($output, $result);
         }
     }
-    if ($r != false) {
-        serendipity_optimizeImage($outfile);
-    }
     return $r;
-}
-
-/**
- * Optimize thee given image by running it through image optimizers, to further reduze image size
- */
-function serendipity_optimizeImage($imagePath) {
-    $optimizerChain = OptimizerChainFactory::create();
-    $optimizerChain->optimize($imagePath);
 }
 
 /**
