@@ -1,6 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Set more efficient defaults for (jpg) thumbnail generation
+
    * Fix admin dashboard link in menu not showing tool tips
      (thanks to HQJaTu Jari Turkia)
 
