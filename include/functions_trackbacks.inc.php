@@ -470,6 +470,65 @@ function add_pingback($id, $postdata) {
     return 0;
 }
 
+/**
+ * Receive a webmention. Converts the webmention to a trackback for internal storage
+ *
+ * @access public
+ * @param   int     The ID of our entry
+ * @param   string  The URL of the foreign blog
+ * @return true
+ */
+function add_webmention($id, $url, $target) {
+    global $serendipity;
+
+    log_trackback('add_trackback:' . print_r(func_get_args(), true));
+
+    // We can't accept a webmention if we don't get any URL
+    // This is a protocol rule.
+    if (empty($url)) {
+        log_trackback('Empty URL.');
+
+        return 0;
+    }
+
+    // We need to get a fallback name. A easy solution would be to fetch the HEAD of the $url and
+    // fetch the title. Alternative and suggestion from indieweb.org: rel-author
+    $sourceHTML = serendipity_request_url($url)
+    $doc = new DOMDocument();
+	$doc->loadHTML($sourceHTML);
+	$xpath = new DOMXPath($doc);
+    $name = $xpath->query('//head/title');
+
+    // We could now already store the webmention like a pingback. The source (in $url) still needs
+    // to be verified, but  he spamblock plugin does that for us later when storing this as
+    // trackback or pingback. 
+    // But we can also try to detect more metadata first by interpreting the microformat on the
+    // source page. See https://indieweb.org/comments#How_to_display
+    $microdata = Mf2\parse($sourceHTML, '$url');
+    if ($microdata) {
+        $title = ''
+        $excerpt = ''
+        // TODO: Check the microdata entry for a $title and an $excerpt, and optionally for a better
+        //       name
+
+        if ($title != '' && $excerpt != '') {
+            // Now we have everything to store the webmention as a trackback
+            return add_trackback($id, $title, $url, $name, $excerpt)
+        }
+    }
+
+    if ($id>0) {
+        $comment['title']   = 'Webmention';
+        $comment['url']     = $url;
+        $comment['comment'] = '';
+        $comment['name']    = $name;
+        serendipity_saveComment($id, $comment, 'PINGBACK');
+        return 1;
+    }
+    return 0; 
+}
+
+
 function evaluateIdByLocalUrl($localUrl) {
     global $serendipity;
 

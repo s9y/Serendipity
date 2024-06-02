@@ -129,6 +129,22 @@ if ($type == 'trackback') {
         log_pingback('PINGBACK FAILURE');;
         report_pingback_failure();
     }
+} else if ($type == 'webmention') {
+    if (isset($_REQUEST['entry_id'])) {
+        $id = (int)$_REQUEST['entry_id'];;
+    } else if (preg_match('@/(\d+)_[^/]*$@', $uri, $matches)) {
+        $id = (int)$matches[1];
+    }
+
+    // TODO: Check that given $target url matches the $id of this endpoint
+    
+    if (add_webmention($id, $_REQUEST['source'], $_REQUEST['target'] )) {
+        log_trackback('WEBMENTION SUCCESS');
+        report_trackback_success();
+    } else {
+        log_trackback('WEBMENTION FAILURE');
+        report_trackback_failure();
+    }
 } else {
     $id = (int)(!empty($serendipity['POST']['entry_id']) ? $serendipity['POST']['entry_id'] : $serendipity['GET']['entry_id']);
     $serendipity['head_subtitle'] = COMMENTS;
