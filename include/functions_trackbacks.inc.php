@@ -471,11 +471,12 @@ function add_pingback($id, $postdata) {
 }
 
 /**
- * Receive a webmention. Converts the webmention to a trackback for internal storage
+ * Receive a webmention. Converts the webmention to a trackback or pingback for internal storage
  *
  * @access public
  * @param   int     The ID of our entry
- * @param   string  The URL of the foreign blog
+ * @param   string  The URL of the foreign blog, as given by the webmention request
+ * @param   string  The URL of our blog article, as given by the webmention request
  * @return true
  */
 function add_webmention($id, $url, $target) {
@@ -489,39 +490,25 @@ function add_webmention($id, $url, $target) {
         return 0;
     }
 
-    // We need to get a fallback name. A easy solution would be to fetch the HEAD of the $url and
-    // fetch the title. Alternative and suggestion from indieweb.org: rel-author
-    $sourceHTML = serendipity_request_url($url)
-    $doc = new DOMDocument();
-	$doc->loadHTML($sourceHTML);
-	$xpath = new DOMXPath($doc);
-    $name = $xpath->query('//head/title');
+    if ($id > 0) {
+        // We need to get a fallback name, and can do it like pingbacks: Use the URL
+        $name = parse_url($url, PHP_URL_HOST);
 
-    // We could now already store the webmention like a pingback. The source (in $url) still needs
-    // to be verified, but  he spamblock plugin does that for us later when storing this as
-    // trackback or pingback. 
-    // But we can also try to detect more metadata first by interpreting the microformat on the
-    // source page. See https://indieweb.org/comments#How_to_display
-    $microdata = Mf2\parse($sourceHTML, '$url');
-    if ($microdata) {
-        $title = ''
-        $excerpt = ''
-        // TODO: Check the microdata entry for a $title and an $excerpt, and optionally for a better
-        //       name
-
-        if ($title != '' && $excerpt != '') {
-            // Now we have everything to store the webmention as a trackback
-            return add_trackback($id, $title, $url, $name, $excerpt)
+        $microMetaData = fetchWebmentionData($url, $target);
+        if (! empty($microMetaData)) {
+            // Since we found enough mf2 microdata on the origin $url we can add a trackback
+            // This mirrors the indieweb comment concept
+            return add_trackback($id, $microMetaData['title'], $url, $microMetaData['name'], $microMetaData['excerpt']);
+        } else {
+            // Without additional data from the origin $url we can add only a pingback
+            // This mirrors the indieweb mention concept
+            $comment['title']   = 'Webmention';
+            $comment['url']     = $url;
+            $comment['comment'] = '';
+            $comment['name']    = $name;
+            serendipity_saveComment($id, $comment, 'PINGBACK');
+            return 1;
         }
-    }
-
-    if ($id>0) {
-        $comment['title']   = 'Webmention';
-        $comment['url']     = $url;
-        $comment['comment'] = '';
-        $comment['name']    = $name;
-        serendipity_saveComment($id, $comment, 'PINGBACK');
-        return 1;
     }
     return 0; 
 }
@@ -561,6 +548,30 @@ function getPingbackParam($paramName, $data) {
     } else {
         return null;
     }
+}
+
+/**
+ * Fetches additional comment data from the page that sent the webmention
+ * @access private
+ * @param string  The URL of the foreign blog, as given by the webmention request
+ * @param string  The URL of our blog article, as given by the webmention request
+ * @return array Either contains name, title and excerpt or stays empty
+ */
+function fetchWebmentionData($url, $target) {
+    $sourceHTML = serendipity_request_url($url)
+    $microdata = Mf2\parse($sourceHTML, $url);
+    if ($microdata) {
+        $title = ''
+        $excerpt = ''
+        $name = ''
+        // TODO: Check the microdata entry for a title (of the post), an excerpt and a name
+        //       (of the author)
+
+        if ($title != '' && $excerpt != '' && $name != '') {
+            return ['title' => $title, 'name' => $name, 'excerpt => '$excerpt];
+        }
+    }
+    return [];
 }
 
 /**
