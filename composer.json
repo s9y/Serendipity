@@ -32,6 +32,8 @@
         "ext-session": "*",
         "ext-xml": "*",
         "katzgrau/klogger": "^1.0.0",
+        "masterminds/html5": "^2.9",
+        "mf2/mf2": "^0.5.0",
         "pear/http_request2": "^2.5",
         "pear/net_dns2": "^1.5",
         "php81_bc/strftime": "^0.5.0",
