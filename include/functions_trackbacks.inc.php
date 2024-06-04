@@ -481,8 +481,6 @@ function add_pingback($id, $postdata) {
 function add_webmention($id, $url, $target) {
     global $serendipity;
 
-    log_trackback('add_trackback:' . print_r(func_get_args(), true));
-
     // We can't accept a webmention if we don't get any URL
     // This is a protocol rule.
     if (empty($url)) {
