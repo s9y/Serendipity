@@ -558,17 +558,17 @@ function getPingbackParam($paramName, $data) {
  * @return array Either contains name, title and excerpt or stays empty
  */
 function fetchWebmentionData($url, $target) {
-    $sourceHTML = serendipity_request_url($url)
+    $sourceHTML = serendipity_request_url($url);
     $microdata = Mf2\parse($sourceHTML, $url);
     if ($microdata) {
-        $title = ''
-        $excerpt = ''
-        $name = ''
+        $title = '';
+        $excerpt = '';
+        $name = '';
         // TODO: Check the microdata entry for a title (of the post), an excerpt and a name
         //       (of the author)
 
         if ($title != '' && $excerpt != '' && $name != '') {
-            return ['title' => $title, 'name' => $name, 'excerpt => '$excerpt];
+            return ['title' => $title, 'name' => $name, 'excerpt' => $excerpt];
         }
     }
     return [];
