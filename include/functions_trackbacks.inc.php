@@ -496,12 +496,12 @@ function add_webmention($id, $url, $target) {
 
         $microMetaData = fetchWebmentionData($url, $target);
         if (! empty($microMetaData)) {
-            // Since we found enough mf2 microdata on the origin $url we can add a trackback
-            // This mirrors the indieweb comment concept
+            // Since we found enough mf2 microdata on the origin $url we can add a trackback.
+            // This mirrors the indieweb comment concept.
             return add_trackback($id, $microMetaData['title'], $url, $microMetaData['name'], $microMetaData['excerpt']);
         } else {
-            // Without additional data from the origin $url we can add only a pingback
-            // This mirrors the indieweb mention concept
+            // Without additional data from the origin $url we can add only a pingback.
+            // This mirrors the indieweb mention concept.
             $comment['title']   = 'Webmention';
             $comment['url']     = $url;
             $comment['comment'] = '';
@@ -564,8 +564,32 @@ function fetchWebmentionData($url, $target) {
         $title = '';
         $excerpt = '';
         $name = '';
-        // TODO: Check the microdata entry for a title (of the post), an excerpt and a name
-        //       (of the author)
+
+        if (is_array($microdata)) {
+            $hEntry = array_search([0 => 'h-entry'], $microdata['items']);
+            foreach ($microdata['items'] as $item) {
+                if ($item['type'][0] == 'h-entry') {
+                    if (isset($item['properties']) &&
+                        isset($item['properties']['in-reply-to']) &&
+                        $item['properties']['in-reply-to'][0] == $target
+                        ) {
+                            if (isset($item['properties']['content'])) {
+                                $excerpt = $item['properties']['content'][0];
+                            }
+                            if (isset($item['properties']['author']) &&
+                                isset($item['properties']['author'][0]['properties']['name'])
+                                ) {
+                                $name = $item['properties']['author'][0]['properties']['name'][0];
+                            }
+                            $title = 'Webmention';
+                    } else {
+                        // We are only supposed to work with the first h-entry, so if that one
+                        // does not have the data we need we can stop here.
+                        break;
+                    }
+                }
+            }
+        }
 
         if ($title != '' && $excerpt != '' && $name != '') {
             return ['title' => $title, 'name' => $name, 'excerpt' => $excerpt];
