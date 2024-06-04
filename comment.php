@@ -131,7 +131,7 @@ if ($type == 'trackback') {
     }
 } else if ($type == 'webmention') {
     if (isset($_REQUEST['entry_id'])) {
-        $id = (int)$_REQUEST['entry_id'];;
+        $id = (int)$_REQUEST['entry_id'];
     } else if (preg_match('@/(\d+)_[^/]*$@', $uri, $matches)) {
         $id = (int)$matches[1];
     }
