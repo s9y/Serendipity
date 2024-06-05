@@ -135,8 +135,6 @@ if ($type == 'trackback') {
     } else if (preg_match('@/(\d+)_[^/]*$@', $uri, $matches)) {
         $id = (int)$matches[1];
     }
-
-    // TODO: Check that given $target url matches the $id of this endpoint
     
     if (add_webmention($id, $_REQUEST['source'], $_REQUEST['target'] )) {
         log_trackback('WEBMENTION SUCCESS');
