@@ -52,4 +52,8 @@ RewriteRule (.*\.html?) {indexFile}?url=/$1 [L,QSA]
     deny from all
 </Files>
 
+<Files *.inc>
+    deny from all
+</Files> 
+
 # END s9y
