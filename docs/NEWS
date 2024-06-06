@@ -9,6 +9,8 @@ Version 2.6-alpha1 ()
    * Fix token cleanup SQL statement in PostgreSQL environments
      (thanks to HQJaTu Jari Turkia)
 
+   * Block access to .inc php files via .htaccess
+
 Version 2.5.0 (February 13th, 2024)
 ------------------------------------------------------------------------
 

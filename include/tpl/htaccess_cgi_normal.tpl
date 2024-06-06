@@ -21,4 +21,8 @@ DirectoryIndex {PREFIX}{indexFile}
     deny from all
 </Files>
 
+<Files *.inc>
+    deny from all
+</Files> 
+
 # END s9y
