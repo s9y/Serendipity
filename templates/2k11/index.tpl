@@ -27,6 +27,7 @@
 {if $entry_id}
     <link rel="trackback" type="application/x-www-form-urlencoded" href="{$serendipityBaseURL}comment.php?type=trackback&amp;entry_id={$entry_id}">
     <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}">
+    <link rel="webmention" href="{$serendipityBaseURL}comment.php?type=webmention&amp;entry_id={$entry_id}" />
 {/if}
 {serendipity_hookPlugin hook="frontend_header"}
     <script src="{$head_link_script}"></script>

@@ -470,6 +470,50 @@ function add_pingback($id, $postdata) {
     return 0;
 }
 
+/**
+ * Receive a webmention. Converts the webmention to a trackback or pingback for internal storage
+ *
+ * @access public
+ * @param   int     The ID of our entry
+ * @param   string  The URL of the foreign blog, as given by the webmention request
+ * @param   string  The URL of our blog article, as given by the webmention request
+ * @return true
+ */
+function add_webmention($id, $url, $target) {
+    global $serendipity;
+
+    // We can't accept a webmention if we don't get any URL
+    // This is a protocol rule.
+    if (empty($url)) {
+        log_trackback('Empty URL.');
+
+        return 0;
+    }
+
+    if ($id > 0) {
+        // We need to get a fallback name, and can do it like pingbacks: Use the URL
+        $name = parse_url($url, PHP_URL_HOST);
+
+        $microMetaData = fetchWebmentionData($url, $target);
+        if (! empty($microMetaData)) {
+            // Since we found enough mf2 microdata on the origin $url we can add a trackback.
+            // This mirrors the indieweb comment concept.
+            return add_trackback($id, $microMetaData['title'], $url, $microMetaData['name'], $microMetaData['excerpt']);
+        } else {
+            // Without additional data from the origin $url we can add only a pingback.
+            // This mirrors the indieweb mention concept.
+            $comment['title']   = 'Webmention';
+            $comment['url']     = $url;
+            $comment['comment'] = '';
+            $comment['name']    = $name;
+            serendipity_saveComment($id, $comment, 'PINGBACK');
+            return 1;
+        }
+    }
+    return 0; 
+}
+
+
 function evaluateIdByLocalUrl($localUrl) {
     global $serendipity;
 
@@ -504,6 +548,54 @@ function getPingbackParam($paramName, $data) {
     } else {
         return null;
     }
+}
+
+/**
+ * Fetches additional comment data from the page that sent the webmention
+ * @access private
+ * @param string  The URL of the foreign blog, as given by the webmention request
+ * @param string  The URL of our blog article, as given by the webmention request
+ * @return array Either contains name, title and excerpt or stays empty
+ */
+function fetchWebmentionData($url, $target) {
+    $sourceHTML = serendipity_request_url($url);
+    $microdata = Mf2\parse($sourceHTML, $url);
+    if ($microdata) {
+        $title = '';
+        $excerpt = '';
+        $name = '';
+
+        if (is_array($microdata)) {
+            $hEntry = array_search([0 => 'h-entry'], $microdata['items']);
+            foreach ($microdata['items'] as $item) {
+                if ($item['type'][0] == 'h-entry') {
+                    if (isset($item['properties']) &&
+                        isset($item['properties']['in-reply-to']) &&
+                        $item['properties']['in-reply-to'][0] == $target
+                        ) {
+                            if (isset($item['properties']['content'])) {
+                                $excerpt = $item['properties']['content'][0];
+                            }
+                            if (isset($item['properties']['author']) &&
+                                isset($item['properties']['author'][0]['properties']['name'])
+                                ) {
+                                $name = $item['properties']['author'][0]['properties']['name'][0];
+                            }
+                            $title = 'Webmention';
+                    } else {
+                        // We are only supposed to work with the first h-entry, so if that one
+                        // does not have the data we need we can stop here.
+                        break;
+                    }
+                }
+            }
+        }
+
+        if ($title != '' && $excerpt != '' && $name != '') {
+            return ['title' => $title, 'name' => $name, 'excerpt' => $excerpt];
+        }
+    }
+    return [];
 }
 
 /**

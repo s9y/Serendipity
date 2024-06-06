@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    
+    strategy:
+      matrix:
+        php: ['5.6', '7.3', '7.4']
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: shivammathur/setup-php@2.11.0
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: 'xdebug'
+
+    - uses: actions/checkout@v2
+
+    - name: Validate composer.json and composer.lock
+      #run: composer validate --strict  # Currently we’re installing mf2/tests from a commit ref.
+      run: composer validate
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Run Test Suite
+      run: XDEBUG_MODE=coverage ./vendor/bin/phpunit tests --coverage-text
+    
+    - name: Run Code Sniffer
+      run: ./vendor/bin/phpcs
+    
+    #- name: Run Static Analysis
+    #  run: ./vendor/bin/psalm
