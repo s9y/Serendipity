@@ -1,5 +1,7 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+   * Swap order of entries in the dashboard, so that upcoming
+     entries are shown first
 
    * Set more efficient defaults for (jpg) thumbnail generation
 
