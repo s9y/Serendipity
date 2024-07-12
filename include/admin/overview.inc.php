@@ -108,7 +108,7 @@ $entries = serendipity_fetchEntries(
                      (int)$serendipity['dashboardEntriesLimit'],
                      true,
                      false,
-                     'timestamp DESC',
+                     'timestamp ASC',
                      'e.timestamp >= ' . serendipity_serverOffsetHour() . $efilter
                    );
 
@@ -124,7 +124,7 @@ if ($entriesAmount < (int)$serendipity['dashboardEntriesLimit']) {
                      (int)$serendipity['dashboardEntriesLimit'] - $entriesAmount,
                      true,
                      false,
-                     'timestamp DESC',
+                     'timestamp ASC',
                      "isdraft = 'true' AND e.timestamp <= " . serendipity_serverOffsetHour() . $efilter
                    );
     if (is_array($entries) && is_array($drafts)) {
