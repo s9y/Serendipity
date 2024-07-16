@@ -883,7 +883,8 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         $term             = str_replace('&quot;', '"', $term);
         $relevance_enabled = true;
         if (preg_match('@["\+\-\*~<>\(\)]+@', $term)) {
-            $cond['find_part'] = "MATCH(title,body,extended) AGAINST('$term' IN BOOLEAN MODE)";
+            $term = mysqli_real_escape_string($serendipity['dbConn'], $term);
+	    $cond['find_part'] = "MATCH(title,body,extended) AGAINST('\"$term\"' IN BOOLEAN MODE)";
         } else {
             $cond['find_part'] = "MATCH(title,body,extended) AGAINST('$term')";
         }
