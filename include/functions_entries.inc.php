@@ -882,8 +882,11 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         $cond['distinct'] = '';
         $term             = str_replace('&quot;', '"', $term);
         $relevance_enabled = true;
-        $term = serendipity_db_escape_string($term);
-        $cond['find_part'] = "MATCH(title,body,extended) AGAINST('\"$term\"' IN BOOLEAN MODE)";
+        if (preg_match('@([\+\-\*~<>\(\)"])\s*(\b\w+\b)@', $term)) {
+            $cond['find_part'] = "MATCH(title,body,extended) AGAINST('$term' IN BOOLEAN MODE)";
+        } else {
+            $cond['find_part'] = "MATCH(title,body,extended) AGAINST('$term')";
+        }
     }
 
     switch($serendipity['searchsort']) {
