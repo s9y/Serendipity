@@ -884,7 +884,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         $relevance_enabled = true;
         if (preg_match('@["\+\-\*~<>\(\)]+@', $term)) {
             $term = serendipity_db_escape_string($term);
-	    $cond['find_part'] = "MATCH(title,body,extended) AGAINST('\"$term\"' IN BOOLEAN MODE)";
+            $cond['find_part'] = "MATCH(title,body,extended) AGAINST('\"$term\"' IN BOOLEAN MODE)";
         } else {
             $cond['find_part'] = "MATCH(title,body,extended) AGAINST('$term')";
         }
