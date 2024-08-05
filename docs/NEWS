@@ -1,6 +1,9 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Add ability to receive webmentions. They will be displayed as ping-
+     or trackbacks
+
    * Fix admin dashboard link in menu not showing tool tips
      (thanks to HQJaTu Jari Turkia)
 
@@ -10,7 +13,8 @@ Version 2.6-alpha1 ()
 Version 2.5.0 (February 13th, 2024)
 ------------------------------------------------------------------------
 
-   * Restore compatibility with PHP 7.4
+   * Restore compatibility with PHP 7.4 by setting that version as
+     composer platform (downgrades psr/simple-cache dependency)
 
    * Remove bundled composer.phar (thanks to hboeck)
 
