@@ -6,7 +6,7 @@ plugins/additional_plugins*
 
 # ide / dev stuff
 .cvsignore
-.htaccess*
+/.htaccess
 *.db
 private/*
 archives/*

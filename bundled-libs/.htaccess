@@ -1,0 +1,7 @@
+# BEGIN s9y
+
+<Files *.php>
+    deny from all
+</Files>
+
+# END s9y
