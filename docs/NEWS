@@ -1,5 +1,9 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+
+   * Fix specific search terms (like a - at the end) causing an error
+     page when using MySQL/MariaDB (thanks to  GuillaumeValadas) 
+
    * Swap order of entries in the dashboard, so that upcoming
      entries are shown first
 
