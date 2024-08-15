@@ -189,7 +189,7 @@ function serendipity_db_matched_rows() {
  */
 function serendipity_db_escape_string($string) {
     global $serendipity;
-    return mysqli_escape_string($serendipity['dbConn'], $string);
+    return mysqli_real_escape_string($serendipity['dbConn'], $string);
 }
 
 /**
