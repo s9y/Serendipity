@@ -20,6 +20,9 @@ Version 2.6-alpha1 ()
 
    * Block access to .inc php files via .htaccess
 
+   * Make serendipity_sendMail() standard compliant by using CRLF
+     instead of LF to separate headers.
+
 Version 2.5.0 (February 13th, 2024)
 ------------------------------------------------------------------------
 
