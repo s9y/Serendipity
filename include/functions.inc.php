@@ -160,6 +160,7 @@ function serendipity_strftime($format, $timestamp = null, $useOffset = true, $us
         $out = mb_convert_encoding($out, 'UTF-8', 'ISO-8859-1');
     }
 
+    if (LANG_CHARSET != "UTF-8") $out = mb_convert_encoding($out, LANG_CHARSET, 'UTF-8');
     return $out;
 }
 
