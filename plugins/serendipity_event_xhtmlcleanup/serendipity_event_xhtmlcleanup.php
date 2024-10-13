@@ -10,6 +10,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
 {
     var $title = PLUGIN_EVENT_XHTMLCLEANUP_NAME;
     var $cleanup_tag, $cleanup_checkfor, $cleanup_val, $cleanup_parse;
+    protected $markup_elements = array();
 
     function introspect(&$propbag)
     {
