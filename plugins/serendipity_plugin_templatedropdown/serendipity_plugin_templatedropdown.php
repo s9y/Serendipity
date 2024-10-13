@@ -9,6 +9,7 @@ if (IN_serendipity !== true) {
 class serendipity_plugin_templatedropdown extends serendipity_plugin
 {
     var $title = PLUGIN_TEMPLATEDROPDOWN_NAME;
+    protected $dependencies = array();
 
     function introspect(&$propbag)
     {

@@ -89,7 +89,12 @@ function serendipity_db_reconnect() {
  * @return  string   output string
  */
 function serendipity_db_escape_string($string) {
-    return pg_escape_string($string);
+    global $serendipity;
+
+    if (is_null($string))
+        return $string;
+
+    return pg_escape_string($serendipity['dbConn'], $string);
 }
 
 /**

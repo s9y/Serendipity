@@ -9,6 +9,7 @@ if (IN_serendipity !== true) {
 class serendipity_plugin_creativecommons extends serendipity_plugin
 {
     var $title = PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME;
+    protected $dependencies = array();
 
     function introspect(&$propbag)
     {
