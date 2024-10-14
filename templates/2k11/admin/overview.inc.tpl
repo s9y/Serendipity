@@ -88,7 +88,7 @@
                     <ul class="plainList actions">
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;{$urltoken}&amp;serendipity[id]={$entry.id}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-search" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                        {if $entry.isdraft == "true"}
+                        {if $entry.isdraft[0] == "t"}
                             <li>
                                 <form method="POST" class="overviewListForm">
                                     <input type="hidden" name="serendipity[adminAction]" value="publish" />
@@ -100,13 +100,13 @@
                         {/if}
 
                     </ul>
-                {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft == "false"}
+                {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft[0] == "f"}
                     <span class="entry_status status_future" title="{$CONST.SCHEDULED}: {$CONST.ENTRY_PUBLISHED_FUTURE}">{$entry.timestamp|formatTime:$CONST.DATE_FORMAT_SHORT}</span>
                 {/if}
                 {if isset($entry.properties.ep_is_sticky) && $entry.properties.ep_is_sticky}
                     <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
                 {/if}
-                {if $entry.isdraft == "true"}
+                {if $entry.isdraft[0] == "t"}
                     <span class="entry_status status_draft">{$CONST.DRAFT}</span>
                 {/if}
                 </li>
