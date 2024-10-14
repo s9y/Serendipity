@@ -94,9 +94,10 @@ function serendipity_db_escape_string($string) {
     if (is_null($string))
         return $string;
 
-    if (PHP_MAJOR_VERSION < 8 || (PHP_MAJOR_VERSION == 8 && PHP_MINOR_VERSION < 1))
-        # Last supported version is PHP 8.0
+    if (version_compare(PHP_VERSION, '8.1.0', '<')) {
+        # Versions before 8.1 give the connection by default
         return pg_escape_string($string);
+    }
 
     # From PHP 8.1 onwards
     return pg_escape_string($serendipity['dbConn'], $string);
