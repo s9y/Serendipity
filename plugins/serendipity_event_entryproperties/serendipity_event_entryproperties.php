@@ -878,7 +878,8 @@ class serendipity_event_entryproperties extends serendipity_event
                         }
                     }
 
-                    if ($addData['preview'] && is_array($serendipity['POST']['properties']) && count($serendipity['POST']['properties']) > 0){
+                    if ($addData['preview'] && isset($serendipity['POST']['properties']) &&
+                        is_array($serendipity['POST']['properties']) && count($serendipity['POST']['properties']) > 0){
                         $parr = array();
                         $supported_properties = serendipity_event_entryproperties::getSupportedProperties();
                         foreach($supported_properties AS $prop_key) {
