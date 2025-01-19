@@ -1,0 +1,78 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "8cc241c036cbdcce1bc8a15d7092a753",
+    "packages": [
+        {
+            "name": "netcarver/textile",
+            "version": "v4.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/textile/php-textile.git",
+                "reference": "a16ccd9e7c5ab758cf66fca5ab2b39eaae1b616c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/textile/php-textile/zipball/a16ccd9e7c5ab758cf66fca5ab2b39eaae1b616c",
+                "reference": "a16ccd9e7c5ab758cf66fca5ab2b39eaae1b616c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "1.12.11",
+                "phpunit/phpunit": "^9.5.20",
+                "psy/psysh": "^0.12.4",
+                "squizlabs/php_codesniffer": "3.*",
+                "symfony/yaml": "^5.4.40"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Netcarver\\Textile\\": "src/Netcarver/Textile/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Textile markup language parser",
+            "homepage": "https://github.com/textile/php-textile",
+            "keywords": [
+                "document",
+                "format",
+                "html",
+                "language",
+                "markup",
+                "parser",
+                "php-textile",
+                "plaintext",
+                "textile"
+            ],
+            "support": {
+                "issues": "https://github.com/textile/php-textile/issues",
+                "source": "https://github.com/textile/php-textile",
+                "wiki": "https://github.com/textile/php-textile/wiki"
+            },
+            "time": "2025-01-07T14:11:32+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}
