@@ -269,7 +269,7 @@ class serendipity_event_textile extends serendipity_event
 
     function textile($string)
     {
-        require './vendor/autoload.php';
+        require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/vendor/autoload.php';
         $textile = new \Netcarver\Textile\Parser();
         return $textile->parse($string);
     }
