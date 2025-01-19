@@ -9,6 +9,7 @@ if (IN_serendipity !== true) {
 class serendipity_event_textile extends serendipity_event
 {
     var $title = PLUGIN_EVENT_TEXTILE_NAME;
+    var $markup_elements = [];
 
     function introspect(&$propbag)
     {
@@ -149,7 +150,7 @@ class serendipity_event_textile extends serendipity_event
 
                             $blocks = array();
                             foreach($preserve_tags as $tag) {
-                                if (preg_match_all('/(<'.$tag.'[^>]?>.*<\/'.$tag.'>)/msU', $eventData[$element] ?? null, $matches )) {
+                                if (preg_match_all('/(<'.$tag.'[^>]?>.*<\/'.$tag.'>)/msU', $eventData[$element] ?? '', $matches )) {
                                     foreach($matches[1] as $match) {
                                         $blocks[] = $match;
                                     }
