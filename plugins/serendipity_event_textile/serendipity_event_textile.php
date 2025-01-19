@@ -18,11 +18,11 @@ class serendipity_event_textile extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_TEXTILE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team', 'Lars Strojny');
-        $propbag->add('version',       '1.8.4');
+        $propbag->add('version',       '2.0');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
-            'php'         => '5.2.0'
+            'php'         => '5.3.0'
         ));
         $propbag->add('cachable_events', array('frontend_display' => true));
         $propbag->add('event_hooks',   array('frontend_display' => true, 'frontend_comment' => true));
@@ -59,7 +59,6 @@ class serendipity_event_textile extends serendipity_event
         foreach($this->markup_elements as $element) {
             $conf_array[] = $element['name'];
         }
-        $conf_array[] = 'textile_version';
         $conf_array[] = 'textile_doctype';
         // todo $conf_array[] = 'textile_restrict_comments';
         $conf_array[] = 'unescape';
@@ -91,17 +90,6 @@ class serendipity_event_textile extends serendipity_event
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
-
-            case 'textile_version':
-                $propbag->add('type',        'radio');
-                $propbag->add('name',        PLUGIN_EVENT_TEXTILE_VERSION);
-                $propbag->add('description', PLUGIN_EVENT_TEXTILE_VERSION_DESCRIPTION);
-                $propbag->add('radio',       array(
-                                                'value' => array(1, 2, 3),
-                                                'desc'  => array('1.0', '2.0', '3.0'),
-                ));
-                $propbag->add('default',     3);
-                break;
 
             case 'textile_doctype':
                 $propbag->add('type',        'boolean');
@@ -281,30 +269,9 @@ class serendipity_event_textile extends serendipity_event
 
     function textile($string)
     {
-        switch($this->get_config('textile_version')) {
-            case 3:
-                if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
-                    require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/Parser.php';
-                    require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/DataBag.php';
-                    require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/Tag.php';
-                    include 'textile_namespace.inc.php'; // PHP 5.2 compat
-                    // todo check for user-supplied output to restrict
-                    #    return $textile->textileRestricted($string);
-                    if (is_object($textile)) return $textile->textileThis($string);
-                } else {
-                    trigger_error(' Textile lib3 needs at least PHP 5.3.0 running. Update your PHP version or use lib2 instead.', E_USER_WARNING);
-                }
-                break;
-            case 2:
-                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib2/classTextile.php';
-                $textile = new Textile();
-                return $textile->textileThis($string);
-                break;
-            case 1:
-                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib1/textile.php';
-                return textile($string);
-                break;
-        }
+        require './vendor/autoload.php';
+        $textile = new \Netcarver\Textile\Parser();
+        return $textile->parse($string);
     }
 
 }
