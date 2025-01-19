@@ -166,7 +166,7 @@ looping over a PHP iterator instead of an array().
 
 ```php
 <?php 
-  include('Smarty.class.php'); 
+  use Smarty\Smarty;
 
   $smarty = new Smarty; 
 
@@ -252,7 +252,7 @@ iteration.
 
 ```smarty
  {foreach $myNames as $name}
-   {if $name@iteration is even by 3}
+   {if $name@index is even by 3}
      <span style="color: #000">{$name}</span>
    {else}
      <span style="color: #eee">{$name}</span>
