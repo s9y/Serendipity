@@ -271,7 +271,11 @@ class serendipity_event_textile extends serendipity_event
     {
         require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/vendor/autoload.php';
         $textile = new \Netcarver\Textile\Parser();
-        return $textile->parse($string);
+        if (serendipity_db_bool($this->get_config('textile_doctype', 'false'))) {
+            return $textile->setDocumentType('html5')->parse($string);
+        } else {
+            return $textile->setDocumentType('xhtml')->parse($string);
+        }
     }
 
 }
