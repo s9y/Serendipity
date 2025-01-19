@@ -6,6 +6,8 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
+use Smarty\Smarty;
+
 /**
  * Fetch a list of trackbacks for an entry
  *
@@ -962,7 +964,7 @@ function serendipity_smarty_init($vars = array()) {
                 include_once SMARTY_DIR . 'Smarty.class.php';
             }
 
-            if (!class_exists('Smarty')) {
+            if (!class_exists('\Smarty\Smarty')) {
                 return false;
             }
 

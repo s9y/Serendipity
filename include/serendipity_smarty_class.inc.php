@@ -1,5 +1,6 @@
 <?php
-// serendipity_smarty_class.inc.php lm 2014-12-10 Ian
+
+use Smarty\Smarty;
 
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -9,7 +10,7 @@
 
 
 // Create a wrapper class extended from Smarty_Security - which allows access to S9Y-plugin and S9Y-template dirs
-class Serendipity_Smarty_Security_Policy extends Smarty_Security
+class Serendipity_Smarty_Security_Policy extends \Smarty\Security
   {
     // these are the allowed functions only. - default as is
     public $php_functions = array('isset', 'empty', 'sizeof', 'count', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists');
@@ -51,7 +52,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
   }
 
 // Create a wrapper class extended from Smarty
-class Serendipity_Smarty extends Smarty
+class Serendipity_Smarty extends \Smarty\Smarty
   {
     // bc mode for plugins Smarty2 compat INCLUDE_ANY fetch() calls - to avoid an undefinied property error.
     public $security_settings = false;
@@ -267,7 +268,15 @@ class Serendipity_Smarty extends Smarty
      */
     public function assign_by_ref($tpl_var, &$value)
     {
-        $this->assignByRef($tpl_var, $value);
+        $this->assign($tpl_var, $value);
+    }
+
+    /**
+     * Compatibility function for smarty 5
+     */
+    public function assignByRef($tpl_var, &$value)
+    {
+        $this->assign($tpl_var, $value);
     }
 
     /**
