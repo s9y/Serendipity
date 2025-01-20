@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'どれを基準に参照リンクのしますか? (デフォルト: リンク数)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '日付');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'リンクの数');
-
+@define('TOP_REFERRER', 'トップリファラ一覧');
+@define('SHOWS_TOP_SITES', 'あなたのブログにリンクしたサイトのトップを表示します。');
+@define('TOP_EXITS', 'トップ退出一覧');
+@define('SHOWS_TOP_EXIT', 'あなたのブログから退出したリンクのトップを表示します。');

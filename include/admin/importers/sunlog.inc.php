@@ -240,7 +240,7 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
         return true;
     }
 
-    function importCategories($parentid = 0, $new_parentid = 0, $sunlogdb) {
+    function importCategories($parentid = 0, $new_parentid = 0, $sunlogdb = null) {
         $where = "WHERE parent = '" . mysqli_escape_string($parentid) . "'";
 
         $res = $this->nativeQuery("SELECT * FROM {$this->data['prefix']}categories

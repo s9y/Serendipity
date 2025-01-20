@@ -31,7 +31,6 @@ if (!defined('serendipity_LANG_LOADED') || serendipity_LANG_LOADED !== true) {
     }
 
     // Try and include preferred language from the configurated setting
-
     if (@include(S9Y_INCLUDE_PATH . 'lang/' . $charset . 'serendipity_lang_'. $serendipity['lang'] .'.inc.php') ) {
         // Only here can we truly say the language is loaded
         define('serendipity_LANG_LOADED', true);
@@ -54,7 +53,7 @@ if (!defined('serendipity_MB_LOADED') && defined('serendipity_LANG_LOADED')) {
     // Needs to be included here because we need access to constant LANG_CHARSET definied in languages (not available for compat.inc.php)
 
     if (function_exists('mb_language')) {
-        @mb_language($serendipity['lang']);
+        @mb_language('uni'); // TODO: test for non-unicode installations
     }
 
     if (function_exists('mb_internal_encoding')) {

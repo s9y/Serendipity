@@ -25,4 +25,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'Qual critério a usar para classificar as ligações? Par omissão: o número de ligações.');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Por data');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Por número de ligações');
-
+@define('TOP_REFERRER', 'Referenciadores mais importantes');
+@define('SHOWS_TOP_SITES', 'Exibe os links de entrada mais utilizados para aceder no seu blogue');
+@define('TOP_EXITS', 'Saídas Maiores');
+@define('SHOWS_TOP_EXIT', 'Exibe os links de saída mais requisitados de seu blogue');

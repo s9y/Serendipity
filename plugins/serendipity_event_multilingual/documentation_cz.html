@@ -1,0 +1,29 @@
+<html>
+<head>
+		<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+		<meta name="generator" content="PSPad editor, www.pspad.com">
+        <title>Dokumentace: Vícejazyčné záznamy</title>
+        <style>
+        	pre {
+				display: block;
+				padding: 5px;
+				border: solid 1px #333333;
+				background-color: #cccccc;
+			}
+        </style>
+</head>
+
+<body><h1>Dokumentace k pluginu 'Vícejazyčné záznamy'</h1>
+	<p>Dokumentaci k tomuto pluginu přeložil do češtiny Vladimír Ajgl (vlada [zavinac] ajgl [tecka] cz) dne 29.9.2010. Od té doby mohl být plugin pozměněn nebo mohly být rozšířené jeho funkce. Zkontrolujte pro jistotu i  	
+		<a href="documentation_en.html">aktuální anglickou dokumentaci</a>.  	
+	</p>
+
+	<h2>Překlad s pomocí značek v textu</h2>		
+	<p>Plugin 'Vícejazyčné záznamy' umožňuje vkládaní více jazykových verzí do jednoho textu pomocí značek {{!&lt;jazyk&gt;}}&lt;text&gt;{{--}}. Takže když chcete napsat anglický text a zároveň jeho českou verzi, stačí napsat:  
+<pre>{{!en}}English version of text{{--}}{{!cz}}Česká verze textu{{--}}</pre>   			
+		</br>Překlad s pomocí značek má tu výhodu, že lze použít i v postranním sloupci. Takže jakýkoliv editovatelný obsah (typicky nadpis) postranního sloupce může být přeložen. Tato vlastnost se dokonce vztahuje i na nadpis a podnadpis celého blogu.  			
+		</br>			
+		</br>Překlad s pomocí značek je možný i pro příspěvky, ale ve výchozím nastavení je vypnut, protože dělá stejnou funkci jako jiná funkce pluginu. Překlad příspěvků je totiž zabezpečen použitím databáze. Takže byste se měli dopředu rozhodnout, jaký přístup při překladu příspěvků blogu Vám vyhovuje více. Používání obou přístupu zároveň může vést k podivným a matoucím výslekům, vřele ho tedy nedoporučujeme. Uvědomte si prosím, že překlad pomocí značek v textu funguje na jednoduchém principu odstřižení bloků s jinými jazyky než je ten aktuální, uživatelem nastavený. To znamená mimo jiné to, že byste měli v příspěvcích vypnout plugin Markup: NL2BR. Jinak budou znaky nové řádky mimo jazykových bloků převedeny na html tag &lt;/br&gt; a v textu přípěvků z tohoto důvodu budou přebytečné prázdné řádky.  		
+	</p>
+</body>
+</html>

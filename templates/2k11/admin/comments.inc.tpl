@@ -133,17 +133,17 @@
                                 <dt>{$CONST.AUTHOR}:</dt>
                                 <dd>{$comment.author|escape|truncate:40:"&hellip;"} {$comment.action_author}</dd>
                                 <dt>{$CONST.EMAIL}:</dt>
-                                <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <i>({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</i>{/if}{/if} {$comment.action_email}</dd>
+                                <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <i>({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</i>{/if}{/if} {if isset($comment.action_email)}{$comment.action_email}{/if}</dd>
                                 <dt>IP:</dt>
-                                <dd>{if empty($comment.ip)}N/A{else}{$comment.ip|escape}{/if} {$comment.action_ip}</dd>
+                                <dd>{if empty($comment.ip)}N/A{else}{$comment.ip|escape}{/if} {if isset($comment.action_ip)}{$comment.action_ip}{/if}</dd>
                                 <dt>URL:</dt>
-                                <dd>{if empty($comment.url)}N/A{else}<a href="{$comment.url|escape}" title="{$comment.url|escape}">{$comment.url|escape|truncate:40:"&hellip;"}</a> {/if} {$comment.action_url}</dd>
+                                <dd>{if empty($comment.url)}N/A{else}<a href="{$comment.url|escape}" title="{$comment.url|escape}">{$comment.url|escape|truncate:40:"&hellip;"}</a> {/if} {if isset($comment.action_url)}{$comment.action_url}{/if}</dd>
                                 <dt>{$CONST.REFERER}:</dt>
-                                <dd>{if empty($comment.referer)}N/A{else}<a href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:40:"&hellip;"}</a>{/if} {$comment.action_referer}</dd>
+                                <dd>{if empty($comment.referer)}N/A{else}<a href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:40:"&hellip;"}</a>{/if} {if isset($comment.action_referer)}{$comment.action_referer}{/if}</dd>
                             </dl>
                         </div>
 
-                        <div id="c{$comment.id}_summary" class="comment_summary">{$comment.fullBody|truncate:120:"&hellip;"}</div>
+                        <div id="c{$comment.id}_summary" class="comment_summary">{$comment.fullBody|truncate:200:"&hellip;"}</div>
 
                         <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody}</div>
 
@@ -152,7 +152,7 @@
                             <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                             <li><a class="button_link comments_reply" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;{$urltoken}" title="{$CONST.REPLY}"><span class="icon-chat" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.REPLY}</span></a></li>
                         {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
-                            <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-thumbs-up-alt" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
+                            <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;serendipity[page]={$page}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-thumbs-up-alt" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
                         {/if}
                         {if ($comment.status == 'approved')}
                             <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.SET_TO_MODERATED}"><span class="icon-thumbs-down-alt" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.SET_TO_MODERATED}</span></a></li>
@@ -163,7 +163,9 @@
                             <li><button class="button_link toggle_comment_full" type="button" data-href="#c{$comment.id}_full" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button></li>
                         {/if}
                         </ul>
+                        {if isset($comment.action_more)}
                         {$comment.action_more}
+                        {/if}
                     </li>
                 {/foreach}
                 </ul>

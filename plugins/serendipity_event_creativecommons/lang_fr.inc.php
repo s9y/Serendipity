@@ -25,3 +25,10 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'L\'auteur autorise de reproduire, distribuer et communiquer cette création au public, mais n\'autorise pas la modification de cette création.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Oui, tant que les autres partagent aussi');
 
+@define('PLUGIN_CREATIVECOMMONS_VERSION',     'License version');
+@define('PLUGIN_CREATIVECOMMONS_VERSION_DESC',     'Select which numbered version of the license you want to use.');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_GENERIC', 'generic');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_SMALL', 'small');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_BIG', 'big');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE', 'Image variant');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_DESC', 'Select which type of image to display.');

@@ -1,0 +1,143 @@
+2.36.2:
+    * Fix errors under PHP 8.1:
+        * catch sql error 'duplicate key' on CREATE INDEX fulltext_idx
+           in /include/db/mysqli.inc.php
+        * $serendipity['GET']['lang_selected'] empty
+
+2.36.1 & 1.16.1 (sidebar):
+    * Avoid warnings under PHP 8.2
+
+2.36 & 1.16 (sidebar): 
+
+    * Rework of the language determination function, most of it now covered in
+      the serendipity framework, details in leading comments and comments in
+      /include/functions_config.inc.php: serendipity_getSessionLanguage() and
+      serendipity_getPostAuthSessionLanguage(), added $serendipity['default_lang']
+      for the blogs default language, needs now Serendipity version 2.4 to fix
+      all issues because of accompanying changes in the core. Added db_query to
+      get default_lang in case of an older core version.
+    * activated and integrated the option to hide untranslated articles
+      reduced the 'hide untranslated articles' option only to index page
+      to prevent permalinks to untranslated articles throw a 404
+    * changed the footer link to the format id-title for all languages,
+      including default
+    * The backend display language is now the user language, the dropdown
+      entry for 'default' is fixed to the blog default language (has to be).
+    * sidebar plugin: changed the POST value to [serendipity][user_language]
+      to get it into $serendipity['POST']
+    * added event_hook 'multilingual_strip_langs' to strip tagged translation from strings
+      i. e. category use outside the sidebar
+    * fetchentries event hook: added $addData['showAllLangs'] to show untranslated articles 
+      in special situations (e.g. customarchive plugin), the plugin has to be below the calling
+      plugin in the plugin list
+    * fetchentries event hook: removed duplicated population of multilingual_ data 
+      by SQL join (translations are already in entries-properties subarray)
+      fixed search: find only matches in the current language
+    * Fixed undefined array key '$serendipity['head_subtitle']' warning
+
+2.35.1 & 1.15.1 (sidebar):
+      * PHP 8 compatibility fixes
+      * Fix sidebar change not changing language in 2.4.
+        
+2.35: assign lang stripped blogTitle in genpage hook (empty search was not covered)
+2.34: Added legal gdpr/dsgvo info
+2.33: Iconfont a11y fix (yellowled)
+
+2.32: Remove s9y 2.0+ inline style for the fieldset
+
+2.31:
+
+    * Better recognize $serendipity['dbType'] query check for all supported
+      postgres and all sqlite versions
+    * Set strip_langs() method static
+
+2.30 & 1.15 (sidebar): Fix Invalid argument supplied for foreach() error in
+                      case the $serendipity['languages'] array is missing
+                      (i.e. by emerge.sh call)
+
+2.29 & 1.14 (sidebar): Fix config sidebar selected langs on save
+
+2.28: Extend RSS blog title and description for lang strip
+
+2.27: Extend blogTitle and description lang strip in the genpage hook (fixes
+      the email subject inclusion for example)
+
+2.26:
+
+    * Fix possible missing Smarty object init
+    * Add blogDescription tagged translations to 2.25
+
+2.25:
+
+    * Fix "Select language" displaying entries false same "<lang>, <lang>" links
+    * This also fixes the "Force full language" switch
+    * Fix blogTitle tagged translations for /archive page
+    * Fix blogTitle tagged translations for backend
+
+2.24: Allow PCRE_DOTALL /s modifier, in case the |multilingual_lang Smarty
+      modifier replacement is used for content body textarea fields having
+      newlines.
+
+2.23 & 1.13 (sidebar):
+
+    * Load langs by lang API method - requires S9y 1.6+
+    * Fix some plugin inconsistencies
+    * Append the CSS if not already used by theme
+
+2.22: Fix missing Smarty template vars when initiating in genpage
+
+2.21: Fix backend form lang selected entry
+
+2.20, 1.12:
+
+    * Minor preparations for the Serendipity 2.0 Backend
+    * Fix missing Smarty object init
+    * Fix Smarty modifier "multilingual_lang" method name
+    * Fix constant PLUGIN_EVENT_MULTILINGUAL_LANGSWITCH define(s)
+    * Added more usage documentary
+    * Added htaccess file for documentation file readability
+    * Added a new OK Constant for the backend entry language switch.
+      This needs a change in backend templates 2k11/admin/entries.inc.tpl
+      file with 2.0.2+. Watch out for current or upcoming changes in
+      github.com/s9y/Serendipity/commits/2.0/templates/2k11/admin/entries.inc.tpl
+    * Check and error a missing entryproperties database table index
+      and fix a wrong set config value
+    * Fix the force "langswitch" variable option to properly work on click,
+      as long as the Browsers SESSION holds
+    * Posted sidebar lang selection influences backend lang ... document
+      dependencies
+    * Fix 'enry_title' Smarty var not using translation with Smarty3 versions in
+     non-tag mode and option "Tag translation of the blog title" set true. We
+     need to declare this option valid for banner title translations in non-tag
+     mode too!
+
+2.15: Added new "langswitch" variable to allow users forcing to switch the
+      frontend language based on the content language
+
+2.14:
+
+    * Added genpage event hook so that blogTitle/Description gets replaced in
+      other instances where entries are not fetched (i.e. 'archives')
+    * sidebar 1.11: Use proper "current url", thanks to timbalu
+
+2.13: Add smarty modifier "multilingual_lang" that you can use like
+      {$entry_category.category_name|@multilingual_lang|@escape} in templates,
+      to replace possible {{...}} language variants. Also, by default parse
+      such language constructs in the category name.
+
+2.11, 2.12:
+
+    * Patch to save drafts properly, by Martin Matuska, Bug #3047591
+    * Patch to properly detect current language, by Martin Matuska, Bug #3047600
+
+2.10: Allow to replace category names/descriptions for the header display
+
+2.9: Completely replace the broken regexp to use subparts now.
+
+2.8: Another regexp for replacements, look-behind and look-ahead.
+
+2.7: Better regexp for replacements
+
+2.6: Fix a PHP error notice
+
+2.5: Allow for tagged translations, see documentation. By praabjerg

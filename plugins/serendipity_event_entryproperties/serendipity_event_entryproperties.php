@@ -19,7 +19,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.41.4');
+        $propbag->add('version',       '1.41.6');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.27',
@@ -229,7 +229,7 @@ class serendipity_event_entryproperties extends serendipity_event
     {
         global $serendipity;
 
-        if (is_array($properties['disable_markups'])) {
+        if (is_array($properties['disable_markups'] ?? null)) {
             foreach($properties['disable_markups'] AS $idx => $instance) {
                 $properties['disable_markup_' . $instance] = $instance;
             }
@@ -244,8 +244,12 @@ class serendipity_event_entryproperties extends serendipity_event
         $property = serendipity_fetchEntryProperties($eventData['id']);
         $supported_properties = serendipity_event_entryproperties::getSupportedProperties();
 
+        // serendipity_updertEntry may have been called from a plugin so $serendipity['POST']['properties']
+        // is not completely filled, so we_ always_ have to check that $serendipity['POST']['propertyform']
+        // is set (which will only happen if the form has been submitted) - not just in the foreach() below
+
         // Cleanup properties first, if none disable_markups plugins were set, or a previous selected one was re-set
-        if (is_array($serendipity['POST']['properties']) && !is_array($serendipity['POST']['properties']['disable_markups'])) {
+        if (isset($serendipity['POST']['propertyform']) && is_array($serendipity['POST']['properties']) && !is_array($serendipity['POST']['properties']['disable_markups'] ?? null)) {
             $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property LIKE 'ep_disable_markup_%'";
             serendipity_db_query($q);
         }
@@ -253,14 +257,14 @@ class serendipity_event_entryproperties extends serendipity_event
         // Special case for input type checkbox entryproperties
         $reset_properties = array('is_sticky', 'no_frontpage', 'hiderss');
         foreach($reset_properties AS $property) {
-            if (!isset($serendipity['POST']['propertyform']) && is_array($serendipity['POST']['properties']) && !in_array($property, $serendipity['POST']['properties'])) {
+            if (isset($serendipity['POST']['propertyform']) && is_array($serendipity['POST']['properties']) && !in_array($property, $serendipity['POST']['properties'])) {
                 $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property = 'ep_{$property}'";
                 serendipity_db_query($q);
             }
         }
 
         // Special case for disable markups.
-        if (is_array($properties['disable_markups'])) {
+        if (isset($serendipity['POST']['propertyform']) && is_array($properties['disable_markups'] ?? null)) {
             $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property LIKE 'ep_disable_markup_%'";
             serendipity_db_query($q);
 
@@ -285,7 +289,14 @@ class serendipity_event_entryproperties extends serendipity_event
             $prop_key = 'ep_' . $prop_key;
 
             if (is_array($prop_val)) {
-                $prop_val = ";" . implode(';', $prop_val) . ";";
+                if ($prop_key !== 'multi_authors') {
+                    $prop_val = implode(';', $prop_val);
+                } else {
+                    // Note: Not sure if this prefix and suffix with ";" is a really good idea.
+                    // At least with multi_authors it's a problem, because it creates empty records.
+                    // Maybe other keys also need specific fixing.
+                    $prop_val = ";" . implode(';', $prop_val) . ";";
+                }
             }
 
             $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property = '" . serendipity_db_escape_string($prop_key) . "'";
@@ -489,7 +500,8 @@ class serendipity_event_entryproperties extends serendipity_event
 
                 if (is_array($plugins)) {
                     foreach($plugins as $plugin => $plugin_data) {
-                        if (!is_array($plugin_data['p']->markup_elements)) {
+                        if (! isset($plugin_data['p']->markup_elements) ||
+                        ! is_array($plugin_data['p']->markup_elements)) {
                             continue;
                         }
 
@@ -501,7 +513,7 @@ class serendipity_event_entryproperties extends serendipity_event
                             $selected = false;
                         }
                         // automatically mark nl2br markup parser as disabled, when WYSIWYG is active
-                        if (!$selected && $serendipity['wysiwyg'] && $plugin_data['p']->act_pluginPath == 'serendipity_event_nl2br') {
+                        if (!$selected && isset($serendipity['wysiwyg']) && $serendipity['wysiwyg'] && $plugin_data['p']->act_pluginPath == 'serendipity_event_nl2br') {
                             $selected = true;
                         }
                         echo '<option ' . ($selected ? 'selected="selected"' : '') . ' value="' . $plugin_data['p']->instance . '">' . serendipity_specialchars($plugin_data['p']->title) . '</option>' . "\n";
@@ -711,7 +723,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         );
 
                         $total = serendipity_getTotalEntries();
-                        printf(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_TOTAL  . '</h2>', $total);
+                        printf(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_TOTAL . '</h2>', $total);
 
                         if (is_array($entries)) {
                             echo '<ul class="plainList">';
@@ -767,7 +779,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     break;
 
                 case 'backend_entry_presave':
-                    if (is_array($serendipity['POST']['properties'])) {
+                    if (is_array($serendipity['POST']['properties'] ?? null)) {
                         $this->applyProperties($serendipity['POST']['properties']);
                     }
                     break;
@@ -798,11 +810,11 @@ class serendipity_event_entryproperties extends serendipity_event
                         $serendipity['POST']['properties']['cache_extended'] = $eventData['extended'];
                     }
 
-                    if (is_array($serendipity['POST']['properties']['access_groups']) && $serendipity['POST']['properties']['access'] != 'member') {
+                    if (is_array($serendipity['POST']['properties']['access_groups'] ?? null) && $serendipity['POST']['properties']['access'] != 'member') {
                         unset($serendipity['POST']['properties']['access_groups']);
                     }
 
-                    if (is_array($serendipity['POST']['properties']['access_users']) && $serendipity['POST']['properties']['access'] != 'member') {
+                    if (is_array($serendipity['POST']['properties']['access_users'] ?? null) && $serendipity['POST']['properties']['access'] != 'member') {
                         unset($serendipity['POST']['properties']['access_users']);
                     }
 
@@ -827,16 +839,19 @@ class serendipity_event_entryproperties extends serendipity_event
 
                     foreach($properties AS $idx => $row) {
                         if ($row['property'] == "ep_multi_authors") {
-                           $tmp = explode(";", $row['value']);
-                           $counter = 0;
-                           unset($eventData[$addData[$row['entryid']]]['properties'][$row['property']]);
-                           foreach($tmp as $key => $value) {
-                               $tmp_author_array = serendipity_fetchAuthor($value);
-                               $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_id'] = $value;
-                               $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_name'] = $tmp_author_array[0]['realname'];
-                               $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_url'] = serendipity_authorURL($tmp_author_array[0]);            
-                               $counter++;
-                           }
+                            $tmp = explode(";", $row['value']);
+                            $counter = 0;
+                            unset($eventData[$addData[$row['entryid']]]['properties'][$row['property']]);
+                            foreach($tmp as $key => $value) {
+                                if (empty($value)) {
+                                    continue;
+                                }
+                                $tmp_author_array = serendipity_fetchAuthor($value);
+                                $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_id'] = $value;
+                                $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_name'] = $tmp_author_array[0]['realname'];
+                                $eventData[$addData[$row['entryid']]]['properties'][$row['property']][$counter]['author_url'] = serendipity_authorURL($tmp_author_array[0]);
+                                $counter++;
+                            }
                         } else {
                             $eventData[$addData[$row['entryid']]]['properties'][$row['property']] = $row['value'];
                         }
@@ -906,8 +921,9 @@ class serendipity_event_entryproperties extends serendipity_event
                     } else {
                         $conds[] = " (ep_access.property IS NULL OR ep_access.value = 'public')";
                     }
-
-                    if (!isset($serendipity['GET']['viewAuthor']) && !isset($serendipity['plugin_vars']['tag']) && !isset($serendipity['GET']['category']) && !isset($serendipity['GET']['adminModule']) && $event == 'frontend_fetchentries' && $addData['source'] != 'search') {
+                    
+                    if (!isset($serendipity['GET']['viewAuthor']) && !isset($serendipity['plugin_vars']['tag']) && !isset($serendipity['GET']['category']) && !isset($serendipity['GET']['adminModule']) && $event == 'frontend_fetchentries' && ($addData
+                    === null || $addData['source'] != 'search')) {
                         $conds[] = " (ep_no_frontpage.property IS NULL OR ep_no_frontpage.value != 'true') ";
                         $joins[] = " LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties ep_no_frontpage
                                                   ON (e.id = ep_no_frontpage.entryid AND ep_no_frontpage.property = 'ep_no_frontpage')";
@@ -989,7 +1005,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 case 'frontend_entries_rss':
                     if (is_array($eventData)) {
                         foreach($eventData AS $idx => $entry) {
-                            if (is_array($entry['properties']) && isset($entry['properties']['ep_hiderss']) && $entry['properties']['ep_hiderss']) {
+                            if (is_array($entry['properties'] ?? null) && isset($entry['properties']['ep_hiderss']) && $entry['properties']['ep_hiderss']) {
                                 unset($eventData[$idx]['body']);
                                 unset($eventData[$idx]['extended']);
                                 unset($eventData[$idx]['exflag']);

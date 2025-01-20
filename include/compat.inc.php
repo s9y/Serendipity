@@ -7,7 +7,6 @@ if (IN_serendipity !== true) {
 }
 
 $serendipity = array();
-@ini_set('magic_quotes_runtime', 'off');
 
 if (!defined('PATH_SEPARATOR')) {
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -170,13 +169,13 @@ if (!function_exists('errorToExceptionHandler')) {
             return false;
         }
 
+        $args = func_get_args();
+
         // Several plugins might not adapt to proper style. This should not completely kill our execution.
         if ($serendipity['production'] !== 'debug' && preg_match('@Declaration.*should be compatible with@i', $args[1])) {
             #if (!headers_sent()) echo "<strong>Compatibility warning:</strong> Please upgrade file old '{$args[2]}', it contains incompatible signatures.<br/>Details: {$args[1]}<br/>";
             return false;
         }
-
-        $args = func_get_args();
 
         /*
          * $serendipity['production'] can be:
@@ -185,7 +184,6 @@ if (!function_exists('errorToExceptionHandler')) {
          * (bool) FALSE         Beta/alpha builds
          * (string) 'debug'     Developer build, specifically enabled.
          */
-
         if ($serendipity['production'] !== 'debug') {
             $debug_note = '<br />For more details set $serendipity[\'production\'] = \'debug\' in serendipity_config_local.inc.php to receive a stack-trace.';
         } else {
@@ -207,33 +205,14 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] !== true) {
             // Display error (production: FALSE and production: 'debug')
             echo '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
-
-            echo '<pre style="white-space: pre-line;">';
-            throw new \ErrorException($type . ': ' . $errStr, 0, $errNo, $errFile, $errLine); // tracepath = all, if not ini_set('display_errors', 0);
+            
+            if ($serendipity['production'] === 'debug') {
+                // In debug mode, throwing an exception here will stop the code execution. Sometimes useful to catch all errors.
+                throw new \ErrorException($type . ': ' . $errStr, 0, $errNo, $errFile, $errLine);
+            }
 
             if (!$serendipity['dbConn'] || $exit) {
                 exit; // make sure to exit in case of database connection errors or fatal errors.
-            }
-        } else {
-            // Only display error (production blog) if an admin is logged in, else we discard the error.
-
-            if ($serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN) {
-                $str  = " == SERENDIPITY ERROR == ";
-                $str .= '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
-
-                if (headers_sent()) {
-                    serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, or into streamed js files, which hardly isn't seen by many users
-                } else {
-                    // see global include of function in plugin_api.inc.php
-                    // this also reacts on non eye-displayed errors with following small javascript,
-                    // while being in tags like <select> to push on top of page, else return non javascript use $str just there
-                    // sadly we can not use HEREDOC notation here, since this does not execute the javascript after finished writing
-                    echo "\n".'<script>
-if (typeof errorHandlerCreateDOM == "function") {
-var fragment = window.top.errorHandlerCreateDOM("Error redirect: '.addslashes($str).'");
-document.body.insertBefore(fragment, document.body.childNodes[0]);
-}' . "\n</script>\n<noscript>" . $str . "</noscript>\n";
-                }
             }
         }
     }
@@ -331,47 +310,6 @@ if (extension_loaded('filter') && function_exists('filter_id') && function_exist
     */
 }
 
-/*
- *  Avoid magic_quotes_gpc issues
- *  courtesy of iliaa@php.net
- */
-function serendipity_strip_quotes(&$var)
-{
-    if (is_array($var)) {
-        foreach ($var as $k => $v) {
-            if (is_array($v)) {
-                array_walk($var[$k], 'serendipity_strip_quotes');
-            } else {
-                $var[$k] = stripslashes($v);
-            }
-        }
-    } else {
-        $var = stripslashes($var);
-    }
-}
-
-if (ini_get('magic_quotes_gpc')) {
-    if (@count($_REQUEST)) {
-        array_walk($_REQUEST, 'serendipity_strip_quotes');
-    }
-
-    if (@count($_GET)) {
-        array_walk($_GET,     'serendipity_strip_quotes');
-    }
-
-    if (@count($_POST)) {
-        array_walk($_POST,    'serendipity_strip_quotes');
-    }
-
-    if (@count($_COOKIE)) {
-        array_walk($_COOKIE, 'serendipity_strip_quotes');
-    }
-
-    if (@count($_FILES) && strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
-        array_walk($_FILES,   'serendipity_strip_quotes');
-    }
-}
-
 // Merge get and post into the serendipity array
 // It is vital that also an empty array is mapped as a reference
 // because the s9y core actually sets new array key values sometimes in $_GET and
@@ -426,7 +364,7 @@ function serendipity_get_bool($item) {
 function serendipity_getCharset() {
     global $serendipity;
 
-    $charset = $serendipity['charset'];
+    $charset = $serendipity['charset'] ?? '';
     if (!empty($_POST['charset'])) {
         if ($_POST['charset'] == 'UTF-8/') {
             $charset = 'UTF-8/';
@@ -553,7 +491,7 @@ function serendipity_specialchars($string, $flags = null, $encoding = LANG_CHARS
         $encoding = 'UTF-8';
     }
 
-    return htmlspecialchars($string, $flags, $encoding, $double_encode);
+    return htmlspecialchars($string ?? '', $flags, $encoding, $double_encode);
 }
 
 /**

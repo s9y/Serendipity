@@ -46,14 +46,14 @@
                     <select id="filter_category" name="serendipity[filter][category]">
                         <option value="">-</option>
                     {foreach $categories as $cat}
-                        <option value="{$cat.categoryid}"{($get.filter.category == $cat.categoryid) ? ' selected' : ''}>{'&nbsp;'|str_repeat:$cat.depth} {$cat.category_name|escape}</option>
+                        <option value="{$cat.categoryid}"{(isset($get.filter.category) and $get.filter.category == $cat.categoryid) ? ' selected' : ''}>{'&nbsp;'|str_repeat:$cat.depth} {$cat.category_name|escape}</option>
                     {/foreach}
                     </select>
                 </div>
 
                 <div class="form_field">
                     <label for="filter_content">{$CONST.CONTENT}</label>
-                    <input id="filter_content" name="serendipity[filter][body]" type="text" value="{(isset($get.filter.body)) ? "{$get.filter.body|escape}" : ''}">
+                    <input id="filter_content" name="serendipity[filter][body]" type="text" value="{if isset($get.filter.body)}{$get.filter.body|escape}{/if}">
                 </div>
             </div>
         </fieldset>
@@ -175,7 +175,9 @@
                     {if $entry.isdraft}
                         <span class="entry_status status_draft">{$CONST.DRAFT}</span>
                     {/if}
-                    {$entry.info_more}
+                    {if isset($entry.info_more)}
+                        {$entry.info_more}
+                    {/if}
                     </div>
                 </li>
             {/foreach}
@@ -196,7 +198,7 @@
             {/if}
         </div>
     {/if}
-    {if NOT $simpleFilters}
+    {if $count > 1 && NOT $simpleFilters }
         <div id="multidelete_tools" class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
             <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE}">
@@ -211,10 +213,7 @@
 {/if}
 
 {if $switched_output}
-    {if ($get.adminAction && $dateval)}
-        <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.DATE_INVALID}</span>
-    {/if}
-    {if ($get.adminAction && $use_legacy)}
+    {if ($get.adminAction && isset($use_legacy) && $use_legacy)}
         {if $is_draft && ! $errors}
         <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
         {/if}
@@ -239,7 +238,7 @@
         <span class="msg_hint"><span class="icon-help-circled" aria-hidden="true"></span> {$ripent}</span>
         {/foreach}
         <div class="form_buttons">
-            <a class="button_link state_cancel icon_link" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a>
+            <a class="button_link state_cancel icon_link" {if isset($smarty.server.HTTP_REFERER)}href="{$smarty.server.HTTP_REFERER|escape}"{/if}{if ! isset($smarty.server.HTTP_REFERER)}href="javascript://" onclick="history.back();"{/if}>{$CONST.NOT_REALLY}</a>
             <a class="button_link state_submit icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
         </div>
     {/if}

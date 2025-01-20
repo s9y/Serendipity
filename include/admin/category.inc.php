@@ -11,7 +11,7 @@ if (!serendipity_checkPermission('adminCategories')) {
 }
 
 $admin_category = (!serendipity_checkPermission('adminCategoriesMaintainOthers') ? "AND (authorid = 0 OR authorid = " . (int)$serendipity['authorid'] . ")" : '');
-$data = array();
+$data = array('post_save' => false, 'doDelete' => false, 'delete' => false, 'edit' => false, 'new' => false);
 /* Add a new category */
 if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
     $name = $serendipity['POST']['cat']['name'];
@@ -146,6 +146,7 @@ if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminA
         $write_groups = serendipity_ACLGet($cid, 'category', 'write');
     } else {
         $data['new'] = true;
+        $data['category_name'] = null;
         $cid = false;
         $this_cat = array();
         echo '<h2>'. CREATE_NEW_CAT .'</h2>';

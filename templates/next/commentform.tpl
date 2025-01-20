@@ -16,7 +16,7 @@
             <label for="serendipity_commentform_email">{$CONST.EMAIL}{if $required_fields.email}*{/if}</label>
             <input id="serendipity_commentform_email" type="email" name="serendipity[email]" value="{$commentform_email}"{if $required_fields.email} required{/if}>
         </div>
-    {if $spice.inputtwitter}
+    {if isset($spice.inputtwitter) and $spice.inputtwitter}
         <div id="serendipity_commentspice_twitter" class="form_field">
             <label for="serendipity_commentform_twitter">{$spice.inputtwitterlabel}</label>
             <input id="serendipity_commentform_twitter" name="serendipity[twitter]" type="text" value="{$spice.inputtwittervalue}">
@@ -26,7 +26,7 @@
             <label for="serendipity_commentform_url">{$CONST.HOMEPAGE}{if $required_fields.url}*{/if}</label>
             <input id="serendipity_commentform_url" type="url" name="serendipity[url]" value="{$commentform_url}" placeholder="http://example.org" {if $required_fields.url} required{/if}>
         </div>
-    {if $spice.inputarticle}
+    {if isset($spice.inputarticle) and $spice.inputarticle}
         <div id="serendipity_commentspice_rss"  class="form_select spicehidden">
             <label for="serendipity_commentform_rss">{$spice.inputarticlelabel}</label>
             <select id="serendipity_commentform_rss" class="commentspice_rss_input" name="serendipity[promorss]"></select>

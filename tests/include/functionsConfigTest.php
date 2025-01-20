@@ -4,14 +4,14 @@ $serendipity['dbType'] = 'pdo-sqlite';
 define('IN_serendipity', true);
 require_once dirname(__FILE__) . '/../../include/functions_config.inc.php';
 
+use PHPUnit\Framework\Attributes\Test;
+
 /**
  * Class functionsTest
  */
-class functionsConfigTest extends PHPUnit_Framework_TestCase
+class functionsConfigTest extends PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function test_serendipity_getTemplateFile()
     {
         global $serendipity;
@@ -22,12 +22,11 @@ class functionsConfigTest extends PHPUnit_Framework_TestCase
         $serendipity['template_backend'] = '2k11';
         $serendipity['serendipityPath'] = realpath('../');
         $serendipity['serendipityHTTPPath'] = realpath('/');
-        
-        $this->assertContains('next/index.tpl', serendipity_getTemplateFile('index.tpl'));
-        define('IN_serendipity_admin', true);
-        $this->assertContains('2k11/admin/index.tpl', serendipity_getTemplateFile('admin/index.tpl'));
-        $this->assertContains('next/index.tpl', serendipity_getTemplateFile('index.tpl', 'serendipityHTTPPath', true));
-    }
 
+        $this->assertStringEndsWith('next/index.tpl', serendipity_getTemplateFile('index.tpl'));
+        define('IN_serendipity_admin', true);
+        $this->assertStringEndsWith('2k11/admin/index.tpl', serendipity_getTemplateFile('admin/index.tpl'));
+        $this->assertStringEndsWith('next/index.tpl', serendipity_getTemplateFile('index.tpl', 'serendipityHTTPPath', true));
+    }
 
 }

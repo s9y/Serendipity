@@ -14,7 +14,7 @@
     <li id="comment-{$comment.id}" class="comment-list-item">
         <a id="c{$comment.id}"></a>
         <div id="div-comment-{$comment.id}" class="comment_any{cycle values=" comment_odd, comment_even"} comment_author_{$comment.author|@makeFilename} {if ($entry.author == $comment.author) && ($entry.email == $commentform_entry.email)}comment_author_self{/if}">
-            {if $comment.avatar}
+            {if isset($comment.avatar) and $comment.avatar}
                     {$comment.avatar}
             {/if}                
             <div class="comment-list-item-body">
@@ -42,7 +42,7 @@
                     {/if}                        
                     
                     {if $entry.allow_comments AND $comment.body != 'COMMENT_DELETED'}
-                        <a class="comment-reply-link btn btn-sm btn-default btn-theme" href="#serendipity_CommentForm" id="serendipity_reply_{$comment.id}" onclick="document.getElementById('serendipity_replyTo').value='{$comment.id}'; {$comment_onchange}" title="{$CONST.REPLY}"><i class="fas fa-lg fa-reply"></i><span class="sr-only"> {$CONST.REPLY}</span></a>
+                        <a class="comment-reply-link btn btn-sm btn-default btn-theme" href="#serendipity_CommentForm" id="serendipity_reply_{$comment.id}" onclick="document.getElementById('serendipity_replyTo').value='{$comment.id}'; {if isset($comment_onchange)}{$comment_onchange}{/if}" title="{$CONST.REPLY}"><i class="fas fa-lg fa-reply"></i><span class="sr-only"> {$CONST.REPLY}</span></a>
                         <div id="serendipity_replyform_{$comment.id}"></div>
                     {/if}
                 </div>

@@ -1,18 +1,184 @@
+Version 2.6-alpha1 ()
+------------------------------------------------------------------------
+
+   * Fix specific search terms (like a - at the end) causing an error
+     page when using MySQL/MariaDB (thanks to  GuillaumeValadas) 
+
+   * Swap order of entries in the dashboard, so that upcoming
+     entries are shown first
+
+   * Set more efficient defaults for (jpg) thumbnail generation
+
+   * Add ability to receive webmentions. They will be displayed as ping-
+     or trackbacks
+
+   * Fix admin dashboard link in menu not showing tool tips
+     (thanks to HQJaTu Jari Turkia)
+
+   * Fix token cleanup SQL statement in PostgreSQL environments
+     (thanks to HQJaTu Jari Turkia)
+
+   * Block access to .inc php files via .htaccess
+
+   * Make serendipity_sendMail() standard compliant by using CRLF
+     instead of LF to separate headers.
+
+Version 2.5.0 (February 13th, 2024)
+------------------------------------------------------------------------
+
+   * Restore compatibility with PHP 7.4 by setting that version as
+     composer platform (downgrades psr/simple-cache dependency)
+
+   * Remove bundled composer.phar (thanks to hboeck)
+
+   * Update composer dependencies (mostly for PHP 8.3 compatibility):
+      katzgrau/klogger (1.0.0 => 1.2.2)
+      pear/http_request2 (v2.5.1 => v2.6.0)
+      pear/net_dns2 (v1.5.3 => v1.5.4)
+      psr/log (1.0.0 => 1.1.4)
+      smarty/smarty (v4.3.2 => v4.3.5)
+
+   * Fix a PHP notice in User management ("isEditable") (garvinhicking)
+
+   * Fix a bug when the p parameter given was set to 0 (@hannob)
+
+   * Fix an incompatibility with MySQL 5.7 or later (@mariohommel)
+
+
+Version 2.5-beta1 (September 28th, 2023)
+------------------------------------------------------------------------
+
+   * Update Net/DNS2 to v1.5.3
+     This dependency was also added to composer. A wrapper was added for
+     backwards compatibility with the old include path.
+
+   * Fix Onyx/RSS dependency under PHP >= 8.0
+
+   * Address several warnings when using PHP 8.2
+
+   * Update HTTP_Request2 to current version v2.5.1
+     This dependency was also added to composer. A wrapper was added for
+     backwards compatibility with the old include path.
+     Subsequently, some files form bundled_libs/HTTP were dropped that
+     were not part of Request2.
+
+   * Update smarty to current version v4.3.2.
+     Also enables a warning suppressor, which should avoid issues with
+     old smarty templates when using PHP 8.0 or newer.
+  
+   * Avoid warning under PHP 8.2 when using an SQLite database
+
+   * Improved and extended russian translation files, thanks to Vadim
+     Rakhmatullin
+
+   * [!] Bugfix: Fixes showing wrong values for Usergroup permission
+         configuration. All checkboxes where enabled instead of
+         only the ones really set, thus saving any usergroup with
+         these checkboxes would changer permissions as indicated
+         by the checked values. Please ensure after upgrading that
+         any possible custom usergroup configurations have the 
+         wanted permission settings. If you have never saved
+         a permission group setting, you will not be impacted.
+         (garvinhicking)
+
+   * Adds new time formats to 2k11 frontend (using %H:%M for date output)
+
+   * Fix: Several uninitialized variable error notices in upgrader,
+          category management, maintenance (garvinhicking)
+
+   * Fix: 2k11 fonts now downloaded locally and included with template.
+
+   * Fix: Utilizes missing variables in Smarty admin upgrader
+     (garvinhicking)
+
+Version 2.4.0 (November 20th, 2022)
+------------------------------------------------------------------------
+
+   * Fix: Avoid bad number of arguments to sprintf and fix logic error
+     in spamblock plugin.     
+
+   * Improve w3c compatibility be encode square brackets of comment
+     mode links (thanks @hannob)
+
+   * Fix: Previewing comments warning threw a warning on PHP 8, when
+          debug mode on (thanks @hannob)
+
+   * Fix: Editor autosave cached was not deleted when saving entry
+
+   * Fix: Editor autosave was not on by default, despite the setting
+          being active by default
+
+   * Fix: admin/entries.tpl: fix undefined variable iso2br
+
+   * Fix: The calendar plugin threw a warning about $cond['join'] not
+          existing in some setups
+
+   * Fix: Avoid one more situation where responsive image upscaled
+          a small thumbnail
+
+   * Bugfix: Entryproperites plugin no longer insert empty records
+     for multiple authors (garvinhicking)
+
+   * Improve permalink generation performance and enable more unicode
+     replacements (thanks to mbirth!)
+
+Version 2.4-beta1 (September 12th, 2021)
+------------------------------------------------------------------------
+   * Hide more PHP warnings in production mode, to ease the migration
+     to PHP 8
+   * Fix: Deleting a user was not possible
+   * New images added via the ML will set loading="lazy", improving
+     site performance for visitors (only if height and width known)
+   * Remove multitude of wysiwyg toolbars
+   * PHP 8 compatibility for serendipity core
+   * Fix: Using the ML filters in the selection popup after uploading
+          no longer removes option to insert image into article
+   * Drop never fully integrated laminas-db powered database backend
+   * Drop legacy mysql database backend (long ago replaced by mysqli)
+   * Update Cache/Lite to 1.8.3 for better PHP 7.4 compat
+   * Change backend_image_add hook to always contain same structure
+   * Split date and time input in editor into two input fields
+   * Improve performance of the media library by caching the file list
+   
+Version 2.4-alpha2 ()
+------------------------------------------------------------------------
+   * Adds 'image_id' to event 'backend_image_add' in addData array
+   * Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, 
+     enabling full unicode input.
+   * added type 'media' to configuration types,
+     this shows an input text with the button for the media library,
+     unified the CSS between this item and the plugin item,
+     hide the preview when no image is selected
+   * renamed 'multiDelete' in media selection to 'multicheck'
+     as suggested in the comments
+   * check for empty file input in media_upload
+   * stripped the multilingual tags from the preview iframe
+   * totally resorted the language files, added a new 'langsorter.php'
+     script which automatically sorts and completes the languages,
+     strings which doesn't seem in use are now in the 'orphaned' section
+   * Make it possible for plugins to let the core skip the check
+     whether trackbacks are already sent, with 
+     $serendipity['skip_trackback_check']
+   * Add the original image to the response images srcset when
+     the original image is small, to avoid upscaling
+
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
-   * Merge s9y and plugin update notifications in dashboard.
+   * template/bootstrap4/sidebar.tpl: fix usage of wrong template
+     variable which prevented the sidebar from being emitted.
 
-   * Fix: Don't drop upgraded_version from local plugin cache.
+   * templates/2k11/admin/comments.tpl: Stay on the same page after
+     approving a comment; truncate comments to the same length (200)
+     as given by /include/admin/comments.php
+
+   * Merge s9y and plugin update notifications in dashboard.
 
    * Fix: Simplify count_plugin_upgrades() in event_spartacus.
 
    * Fix: Modified sql statement used for htaccess blocking to work in
           MySQL 5.7.
           Thanks to @fasterit!
-
-   * Fix: Truncate extension of media items to 5 chars (which ist the
-          max length of the corresponding database field).
 
    * Switch new installations with MySQL >= 5.6.4 or MariaDB >= 10.0.5
      to the InooDB stoprage engine and utf8mb4 charset. This enables
@@ -81,6 +247,36 @@ Version 2.4-alpha1 ()
    * Add plugin update notifications to the plugin update button and
      to the dashboard.
 
+Version 2.3.5 (April 25th, 2020)
+------------------------------------------------------------------------
+
+   * Fix: CSS: Restrict block display of summary to trackbacks. (#703)
+
+   * Fix: Don't strip HTML from comments body in serendipity_plugin_comments
+          before serendipity_event_unstrip_tags can convert the HTML tags
+          (being called via frontend_display hook). (#702)
+
+   * Fix: [CKE] Don't remove <details> and <summary> elements from
+          WYSIWYG editor.
+
+   * Fix: Don't delete extend properties from the entryproperties
+          plugin when publishing from dashboard (or sending
+          delayed trackbacks). (#695)
+
+   * Fix: SQL error in serendipity_plugin_history present since we
+          "don't allow requesting an archive page that doesn't exist"
+          (2.3.3). (#694)
+
+   * Fix: Entry title in backend list of entries was double escaped.
+
+   * Fix: Don't drop upgraded_version from local plugin cache.
+
+   * Fix: Regular expression in functions_routing.inc.php
+
+   * Fix: Truncate extension of media items to 5 chars (which ist the
+          max length of the corresponding database field). (#609)
+          Thanks to @mmitch!
+
 Version 2.3.4 (March 25th, 2020)
 ------------------------------------------------------------------------
 
@@ -110,7 +306,7 @@ Version 2.3.3 (March 22nd, 2020)
      markup
 
    * Updates mailer event plugin to support force sending mails on
-     published blog entries and ability to prepend a mail body. 
+     published blog entries and ability to prepend a mail body.
      Also fixes missing "keep strip tags" configuration option
 
    * Fix serendipity_killPath().

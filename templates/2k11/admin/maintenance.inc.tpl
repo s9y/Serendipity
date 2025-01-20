@@ -3,7 +3,7 @@
 
 {if $action == "integrity"}
     <h3 class="visuallyhidden">{$CONST.INTEGRITY}</h3>
-    {if $noChecksum == true}
+    {if isset($noChecksum) && $noChecksum == true}
         <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.CHECKSUMS_NOT_FOUND}</span>
     {else}
         {if $badsums|count == 0}
@@ -111,39 +111,6 @@
                     <button type="submit">{$CONST.MAINTENANCE_MODE_ACTIVATE}</button>
                 </div>
             {/if}
-        </form>
-       
-    </section>
-{/if}
-
-
-{if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
-    <section id="maintenance_mode" class="equal_heights quick_list">
-        <h3>MySQL: Native to UTF8</h3>
-
-        <p>{$CONST.NATIVE_CONVERSION_DESC}</p>
-        <p><span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.NATIVE_CONVERSION_WARNING}</span></p>
-
-        <form method="POST" target="?">
-            <input type="hidden" name="adminAction" value="nativetoutf8"/>
-            <div class="form_select">
-                <button type="submit">{$CONST.GO}</button>
-            </div>
-        </form>
-       
-    </section>
-    
-    <section id="maintenance_mode" class="equal_heights quick_list">
-        <h3>MySQL: UTF8 to UTF8MB4</h3>
-
-        <p>{$CONST.NATIVE_CONVERSION_DESC}</p>
-        <p><span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.NATIVE_CONVERSION_WARNING}</span></p>
-
-        <form method="POST" target="?">
-            <input type="hidden" name="adminAction" value="utf8toutf8mb4"/>
-            <div class="form_select">
-                <button type="submit">{$CONST.GO}</button>
-            </div>
         </form>
        
     </section>

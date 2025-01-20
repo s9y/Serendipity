@@ -25,14 +25,14 @@
 
     <main class="clearfix serendipityAdminContent installer">
         <div id="content" class="clearfix">
-        {if $is_errors && is_array($errors)}
+        {if isset($is_errors) && $is_errors && is_array($errors)}
             <ul class="plainList">
             {foreach $errors AS $error}
                 <li><span class="msg_error">{$error}</span></li>
             {/foreach}
             </ul>
         {/if}
-        {if $getstepint0}
+        {if $getstepint0|default:false}
             <h2>{$CONST.WELCOME_TO_INSTALLATION}</h2>
 
             <p>{$CONST.FIRST_WE_TAKE_A_LOOK}</p>
@@ -94,6 +94,10 @@
                         <tr>
                             <td>mbstring extension</td>
                             <td>{$installerResultDiagnose_MBSTR}</td>
+                        </tr>
+                        <tr>
+                            <td>xml extension</td>
+                            <td>{$installerResultDiagnose_XML}</td>
                         </tr>
                         <tr>
                             <td>iconv extension</td>
@@ -258,7 +262,7 @@
             </form>
         {elseif $s9yGETstep == '3'}
             <h3>{$CONST.CHECK_DATABASE_EXISTS}</h3>
-            {if is_array($authors_query)}
+            {if is_array($authors_query|default:null)}
             <span class="msg_success"><strong>{$CONST.THEY_DO}</strong>, {$CONST.WONT_INSTALL_DB_AGAIN}</span>
             {else}
             <span class="msg_success"><strong>{$CONST.THEY_DONT}</strong></span>
@@ -295,7 +299,7 @@
         </div>
     </main>
     <footer id="meta">
-        <p>{$ADMIN_FOOTER_POWERED_BY|sprintf:$versionInstalled:$phpversion}</p>
+        <p>{$CONST.ADMIN_FOOTER_POWERED_BY|sprintf:$versionInstalled:$phpversion}</p>
     </footer>
 </body>
 </html>

@@ -103,9 +103,9 @@ $template_config = array(
 );
 
 $template_global_config = array('navigation' => true);
-$template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
+$template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'] ?? '', true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
 
-if ($_SESSION['serendipityUseTemplate']) {
+if (isset($_SESSION['serendipityUseTemplate']) && $_SESSION['serendipityUseTemplate']) {
     $template_loaded_config['use_corenav'] = false;
 }

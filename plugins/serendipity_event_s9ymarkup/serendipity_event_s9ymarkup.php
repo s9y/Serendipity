@@ -9,6 +9,7 @@ if (IN_serendipity !== true) {
 class serendipity_event_s9ymarkup extends serendipity_event
 {
     var $title = PLUGIN_EVENT_S9YMARKUP_NAME;
+    var $markup_elements;
 
     function introspect(&$propbag)
     {
@@ -18,7 +19,7 @@ class serendipity_event_s9ymarkup extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_S9YMARKUP_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.4.2');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -92,7 +93,7 @@ class serendipity_event_s9ymarkup extends serendipity_event
                 case 'frontend_display':
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
-                            !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
+                            ! ($eventData['properties']['ep_disable_markup_' . $this->instance] ?? null) &&
                             !isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
                             $element = $temp['element'];
                             $eventData[$element] = $this->_s9y_markup($eventData[$element]);

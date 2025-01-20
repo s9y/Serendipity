@@ -2,6 +2,10 @@
         <h2>{$CONST.WELCOME_BACK} {$username|escape}</h2>
         <a href="#s9y_links" class="button_link toggle_links"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.FURTHER_LINKS}</span></a>
     </div>
+    {if NOT $db_health}
+        <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> Error, database not writeable</span>
+        <hr class="separator">
+    {/if}
 {$backend_frontpage_display}
     <div id="dashboard">
     {if $published}
@@ -99,7 +103,7 @@
                 {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft == "false"}
                     <span class="entry_status status_future" title="{$CONST.SCHEDULED}: {$CONST.ENTRY_PUBLISHED_FUTURE}">{$entry.timestamp|formatTime:$CONST.DATE_FORMAT_SHORT}</span>
                 {/if}
-                {if $entry.properties.ep_is_sticky}
+                {if isset($entry.properties.ep_is_sticky) && $entry.properties.ep_is_sticky}
                     <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
                 {/if}
                 {if $entry.isdraft == "true"}

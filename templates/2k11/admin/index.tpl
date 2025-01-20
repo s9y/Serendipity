@@ -38,7 +38,9 @@
     <main id="workspace" class="clearfix">
     {if NOT $admin_vars.is_logged_in}
         {$admin_vars.out|serendipity_refhookPlugin:'backend_login_page'}
+        {if isset($admin_vars.out.header)}
             {$admin_vars.out.header}
+        {/if}
         {if $admin_vars.post_action != '' AND NOT $admin_vars.is_logged_in}
             <span class="msg_error">{$CONST.WRONG_USERNAME_OR_PASSWORD}</span>
         {/if}
@@ -66,9 +68,13 @@
                         <a class="button_link" href="{$serendipityBaseURL}">{$CONST.BACK_TO_BLOG}</a>
                     </div>
                 </fieldset>
-                {$admin_vars.out.table}
+                {if isset($admin_vars.out.table)}
+                    {$admin_vars.out.table}
+                {/if}
             </form>
-            {$admin_vars.out.footer}
+            {if isset($admin_vars.out.footer)}
+                {$admin_vars.out.footer}
+            {/if}
     {else}
         {if NOT $admin_vars.no_sidebar}
         <nav id="main_menu">
@@ -77,7 +83,7 @@
             <ul class="clearfix">
                 <li id="user_menu"><h3>{$admin_vars.self_info}</h3>
                     <ul class="clearfix">
-                        <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.MENU_DASHBOARD}"><span class="icon-home"aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MENU_DASHBOARD}</span></a></li>
+                        <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.MENU_DASHBOARD}"><span class="icon-home" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MENU_DASHBOARD}</span></a></li>
                     {if 'personalConfiguration'|checkPermission}
 
                         <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>

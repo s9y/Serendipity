@@ -28,7 +28,7 @@ if (defined('S9Y_DATA_PATH')) {
 
 $data['basedir'] = $basedir;
 $data['phpversion'] = phpversion();
-$data['versionInstalled'] = $serendipity['versionInstalled'];
+$data['versionInstalled'] = $serendipity['versionInstalled'] ?? null;
 $data['templatePath']  = $serendipity['templatePath'];
 $data['installerHTTPPath'] = str_replace('//', '/', dirname($_SERVER['PHP_SELF']) . '/'); // since different OS handlers for enddir
 
@@ -93,9 +93,9 @@ if ( sizeof($_POST) > 1 && $serendipity['GET']['step'] == '3' ) {
     }
 }
 
-$data['s9yGETstep'] = $serendipity['GET']['step'];
+$data['s9yGETstep'] = $serendipity['GET']['step'] ?? null;
 
-if ( (int)$serendipity['GET']['step'] == 0 ) {
+if ( (int)($serendipity['GET']['step'] ?? null) == 0 ) {
     $data['getstepint0'] = true;
     $data['print_ERRORS_ARE_DISPLAYED_IN'] = sprintf(ERRORS_ARE_DISPLAYED_IN, serendipity_installerResultDiagnose(S9Y_I_ERROR, RED), serendipity_installerResultDiagnose(S9Y_I_WARNING, YELLOW), serendipity_installerResultDiagnose(S9Y_I_SUCCESS, GREEN));
     $data['s9yversion'] = $serendipity['version'];
@@ -158,6 +158,12 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         $data['installerResultDiagnose_MBSTR'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, YES);
     } else {
         $data['installerResultDiagnose_MBSTR'] =  serendipity_installerResultDiagnose(S9Y_I_WARNING, NO);
+    }
+
+    if ( extension_loaded('xml') ) {
+        $data['installerResultDiagnose_XML'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, YES);
+    } else {
+        $data['installerResultDiagnose_XML'] =  serendipity_installerResultDiagnose(S9Y_I_ERROR, NO);
     }
 
     if ( extension_loaded('iconv') ) {
@@ -302,22 +308,27 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         }
     }
 
-    $data['showWritableNote'] = $showWritableNote;
+    $data['showWritableNote'] = $showWritableNote ?? null;
     $data['errorCount'] = $errorCount;
 
 } elseif ( $serendipity['GET']['step'] == '2a' ) {
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE, null, array('simpleInstall'));
-    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from, true, false, false);
+    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from ?? false, true, false, false);
 
 } elseif ( $serendipity['GET']['step'] == '2b' ) {
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
-    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from, true, false, false);
+    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from ?? false, true, false, false);
 
 } elseif ( $serendipity['GET']['step'] == '3' ) {
     $serendipity['dbPrefix'] = $_POST['dbPrefix'];
-
-    $t = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}authors", false, 'both', false, false, false, true);
-    $data['authors_query'] = $t;
+    try {
+        $t = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}authors", false, 'both', false, false, false, true);
+        $data['authors_query'] = $t;
+    } catch (PDOException $e) {
+        $t = null;
+    } catch (mysqli_sql_exception $e) {
+        $t = null;
+    }
 
     if ( is_array($t) ) {
         // void
@@ -355,7 +366,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
 
 include_once  dirname(dirname(__FILE__)) . "/functions.inc.php";
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 

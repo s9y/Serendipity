@@ -43,6 +43,8 @@ class AdapterApcu implements iAdapter
             &&
             \ini_get('apc.enable_cli')
         ) {
+            \ini_set('apc.use_request_time', '0');
+
             $this->installed = true;
         }
     }
@@ -84,12 +86,19 @@ class AdapterApcu implements iAdapter
      * @param bool $limited    - If $limited is TRUE, the return value will exclude the individual list of cache
      *                         entries. This is useful when trying to optimize calls for statistics gathering
      *
-     * @return array|false
-     *                    <p>Array of cached data (and meta-data) or FALSE on failure.</p>
+     * @return array
+     *               <p>Array of cached data (and meta-data) or empty array on failure.</p>
      */
     public function cacheInfo(bool $limited = false): array
     {
-        return \apcu_cache_info($limited);
+        /** @var array|false $return */
+        $return = \apcu_cache_info($limited);
+
+        if ($return === false) {
+            return [];
+        }
+
+        return $return;
     }
 
     /**

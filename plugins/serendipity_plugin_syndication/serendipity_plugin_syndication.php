@@ -13,12 +13,11 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.2.3');
+        $propbag->add('version',       '2.3.1');
         $propbag->add('configuration', array(
                                         'title',
                                         'big_img',
                                         'feed_format',
-                                        'subToMe',
                                         'show_comment_feed',
                                         'separator',
                                         'iconURL',
@@ -33,17 +32,13 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
         $propbag->add('legal',    array(
             'services' => array(
-                'subtome' => array(
-                    'url'  => 'https://www.subtome.com',
-                    'desc' => 'Enables visitors to easily subscribe to RSS feeds. The visitor loads a JavaScript from their servers, thus the IP address will be known to the service.'
-                ),
                 'feedburner.com' => array(
                     'url'  => 'https://www.feedburner.com',
                     'desc' => 'Feedburner can be used to track your feed subscription statistics. If used, a tracking pixel is loaded from FeedBurner.com servers and the IP address of the visitor will be known to the service.'
                 ),
             ),
             'frontend' => array(
-                'To allow easy subscription to feeds and optional tracking statistics, the subtome or feedburner services can be used.',
+                'To allow easy subscription to feeds and optional tracking statistics, the legacy feedburner services can be used.',
             ),
             'backend' => array(
             ),
@@ -129,13 +124,6 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('default',     '');
                 break;
 
-            case 'subToMe':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        SYNDICATION_PLUGIN_SUBTOME);
-                $propbag->add('description', SYNDICATION_PLUGIN_SUBTOME_DESC);
-                $propbag->add('default',     false);
-                break;
-
             case 'custom_url':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_CUSTOMURL);
@@ -164,7 +152,6 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         if ($custom_img != 'none' && $custom_img != "feedburner") {
             $custom_img = serendipity_getTemplateFile($custom_img);
         }
-        $subtome     = serendipity_db_bool($this->get_config('subToMe', true));
         $fbid        = $this->get_config('fb_id');
         $custom_url  = serendipity_db_bool($this->get_config('custom_url', false));
         $feed_format = $this->get_config('feed_format', 'rss');
@@ -209,50 +196,39 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             if ($fbid != "") {
                 $mainFeed ='http://feeds.feedburner.com/' . $fbid;
             } else {
-                if ($useAtom && ! $useRss) {
+                if ((isset($useAtom) && $useAtom) && ! $useRss) {
                     $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml');
                 }
             }
         }
 
-        $onclick = "";
-        if ($subtome) {
-            $onclick = $this->getOnclick($mainFeed);
-        }
-
         echo "\n".'<ul id="serendipity_syndication_list" class="plainList">';
-        echo $this->generateFeedButton($mainFeed, ($icon == $small_icon ?  ($useRss ? "RSS $FEED" : "Atom $FEED") : ""), $onclick, $icon, $icon == $small_icon);
+        echo $this->generateFeedButton($mainFeed, ($icon == $small_icon ?  ($useRss ? "RSS $FEED" : "Atom $FEED") : ""), $icon, $icon == $small_icon);
 
-        if ($useRss && $useAtom) {
-            echo $this->generateFeedButton(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml'), "Atom $FEED",
-                                            ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml')) : ""), $small_icon);
+        if ($useRss && (isset($useAtom) && $useAtom)) {
+            echo $this->generateFeedButton(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml'), "Atom $FEED", $small_icon);
         }
 
         if (serendipity_db_bool($this->get_config('show_2.0c', false)) || serendipity_db_bool($this->get_config('show_comment_feed', false))) {
             if ($useRss) {
                 echo $this->generateFeedButton( serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2'),
-                                                $COMMENTS . ($useAtom ? " (RSS)": ""),
-                                                ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2')) : ""),
+                                                $COMMENTS . ((isset($useAtom) && $useAtom) ? " (RSS)": ""),
                                                 $small_icon);
             }
-            if ($useAtom) {
+            if (isset($useAtom) && $useAtom) {
                 echo $this->generateFeedButton( serendipity_rewriteURL(PATH_FEEDS .'/comments.atom10'),
                                                 $COMMENTS . ($useRss ? " (Atom)": ""),
-                                                ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.atom10')) : ""),
                                                 $small_icon);
             }
         }
         echo "</ul>\n";
     }
 
-    function generateFeedButton($feed, $label, $onclick, $icon, $small = false)
+    function generateFeedButton($feed, $label, $icon, $small = false)
     {
-        $link = 'href="'.$feed.'" '. $onclick;
+        $link = 'href="'.$feed.'" ';
         $output = '<li>';
         $class = "";
-        if ($onclick != "") {   # this might be not a good solution, but right now works to add the subtome-class only when subtome is on
-            $class = "subtome";
-        }
         if ($small) {
             $class .= " serendipity_xml_icon";
         }
@@ -263,11 +239,6 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             $output .= " <a $link>$label</a>\n";
         }
         return $output .= "</li>\n";
-    }
-
-    function getOnclick($url)
-    {
-        return "onclick=\"document.subtomeBtn=this;document.subtomeBtn.dataset['subtomeFeeds']='". urlencode($url). "';var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;\"";
     }
 
 }

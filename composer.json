@@ -1,4 +1,22 @@
 {
+    "name": "s9y/serendipity",
+    "description": "A reliable, secure & extensible PHP blog - Not mainstream since 2002",
+    "keywords": ["serendipity", "serendipity-blog", "s9y", "weblog", "blog", "blogging"],
+    "homepage": "https://s9y.org/",
+    "type": "s9y-core",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Serendipity Team",
+            "role": "Developer",
+            "homepage": "https://s9y.org"
+        }
+    ],
+    "support": {
+        "docs": "https://docs.s9y.org/",
+        "issues": "https://github.com/s9y/Serendipity/issues",
+        "source": "https://github.com/s9y/Serendipity/"
+    },
     "repositories": [
         {
             "type": "composer",
@@ -6,10 +24,21 @@
         }
     ],
     "require": {
-        "php": "~7.0",
-        "zendframework/zend-db": "2.*",
-        "katzgrau/klogger": "1.0.*",
-        "voku/simple-cache": "4.*"
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-mbstring": "*",
+        "ext-pcre": "*",
+        "ext-session": "*",
+        "ext-xml": "*",
+        "katzgrau/klogger": "^1.0.0",
+        "masterminds/html5": "^2.9",
+        "mf2/mf2": "^0.5.0",
+        "pear/http_request2": "^2.5",
+        "pear/net_dns2": "^1.5",
+        "php81_bc/strftime": "^0.5.0",
+        "smarty/smarty": "^4.3",
+        "voku/simple-cache": "^4.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -22,9 +51,12 @@
             "http"
         ],
         "platform": {
-            "php": "7.0.99"
+            "php": "7.4"
         },
         "sort-packages": true,
-        "vendor-dir": "bundled-libs"
+        "vendor-dir": "bundled-libs",
+        "allow-plugins": {
+            "s9y/composer-installers": true
+        }
     }
 }

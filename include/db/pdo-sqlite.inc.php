@@ -36,7 +36,7 @@ function serendipity_db_sqlite_fetch_array($row, $type = PDO::FETCH_ASSOC)
         //       To fix that, we use a preg-regex; but that is quite performance costy.
         //       Either we always need to use 'SELECT a.id AS id, b.text AS text' in query,
         //       or the sqlite extension may get fixed. :-)
-        $newrow[preg_replace('@^.+\.(.*)@', '\1', $i)] = str_replace($search, $replace, $v);
+        $newrow[preg_replace('@^.+\.(.*)@', '\1', $i)] = str_replace($search, $replace, $v ?? '');
     }
 
     return $newrow;
@@ -119,7 +119,7 @@ function serendipity_db_reconnect() {
  */
 function serendipity_db_escape_string($string) {
     global $serendipity;
-    return substr($serendipity['dbConn']->quote($string), 1, -1);
+    return substr($serendipity['dbConn']->quote($string ?? ''), 1, -1);
 }
 
 /**

@@ -84,7 +84,7 @@ $no_footer = (isset($serendipity['GET']['noFooter']) || isset($serendipity['POST
 
 $use_installer = (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false );
 
-$post_action = $serendipity['POST']['action'];
+$post_action = $serendipity['POST']['action'] ?? null;
 
 $main_content = '';
 if (!$use_installer && $is_logged_in) {
@@ -200,7 +200,7 @@ if (!$use_installer && $is_logged_in) {
             break;
 
         case 'event_display':
-            if ($serendipity['no_create'] !== true) {
+            if (($serendipity['no_create'] ?? false) !== true) {
                 serendipity_plugin_api::hook_event('backend_sidebar_entries_event_display_' . $serendipity['GET']['adminAction'], $serendipity);
             }
             break;
@@ -234,8 +234,8 @@ if ($ajax) {
     }
 
     $admin_vars['out']         = array();
-    $admin_vars['no_create']   = $serendipity['no_create'];
-    $admin_vars['title']       = $admin_section;
+    $admin_vars['no_create']   = $serendipity['no_create'] ?? null;
+    $admin_vars['title']       = $admin_section ?? '';
     $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
 
     if ($serendipity['expose_s9y']) {
@@ -244,7 +244,7 @@ if ($ajax) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, '', '');
     }
 
-    if (!is_object($serendipity['smarty'])) {
+    if (!is_object($serendipity['smarty'] ?? null)) {
         serendipity_smarty_init();
     }
     $serendipity['smarty']->assignByRef('admin_vars', $admin_vars);

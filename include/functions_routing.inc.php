@@ -37,30 +37,35 @@ function locateHiddenVariables($_args) {
             continue;
         }
 
-        if ($v[0] == 'P') { /* Page */
-            $page = substr($v, 1);
-            if (is_numeric($page)) {
-                $serendipity['GET']['page'] = $page;
-                unset($_args[$k]);
-                unset($serendipity['uriArguments'][$k]);
-            }
-        } elseif ($v[0] == 'A') { /* Author */
-            $url_author = substr($v, 1);
-            if (is_numeric($url_author)) {
-                $serendipity['GET']['viewAuthor'] = (int)$url_author;
-                unset($_args[$k]);
-            }
-        } elseif ($v == 'summary') { /* Summary */
-            $serendipity['short_archives'] = true;
-            $serendipity['head_subtitle'] .= SUMMARY . ' - ';
-            unset($_args[$k]);
-        } elseif ($v[0] == 'C') { /* category */
-            $cat = substr($v, 1);
-            if (is_numeric($cat)) {
-                $serendipity['GET']['category'] = $cat;
-                unset($_args[$k]);
-            }
-        }
+        if (strlen($v) > 0) {
+             if ($v[0] == 'P') { /* Page */
+                 $page = substr($v, 1);
+                 if (is_numeric($page)) {
+                     $serendipity['GET']['page'] = $page;
+                     unset($_args[$k]);
+                     unset($serendipity['uriArguments'][$k]);
+                 }
+             } elseif ($v[0] == 'A') { /* Author */
+                 $url_author = substr($v, 1);
+                 if (is_numeric($url_author)) {
+                     $serendipity['GET']['viewAuthor'] = (int)$url_author;
+                     unset($_args[$k]);
+                 }
+             } elseif ($v == 'summary') { /* Summary */
+                 $serendipity['short_archives'] = true;
+                 if (! array_key_exists('head_subtitle', $serendipity)) {
+                     $serendipity['head_subtitle'] = '';
+                 }
+                 $serendipity['head_subtitle'] .= SUMMARY . ' - ';
+                 unset($_args[$k]);
+             } elseif ($v[0] == 'C') { /* category */
+                 $cat = substr($v, 1);
+                 if (is_numeric($cat)) {
+                     $serendipity['GET']['category'] = $cat;
+                     unset($_args[$k]);
+                 }
+             }
+         }
     }
     return $_args;
 }
@@ -216,7 +221,7 @@ function serveAuthorPage($matches) {
         header('HTTP/1.0 404 Not found');
         header('Status: 404 Not found');
     } else {
-        $serendipity['head_title']    = sprintf(ENTRIES_BY, $uInfo[0]['realname']);
+        $serendipity['head_title']    = sprintf(ENTRIES_FOR, $uInfo[0]['realname']);
         $serendipity['head_subtitle'] = $serendipity['blogTitle'];
     }
 
@@ -347,7 +352,7 @@ function serveEntry($matches) {
         $comment['comment']   = (is_string($serendipity['POST']['comment']) ? trim($serendipity['POST']['comment']) : '');
         $comment['name']      = $serendipity['POST']['name'];
         $comment['email']     = $serendipity['POST']['email'];
-        $comment['subscribe'] = $serendipity['POST']['subscribe'];
+        $comment['subscribe'] = $serendipity['POST']['subscribe'] ?? false;
         $comment['parent_id'] = $serendipity['POST']['replyTo'];
 
         if (!empty($comment['comment'])) {
@@ -367,10 +372,6 @@ function serveEntry($matches) {
     }
 
     $id = (int)$matches[1];
-    if ($id === 0) {
-        $id = false;
-    }
-
     $serendipity['GET']['action'] = 'read';
     $serendipity['GET']['id']     = $id;
 
@@ -393,12 +394,13 @@ function serveArchives() {
     $serendipity['view'] = 'archives';
 
     $_args = locateHiddenVariables($serendipity['uriArguments']);
-
     /* We must always *assume* that Year, Month and Day are the first 3 arguments */
-    list(,$year, $month, $day) = $_args;
-    if ($year == "archives") {
-        unset($year);
-    }
+    $year = $_args[1] ?? null;
+    $month = $_args[2] ?? null;
+    $day = $_args[3] ?? null;
+    //if ($year == "archives") {
+    //    unset($year);
+    //}
 
     $serendipity['GET']['action']     = 'read';
     $serendipity['GET']['hidefooter'] = true;
@@ -427,67 +429,39 @@ function serveArchives() {
         case 'gregorian':
         default:
             $gday = 1;
-
-            if ($week) {
-                $tm = strtotime('+ '. ($week-2) .' WEEKS monday', mktime(0, 0, 0, 1, 1, $year));
-                $ts = mktime(0, 0, 0, date('m', $tm), date('j', $tm), $year);
-                $te = mktime(23, 59, 59, date('m', $tm), date('j', $tm)+7, $year);
-                $date = serendipity_formatTime(WEEK .' '. $week .', %Y', $ts, false);
+            
+            if ($day) {
+                $ts = mktime(0, 0, 0, $month, $day, $year);
+                $te = mktime(23, 59, 59, $month, $day, $year);
+                $date = serendipity_formatTime(DATE_FORMAT_ENTRY, $ts, false);
             } else {
-                if ($day) {
-                    $ts = mktime(0, 0, 0, $month, $day, $year);
-                    $te = mktime(23, 59, 59, $month, $day, $year);
-                    $date = serendipity_formatTime(DATE_FORMAT_ENTRY, $ts, false);
-                } else {
-                    $ts = mktime(0, 0, 0, $month, $gday, $year);
-                    if (!isset($gday2)) {
-                        $gday2 = date('t', $ts);
-                    }
-                    $te = mktime(23, 59, 59, $month, $gday2, $year);
-                    $date = serendipity_formatTime('%B %Y', $ts, false);
+                $ts = mktime(0, 0, 0, $month, $gday, $year);
+                if (!isset($gday2)) {
+                    $gday2 = date('t', $ts);
                 }
+                $te = mktime(23, 59, 59, $month, $gday2, $year);
+                $date = serendipity_formatTime('%B %Y', $ts, false);
             }
+            
             break;
 
         case 'persian-utf8':
             require_once S9Y_INCLUDE_PATH . 'include/functions_calendars.inc.php';
             $gday = 1;
-            if ($week) {
-                --$week;
-                $week *= 7;
-                ++$week;
-                $day = $week;
-
-                // convert day number of year to day number of month AND month number of year
-                $j_days_in_month = array(0, 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
-                if(($g_y % 4) == 3) $j_days_in_month[12]++;
-
-                for($i=1; isset($j_days_in_month[$i]); ++$i){
-                    if(($day-$j_days_in_month[$i])>0){
-                        $day -= $j_days_in_month[$i];
-                    }else{
-                        break;
-                    }
-                }
-
-                $tm = persian_mktime(0, 0, 0, $i, $day, $year);
-                $ts = persian_mktime(0, 0, 0, persian_date_utf('m', $tm), persian_date_utf('j', $tm), $year);
-                $te = persian_mktime(23, 59, 59, persian_date_utf('m', $tm), persian_date_utf('j', $tm)+7, $year);
-                $date = serendipity_formatTime(WEEK .' '. $week .'، %Y', $ts, false);
+            
+            if ($day) {
+                $ts = persian_mktime(0, 0, 0, $month, $day, $year);
+                $te = persian_mktime(23, 59, 59, $month, $day, $year);
+                $date = serendipity_formatTime(DATE_FORMAT_ENTRY, $ts, false);
             } else {
-                if ($day) {
-                    $ts = persian_mktime(0, 0, 0, $month, $day, $year);
-                    $te = persian_mktime(23, 59, 59, $month, $day, $year);
-                    $date = serendipity_formatTime(DATE_FORMAT_ENTRY, $ts, false);
-                } else {
-                    $ts = persian_mktime(0, 0, 0, $month, $gday, $year);
-                    if (!isset($gday2)) {
-                        $gday2 = persian_date_utf('t', $ts);
-                    }
-                    $te = persian_mktime(23, 59, 59, $month, $gday2, $year);
-                    $date = serendipity_formatTime('%B %Y', $ts, false);
+                $ts = persian_mktime(0, 0, 0, $month, $gday, $year);
+                if (!isset($gday2)) {
+                    $gday2 = persian_date_utf('t', $ts);
                 }
+                $te = persian_mktime(23, 59, 59, $month, $gday2, $year);
+                $date = serendipity_formatTime('%B %Y', $ts, false);
             }
+            
 
             list($year, $month, $day) = p2g ($year, $month, $day);
             break;
@@ -496,9 +470,12 @@ function serveArchives() {
     $serendipity['range'] = array($ts, $te);
 
     if ($serendipity['GET']['action'] == 'read') {
-        if ($serendipity['GET']['category']) {
+        if ($serendipity['GET']['category'] ?? false) {
             $cInfo = serendipity_fetchCategoryInfo($serendipity['GET']['category']);
             $serendipity['head_title'] = $cInfo['category_name'];
+        }
+        if (!isset($serendipity['head_subtitle'])) {
+            $serendipity['head_subtitle'] = '';
         }
         $serendipity['head_subtitle'] .= sprintf(ENTRIES_FOR, $date);
     }

@@ -1,0 +1,19 @@
+parameters:
+    level: 8
+    paths:
+        - %currentWorkingDirectory%/src/
+    reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
+    excludes_analyse:
+        - %currentWorkingDirectory%/vendor/*
+        - %currentWorkingDirectory%/tests/*
+    ignoreErrors:
+        - '/always false/'
+        - '/always true/'
+        - '/Predis\\Client/'
+        - '/Symfony\\Component\\VarExporter/'
+        - '/Memcache(d)*/'
+        - '/MEMCACHE_COMPRESSED/'
+        - '/Function checkForDev not found\./'
+        - '/Function msgpack/'
+        - '/function unserialize expects array/'

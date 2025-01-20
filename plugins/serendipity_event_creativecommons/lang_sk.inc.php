@@ -20,3 +20,10 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'Nastavenie NIE znamená, ¾e: Vlastník licence povoµuje ostatným kopírovat, distribuova», zobrazova» a pou¾íva» dielo iba v jeho pôvodnom znení. ®iadne zmeny a úpravy diela nie sú povolené.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Áno, pokiaµ bude ostatnými ¹írené pod rovnakou licenciou');
 
+@define('PLUGIN_CREATIVECOMMONS_VERSION',     'License version');
+@define('PLUGIN_CREATIVECOMMONS_VERSION_DESC',     'Select which numbered version of the license you want to use.');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_GENERIC', 'generic');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_SMALL', 'small');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_BIG', 'big');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE', 'Image variant');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_DESC', 'Select which type of image to display.');

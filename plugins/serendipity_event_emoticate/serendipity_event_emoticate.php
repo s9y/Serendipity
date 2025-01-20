@@ -9,6 +9,8 @@ if (IN_serendipity !== true) {
 class serendipity_event_emoticate extends serendipity_event
 {
     var $title = PLUGIN_EVENT_EMOTICATE_NAME;
+    var $markup_elements;
+    var $smilies;
 
     function introspect(&$propbag)
     {
@@ -18,7 +20,7 @@ class serendipity_event_emoticate extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_EMOTICATE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.11');
+        $propbag->add('version',       '1.11.2');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -179,7 +181,7 @@ class serendipity_event_emoticate extends serendipity_event
                 case 'frontend_display':
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
-                            !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
+                            !($eventData['properties']['ep_disable_markup_' . $this->instance] ?? null) &&
                             !isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
                             $element = &$eventData[$temp['element']];
 
@@ -195,9 +197,7 @@ class serendipity_event_emoticate extends serendipity_event
 
                 case 'css_backend':
                     $eventData .= '
-
 /* event emoticate plugin start */
-
 .example_emos {
     margin-left: auto;
     margin-right: auto;
@@ -205,23 +205,17 @@ class serendipity_event_emoticate extends serendipity_event
 .example_emos td {
     text-align: center;
 }
-
 /* event emoticate plugin end */
-
 ';
                 case 'css':
                     $eventData .= '
-
 /* serendipity_event_emoticate start */
-
 .emoticon {
     display: inline;
     vertical-align: bottom;
     border: 0 none;
 }
-
 /* serendipity_event_emoticate end */
-
 ';
                     break;
 

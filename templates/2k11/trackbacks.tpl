@@ -9,7 +9,7 @@
         <div class="content serendipity_commentBody">{$trackback.body|strip_tags|escape:'htmlall'}</div>
     </details>
 {/if}
-{if $entry.is_entry_owner}
+{if isset($entry.is_entry_owner) and $entry.is_entry_owner}
     <footer>
         <a href="{$trackback.link_delete}">{$CONST.DELETE}</a>
     </footer>

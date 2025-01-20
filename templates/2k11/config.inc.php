@@ -26,7 +26,7 @@ if (is_array($required_fieldlist)) {
     $serendipity['smarty']->assign('required_fields', $smarty_required_fields);
 }
 
-$serendipity['smarty']->assign('is_templatechooser', $_SESSION['serendipityUseTemplate']);
+$serendipity['smarty']->assign('is_templatechooser', $_SESSION['serendipityUseTemplate'] ?? null);
 
 $template_config = array(
     array(
@@ -50,7 +50,18 @@ $template_config = array(
                                 '%a, %m/%d/%y' => '%a, %m/%d/%y',
                                 '%m/%d/%y' => '%m/%d/%y',
                                 '%m/%d/%Y' => '%m/%d/%Y',
-                                '%Y-%m-%d' => '%Y-%m-%d')
+                                '%Y-%m-%d' => '%Y-%m-%d',
+                                '%A, %e. %B %Y %H:%M' => '%A, %e. %B %Y %H:%M',
+                                '%a, %e. %B %Y %H:%M' => '%a, %e. %B %Y %H:%M',
+                                '%e. %B %Y %H:%M' => '%e. %B %Y %H:%M',
+                                '%d.%m.%y %H:%M' => '%d.%m.%y %H:%M',
+                                '%d.%m.%Y %H:%M' => '%d.%m.%Y %H:%M',
+                                '%A, %m/%d/%Y %H:%M' => '%A, %m/%d/%Y %H:%M',
+                                '%a, %m/%d/%y %H:%M' => '%a, %m/%d/%y %H:%M',
+                                '%m/%d/%y %H:%M' => '%m/%d/%y %H:%M',
+                                '%m/%d/%Y %H:%M' => '%m/%d/%Y %H:%M',
+                                '%Y-%m-%d %H:%M' => '%Y-%m-%d %H:%M'
+            )
     ),
     array(
         'var' => 'header_img',
@@ -69,7 +80,7 @@ $template_config = array(
                                 'osans' => 'Open Sans',
                                 'cabin' => 'Cabin',
                                 'ubuntu' => 'Ubuntu',
-                                'dserif' => 'Droid Serif')
+                                'dserif' => 'Noto Serif')
     ),
     array(
         'var' => 'imgstyle',
@@ -96,7 +107,7 @@ $template_config = array(
 
 $template_config_groups = NULL;
 $template_global_config = array('navigation' => true);
-$template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
+$template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'] ?? '', true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
 
 // 2k11 shall be a re-usable frontend theme that other templates can inherit (through "Engine: 2k11" in their info.txt)
@@ -117,7 +128,263 @@ jQuery(function() {
 })\n\n";
 }
 
-if ($_SESSION['serendipityUseTemplate']) {
+// 2k11 shall be a re-usable frontend theme that other templates can inherit (through "Engine: 2k11" in their info.txt)
+// If those themes use a custom config.inc.php file, they may need to declare their own pre-event-hooks.
+// Since serendipity_plugin_api_pre_event_hook() is the advertised method for template authors to hook into
+// 2k11 cannot declare this on its own. We rather use per-event hook functions now, which templates other than 2k11
+// (or other custom engines) should not use.
+function serendipity_plugin_api_pre_event_hook_css($event, &$bag, &$eventData, &$addData) {
+    global $serendipity;
+    if (isset($serendipity['smarty']) &&
+        isset($serendipity['smarty']->tpl_vars['template_option']) &&
+        isset($serendipity['smarty']->tpl_vars['template_option']->value['webfonts'])) {
+            
+        switch ($serendipity['smarty']->tpl_vars['template_option']->value['webfonts']) {
+            case 'droid':
+                echo "
+                /* latin */
+                @font-face {
+                  font-family: 'Droid Sans';
+                  font-style: normal;
+                  font-weight: 400;
+                  src: url({$serendipity['baseURL']}/templates/2k11/font/droid_sans_400.woff2) format('woff2');
+                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+                }
+                /* latin */
+                @font-face {
+                  font-family: 'Droid Sans';
+                  font-style: normal;
+                  font-weight: 700;
+                  src: url({$serendipity['baseURL']}/templates/2k11/font/droid_sans_700.woff2) format('woff2');
+                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+                }
+
+                \n\n";
+                break;
+            case 'ptsans':
+                echo "
+                /* pt-sans-regular - latin-ext_latin_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'PT Sans';
+                  font-style: normal;
+                  font-weight: 400;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/pt-sans-v17-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/pt-sans-v17-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* pt-sans-italic - latin-ext_latin_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'PT Sans';
+                  font-style: italic;
+                  font-weight: 400;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/pt-sans-v17-latin-ext_latin_cyrillic-ext_cyrillic-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/pt-sans-v17-latin-ext_latin_cyrillic-ext_cyrillic-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* pt-sans-700 - latin-ext_latin_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'PT Sans';
+                  font-style: normal;
+                  font-weight: 700;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/pt-sans-v17-latin-ext_latin_cyrillic-ext_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/pt-sans-v17-latin-ext_latin_cyrillic-ext_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* pt-sans-700italic - latin-ext_latin_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'PT Sans';
+                  font-style: italic;
+                  font-weight: 700;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/pt-sans-v17-latin-ext_latin_cyrillic-ext_cyrillic-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/pt-sans-v17-latin-ext_latin_cyrillic-ext_cyrillic-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+                \n\n";
+                break;
+            case 'osans':
+                echo "
+                /* open-sans-regular - vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Open Sans';
+                  font-style: normal;
+                  font-weight: 400;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* open-sans-700 - vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Open Sans';
+                  font-style: normal;
+                  font-weight: 700;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* open-sans-italic - vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Open Sans';
+                  font-style: italic;
+                  font-weight: 400;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* open-sans-700italic - vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Open Sans';
+                  font-style: italic;
+                  font-weight: 700;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/open-sans-v34-vietnamese_latin-ext_latin_hebrew_greek-ext_greek_cyrillic-ext_cyrillic-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+                \n\n
+                ";
+                break;
+            case 'cabin':
+                echo "
+                   /* cabin-regular - vietnamese_latin-ext_latin */
+                    @font-face {
+                      font-family: 'Cabin';
+                      font-style: normal;
+                      font-weight: 400;
+                      src: local(''),
+                           url('{$serendipity['baseURL']}/templates/2k11/font/cabin-v26-vietnamese_latin-ext_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                           url('{$serendipity['baseURL']}/templates/2k11/font/cabin-v26-vietnamese_latin-ext_latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                    }
+
+                    /* cabin-700 - vietnamese_latin-ext_latin */
+                    @font-face {
+                      font-family: 'Cabin';
+                      font-style: normal;
+                      font-weight: 700;
+                      src: local(''),
+                           url('{$serendipity['baseURL']}/templates/2k11/font/cabin-v26-vietnamese_latin-ext_latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                           url('{$serendipity['baseURL']}/templates/2k11/font/cabin-v26-vietnamese_latin-ext_latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                    }
+
+                    /* cabin-italic - vietnamese_latin-ext_latin */
+                    @font-face {
+                      font-family: 'Cabin';
+                      font-style: italic;
+                      font-weight: 400;
+                      src: local(''),
+                           url('{$serendipity['baseURL']}/templates/2k11/font/cabin-v26-vietnamese_latin-ext_latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                           url('{$serendipity['baseURL']}/templates/2k11/font/cabin-v26-vietnamese_latin-ext_latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                    }
+
+                    /* cabin-700italic - vietnamese_latin-ext_latin */
+                    @font-face {
+                      font-family: 'Cabin';
+                      font-style: italic;
+                      font-weight: 700;
+                      src: local(''),
+                           url('{$serendipity['baseURL']}/templates/2k11/font/cabin-v26-vietnamese_latin-ext_latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                           url('{$serendipity['baseURL']}/templates/2k11/font/cabin-v26-vietnamese_latin-ext_latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                    }
+                \n\n
+                ";
+                break;
+            case 'ubuntu':
+                echo "
+                /* ubuntu-italic - latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Ubuntu';
+                  font-style: italic;
+                  font-weight: 400;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/ubuntu-v20-latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/ubuntu-v20-latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* ubuntu-700 - latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Ubuntu';
+                  font-style: normal;
+                  font-weight: 700;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/ubuntu-v20-latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/ubuntu-v20-latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* ubuntu-700italic - latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Ubuntu';
+                  font-style: italic;
+                  font-weight: 700;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/ubuntu-v20-latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/ubuntu-v20-latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* ubuntu-regular - latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Ubuntu';
+                  font-style: normal;
+                  font-weight: 400;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/ubuntu-v20-latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/ubuntu-v20-latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+                \n\n
+                ";
+                break;
+            case 'dserif':
+            echo "
+                /* noto-serif-regular - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Noto Serif';
+                  font-style: normal;
+                  font-weight: 400;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/noto-serif-v21-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/noto-serif-v21-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* noto-serif-italic - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Noto Serif';
+                  font-style: italic;
+                  font-weight: 400;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/noto-serif-v21-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/noto-serif-v21-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* noto-serif-700 - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Noto Serif';
+                  font-style: normal;
+                  font-weight: 700;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/noto-serif-v21-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/noto-serif-v21-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+
+                /* noto-serif-700italic - vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic */
+                @font-face {
+                  font-family: 'Noto Serif';
+                  font-style: italic;
+                  font-weight: 700;
+                  src: local(''),
+                       url('{$serendipity['baseURL']}/templates/2k11/font/noto-serif-v21-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                       url('{$serendipity['baseURL']}/templates/2k11/font/noto-serif-v21-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+                }
+                \n\n";
+                break;
+        }
+    }
+}
+
+
+if ($_SESSION['serendipityUseTemplate'] ?? false) {
     $template_loaded_config['use_corenav'] = false;
 }
 

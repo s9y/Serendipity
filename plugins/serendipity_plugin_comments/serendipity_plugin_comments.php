@@ -20,7 +20,7 @@ class serendipity_plugin_comments extends serendipity_plugin
         $propbag->add('description',   PLUGIN_COMMENTS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking, Tadashi Jokagi, Judebert, G. Brockhaus');
-        $propbag->add('version',       '1.16');
+        $propbag->add('version',       '1.17.2');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -166,6 +166,9 @@ class serendipity_plugin_comments extends serendipity_plugin
             serendipity_ACL_SQL($cond, true);
             serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('source' => 'entries'));
         }
+        if (!isset($cond['joins'])) {
+            $cond['joins'] = '';
+        }
 
         $q = 'SELECT    co.body              AS comment,
                         co.timestamp         AS stamp,
@@ -193,11 +196,17 @@ class serendipity_plugin_comments extends serendipity_plugin
 
         if ($sql && is_array($sql)) {
             foreach($sql AS $key => $row) {
+                # don't strip HTML tags if serendipity_event_unstrip_tags is active
+                if (!class_exists('serendipity_event_unstrip_tags')) {
+                    $comment = strip_tags($row['comment']);
+                } else {
+                    $comment = $row['comment'];
+                }
                 # truncate comment to $max_chars
                 if (function_exists('mb_strimwidth')) {
-                    $comment = mb_strimwidth(strip_tags($row['comment']), 0, $max_chars, " [...]", LANG_CHARSET);
+                    $comment = mb_strimwidth($comment, 0, $max_chars, " [...]", LANG_CHARSET);
                 } else {
-                    $comments = wordwrap(strip_tags($row['comment']), $max_chars, '@@@', 1);
+                    $comments = wordwrap($comment, $max_chars, '@@@', 1);
                     $aComment = explode('@@@', $comments);
                     $comment  = $aComment[0];
                     if (count($aComment) > 1) {
@@ -240,7 +249,7 @@ class serendipity_plugin_comments extends serendipity_plugin
                         # do we still need to wrap this line or is it shorter than $wordwrap?
                         if ($comment_len - $pos > $wordwrap) {
                             # location of first space
-                            $spacepos = mb_strrpos(mb_substr($comment, $pos, $wordwrap, $enc), ' ', $enc);
+                            $spacepos = mb_strrpos(mb_substr($comment, $pos, $wordwrap, $enc), ' ', 0, $enc);
                             # wrap at word boundary if we have at least one space
                             $part = ( $spacepos > 0 ) ? mb_substr($comment, $pos, $spacepos, $enc) : mb_strimwidth($comment, $pos, $wordwrap, '', $enc);;
                         } else {

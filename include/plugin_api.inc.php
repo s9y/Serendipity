@@ -131,7 +131,7 @@ function errorHandlerCreateDOM(htmlStr) {
         case 'backend_save':
         case 'backend_publish':
             // this is preview_iframe.tpl updertHooks [ NOT ONLY!! See freetags ]
-            if ($serendipity['GET']['is_iframe'] == 'true' && $serendipity['GET']['iframe_mode'] == 'save') {
+            if ((($serendipity['GET']['adminAction'] ?? '') == 'save') && ($serendipity['GET']['preview'] ?? true) == 'false') {
                 echo "\n".'<script>document.addEventListener("DOMContentLoaded", function() { window.parent.serendipity.eraseEntryEditorCache(); });</script>'."\n";
             }
             break;
@@ -230,7 +230,7 @@ class serendipity_plugin_api
     {
         global $serendipity;
 
-        $id = md5(uniqid(''));
+        $id = bin2hex(random_bytes(16));
 
         $key = $plugin_class_id . ':' . $id;
         $key = serendipity_db_escape_string($key);
@@ -302,7 +302,7 @@ class serendipity_plugin_api
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}config  where name LIKE '$plugin_instance_id/%'");
         return;
-
+    
     }
 
     /**
@@ -528,7 +528,7 @@ class serendipity_plugin_api
         global $serendipity;
 
         // Can be shortcircuited via a $serendipity['prevent_sidebar_plugins_(left|right|event)'] variable!
-        if (!$negate && $serendipity['prevent_sidebar_plugins_' . $filter] == true) {
+        if (!$negate && ($serendipity['prevent_sidebar_plugins_' . $filter] ?? false) == true) {
             return 0;
         }
 
@@ -742,7 +742,7 @@ class serendipity_plugin_api
             }
         }
 
-        if (is_array($pluginlist[$pluginFile]) && !preg_match('@plugin_internal\.inc\.php@', $pluginFile)) {
+        if (is_array($pluginlist[$pluginFile] ?? null) && !preg_match('@plugin_internal\.inc\.php@', $pluginFile)) {
             $data = $pluginlist[$pluginFile];
             if ((int) filemtime($pluginFile) == (int) $data['last_modified']) {
                 $data['stackable'] = serendipity_db_bool($data['stackable']);
@@ -840,10 +840,10 @@ class serendipity_plugin_api
         // Only insert data keys that exist in the DB.
         $insertdata = array();
         foreach($dbfields AS $field) {
-            $insertdata[$field] = $data[$field];
+            $insertdata[$field] = $data[$field] ?? null;
         }
 
-        if ($data['upgradable']) {
+        if ($data['upgradable'] ?? false) {
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}pluginlist
                                      SET upgrade_version = '" . serendipity_db_escape_string($data['upgrade_version']) . "'
                                    WHERE plugin_class    = '" . serendipity_db_escape_string($data['plugin_class']) . "'");
@@ -1028,7 +1028,7 @@ class serendipity_plugin_api
             $serendipity['no_events'] = $ne;
         }
 
-        if (strlen(trim($title)) == 0) {
+        if (strlen(trim($title ?? '')) == 0) {
             if (!empty($default_title)) {
                 $title = $default_title;
             } else {
@@ -1047,7 +1047,7 @@ class serendipity_plugin_api
      * @return  boolean
      */
     static function is_bundled_plugin($name)
-    {
+    {   
         return in_array ($name, BUNDLED_PLUGINS);
     }
 
@@ -1136,7 +1136,7 @@ class serendipity_plugin_api
             return false;
         }
 
-        if ($serendipity['enablePluginACL'] && !serendipity_hasPluginPermissions($event_name)) {
+        if (($serendipity['enablePluginACL'] ?? false) && !serendipity_hasPluginPermissions($event_name)) {
             return false;
         }
 
@@ -1146,7 +1146,7 @@ class serendipity_plugin_api
         // skip the execution of any follow-up plugins.
         $plugins = serendipity_plugin_api::get_event_plugins();
 
-        if ($serendipity['core_events'][$event_name]) {
+        if (array_key_exists($event_name, $serendipity['core_events']) && $serendipity['core_events'][$event_name]) {
             foreach($serendipity['core_events'][$event_name] as $apifunc_key => $apifunc) {
                 $apifunc($event_name, $bag, $eventData, $addData);
             }
@@ -1184,7 +1184,7 @@ class serendipity_plugin_api
                         }
                     }
 
-                    if ($serendipity['enablePluginACL'] && !serendipity_hasPluginPermissions($plugin)) {
+                    if (($serendipity['enablePluginACL'] ?? false) && !serendipity_hasPluginPermissions($plugin)) {
                         continue;
                     }
                     $plugins[$plugin]['p']->event_hook($event_name, $bag, $eventData, $addData);
@@ -1256,10 +1256,10 @@ class serendipity_plugin_api
 
         return $instance;
     }
-
+    
     /**
      * Find the plugin instances for a given classname
-     *
+     * 
      * @access public
      * @param   string      The classname of the plugin
      * @param   int         The owner author
@@ -1274,17 +1274,17 @@ class serendipity_plugin_api
 
         $where[] = "(name LIKE '@" . serendipity_db_escape_string($plugin_name) . "%' OR name LIKE '" . serendipity_db_escape_string($plugin_name) . "%') ";
         $where[] = "authorid='" . serendipity_db_escape_string($authorid) . "' ";
-
+        
         if ($ignore_hidden) $where[] = "NOT ( placement = 'hidden' OR placement = 'eventh') ";
-
+        
         if (count($where) > 0) {
             $sql .= ' WHERE ' . implode(' AND ', $where);
         }
-
+        
         $rs = serendipity_db_query($sql,false,'assoc');
         $ids = array();
-
-        if (!empty($rs) & is_Array($rs)) {
+        
+        if (!empty($rs) & is_Array($rs)) { 
             foreach($rs as $line) {
                 $ex = explode(':',$line['name']);
                 $ids[] = $ex[1];
@@ -1307,12 +1307,19 @@ class serendipity_plugin_api
     static function load_language($path) {
         global $serendipity;
 
+        // We deactivate error reporting here, because in PHP 8 setting constants twice always throws a warning.
+        // However, the language files of some plugins sometimes rely on constants being set only in the fallback
+        // language file, so we do have to set the other constants twice.
+        $oldReportingLevel = error_reporting();
+        error_reporting(0);
+        
         $probelang = $path . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
         if (file_exists($probelang)) {
             include $probelang;
         }
 
         include $path . '/lang_en.inc.php';
+        error_reporting($oldReportingLevel);
     }
 }
 
@@ -1541,13 +1548,13 @@ class serendipity_plugin
                     break;
 
                 case 'url':
-                    if (!preg_match('�^' . $pattern_url . '$�', $value)) {
+                    if (!preg_match('§^' . $pattern_url . '$§', $value)) {
                         $valid = false;
                     }
                     break;
 
                 case 'mail':
-                    if (!preg_match('�^' . $pattern_mail . '$�', $value)) {
+                    if (!preg_match('§^' . $pattern_mail . '$§', $value)) {
                         $valid = false;
                     }
                     break;
@@ -1740,7 +1747,8 @@ class serendipity_plugin
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }
 
-        return $serendipity['smarty']->fetch('file:'. $tfile);
+        $output = $serendipity['smarty']->fetch('file:'. $tfile);
+        return $output;
     }
 
     /**
@@ -1752,7 +1760,7 @@ class serendipity_plugin
     function &getFile($filename, $key = 'serendipityPath')
     {
         global $serendipity;
-
+        
         $path = serendipity_getTemplateFile($filename, $key, true);
         if (!$path) {
             if (file_exists(dirname($this->pluginFile) . '/' . $filename)) {
@@ -1799,7 +1807,7 @@ class serendipity_event extends serendipity_plugin
      * @param   array       The entry superarray to get the reference from
      * @return  array       The value of the array for the fieldname (reference)
      */
-    function &getFieldReference($fieldname = 'body', &$eventData)
+    function &getFieldReference($fieldname = 'body', &$eventData = [])
     {
         // Get a reference to a content field (body/extended) of
         // $entries input data. This is a unifying function because
@@ -1818,13 +1826,13 @@ class serendipity_event extends serendipity_plugin
             } else {
                 $key = &$eventData[0][$fieldname];
             }
-        } elseif (is_array($eventData) && is_array($eventData['properties'])) {
+        } elseif (is_array($eventData) && is_array($eventData['properties'] ?? null)) {
             if (!empty($eventData['properties']['ep_cache_' . $fieldname])) {
                 $key = &$eventData['properties']['ep_cache_' . $fieldname];
             } else {
                 $key = &$eventData[$fieldname];
             }
-        } elseif (is_array($eventData[0]) && isset($eventData[0][$fieldname])) {
+        } elseif (isset($eventData[0]) && isset($eventData[0][$fieldname])) {
             $key = &$eventData[0][$fieldname];
         } elseif (isset($eventData[$fieldname])) {
             $key = &$eventData[$fieldname];

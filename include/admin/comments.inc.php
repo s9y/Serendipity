@@ -12,8 +12,8 @@ $summaryLength = 200;
 $errormsg = array();
 $msg = array();
 
-if ($serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
-    if ($serendipity['POST']['togglemoderate'] != '') {
+if (isset($serendipity['POST']['formAction']) && $serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
+    if (($serendipity['POST']['togglemoderate'] ?? null) != '') {
         foreach ( $serendipity['POST']['delete'] as $k => $v ) {
             $ac = serendipity_approveComment((int)$k, (int)$v, false, 'flip');
             if ($ac > 0) {
@@ -54,7 +54,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $comment['comment']   = trim($serendipity['POST']['comment']);
     $comment['name']      = $serendipity['POST']['name'];
     $comment['email']     = $serendipity['POST']['email'];
-    $comment['subscribe'] = $serendipity['POST']['subscribe'];
+    $comment['subscribe'] = $serendipity['POST']['subscribe'] ?? false;
     $comment['parent_id'] = $serendipity['POST']['replyTo'];
 
     if (!empty($comment['comment'])) {
@@ -131,7 +131,8 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
                       'body'      => $serendipity['POST']['comment'],
                       'url'       => $serendipity['POST']['url'],
                       'timestamp' => time(),
-                      'parent_id' => $serendipity['GET']['id']
+                      'parent_id' => $serendipity['GET']['id'],
+                      'id'        => null
             );
         }
 
@@ -204,49 +205,46 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
 /* Searchable fields */
 $filters = array('author', 'email', 'ip', 'url', 'body', 'referer');
 
-/* Compress the filters into an "AND" SQL query, and a querystring */
+$and = '';
+$searchString = '';
+/* Compress the filters into an "AND" SQL query, and a querystring. Also init the GET variable if empty, to not die later */
 foreach ($filters as $filter) {
     $and          .= (!empty($serendipity['GET']['filter'][$filter]) ? "AND c.". $filter ." LIKE '%". serendipity_db_escape_string($serendipity['GET']['filter'][$filter]) ."%'" : "");
     $searchString .= (!empty($serendipity['GET']['filter'][$filter]) ? "&amp;serendipity[filter][". $filter ."]=". serendipity_specialchars($serendipity['GET']['filter'][$filter]) : "");
+    if (! isset($serendipity['GET']['filter'][$filter])) {
+        $serendipity['GET']['filter'][$filter] = null;
+    }
 }
 
-if ($serendipity['GET']['filter']['show'] == 'approved') {
-    $and          .= "AND status = 'approved'";
-    $searchString .= "&amp;serendipity[filter][show]=approved";
-} elseif ($serendipity['GET']['filter']['show'] == 'pending') {
-    $and           .= "AND status = 'pending'";
-    $searchString .= "&amp;serendipity[filter][show]=pending";
-} elseif ($serendipity['GET']['filter']['show'] == 'confirm') {
-    $and           .= "AND status LIKE 'confirm%'";
-    $searchString .= "&amp;serendipity[filter][show]=confirm";
-} else {
+if (! isset($serendipity['GET']['filter']['show'])) {
     $serendipity['GET']['filter']['show'] = 'all';
+} else {
+    if ($serendipity['GET']['filter']['show'] == 'approved') {
+        $and          .= "AND status = 'approved'";
+        $searchString .= "&amp;serendipity[filter][show]=approved";
+    } elseif ($serendipity['GET']['filter']['show'] == 'pending') {
+        $and           .= "AND status = 'pending'";
+        $searchString .= "&amp;serendipity[filter][show]=pending";
+    } elseif ($serendipity['GET']['filter']['show'] == 'confirm') {
+        $and           .= "AND status LIKE 'confirm%'";
+        $searchString .= "&amp;serendipity[filter][show]=confirm";
+    }
 }
 
-if ($serendipity['GET']['filter']['type'] == 'TRACKBACK') {
-    $c_type = 'TRACKBACK';
-    $searchString .= "&amp;serendipity[filter][type]=TRACKBACK";
-} elseif ($serendipity['GET']['filter']['type'] == 'PINGBACK') {
-    $c_type = 'PINGBACK';
-    $searchString .= "&amp;serendipity[filter][type]=PINGBACK";
-} elseif ($serendipity['GET']['filter']['type'] == 'NORMAL') {
-    $c_type = 'NORMAL';
-    $searchString .= "&amp;serendipity[filter][type]=NORMAL";
-} else {
-    $c_type = null;
-}
 
-if ($serendipity['GET']['filter']['type'] == 'TRACKBACK') {
-    $c_type = 'TRACKBACK';
-    $searchString .= "&amp;serendipity[filter][type]=TRACKBACK";
-} elseif ($serendipity['GET']['filter']['type'] == 'PINGBACK') {
-    $c_type = 'PINGBACK';
-    $searchString .= "&amp;serendipity[filter][type]=PINGBACK";
-} elseif ($serendipity['GET']['filter']['type'] == 'NORMAL') {
-    $c_type = 'NORMAL';
-    $searchString .= "&amp;serendipity[filter][type]=NORMAL";
-} else {
+if (! isset($serendipity['GET']['filter']['type'])) {
     $c_type = null;
+} else {
+    if ($serendipity['GET']['filter']['type'] == 'TRACKBACK') {
+        $c_type = 'TRACKBACK';
+        $searchString .= "&amp;serendipity[filter][type]=TRACKBACK";
+    } elseif ($serendipity['GET']['filter']['type'] == 'PINGBACK') {
+        $c_type = 'PINGBACK';
+        $searchString .= "&amp;serendipity[filter][type]=PINGBACK";
+    } elseif ($serendipity['GET']['filter']['type'] == 'NORMAL') {
+        $c_type = 'NORMAL';
+        $searchString .= "&amp;serendipity[filter][type]=NORMAL";
+    }
 }
 
 if ($commentsPerPage != 10) {
@@ -260,7 +258,11 @@ $sql = serendipity_db_query("SELECT COUNT(*) AS total FROM {$serendipity['dbPref
 
 $totalComments = $sql['total'];
 $pages = ($commentsPerPage == COMMENTS_FILTER_ALL ? 1 : ceil($totalComments/(int)$commentsPerPage));
-$page = (int)$serendipity['GET']['page'];
+if (isset($serendipity['GET']['page'])) {
+    $page = (int)$serendipity['GET']['page'];
+} else {
+    $page = 0;
+}
 if ( $page == 0 || $page > $pages ) {
     $page = 1;
 }
@@ -371,8 +373,9 @@ $data['msg']           = $msg;
 $data['urltoken']      = serendipity_setFormToken('url');
 $data['formtoken']     = serendipity_setFormToken();
 $data['get']['filter'] = $serendipity['GET']['filter']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+$data['commentReplied'] = false;
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 

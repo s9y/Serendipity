@@ -9,7 +9,7 @@
     <title>{$head_title|default:$blogTitle}{if $head_subtitle} | {$head_subtitle}{/if}</title>
     <meta name="generator" content="Serendipity v.{$serendipityVersion}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-{if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || $staticpage_pagetitle != "" || $robots_index == 'index')}
+{if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || (isset($staticpage_pagetitle) and $staticpage_pagetitle != "") || (isset($robots_index) and $robots_index == 'index'))}
     <meta name="robots" content="index,follow">
 {else}
     <meta name="robots" content="noindex,follow">
@@ -20,19 +20,6 @@
 {if ($view == "start")}
     <link rel="canonical" href="{$serendipityBaseURL}">
 {/if}
-{if $template_option.webfonts == 'droid'}
-    <link  rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Sans:400,700">
-{elseif $template_option.webfonts == 'ptsans'}
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic">
-{elseif $template_option.webfonts == 'osans'}
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic">
-{elseif $template_option.webfonts == 'cabin'}
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Cabin:400,400italic,700,700italic">
-{elseif $template_option.webfonts == 'ubuntu'}
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic">
-{elseif $template_option.webfonts == 'dserif'}
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic">
-{/if}
     <link rel="stylesheet" href="{$head_link_stylesheet}">
     <script src="{serendipity_getFile file="js/modernizr-2.7.1.min.js"}"></script>
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
@@ -40,6 +27,7 @@
 {if $entry_id}
     <link rel="trackback" type="application/x-www-form-urlencoded" href="{$serendipityBaseURL}comment.php?type=trackback&amp;entry_id={$entry_id}">
     <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}">
+    <link rel="webmention" href="{$serendipityBaseURL}comment.php?type=webmention&amp;entry_id={$entry_id}" />
 {/if}
 {serendipity_hookPlugin hook="frontend_header"}
     <script src="{$head_link_script}"></script>
@@ -104,7 +92,7 @@
 
 <script src="{serendipity_getFile file="js/2k11.min.js"}"></script>
 {/if}
-{$raw_data}
+{if isset($raw_data)}{$raw_data}{/if}
 {serendipity_hookPlugin hook="frontend_footer"}
 {if $is_embedded != true}
 </body>

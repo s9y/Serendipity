@@ -1,6 +1,6 @@
 {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
 
-{if $template_option.display_as_timeline and $entries and !$is_single_entry and not $entry.is_extended and not $is_preview}{* THIS IS OUR FRONTPAGE SCENARIO - OPEN TIMELINE*}
+{if $template_option.display_as_timeline and $entries and !$is_single_entry and not isset($entry.is_extended) and not $is_preview}{* THIS IS OUR FRONTPAGE SCENARIO - OPEN TIMELINE*}
     <ul class="timeline">
     {assign var="prevmonth" value=''}
 {/if}
@@ -25,10 +25,10 @@
                     <div class="timeline-badge"><i class="far fa-dot-circle" aria-hidden="true"></i></div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            {if $entry.properties.timeline_image|is_in_string:'<iframe,<embed,<object'}{* we assume this is a video, just emit the contents of the var *}
+                            {if isset($entry.properties.timeline_image) and $entry.properties.timeline_image|is_in_string:'<iframe,<embed,<object'}{* we assume this is a video, just emit the contents of the var *}
                                 {$entry.properties.timeline_image}
                             {else}
-                                <a href="{$entry.link}" title="{$entry.title}"><img class="img-responsive" {if $entry.properties.timeline_image}src="{$entry.properties.timeline_image}"{else}src="{serendipity_getFile file='img/image_unavailable.jpg'}"{/if} alt=""/></a>
+                                <a href="{$entry.link}" title="{$entry.title}"><img class="img-responsive" {if isset($entry.properties.timeline_image) and $entry.properties.timeline_image}src="{$entry.properties.timeline_image}"{else}src="{serendipity_getFile file='img/image_unavailable.jpg'}"{/if} alt=""/></a>
                             {/if}
                         </div>
                         <div class="timeline-body">
@@ -46,13 +46,13 @@
                     </li>
                     {assign var="prevmonth" value=$entry.timestamp|@formatTime:"%B"}
             {else}{* not using timeline - use blog format instead *}
-                {if $entry.body || $entry.properties.timeline_image}
+                {if $entry.body || isset($entry.properties.timeline_image) and $entry.properties.timeline_image}
                     <div class="row each-blogstyle-entry">
                         <div class="col-md-5 blogstyle-post-thumb">
-                            {if $entry.properties.timeline_image|is_in_string:'<iframe,<embed,<object'}{* we assume this is a video, just emit the contents of the var *}
+                            {if isset($entry.properties.timeline_image) and  $entry.properties.timeline_image|is_in_string:'<iframe,<embed,<object'}{* we assume this is a video, just emit the contents of the var *}
                                 <div>{$entry.properties.timeline_image}</div>
                             {else}
-                                <a href="{$entry.link}" title="{$entry.title}"><img class="img-responsive" {if $entry.properties.timeline_image}src="{$entry.properties.timeline_image}"{else}src="{serendipity_getFile file='img/image_unavailable.jpg'}"{/if} alt=""/></a>
+                                <a href="{$entry.link}" title="{$entry.title}"><img class="img-responsive" {if isset($entry.properties.timeline_image) and $entry.properties.timeline_image}src="{$entry.properties.timeline_image}"{else}src="{serendipity_getFile file='img/image_unavailable.jpg'}"{/if} alt=""/></a>
                             {/if}                        
                         </div>
                         <div class="col-md-7 blogstyle-post-body">
@@ -83,7 +83,7 @@
                 {if $is_preview}
                     {append var='entry' value=$smarty.session.save_entry_POST.properties index='properties'}{* gives us access to entry properties in preview *}
                 {/if}
-                {if $entry.properties.timeline_image}
+                {if isset($entry.properties.timeline_image) and $entry.properties.timeline_image}
                     {if $entry.properties.timeline_image|is_in_string:'<iframe,<embed,<object'}{* we assume this is a video, just emit the contents of the var *}
                         {$entry.properties.timeline_image}
                     {else}
@@ -277,7 +277,7 @@
 {/if}
 
 
-{if $footer_info or $footer_prev_page or $footer_next_page}
+{if not $is_single_entry and ($footer_info or $footer_prev_page or $footer_next_page)}
     <div class='serendipity_pageSummary'>
         {if $footer_info}
             <p class="summary serendipity_center">{$footer_info}</p>

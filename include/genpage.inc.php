@@ -42,9 +42,7 @@ switch ($serendipity['GET']['action']) {
             if (!is_array($entry) || count($entry) < 1 || !is_array($entry[0])) {
                 unset($serendipity['GET']['id']);
                 $entry = array(array());
-                $serendipity['head_title'] = serendipity_specialchars($serendipity['blogTitle']);
                 $serendipity['head_subtitle'] = '';
-                $serendipity['smarty']->assign('head_title', $serendipity['head_title']);
                 $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']);
                 $serendipity['view'] = '404';
                 $serendipity['content_message'] = URL_NOT_FOUND;
@@ -54,7 +52,7 @@ switch ($serendipity['GET']['action']) {
             
             serendipity_printEntries($entry, 1);
         } else {
-            serendipity_printEntries(serendipity_fetchEntries($serendipity['range'], true, $serendipity['fetchLimit']));
+            serendipity_printEntries(serendipity_fetchEntries($serendipity['range'] ?? null, true, $serendipity['fetchLimit']));
         }
         break;
 
@@ -93,7 +91,7 @@ switch ($serendipity['GET']['action']) {
             array(
                 'content_message'      => sprintf(YOUR_SEARCH_RETURNED_BLAHBLAH, '<span class="searchterm">' . $serendipity['GET']['searchTerm'] . '</span>', '<span class="searchresults">' . serendipity_getTotalEntries() . '</span>'),
                 'searchresult_results' => true,
-                'searchresult_fullentry' => $serendipity['GET']['fullentry']
+                'searchresult_fullentry' => $serendipity['GET']['fullentry'] ?? null
             )
         );
 
@@ -104,7 +102,6 @@ switch ($serendipity['GET']['action']) {
     case 'comments':
         serendipity_printCommentsByAuthor();
         // use 'content_message' for pagination?
-
         break;
 
     // Show the archive
@@ -132,6 +129,57 @@ switch ($serendipity['GET']['action']) {
 
 if ($serendipity['GET']['action'] != 'search' && !empty($serendipity['content_message'])) {
     $serendipity['smarty']->assign('content_message', $serendipity['content_message']);
+}
+
+
+if ($serendipity['smarty']->getTemplateVars('searchresult_tooShort') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'searchresult_tooShort' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('searchresult_error') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'searchresult_error' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('searchresult_noEntries') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'searchresult_noEntries' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('searchresult_results') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'searchresult_results' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('content_message') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'content_message' => false
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('ARCHIVES') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'ARCHIVES' => ''
+                )
+            );    
+}
+if ($serendipity['smarty']->getTemplateVars('ENTRIES') == null) {
+    $serendipity['smarty']->assign(
+                array(
+                    'ENTRIES' => ''
+                )
+            );    
 }
 
 serendipity_smarty_fetch('CONTENT', 'content.tpl');

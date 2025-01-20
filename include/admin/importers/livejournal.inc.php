@@ -25,7 +25,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                                          'value'   => 0,
                                          'default' => $this->_getCategoryList()),
 
-                                   array('text'    => STATUS,
+                                   array('text'    => IMPORT_STATUS,
                                          'type'    => 'list',
                                          'name'    => 'type',
                                          'value'   => 'publish',

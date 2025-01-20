@@ -19,3 +19,10 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'El licenciador autoriza a otros a copiar, distribuir, mostrary actuar sólo copias no alteradas de su trabajo -- no pueden derivarse trabajos basados en él.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Sí, siempre y cuando sea editado bajo la misma licencia');
 
+@define('PLUGIN_CREATIVECOMMONS_VERSION',     'License version');
+@define('PLUGIN_CREATIVECOMMONS_VERSION_DESC',     'Select which numbered version of the license you want to use.');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_GENERIC', 'generic');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_SMALL', 'small');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_BIG', 'big');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE', 'Image variant');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_DESC', 'Select which type of image to display.');

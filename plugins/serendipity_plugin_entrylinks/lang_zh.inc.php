@@ -13,3 +13,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', '以何种顺序排列来源链接(默认：链入次数)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '日期');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', '链入次数');
+@define('TOP_REFERRER', 'Ö÷ÒªÀ´Ô´');
+@define('SHOWS_TOP_SITES', 'ÏÔÊ¾Á¬½Óµ½ÄãµÄÍøÕ¾');
+@define('TOP_EXITS', 'Ö÷Òª³öÔ´');
+@define('SHOWS_TOP_EXIT', 'ÏÔÊ¾ÍøÕ¾µÄÖ÷Òª³öÔ´');

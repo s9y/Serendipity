@@ -10,23 +10,56 @@ if (!serendipity_checkPermission('adminImages')) {
 
 $data = array();
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 
 // No echo output here, before the switch, since that matters renaming alerts!
 
 // unset adminAction type to default, if an image was bulkmoved and the origin page reloaded
-if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'multidelete') {
+if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'multicheck') {
     unset($serendipity['GET']['adminAction']);
 }
-// Listens on toggle_dir STRICT to list items per directory, or include all sub directory items
+
 if (empty($serendipity['GET']['toggle_dir']) && empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
     $serendipity['GET']['toggle_dir'] = 'no'; // default
 }
 if (!empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
     serendipity_restoreVar($serendipity['COOKIE']['serendipity_toggle_dir'], $serendipity['GET']['toggle_dir']);
 }
+
+$messages = array();
+
+// submitted media_upload.tpl: check for empty file field and redirect back to media_upload
+if ( $serendipity['GET']['adminAction'] == 'add' && ! ($serendipity['POST']['adminSubAction'] ?? null) == 'properties') {
+
+    if ((empty($serendipity['POST']['imageurl']) || $serendipity['POST']['imageurl'] == 'http://' )
+            && empty($_FILES['serendipity']['name']['userfile'][1])) {
+        $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span>' . NO_FILE_SELECTED . "</span>\n";
+        $serendipity['GET']['adminAction'] = 'addSelect';
+    }
+}
+
+# php 8 compat array field initialization
+$data['case_doSync'] = false;
+$data['case_do_delete'] = false;
+$data['case_do_multidelete'] = false;
+$data['case_multidelete'] = false;
+$data['case_delete'] = false;
+$data['case_add'] = false;
+$data['case_directoryDoDelete'] = false;
+$data['case_directoryEdit'] = false;
+$data['case_directoryDelete'] = false;
+$data['case_directoryDoCreate'] = false;
+$data['case_directoryCreate'] = false;
+$data['case_addSelect'] = false;
+$data['case_rotateCW'] = false;
+$data['case_rotateCCW'] = false;
+$data['case_scale'] = false;
+$data['case_scaleSelect'] = false;
+$data['case_default'] = false;
+$data['showMLbutton'] = false;
+$data['case_directorySelect'] = false;
 
 switch ($serendipity['GET']['adminAction']) {
 
@@ -71,7 +104,6 @@ switch ($serendipity['GET']['adminAction']) {
             break;
         }
 
-        $messages = array();
         $data['case_do_delete'] = true;
         $messages[] = serendipity_deleteImage($serendipity['GET']['fid']);
         $messages[] = sprintf('<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . RIP_ENTRY . "</span>\n", $serendipity['GET']['fid']);
@@ -85,7 +117,6 @@ switch ($serendipity['GET']['adminAction']) {
             break;
         }
 
-        $messages = array();
         $parts = explode(',', $serendipity['GET']['id']);
         $data['case_do_multidelete'] = true;
         foreach($parts AS $id) {
@@ -119,23 +150,21 @@ switch ($serendipity['GET']['adminAction']) {
         $data['newLoc']   = $newLoc;
         break;
 
-    case 'multidelete':
+    case 'multicheck':
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDirectories')) {
             return; // blank content page, but default token check parameter is presenting a XSRF message when false
         }
-        if (!is_array($serendipity['POST']['multiDelete']) && isset($_POST['toggle_move'])) {
+
+        // empty selection
+        if (!is_array($serendipity['POST']['multicheck'])) {
             echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
-        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && (! isset($serendipity['POST']['newDir'])) && isset($_POST['toggle_move'])) {
-            echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_DIR, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
-            break;
-        }
+        
         // case bulk multimove (leave the fake oldDir being send as an empty dir)
         if (!empty($serendipity['POST']['newDir'])) {
-            $messages = array();
-            $multiMoveImages = $serendipity['POST']['multiDelete']; // The 'multiDelete' key name should better be renamed to 'multiCheck', but this would need to change 2k11/admin/serendipity_editor.js, images.inc.tpl, media_items.tpl, media_pane.tpl and this file
-            unset($serendipity['POST']['multiDelete']);
+            $multiMoveImages = $serendipity['POST']['multicheck'];
+            unset($serendipity['POST']['multicheck']);
 
             $nDir = serendipity_specialchars(serendipity_dirSlash('end', (string)$serendipity['POST']['newDir'])); // relative to Uploads/
 
@@ -161,7 +190,7 @@ switch ($serendipity['GET']['adminAction']) {
         $ids = '';
         $data['rip_image']        = array();
         $data['case_multidelete'] = true;
-        foreach($serendipity['POST']['multiDelete'] AS $idx => $id) {
+        foreach($serendipity['POST']['multicheck'] AS $idx => $id) {
             $ids .= (int)$id . ',';
             $image = serendipity_fetchImageFromDatabase($id);
             $data['rip_image'][] = sprintf(DELETE_SURE, $image['id'] . ' - ' . serendipity_specialchars($image['realname']));
@@ -199,8 +228,8 @@ switch ($serendipity['GET']['adminAction']) {
             return;
         }
         $data['case_add'] = true;
-        $messages = array();
-        if ($serendipity['POST']['adminSubAction'] == 'properties') {
+
+        if (($serendipity['POST']['adminSubAction'] ?? null) == 'properties') {
             serendipity_restoreVar($serendipity['COOKIE']['serendipity_only_path'], $serendipity['GET']['only_path']); // restore last set directory path, see true parameter
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
@@ -314,12 +343,12 @@ switch ($serendipity['GET']['adminAction']) {
 
                             // Insert into database
                             $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$tindex], $authorid, null, $realname);
-                            serendipity_plugin_api::hook_event('backend_image_add', $target);
                             $new_media[] = array(
                                 'image_id'          => $image_id,
                                 'target'            => $target,
                                 'created_thumbnail' => $created_thumbnail
                             );
+                            serendipity_plugin_api::hook_event('backend_image_add', $target, end($new_media));
                         }
                     }
                     serendipity_request_end();
@@ -399,12 +428,12 @@ switch ($serendipity['GET']['adminAction']) {
 
                         // Insert into database
                         $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$idx], $authorid, null, $realname);
-                        serendipity_plugin_api::hook_event('backend_image_add', $target, $created_thumbnail);
                         $new_media[] = array(
                             'image_id'          => $image_id,
                             'target'            => $target,
                             'created_thumbnail' => $created_thumbnail
                         );
+                        serendipity_plugin_api::hook_event('backend_image_add', $target, end($new_media));
                     } else {
                         // necessary for the ajax-uplaoder to show upload errors
                         header("Internal Server Error", true, 500);
@@ -438,8 +467,9 @@ switch ($serendipity['GET']['adminAction']) {
 
         $data['case_directoryDoDelete'] = true;
         $new_dir = serendipity_uploadSecure($serendipity['GET']['dir'], true);
-        if (is_dir($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir)) {
-            if (!is_writable($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir)) {
+        $nd      = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir;
+        if (is_dir($nd)) {
+            if (!is_writable($nd)) {
                 $data['print_DIRECTORY_WRITE_ERROR'] = sprintf(DIRECTORY_WRITE_ERROR, $new_dir);
             } else {
                 ob_start();
@@ -447,6 +477,7 @@ switch ($serendipity['GET']['adminAction']) {
                 serendipity_killPath($serendipity['serendipityPath'] . $serendipity['uploadPath'], $new_dir, (isset($serendipity['POST']['nuke']) ? true : false));
                 $data['ob_serendipity_killPath'] = ob_get_contents();
                 ob_end_clean();
+                serendipity_cleanCache();
            }
         } else {
             $data['print_ERROR_NO_DIRECTORY'] = sprintf(ERROR_NO_DIRECTORY, $new_dir);
@@ -489,8 +520,8 @@ switch ($serendipity['GET']['adminAction']) {
                 $use_dir = $newDir;
             }
 
-            serendipity_ACLGrant(0, 'directory', 'read', $serendipity['POST']['read_authors'], $use_dir);
-            serendipity_ACLGrant(0, 'directory', 'write', $serendipity['POST']['write_authors'], $use_dir);
+            serendipity_ACLGrant(0, 'directory', 'read', $serendipity['POST']['read_authors'] ?? null, $use_dir);
+            serendipity_ACLGrant(0, 'directory', 'write', $serendipity['POST']['write_authors'] ?? null, $use_dir);
             $data['print_SETTINGS_SAVED_AT'] = sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S'));
         }
 
@@ -543,7 +574,8 @@ switch ($serendipity['GET']['adminAction']) {
         if (is_dir($nd) || @mkdir($nd)) {
             $data['print_DIRECTORY_CREATED'] = sprintf(DIRECTORY_CREATED, $new_dir);
             @umask(0000);
-            @chmod($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir, 0777);
+            @chmod($nd, 0777);
+            serendipity_cleanCache();
 
             // Apply parent ACL to new child.
             $array_parent_read  = serendipity_ACLGet(0, 'directory', 'read',  $serendipity['POST']['parent']);
@@ -586,7 +618,7 @@ switch ($serendipity['GET']['adminAction']) {
         $data['case_directoryCreate'] = true;
         $data['formtoken'] = serendipity_setFormToken();
         $data['folders']   = $folders;
-        $data['dir']  = $serendipity['GET']['dir'];
+        $data['dir']  = $serendipity['GET']['dir'] ?? null;
         break;
 
     case 'directorySelect':
@@ -646,6 +678,7 @@ switch ($serendipity['GET']['adminAction']) {
             'multiperm'         => serendipity_checkPermission('adminImagesDirectories')
         );
         // ToDo later: merge $data and $media
+        $serendipity['smarty']->assign('messages', $messages);
         $serendipity['smarty']->assign('media', $mediaFiles);
         $serendipity['smarty']->display(serendipity_getTemplateFile('admin/media_upload.tpl', 'serendipityPath'));
         return;
@@ -732,7 +765,7 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'choose':
-        if ($serendipity['GET']['fid']) {
+        if ($serendipity['GET']['fid'] ?? false) {
             $file          = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
             $media['file'] = &$file;
             if (!is_array($file)) {
@@ -772,7 +805,7 @@ switch ($serendipity['GET']['adminAction']) {
 
                     serendipity_prepareMedia($media['file']);
 
-                    $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
+                    $media['file']['props'] =& serendipity_fetchMediaProperties((int)($serendipity['GET']['fid'] ?? null));
                     serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
                     $medias[] = $media;
                 }
@@ -801,8 +834,9 @@ if (! isset($data['showML'])) {
     }
 }
 
-$data['get']['fid']       = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
-$data['get']['only_path'] = $serendipity['GET']['only_path'];
+$data['get']['fid'] = $serendipity['GET']['fid'] ?? null; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+$data['get']['only_path'] = $serendipity['GET']['only_path'] ?? null;
+if (! isset($data['messages'])) { $data['messages'] = []; }
 
 echo serendipity_smarty_show('admin/images.inc.tpl', $data);
 

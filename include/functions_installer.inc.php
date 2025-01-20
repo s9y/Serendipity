@@ -109,7 +109,11 @@ function serendipity_updateLocalConfig($dbName, $dbPrefix, $dbHost, $dbUser, $db
     fwrite($configfp, "\t\$serendipity['dbType']            = '" . addslashes($dbType) . "';\n");
     fwrite($configfp, "\t\$serendipity['dbPersistent']      = ". (serendipity_db_bool($dbPersistent) ? 'true' : 'false') .";\n");
     if ($serendipity['dbNames']) {
-        fwrite($configfp, "\t\$serendipity['dbCharset']         = '" . addslashes(SQL_CHARSET) . "';\n");
+        if (($dbType == 'mysqli' || $dbType == 'mysql') && serendipity_utf8mb4_ready()) {
+            fwrite($configfp, "\t\$serendipity['dbCharset']         = 'utf8mb4';\n");
+        } else {
+            fwrite($configfp, "\t\$serendipity['dbCharset']         = 'utf8';\n");
+        }
     }
 
     if (is_array($privateVariables) && count($privateVariables) > 0) {
@@ -286,7 +290,7 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
 function serendipity_parseTemplate($filename, $areas = null, $onlyFlags=null) {
     global $serendipity;
 
-    $userlevel = $serendipity['serendipityUserlevel'];
+    $userlevel = $serendipity['serendipityUserlevel'] ?? null;
 
     if ( !IS_installed ) {
         $userlevel = USERLEVEL_ADMIN;
@@ -421,11 +425,10 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
             break;
 
         case 'list':
-            $cval = (string)$value;
             $default = (array)$default;
             foreach ($default as $k => $v) {
-                $selected = ((string)$k == (string)$value);
-                if (empty($cval) && ((string)$k === 'false' || (string)$k === null)) {
+                $selected = ($k == $value);
+                if (empty($value) && ((string)$k === 'false' || (string)$k === null)) {
                     $selected = true;
                 }
                 $curOptions[$name][$k]['selected'] = $selected;
@@ -465,7 +468,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
     foreach ($config as &$category) {
         foreach ($category['items'] as &$item) {
 
-            $value = $from[$item['var']];
+            $value = $from[$item['var']] ?? false;
 
             /* Calculate value if we are not installed, how clever :) */
             if ($from == false) {
@@ -481,7 +484,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
                 $value = '';
             }
 
-            if (!$showDangerous && $item['view'] == 'dangerous') {
+            if (!$showDangerous && ($item['view'] ?? null) == 'dangerous') {
                 continue;
             }
 
@@ -499,6 +502,8 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
 
             if (in_array('ignore', $item['flags'])) {
                 $item['ignore'] = true;
+            } else {
+                $item['ignore'] = false;
             }
 
             if (in_array('ifEmpty', $item['flags']) && empty($value)) {
@@ -508,6 +513,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
         }
     }
     $data['config'] = $config;
+    $data['config_groupkeys'] = null;
     return serendipity_smarty_show('admin/config_template.tpl', $data);
 }
 
@@ -888,7 +894,7 @@ function serendipity_updateConfiguration() {
 
             // Check permission set. Changes to blogConfiguration or siteConfiguration items
             // always required authorid = 0, so that it be not specific to a userlogin
-            if ( $serendipity['serendipityUserlevel'] >= $item['userlevel'] || IS_installed === false ) {
+            if ( ($serendipity['serendipityUserlevel'] ?? 0) >= $item['userlevel'] || IS_installed === false ) {
                 $authorid = 0;
             } elseif ($item['permission'] == 'blogConfiguration' && serendipity_checkPermission('blogConfiguration')) {
                 $authorid = 0;
@@ -900,8 +906,7 @@ function serendipity_updateConfiguration() {
 
             if (is_array($_POST[$item['var']])) {
                 // Arrays not allowed. Use first index value.
-                list($a_key, $a_val) = each($_POST[$item['var']]);
-                $_POST[$item['var']] = $a_key;
+                $_POST[$item['var']] = array_key_first($_POST[$item['var']]);
 
                 // If it still is an array, munge it all together.
                 if (is_array($_POST[$item['var']])) {
@@ -1233,7 +1238,7 @@ function serendipity_getCurrentVersion() {
 
     // Perform update check once a day. We use a suffix of the configured channel, so when
     // the user switches channels, it has its own timer.
-    if ($serendipity['last_update_check_' . $serendipity['updateCheck']] >= (time()-86400)) {
+    if (($serendipity['last_update_check_' . $serendipity['updateCheck']] ?? 0) >= (time()-86400)) {
         // Last update was performed less than a day ago. Return last result.
         return $serendipity['last_update_version_' . $serendipity['updateCheck']];
     }

@@ -16,3 +16,10 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     '원작자의 작업물에 대해서 원본 그대로의 상태로만 복제, 공표, 게시, 이행 등을 허락합니다. 변경을 일절 금합니다.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     '동일 규약으로 공유한다는 조건으로 변경을 허락합니다.');
 
+@define('PLUGIN_CREATIVECOMMONS_VERSION',     'License version');
+@define('PLUGIN_CREATIVECOMMONS_VERSION_DESC',     'Select which numbered version of the license you want to use.');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_GENERIC', 'generic');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_SMALL', 'small');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_BIG', 'big');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE', 'Image variant');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_DESC', 'Select which type of image to display.');

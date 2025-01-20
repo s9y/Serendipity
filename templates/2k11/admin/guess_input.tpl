@@ -26,6 +26,15 @@
     </select>
 {elseif $type == 'file'}
     <input id="{$name}" type="file" name="{$name}">
+{elseif $type == 'media'}
+    <div class='form_group'>
+        <input id="{$name}" name="{$name}" class="form_media change_preview" data-configitem="{$name}" type="text" value="{$value|escape}">
+        <button class="choose_media" type="button" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>
+        <figure id="{$name}_preview" {if $value == ''} style='display:none;'{/if}>
+            <figcaption>{$CONST.PREVIEW}</figcaption>
+            <img src="{$value}" alt="">
+        </figure>
+    </div>
 {elseif $type == 'textarea'}
     <textarea id="{$name}" rows="5" name="{$name}">{$value|escape}</textarea>
 {else}

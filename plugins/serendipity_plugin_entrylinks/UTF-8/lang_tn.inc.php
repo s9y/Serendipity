@@ -25,3 +25,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', '要怎樣排序參照連結？(預設：連結數量)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '日期');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', '連結數量');
+@define('TOP_REFERRER', '主要來源');
+@define('SHOWS_TOP_SITES', '顯示連結到您的網誌的網站');
+@define('TOP_EXITS', '主要出源');
+@define('SHOWS_TOP_EXIT', '顯示您的網誌的主要出源');

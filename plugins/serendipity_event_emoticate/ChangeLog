@@ -1,3 +1,7 @@
+1.11.2:
+----
+ * Avoid warning under PHP 8.2
+
 1.11:
 ----
  * Add smiley images to plugin

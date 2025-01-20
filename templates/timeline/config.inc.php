@@ -9,23 +9,27 @@ $serendipity['smarty']->assign(array('currpage'  => "http://".$_SERVER['HTTP_HOS
 
 $serendipity['smarty']->assign('archiveURL', serendipity_rewriteURL(PATH_ARCHIVE));
 
-if ($serendipity['GET']['adminModule'] == 'templates' || $serendipity['POST']['adminModule'] == 'templates' || $serendipity['GET']['adminAction'] == 'cattemplate') {
-    $css_files = glob(dirname(__FILE__) . '/*_style.css');
-    foreach($css_files AS $css_file) {
-        $css_file = str_replace('_style.css', '', basename($css_file));
-        if (!isset($colorsets[$css_file])) {
-            $colorsets[$css_file] = $css_file;
+if (isset($serendipity['GET']['adminModule']) || isset($serendipity['POST']['adminModule'])) {
+    if ($serendipity['GET']['adminModule'] == 'templates' || $serendipity['POST']['adminModule'] == 'templates' || $serendipity['GET']['adminAction'] == 'cattemplate') {
+        $css_files = glob(dirname(__FILE__) . '/*_style.css');
+        foreach($css_files AS $css_file) {
+            $css_file = str_replace('_style.css', '', basename($css_file));
+            if (!isset($colorsets[$css_file])) {
+                $colorsets[$css_file] = $css_file;
+            }
         }
     }
 }
 
-if ($serendipity['GET']['adminModule'] == 'templates' || $serendipity['POST']['adminModule'] == 'templates' || $serendipity['GET']['adminAction'] == 'cattemplate') {
-    $skin_files = glob(dirname(__FILE__) . '/*_skin.css');
-    $skinsets[$skin_file] = 'light'; // light is default, but light_skin.css does not exist as light styles are written into style.css
-    foreach($skin_files AS $skin_file) {
-        $skin_file = str_replace('_skin.css', '', basename($skin_file));
-        if (!isset($skinsets[$skin_file])) {
-            $skinsets[$skin_file] = $skin_file;
+if (isset($serendipity['GET']['adminModule']) || isset($serendipity['POST']['adminModule'])) {
+    if ($serendipity['GET']['adminModule'] == 'templates' || $serendipity['POST']['adminModule'] == 'templates' || $serendipity['GET']['adminAction'] == 'cattemplate') {
+        $skin_files = glob(dirname(__FILE__) . '/*_skin.css');
+        $skinsets[$skin_file] = 'light'; // light is default, but light_skin.css does not exist as light styles are written into style.css
+        foreach($skin_files AS $skin_file) {
+            $skin_file = str_replace('_skin.css', '', basename($skin_file));
+            if (!isset($skinsets[$skin_file])) {
+                $skinsets[$skin_file] = $skin_file;
+            }
         }
     }
 }
@@ -122,14 +126,14 @@ $template_config = array(
         'name'          => THEME_COLORSET,
         'type'          => 'select',
         'default'       => 'green',
-        'select_values' => $colorsets
+        'select_values' => $colorsets ?? []
     ),   
     array(
         'var'           => 'skinset',
         'name'          => THEME_SKINSET,
         'type'          => 'select',
         'default'       => 'light',
-        'select_values' => $skinsets
+        'select_values' => $skinsets ?? []
     ),      
     array(
         'var'           => 'header_img',
@@ -229,7 +233,7 @@ $serendipity['smarty']->assign_by_ref('FooterSidebarElements', $FooterSidebarEle
 
 
 $template_global_config = array('navigation' => true);
-$serendipity['template_loaded_config'] = $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
+$serendipity['template_loaded_config'] = $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'] ?? '', true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
 
 
@@ -297,8 +301,8 @@ for ($i = 0; $i < $template_loaded_config['social_icons_amount']; $i++) {
         'default'       => '#',
     );
     $socialicons[] = array(
-        'service'           => $template_loaded_config['social_icon' . $i . 'service'],
-        'url'               => $template_loaded_config['social_icon' . $i . 'url'],
+        'service'           => $template_loaded_config['social_icon' . $i . 'service'] ?? '',
+        'url'               => $template_loaded_config['social_icon' . $i . 'url'] ?? '',
     );    
 }
 $serendipity['smarty']->assign_by_ref('socialicons', $socialicons);

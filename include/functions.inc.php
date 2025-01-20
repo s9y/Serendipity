@@ -140,7 +140,7 @@ function serendipity_strftime($format, $timestamp = null, $useOffset = true, $us
                 } elseif ($useOffset) {
                     $timestamp = serendipity_serverOffsetHour($timestamp);
                 }
-                $out = strftime($format, $timestamp);
+                $out = PHP81_BC\strftime($format, (int)$timestamp);
                 break;
 
             case 'persian-utf8':
@@ -157,7 +157,7 @@ function serendipity_strftime($format, $timestamp = null, $useOffset = true, $us
     }
 
     if ($is_win_utf && (empty($serendipity['calendar']) || $serendipity['calendar'] == 'gregorian')) {
-        $out = utf8_encode($out);
+        $out = mb_convert_encoding($out, 'UTF-8', 'ISO-8859-1');
     }
 
     return $out;
@@ -264,6 +264,8 @@ function serendipity_fetchTemplateInfo($theme, $abspath = null) {
     if (@is_file($serendipity['templatePath'] . $theme . '/config.inc.php')) {
         $data['custom_config'] = YES;
         $data['custom_config_engine'] = $theme;
+    } else {
+        $data['custom_config'] = NO;
     }
 
     // Templates can depend on a possible "Engine" (i.e. "Engine: 2k11").
@@ -277,18 +279,24 @@ function serendipity_fetchTemplateInfo($theme, $abspath = null) {
             if (@is_file($serendipity['templatePath'] . $engine . '/config.inc.php')) {
                 $data['custom_config'] = YES;
                 $data['custom_config_engine'] = $engine;
+            } else {
+                $data['custom_config'] = NO;
             }
         }
     }
 
     if ( $theme != 'default' && $theme != 'default-rtl'
       && @is_dir($serendipity['templatePath'] . $theme . '/admin')
-      && strtolower($data['backend']) == 'yes' ) {
+      && strtolower($data['backend'] ?? '') == 'yes' ) {
 
         $data['custom_admin_interface'] = YES;
     } else {
         $data['custom_admin_interface'] = NO;
     }
+
+    # php 8 compat section
+    if (! isset($data['customURI'])) { $data['customURI'] = null; }
+    if (! isset($data['author'])) { $data['author'] = null; }
 
     return $data;
 }
@@ -363,9 +371,9 @@ function serendipity_walkRecursive($ary, $child_name = 'id', $parent_name = 'par
 function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
     global $serendipity;
 
-    $where = '';
+    $where = 'WHERE 1=1';
     if (!empty($user)) {
-        $where = "WHERE a.authorid = '" . (int)$user ."'";
+        $where .= " AND a.authorid = '" . (int)$user ."'";
     }
 
     $query_select   = '';
@@ -414,7 +422,7 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
         if ($group === 'hidden') {
             $query_join .= "LEFT OUTER JOIN {$serendipity['dbPrefix']}groupconfig AS gc
                                          ON (gc.property = 'hiddenGroup' AND gc.id = ag.groupid AND gc.value = 'true')";
-            $where .= " AND gc.id IS NULL ";
+            $where .= ' AND gc.id IS NULL';
         } elseif (is_array($group)) {
             foreach($group AS $idx => $groupid) {
                 $group[$idx] = (int)$groupid;
@@ -422,6 +430,10 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
             $group_sql = implode(', ', $group);
         } else {
             $group_sql = (int)$group;
+        }
+
+        if ($group_sql ?? false) {
+            $where .= ' AND ' . "g.id IN ($group_sql)";
         }
 
         $querystring = "SELECT $query_distinct
@@ -442,7 +454,6 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
                LEFT OUTER JOIN {$serendipity['dbPrefix']}groups AS g
                             ON ag.groupid  = g.id
                                $query_join
-                         WHERE " . ($group_sql ? "g.id IN ($group_sql)" : '1=1') . "
                                $where
                                $query_group
                       ORDER BY a.realname ASC";
@@ -529,7 +540,7 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
             $maildata['headers'][] = 'X-Mailer: ' . $maildata['version'];
             $maildata['headers'][] = 'X-Engine: PHP/'. phpversion();
         }
-        $maildata['headers'][] = 'Message-ID: <'. md5(microtime() . uniqid(time())) .'@'. $_SERVER['HTTP_HOST'] .'>';
+        $maildata['headers'][] = 'Message-ID: <'. bin2hex(random_bytes(16)) .'@'. $_SERVER['HTTP_HOST'] .'>';
         $maildata['headers'][] = 'MIME-Version: 1.0';
         $maildata['headers'][] = 'Precedence: bulk';
         $maildata['headers'][] = 'Content-Type: text/plain; charset=' . LANG_CHARSET;
@@ -546,14 +557,14 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         }
     }
 
-    if ($serendipity['dumpMail']) {
+    if ($serendipity['dumpMail'] ?? false) {
         $fp = fopen($serendipity['serendipityPath'] . '/templates_c/mail.log', 'a');
         fwrite($fp, date('Y-m-d H:i') . "\n" . print_r($maildata, true));
         fclose($fp);
     }
 
     if (!isset($maildata['skip_native']) && !empty($maildata['to'])) {
-        return mail($maildata['to'], $maildata['subject'], $maildata['message'], implode("\n", $maildata['headers']));
+        return mail($maildata['to'], $maildata['subject'], $maildata['message'], implode("\r\n", $maildata['headers']));
     }
 }
 
@@ -582,21 +593,9 @@ function serendipity_fetchReferences($id) {
  */
 function serendipity_utf8_encode($string) {
     if (strtolower(LANG_CHARSET) != 'utf-8') {
-        if (function_exists('iconv')) {
-            $new = iconv(LANG_CHARSET, 'UTF-8', $string);
-            if ($new !== false) {
-                return $new;
-            } else {
-                return utf8_encode($string);
-            }
-        } else if (function_exists('mb_convert_encoding')) {
-            return mb_convert_encoding($string, 'UTF-8', LANG_CHARSET);
-        } else {
-            return utf8_encode($string);
-        }
-    } else {
-        return $string;
+        return mb_convert_encoding($string, 'UTF-8', LANG_CHARSET);
     }
+    return $string;
 }
 
 /**
@@ -1381,6 +1380,12 @@ use voku\cache\Cache;
 // when Memcached and Redis are not used. Returns the configured cache object. Used internally by
 // the other cache functions, you most likely never need to call this.
 function serendipity_setupCache() {
+    global $serendipity;
+
+    if (!serendipity_db_bool($serendipity['useInternalCache'])) {
+        return false;
+    }
+
     $cacheManager = new \voku\cache\CacheAdapterAutoManager();
 
     $cacheManager->addAdapter(
@@ -1415,16 +1420,29 @@ function serendipity_setupCache() {
 
 function serendipity_cleanCache() {
     $cache = serendipity_setupCache();
+    if ($cache === false) {
+        return false;
+    }
+
     return $cache->removeAll();
 }
 
 function serendipity_cacheItem($key, $item, $ttl = 3600) {
     $cache = serendipity_setupCache();
+
+    if ($cache === false) {
+        return false;
+    }
+
     return $cache->setItem($key, $item, $ttl);
 }
 
 function serendipity_getCacheItem($key) {
     $cache = serendipity_setupCache();
+    if ($cache === false) {
+        return false;
+    }
+
     return $cache->getItem($key);
 }
 

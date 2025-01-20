@@ -10,14 +10,28 @@ namespace voku\cache;
 class AdapterArray implements iAdapter
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private static $values = [];
 
     /**
-     * @var array
+     * @var array<string, array<int>>
      */
     private static $expired = [];
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getStaticValues() {
+        return self::$values;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getStaticKeys() {
+        return \array_keys(self::$values);
+    }
 
     /**
      * {@inheritdoc}
@@ -89,7 +103,7 @@ class AdapterArray implements iAdapter
     {
         self::$values[$key] = $value;
 
-        if ($ttl !== null) {
+        if ($ttl !== 0) {
             self::$expired[$key] = [\time(), $ttl];
         }
 
@@ -114,6 +128,8 @@ class AdapterArray implements iAdapter
         }
 
         list($time, $ttl) = self::$expired[$key];
+        \assert(\is_int($time));
+        \assert(\is_int($ttl));
 
         if (\time() > ($time + $ttl)) {
             unset(self::$values[$key]);

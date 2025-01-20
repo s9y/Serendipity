@@ -16,7 +16,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                                          'type'    => 'input',
                                          'name'    => 'url'),
 
-                                   array('text'    => STATUS,
+                                   array('text'    => IMPORT_STATUS,
                                          'type'    => 'list',
                                          'name'    => 'type',
                                          'value'   => 'publish',

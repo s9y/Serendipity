@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.38.4');
+        $propbag->add('version',       '2.39.3');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -66,6 +66,10 @@ class serendipity_event_spartacus extends serendipity_event
                 ),
                 'sourceforge.net' => array(
                     'url'  => 'http://www.sourceforget.net',
+                    'desc' => 'Package server for plugin downloads'
+                ),
+                'gitlab.com' => array(
+                    'url'  => 'http://www.gitlab.com',
                     'desc' => 'Package server for plugin downloads'
                 )
             ),
@@ -117,12 +121,14 @@ class serendipity_event_spartacus extends serendipity_event
             'xml' => array(
                 'github.com',
                 's9y.org',
+                'gitlab.com'
             ),
 
             'files' => array(
                 'github.com',
                 'SourceForge.net',
-                's9y.org'
+                's9y.org',
+                'gitlab.com'
             )
         );
 
@@ -130,18 +136,21 @@ class serendipity_event_spartacus extends serendipity_event
             'xml' => array(
                 'https://raw.github.com/s9y/additional_plugins/master/',
                 'http://s9y.org/mirror/',
+                'https://gitlab.com/s9y_blog/additional_plugins/-/raw/master/'
             ),
 
             'files' => array(
                 'https://raw.github.com/s9y/',
                 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/',
                 'http://s9y.org/mirror/',
+                'https://gitlab.com/s9y_blog/'
             ),
 
             'files_health' => array(
                 'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/serendipity/docs/LICENSE',
                 'http://s9y.org/'                       => 'http://s9y.org/',
                 'https://raw.github.com/'               => 'https://raw.github.com/',
+                'https://gitlab.com/'               => 'https://gitlab.com/',
             )
         );
 
@@ -311,16 +320,16 @@ class serendipity_event_spartacus extends serendipity_event
                 case 'complete':
                     $children[] = array(
                         'tag'        => $vals[$i]['tag'],
-                        'attributes' => $vals[$i]['attributes'],
-                        'value'      => $vals[$i]['value']
+                        'attributes' => $vals[$i]['attributes'] ?? null,
+                        'value'      => $vals[$i]['value'] ?? null
                     );
                     break;
 
                 case 'open':
                     $children[] = array(
                         'tag'        => $vals[$i]['tag'],
-                        'attributes' => $vals[$i]['attributes'],
-                        'value'      => $vals[$i]['value'],
+                        'attributes' => $vals[$i]['attributes'] ?? null,
+                        'value'      => $vals[$i]['value'] ?? null,
                         'children'   => $this->GetChildren($vals, $i)
                     );
                     break;
@@ -353,7 +362,7 @@ class serendipity_event_spartacus extends serendipity_event
         foreach($paths AS $pathid => $path) {
             $stack .= $path . '/';
 
-            if ($spaths[$pathid] == $path) {
+            if (($spaths[$pathid] ?? null) == $path) {
                 continue;
             }
 
@@ -420,6 +429,7 @@ class serendipity_event_spartacus extends serendipity_event
     function &fetchfile($url, $target, $cacheTimeout = 0, $decode_utf8 = false, $sub = 'plugins')
     {
         global $serendipity;
+        $serendipity['logger'] ?? $serendipity['logger'] = false;
         static $error = false;
 
         // Fix double URL strings.
@@ -475,7 +485,7 @@ class serendipity_event_spartacus extends serendipity_event
                     }
                 }
             }
-            if ($check_health) {
+            if (isset($check_health) && $check_health) {
                 /*--JAM: Useful for later, when we have a health monitor for SPARTACUS
                 $propbag = new serendipity_property_bag;
                 $this->introspect($propbag);
@@ -521,7 +531,7 @@ class serendipity_event_spartacus extends serendipity_event
                 }
             } else {
                 // Fetch file
-                if (!$data) {
+                if (! isset($data) || !$data) {
                     $data = $response->getBody();
                 }
                 if (is_object($serendipity['logger'])) $serendipity['logger']->debug(sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_URL, strlen($data), $target));
@@ -569,7 +579,7 @@ class serendipity_event_spartacus extends serendipity_event
                 break;
 
             case 'iso-8859-1':
-                $data = utf8_decode($data);
+                $data = mb_convert_encoding($data, 'ISO-8859-1', 'UTF-8');
                 break;
 
             default:
@@ -691,7 +701,6 @@ class serendipity_event_spartacus extends serendipity_event
             }
 
             xml_parser_set_option($p, XML_OPTION_CASE_FOLDING, 0);
-            @xml_parser_set_option($this->parser, XML_OPTION_TARGET_ENCODING, LANG_CHARSET);
             $xml_package = $xml_string . "\n" . $xml_package;
             xml_parse_into_struct($p, $xml_package, $vals);
             xml_parser_free($p);
@@ -762,6 +771,10 @@ class serendipity_event_spartacus extends serendipity_event
                 if ($bag->get('version') == $data['version']) {
                     $installable = false;
                 } elseif (version_compare($bag->get('version'), $data['version'], '<')) {
+                    // I'm not sure if setting 'upgrade_version' to 'version' is correct
+                    // for the context of pluginlocation = 'Spartacus', but leave it
+                    // for now.
+                    // See https://github.com/s9y/Serendipity/issues/685 for context.
                     $data['upgradable']      = true;
                     $data['upgrade_version'] = $data['version'];
                     $data['version']         = $bag->get('version');
@@ -894,6 +907,10 @@ class serendipity_event_spartacus extends serendipity_event
 
         if (stristr($mirror, 'github.com')) {
             $gitloc = 'master/';
+        }
+
+        if (stristr($mirror, 'gitlab.com')) {
+            $gitloc = '-/raw/master/';
         }
 
         $this->checkArray($tree);
@@ -1061,6 +1078,10 @@ class serendipity_event_spartacus extends serendipity_event
             $gitloc = 'master/';
         }
 
+        if (stristr($mirror, 'gitlab.com')) {
+            $gitloc = '-/raw/master/';
+        }
+
         foreach($files AS $file) {
             $url    = $mirror . '/' . $sfloc . '/' . $gitloc . $file . '?revision=1.9999';
             $target = $pdir . $file;
@@ -1145,19 +1166,24 @@ class serendipity_event_spartacus extends serendipity_event
         $foreignPlugins = array_merge($sidebarPlugins, $eventPlugins);
 
         // count upgradable plugins
+        $upgradeCount = 0;
         foreach ($installedPlugins as $plugin) {
             $infoplugin =& serendipity_plugin_api::load_plugin($plugin);
             if (is_object($infoplugin)) {
                 $bag    = new serendipity_property_bag;
                 $infoplugin->introspect($bag);
                 $currentVersion = $bag->get('version');
-                $upgradeVersion = $foreignPlugins[$plugin]['upgrade_version'] ? $foreignPlugins[$plugin]['upgrade_version'] : $foreignPlugins[$plugin]['version'];
+                if (array_key_exists($plugin, $foreignPlugins)) {
+                    $upgradeVersion = ($foreignPlugins[$plugin]['upgrade_version'] ?? false) ? ($foreignPlugins[$plugin]['upgrade_version'] ?? '0') : $foreignPlugins[$plugin]['version'] ?? '0';
+                } else {
+                    $upgradeVersion = '';
+                }
                 if (version_compare($currentVersion, $upgradeVersion, '<')) {
                     $upgradeCount++;
                 }
             }
         }
-        return $upgradeCount;
+        return $upgradeCount ?? 0;
     }
 
     function event_hook($event, &$bag, &$eventData, $addData = null)
@@ -1369,7 +1395,7 @@ class serendipity_event_spartacus extends serendipity_event
                                 $eventData['GET']['pluginPath'] = $eventData['GET']['install_plugin'];
                             }
 
-                            if ($eventData['GET']['spartacus_upgrade']) {
+                            if ($eventData['GET']['spartacus_upgrade'] ?? false) {
                                 $eventData['install'] = false;
                             }
                         }

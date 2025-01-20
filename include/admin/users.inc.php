@@ -17,19 +17,23 @@ $data = array();
 /* Delete a user */
 if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
     $data['delete_yes'] = true;
-    $user = serendipity_fetchUsers($serendipity['POST']['user']);
+    $user = serendipity_fetchUsers($serendipity['POST']['userid']);
     if (($serendipity['serendipityUserlevel'] < USERLEVEL_ADMIN && $user[0]['userlevel'] >= $serendipity['serendipityUserlevel']) || !serendipity_checkPermission('adminUsersDelete')) {
         $data['no_delete_permission'] = true;
-    } elseif ($_POST['userlevel'] > $serendipity['serendipityUserlevel']) {
+        $data['no_delete_permission_userlevel'] = false;
+    } elseif (($_POST['userlevel'] ?? null) > $serendipity['serendipityUserlevel']) {
         $data['no_delete_permission_userlevel'] = true;
+        $data['no_delete_permission'] = false;
     } else {
-        $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
+        $data['no_delete_permission_userlevel'] = false;
+        $data['no_delete_permission'] = false;
+        $group_intersect = serendipity_intersectGroup($user[0]['authorid'] ?? null);
         if (serendipity_checkPermission('adminUsersMaintainOthers') || (serendipity_checkPermission('adminUsersMaintainSame') && $group_intersect)) {
             $data['delete_permission'] = true;
             serendipity_deleteAuthor($user[0]['authorid']);
             serendipity_plugin_api::hook_event('backend_users_delete', $user[0]);
-            $data['user'] = $serendipity['POST']['user'];
-            $data['realname'] = $_POST['realname'];
+            $data['user'] = $serendipity['POST']['userid'] ?? null;
+            $data['realname'] = $user[0]['realname'] ?? null;
         }
     }
 }
@@ -41,7 +45,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
     if (($serendipity['serendipityUserlevel'] < USERLEVEL_ADMIN && $_POST['userlevel'] >= $serendipity['serendipityUserlevel']) || !serendipity_checkPermission('adminUsersCreateNew')) {
         $data['no_save_permission'] = true;
     } else {
-        $serendipity['POST']['user'] = serendipity_addAuthor($_POST['username'], $_POST['pass'], $_POST['realname'], $_POST['email'], $_POST['userlevel'], 2);
+        $serendipity['POST']['user'] = serendipity_addAuthor($_POST['username'], $_POST['password'], $_POST['realname'], $_POST['email'], $_POST['userlevel'], 2);
 
         $valid_groups = serendipity_getGroups($serendipity['authorid'], true);
         /* Save all the properties */
@@ -73,7 +77,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
                         continue;
                     }
 
-                    if (count($_POST[$item['var']]) < 1) {
+                    if (count($_POST[$item['var']] ?? []) < 1) {
                         $data['no_group_selected'] = true;
                     } else {
                         serendipity_updateGroups($_POST[$item['var']], $serendipity['POST']['user'], false);
@@ -82,7 +86,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
                 }
 
                 if (serendipity_checkConfigItemFlags($item, 'local')) {
-                    serendipity_set_user_var($item['var'], $_POST[$item['var']], $serendipity['POST']['user'], ($serendipity['authorid'] == $serendipity['POST']['authorid'] ? true : false));
+                    serendipity_set_user_var($item['var'], $_POST[$item['var']], $serendipity['POST']['user'], ($serendipity['authorid'] == ($serendipity['POST']['authorid'] ?? null)));
                 }
 
                 if (serendipity_checkConfigItemFlags($item, 'configuration')) {
@@ -103,6 +107,7 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     $data['save_edit'] = true;
     $user = serendipity_fetchUsers($serendipity['POST']['user']);
     $data['user'] = $user;
+    $data['realname'] = $_POST['realname'];
     if (!serendipity_checkPermission('adminUsersMaintainOthers') && $user[0]['userlevel'] >= $serendipity['serendipityUserlevel']) {
         $data['no_edit_permission'] = true;
     } elseif ($_POST['userlevel'] > $serendipity['serendipityUserlevel']) {
@@ -184,8 +189,10 @@ if ($serendipity['GET']['adminAction'] != 'delete') {
     if (is_array($users)) {
         foreach($users as $user => $userdata) {
             if ($userdata['userlevel'] < $serendipity['serendipityUserlevel'] || $userdata['authorid'] == $serendipity['authorid'] || $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
-                    $data['users'][$user]['isEditable'] = true;
-                    $data['users'][$user]['authorUrl'] = serendipity_authorURL($userdata);
+                $data['users'][$user]['isEditable'] = true;
+                $data['users'][$user]['authorUrl'] = serendipity_authorURL($userdata);
+            } else {
+                $data['users'][$user]['isEditable'] = false;
             }
             $data['users'][$user]['userlevel_name'] = $serendipity['permissionLevels'][$userdata['userlevel']];
         }
@@ -243,6 +250,16 @@ if ( ($serendipity['GET']['adminAction'] == 'edit' && serendipity_checkPermissio
         $data['formToken'] = serendipity_setFormToken();
     }
 }
+
+# php 8 compat section
+if (! isset($data['delete_yes'])) { $data['delete_yes'] = null; }
+if (! isset($data['save_new'])) { $data['save_new'] = null; }
+if (! isset($data['save_edit'])) { $data['save_edit'] = null; }
+if (! isset($data['show_form'])) { $data['show_form'] = null; }
+if (! isset($data['new'])) { $data['new'] = false; }
+if (! isset($data['no_save_permission'])) { $data['no_save_permission'] = null; }
+if (! isset($data['no_group_selected'])) { $data['no_group_selected'] = null; }
+
 
 echo serendipity_smarty_show('admin/users.inc.tpl', $data);
 

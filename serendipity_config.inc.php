@@ -7,12 +7,19 @@ if (defined('S9Y_FRAMEWORK')) {
 }
 
 @define('S9Y_FRAMEWORK', true);
+
+@define('S9Y_IS_HTTPS_SERVER', array_key_exists('HTTPS', $_SERVER) && strtolower($_SERVER['HTTPS']) == 'on');
+
 if (!headers_sent() && php_sapi_name() !== 'cli') {
     // Only set the session name, if no session has yet been issued.
     if (session_id() == '') {
-        $cookieParams = session_get_cookie_params();
-        $cookieParams['secure'] = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? true : false);
-        session_set_cookie_params($cookieParams['lifetime'], $cookieParams['path'], $cookieParams['domain'], $cookieParams['secure'], $cookieParams['httponly']);
+        $secure = S9Y_IS_HTTPS_SERVER;
+        if (PHP_VERSION_ID >= 70300) {
+            session_set_cookie_params(array("secure"=>$secure, "httponly"=>true, "samesite"=>"Lax"));
+        } else {
+            // Support for PHP before 7.3, can be removed at some point
+            session_set_cookie_params(0, '/', '', $secure, true);
+        }
         session_name('s9y_' . md5(dirname(__FILE__)));
         session_start();
     }
@@ -47,16 +54,21 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version'] = '2.4-alpha2';
+$serendipity['version'] = '2.6-alpha1';
 
 
 // Setting this to 'false' will enable debugging output. All alpha/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 if (!isset($serendipity['production'])) {
-    $serendipity['production'] = ! preg_match('@\-(alpha|beta|cvs|rc).*@', $serendipity['version']);
+    $serendipity['production'] = ! preg_match('@\-(alpha|cvs).*@', $serendipity['version']);
 }
 
 // Set error reporting
-error_reporting(E_ALL & ~(E_NOTICE|E_STRICT|E_DEPRECATED)); // is 22519 with 5.4+
+if ($serendipity['production']) {
+    error_reporting(E_ALL & ~(E_WARNING|E_NOTICE|E_STRICT|E_DEPRECATED));
+    @ini_set('display_errors', 'off');
+} else {
+    error_reporting(E_ALL & ~(E_NOTICE|E_STRICT|E_DEPRECATED));
+}
 
 if ($serendipity['production'] !== true) {
     @ini_set('display_errors', 'on');
@@ -209,10 +221,10 @@ $serendipity['charsets'] = array(
 @define('VIEWMODE_THREADED', 'threaded');
 @define('VIEWMODE_LINEAR', 'linear');
 
-if (!version_compare(phpversion(), '5.3', '>=')) {
+if (!version_compare(phpversion(), '7.0', '>=')) {
     $serendipity['lang'] = 'en';
     include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
-    serendipity_die(sprintf(SERENDIPITY_PHPVERSION_FAIL, phpversion(), '5.3'));
+    serendipity_die(sprintf(SERENDIPITY_PHPVERSION_FAIL, phpversion(), '7.0'));
 }
 
 
@@ -220,7 +232,7 @@ if (!version_compare(phpversion(), '5.3', '>=')) {
 if ( !defined('IN_installer') && IS_installed === false ) {
     header('Status: 302 Found');
     header('X-RequireInstall: 1');
-    header('Location: ' . (strtolower($_SERVER['HTTPS']) == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])) . '/serendipity_admin.php');
+    header('Location: ' . (S9Y_IS_HTTPS_SERVER ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])) . '/serendipity_admin.php');
     serendipity_die(sprintf(SERENDIPITY_NOT_INSTALLED, 'serendipity_admin.php'));
 }
 
@@ -237,7 +249,7 @@ require_once("bundled-libs/autoload.php");
 
 $new_include = ($serendipity['use_PEAR'] ? $old_include . PATH_SEPARATOR : '')
              . S9Y_INCLUDE_PATH . 'bundled-libs/' . PATH_SEPARATOR
-             . S9Y_INCLUDE_PATH . 'bundled-libs/Smarty/libs/' . PATH_SEPARATOR
+             . S9Y_INCLUDE_PATH . 'bundled-libs/smarty/smarty/libs/' . PATH_SEPARATOR
              . $serendipity['serendipityPath'] . PATH_SEPARATOR
              . (!$serendipity['use_PEAR'] ? $old_include . PATH_SEPARATOR : '');
 
@@ -345,7 +357,7 @@ serendipity_initLog();
 
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
-    $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
+    $serendipity['baseURL'] = 'http' . (S9Y_IS_HTTPS_SERVER ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
 }
 
 // If a user is logged in, fetch his preferences. He possibly wants to have a different language
@@ -425,7 +437,7 @@ if (function_exists('date_default_timezone_set')) {
 }
 
 // Fallback charset, if none is defined in the language files
-@define('LANG_CHARSET', 'ISO-8859-1');
+defined('LANG_CHARSET') or @define('LANG_CHARSET', 'ISO-8859-1');
 
 // Create array of permission levels, with descriptions
 $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DESC,
@@ -486,14 +498,12 @@ if (!isset($serendipity['useInternalCache'])) {
     $serendipity['useInternalCache'] = true;
 }
 
-// You can set parameters which ImageMagick should use to generate the thumbnails
-// by default, thumbs will get a little more brightness and saturation (modulate)
-// an unsharp-mask (unsharp)
-// and quality-compression of 75% (default would be to use quality of original image)
 if (!isset($serendipity['imagemagick_thumb_parameters'])) {
-    $serendipity['imagemagick_thumb_parameters'] = '';
-    // Set a variable like below in your serendpity_config_local.inc.php
-    //$serendipity['imagemagick_thumb_parameters'] = '-modulate 105,140 -unsharp 0.5x0.5+1.0 -quality 75';
+    // Sets a subset of the old lighthouse recommended jpeg settings, plus an unsharp filter to improve
+    // image quality when resizing.
+    // 
+    // Set a variable like below in your serendpity_config_local.inc.php with your own settings
+    $serendipity['imagemagick_thumb_parameters'] = '-sampling-factor 4:2:0 -unsharp 0x0.75+0.75+0.008 -strip -quality 85 -interlace JPEG';
 }
 
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);

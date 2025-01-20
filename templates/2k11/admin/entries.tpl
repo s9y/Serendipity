@@ -2,7 +2,7 @@
 {if $entry_vars.errMsg}
     <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$entry_vars.errMsg}</span>
 {/if}
-<form id="serendipityEntry" name="serendipityEntry" {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post">
+<form id="serendipityEntry" name="serendipityEntry" {if isset($entry_vars.entry.entry_form)}$entry_vars.entry.entry_form{/if} action="{$entry_vars.targetURL}" method="post">
     {foreach $entry_vars.hiddens as $key => $value}
     <input type="hidden" name="{$key}" value="{$value}">
     {/foreach}
@@ -33,7 +33,7 @@
         <label for="serendipity[body]">{$CONST.ENTRY_BODY}</label>
     {if NOT $entry_vars.wysiwyg}
         <div id="tools_entry" class="editor_toolbar">
-        {if $iso2br}
+        {if isset($iso2br) && $iso2br}
             <button class="wrap_selection lang-html" type="button" name="insX" data-tag-open="nl" data-tag-close="nl" data-tarea="serendipity[body]">NoBR</button>
         {/if}
             <button class="hilite_i wrap_selection lang-html" type="button" name="insI" data-tag-open="em" data-tag-close="em" data-tarea="serendipity[body]">i</button>
@@ -42,11 +42,11 @@
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[body]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[body]">{$CONST.MEDIA}</button>
             <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[body]">URL</button>
-            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_vars.entry hookAll="true"}
         </div>
     {else}
         <div id="tools_entry" class="editor_toolbar">
-            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_vars.entry hookAll="true"}
         </div>
     {/if}
         <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{$entry_vars.entry.body|escape}</textarea>
@@ -56,7 +56,7 @@
         <label for="serendipity[extended]">{$CONST.EXTENDED_BODY}</label>
     {if NOT $entry_vars.wysiwyg}
         <div id="tools_extended" class="editor_toolbar">
-        {if $iso2br}
+        {if isset($iso2br) && $iso2br}
             <button class="wrap_selection lang-html" type="button" name="insX" data-tag-open="nl" data-tag-close="nl" data-tarea="serendipity[extended]">NoBR</button>
         {/if}
             <button class="hilite_i wrap_selection lang-html" type="button" name="insI" data-tag-open="em" data-tag-close="em" data-tarea="serendipity[extended]">i</button>
@@ -65,11 +65,11 @@
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[extended]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[extended]">{$CONST.MEDIA}</button>
             <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[extended]">URL</button>
-            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_vars.entry hookAll="true"}
         </div>
     {else}
         <div id="tools_extended" class="editor_toolbar">
-            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_vars.entry hookAll="true"}
         </div>
     {/if}
         <div id="extended_entry_editor">
@@ -98,9 +98,13 @@
         {if $entry_vars.allowDateManipulation}
             <div id="edit_entry_timestamp" class="form_field">
                 <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp|escape}">
-
-                <label for="serendipityNewTimestamp">{$CONST.DATE}</label>
-                <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="datetime-local" value="{$entry_vars.timestamp|formatTime:'Y-m-d\TH:i':true:false:true}">
+                
+                <label for="serendipityNewDate">{$CONST.DATE}</label>
+                <input id="serendipityNewDate" name="serendipity[new_date]" type="date" value="{$entry_vars.timestamp|formatTime:'Y-m-d':true:false:true}">
+                
+                <label for="serendipityNewTime">{$CONST.TIME}</label>
+                <input id="serendipityNewTime" name="serendipity[new_time]" type="time" value="{$entry_vars.timestamp|formatTime:'H:i':true:false:true}">
+                
             </div>
         {/if}
             <div id="edit_entry_status" class="form_select">
@@ -142,7 +146,7 @@
                     <div class="form_check">
                         <input type="hidden" name="serendipity[had_categories]" value="1">
                         <span class="cat_view_pad">{$entry_cat.depth_pad}</span>
-                        <input id="serendipity_category_{$entry_cat.categoryid}" name="serendipity[categories][]" type="checkbox" value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} checked="checked"{/if}>
+                        <input id="serendipity_category_{$entry_cat.categoryid}" name="serendipity[categories][]" type="checkbox" value="{$entry_cat.categoryid}"{if isset($entry_cat.is_selected) and $entry_cat.is_selected} checked="checked"{/if}>
 
                         <label for="serendipity_category_{$entry_cat.categoryid}">{$entry_cat.category_name|escape}</label>
                     </div>

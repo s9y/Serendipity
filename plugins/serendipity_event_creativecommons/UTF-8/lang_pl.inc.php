@@ -20,3 +20,10 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'Licencjonodawca zezwala innym na kopiowanie, rozpowszechnianie odtwarzanie i wykonywanie dzieła tylko w niezmienionej formie - nie udziela tym samym zezwolenia na korzystanie z utworu w dziełach zaleznych.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Yes, as long as others share alike');
 
+@define('PLUGIN_CREATIVECOMMONS_VERSION',     'License version');
+@define('PLUGIN_CREATIVECOMMONS_VERSION_DESC',     'Select which numbered version of the license you want to use.');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_GENERIC', 'generic');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_SMALL', 'small');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_BIG', 'big');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE', 'Image variant');
+@define('PLUGIN_CREATIVECOMMONS_IMAGETYPE_DESC', 'Select which type of image to display.');

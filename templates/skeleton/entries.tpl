@@ -111,8 +111,8 @@
     <p class="serendipity_msg_notice">{$CONST.NO_ENTRIES_TO_PRINT}</p>
     {/if}
 {/foreach}
-{if not $is_preview}
-    {if $staticpage_pagetitle == ''}
+{if not $is_preview and not $is_single_entry}
+    {if ! isset($staticpage_pagetitle) or $staticpage_pagetitle == ''}
     <nav class="pager u-cf" role="navigation">
         <p>{$footer_info}</p>
     {if $footer_prev_page || $footer_next_page}

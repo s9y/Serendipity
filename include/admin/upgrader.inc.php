@@ -349,6 +349,8 @@ if ($serendipity['GET']['action'] == 'ignore') {
 
     if (sizeof($errors)) {
         $data['errors'] = $errors;
+    } else {
+        $data['errors'] = false;
     }
 
     /* I don't care what you told me, I will always nuke Smarty cache */
@@ -453,7 +455,13 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
         }
     }
 
-    $data['showWritableNote'] = $showWritableNote;
+    $data['upgraderResultDiagnosePlugins'] = array();
+    serendipity_plugin_api::hook_event('backend_plugins_upgradecount', $pluginUpdates);
+    if (empty($pluginUpdates)) {
+        $data['upgraderResultDiagnosePlugins'][] = serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, 'Plugins current');
+    } else {
+        $data['upgraderResultDiagnosePlugins'][] = serendipity_upgraderResultDiagnose(S9Y_U_WARNING, 'Plugin updates available');
+    }
 
     $data['errorCount'] = $errorCount;
     if ($errorCount < 1) {
@@ -477,10 +485,36 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
 
 $data['get']['action'] = $serendipity['GET']['action']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 $data['templatePath']  = $serendipity['templatePath'];
+$data['showWritableNote'] = $showWritableNote;
+$data['sqlfiles'] = $sqlfiles;
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
+
+$poll_admin_vars = array('main_content', 'no_banner', 'no_sidebar', 'no_footer', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer', 'title');
+$admin_vars      = array();
+
+foreach($poll_admin_vars AS $poll_admin_var) {
+    $admin_vars[$poll_admin_var] =& $$poll_admin_var;
+}
+
+$admin_vars['out']         = array();
+$admin_vars['no_create']   = $serendipity['no_create'] ?? null;
+$admin_vars['title']       = UPGRADE;
+$admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
+
+if ($serendipity['expose_s9y']) {
+    $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());
+} else {
+    $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, '', '');
+}
+
+if (!is_object($serendipity['smarty'] ?? null)) {
+    serendipity_smarty_init();
+}
+
+$data['admin_vars'] = $admin_vars;
 
 /* see on top */
 #$serendipity['smarty']->registerPlugin('function', 'serendipity_upgraderResultDiagnose', 'serendipity_smarty_backend_upgraderResultDiagnose');

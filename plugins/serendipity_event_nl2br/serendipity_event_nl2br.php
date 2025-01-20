@@ -9,6 +9,8 @@ if (IN_serendipity !== true) {
 class serendipity_event_nl2br extends serendipity_event
 {
     var $title = PLUGIN_EVENT_NL2BR_NAME;
+    var $markup_elements;
+    var $isolationtags;
 
     function introspect(&$propbag)
     {
@@ -18,7 +20,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team, Stephan Brunker');
-        $propbag->add('version',       '2.21.4');
+        $propbag->add('version',       '2.21.11');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -224,10 +226,10 @@ class serendipity_event_nl2br extends serendipity_event
                 case 'frontend_display':
 
                     // check single entry for temporary disabled markups
-                    if ( !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
-                         @!in_array($this->instance, $serendipity['POST']['properties']['disable_markups']) &&
-                         !$eventData['properties']['ep_no_textile'] && !isset($serendipity['POST']['properties']['ep_no_textile']) &&
-                         !$eventData['properties']['ep_no_markdown'] && !isset($serendipity['POST']['properties']['ep_no_markdown'])) {
+                    if ( !($eventData['properties']['ep_disable_markup_' . $this->instance] ?? null) &&
+                         @!in_array($this->instance, ($serendipity['POST']['properties']['disable_markups'] ?? [])) &&
+                         !($eventData['properties']['ep_no_textile'] ?? null) && !isset(($serendipity['POST']['properties']['ep_no_textile'])) &&
+                         !($eventData['properties']['ep_no_markdown'] ?? null) && !isset($serendipity['POST']['properties']['ep_no_markdown'])) {
                         // yes, this markup shall be applied
                         $serendipity['nl2br']['entry_disabled_markup'] = false;
                     } else {
@@ -274,9 +276,9 @@ class serendipity_event_nl2br extends serendipity_event
 
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
-                                !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
-                                @!in_array($this->instance, $serendipity['POST']['properties']['disable_markups']) &&
-                                !$eventData['properties']['ep_no_nl2br'] &&
+                                !($eventData['properties']['ep_disable_markup_' . $this->instance] ?? null) &&
+                                @!in_array($this->instance, ($serendipity['POST']['properties']['disable_markups'] ?? [])) &&
+                                !($eventData['properties']['ep_no_nl2br'] ?? null) &&
                                 !isset($serendipity['POST']['properties']['ep_no_nl2br'])) {
 
                             $element = $temp['element'];
@@ -294,9 +296,9 @@ class serendipity_event_nl2br extends serendipity_event
                                     //but with obligatory break because of the independent div-elements
                                     
                                     // rules for body <-> extended:
-                                    // no margins only if body ends with \n or no \n and extended starts without \n
+                                    // no margins only if body ends without \n and extended starts without \n
                                     // means: concatenate body and extended and there is no whiteline between them                                
-                                    if ($element == 'body' && isset($eventData['extended']) && !(strspn($text,"\n",-1) > 1) && strspn($eventData['extended'],"\n") )
+                                    if ($element == 'body' && isset($eventData['extended']) && !strspn($text,"\n",-1) && !strspn($eventData['extended'],"\n") )
                                     { 
                                         $text = "\n" . $text;
                                     }
@@ -344,7 +346,7 @@ class serendipity_event_nl2br extends serendipity_event
                     if( $isobr ) {
                         $serendipity['nl2br']['iso2br'] = true; // include to global as also used by staticpages now
 
-                        if (!is_object($serendipity['smarty'])) {
+                        if (!is_object($serendipity['smarty'] ?? null)) {
                             serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
                         }
 
@@ -355,24 +357,18 @@ class serendipity_event_nl2br extends serendipity_event
 
                 case 'css':
                     $eventData .= '
-
 /* nl2br plugin start */
-
 p.wl_nobottom {
     margin-bottom: 0em;
 }
-
 p.wl_notop {
     margin-top: 0em;
 }
-
 p.wl_notopbottom {
     margin-top: 0em;
     margin-bottom: 0em;
 }
-
 /* nl2br plugin end */
-
 ';
                     break;
 
@@ -448,7 +444,7 @@ p.wl_notopbottom {
                                 'acronym', 'cite', 'code', 'dfn', 'em', 'kbd', 'strong',
                                 'samp', 'var', 'bdo', 'bdi', 'map', 'object',
                                 'q', 'script', 'span', 'sub', 'sup', 'button',
-                                'label', 'select', 'textarea', 's', 'strike' 
+                                'label', 'select', 'textarea', 's', 'strike', 'u' 
                                 );
 
     var $allowed_p_parents = array('blockquote', 'td', 'div', 'article', 'aside', 'dd',
@@ -772,7 +768,7 @@ p.wl_notopbottom {
                 // concatenate closing tag if it's standard html
                 if (in_array($tag, $this->isolation_block_elements) )
                 {
-                    $content .= $textarray[$i];
+                    $content .= $textarray[$i] . "\n";
                 }
             }
             //closing blocktag or p parent - e.g. </table> or </td>
@@ -786,11 +782,11 @@ p.wl_notopbottom {
                         $content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start))) . "\n";
                     } else
                     {
-                        $content .= implode(array_slice($textarray,$start,$i-$start));
+                        $content .= implode(array_slice($textarray,$start,$i-$start)) . "\n";
                     }
                 }
                 //closing tag
-                $content .= $textarray[$i]; 
+                $content .= $textarray[$i] . "\n"; 
 
                 $start = $i+1;
                 array_shift($tagstack);
@@ -892,7 +888,7 @@ p.wl_notopbottom {
                 {
 
                     // whiteline \n\n found: make paragraph with buffer and this line
-                    if ( ($j < count($textline) - 1 && empty($textline[$j+1]) ) )
+                    if ( ($j < count($textline) - 1 && empty(trim($textline[$j+1])) ) )
                     {
                         // p start tag, append buffer and empty buffer
                         if  ($firstp && !$startnl) { $content .= self::P_NOTOP . $buffer; }
@@ -902,7 +898,7 @@ p.wl_notopbottom {
                         $bufferhastext = false;
 
                         //append textline
-                        $content .= $textline[$j];
+                        $content .= $textline[$j] . "\n";
 
                         //close open tags
                         foreach($tagstack as $ins_tag) { $content .= $this->html_end_tag($this->extract_tag($ins_tag)); }

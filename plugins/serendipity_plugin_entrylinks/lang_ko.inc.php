@@ -15,4 +15,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', '어떤 방식으로 참고 링크의 순서를 정하겠습니까? (기본값: 링크의 수)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '날짜');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', '링크의 수');
-
+@define('TOP_REFERRER', '상위 진입 링크');
+@define('SHOWS_TOP_SITES', '블로그로 가장 자주 링크를 건 사이트 보기');
+@define('TOP_EXITS', '상위 진출 링크');
+@define('SHOWS_TOP_EXIT', '블로그에서 가장 자주 타고 나간 링크 보기');

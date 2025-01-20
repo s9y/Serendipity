@@ -45,6 +45,11 @@ class Cache implements iCache
     protected $serializer;
 
     /**
+     * @var array
+     */
+    protected $unserialize_options = ['allowed_classes' => true];
+
+    /**
      * @var string
      */
     protected $prefix = '';
@@ -92,27 +97,30 @@ class Cache implements iCache
     /**
      * __construct
      *
-     * @param iAdapter|null       $adapter
-     * @param iSerializer|null    $serializer
-     * @param bool                $checkForUsage                              <p>check for admin-session && check for
-     *                                                                        server-ip == client-ip
-     *                                                                        && check for dev</p>
-     * @param bool                $cacheEnabled                               <p>false === disable the cache (use it
-     *                                                                        e.g. for global settings)</p>
-     * @param bool                $isAdminSession                             <p>true === disable cache for this user
-     *                                                                        (use it e.g. for admin user settings)
-     * @param bool                $useCheckForAdminSession                    <p>use $isAdminSession flag or not</p>
-     * @param bool                $useCheckForDev                             <p>use checkForDev() or not</p>
-     * @param bool                $useCheckForServerIpIsClientIp              <p>use check for server-ip == client-ip
-     *                                                                        or
-     *                                                                        not</p>
-     * @param string                  $disableCacheGetParameter               <p>set the _GET parameter for disabling
-     *                                                                        the cache, disable this check via empty
-     *                                                                        string</p>
-     * @param CacheAdapterAutoManager $cacheAdapterManagerForAutoConnect      <p>Overwrite some Adapters for the
-     *                                                                        auto-connect-function.</p>
-     * @param bool                    $cacheAdapterManagerForAutoConnectOverwrite <p>true === Use only Adapters from your
-     *                                                                        "CacheAdapterManager".</p>
+     * @param iAdapter|null           $adapter
+     * @param iSerializer|null        $serializer
+     * @param bool                    $checkForUsage                              <p>check for admin-session && check
+     *                                                                            for server-ip == client-ip
+     *                                                                            && check for dev</p>
+     * @param bool                    $cacheEnabled                               <p>false === disable the cache (use
+     *                                                                            it
+     *                                                                            e.g. for global settings)</p>
+     * @param bool                    $isAdminSession                             <p>true === disable cache for this
+     *                                                                            user
+     *                                                                            (use it e.g. for admin user settings)
+     * @param bool                    $useCheckForAdminSession                    <p>use $isAdminSession flag or
+     *                                                                            not</p>
+     * @param bool                    $useCheckForDev                             <p>use checkForDev() or not</p>
+     * @param bool                    $useCheckForServerIpIsClientIp              <p>use check for server-ip ==
+     *                                                                            client-ip or not</p>
+     * @param string                  $disableCacheGetParameter                   <p>set the _GET parameter for
+     *                                                                            disabling the cache, disable this
+     *                                                                            check via empty string</p>
+     * @param CacheAdapterAutoManager $cacheAdapterManagerForAutoConnect          <p>Overwrite some Adapters for the
+     *                                                                            auto-connect-function.</p>
+     * @param bool                    $cacheAdapterManagerForAutoConnectOverwrite <p>true === Use only Adapters from
+     *                                                                            your
+     *                                                                            "CacheAdapterManager".</p>
      */
     public function __construct(
         iAdapter $adapter = null,
@@ -153,13 +161,20 @@ class Cache implements iCache
                 $adapter = $this->autoConnectToAvailableCacheSystem($cacheAdapterManagerForAutoConnect, $cacheAdapterManagerForAutoConnectOverwrite);
             }
 
-            // INFO: Memcache(d) has his own "serializer", so don't use it twice
             if (!\is_object($serializer) && $serializer === null) {
                 if (
                     $adapter instanceof AdapterMemcached
                     ||
                     $adapter instanceof AdapterMemcache
                 ) {
+                    // INFO: Memcache(d) has his own "serializer", so don't use it twice
+                    $serializer = new SerializerNo();
+                } elseif (
+                    $adapter instanceof AdapterOpCache
+                    &&
+                    \class_exists('\Symfony\Component\VarExporter\VarExporter')
+                ) {
+                    // INFO: opcache + Symfony-VarExporter don't need any "serializer"
                     $serializer = new SerializerNo();
                 } else {
                     // set default serializer
@@ -177,17 +192,45 @@ class Cache implements iCache
             $this->setCacheIsReady(true);
 
             $this->adapter = $adapter;
+
             $this->serializer = $serializer;
+
+            $this->serializer->setUnserializeOptions($this->unserialize_options);
         }
+    }
+
+    /**
+     * @return iAdapter|null
+     */
+    public function getAdapter() {
+        return $this->adapter;
+    }
+
+    /**
+     * @return iSerializer|null
+     */
+    public function getSerializer() {
+        return $this->serializer;
+    }
+
+    /**
+     * @param array $array
+     *
+     * @return void
+     */
+    public function setUnserializeOptions(array $array = [])
+    {
+        $this->unserialize_options = $array;
     }
 
     /**
      * Auto-connect to the available cache-system on the server.
      *
      * @param CacheAdapterAutoManager $cacheAdapterManagerForAutoConnect          <p>Overwrite some Adapters for the
-     *                                                                        auto-connect-function.</p>
-     * @param bool                    $cacheAdapterManagerForAutoConnectOverwrite <p>true === Use only Adapters from your
-     *                                                                        "CacheAdapterManager".</p>
+     *                                                                            auto-connect-function.</p>
+     * @param bool                    $cacheAdapterManagerForAutoConnectOverwrite <p>true === Use only Adapters from
+     *                                                                            your
+     *                                                                            "CacheAdapterManager".</p>
      *
      * @return iAdapter
      */
@@ -195,6 +238,7 @@ class Cache implements iCache
         CacheAdapterAutoManager $cacheAdapterManagerForAutoConnect = null,
         bool $cacheAdapterManagerForAutoConnectOverwrite = false
     ): iAdapter {
+        /** @var null|iAdapter $AUTO_ADAPTER_STATIC_CACHE */
         static $AUTO_ADAPTER_STATIC_CACHE = null;
 
         if (
@@ -221,12 +265,12 @@ class Cache implements iCache
 
         foreach ($cacheAdapterManagerDefault->getAdapters() as $adapterTmp => $callableFunctionTmp) {
 
-            /** @var iAdapter $adapterTest */
             if ($callableFunctionTmp !== null) {
                 $adapterTest = new $adapterTmp($callableFunctionTmp);
             } else {
                 $adapterTest = new $adapterTmp();
             }
+            assert($adapterTest instanceof iAdapter);
 
             if ($adapterTest->installed()) {
                 $adapter = $adapterTest;
@@ -234,6 +278,8 @@ class Cache implements iCache
                 break;
             }
         }
+
+        assert($adapter instanceof iAdapter);
 
         // save to static cache
         $AUTO_ADAPTER_STATIC_CACHE = $adapter;
@@ -381,7 +427,11 @@ class Cache implements iCache
         }
 
         $serialized = $this->adapter->get($storeKey);
-        $value = $serialized && $this->serializer ? $this->serializer->unserialize($serialized) : null;
+        if ($this->serializer && $this->serializer instanceof SerializerNo) {
+            $value = $serialized;
+        } else {
+            $value = $serialized && $this->serializer ? $this->serializer->unserialize($serialized) : null;
+        }
 
         self::$STATIC_CACHE_COUNTER[$storeKey]++;
 
@@ -468,7 +518,7 @@ class Cache implements iCache
      * @param mixed                  $value
      * @param \DateInterval|int|null $ttl
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return bool
      */
@@ -493,7 +543,6 @@ class Cache implements iCache
         if ($ttl) {
             if ($ttl instanceof \DateInterval) {
                 // Converting to a TTL in seconds
-                /** @noinspection PhpUnhandledExceptionInspection */
                 $ttl = (new \DateTimeImmutable('now'))->add($ttl)->getTimestamp() - \time();
             }
 
@@ -593,6 +642,8 @@ class Cache implements iCache
 
     /**
      * Set the default-prefix via "SERVER"-var + "SESSION"-language.
+     *
+     * @return string
      */
     protected function getTheDefaultPrefix(): string
     {
@@ -600,18 +651,21 @@ class Cache implements iCache
                ($_SERVER['THEME'] ?? '') . '_' .
                ($_SERVER['STAGE'] ?? '') . '_' .
                ($_SESSION['language'] ?? '') . '_' .
-               ($_SESSION['language_extra'] ?? '');
+               ($_SESSION['language_extra'] ?? '') . '_' .
+               \PHP_VERSION_ID . '_' .
+               ($this->serializer ? $this->serializer->getName() : '');
     }
 
     /**
      * Get the current adapter class-name.
      *
      * @return string
+     *
+     * @psalm-return class-string|string
      */
     public function getUsedAdapterClassName(): string
     {
         if ($this->adapter) {
-            /** @noinspection GetClassUsageInspection */
             return \get_class($this->adapter);
         }
 
@@ -622,11 +676,12 @@ class Cache implements iCache
      * Get the current serializer class-name.
      *
      * @return string
+     *
+     * @psalm-return class-string|string
      */
     public function getUsedSerializerClassName(): string
     {
         if ($this->serializer) {
-            /** @noinspection GetClassUsageInspection */
             return \get_class($this->serializer);
         }
 
@@ -640,6 +695,7 @@ class Cache implements iCache
      */
     public function isCacheActiveForTheCurrentUser(): bool
     {
+        // init
         $active = true;
 
         // test the cache, with this GET-parameter
@@ -685,6 +741,8 @@ class Cache implements iCache
      * enable / disable the cache
      *
      * @param bool $isActive
+     *
+     * @return void
      */
     public function setActive(bool $isActive)
     {
@@ -695,6 +753,8 @@ class Cache implements iCache
      * Set "isReady" state.
      *
      * @param bool $isReady
+     *
+     * @return void
      */
     protected function setCacheIsReady(bool $isReady)
     {
@@ -707,6 +767,8 @@ class Cache implements iCache
      * WARNING: Do not use if you don't know what you do. Because this will overwrite the default prefix.
      *
      * @param string $prefix
+     *
+     * @return void
      */
     public function setPrefix(string $prefix)
     {
@@ -717,6 +779,8 @@ class Cache implements iCache
      * Set the static-hit-counter: Who often do we hit the cache, before we use static cache?
      *
      * @param int $staticCacheHitCounter
+     *
+     * @return void
      */
     public function setStaticCacheHitCounter(int $staticCacheHitCounter)
     {

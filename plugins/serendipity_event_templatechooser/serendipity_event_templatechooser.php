@@ -18,7 +18,7 @@ class serendipity_event_templatechooser extends serendipity_event
         $propbag->add('description', PLUGIN_EVENT_TEMPLATECHOOSER_DESC);
         $propbag->add('stackable',   false);
         $propbag->add('author',      'Evan Nemerson');
-        $propbag->add('version',     '1.7');
+        $propbag->add('version',     '1.7.1');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -109,7 +109,7 @@ class serendipity_event_templatechooser extends serendipity_event
                     // which detect serendipityUseTemplate can use reasonable defaults in case
                     // template configuration options do not exist. Guess nobody understands
                     // this explanation anyways, and who reads this stuff, heh?
-                    if ($_SESSION['serendipityUseTemplate'] == $eventData['template']) {
+                    if (($_SESSION['serendipityUseTemplate'] ?? null) == $eventData['template']) {
                         unset($_SESSION['serendipityUseTemplate']);
                     }
 

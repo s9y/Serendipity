@@ -19,7 +19,7 @@
     {if !empty($license)}
         <p><b>{$CONST.MEDIA_PROPERTY_COPYRIGHT}:</b> {$license}</p>
     {/if}
-    {if ! empty($documentation) || $changelog || $documentation_local}
+    {if ! empty($documentation) || isset($changelog) || $documentation_local}
         <ul class="plainList">
         {if !empty($documentation)}
             <li><a href="{$documentation|escape}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
@@ -96,7 +96,7 @@
                                 <summary><var class="perm_name">{$plug.class_name}</var></summary>
 
                                 <div class="plugin_desc clearfix">
-                                {$plug.description}
+                                {$plug.description|escape:"html"}
                                 </div>
                             </details>
                         {else}
@@ -137,7 +137,7 @@
                     <div class="plugin_status">
                     {if isset($requirement_failures.{$plug.class_name})}
                         <span class="unmet_requirements msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirement_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirement_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirement_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
-                    {elseif $plug['upgradable'] == true}
+                    {elseif isset($plug['upgradable']) and $plug['upgradable'] == true}
                         <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug['customURI'])}{$plug.customURI}{/if}&amp;{$urltoken}" title="{$CONST.PLUGIN_EVENT_SPARTACUS_CHECK_HINT}">{$CONST.UPGRADE}</a>
                     {elseif $plug.installable == true}
                         <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURI}{/if}&amp;{$urltoken}">{$CONST.INSTALL}</a>

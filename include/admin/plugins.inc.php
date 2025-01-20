@@ -14,7 +14,7 @@ include_once S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
 if (!class_exists('Smarty')) {
-    @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
+    @define('SMARTY_DIR', S9Y_PEAR_PATH . 'smarty/smarty/libs/');
     include_once SMARTY_DIR . 'Smarty.class.php';
 }
 
@@ -93,7 +93,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         foreach ($config_names as $config_item) {
             $cbag = new serendipity_property_bag;
             if ($plugin->introspect_config_item($config_item, $cbag)) {
-                $value    = $_POST['serendipity']['plugin'][$config_item];
+                $value    = $_POST['serendipity']['plugin'][$config_item] ?? null;
 
                 $validate = $plugin->validate($config_item, $cbag, $value);
                 if ($validate === true) {
@@ -101,7 +101,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
                         $value = $_POST['serendipity']['plugin']['override'][$config_item];
                     }
 
-                    if (is_array($_POST['serendipity']['plugin']['activate'][$config_item])) {
+                    if (is_array($_POST['serendipity']['plugin']['activate'][$config_item] ?? null)) {
                         $active_values = array();
                         foreach($_POST['serendipity']['plugin']['activate'][$config_item] as $ordered_item_value) {
                             $ordered_item_value;
@@ -120,6 +120,9 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         $plugin->cleanup();
     }
 
+    $data['save_errors'] = null;
+    $data['saveconf'] = null;
+    $data['timestamp'] = null;
     if ( isset($save_errors) && is_array($save_errors) && count($save_errors) > 0 ) {
         $data['save_errors'] = $save_errors;
     } elseif ( isset($_POST['SAVECONF'])) {
@@ -137,6 +140,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
         $data['changelog'] = true;
     }
 
+    $data['documentation_local'] = null;
     if (@file_exists(dirname($plugin->pluginFile) . '/documentation_' . $serendipity['lang'] . '.html')) {
         $data['documentation_local'] = '/documentation_' . $serendipity['lang'] . '.html';
     } elseif (@file_exists(dirname($plugin->pluginFile) . '/documentation_en.html')) {
@@ -151,7 +155,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $data['config'] = serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups);
 
 } elseif ( $serendipity['GET']['adminAction'] == 'addnew' && serendipity_checkFormToken()) {
-    $serendipity['GET']['type'] = $serendipity['GET']['type'] ?: 'sidebar';
+    $serendipity['GET']['type'] = $serendipity['GET']['type'] ?? 'sidebar';
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
 
@@ -160,7 +164,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPlugins);
     $pluginstack = array_merge((array)$foreignPlugins['pluginstack'], $pluginstack);
     $errorstack  = array_merge((array)$foreignPlugins['errorstack'], $errorstack);
-    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+    if (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE') {
         // for upgrades, the distinction in sidebar and event-plugins is not useful. We will fetch both and mix the lists    
         if ($serendipity['GET']['type'] == 'event') {
             $serendipity['GET']['type'] = 'sidebar';
@@ -177,7 +181,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     # load data for installed plugins
     $plugins = serendipity_plugin_api::get_installed_plugins();
     $classes = serendipity_plugin_api::enum_plugin_classes(($serendipity['GET']['type'] === 'event'));
-    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+    if (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE') {
         $classes = array_merge($classes, serendipity_plugin_api::enum_plugin_classes(!($serendipity['GET']['type'] === 'event')));
         $data['type'] = 'both';
     }
@@ -218,7 +222,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
                 } else {
                     $baseURI = "&amp;serendipity[spartacus_fetch]=event";
                 }
-                $props['customURI'] .= $baseURI . $foreignPlugins['upgradeURI'];
+                $props['customURI'] = $baseURI . $foreignPlugins['upgradeURI'];
             }
 
             $props['installable']  = !($props['stackable'] === false && in_array($class_data['true_name'], $plugins));
@@ -262,9 +266,9 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
             $plugdata['pluginsource'] = PLUGIN_SOURCE_LOCAL;
         }
         # create pluggroups
-        if ($serendipity['GET']['only_group'] == 'ALL') {
+        if (($serendipity['GET']['only_group'] ?? null) == 'ALL') {
             $pluggroups['ALL'][] = $plugdata;
-        } elseif ($serendipity['GET']['only_group'] == 'UPGRADE' && $plugdata['upgradable']) {
+        } elseif (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE' && ($plugdata['upgradable'] ?? false)) {
             $pluggroups['UPGRADE'][] = $plugdata;
         } elseif (is_array($plugdata['groups'])) {
             foreach($plugdata['groups'] AS $group) {
@@ -280,7 +284,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $data['count_pluginstack'] = count($pluginstack);
     $data['errorstack'] = $errorstack;
 
-    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+    if (($serendipity['GET']['only_group'] ?? null) == 'UPGRADE') {
         serendipity_plugin_api::hook_event('backend_pluginlisting_header_upgrade', $pluggroups);
     }
 
@@ -293,7 +297,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
     $data['groupnames'] = $groupnames;
     $data['pluggroups'] = $pluggroups;
     $data['formToken'] = serendipity_setFormToken();
-    $data['only_group'] = $serendipity['GET']['only_group'];
+    $data['only_group'] = $serendipity['GET']['only_group'] ?? null;
     $data['available_upgrades'] = isset($pluggroups['UPGRADE']);
     $requirement_failures = array();
 
@@ -365,7 +369,7 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
 
             serendipity_plugin_api::update_plugin_owner(
                 addslashes($plugin['id']),
-                addslashes($_POST['serendipity']['ownership'][$plugin['name']])
+                addslashes($_POST['serendipity']['ownership'][$plugin['name'] ?? null] ?? '')
             );
             $pos++;
         }
@@ -479,13 +483,24 @@ if (isset($serendipity['GET']['plugin_to_conf'])) {
 
     $data['event_plugins'] = show_plugins(true);
 
-    if ($serendipity['memSnaps'] && count($serendipity['memSnaps']) > 0) {
+    if (isset($serendipity['memSnaps']) && $serendipity['memSnaps'] && count($serendipity['memSnaps']) > 0) {
         $data['$memsnaps'] = $serendipity['memSnaps'];
+    } else {
+        $data['$memsnaps'] = null;
     }
+        
     $data['updateAllMsg'] = isset($serendipity['GET']['updateAllMsg']);
 }
 
 $data['urltoken']      = serendipity_setFormToken('url');
+
+# php 8 compat section
+if (! isset($data['plugin_to_conf'])) { $data['plugin_to_conf'] = null; }
+if (! isset($data['adminAction'])) { $data['adminAction'] = null; }
+if (! isset($data['new_plugin_failed'])) { $data['new_plugin_failed'] = null; }
+if (! isset($data['save'])) { $data['save'] = null; }
+if (! isset($data['memsnaps'])) { $data['memsnaps'] = null; }
+
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);
 
 

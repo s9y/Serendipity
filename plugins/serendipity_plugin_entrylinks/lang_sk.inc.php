@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH',   'Podµa èoho majú by» odkazy zoaïované? (Prednastavené: Poradie v texte)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY',        'Dátum');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT',  'Poradie v texte');
-
+@define('TOP_REFERRER',		'Top odkazujúce stránky');
+@define('SHOWS_TOP_SITES',		'Najèastej¹ie odkazujúce stránky na tento weblog');
+@define('TOP_EXITS',		'Top výstupy');
+@define('SHOWS_TOP_EXIT',		'Nejèastej¹ie stránky odkazované z tohto weblogu');

@@ -3,10 +3,9 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 // PHP 5.5 compat, no longer use deprecated mysql
-if ($serendipity['dbType'] == 'mysql' && (version_compare(PHP_VERSION, '5.5.0') >= 0 || !function_exists('mysql_connect'))) {
+if (($serendipity['dbType'] ?? '') == 'mysql') {
     $serendipity['dbType'] = 'mysqli';
 }
-
 
 if (@include(S9Y_INCLUDE_PATH . "include/db/{$serendipity['dbType']}.inc.php")) {
     @define('S9Y_DB_INCLUDED', TRUE);
@@ -182,6 +181,29 @@ function serendipity_db_implode($string, &$array, $type = 'int') {
 
     $string = implode($string, $new_array);
     return $string;
+}
+
+/**
+ * @access public
+ * @param   string Database table column name
+ * @param   string Database column type
+ * @return  string Column CAST() to chosen database
+ */
+function serendipity_db_cast($columnName, $type) {
+    global $serendipity;
+
+    if (stristr($serendipity['dbType'], 'sqlite')) {
+        return $columnName;
+    }
+
+    // MySQL (and variants) have unsigned integer. ANSI SQL does not.
+    if ($type == 'unsigned') {
+        if (!stristr($serendipity['dbType'], 'mysqli'))
+            $type = 'integer';
+    }
+
+    // Adds explicits casting for ANSI SQL -compliant DBs, like mysql and postgresql.
+    return "cast($columnName as $type)";
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

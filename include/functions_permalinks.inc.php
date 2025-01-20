@@ -15,49 +15,107 @@ if (IN_serendipity !== true) {
  * @return  string  output string
  */
 function serendipity_makeFilename($str, $stripDots = false) {
+
+    // These are UTF-8 replacements happening regardless of selected locale
+    static $pre_from = array(
+                     'ðŸ‡¦',
+                     'ðŸ‡§',
+                     'ðŸ‡¨',
+                     'ðŸ‡©',
+                     'ðŸ‡ª',
+                     'ðŸ‡«',
+                     'ðŸ‡¬',
+                     'ðŸ‡­',
+                     'ðŸ‡®',
+                     'ðŸ‡¯',
+                     'ðŸ‡°',
+                     'ðŸ‡±',
+                     'ðŸ‡²',
+                     'ðŸ‡³',
+                     'ðŸ‡´',
+                     'ðŸ‡µ',
+                     'ðŸ‡¶',
+                     'ðŸ‡·',
+                     'ðŸ‡¸',
+                     'ðŸ‡¹',
+                     'ðŸ‡º',
+                     'ðŸ‡»',
+                     'ðŸ‡¼',
+                     'ðŸ‡½',
+                     'ðŸ‡¾',
+                     'ðŸ‡¿');
+
+    static $pre_to = array(
+                     'A',
+                     'B',
+                     'C',
+                     'D',
+                     'E',
+                     'F',
+                     'G',
+                     'H',
+                     'I',
+                     'J',
+                     'L',
+                     'M',
+                     'N',
+                     'O',
+                     'P',
+                     'Q',
+                     'R',
+                     'S',
+                     'T',
+                     'U',
+                     'V',
+                     'W',
+                     'X',
+                     'Y',
+                     'Z');
+
+    // These are replacements happening after all UTF-8 characters have been stripped away
     static $from = array(
                      ' ',
                      '%',
 
-                     'Ä',
-                     'ä',
+                     'Ã„',
+                     'Ã¤',
 
-                     'Ö',
-                     'ö',
+                     'Ã–',
+                     'Ã¶',
 
-                     'Ü',
-                     'ü',
+                     'Ãœ',
+                     'Ã¼',
 
-                     'ß',
+                     'ÃŸ',
 
-                     'é',
-                     'è',
-                     'ê',
+                     'Ã©',
+                     'Ã¨',
+                     'Ãª',
 
-                     'í',
-                     'ì',
-                     'î',
+                     'Ã­',
+                     'Ã¬',
+                     'Ã®',
 
-                     'á',
-                     'à',
-                     'â',
-                     'å',
+                     'Ã¡',
+                     'Ã ',
+                     'Ã¢',
+                     'Ã¥',
 
-                     'ó',
-                     'ò',
-                     'ô',
-                     'õ',
+                     'Ã³',
+                     'Ã²',
+                     'Ã´',
+                     'Ãµ',
 
-                     'ú',
-                     'ù',
-                     'û',
+                     'Ãº',
+                     'Ã¹',
+                     'Ã»',
 
-                     'ç',
-                     'Ç',
+                     'Ã§',
+                     'Ã‡',
 
-                     'ñ',
+                     'Ã±',
 
-                     'ý');
+                     'Ã½');
 
     static $to   = array(
                      '-',
@@ -109,6 +167,9 @@ function serendipity_makeFilename($str, $stripDots = false) {
         $str = str_replace('/', '%2F', $str);
         $str = urlencode($str);
     } else {
+        // Replace some emojis and flags into latin characters before mb_convert_encoding() strips them away
+        $str = str_replace($pre_from, $pre_to, $str);
+
         if (isset($GLOBALS['i18n_filename_from'])) {
             // Replace international chars not detected by every locale.
             // The array of chars is defined in the language file.
@@ -117,17 +178,17 @@ function serendipity_makeFilename($str, $stripDots = false) {
             if (LANG_CHARSET == 'UTF-8') {
                 // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
                 // characters, try to UTF8-decode the string first.
-                $str = utf8_decode($str);
+                $str = mb_convert_encoding($str, 'ISO-8859-1', 'UTF-8');
             }
         } else {
             // Replace international chars not detected by every locale
+            $str = str_replace($from, $to, $str);
+
             if (LANG_CHARSET == 'UTF-8') {
                 // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
                 // characters, try to UTF8-decode the string first.
-                $str = utf8_decode($str);
+                $str = mb_convert_encoding($str, 'ISO-8859-1', 'UTF-8');
             }
-
-            $str = str_replace($from, $to, $str);
         }
 
         // Nuke chars not allowed in our URI
@@ -449,6 +510,8 @@ function serendipity_insertPermalink(&$data, $type = 'entry') {
 function serendipity_buildPermalinks() {
     global $serendipity;
 
+    serendipity_db_begin_transaction();
+
     $entries = serendipity_db_query("SELECT id, title, timestamp FROM {$serendipity['dbPrefix']}entries");
 
     if (is_array($entries)) {
@@ -479,6 +542,8 @@ function serendipity_buildPermalinks() {
             serendipity_insertPermalink($category, 'category');
         }
     }
+
+    serendipity_db_end_transaction(true);
 }
 
 /**
@@ -492,7 +557,7 @@ function serendipity_buildPermalinks() {
  */
 function serendipity_rewriteURL($path, $key='baseURL', $forceNone = false) {
     global $serendipity;
-    return $serendipity[$key] . ($serendipity['rewrite'] == 'none' || ($serendipity['rewrite'] != 'none' && $forceNone) ? $serendipity['indexFile'] . '?/' : '') . $path;
+    return ($serendipity[$key] ?? null) . ($serendipity['rewrite'] == 'none' || ($serendipity['rewrite'] != 'none' && $forceNone) ? $serendipity['indexFile'] . '?/' : '') . $path;
 }
 
 /**
@@ -522,7 +587,7 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
                 }
             }
 
-            $ts = serendipity_serverOffsetHour($data['entry']['timestamp']);
+            $ts = serendipity_serverOffsetHour($data['entry']['timestamp'] ?? null);
 
             $ftitle  = serendipity_makeFilename($data['title']);
             $fltitle = strtolower($ftitle);
@@ -782,7 +847,7 @@ function serendipity_getUriArguments($uri, $wildcard = false) {
 
     /* Explode the path into sections, to later be able to check for arguments and add our own */
     preg_match('/^'. preg_quote($serendipity['serendipityHTTPPath'], '/') . '(' . preg_quote($serendipity['indexFile'], '/') . '\?\/)?(' . ($wildcard ? '.+' : '[!;,_a-z0-9\-*\/%\+]+') . ')/i', $uri, $_res);
-    if (strlen($_res[2]) != 0) {
+    if (strlen($_res[2] ?? '') != 0) {
         $args = explode('/', $_res[2]);
         if ($args[0] == $indexFile || $args[0] == $serendipity['indexFile']) {
             unset($args[0]);
@@ -793,4 +858,3 @@ function serendipity_getUriArguments($uri, $wildcard = false) {
         return array();
     }
 }
-

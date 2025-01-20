@@ -34,7 +34,7 @@
             {if $entry.has_comments}
                 <li class="post_comments d-inline-block"><svg class="icon-comments" role="img" viewbox="0 0 1792 1792" width="1792" height="1792" aria-labelledby="title"><title id="title">{$entry.label_comments}</title><use xlink:href="{$serendipityHTTPPath}templates/{$template}/img/icons.svg#comments"></use></svg><a href="{$entry.link}#comments" title="{$entry.comments} {$entry.label_comments}{if $entry.has_trackbacks}, {$entry.trackbacks} {$entry.label_trackbacks}{/if}">{$entry.comments}</a></li>
             {/if}
-            {if $entry.freetag.tags.tags}
+            {if isset($entry.freetag.tags.tags) && $entry.freetag.tags.tags}
                 <li class="post_tags d-inline-block"><svg class="icon-tag" role="img" viewbox="0 0 1792 1792" width="1792" height="1792" aria-labelledby="title"><title id="title">Tags</title><use xlink:href="{$serendipityHTTPPath}templates/{$template}/img/icons.svg#tag"></use></svg>{foreach from=$entry.freetag.tags.tags item="tag"}{$tag} {/foreach}</li>
             {/if}
             </ul>
@@ -109,8 +109,8 @@
     <p class="alert alert-info" role="alert">{$CONST.NO_ENTRIES_TO_PRINT}</p>
     {/if}
 {/foreach}
-{if not $is_preview}
-    {if $staticpage_pagetitle == ''}
+{if not $is_preview and ! $is_single_entry}
+    {if ! isset($staticpage_pagetitle) || $staticpage_pagetitle == ''}
     <nav aria-label="{$footer_info}" title="{$footer_info}">
         <ul class="pagination justify-content-between">
             <li class="page-item{if !$footer_prev_page} disabled{/if}">

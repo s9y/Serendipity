@@ -87,7 +87,7 @@ class Serendipity_Import {
                 } elseif (function_exists('recode')) {
                     $out = recode('iso-8859-1..' . LANG_CHARSET, $string);
                 } elseif (LANG_CHARSET == 'UTF-8') {
-                    return utf8_encode($string);
+                    return mb_convert_encoding($string, 'UTF-8', 'ISO-8859-1');
                 } else {
                     return $string;
                 }
@@ -95,7 +95,7 @@ class Serendipity_Import {
 
             case 'UTF-8':
             default:
-                $out = utf8_decode($string);
+                $out = mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8');
                 return $out;
         }
     }
@@ -230,6 +230,7 @@ if (isset($serendipity['GET']['importFrom']) && serendipity_checkFormToken()) {
         }
     }
 } else {
+    $data['importForm'] = false;
     $importpath = S9Y_INCLUDE_PATH . 'include/admin/importers/';
     $dir        = opendir($importpath);
     $list       = array();
@@ -251,7 +252,7 @@ if (isset($serendipity['GET']['importFrom']) && serendipity_checkFormToken()) {
     $data['list'] = $list;
 }
 
-if (!is_object($serendipity['smarty'])) {
+if (!is_object($serendipity['smarty'] ?? null)) {
     serendipity_smarty_init();
 }
 

@@ -164,11 +164,13 @@
         var filename = document.getElementById(input).value;
         var $target = $('#' + output + '_preview > img');
         $target.attr('src', filename);
+        var $container = document.getElementById( output + '_preview');
+        $container.style.display = "block";
     }
 
     // Opens media db image selection in new window
     serendipity.choose_media = function(id) {
-        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[showUpload]=true&serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true');
+        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[multiselect]=false&serendipity[showUpload]=true&serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true');
     }
 
     // "Transfer" value from media db popup to form element, used for example for selecting a category-icon
@@ -329,7 +331,13 @@
         if (floating == "") {
             floating = "center";
         }
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\">";
+        
+        var lazyload = '';
+        if (imgWidth && imgHeight) {
+            lazyload = 'loading="lazy"';
+        }
+        
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " " + lazyload + " alt=\"" + alt + "\">";
 
         if ($(':input[name="serendipity[isLink]"]:checked').val() == "yes") {
             // wrap the img in a link to the image. TODO: The label in the media_chooser.tpl explains it wrong
@@ -732,6 +740,16 @@
             }
             $box.trigger('click');
         });
+        $('#formMultiCheck .multicheck').each(function() {
+            var $box = $(this);
+            var boxId = $box.attr('id');
+            if($box.is(':checked')) {
+                $(boxId).prop('checked', false);
+            } else {
+                $(boxId).prop('checked', true);
+            }
+            $box.trigger('click');
+        });
     }
 
     // Highlight/dehighlight elements in lists
@@ -740,7 +758,7 @@
     }
 
     serendipity.closeCommentPopup = function() {
-        {if $use_backendpopups || $force_backendpopups.comments}
+        {if $use_backendpopups || (isset($force_backendpopups.comments) && $force_backendpopups.comments)}
             parent.self.close();
         {else}
             window.parent.parent.$.magnificPopup.close();
@@ -748,7 +766,7 @@
     }
 
     serendipity.openPopup = function(url) {
-        {if $use_backendpopups || $force_backendpopups.images}
+        {if $use_backendpopups || (isset($force_backendpopups.images) && $force_backendpopups.images)}
             window.open(url,
                         'ImageSel',
                         'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
@@ -1044,9 +1062,6 @@ $(function() {
     // Make the timestamp readable in browser not supporting datetime-local.
     // Has no effect in those supporting it, as the timestamp is invalid in HTML5
     if($('#serendipityEntry').length > 0) {
-        if(!Modernizr.inputtypes.date) {
-            $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
-        }
         if(Modernizr.indexeddb && {$use_autosave}) {
             serendipity.startEntryEditorCache();
         }
@@ -1054,10 +1069,11 @@ $(function() {
 
     // Set entry timestamp
     $('#reset_timestamp').click(function(e) {
-        $('#serendipityNewTimestamp').val($(this).attr('data-currtime'));
-        if(!Modernizr.inputtypes.date) {
-            $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
-        }
+        var curDate = $(this).attr('data-currtime').replace(/T.*/, '');
+        var curTime = $(this).attr('data-currtime').replace(/.*T/, '');
+        $('#serendipityNewDate').val(curDate);
+        $('#serendipityNewTime').val(curTime);
+        
         e.preventDefault();
         // Inline notification, we might want to make this reuseable
         $('<span id="msg_timestamp" class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.TIMESTAMP_RESET} <a class="remove_msg" href="#msg_timestamp"><span class="icon-cancel" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
@@ -1149,7 +1165,7 @@ $(function() {
     });
 
     $('.wrap_insmedia').click(function() {
-        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[showUpload]=true&serendipity[textarea]=' + $(this).attr('data-tarea'));
+        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[multiselect]=true&serendipity[showUpload]=true&serendipity[textarea]=' + $(this).attr('data-tarea'));
     });
 
     // Entry metadata
@@ -1163,7 +1179,7 @@ $(function() {
     }
 
     // Show category selector
-    {if $use_backendpopups || $force_backendpopups.categories}
+    {if $use_backendpopups || (isset($force_backendpopups.categories) && $force_backendpopups.categories)}
         if($('#serendipityEntry').length > 0) {
             $('#select_category').click(function(e) {
                 e.preventDefault();
@@ -1230,7 +1246,7 @@ $(function() {
     };
 
     // Show tag selector
-    {if $use_backendpopups || $force_backendpopups.tags}
+    {if $use_backendpopups || (isset($force_backendpopups.tags) && $force_backendpopups.tags)}
         if($('#serendipityEntry').length > 0) {
             $('#select_tags').click(function(e) {
                 e.preventDefault();
@@ -1384,10 +1400,10 @@ $(function() {
     });
 
     // Selection for multidelete
-    $('.multidelete, .multiinsert').click(function() {
+    $('.multidelete, .multiinsert, .multicheck').click(function() {
         var $el = $(this);
         serendipity.highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
-        var selectionAmount = $('.multidelete:checked, .multiinsert:checked').length;
+        var selectionAmount = $('.multidelete:checked, .multiinsert:checked, .multiselect:checked').length;
         if (selectionAmount > 0) {
             $('#media_galleryinsert').fadeIn();
         } else {
@@ -1403,7 +1419,7 @@ $(function() {
     // When clicking the 'Insert all' button, check whether only one or multiple
     // images are selected
     $('#media_galleryinsert .image_insert').on('click', function(e) {
-        var selectionAmount = $('.multidelete:checked, .multiinsert:checked').length;
+        var selectionAmount = $('.multidelete:checked, .multiinsert:checked, .multicheck:checked').length;
         if (selectionAmount == 0) {
             e.preventDefault();
             return false;
@@ -1412,7 +1428,7 @@ $(function() {
         // Actually do a single insert
         if (selectionAmount == 1) {
             e.preventDefault();
-            var actualTargetElement = $('.multidelete:checked, .multiinsert:checked').closest('.media_file').find('.media_file_preview a').first();
+            var actualTargetElement = $('.multidelete:checked, .multiinsert:checked, .multicheck:checked').closest('.media_file').find('.media_file_preview a').first();
             // This below is a hack. Triggering actualTargetElement.click() does not work. Probably because MFP overrides click events within a modal popup.
             // So we need to do something dirty and directly access the location href. Don't tell my mom.
             location.href = actualTargetElement.attr('href');
@@ -1479,7 +1495,7 @@ $(function() {
     });
 
     // Show further links
-    {if $use_backendpopups || $force_backendpopups.links}
+    {if $use_backendpopups || (isset($force_backendpopups.links) && $force_backendpopups.links)}
         if($('#dashboard').length > 0) {
             $('.toggle_links').click(function(e) {
                 $('#s9y_links').toggleClass('mfp-hide');
@@ -1495,7 +1511,7 @@ $(function() {
     {/if}
 
     // Media file actions
-    {if $use_backendpopups || $force_backendpopups.images}
+    {if $use_backendpopups || (isset($force_backendpopups.images) && $force_backendpopups.images)}
     $('.media_fullsize').click(function(e) {
         e.preventDefault();
         var $el = $(this);

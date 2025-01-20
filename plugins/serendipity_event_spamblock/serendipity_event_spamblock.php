@@ -25,7 +25,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.89.1');
+        $propbag->add('version',       '1.89.5');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -672,7 +672,9 @@ class serendipity_event_spamblock extends serendipity_event
 
         $ret = false;
         require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
-        if (function_exists('serendipity_request_start')) serendipity_request_start();
+        if (function_exists('serendipity_request_start')) {
+            serendipity_request_start();
+        }
 
         // this switch statement is a leftover from blogg.de support (i.e. there were more options than just one). Leaving it in place in case we get more options again in the future.
         switch($where) {
@@ -700,7 +702,9 @@ class serendipity_event_spamblock extends serendipity_event
                 break;
         }
 
-        if (function_exists('serendipity_request_end')) serendipity_request_end();
+        if (function_exists('serendipity_request_end')) {
+            serendipity_request_end();
+        }
         return $ret;
     }
 
@@ -979,7 +983,7 @@ class serendipity_event_spamblock extends serendipity_event
                             if (!is_array($auth)) {
                                 // Filter authors names, Filter URL, Filter Content, Filter Emails, Check for maximum number of links before rejecting
                                 // moderate false
-                                if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData)) {
+                                if(false === $this->wordfilter($logfile, $eventData, $wordmatch ?? null, $addData)) {
                                     // already there #$this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS, $addData);
                                     // already there #$eventData = array('allow_comments' => false);
                                     // already there #$serendipity['messagestack']['emails'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
@@ -1055,31 +1059,32 @@ class serendipity_event_spamblock extends serendipity_event
                                 $tipval_method = ($trackback_ipvalidation_option == 'reject'?'REJECTED':'MODERATE');
                                 // Getting host from url successfully?
                                 if (!is_array($parts)) { // not a valid URL
-                                    $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url'], '', ''), $addData);
+                                    $this->log($logfile, $eventData['id'], $tipval_method, PLUGIN_EVENT_SPAMBLOCK_REASON_URLINVALID, $addData);
                                     if ($trackback_ipvalidation_option == 'reject') {
                                         $eventData = array('allow_comments' => false);
-                                        $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
+                                        $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_REASON_URLINVALID;
                                         return false;
                                     } else {
                                         $eventData['moderate_comments'] = true;
                                         $serendipity['csuccess']        = 'moderate';
-                                        $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
+                                        $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_REASON_URLINVALID;
                                     }
-                                }
-                                $trackback_ip = preg_replace('/[^0-9.]/', '', gethostbyname($parts['host']) );
-                                $sender_ip = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
-                                $sender_ua = ($debug ? ', ua="' . $_SERVER['HTTP_USER_AGENT'] . '"' : '') ;
-                                // Is host ip and sender ip matching?
-                                if ($trackback_ip != $sender_ip) {
-                                    $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip  . $sender_ua), $addData);
-                                    if ($trackback_ipvalidation_option == 'reject') {
-                                        $eventData = array('allow_comments' => false);
-                                        $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
-                                        return false;
-                                    } else {
-                                        $eventData['moderate_comments'] = true;
-                                        $serendipity['csuccess']        = 'moderate';
-                                        $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                } else {
+                                    $trackback_ip = preg_replace('/[^0-9.]/', '', gethostbyname($parts['host']) );
+                                    $sender_ip = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
+                                    $sender_ua = ($debug ? ', ua="' . $_SERVER['HTTP_USER_AGENT'] . '"' : '') ;
+                                    // Is host ip and sender ip matching?
+                                    if ($trackback_ip != $sender_ip) {
+                                        $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip  . $sender_ua), $addData);
+                                        if ($trackback_ipvalidation_option == 'reject') {
+                                            $eventData = array('allow_comments' => false);
+                                            $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                            return false;
+                                        } else {
+                                            $eventData['moderate_comments'] = true;
+                                            $serendipity['csuccess']        = 'moderate';
+                                            $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                        }
                                     }
                                 }
                             }
@@ -1145,7 +1150,7 @@ class serendipity_event_spamblock extends serendipity_event
                             }
                         }
 
-                        if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData)) {
+                        if(false === $this->wordfilter($logfile, $eventData, $wordmatch ?? null, $addData)) {
                             return false;
                         }
 
@@ -1290,7 +1295,7 @@ class serendipity_event_spamblock extends serendipity_event
                         echo serendipity_setFormToken('form');
                     }
 
-                    if ($timeout) $_SESSION['serendipity_comment_timeout'] = time();
+                    if ($timeout && !isset($serendipity['POST']['preview'])) $_SESSION['serendipity_comment_timeout'] = time();
 
 
                     // Check whether to allow comments from registered authors
@@ -1300,7 +1305,7 @@ class serendipity_event_spamblock extends serendipity_event
 
                     if ($show_captcha) {
                         echo '<div class="serendipity_commentDirection serendipity_comment_captcha">';
-                        if (!isset($serendipity['POST']['preview']) || strtolower($serendipity['POST']['captcha'] != strtolower($_SESSION['spamblock']['captcha']))) {
+                        if (!isset($serendipity['POST']['preview']) || !isset($_SESSION['spamblock']['captcha']) || strtolower($serendipity['POST']['captcha'] != strtolower($_SESSION['spamblock']['captcha']))) {
                             echo '<br />' . PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC . '<br />';
                             echo $this->show_captcha($use_gd);
                             echo '<br />';
@@ -1442,15 +1447,25 @@ class serendipity_event_spamblock extends serendipity_event
                         $eventData['action_more'] .= ' <a class="button_link actions_extra" title="' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamNotSpam]=' . $eventData['id'] . $addData . '#' . $clink . '"><span class="icon-ok-circled" aria-hidden="true"></span><span class="visuallyhidden"> ' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '</span></a>';
                     }
 
+
+                    if (! isset($eventData['action_author'])) {
+                        $eventData['action_author'] = '';
+                    } 
                     $eventData['action_author'] .= ' <a class="button_link" title="' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockAuthor]=' . $eventData['id'] . $addData . $randomString . '#' . $clink . '"><span class="icon-' . ($author_is_filtered ? 'ok-circled' : 'block') .'" aria-hidden="true"></span><span class="visuallyhidden"> ' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '</span></a>';
 
                     if (!empty($eventData['url'])) {
                         $url_is_filtered    = $this->checkFilter('urls', $eventData['url']);
+                        if (! isset($eventData['action_url'])) {
+                            $eventData['action_url'] = '';
+                        } 
                         $eventData['action_url']    .= ' <a class="button_link" title="' . ($url_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL : PLUGIN_EVENT_SPAMBLOCK_ADD_URL) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockURL]=' . $eventData['id'] . $addData . $randomString . '#' . $clink . '"><span class="icon-' . ($url_is_filtered ? 'ok-circled' : 'block') .'" aria-hidden="true"></span><span class="visuallyhidden"> ' . ($url_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL : PLUGIN_EVENT_SPAMBLOCK_ADD_URL) . '</span></a>';
                     }
 
                     if (!empty($eventData['email'])) {
                         $email_is_filtered    = $this->checkFilter('emails', $eventData['email']);
+                        if (! isset($eventData['action_email'])) {
+                            $eventData['action_email'] = '';
+                        } 
                         $eventData['action_email']    .= ' <a class="button_link" title="' . ($email_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL : PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockEmail]=' . $eventData['id'] . $addData . $randomString . '#' . $clink . '"><span class="icon-' . ($email_is_filtered ? 'ok-circled' : 'block') .'" aria-hidden="true"></span><span class="visuallyhidden"> ' . ($email_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL : PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL) . '</span></a>';
                     }
                     break;
@@ -1477,8 +1492,6 @@ class serendipity_event_spamblock extends serendipity_event
 
         // Check for word filtering
         if ($filter_type = $this->get_config('contentfilter_activate', 'moderate')) {
-
-            if($ftc) $filter_type = 'reject';
 
             // Filter authors names
             $filter_authors = explode(';', $this->get_config('contentfilter_authors', $this->filter_defaults['authors']));
@@ -1536,7 +1549,7 @@ class serendipity_event_spamblock extends serendipity_event
                     if (empty($filter_body)) {
                         continue;
                     }
-                    if (preg_match('@(' . $filter_body . ')@i', $addData['comment'], $wordmatch)) {
+                    if (preg_match('@(' . preg_quote($filter_body) . ')@i', $addData['comment'], $wordmatch)) {
                         if ($filter_type == 'moderate') {
                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ': ' . $wordmatch[1], $addData);
                             $eventData['moderate_comments'] = true;
@@ -1580,7 +1593,7 @@ class serendipity_event_spamblock extends serendipity_event
 
         // Check for maximum number of links in comment body to reject
         $link_count = substr_count(strtolower($addData['comment']), 'http://');
-        if ($links_reject > 0 && $link_count > $links_reject) {
+        if (($links_reject ?? 0) > 0 && ($link_count ?? 0) > $links_reject) {
             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_REJECT, $addData);
             $eventData = array('allow_comments' => false);
             $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
@@ -1588,7 +1601,7 @@ class serendipity_event_spamblock extends serendipity_event
         }
         
         // Check for maximum number of links before forcing moderation
-        if ($links_moderate > 0 && $link_count > $links_moderate) {
+        if (($links_moderate ?? 0) > 0 && ($link_count ?? 0) > ($links_moderate ?? 0)) {
             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_MODERATE, $addData);
             $eventData['moderate_comments'] = true;
             $serendipity['csuccess']        = 'moderate';

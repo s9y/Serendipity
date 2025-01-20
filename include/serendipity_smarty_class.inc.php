@@ -12,15 +12,12 @@
 class Serendipity_Smarty_Security_Policy extends Smarty_Security
   {
     // these are the allowed functions only. - default as is
-    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists');
+    public $php_functions = array('isset', 'empty', 'sizeof', 'count', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists');
     // to disable all PHP functions
     #public $php_functions = null;
 
-    // remove PHP tags
-    public $php_handling = Smarty::PHP_REMOVE; // = 2
-
     // set allowed modifiers only. (default = array( 'escape', 'count' );)
-    public $php_modifiers = array('escape', 'sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat', 'nl2br');
+    public $php_modifiers = array('escape', 'rand', 'str_repeat', 'nl2br');
 
     public $allow_constants = true;
 
@@ -123,7 +120,7 @@ class Serendipity_Smarty extends Smarty
         $template_dirs   = array();
         
         // first add template path
-        $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];
+        $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . ($serendipity['template'] ?? null);
         // then fallback engines (which should never be a comma separated list)
         if ($template_engine) {
             $p = explode(',', $template_engine);
@@ -214,9 +211,9 @@ class Serendipity_Smarty extends Smarty
 
         // set smarty error reporting. General error_reporting is set in serendipity/serendipity_config.inc.php
         $this->error_reporting = E_ALL & ~(E_NOTICE|E_STRICT);
-
-        // we use our own error_handler and get in conflicts with smarty?
-        // $this->muteExpectedErrors();
+        // Avoid a multitude of warnings when using Smarty on a newer PHP version, liek when we jumped
+        // to PHP 8:
+        $this->muteUndefinedOrNullWarnings();
     }
 
     /*

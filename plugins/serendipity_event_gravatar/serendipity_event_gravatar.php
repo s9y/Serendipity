@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 // Actual version of this plugin
-@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.62.3'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
+@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.63.1'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
 
 // Defines the maximum available method  slots in the configuration.
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
@@ -458,7 +458,7 @@ class serendipity_event_gravatar extends serendipity_event
         $useSmarty = serendipity_db_bool($this->get_config('smartyimage', 'false'));
 
         // comments sidebar plugin doesn't support smarty, so switch it off, if detected
-        if ($addData['from'] == 'serendipity_plugin_comments:generate_content') {
+        if (is_array($addData) && $addData['from'] == 'serendipity_plugin_comments:generate_content') {
            if (!serendipity_db_bool($this->get_config('recent_entries', 'true'))) {
                return false;
            }
@@ -588,7 +588,9 @@ class serendipity_event_gravatar extends serendipity_event
         $methodnr = 1;
 
         // Assure existance of cache directory
-        @mkdir($this->getCacheDirectory());
+        if (! file_exists($this->getCacheDirectory())) {
+            mkdir($this->getCacheDirectory());
+        }
         $default = $this->getDefaultImageConfiguration();
 
         // load configuration of last run
@@ -1212,7 +1214,9 @@ class serendipity_event_gravatar extends serendipity_event
         $this->log("cacheAvatar: " . $cache_file);
 
         // Save image
-        @mkdir($this->getCacheDirectory());
+        if (! file_exists($this->getCacheDirectory())) {
+            mkdir($this->getCacheDirectory());
+        }
         $fp = @fopen($cache_file, 'wb');
         if (!$fp) {
             $this->log("! Error writing cache file $cache_file");
@@ -1369,7 +1373,7 @@ class serendipity_event_gravatar extends serendipity_event
      */
     function urlencode($url)
     {
-        $hash = md5($this->instance_id . $url);
+        $hash = md5($this->instance . $url);
         return $hash . str_replace ('_', '%5F', urlencode($url));
     }
 
@@ -1378,7 +1382,7 @@ class serendipity_event_gravatar extends serendipity_event
         $hash     = substr($url, 0, 32);
         $real_url = urldecode(substr($url, 32));
 
-        if ($hash == md5($this->instance_id . $real_url)) {
+        if ($hash == md5($this->instance . $real_url)) {
             // Valid hash was found.
             return $real_url;
         } else {
@@ -1420,7 +1424,7 @@ class serendipity_event_gravatar extends serendipity_event
     {
         global $serendipity;
 
-        if ($this->defaultImageConfigurationdefault === null) {
+        if (($this->defaultImageConfigurationdefault ?? null) === null) {
             $this->defaultImageConfigurationdefault = array(
                 'defaultavatar' => ($this->get_config('defaultavatar')==''?'': $this->get_config('defaultavatar', '')),
                 'size'          => $this->get_config('size', '40'),

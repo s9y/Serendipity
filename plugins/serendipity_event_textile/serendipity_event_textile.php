@@ -18,7 +18,7 @@ class serendipity_event_textile extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_TEXTILE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team', 'Lars Strojny');
-        $propbag->add('version',       '1.8.3');
+        $propbag->add('version',       '1.8.4');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -151,7 +151,7 @@ class serendipity_event_textile extends serendipity_event
 
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], 'true'))) {
-                            if ($eventData['properties']['ep_disable_markup_' . $this->instance] ||
+                            if (($eventData['properties']['ep_disable_markup_' . $this->instance] ?? false) ||
                                     isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
                                 continue;
                             }
@@ -161,7 +161,7 @@ class serendipity_event_textile extends serendipity_event
 
                             $blocks = array();
                             foreach($preserve_tags as $tag) {
-                                if (preg_match_all('/(<'.$tag.'[^>]?>.*<\/'.$tag.'>)/msU', $eventData[$element], $matches )) {
+                                if (preg_match_all('/(<'.$tag.'[^>]?>.*<\/'.$tag.'>)/msU', $eventData[$element] ?? null, $matches )) {
                                     foreach($matches[1] as $match) {
                                         $blocks[] = $match;
                                     }
@@ -179,7 +179,7 @@ class serendipity_event_textile extends serendipity_event
                             if (serendipity_db_bool($this->get_config('unescape'))) {
                                 $eventData[$element] = str_replace('&quot;', '"', $eventData[$element]);
                             }
-                            $eventData[$element] = $this->textile($eventData[$element]);
+                            $eventData[$element] = $this->textile($eventData[$element] ?? null);
 
                             /* each block will now be "<code>BLOCK::2</code>"
                              * so look for those place holders and replace

@@ -22,16 +22,17 @@ if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
 if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
     $serendipity['POST']['group'] = serendipity_addGroup($serendipity['POST']['name']);
     $perms = serendipity_getAllPermissionNames();
-    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
+    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'] ?? null, $serendipity['POST']['forbidden_hooks'] ?? null);
     $data['save_new'] = true;
     $data['group_id'] = $serendipity['POST']['group'];
+    $group = serendipity_fetchGroup($serendipity['POST']['group']);
     $data['group'] = $group;
 }
 
 /* Edit a group */
 if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     $perms = serendipity_getAllPermissionNames();
-    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
+    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, ($serendipity['POST']['forbidden_plugins'] ?? null), ($serendipity['POST']['forbidden_hooks'] ?? null));
     $data['save_edit'] = true;
     $data['name'] = $serendipity['POST']['name'];
 }
@@ -70,11 +71,11 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $ser
     $data['from'] = $from;
 
     $allusers = serendipity_fetchUsers();
-    $users    = serendipity_getGroupUsers($from['id']);
+    $users    = serendipity_getGroupUsers($from['id'] ?? null);
 
     $selected = array();
     foreach((array)$users AS $user) {
-        $selected[$user['id']] = true;
+        $selected[$user['id'] ?? null] = true;
     }
     $data['selected'] = $selected;
     $data['allusers'] = $allusers;
@@ -84,9 +85,15 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $ser
     $data['perms'] = $perms;
     foreach($perms AS $perm => $userlevels) {
         if (defined('PERMISSION_' . strtoupper($perm))) {
-            list($name, $note) = explode(":", constant('PERMISSION_' . strtoupper($perm)));
-            $data['perms'][$perm]['permission_name'] = $name;
-            $data['perms'][$perm]['permission_note'] = $note;
+            if (stripos(':', constant('PERMISSION_' . strtoupper($perm))) !== false) {
+                list($name, $note) = explode(":", constant('PERMISSION_' . strtoupper($perm)));
+                $data['perms'][$perm]['permission_name'] = $name;
+                $data['perms'][$perm]['permission_note'] = $note;
+            } else {
+                # in case a permission has not the right value, that it misses the :
+                $data['perms'][$perm]['permission_name'] = constant('PERMISSION_' . strtoupper($perm));
+                $data['perms'][$perm]['permission_note'] = '';
+            }
         } else {
             $data['perms'][$perm]['permission_name'] = $perm;
         }
@@ -123,6 +130,17 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $ser
     $data['group'] = $group;
     $data['formToken'] = serendipity_setFormToken();
 }
+
+# php 8 compat section
+if (! isset($data['delete_yes'])) { $data['delete_yes'] = null; }
+if (! isset($data['save_new'])) { $data['save_new'] = null; }
+if (! isset($data['save_edit'])) { $data['save_edit'] = null; }
+if (! isset($data['edit'])) { $data['edit'] = null; }
+if (! isset($data['new'])) { $data['new'] = null; }
+if (! isset($data['start'])) { $data['start'] = null; }
+if (! isset($data['indent'])) { $data['indent'] = ''; }
+if (! isset($data['in_indent'])) { $data['in_indent'] = false; }
+if (! isset($data['enablePluginACL'])) { $data['enablePluginACL'] = null; }
 
 echo serendipity_smarty_show('admin/groups.inc.tpl', $data);
 

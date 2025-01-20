@@ -40,7 +40,7 @@ function serendipity_groupname($group) {
  * @return boolean  Return code for array comparison
  */
 function serendipity_pluginListSort($x, $y) {
-    return strnatcasecmp($x['name'] . ' - ' . $x['description'], $y['name'] . ' - ' . $y['description']);
+    return strnatcasecmp($x['name'] . ' - ' . ($x['description'] ?? ''), $y['name'] . ' - ' . ($y['description'] ?? ''));
 }
 
 /**
@@ -248,6 +248,8 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
     if ($showSubmit && $postKey != 'plugin') {
         $data['showSubmit_head'] = true;
+    } else {
+        $data['showSubmit_head'] = false;
     }
 
     if ($showTable) {
@@ -286,12 +288,12 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
             }
         }
 
-        if (isset($_POST['serendipity'][$postkey][$config_item])) {
-            if (is_array($_POST['serendipity'][$postkey][$config_item])) {
-                $hvalue = $_POST['serendipity'][$postkey][$config_item];
+        if (isset($_POST['serendipity'][$postKey][$config_item])) {
+            if (is_array($_POST['serendipity'][$postKey][$config_item])) {
+                $hvalue = $_POST['serendipity'][$postKey][$config_item];
                 array_walk($hvalue, 'serendipity_specialchars');
             } else {
-                $hvalue = serendipity_specialchars($_POST['serendipity'][$postkey][$config_item]);
+                $hvalue = serendipity_specialchars($_POST['serendipity'][$postKey][$config_item]);
             }
         } else {
             $hvalue = serendipity_specialchars($value);
@@ -311,12 +313,15 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $data['postKey']     = $postKey;
         $data['config_item'] = $config_item;
 
+        if (! isset($data['backend_wysiwyg'])) { $data['backend_wysiwyg'] = null; }
+
         $assign_plugin_config = function($data) use (&$plugin_options, $tfile, $config_item) {
         $plugin_options[$config_item] = array(
                                 'config' => serendipity_smarty_show($tfile, $data),
                                 'ctype'  => $data['ctype']
                         );
         };
+        
 
 
         switch ($ctype) {
@@ -492,7 +497,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 // I can't get it to work unless there's a class of
                 // pluginmanager_container on the ol, either.
                 // The drag-n-drop returns the list of IDs in order.
-                $data['sequencejs_output'] = $sequencejs_output = $serendipity['sequencejs_output'];
+                $data['sequencejs_output'] = $sequencejs_output = $serendipity['sequencejs_output'] ?? null;
                 if (!$sequencejs_output) {
                     $serendipity['sequencejs_output'] = true;
                 }
@@ -659,6 +664,10 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         serendipity_plugin_api::hook_event('backend_wysiwyg_nuggets', $ev);
         $data['ev'] = $ev;
     }
+
+    # php 8 compat section
+    if (! isset($data['showExample'])) { $data['showExample'] = null; }
+    if (! isset($data['spawnNuggets'])) { $data['spawnNuggets'] = null; }
 
     return serendipity_smarty_show('admin/plugin_config.tpl', $data);
 }

@@ -2,7 +2,7 @@
     {if NOT $media.manage}
         {* ML got called for inserting media *}
             {if $file.is_image AND $file.full_thumb}
-                {if $media.textarea || $media.htmltarget}
+                {if (isset($media.textarea) && $media.textarea) || (isset($media.htmltarget) && $media.htmltarget)}
                 {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[htmltarget]={$media.htmltarget}"}
                 {else}
                     {if $file.url}
@@ -15,7 +15,7 @@
                 {$img_alt="{$file.realname}"}
                 
             {elseif $file.is_image AND $file.hotlink}
-                {if $media.textarea}
+                {if (isset($media.textarea) && $media.textarea)}
                     {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[htmltarget]={$media.htmltarget}"}
                 {else}
                     {if $file.url}
@@ -26,7 +26,7 @@
                     {$img_title="{$file.path}"}
                     {$img_alt="{$file.realname}"}
             {else}
-                {if $media.textarea}
+                {if (isset($media.textarea) && $media.textarea)}
                     {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[htmltarget]={$media.htmltarget}"}
                 {else}
                     {if $file.url}
@@ -61,11 +61,11 @@
                     {if $media.manage AND $media.multiperm}
 
                     <div class="form_check">
-                        <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
-                        <label for="multidelete_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
+                        <input id="multicheck_image{$file.id}" class="multicheck" name="serendipity[multicheck][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
+                        <label for="multicheck_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                     </div>
                     {else}
-                        {if NOT $media.manage}
+                        {if NOT $media.manage && $media.multiselect}
                             <div class="form_check">
                                 <input id="multiinsert_image{$file.id}" class="multiinsert" name="serendipity[fids][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
                                 <label for="multiinsert_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
@@ -73,7 +73,7 @@
                         {/if}
                     {/if}
 
-                    <h3 title="{$file.realname}">{$file.realname|truncate:50:"&hellip;":true}{if $file.orderkey != ''}: {$file.orderkey|escape}{/if}</h3>
+                    <h3 title="{$file.realname}">{$file.realname|truncate:50:"&hellip;":true}{if (isset($file.orderkey) && $file.orderkey != '')}: {$file.orderkey|escape}{/if}</h3>
                     {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
 
                 </header>
@@ -87,12 +87,12 @@
                             <br />
                             {if NOT $media.manage}
                                 {* we need a link to go to the next step when inserting into an entry *}
-                                <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
+                                <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{if isset($link)}{$link}{/if}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
                                     {$CONST.VIDEO}
                                 </a>
                             {/if}
                         {else}
-                            <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
+                            <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{if isset($link)}{$link}{/if}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
                                 {* even files that are not images get aplaceholder image from the backend *}    
                                 <img src="{$img_src}" title="{$img_title}" alt="{$img_alt}">
                             </a>
@@ -210,10 +210,10 @@
                         <label for="newDir{$file@key}">{$CONST.FILTER_DIRECTORY}</label>
                         <input type="hidden" name="serendipity[oldDir][{$file@key}]" value="{$file.path|escape}">
                         <select id="newDir{$file@key}" name="serendipity[newDir][{$file@key}]">
-                            <option{if ($file.path == $folder.relpath)} selected{/if} value="">{$CONST.BASE_DIRECTORY}</option>
+                            <option{if (isset($folder) && $file.path == $folder.relpath)} selected{/if} value="">{$CONST.BASE_DIRECTORY}</option>
                         {foreach $media.paths AS $folder}
 
-                            <option{if ($file.path == $folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
+                            <option{if ($file.path == $folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{if isset($folder.name)}{$folder.name}{/if}</option>
                         {/foreach}
 
                         </select>
@@ -228,7 +228,7 @@
                     <ul class="clearfix plainList">
                     {foreach $file.base_keywords AS $keyword_cells}
                         {foreach $keyword_cells AS $keyword}
-                        {if $keyword.name}
+                        {if isset($keyword.name) and $keyword.name}
 
                         <li>
                             <input id="mediaKeyword{$keyword.name}{$file@key}" name="serendipity[mediaKeywords][{$file@key}][{$keyword.name}]" type="checkbox" value="true"{if $keyword.selected} checked="checked"{/if}>

@@ -41,7 +41,7 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
 /**
  * Perform a DB Layer SQL query.
  *
- * This function returns values dependin on the input parameters and the result of the query.
+ * This function returns values depending on the input parameters and the result of the query.
  * It can return:
  *   false or a string if there was an error (depends on $expectError),
  *   true if the query succeeded but did not generate any rows
@@ -189,7 +189,7 @@ function serendipity_db_matched_rows() {
  */
 function serendipity_db_escape_string($string) {
     global $serendipity;
-    return mysqli_escape_string($serendipity['dbConn'], $string);
+    return mysqli_real_escape_string($serendipity['dbConn'], $string);
 }
 
 /**
@@ -250,7 +250,7 @@ function serendipity_db_reconnect() {
     $use_charset = '';
     if (isset($serendipity['dbCharset']) && !empty($serendipity['dbCharset'])) {
         $use_charset = $serendipity['dbCharset'];
-        @define('SQL_CHARSET_INIT', true);
+        if (!defined('SQL_CHARSET_INIT')) { define('SQL_CHARSET_INIT', true); }
     } elseif (defined('SQL_CHARSET') && $serendipity['dbNames'] && !defined('SQL_CHARSET_INIT')) {
         $use_charset = SQL_CHARSET;
     }
@@ -275,12 +275,12 @@ function serendipity_db_schema_import($query) {
     global $serendipity;
     
     $search[] = '{UTF_8}';
-    if (  $_POST['charset'] == 'UTF-8/' ||
-          $serendipity['charset'] == 'UTF-8/' ||
-          $serendipity['POST']['charset'] == 'UTF-8/' ||
+    if (  isset($_POST['charset']) && $_POST['charset'] == 'UTF-8/' ||
+          isset($serendipity['charset']) && $serendipity['charset'] == 'UTF-8/' ||
+          isset($serendipity['POST']['charset']) && $serendipity['POST']['charset'] == 'UTF-8/' ||
           LANG_CHARSET == 'UTF-8' ) {
         if (serendipity_utf8mb4_ready()) {
-            $replace[] = 'ROW_FORMAT=DYNAMIC /*!40100 CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci */';
+            $replace[] = 'ROW_FORMAT=DYNAMIC /*!40100 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */';
         } else {
             # in old versions we stick to the three byte pseudo utf8 to not trip
             # over the max index restriction of 1000 bytes
@@ -291,19 +291,34 @@ function serendipity_db_schema_import($query) {
     }
     
 
-    if (serendipity_utf8mb4_ready()) {
-        # InnoDB enables us to use utf8mb4 with the higher max index size
-        serendipity_db_query("SET storage_engine=INNODB");
-    } else {
-        # Before 5.6.4/10.0.5 InnoDB did not support fulltext indexes, which we use,
-        # thus we stay with MyISAM here
-        serendipity_db_query("SET storage_engine=MYISAM");
+    $mysql_version = mysqli_get_server_info($serendipity['dbConn']);
+    if (serendipity_is_maria() || version_compare($mysql_version, '5.7', '<')) {
+        # MySQL has dropped the storage_engine setting in 5.7, so we only need to set it in MariaDB or earlier MySQL version
+        if (serendipity_utf8mb4_ready()) {
+            # InnoDB enables us to use utf8mb4 with the higher max index size
+            serendipity_db_query("SET storage_engine=INNODB");
+        } else {
+            # Before 5.6.4/10.0.5 InnoDB did not support fulltext indexes, which we use,
+            # thus we stay with MyISAM here
+            serendipity_db_query("SET storage_engine=MYISAM");
+        }
     }
 
     $query = trim(str_replace($search, $replace, $query));
     if ($query[0] == '@') {
         // Errors are expected to happen (like duplicate index creation)
-        return serendipity_db_query(substr($query, 1), false, 'both', false, false, false, true);
+        // for PHP 8.1 and later, duplicate index creation throws a fatal Uncaught mysqli_sql_exception, so catch it 
+        try {
+            $result = serendipity_db_query(substr($query, 1), false, 'both', false, false, false, true);
+        } catch ( mysqli_sql_exception $e) {
+            $msg = $e->getMessage();
+            if (str_contains($msg, 'Duplicate key name') && str_contains($query, 'CREATE FULLTEXT INDEX')) {
+                return $result;
+            } else {
+                throw $e;
+            }
+        }
+        return $result;
     } else {
         return serendipity_db_query($query);
     }
@@ -447,12 +462,16 @@ function serendipity_db_probe($hash, &$errs) {
 
     $function = 'mysqli_connect';
     $connparts = explode(':', $hash['dbHost']);
-    if (!empty($connparts[1])) {
-        // A "hostname:port" connection was specified
-        $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass'], $hash['dbName'], $connparts[1]);
-    } else {
-        // Connect with default ports
-        $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass']);
+    try {
+        if (!empty($connparts[1])) {
+            // A "hostname:port" connection was specified
+            $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass'], $hash['dbName'], $connparts[1]);
+        } else {
+            // Connect with default ports
+            $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass']);
+        }
+    } catch (mysqli_sql_exception $e) {
+        return false;
     }
 
     if (!$c) {
@@ -481,6 +500,17 @@ function serendipity_db_probe($hash, &$errs) {
  */
 function serendipity_db_concat($string) {
     return 'concat(' . $string . ')';
+}
+
+// Return true if database is MariaDB, false if it is MySQL
+function serendipity_is_maria() {
+    global $serendipity;
+    
+    $mysql_version = mysqli_get_server_info($serendipity['dbConn']);
+    if (strpos($mysql_version, 'MariaDB') !== false) {
+        return true;
+    }
+    return false;
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

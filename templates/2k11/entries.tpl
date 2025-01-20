@@ -1,4 +1,5 @@
 {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
+{if isset($entries)}
 {foreach from=$entries item="dategroup"}
     {foreach from=$dategroup.entries item="entry"}
     {assign var="entry" value=$entry scope="parent"}
@@ -6,17 +7,17 @@
         <header class="clearfix">
             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
 
-            <span class="serendipity_byline block_level"><span class="single_user">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} </span><time datetime="{$entry.timestamp|@serendipity_html5time}">{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
+            <span class="serendipity_byline block_level"><span class="single_user">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} </span><time datetime="{$entry.timestamp|@serendipity_html5time}">{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if 'is_entry_owner'|array_key_exists:$entry and $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
         </header>
 
         <div class="clearfix content serendipity_entry_body">
         {if $entry.categories}{foreach from=$entry.categories item="entry_category"}{if $entry_category.category_icon}<a href="{$entry_category.category_link}"><img class="serendipity_entryIcon" title="{$entry_category.category_name|escape}{$entry_category.category_description|@emptyPrefix}" alt="{$entry_category.category_name|escape}" src="{$entry_category.category_icon|escape}"></a>{/if}{/foreach}{/if}
         {$entry.body}
-        {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
+        {if 'has_extended'|array_key_exists:$entry and $entry.has_extended and not $is_single_entry and not $entry.is_extended}
         <a class="read_more block_level" href="{$entry.link}#extended">{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title}</a>
         {/if}
         </div>
-        {if $entry.is_extended}
+        {if 'is_extended'|array_key_exists:$entry and $entry.is_extended}
         <div id="extended" class="clearfix content">
         {$entry.extended}
         </div>
@@ -29,24 +30,26 @@
         {if $entry.categories}
             <span class="visuallyhidden">{$CONST.CATEGORIES}: </span>{foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
         {/if}
-        {if $entry.categories and ($entry.has_comments or $entry.has_disqus)} | {/if}
-        {if ($entry.has_comments or $entry.has_disqus)}
-        {if $entry.has_disqus }
+        {if $entry.categories and (('has_comments'|array_key_exists:$entry and $entry.has_comments) or ('has_disqus'|array_key_exists:$entry and $entry.has_disqus))} | {/if}
+        {if (('has_comments'|array_key_exists:$entry and $entry.has_comments) or ('has_disqus'|array_key_exists:$entry and $entry.has_disqus))}
+        {if ('has_disqus'|array_key_exists:$entry and $entry.has_disqus) }
             {$entry.comments}{if $entry.has_trackbacks}, <a href="{$entry.link}#trackbacks">{$entry.trackbacks} {$entry.label_trackbacks}</a>{/if}
         {else}
             <a href="{$entry.link}#comments" title="{$entry.comments} {$entry.label_comments}{if $entry.has_trackbacks}, {$entry.trackbacks} {$entry.label_trackbacks}{/if}">{$entry.comments} {$entry.label_comments}</a>
         {/if}
         {/if}
-        {if $entry.url_tweetthis}
+        {if ('url_tweetthis'|array_key_exists:$entry and $entry.url_tweetthis)}
             | <a href="{$entry.url_tweetthis}" title="{$CONST.TWOK11_TWEET_THIS}">Twitter</a>
         {/if}
-        {if $entry.url_dentthis}
+        {if ('url_dentthis'|array_key_exists:$entry and $entry.url_dentthis)}
             | <a href="{$entry.url_dentthis}" title="{$CONST.TWOK11_DENT_THIS}">Identica</a>
         {/if}
-        {if $entry.url_shorturl}
+        {if ('url_shorturl'|array_key_exists:$entry and $entry.url_shorturl)}
             | <a href="{$entry.url_shorturl}" title="{$CONST.TWOK11_SHORT_URL_HINT}" class="short-url">{$CONST.TWOK11_SHORT_URL}</a>
         {/if}
-            {$entry.add_footer}
+            {if 'add_footer'|array_key_exists:$entry}
+                {$entry.add_footer}
+            {/if}
         </footer>
 
         <!--
@@ -98,7 +101,7 @@
             </p>
 
             {serendipity_printComments entry=$entry.id mode=$entry.viewmode}
-        {if $entry.is_entry_owner}
+        {if 'is_entry_owner'|array_key_exists:$entry and $entry.is_entry_owner}
             <p class="manage_comments">
             {if $entry.allow_comments}
             <a href="{$entry.link_deny_comments}">{$CONST.COMMENTS_DISABLE}</a>
@@ -125,15 +128,22 @@
         </section>
 
     {/if}
-    {$entry.backend_preview}
+    {if 'backend_preview'|array_key_exists:$entry}
+        {$entry.backend_preview}
+    {/if}
     </article>
     {/foreach}
 {foreachelse}
-    {if not $plugin_clean_page}
+    {if isset($plugin_clean_page) and not $plugin_clean_page}
     <p class="nocontent">{$CONST.NO_ENTRIES_TO_PRINT}</p>
     {/if}
 {/foreach}
-{if $footer_info or $footer_prev_page or $footer_next_page}
+{else}
+    {if isset($plugin_clean_page) and not $plugin_clean_page}
+    <p class="nocontent">{$CONST.NO_ENTRIES_TO_PRINT}</p>
+    {/if}
+{/if}
+{if isset($footer_info) and $footer_info or isset($footer_prev_page) and $footer_prev_page or isset($footer_next_page) and $footer_next_page}
     <nav class="serendipity_pagination block_level">
         <h2 class="visuallyhidden">{$CONST.TWOK11_PAG_TITLE}</h2>
 

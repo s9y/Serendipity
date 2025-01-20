@@ -36,7 +36,7 @@ class template_option
                                     WHERE okey = 't_" . serendipity_db_escape_string($serendipity['template']) . "'
                                       AND name = '" . serendipity_db_escape_string($item) . "'");
 
-        if ($this->config[$item]['scope'] == 'global') {
+        if (($this->config[$item]['scope'] ?? '') == 'global') {
             serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
                                    WHERE okey = 't_global'
                                      AND name = '" . serendipity_db_escape_string($item) . "'");
@@ -86,7 +86,7 @@ if (($serendipity['GET']['adminAction'] == 'install' || $serendipity['GET']['adm
         // template_engine was set by default to default, which screws up the fallback chain (to the default-template first)
         // The "Engine" now only applies to FRONTEND themes. Backend themes will always fall back to our default backend theme only, to ensure proper backend operation.
         serendipity_set_config_var('template_engine', null);
-        if ($themeInfo['engine']) {
+        if ($themeInfo['engine'] ?? false) {
             serendipity_set_config_var('template_engine', $themeInfo['engine']);
         }
     }
@@ -131,7 +131,7 @@ if (is_array($template_config)) {
     serendipity_plugin_api::hook_event('backend_templates_configuration_top', $template_config);
     $data["has_config"] = true;
 
-    if ($serendipity['POST']['adminAction'] == 'configure' &&  serendipity_checkFormToken()) {
+    if (isset($serendipity['POST']['adminAction']) && $serendipity['POST']['adminAction'] == 'configure' &&  serendipity_checkFormToken()) {
         $storage = new template_option();
         $storage->import($template_config);
         foreach($serendipity['POST']['template'] AS $option => $value) {
@@ -139,6 +139,7 @@ if (is_array($template_config)) {
         }
         $data["adminAction"] = "configure";
         $data["save_time"] = sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S'));
+        serendipity_set_config_var('last_template_change', time());
     }
 
     $data["form_token"] = serendipity_setFormToken();
@@ -184,20 +185,20 @@ ksort($stack);
 
 foreach ($stack as $theme => $info) {
     /* Sorry, but we don't display engines */
-    if ( strtolower($info['engine']) == 'yes') {
+    if ( isset($info['engine']) && strtolower($info['engine']) == 'yes') {
         continue;
     }
     $data['templates'][$theme]['info'] = $info;
 
     foreach(array('', '_backend') as $backendId) {
 
-        if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview${backendId}_fullsize.jpg")) {
-            $data["templates"][$theme]["fullsize${backendId}_preview"] = $serendipity["baseURL"] . $serendipity["templatePath"] . $theme . "/preview${backendId}_fullsize.jpg";
+        if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview{$backendId}_fullsize.jpg")) {
+            $data["templates"][$theme]["fullsize{$backendId}_preview"] = $serendipity["baseURL"] . $serendipity["templatePath"] . $theme . "/preview{$backendId}_fullsize.jpg";
         } elseif (!empty($info["preview{$backendId}_fullsizeURL"])) { // preview{$backendId}_fullsizeURL is not actually set in spartacus yet
             if (file_exists($serendipity["serendipityPath"] . "/templates_c/template_cache/". $theme ."{$backendId}.jpg")) {
-                $data["templates"][$theme]["fullsize${backendId}_preview"]  = $serendipity["baseURL"] . "templates_c/template_cache/". $theme ."{$backendId}.jpg";
+                $data["templates"][$theme]["fullsize{$backendId}_preview"]  = $serendipity["baseURL"] . "templates_c/template_cache/". $theme ."{$backendId}.jpg";
             } else {
-                $data["templates"][$theme]["fullsize${backendId}_preview"] = $info["preview{$backendId}_fullsizeURL"];
+                $data["templates"][$theme]["fullsize{$backendId}_preview"] = $info["preview{$backendId}_fullsizeURL"];
             }
         }
 
@@ -206,14 +207,16 @@ foreach ($stack as $theme => $info) {
             $previewType = '.jpg';
         }
 
-        if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview${backendId}${previewType}")) {
-            $data["templates"][$theme]["preview${backendId}"] = $serendipity["templatePath"] . $theme . "/preview${backendId}${previewType}";
+        if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview{$backendId}{$previewType}")) {
+            $data["templates"][$theme]["preview{$backendId}"] = $serendipity["templatePath"] . $theme . "/preview{$backendId}{$previewType}";
         } elseif (!empty($info["previewURL"])) {
-            $data["templates"][$theme]["preview${backendId}"] = $info["previewURL${backendId}"] ;
+            $data["templates"][$theme]["preview{$backendId}"] = $info["previewURL{$backendId}"] ?? null;
         }
 
-        if ($info['demoURL']) {
+        if (isset($info['demoURL']) && $info['demoURL']) {
             $data['templates'][$theme]['demoURL'] = $info['demoURL'];
+        } else {
+            $data['templates'][$theme]['demoURL'] = null;
         }
     }
 
@@ -223,7 +226,7 @@ foreach ($stack as $theme => $info) {
         $data['templates'][$theme]['unmetRequirements'] = sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements));
     }
 
-    if ($info['recommended']) {
+    if (isset($info['recommended']) && $info['recommended']) {
         $data['recommended_templates'][$theme] = $data['templates'][$theme];
         if ($theme != $serendipity['template'] && $theme != $serendipity['template_backend']) {
             unset($data['templates'][$theme]);
@@ -245,6 +248,10 @@ if ($serendipity['template'] != $serendipity['template_backend'] && isset($data[
     unset($data['templates'][$serendipity['template_backend']]);
 }
 unset($data['recommended_templates'][$serendipity['template']]);
+
+# php 8 compat section
+if (! isset($data['adminAction'])) { $data['adminAction'] = null; }
+if (! isset($data['deprecated'])) { $data['deprecated'] = null; }
 
 echo serendipity_smarty_show('admin/templates.inc.tpl', $data);
 

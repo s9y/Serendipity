@@ -9,6 +9,9 @@ if (IN_serendipity !== true) {
 class serendipity_event_responsiveimages extends serendipity_event
 {
     var $title = PLUGIN_EVENT_RESPONSIVE_NAME;
+    var $markup_elements;
+    var $breakpoints;
+    var $thumbWidths = [1200, 800, 400];
 
     function introspect(&$propbag)
     {
@@ -18,7 +21,7 @@ class serendipity_event_responsiveimages extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_RESPONSIVE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '0.5.1');
+        $propbag->add('version',       '0.5.4');
         $propbag->add('requirements',  array(
             'serendipity' => '2.2',
         ));
@@ -83,14 +86,13 @@ class serendipity_event_responsiveimages extends serendipity_event
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
-        if (!is_object($serendipity['smarty'])) {
+        if (!isset($serendipity['smarty']) || ! is_object($serendipity['smarty'])) {
             serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
         }
-        $this->breakpoints = $serendipity['smarty']->getTemplateVars('template_option')['breakpoints'];
+        $this->breakpoints = $serendipity['smarty']->getTemplateVars('template_option')['breakpoints'] ?? false;
         if (! $this->breakpoints) {
             $this->breakpoints = [1600, 1200, 600]; # This can be overwritten by the theme
         }
-        $this->thumbWidths = [1200, 800, 400];
 
         if (isset($hooks[$event])) {
 
@@ -99,7 +101,7 @@ class serendipity_event_responsiveimages extends serendipity_event
                 case 'frontend_display':
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
-                            !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
+                            !($eventData['properties']['ep_disable_markup_' . $this->instance] ?? null) &&
                             !isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
                             $element = $temp['element'];
                             $eventData[$element] = $this->_responsive_markup($eventData[$element]);
@@ -163,7 +165,7 @@ class serendipity_event_responsiveimages extends serendipity_event
 
         foreach ($matches['id'] as $imgId) {
             preg_match('@<!-- s9ymdb:\d+ --><img[^>]+width=["\'](\d+)["\']@', $text, $matches);
-            if ($matches[1]) {
+            if (count($matches) > 0) {
                 $srcset = $this->createSrcset($imgId, $matches[1]);
             } else {
                 $srcset = $this->createSrcset($imgId);
@@ -191,6 +193,10 @@ class serendipity_event_responsiveimages extends serendipity_event
         global $serendipity;
         
         $origImage = serendipity_fetchImageFromDatabase($id);
+        if (! $origImage) {
+            return '';
+        }
+        
         $imagePath = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $origImage['path'] . $origImage['realname'];
         
         $thumbnails = serendipity_getThumbnails($id);
@@ -216,6 +222,17 @@ class serendipity_event_responsiveimages extends serendipity_event
                 $srcset .= "{$thumbnailHttp} {$breakpoint}w,";
             }
         }
+        // 2 == there is the original thumbnail without a dimension, and one thumbnail for the smallest breakpoint
+        if (count($thumbnails) == 2) {
+            if ($origImage['dimensions_width'] < end($this->breakpoints)) {
+                // It is better to just use the original image
+                $srcset = "srcset=\"$imagePath {$origImage['dimensions_width']}w";
+            } else {
+                // When the smallest thumbnail is the only responsive thumbnail our original image will be needed to as part of the srcset, otherwise we too often upscale the small thumbnail
+                $srcset .= "$imagePath {$origImage['dimensions_width']}w,";
+            }
+        }
+        
         if (substr($srcset, -strlen(',')) === ',') {
             // we don't want to have the trailing comma
             $srcset = substr($srcset, 0, -1);

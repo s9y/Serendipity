@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'Wed³ug jakiego klucza odnosniki maj± byæ sortowane? (Standardowo: ilo¶æ linków)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Data');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Ilo¶æ linków');
-
+@define('TOP_REFERRER', 'Top Referrers');
+@define('SHOWS_TOP_SITES', 'Pokazuje strony, z których najczê¶ciej ³±czono siê z Twoim blogiem');
+@define('TOP_EXITS', 'Top Exits');
+@define('SHOWS_TOP_EXIT', 'Pokazuje ilo¶æ wychodz±cych z Twojego bloga klikniêæ do innych stron');

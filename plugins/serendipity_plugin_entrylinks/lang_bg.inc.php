@@ -18,3 +18,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'В какъв ред референтните връзки да бъдат подредени (по подразбиране: брой на връзките)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Дата');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Брой на връзките');
+@define('TOP_REFERRER', 'Първенци в насочването');
+@define('SHOWS_TOP_SITES', 'Показване на страниците първенци в насочването към сайта ви');
+@define('TOP_EXITS', 'Първенци в излизането');
+@define('SHOWS_TOP_EXIT', 'Показване на страниците първенци в излизането от сайта ви');

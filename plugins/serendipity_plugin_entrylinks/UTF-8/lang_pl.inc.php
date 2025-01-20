@@ -19,4 +19,7 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'Według jakiego klucza odnosniki mają być sortowane? (Standardowo: ilość linków)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Data');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Ilość linków');
-
+@define('TOP_REFERRER', 'Top Referrers');
+@define('SHOWS_TOP_SITES', 'Pokazuje strony, z których najczęściej łączono się z Twoim blogiem');
+@define('TOP_EXITS', 'Top Exits');
+@define('SHOWS_TOP_EXIT', 'Pokazuje ilość wychodzących z Twojego bloga kliknięć do innych stron');

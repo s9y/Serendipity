@@ -5,7 +5,7 @@
     <article id="post_{$entry.id}" class="post{if !$is_single_entry and not $entry.is_extended and not $is_preview}-preview{/if} serendipity_entry{if $dategroup.is_sticky} sticky{/if}" role="article">
     {if !$is_single_entry and not $entry.is_extended and not $is_preview}
         <a href="{$entry.link}"><h2 class="post-title">{$entry.title}</h2>
-        {if $entry.properties.entry_subtitle}
+        {if isset($entry.properties.entry_subtitle) and $entry.properties.entry_subtitle}
             <h3 class="post-subtitle">{$entry.properties.entry_subtitle|escape}</h3>
         {elseif $template_option.subtitle_use_entrybody==true && $template_option.entrybody_detailed_only == true}
             <h3 class="post-subtitle">{$entry.body|@strip_tags|@strip|@truncate:70:" ..."}</h3>
@@ -151,8 +151,8 @@
         <p class="alert alert-info"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span> {$CONST.NO_ENTRIES_TO_PRINT}</p>
     {/if}
 {/foreach}
-{if $footer_info or $footer_prev_page or $footer_next_page}
-            {if $footer_info}
+{if (isset($footer_info) and $footer_info) or isset($footer_prev_page) and footer_prev_page or isset($footer_next_page) and $footer_next_page}
+            {if isset($footer_info) and $footer_info}
                 <p class="summary serendipity_center">{$footer_info}</p>
             {/if}
     <nav role="navigation">

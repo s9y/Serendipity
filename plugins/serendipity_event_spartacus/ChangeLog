@@ -1,3 +1,15 @@
+2.39.3
+-------
+    * PHP8.2 compatibility
+
+2.39.2
+-------
+    * PHP8 compatibility
+
+2.39
+-------
+    * Add new gitlab mirror for plugins and themes
+
 2.38.4
 -------
     * Change dashboard upgrade notification to simple link

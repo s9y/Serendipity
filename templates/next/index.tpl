@@ -7,7 +7,7 @@
     <title>{$head_title|default:$blogTitle}{if $head_subtitle} | {$head_subtitle}{/if}</title>
     <meta name="generator" content="Serendipity v.{$head_version}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-{if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || $staticpage_pagetitle != "" || $robots_index == 'index')}
+{if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || (isset($staticpage_pagetitle) and $staticpage_pagetitle != "") || (isset($robots_index) and $robots_index == 'index'))}
     <meta name="robots" content="index,follow">
 {else}
     <meta name="robots" content="noindex,follow">
@@ -40,7 +40,9 @@
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
     <link rel="alternate" type="application/x.atom+xml" title="{$blogTitle} Atom feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml">
 {if $entry_id}
+    <link rel="trackback" type="application/x-www-form-urlencoded" href="{$serendipityBaseURL}comment.php?type=trackback&amp;entry_id={$entry_id}">
     <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}">
+    <link rel="webmention" href="{$serendipityBaseURL}comment.php?type=webmention&amp;entry_id={$entry_id}" />
 {/if}
 {serendipity_hookPlugin hook="frontend_header"}
 </head>
