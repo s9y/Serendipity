@@ -13,7 +13,7 @@ $data = array();
 include_once S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
-if (!class_exists('Smarty')) {
+if (!class_exists('\Smarty\Smarty')) {
     @define('SMARTY_DIR', S9Y_PEAR_PATH . 'smarty/smarty/libs/');
     include_once SMARTY_DIR . 'Smarty.class.php';
 }
