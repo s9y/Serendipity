@@ -20,3 +20,4 @@ DEADJOE
 *.git
 tests/phpunit.xml
 vagrant/*
+*.orig
