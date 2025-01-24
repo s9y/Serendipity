@@ -1,6 +1,9 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix an often broken element of old themes by not adding the
+     integrated search box when 2k11 is used as the default theme
+
    * Fix specific search terms (like a - at the end) causing an error
      page when using MySQL/MariaDB (thanks to  GuillaumeValadas) 
 
