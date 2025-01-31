@@ -41,7 +41,7 @@ available within the included template.
     is useful to return values from the included template to the
     including template.
 
--   Use the syntax for [template resources](../../programmers/resources.md) to `{include}`
+-   Use the syntax for [template resources](../../api/resources.md) to `{include}`
     files outside of the [`$template_dir`](../../programmers/api-variables/variable-template-dir.md)
     directory.
 
@@ -85,11 +85,11 @@ The template above includes the example `links.tpl` below
 
 ```smarty
 <div id="box">
-    <h3>{$title}{/h3>
+    <h3>{$title}</h3>
     <ul>
         {foreach from=$links item=l}
             .. do stuff  ...
-        </foreach}
+        {/foreach}
     </ul>
 </div>
 ```
@@ -183,5 +183,5 @@ current template.
 {include file="$style_dir/$module.$view.tpl"}
 ```
       
-See also [`{insert}`](./language-function-insert.md), [template resources](../../programmers/resources.md) and
+See also [template resources](../../api/resources.md) and
 [componentized templates](../../appendixes/tips.md#componentized-templates).

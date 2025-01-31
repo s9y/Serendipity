@@ -1,5 +1,6 @@
 <?php
-// serendipity_smarty_class.inc.php lm 2014-12-10 Ian
+
+use Smarty\Smarty;
 
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -9,30 +10,8 @@
 
 
 // Create a wrapper class extended from Smarty_Security - which allows access to S9Y-plugin and S9Y-template dirs
-class Serendipity_Smarty_Security_Policy extends Smarty_Security
+class Serendipity_Smarty_Security_Policy extends \Smarty\Security
   {
-    // these are the allowed functions only. - default as is
-    public $php_functions = array('isset', 'empty', 'sizeof', 'count', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists');
-    // to disable all PHP functions
-    #public $php_functions = null;
-
-    // set allowed modifiers only. (default = array( 'escape', 'count' );)
-    public $php_modifiers = array('escape', 'rand', 'str_repeat', 'nl2br');
-
-    public $allow_constants = true;
-
-    public $allow_super_globals = true;
-
-    // array of template directories that are considered secure. No need, as ...TemplateDir concidered secure implicitly.  (unproofed)
-    public $secure_dir = array(S9Y_TEMPLATE_SECUREDIR); // do we need this then?
-
-    // actually no need, as template dirs are explicit defined as trusted_dirs. (unproofed)
-    public $trusted_dir = array(S9Y_TEMPLATE_USERDEFAULT, S9Y_TEMPLATE_USERDEFAULT_BACKEND, S9Y_TEMPLATE_FALLBACK); // do we need this then?
-
-    #public $modifiers = array(); // can be omitted, when all allowed
-
-    // to test this - overwrites Serendipity_Smarty::default_modifiers and Serendipity_Smarty_Security_Policy::php_modifiers - modifier 'escape' not allowed by security setting
-    #public $allowed_modifiers = array('escape:"htmlall"');
 
     // This allows the fetch() and include calls to pull .tpl files from any directory,
     // so that symlinked plugin directories outside the s9y path can be included properly.
@@ -51,7 +30,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
   }
 
 // Create a wrapper class extended from Smarty
-class Serendipity_Smarty extends Smarty
+class Serendipity_Smarty extends \Smarty\Smarty
   {
     // bc mode for plugins Smarty2 compat INCLUDE_ANY fetch() calls - to avoid an undefinied property error.
     public $security_settings = false;
@@ -267,7 +246,15 @@ class Serendipity_Smarty extends Smarty
      */
     public function assign_by_ref($tpl_var, &$value)
     {
-        $this->assignByRef($tpl_var, $value);
+        $this->assign($tpl_var, $value);
+    }
+
+    /**
+     * Compatibility function for smarty 5
+     */
+    public function assignByRef($tpl_var, &$value)
+    {
+        $this->assign($tpl_var, $value);
     }
 
     /**
