@@ -6,10 +6,8 @@
  * @link https://github.com/textile/php-textile
  */
 
-namespace Netcarver\Textile;
-
 /*
- * Copyright (c) 2013, Netcarver https://github.com/netcarver
+ * Copyright (c) 2016-2017, Netcarver https://github.com/netcarver
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -38,36 +36,35 @@ namespace Netcarver\Textile;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+namespace Netcarver\Textile;
+
 /**
  * Simple data storage.
  *
- * This class to allows storing assignments in an internal
+ * This class allows storing assignments in an internal
  * data array.
  *
- * <code>
- * use Netcarver\Textile\DataBag;
+ * bc. use Netcarver\Textile\DataBag;
  * $plant = new DataBag(array('key' => 'value'));
  * $plant->flower('rose')->color('red');
- * </code>
+ *
+ * @internal
  */
-
 class DataBag
 {
     /**
      * The data array stored in the bag.
      *
-     * @var array
+     * @var array<string, int|string>
      */
-
     protected $data;
 
     /**
      * Constructor.
      *
-     * @param array|null $data The initial data array stored in the bag
+     * @param array<string, string|int>|null $data The initial data array stored in the bag
      */
-
-    public function __construct(array $data = null)
+    public function __construct($data = null)
     {
         $this->data = (array) $data;
     }
@@ -78,17 +75,14 @@ class DataBag
      * Empty values are rejected, unless the
      * second argument is set TRUE.
      *
-     * <code>
-     * use Netcarver\Textile\DataBag;
+     * bc. use Netcarver\Textile\DataBag;
      * $plant = new DataBag(array('key' => 'value'));
      * $plant->flower('rose')->color('red')->emptyValue(false, true);
-     * </code>
      *
-     * @param   string $name   The name
-     * @param   array  $params Arguments
-     * @return  DataBag
+     * @param string $name The name
+     * @param array<int, int|string> $params Arguments
+     * @return DataBag
      */
-
     public function __call($name, array $params)
     {
         if (!empty($params[1]) || !empty($params[0])) {
