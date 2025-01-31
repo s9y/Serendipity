@@ -980,7 +980,6 @@ function serendipity_smarty_init($vars = array()) {
             // Beware: Smarty is used in the Admin backend, despite of this.
             include_once $template_dir . '/template.inc.php';
         } else {
-
             // Backend template overwritten here (NOT earlier due to frontend specific check)
             if (defined('IN_serendipity_admin')) {
                 $template_dir = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'];
