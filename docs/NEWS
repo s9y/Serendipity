@@ -3,6 +3,12 @@ Version 2.6-alpha1 ()
 
    * Update Parser of textile plugin
 
+   * Update smarty from v4.3.5 to v5.4.3. This new major version has
+     breaking changes, worked around as much as possible in the s9y core
+
+   * Fix an often broken element of old themes by not adding the
+     integrated search box when 2k11 is used as the default theme
+
    * Fix specific search terms (like a - at the end) causing an error
      page when using MySQL/MariaDB (thanks to  GuillaumeValadas) 
 

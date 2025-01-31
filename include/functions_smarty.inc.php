@@ -6,6 +6,8 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
+use Smarty\Smarty;
+
 /**
  * Fetch a list of trackbacks for an entry
  *
@@ -917,6 +919,49 @@ function serendipity_smarty_count($value, $mode = COUNT_NORMAL) {
     return count($value, $mode);
 }
 
+function serendipity_smarty_sizeof($value, $mode = COUNT_NORMAL) {
+    return count($value, $mode);
+}
+
+function serendipity_smarty_isset($var, $vars) {
+    return isset($var, $vars);
+}
+
+function serendipity_smarty_empty($var) {
+    return empty($var);
+}
+
+function serendipity_smarty_in_array(mixed $needle, array $haystack, bool $strict = false) {
+    return in_array($needle, $haystack, $strict);
+}
+
+function serendipity_smarty_is_array($var) {
+    return is_array($var);
+}
+
+function serendipity_smarty_time() {
+    return time();
+}
+
+function serendipity_smarty_nl2br(string $string, bool $use_xhtml = true) {
+    return nl2br($string, $use_xhtml);
+}
+
+function serendipity_smarty_class_exists(string $class, bool $autoload = true) {
+    return class_exists($class, $autoload);
+}
+
+function serendipity_smarty_rand($min = 0, $max = null) {
+    return rand($min, $max ?? getrandmax());
+}
+
+function serendipity_smarty_str_repeat($string, $times) {
+    return str_repeat($string, $times);
+}
+
+
+
+
 /**
  * Initialize the Smarty framework for use in Serendipity
  *
@@ -935,7 +980,6 @@ function serendipity_smarty_init($vars = array()) {
             // Beware: Smarty is used in the Admin backend, despite of this.
             include_once $template_dir . '/template.inc.php';
         } else {
-
             // Backend template overwritten here (NOT earlier due to frontend specific check)
             if (defined('IN_serendipity_admin')) {
                 $template_dir = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'];
@@ -958,11 +1002,11 @@ function serendipity_smarty_init($vars = array()) {
             if (!defined('SMARTY_DIR')) {
                 @define('SMARTY_DIR', S9Y_PEAR_PATH . 'smarty/smarty/libs/');
             }
-            if (!class_exists('Smarty')) {
+            if (!class_exists('\Smarty\Smarty')) {
                 include_once SMARTY_DIR . 'Smarty.class.php';
             }
 
-            if (!class_exists('Smarty')) {
+            if (!class_exists('\Smarty\Smarty')) {
                 return false;
             }
 
@@ -987,16 +1031,6 @@ function serendipity_smarty_init($vars = array()) {
             // enable security policy by instance of the Smarty_Security class
             $serendipity['smarty']->enableSecurity('Serendipity_Smarty_Security_Policy');
 
-            // debugging...
-            #echo '<pre>';print_r($serendipity['smarty']);echo '</pre>';#exit;
-            #$serendipity['smarty']->testInstall();exit;
-            // extreme debugging with undocumented internal flag which enables a trace output from the parser during debugging
-            #$serendipity['smarty']->_parserdebug = true; // be careful!
-
-            /**
-             * ToDo: Check for possible API changes in Smarty 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (in class)]
-             * smarty_modifier_foobar(Smarty $smarty, $string, ...) vs. smarty_modifier_foobar($string, ...)
-             **/
             $serendipity['smarty']->registerPlugin('modifier', 'makeFilename', 'serendipity_makeFilename');
             $serendipity['smarty']->registerPlugin('modifier', 'xhtml_target', 'serendipity_xhtml_target');
             $serendipity['smarty']->registerPlugin('modifier', 'emptyPrefix', 'serendipity_emptyPrefix');
@@ -1027,6 +1061,18 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('function', 'serendipity_getImageSize', 'serendipity_smarty_getImageSize');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_getConfigVar', 'serendipity_smarty_getConfigVar');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_setFormToken', 'serendipity_smarty_setFormToken');
+
+
+            // Backwards compatibility fix for Smarty v5: Allow these these php functions and modifiers
+            $php_functions = array('isset', 'empty', 'sizeof', 'count', 'in_array', 'is_array', 'time', 'nl2br');
+            $php_modifiers = array('rand', 'str_repeat', 'nl2br', 'class_exists');
+
+            foreach ($php_functions as $php_function) {
+                $serendipity['smarty']->registerPlugin('function', $php_function, "serendipity_smarty_$php_function");
+            }
+            foreach ($php_modifiers as $php_modifier) {
+                $serendipity['smarty']->registerPlugin('modifier', $php_modifier, "serendipity_smarty_$php_modifier");
+            }
 
             $serendipity['smarty']->registerFilter('pre', 'serendipity_replaceSmartyVars');
 
