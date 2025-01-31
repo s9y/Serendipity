@@ -117,7 +117,7 @@ class functionsSmartyTest extends PHPUnit\Framework\TestCase
 
         serendipity_smarty_init();
         
-        Locale::setDefault('en_US_POSIX');
+        \setlocale(LC_TIME, 'fr_FR.UTF-8');
         $template_string = '{946684800|@formatTime:\'%b %e. %Y\'}';
         $result = $serendipity['smarty']->fetch('eval:' . $template_string);
         $this->assertEquals('Jan  1. 2000', $result);
