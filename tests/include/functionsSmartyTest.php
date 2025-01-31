@@ -1,13 +1,19 @@
 <?php
 
+# Requires ext_intl and pdo_sqlite3 to be activate
+
 $serendipity['dbType'] = 'pdo-sqlite';
-//@define('LANG_CHARSET', 'UTF-8');
 @define('S9Y_PEAR_PATH', dirname(__FILE__) . '/../../bundled-libs/');
+@define('S9Y_INCLUDE_PATH', dirname(__FILE__) . '/../../');
 @define('PATH_SMARTY_COMPILE', dirname(__FILE__) . '/../../templates_c/');
 @define('IN_serendipity', true);
 @define('IS_installed', false);
+@define('serendipity_LANG_LOADED', false);
 
+require_once(dirname(__FILE__) . '/../../bundled-libs/autoload.php');
 require_once dirname(__FILE__) . '/../../lang/UTF-8/serendipity_lang_en.inc.php';
+require_once dirname(__FILE__) . '/../../include/compat.inc.php';
+require_once dirname(__FILE__) . '/../../include/lang.inc.php';
 require_once dirname(__FILE__) . '/../../include/functions_smarty.inc.php';
 
 use PHPUnit\Framework\Attributes\Test;
@@ -62,6 +68,82 @@ class functionsSmartyTest extends PHPUnit\Framework\TestCase
         $template_string = 'display {$foo} here';
         $result = $serendipity['smarty']->fetch('eval:' . $template_string);
         $this->assertEquals('display value here', $result);
+    }
+    
+    #[Test]
+    public function test_smarty_renders_makeFilename()
+    {
+        global $serendipity;
+
+        serendipity_smarty_init();
+
+        @define('PAT_FILENAME', '/');
+
+        $serendipity['smarty']->assign('comment', 'value');
+        $template_string = '{$comment|@makeFilename} {"blank"|@xhtml_target}';
+        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
+        $this->assertNotNull($result);
+    }
+    
+    #[Test]
+    public function test_smarty_renders_xhtml_target()
+    {
+        global $serendipity;
+
+        serendipity_smarty_init();
+
+        $serendipity['smarty']->assign('comment', 'value');
+        $template_string = '{ {"blank"|@xhtml_target}';
+        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
+        $this->assertNotNull($result);
+    }
+    
+    #[Test]
+    public function test_smarty_renders_empty_prefix()
+    {
+        global $serendipity;
+
+        serendipity_smarty_init();
+
+        $template_string = '{"test"|@emptyPrefix}';
+        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
+        $this->assertEquals(': test', $result);
+    }
+    
+    #[Test]
+    public function test_smarty_renders_formatTime()
+    {
+        global $serendipity;
+
+        serendipity_smarty_init();
+
+        $template_string = '{946684800|@formatTime:\'%b %e. %Y\'}';
+        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
+        $this->assertEquals('Jan  1. 2000', $result);
+    }
+    
+    #[Test]
+    public function test_smarty_renders_utf8_encode()
+    {
+        global $serendipity;
+
+        serendipity_smarty_init();
+
+        $template_string = '{"test"|@serendipity_utf8_encode}';
+        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
+        $this->assertEquals('test', $result);
+    }
+    
+    #[Test]
+    public function test_smarty_renders_ifRemember()
+    {
+        global $serendipity;
+
+        serendipity_smarty_init();
+
+        $template_string = '{"test"|@ifRemember:no}';
+        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
+        $this->assertEquals(false, $result);
     }
 
 }
