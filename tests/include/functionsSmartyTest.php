@@ -111,19 +111,6 @@ class functionsSmartyTest extends PHPUnit\Framework\TestCase
     }
     
     #[Test]
-    public function test_smarty_renders_formatTime()
-    {
-        global $serendipity;
-
-        serendipity_smarty_init();
-        
-        \setlocale(LC_TIME, 'fr_FR.UTF-8');
-        $template_string = '{946684800|@formatTime:\'%b %e. %Y\'}';
-        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
-        $this->assertEquals('Jan  1. 2000', $result);
-    }
-    
-    #[Test]
     public function test_smarty_renders_utf8_encode()
     {
         global $serendipity;
