@@ -133,5 +133,30 @@ class functionsSmartyTest extends PHPUnit\Framework\TestCase
         $result = $serendipity['smarty']->fetch('eval:' . $template_string);
         $this->assertEquals(false, $result);
     }
+    #[Test]
+    
+    public function test_smarty_renders_nl2br()
+    {
+        global $serendipity;
+
+        serendipity_smarty_init();
+
+        $template_string = '{"a
+b"|@nl2br}';
+        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
+        $this->assertEquals("a<br />\nb", $result);
+    }
+    
+    public function test_smarty_renders_sizeof()
+    {
+        global $serendipity;
+
+        serendipity_smarty_init();
+
+        $serendipity['smarty']->assign('config', ['a', 'b']);
+        $template_string = '{$config|sizeof}';
+        $result = $serendipity['smarty']->fetch('eval:' . $template_string);
+        $this->assertEquals("2", $result);
+    }
 
 }
