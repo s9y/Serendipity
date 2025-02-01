@@ -1,6 +1,9 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Let installer check for the intl extension, needed for the strftime
+     compatibility library used for PHP 8.1+
+
    * Update Parser of textile plugin
 
    * Update smarty from v4.3.5 to v5.4.3. This new major version has
