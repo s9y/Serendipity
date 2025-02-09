@@ -1,6 +1,9 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix option to set a different theme as fallback option by setting
+     Engine: $themename in a themes info.txt
+
    * Let installer check for the intl extension, needed for the strftime
      compatibility library used for PHP 8.1+
 
