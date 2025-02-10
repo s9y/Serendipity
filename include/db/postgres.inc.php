@@ -89,7 +89,18 @@ function serendipity_db_reconnect() {
  * @return  string   output string
  */
 function serendipity_db_escape_string($string) {
-    return pg_escape_string($string);
+    global $serendipity;
+
+    if (is_null($string))
+        return $string;
+
+    if (version_compare(PHP_VERSION, '8.1.0', '<')) {
+        # Versions before 8.1 give the connection by default
+        return pg_escape_string($string);
+    }
+
+    # From PHP 8.1 onwards
+    return pg_escape_string($serendipity['dbConn'], $string);
 }
 
 /**

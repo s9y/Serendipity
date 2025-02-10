@@ -1390,12 +1390,15 @@ function serendipity_updertEntry($entry) {
 
     serendipity_plugin_api::hook_event('backend_entry_presave', $entry);
 
-    $categories = $entry['categories'];
+    $categories = $entry['categories'] ?? null;
     unset($entry['categories']);
 
     if (array_key_exists('had_categories', $entry)) {
         $had_categories = $entry['had_categories'];
         unset($entry['had_categories']);        
+    }
+    else {
+        $had_categories = null;
     }
 
     $newEntry = 0;
@@ -1414,7 +1417,7 @@ function serendipity_updertEntry($entry) {
         $entry['extended'] = '';
     }
 
-    if (strlen($entry['extended'])) {
+    if (isset($entry['extended']) && strlen($entry['extended'])) {
         $exflag = 1;
     }
 

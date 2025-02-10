@@ -10,11 +10,15 @@ if (IN_serendipity !== true) {
  * Converts a string into a filename that can be used safely in HTTP URLs
  *
  * @access public
- * @param   string  input string
+ * @param   string  input string|null
  * @param   boolean Shall dots in the filename be removed? (Required for certain regex rules)
- * @return  string  output string
+ * @return  string  output string|null
  */
 function serendipity_makeFilename($str, $stripDots = false) {
+
+    if (is_null($str)) {
+        return $str;
+    }
 
     // These are UTF-8 replacements happening regardless of selected locale
     static $pre_from = array(
