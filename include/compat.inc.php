@@ -95,8 +95,6 @@ function debug_ErrorLevelType($type)
             return 'E_USER_WARNING';
         case E_USER_NOTICE: // 1024 //
             return 'E_USER_NOTICE';
-        case E_STRICT: // 2048 //
-            return 'E_STRICT';
         case E_RECOVERABLE_ERROR: // 4096 //
             return 'E_RECOVERABLE_ERROR';
         case E_DEPRECATED: // 8192 //
@@ -139,7 +137,6 @@ if (!function_exists('errorToExceptionHandler')) {
 
             case E_USER_NOTICE:
             case E_NOTICE:
-            case @E_STRICT:
             case @E_DEPRECATED:
             case @E_USER_DEPRECATED:
                 $type = 'Notice';
