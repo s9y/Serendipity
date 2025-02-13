@@ -19,7 +19,7 @@ class serendipity_event_textile extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_TEXTILE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team', 'Lars Strojny');
-        $propbag->add('version',       '2.0');
+        $propbag->add('version',       '2.0.1');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -165,7 +165,7 @@ class serendipity_event_textile extends serendipity_event
 
                             /* textile it */
 
-                            if (serendipity_db_bool($this->get_config('unescape'))) {
+                            if (serendipity_db_bool($this->get_config('unescape')) && isset($eventData[$element])) {
                                 $eventData[$element] = str_replace('&quot;', '"', $eventData[$element]);
                             }
                             $eventData[$element] = $this->textile($eventData[$element] ?? null);

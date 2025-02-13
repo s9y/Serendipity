@@ -1,2 +1,4 @@
+2.0.1: One PHP 8 warning fixed
+
 2.0: Remove old textile parsers and switch to netcarver/textile v4.1.3
      This will improve compatibility with current PHP version (8.x).
