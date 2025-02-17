@@ -3763,6 +3763,14 @@ img.mfp-img {
     display: block;
 }
 
+#upload_tab:checked ~ menu li:has(.upload_tab) {
+    display: block;
+}
+
+#download_tab:checked ~ menu li:has(.download_tab) {
+    display: block;
+}
+
 .tabs > .nav a {
     font-weight: 400;
 }
