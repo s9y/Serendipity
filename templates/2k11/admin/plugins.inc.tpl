@@ -172,21 +172,29 @@
         <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}: {$CONST.PLUGIN_ALL_UPDATED}</span>
     {/if}
     <div class="tabs" id="pluginlist_tabs">
-        <section id="pluginlist_sidebar" class="panel">
-            <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
-            <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;{$urltoken}" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}'>{$CONST.INSTALL_NEW_SIDEBAR_PLUGIN}</a>
+        <input checked="checked" id="sidebar_tab" type="radio" name="tabs" class="hidden">
+        <input id="event_tab" type="radio" name="tabs" class="hidden">
 
-            {$backend_plugins_sidebar_header}
-            {$sidebar_plugins}
-        </section>
+        <ul class="nav clearfix tabs-list tabamount2">
+            <li><label for="sidebar_tab"><a>{$CONST.SIDEBAR_PLUGINS}</a></label></li><li><label for="event_tab"><a>{$CONST.EVENT_PLUGINS}</a></label></li>
+        </ul>
 
-        <section id="pluginlist_event" class="panel">
-            <h3>{$CONST.EVENT_PLUGINS}</h3>
-            <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event&amp;{$urltoken}" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}'>{$CONST.INSTALL_NEW_EVENT_PLUGIN}</a>
+        <menu>
+            <li><section id="pluginlist_sidebar" class="panel sidebar_tab">
+                <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;{$urltoken}" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}'>{$CONST.INSTALL_NEW_SIDEBAR_PLUGIN}</a>
 
-            {$backend_plugins_event_header}
-            {$event_plugins}
-        </section>
+                {$backend_plugins_sidebar_header}
+                {$sidebar_plugins}
+            </section></li>
+
+            <li><section id="pluginlist_event" class="panel event_tab">
+                <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event&amp;{$urltoken}" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}'>{$CONST.INSTALL_NEW_EVENT_PLUGIN}</a>
+
+                {$backend_plugins_event_header}
+                {$event_plugins}
+            </section>
+            </li>
+        </menu>
     </div>
     {if $memsnaps}
     <section>

@@ -2566,18 +2566,18 @@ input[name="serendipity[filter][fileCategory]"] {
 }
 
 .media_selector,
-.tabs > ul li > a {
+.tabs > ul li a {
     border-radius: 0;
     border-right: 0 none;
 }
 
 .media_selector:first-of-type,
-.tabs > ul .first > a {
+.tabs > ul li:first-child a {
     border-radius: 4px 0 0 4px;
 }
 
 .media_selector:last-of-type,
-.tabs > ul .last > a {
+.tabs > ul li:last-child a {
     border-radius: 0 4px 4px 0;
     border-right: 1px solid #bbb;
 }
@@ -3745,4 +3745,24 @@ img.mfp-img {
     .manage h3 {
         width: 19em;
     }
+}
+
+.tabs menu {
+    padding: 0;
+}
+
+.tabs menu > li {
+    display: none;
+}
+
+#event_tab:checked ~ menu li:has(.event_tab) {
+    display: block;
+}
+
+#sidebar_tab:checked ~ menu li:has(.sidebar_tab) {
+    display: block;
+}
+
+.tabs > .nav a {
+    font-weight: 400;
 }
