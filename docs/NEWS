@@ -1,6 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Upgrade bundled jQuery to jQuery 3
+
    * Fix option to set a different theme as fallback option by setting
      Engine: $themename in a themes info.txt
 
