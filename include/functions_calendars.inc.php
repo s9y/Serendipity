@@ -218,7 +218,7 @@ function persian_strftime_utf($format, $timestamp='') {
                     if(date('a',$timestamp)=='pm') $output_str.='بعد از ظهر'; else $output_str.='قبل از ظهر';
                     break;
                 case 'R':
-                    $output_str.=strftime('%R', $timestamp);
+                    $output_str.=PHP81_BC\strftime('%R', $timestamp);
                     break;
                 case 'S':
                     $output_str.=date('s', $timestamp);
@@ -251,7 +251,7 @@ function persian_strftime_utf($format, $timestamp='') {
                     break;
                 case 'z':
                 case 'Z':
-                    $output_str.=strftime('%z', $timestamp);
+                    $output_str.=PHP81_BC\strftime('%z', $timestamp);
                     break;
                 case '%':
                     $output_str.='%';

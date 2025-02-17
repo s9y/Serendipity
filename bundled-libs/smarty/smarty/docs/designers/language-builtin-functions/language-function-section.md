@@ -326,10 +326,10 @@ The template to output the database result in a HTML table
 
 ```smarty
 <table>
-    <tr><th>&nbsp;</th><th>Name></th><th>Home</th><th>Cell</th><th>Email</th></tr>
+    <tr><th>&nbsp;</th><th>Name</th><th>Home</th><th>Cell</th><th>Email</th></tr>
     {section name=co loop=$contacts}
       <tr>
-        <td><a href="view.php?id={$contacts[co].id}">view<a></td>
+        <td><a href="view.php?id={$contacts[co].id}">view</a></td>
         <td>{$contacts[co].name}</td>
         <td>{$contacts[co].home}</td>
         <td>{$contacts[co].cell}</td>
@@ -465,7 +465,7 @@ header block every five rows.
 <table>
     {section name=co loop=$contacts}
       {if $smarty.section.co.iteration is div by 5}
-        <tr><th>&nbsp;</th><th>Name></th><th>Home</th><th>Cell</th><th>Email</th></tr>
+        <tr><th>&nbsp;</th><th>Name</th><th>Home</th><th>Cell</th><th>Email</th></tr>
       {/if}
       <tr>
         <td><a href="view.php?id={$contacts[co].id}">view<a></td>
@@ -478,13 +478,13 @@ header block every five rows.
 </table>
 ```
 
-An example that uses the `iteration` property to alternate a text color every
+An example that uses the `index` property to alternate a text color every
 third row.
 
 ```smarty
 <table>
   {section name=co loop=$contacts}
-    {if $smarty.section.co.iteration is even by 3}
+    {if $smarty.section.co.index is even by 3}
       <span style="color: #ffffff">{$contacts[co].name}</span>
     {else}
       <span style="color: #dddddd">{$contacts[co].name}</span>

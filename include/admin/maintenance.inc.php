@@ -65,7 +65,7 @@ switch($serendipity['GET']['adminAction']) {
 
 
 $data['maintenance_mode'] = serendipity_db_bool(serendipity_get_config_var("maintenanceMode", false));
-$data['maintenance_mode_end'] = strftime('%d.%m.%y %T', serendipity_get_config_var("maintenanceModeEnd"));
+$data['maintenance_mode_end'] = serendipity_strftime('%d.%m.%y %T', serendipity_get_config_var("maintenanceModeEnd"));
 $data['maintenance_mode_active'] = $data['maintenance_mode'] && time() < serendipity_get_config_var("maintenanceModeEnd", 0);
 
 # php 8 compat section

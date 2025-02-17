@@ -46,7 +46,7 @@
                 {if $blogDescription}<p>{$blogDescription}</p>{/if}
             </a>
         </div>
-
+        {if $template == "2k11"}
         <form id="searchform" action="{$serendipityHTTPPath}{$serendipityIndexFile}" method="get">
         <div>
             <input type="hidden" name="serendipity[action]" value="search">
@@ -56,6 +56,7 @@
         </div>
         </form>
         {serendipity_hookPlugin hook="quicksearch_plugin" hookAll="true"}
+        {/if}
         {if $template_option.header_img}
         <img src="{$template_option.header_img|escape}" alt="">
         {/if}

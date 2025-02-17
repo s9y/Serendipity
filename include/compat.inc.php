@@ -396,6 +396,9 @@ function serendipity_getCharset() {
 function serendipity_detectLang($use_include = false) {
     global $serendipity;
 
+    if ($serendipity['languages'] == null) {
+        return null;
+    }
     $supported_languages = array_keys($serendipity['languages']);
     $possible_languages = explode(',', (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : ''));
     if (is_array($possible_languages)) {
