@@ -112,6 +112,9 @@ class serendipity_event_textile extends serendipity_event
                 $propbag->add('description', PLUGIN_EVENT_TEXTILE_UNESCAPE_DESC);
                 $propbag->add('default',     'false');
                 break;
+            case 'textile_version':
+                // For backwards compatibility, otherwise the constant call below will die
+                break;
 
             default:
                 $propbag->add('type',        'boolean');
@@ -200,11 +203,8 @@ class serendipity_event_textile extends serendipity_event
                     break;
 
                 case 'frontend_comment':
-                    if (serendipity_db_bool($this->get_config('COMMENT', 'true'))) {
-                        $url = $this->get_config('textile_version') == 1
-                                   ? 'http://www.textism.com/tools/textile/'
-                                   : 'http://txstyle.org/article/43/a-short-introduction';
-                        echo '<div class="serendipity_commentDirection serendipity_comment_textile">' . sprintf(PLUGIN_EVENT_TEXTILE_TRANSFORM, $url) . '</div>';
+                    if (serendipity_db_bool($this->get_config('COMMENT', 'true'))) {;
+                        echo '<div class="serendipity_commentDirection serendipity_comment_textile">' . sprintf(PLUGIN_EVENT_TEXTILE_TRANSFORM, 'https://textile-lang.com/') . '</div>';
                     }
                     break;
 
