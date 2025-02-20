@@ -1,6 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * PHP 8 compatibility fixes for bundled XML/RPC.php
+
    * Upgrade bundled jQuery to jQuery 3
 
    * Fix option to set a different theme as fallback option by setting
