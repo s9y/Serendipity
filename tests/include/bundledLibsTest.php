@@ -44,4 +44,34 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $message->payload);
     }
 
+    #[Test]
+    public function test_serendipity_xml_rpc_response_valid()
+    {
+        $args = array(
+            new XML_RPC_Value(
+                'testA',
+                'string'
+            ),
+            new XML_RPC_Value(
+                'testB',
+                'string'
+            )
+        );
+        $message = new XML_RPC_Message(
+            'weblogUpdates.ping',
+            $args
+        );
+        $message->createPayload();
+        $example_response = "<methodResponse>
+<params>
+<param>
+<value><string>Success!</string></value>
+</param>
+</params>
+</methodResponse>";
+
+        $xmlrpc_result = $message->parseResponse($example_response);
+        $this->assertEquals($example_response, $xmlrpc_result->serialize());
+    }
+
 }
