@@ -21,11 +21,11 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase {
                 'string'
             )
         );
-        $this->$message = new XML_RPC_Message(
+        $this->message = new XML_RPC_Message(
             'weblogUpdates.ping',
             $args
         );
-        $this->$message->createPayload();
+        $this->message->createPayload();
     }
     
     #[Test]
@@ -44,7 +44,7 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase {
 </params>\r
 </methodCall>\r
 ";
-        $this->assertEquals($expected, $this->$message->payload);
+        $this->assertEquals($expected, $this->message->payload);
     }
 
     #[Test]
@@ -58,7 +58,7 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase {
 </params>
 </methodResponse>";
 
-        $xmlrpc_result = $this->$message->parseResponse($example_response);
+        $xmlrpc_result = $this->message->parseResponse($example_response);
         $this->assertEquals($example_response, $xmlrpc_result->serialize());
     }
     #[Test]
@@ -66,7 +66,7 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase {
     {
         $example_response = "some non-xml response";
 
-        $xmlrpc_result = $this->$message->parseResponse($example_response);
+        $xmlrpc_result = $this->message->parseResponse($example_response);
         $this->assertEquals(2, $xmlrpc_result->faultCode());
     }
 
