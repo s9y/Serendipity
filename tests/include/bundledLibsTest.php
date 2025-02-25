@@ -1,6 +1,8 @@
 <?php
 
 @define('S9Y_PEAR_PATH', dirname(__FILE__) . '/../../bundled-libs/');
+@define('IN_serendipity', true);
+require_once dirname(__FILE__) . '/../../include/compat.inc.php';
 if (!class_exists('XML_RPC_Base')) {
     include_once(S9Y_PEAR_PATH . "XML/RPC.php");
 }
