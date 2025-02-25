@@ -7,11 +7,10 @@ if (!class_exists('XML_RPC_Base')) {
 
 use PHPUnit\Framework\Attributes\Test;
 
-class bundledLibsTest extends PHPUnit\Framework\TestCase
-{
-    #[Test]
-    public function test_serendipity_xml_rpc_message()
-    {
+class bundledLibsTest extends PHPUnit\Framework\TestCase {
+    var $message = null;
+
+    protected function setUp(): void {
         $args = array(
             new XML_RPC_Value(
                 'testA',
@@ -22,12 +21,16 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase
                 'string'
             )
         );
-        $message = new XML_RPC_Message(
+        $this->$message = new XML_RPC_Message(
             'weblogUpdates.ping',
             $args
         );
-        $message->createPayload();
-
+        $this->$message->createPayload();
+    }
+    
+    #[Test]
+    public function test_serendipity_xml_rpc_message()
+    {
         $expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r
 <methodCall>\r
 <methodName>weblogUpdates.ping</methodName>\r
@@ -41,27 +44,12 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase
 </params>\r
 </methodCall>\r
 ";
-        $this->assertEquals($expected, $message->payload);
+        $this->assertEquals($expected, $this->$message->payload);
     }
 
     #[Test]
     public function test_serendipity_xml_rpc_response_valid()
     {
-        $args = array(
-            new XML_RPC_Value(
-                'testA',
-                'string'
-            ),
-            new XML_RPC_Value(
-                'testB',
-                'string'
-            )
-        );
-        $message = new XML_RPC_Message(
-            'weblogUpdates.ping',
-            $args
-        );
-        $message->createPayload();
         $example_response = "<methodResponse>
 <params>
 <param>
@@ -70,8 +58,16 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase
 </params>
 </methodResponse>";
 
-        $xmlrpc_result = $message->parseResponse($example_response);
+        $xmlrpc_result = $this->$message->parseResponse($example_response);
         $this->assertEquals($example_response, $xmlrpc_result->serialize());
+    }
+    #[Test]
+    public function test_serendipity_xml_rpc_response_invalid()
+    {
+        $example_response = "some non-xml response";
+
+        $xmlrpc_result = $this->$message->parseResponse($example_response);
+        $this->assertEquals(2, $xmlrpc_result->faultCode());
     }
 
 }
