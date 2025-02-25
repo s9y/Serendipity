@@ -1532,7 +1532,7 @@ class XML_RPC_Message extends XML_RPC_Base
                 $r = new XML_RPC_Response($v);
             }
         }
-        $r->hdrs = preg_split("@\r?\n@", $XML_RPC_xh[$parser]['ha'] ?: '');
+        $r->hdrs = preg_split("@\r?\n@", array_key_exists('ha', $XML_RPC_xh[$parser]) ? $XML_RPC_xh[$parser]['ha'] : '');
         return $r;
     }
 }
