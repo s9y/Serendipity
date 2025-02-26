@@ -123,6 +123,8 @@ if (!function_exists('errorToExceptionHandler')) {
         // By default, we will continue our process flow, unless:
         $exit = false;
 
+        @ini_set('zend.exception_string_param_max_len', 200);
+
         switch ($errNo) {
             case E_ERROR:
             case E_USER_ERROR:
