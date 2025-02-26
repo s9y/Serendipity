@@ -735,7 +735,22 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
                     $newSize .= '>'; // tell imagemagick to not enlarge small images, only works if safe_mode is off (safe_mode turns > in to \>)
                 }
                 if (!$serendipity['imagemagick_nobang']) $newSize .= '!'; // force the first run image geometry exactly to given sizes, if there were rounding differences (see https://github.com/s9y/Serendipity/commit/94881ba4c0e3bdd4b5fac510e93977e239171c1c and comments)
-                $cmd = escapeshellcmd($serendipity['convert'] . ' ' . $serendipity['imagemagick_thumb_parameters']) . ' -antialias -resize ' . serendipity_escapeshellarg($newSize) . ' ' . serendipity_escapeshellarg($infile) .' '. serendipity_escapeshellarg($outfile);
+
+                $params = '-sampling-factor 4:2:0 -unsharp 0x0.75+0.75+0.008 -strip -quality 85';
+                if (is_string($serendipity['imagemagick_thumb_parameters'])) {
+                    // In s9y < 2.6, $serendipity['imagemagick_thumb_parameters'] was a string and the default
+                    // value targeted jpgs. Users might have set variants of that in their local config, so
+                    // we provide a backwards compatibly path here
+                    $params = $serendipity['imagemagick_thumb_parameters'];
+                } else {
+                    // In 2.6 $serendipity['imagemagick_thumb_parameters'] has values for different
+                    // image formats
+                    if (isset($serendipity['imagemagick_thumb_parameters'][$fdim['mime']])) {
+                        $params = $serendipity['imagemagick_thumb_parameters'][$fdim['mime']];
+                    }
+                }
+                
+                $cmd = escapeshellcmd($serendipity['convert'] . ' ' . $params) . ' -antialias -resize ' . serendipity_escapeshellarg($newSize) . ' ' . serendipity_escapeshellarg($infile) .' '. serendipity_escapeshellarg($outfile);
             }
             exec($cmd, $output, $result);
             if ($result != 0) {
@@ -1317,6 +1332,18 @@ function serendipity_functions_gd($infilename) {
         $func['load'] = 'imagecreatefromjpeg';
         $func['save'] = 'imagejpeg';
         $func['qual'] = 85;
+        break;
+        
+    case 'avif':
+        $func['load'] = 'imagecreatefromavif';
+        $func['save'] = 'imageavif';
+        $func['qual'] = 60;
+        break;
+        
+    case 'webp':
+        $func['load'] = 'imagecreatefromwebp';
+        $func['save'] = 'imagewebp';
+        $func['qual'] = 90;
         break;
 
     case 'png':
