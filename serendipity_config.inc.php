@@ -64,10 +64,10 @@ if (!isset($serendipity['production'])) {
 
 // Set error reporting
 if ($serendipity['production']) {
-    error_reporting(E_ALL & ~(E_WARNING|E_NOTICE|E_STRICT|E_DEPRECATED));
+    error_reporting(E_ALL & ~(E_WARNING|E_NOTICE|E_DEPRECATED));
     @ini_set('display_errors', 'off');
 } else {
-    error_reporting(E_ALL & ~(E_NOTICE|E_STRICT|E_DEPRECATED));
+    error_reporting(E_ALL & ~(E_NOTICE|E_DEPRECATED));
 }
 
 if ($serendipity['production'] !== true) {
@@ -303,20 +303,13 @@ if (!is_readable($local_config)) {
 include($local_config);
 
 if ($serendipity['production'] === 'debug') {
-    error_reporting(E_ALL ^ E_NOTICE); // is 32759 with 5.4+
+    error_reporting(E_ALL ^ E_NOTICE); 
 }
 if ($serendipity['production'] === false) {
-    error_reporting(E_ALL & ~(E_NOTICE|E_STRICT)); // is 30711 with 5.4+
+    error_reporting(E_ALL & ~(E_NOTICE));
 }
 
 $errLevel = error_reporting();
-
-/* [DEBUG] Helper to display current error levels, meant for developers.
-echo $errLevel."<br>\n";
-for ($i = 0; $i < 15;  $i++ ) {
-    print debug_ErrorLevelType($errLevel & pow(2, $i)) . "<br>\n";
-}
-*/
 
 // [internal callback function]: errorToExceptionHandler()
 if (is_callable($serendipity['errorhandler'], false, $callable_name)) {

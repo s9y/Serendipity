@@ -1,6 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * PHP 8.4 fix: Remove deprecated constant E_STRICT
+
    * PHP 8 compatibility fixes for bundled XML/RPC.php
 
    * Upgrade bundled jQuery to jQuery 3
