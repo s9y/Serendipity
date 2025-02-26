@@ -1754,7 +1754,7 @@ class serendipity_plugin
      * @param   string  The path selector that tells whether to return a HTTP or realpath
      * @return  string  The full path+filename to the requested file
      * */
-    function &getFile($filename, $key = 'serendipityPath')
+    function getFile($filename, $key = 'serendipityPath')
     {
         global $serendipity;
         
