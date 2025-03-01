@@ -24,6 +24,7 @@ class serendipity_event_gravatar extends serendipity_event
     var $mybloglog_dummy_md5        = null;
     var $cache_dir                  = null;
     var $defaultImageConfiguration  = null;
+    var $defaultImageConfigurationdefault = null;
 
     var $avatarConfiguration        = array();
     var $cache_seconds              = 0;
@@ -492,7 +493,7 @@ class serendipity_event_gravatar extends serendipity_event
         }
 
         if (isset($eventData['email']) && !empty($eventData['email'])) {
-            $email_md5 = md5(strtolower($eventData['email']));
+            $email_md5 = hash('sha256', trim(strtolower($eventData['email'])));
         }
         else {
             $email_md5 = '';
@@ -500,12 +501,12 @@ class serendipity_event_gravatar extends serendipity_event
         if ($this->cache_seconds > 0) {
             $cache_file = $this->getCacheFilePath($eventData);
             // if no cache filename was generated, no usable user data was found.
-            // this meens: it won't be possible to generate any image, so break at this point.
+            // this means: it won't be possible to generate any image, so break at this point.
             if (!isset($cache_file)) {
                 return false;
             }
             $this->log("comment print: " . print_r($eventData, true));
-            // If there is a cache file that's new enough, return the image immidiatly
+            // If there is a cache file that's new enough, return the image immediately
             if (file_exists($cache_file) &&  (time() - filemtime($cache_file) < $this->cache_seconds)) {
                 $url = $serendipity['baseURL'] . $serendipity['indexFile'] . '?/'
                     . $this->getPermaPluginPath() . '/cachedAvatar_' . md5($url) . '_' . $email_md5
@@ -693,23 +694,20 @@ class serendipity_event_gravatar extends serendipity_event
         $gravatar_fallback = $this->get_config("gravatar_fallback");
         $fallback = "";
         if ($gravatar_fallback != 'none') {
-            $fallback = '&d=' . $gravatar_fallback;
+            $fallback = '?d=' . $gravatar_fallback;
         }
         else {
-            //$defaultavatar = urlencode((empty($default['defaultavatar'])?  $serendipity['baseURL'] . 'dummy.gif': 'http://' . $_SERVER['SERVER_NAME'] . $default['defaultavatar']));
             $defaultavatar = urlencode($serendipity['serendipityHTTPPath'] . 'dummy456.gif123'); // Add a not existing image to produce an error we can check
-            $fallback = '&d=' . $defaultavatar;
+            $fallback = '?d=' . $defaultavatar;
         }
-
-        $urltpl = 'http://www.gravatar.com/avatar.php?'
-            . 'gravatar_id=' . $email_md5
+        
+        $urltpl = 'https://www.gravatar.com/avatar/'
+            . $email_md5
             . $fallback
             . '&size='        . $default['size']
             . ($default['rating']=='-'?'':'&rating='. $default['rating']);
-
-        // Assure a default avatar, because we need it for testing if the avatar given by Gravatar is a dummy image.
+        
         $this->log("Gravatar Link: " . $urltpl) ;
-
         $success = $this->saveAndResponseAvatar($eventData, $urltpl, 1);
         $this->avatarConfiguration['gravatar_found'] = $success;
 
