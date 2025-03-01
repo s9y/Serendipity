@@ -8,7 +8,7 @@
  */
 
 @define('PLUGIN_EVENT_GRAVATAR_NAME',               'Avatar Plugin');
-@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Zobrazuje avatary (ikona či obrázek přispěvatele) v komentářích. Podporovány jsou služby Gravatar, Pavatar, Favatar a MyBlogLog.');
+@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Zobrazuje avatary (ikona či obrázek přispěvatele) v komentářích. Podporovány jsou služby Gravatar, Pavatar a Favatar.');
 
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY',         'Tvořit smarty tag');
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY_DESC',    'Pokud je tato volba zapnuta, obrázky avatarů nejsou zapsány přímo do textu komentáře, ale je místo toho vygenerován tag {$comment.avatar} pro šablonovací systém smarty. Pak budou avatary zobrazovat pouze styly vzhledu, které tento tag používají. Nejjednodušší způsob, jak zjistit, jestli Váš styl vzhledu podporuje avatary, je vyzkoušet zapnout toto nastavení.');

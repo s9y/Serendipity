@@ -20,8 +20,6 @@ class serendipity_event_gravatar extends serendipity_event
 {
     var $title = PLUGIN_EVENT_GRAVATAR_NAME;
 
-    // Holds MD5 code for the MyBlogLog dummy icon.
-    var $mybloglog_dummy_md5        = null;
     var $cache_dir                  = null;
     var $defaultImageConfiguration  = null;
     var $defaultImageConfigurationdefault = null;
@@ -403,9 +401,6 @@ class serendipity_event_gravatar extends serendipity_event
                                 break;
                             case 'pavatar':
                                 $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.pavatar.com">Pavatar</a>';
-                                break;
-                            case 'mybloglog':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.mybloglog.com">MyBlogLog</a>';
                                 break;
                             case 'monsterid':
                                 $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.splitbrain.org/go/monsterid">Monster ID</a>';
