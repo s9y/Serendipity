@@ -1,6 +1,10 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Update bundled avatar plugin: Fix gravatar image fetching, remove
+     defunct options for identica and twitter avatars, and clean up
+     documentation,
+
    * PHP 8.4 fix: Remove deprecated constant E_STRICT
 
    * PHP 8 compatibility fixes for bundled XML/RPC.php
