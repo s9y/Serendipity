@@ -8,7 +8,7 @@
  */
 
 @define('PLUGIN_EVENT_GRAVATAR_NAME',               'Avatar Plugin');
-@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Avatare bei Kommentaren anzeigen. Unterstützt werden Gravatare, Pavatare, Favatare, Twitter und MyBlogLog Avatare');
+@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Avatare bei Kommentaren anzeigen. Unterstützt werden Gravatare, Pavatare, Favatare und MyBlogLog Avatare');
 
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY',         'Smarty Tag erzeugen');
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY_DESC',    'Wenn diese Option eingeschaltet ist, so wird das Avatar Bild nicht direkt in den Kommentar geschrieben, sondern es wird ein Smarty Tag {$comment.avatar} erzeugt, in dem der HTML Code des Images steht. Sie sollten diese Option nur einschalten, wenn sie wissen, dass ihr Template dieses Smarty Tag unterstützt. Ob das der Fall ist, sollten sie einfach ausprobieren.');
@@ -50,7 +50,6 @@
 
 @define('PLUGIN_EVENT_GRAVATAR_LONG_DESCRIPTION',   '<b><a href="http://www.gravatar.com" target="_blank">Gravatare</a></b> werden von einem zentralem Server anhand der EMail Information des Kommentators abgeholt, ' .
         '<b><a href="http://www.peej.co.uk/projects/favatars.html" target="_blank">Favatare</a></b> sind die favicons auf der Homepage, die der Kommentator angegeben hat, ' .
-        '<b><a href="http://twitter.com" target="_blank">Twitter</a></b> lädt Bilder aus Twitter Profilen, ' .
         '<b><a href="http://www.pavatar.com" target="_blank">Pavatare</a></b> zeigen auf ein Bild, das der Besucher auf seiner Homepage hat, ' .
         '<b><a href="http://www.mybloglog.com" target="_blank">MyBlogLog Avatare</a></b> werden von einem zentralen Server geladen und ' .
         '<b><a href="http://www.splitbrain.org/go/monsterid" target="_blank">Monster ID</a></b>, <b><a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/" target="_blank">Identicon</a></b> und <b><a href="http://www.shamusyoung.com/twentysidedtale/?p=1462" target="_blank">Wavatar</a></b> Avatare sind lokal erstellte und für jeden Schreiber einzigartige Bilder.');

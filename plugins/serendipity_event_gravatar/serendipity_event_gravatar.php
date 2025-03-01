@@ -65,10 +65,6 @@ class serendipity_event_gravatar extends serendipity_event
                     'url'  => 'http://www.pavatar.com',
                     'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
                 ),
-                'twitter' => array(
-                    'url'  => 'http://www.twitter.com',
-                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
-                ),
                 'monsterid' => array(
                     'url'  => 'http://www.splitbrain.org/go/monsterid',
                     'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
@@ -120,7 +116,6 @@ class serendipity_event_gravatar extends serendipity_event
             'gravatar'  => "Gravatar",
             'favatar'   => "Favatar",
             'pavatar'   => "Pavatar",
-            'twitter'   => "Twitter",
             'monsterid' => "Monster ID",
             'wavatars'  => "Wavatars",
             'identicon' => "Identicon/YCon",
@@ -409,9 +404,6 @@ class serendipity_event_gravatar extends serendipity_event
                             case 'pavatar':
                                 $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.pavatar.com">Pavatar</a>';
                                 break;
-                            case 'twitter':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.twitter.com">Twitter</a>';
-                                break;
                             case 'mybloglog':
                                 $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.mybloglog.com">MyBlogLog</a>';
                                 break;
@@ -613,9 +605,6 @@ class serendipity_event_gravatar extends serendipity_event
                     break;
                 case 'pavatar':
                     $success = $this->fetchPFavatar($eventData, 'P');
-                    break;
-                case 'twitter':
-                    $success = $this->fetchTwitter($eventData);
                     break;
                 case 'monsterid':
                     $success = $this->fetchMonster($eventData);
@@ -858,89 +847,6 @@ class serendipity_event_gravatar extends serendipity_event
         else {
             return false;
         }
-    }
-
-    function fetchTwitter(&$eventData)
-    {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
-
-        // Was lastrun successfull?
-        if (isset($this->avatarConfiguration['twitter_found']) && !$this->avatarConfiguration['twitter_found']) {
-            return false;
-        }
-
-        // Let other plugins fill metadata. CommentSpice is perhaps able to fetch twitter infos.
-        try {
-            $original_url = $eventData['url'];
-            $this->log("hook_event: avatar_fetch_userinfos");
-            $askforData = array("type" => "twitter");
-            serendipity_plugin_api::hook_event('avatar_fetch_userinfos', $eventData, $askforData);
-        } catch (Exception $e) {
-            $this->log($e);
-        }
-
-        if (empty($eventData['url'])) {
-            return false;
-        }
-        $url = $eventData['url'];
-        $eventData['url'] = $original_url;
-        $parts = @parse_url($url);
-        if (!is_array($parts)) {
-            return false;
-        }
-        if ($parts['host'] == 'twitter.com' || $parts['host'] == 'www.twitter.com') {
-            $path =  trim($parts['path']);
-            $dirs = explode('/',$path);
-            $twittername = $dirs[1];
-
-            $this->log("Twitteruser found ($url): $twittername");
-
-            $twitter_search = 'http://search.twitter.com/search.atom?q=from%3A' . $twittername . '&rpp=1';
-            serendipity_request_start();
-            $options = array();
-            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
-                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
-                $options['ssl_verify_peer'] = false;
-            }
-            $req = new HTTP_Request2($twitter_search, HTTP_Request2::METHOD_GET, $options);
-            try {
-                $response = $req->send();
-
-                $this->last_error = $response->getStatus();
-                if ($response->getStatus() != 200) {
-                    throw new HTTP_Request2_Exception("Could not search on twitter");
-                }
-                $response = trim($response->getBody());
-
-            } catch (HTTP_Request2_Exception $e) {
-                $this->last_error = $response->getStatus();
-                serendipity_request_end();
-                $this->log("Twitter Error: {$this->last_error}");
-                return false;
-            }
-                
-            serendipity_request_end();
-            $parser = xml_parser_create();
-            $vals=array(); $index=array();
-            $success = xml_parse_into_struct($parser, $response, $vals, $index);
-            xml_parser_free($parser);
-            if ($success) {
-                foreach ($index['LINK'] as $index) {
-                    if ($vals[$index]['attributes']['REL'] == 'image') {
-                        $img_url = $vals[$index]['attributes']['HREF'];
-                        $success = true;
-                        break;
-                    }
-                }
-                if ($success) {
-                    $success = $this->saveAndResponseAvatar($eventData, $img_url);
-                }
-            }
-            $this->avatarConfiguration['twitter_found'] = $success;
-            return $success;
-        }
-        return false;
-
     }
 
     /**

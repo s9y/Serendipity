@@ -7,7 +7,7 @@
  */
 
 @define('PLUGIN_EVENT_GRAVATAR_NAME',               'Avatar Plugin');
-@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Show avatars inside comments. Gravatars, Pavatars, Favatars, Twitter and MyBlogLog avatars are supported.');
+@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Show avatars inside comments. Gravatars, Pavatars, Favatars and MyBlogLog avatars are supported.');
 
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY',         'Produce smarty tag');
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY_DESC',    'If this option is switched on, the avatar images are not written directly into the comment output but a smarty tag {$comment.avatar} is produced. Only templates, that support this smarty tag, will display the avatar, if this option is set to true. The best way is to try it, if your template supports this smarty tag.');
@@ -51,7 +51,6 @@
 @define('PLUGIN_EVENT_GRAVATAR_LONG_DESCRIPTION',   '<b><a href="http://www.gravatar.com" target="_blank">Gravatars</a></b> are central-served avatar images by email, ' .
         '<b><a href="http://www.peej.co.uk/projects/favatars.html" target="_blank">Favatars</a></b> are favicons of the writer\'s site, ' .
         '<b><a href="http://www.pavatar.com" target="_blank">Pavatars</a></b> are images at the writer\'s site, ' .
-        '<b><a href="http://twitter.com" target="_blank">Twitter</a></b> loads twitter profile images, ' .
         '<b><a href="http://www.mybloglog.com" target="_blank">MyBlogLog avatars</a></b> are central-served avatar images again and ' .
         '<b><a href="http://www.splitbrain.org/go/monsterid" target="_blank">Monster ID</a></b>, <b><a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/" target="_blank">Identicon</a></b> and <b><a href="http://www.shamusyoung.com/twentysidedtale/?p=1462" target="_blank">Wavatar</a></b> Avatare are localy created monster images unique for each writer.');
 @define('PLUGIN_EVENT_GRAVATAR_EXTLING_WARNING',    '<font color="red">CAUTION!</font> This plugin has to be executed before any plugin changing links (like i.e. the exit tracking plugin)! ' .

@@ -1,7 +1,7 @@
 <?php
 
 @define('PLUGIN_EVENT_GRAVATAR_NAME',               'Плагин аватаров');
-@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Показ аватаров внутри комментариев. Поддерживаются Gravatar, Pavatar, Favatar, Twitter и MyBlogLog.');
+@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Показ аватаров внутри комментариев. Поддерживаются Gravatar, Pavatar, Favatar и MyBlogLog.');
 
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY',         'Создать тег Smarty');
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY_DESC',    'Если эта опция включена, изображения аватара не записываются непосредственно в вывод комментария, но создаётся тег smarty {$comment.avatar}. Только шаблоны, поддерживающие этот тег Smarty, будут отображать аватар, если для этой опции установлено значение "Да". Лучший способ - попробовать это, если Ваш шаблон поддерживает этот тег Smarty.');
