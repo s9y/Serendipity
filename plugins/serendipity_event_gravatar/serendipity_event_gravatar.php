@@ -14,7 +14,7 @@ if (IN_serendipity !== true) {
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
 
 // Switch on and off debugging mode of the plugin
-@define('PLUGIN_EVENT_GRAVATAR_DEBUG', true);
+@define('PLUGIN_EVENT_GRAVATAR_DEBUG', false);
 
 class serendipity_event_gravatar extends serendipity_event
 {
@@ -426,6 +426,12 @@ class serendipity_event_gravatar extends serendipity_event
         }
     }
 
+    // Hash the given value in the way expected for the gravatar fetch. The same hash
+    // can be used for contructing the cached urls
+    function pluginHash($value) {
+        return hash('sha256', trim(strtolower($value)));
+    }
+
     /**
      * Returns HTML displaying the user avatar. This is done without any call to external servers.
      * If a cached avatar is found, the image will have it as SRC, else the SRC will be filled with
@@ -472,7 +478,7 @@ class serendipity_event_gravatar extends serendipity_event
         }
 
         if (isset($eventData['email']) && !empty($eventData['email'])) {
-            $email_md5 = hash('sha256', trim(strtolower($eventData['email'])));
+            $email_md5 = $this->pluginHash($eventData['email']);
         }
         else {
             $email_md5 = '';
@@ -488,9 +494,14 @@ class serendipity_event_gravatar extends serendipity_event
             // If there is a cache file that's new enough, return the image immediately
             if (file_exists($cache_file) &&  (time() - filemtime($cache_file) < $this->cache_seconds)) {
                 $url = $serendipity['baseURL'] . $serendipity['indexFile'] . '?/'
-                    . $this->getPermaPluginPath() . '/cachedAvatar_' . md5($url) . '_' . $email_md5
-                    . '_' . md5($author);
+                    . $this->getPermaPluginPath() . '/cachedAvatar_' . $this->pluginHash($url) . '_' . $email_md5
+                    . '_' . $this->pluginHash($author);
             } else { // no image cached yet, call external plugin hook for fetching a new one
+                if (file_exists($cache_file)) {
+                    // On modern servers the filetime might not be updated. Deleting and recreating
+                    // it after a cache timeout will make the cache logic work again.
+                    unlink($cache_file);
+                }
                 $url = $serendipity['baseURL'] . $serendipity['indexFile'] . '?/'
                     . $this->getPermaPluginPath() . '/fetchAvatar_' . $this->urlencode($url) . '_' . $email_md5
                     . '_' . $this->urlencode($author) . '_' . $eventData['id'];
@@ -655,8 +666,8 @@ class serendipity_event_gravatar extends serendipity_event
                 return false;
             }
             else {
-                if (empty($eventData['url'])) $email_md5 = md5($eventData['author']);
-                else $email_md5 = md5($eventData['url']);
+                if (empty($eventData['url'])) $email_md5 = $this->pluginHash($eventData['author']);
+                else $email_md5 = $this->pluginHash($eventData['url']);
             }
         }
         else {
@@ -926,7 +937,7 @@ class serendipity_event_gravatar extends serendipity_event
     {
         require_once dirname(__FILE__) . '/monsterid/monsterid.php';
 
-        $seed = md5($eventData['author']) . $eventData['email_md5'] . md5($eventData['url']);
+        $seed = $this->pluginHash($eventData['author']) . $eventData['email_md5'] . $this->pluginHash($eventData['url']);
         $default = $this->getDefaultImageConfiguration();
         $size = $default['size'];
 
@@ -957,7 +968,7 @@ class serendipity_event_gravatar extends serendipity_event
     {
         require_once dirname(__FILE__) . '/wavatars/wavatars.php';
 
-        $seed = md5($eventData['author']) . $eventData['email_md5'] . md5($eventData['url']);
+        $seed = $this->pluginHash($eventData['author']) . $eventData['email_md5'] . $this->pluginHash($eventData['url']);
         $default = $this->getDefaultImageConfiguration();
         $size = $default['size'];
 
@@ -990,7 +1001,7 @@ class serendipity_event_gravatar extends serendipity_event
     {
         require_once dirname(__FILE__) . '/ycon/ycon.image.php';
 
-        $seed = md5($eventData['author']) . $eventData['email_md5'] . md5($eventData['url']);
+        $seed = $this->pluginHash($eventData['author']) . $eventData['email_md5'] . $this->pluginHash($eventData['url']);
         $default = $this->getDefaultImageConfiguration();
         $size = $default['size'];
 
@@ -1279,16 +1290,16 @@ class serendipity_event_gravatar extends serendipity_event
      */
     function urlencode($url)
     {
-        $hash = md5($this->instance . $url);
+        $hash = $this->pluginHash($this->instance . $url);
         return $hash . str_replace ('_', '%5F', urlencode($url));
     }
 
     function urldecode($url)
     {
-        $hash     = substr($url, 0, 32);
-        $real_url = urldecode(substr($url, 32));
+        $hash     = substr($url, 0, 64);
+        $real_url = urldecode(substr($url, 64));
 
-        if ($hash == md5($this->instance . $real_url)) {
+        if ($hash == $this->pluginHash($this->instance . $real_url)) {
             // Valid hash was found.
             return $real_url;
         } else {
@@ -1314,11 +1325,11 @@ class serendipity_event_gravatar extends serendipity_event
             $email_md5 = $eventData['email_md5'];
         }
         else if (isset($eventData['email'])) {
-            $email_md5 = md5(strtolower($eventData['email']));
+            $email_md5 = $this->pluginHash(strtolower($eventData['email']));
         }
 
-        $author_md5= isset($eventData['author'])? md5($eventData['author']) : '';
-        $url_md5 = isset($eventData['url'])? md5($eventData['url']) : '' ;
+        $author_md5= isset($eventData['author'])? $this->pluginHash($eventData['author']) : '';
+        $url_md5 = isset($eventData['url'])? $this->pluginHash($eventData['url']) : '' ;
 
         return $url_md5 . '_' . $email_md5 . '_' . $author_md5;
     }
