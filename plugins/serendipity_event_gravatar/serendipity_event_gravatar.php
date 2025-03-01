@@ -8,13 +8,13 @@ if (IN_serendipity !== true) {
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 // Actual version of this plugin
-@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.63.1'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
+@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.63.1');
 
 // Defines the maximum available method  slots in the configuration.
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
 
 // Switch on and off debugging mode of the plugin
-@define('PLUGIN_EVENT_GRAVATAR_DEBUG', false);
+@define('PLUGIN_EVENT_GRAVATAR_DEBUG', true);
 
 class serendipity_event_gravatar extends serendipity_event
 {
@@ -38,7 +38,7 @@ class serendipity_event_gravatar extends serendipity_event
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
-            'php'         => '4.1.0'
+            'php'         => '8.0'
         ));
         $propbag->add('version',       PLUGIN_EVENT_GRAVATAR_VERSION);
         $propbag->add('groups',        array('IMAGES'));
@@ -596,7 +596,7 @@ class serendipity_event_gravatar extends serendipity_event
                     $success = $this->fetchGravatar($eventData);
                     break;
                 case 'favatar':
-                    $success = $this->fetchPFavatar($eventData, 'F');
+                    $success = $this->fetchFavatar($eventData);
                     break;
                 case 'pavatar':
                     $success = $this->fetchPFavatar($eventData, 'P');
@@ -687,6 +687,38 @@ class serendipity_event_gravatar extends serendipity_event
         return $success;
     }
 
+    /**
+     * Fetch the favicon from the commenter's url
+     *
+     * @param array eventdata the data given by the event
+     *
+     * @return boolean true, if Avatar was found and added to the comment buffer
+     * */
+    function fetchFavatar($eventData) {
+        if (! isset($eventData['url']) || empty($eventData['url'])) {
+            return false;
+        }
+        $userpage = serendipity_request_url($eventData['url']);
+        preg_match('/<link[^>]+rel="(?:shortcut )?icon"[^>]+?href="([^"]+?)"/si', $userpage, $matches);
+        if (isset($matches[1])) {
+            // we found a linked favicon
+            $favicon = $matches[1];
+            if (! str_starts_with($favicon, 'http')) {
+                // If the favicon is given as a relative url, we have to construct the abolute
+                $urlParts   = parse_url($eventData['url']);
+                $faviconURL = $urlParts['scheme'] . '://' . $urlParts['host'] . "/$favicon";
+            } else {
+                $faviconURL = $favicon;
+            }
+            return $this->saveAndResponseAvatar($eventData, $faviconURL);
+        } else {
+            $urlParts   = parse_url($eventData['url']);
+            $faviconURL = $urlParts['scheme'] . '://' . $urlParts['host'] . '/favicon.ico';
+            return $this->saveAndResponseAvatar($eventData, $faviconURL);
+        }
+
+        return false;
+    }
 
     /**
      * Tries to add a favatar or pavatar (depending on the given mode) to the comment.
