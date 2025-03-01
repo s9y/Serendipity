@@ -599,7 +599,7 @@ class serendipity_event_gravatar extends serendipity_event
                     $success = $this->fetchFavatar($eventData);
                     break;
                 case 'pavatar':
-                    $success = $this->fetchPFavatar($eventData, 'P');
+                    $success = $this->fetchPavatar($eventData);
                     break;
                 case 'monsterid':
                     $success = $this->fetchMonster($eventData);
@@ -718,6 +718,45 @@ class serendipity_event_gravatar extends serendipity_event
         }
 
         return false;
+    }
+
+    /**
+     * Fetch an image from the given url if it is decalred by the X-Pavatar header, linked by
+     * <link rel="pavatar" href="URL"> or stored as /pavatar.png as the webroot. See
+     * https://github.com/pavatar/pavatar/blob/master/Specification.md 
+     *
+     * @param array eventdata the data given by the event
+     *
+     * @return boolean true, if Avatar was found and added to the comment buffer
+     * */
+    function fetchPavatar($eventData) {
+        global $serendipity;
+        if (! isset($eventData['url']) || empty($eventData['url'])) {
+            return false;
+        }
+        
+        $userpage = serendipity_request_url($eventData['url']);
+        $header = $serendipity['last_http_request']['header'];
+
+        if (isset($header['X-Pavatar'])) {
+            return;
+            // Note that according to the spec, header content has to be the absolute url. We do not
+            // need to work with relative urls
+            return $this->saveAndResponseAvatar($eventData, $header['X-Pavatar']);
+        }
+
+        preg_match('/<link[^>]+rel="pavatar"[^>]+?href="([^"]+?)"/si', $userpage, $matches);
+        if (isset($matches[1])) {
+            // Again, the spec asks for an absolute URL here.
+            return $this->saveAndResponseAvatar($eventData, $matches[1]);
+        }
+
+        // If neither header nor link is set we can still guess
+        $urlParts   = parse_url($eventData['url']);
+        $pavatarURL = $urlParts['scheme'] . '://' . $urlParts['host'] . '/pavatar.png';
+
+        // If the pavatar does not exist this will properly return false
+        return $this->saveAndResponseAvatar($eventData, $pavatarURL);
     }
 
     /**
