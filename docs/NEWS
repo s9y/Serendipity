@@ -1,6 +1,13 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Enable .webp and .avif thumbnails also when using PHP's gd module
+     instead of imagemagick. Optimize imagemagick's thumbnail parameters,
+     for smaller filesizes for .webp and .avif images.
+     NOTE: Check the new structure in serendipity_config.inc.php if you
+     have set a custom value for imagemagick_thumb_parameters in your
+     local config file.
+
    * PHP 8.4 fix: Remove deprecated constant E_STRICT
 
    * PHP 8 compatibility fixes for bundled XML/RPC.php
