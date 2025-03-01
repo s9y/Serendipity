@@ -69,10 +69,6 @@ class serendipity_event_gravatar extends serendipity_event
                     'url'  => 'http://www.twitter.com',
                     'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
                 ),
-                'identica' => array(
-                    'url'  => 'http://identi.ca',
-                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
-                ),
                 'monsterid' => array(
                     'url'  => 'http://www.splitbrain.org/go/monsterid',
                     'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
@@ -125,7 +121,6 @@ class serendipity_event_gravatar extends serendipity_event
             'favatar'   => "Favatar",
             'pavatar'   => "Pavatar",
             'twitter'   => "Twitter",
-            'identica'  => "Identica",
             'monsterid' => "Monster ID",
             'wavatars'  => "Wavatars",
             'identicon' => "Identicon/YCon",
@@ -417,9 +412,6 @@ class serendipity_event_gravatar extends serendipity_event
                             case 'twitter':
                                 $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.twitter.com">Twitter</a>';
                                 break;
-                            case 'identica':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://identi.ca">Identica</a>';
-                                break;
                             case 'mybloglog':
                                 $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.mybloglog.com">MyBlogLog</a>';
                                 break;
@@ -624,9 +616,6 @@ class serendipity_event_gravatar extends serendipity_event
                     break;
                 case 'twitter':
                     $success = $this->fetchTwitter($eventData);
-                    break;
-                case 'identica':
-                    $success = $this->fetchIdentica($eventData);
                     break;
                 case 'monsterid':
                     $success = $this->fetchMonster($eventData);
@@ -954,59 +943,6 @@ class serendipity_event_gravatar extends serendipity_event
 
     }
 
-    function fetchIdentica(&$eventData)
-    {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
-
-        // Was lastrun successfull?
-        if (isset($this->avatarConfiguration['identica_found']) && !$this->avatarConfiguration['identica_found']) {
-            return false;
-        }
-        if (empty($eventData['url'])) {
-            return false;
-        }
-        $url = $eventData['url'];
-
-        if (preg_match('@^http://identi\.ca/notice/(\d+)$@',$url,$matches)) {
-            $status_id = $matches[1];
-            $search = "http://identi.ca/api/statuses/show/$status_id.xml";
-            serendipity_request_start();
-            $options = array();
-            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
-                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
-                $options['ssl_verify_peer'] = false;
-            }
-            $req = new HTTP_Request2($search, HTTP_Request2::METHOD_GET, $options);
-            try {
-                $response = $req->send();
-                $this->last_error = $response->getStatus();
-                if ($response->getStatus() != 200) {
-                    throw new HTTP_Request2_Exception("Could not search on identica");
-                }
-                $response = trim($response->getBody());
-            } catch (HTTP_Request2_Exception $e) {
-                $this->last_error = $response->getStatus();
-                serendipity_request_end();
-                $this->log("Identica Error: {$this->last_error}");
-                return false;
-            }
-            serendipity_request_end();
-            $parser = xml_parser_create();
-            $vals=array(); $index=array();
-            $success = xml_parse_into_struct($parser, $response, $vals, $index);
-            xml_parser_free($parser);
-            if ($success) {
-                $img_url = $vals[$index['PROFILE_IMAGE_URL'][0]]['value'];
-                $success = $this->saveAndResponseAvatar($eventData, $img_url);
-            }
-            $this->avatarConfiguration['identica_found'] = $success;
-            return $success;
-        }
-
-        return false;
-
-    }
-
     /**
      * Shows a monster id avatar.
      *
@@ -1162,7 +1098,7 @@ class serendipity_event_gravatar extends serendipity_event
         try {
             $response = $req->send();
             if ($response->getStatus() != '200') {
-                throw new HTTP_Request2_Exception("Could not search on identica");
+                throw new HTTP_Request2_Exception("Could not fetch avatar");
             }
             // Allow only images as Avatar!
             $mime = $response->getHeader("content-type");

@@ -1,7 +1,7 @@
 <?php
 
 @define('PLUGIN_EVENT_GRAVATAR_NAME',               'Плагин аватаров');
-@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Показ аватаров внутри комментариев. Поддерживаются Gravatar, Pavatar, Favatar, Twitter, Identica и MyBlogLog.');
+@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Показ аватаров внутри комментариев. Поддерживаются Gravatar, Pavatar, Favatar, Twitter и MyBlogLog.');
 
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY',         'Создать тег Smarty');
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY_DESC',    'Если эта опция включена, изображения аватара не записываются непосредственно в вывод комментария, но создаётся тег smarty {$comment.avatar}. Только шаблоны, поддерживающие этот тег Smarty, будут отображать аватар, если для этой опции установлено значение "Да". Лучший способ - попробовать это, если Ваш шаблон поддерживает этот тег Smarty.');
@@ -46,7 +46,6 @@
         '<b><a href="http://www.peej.co.uk/projects/favatars.html" target="_blank">Favatar</a></b> являются иконками сайта (favicon) писателя, ' .
         '<b><a href="http://www.pavatar.com" target="_blank">Pavatar</a></b> являются изображениями на сайте автора, ' .
         '<b><a href="http://twitter.com" target="_blank">Twitter</a></b> загружает изображения профиля в Twitter, ' .
-        '<b><a href="http://identi.ca" target="_blank">Identica</a></b> загружает изображения профиля identi.ca, ' .
         '<b><a href="http://www.mybloglog.com" target="_blank">Аватары MyBlogLog</a></b> снова являются централизованными изображениями аватаров и ' .
         '<b><a href="http://www.splitbrain.org/go/monsterid" target="_blank">Monster ID</a></b>, <b><a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/" target="_blank">Identicon</a></b> и <b><a href="http://www.shamusyoung.com/twentysidedtale/?p=1462" target="_blank">Wavatar</a></b> являются локально созданными изображениями монстров, уникальными для каждого автора.');
 @define('PLUGIN_EVENT_GRAVATAR_EXTLING_WARNING',    '<font color="red">ОСТОРОЖНО!</font> Этот плагин должен быть запущен перед любым плагином, изменяющим ссылки (например, плагин отслеживания выхода)! ' .
