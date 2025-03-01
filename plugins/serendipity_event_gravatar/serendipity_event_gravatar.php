@@ -394,16 +394,16 @@ class serendipity_event_gravatar extends serendipity_event
                         $act_method = $this->get_config("method_".$methodnr);
                         switch ($act_method){
                             case 'gravatar':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.gravatar.com">Gravatar</a>';
+                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="https://www.gravatar.com">Gravatar</a>';
                                 break;
                             case 'favatar':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.peej.co.uk/projects/favatars.html">Favatar</a>';
+                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . 'Favatar (Favicons)';
                                 break;
                             case 'pavatar':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.pavatar.com">Pavatar</a>';
+                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://pavatar.github.io/pavatar/">Pavatar</a>';
                                 break;
                             case 'monsterid':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.splitbrain.org/go/monsterid">Monster ID</a>';
+                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="https://www.splitbrain.org/go/monsterid">Monster ID</a>';
                                 break;
                             case 'identicon':
                                 $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/">Identicon/Ycon</a>';

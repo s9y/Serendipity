@@ -49,9 +49,9 @@
 @define('PLUGIN_EVENT_GRAVATAR_AUTOR_ALT_DESC',     'Normaler Weise wird der Autorenname im TITLE Attribut des Avatar Bildes angegeben, das ALT Attribut wird mit einem * gefüllt, um das Seitenlayout nicht zu zerstören, wenn der Browser das Bild nicht laden kann. Allerdings wird blinden Lesern das ALT Attribut vorgelesen. Falls Sie diese Leser unterstützen wollen, sollten Sie diese Option einschalten.');
 
 @define('PLUGIN_EVENT_GRAVATAR_LONG_DESCRIPTION',   '<b><a href="http://www.gravatar.com" target="_blank">Gravatare</a></b> werden von einem zentralem Server anhand der EMail Information des Kommentators abgeholt, ' .
-        '<b><a href="http://www.peej.co.uk/projects/favatars.html" target="_blank">Favatare</a></b> sind die favicons auf der Homepage, die der Kommentator angegeben hat, ' .
-        '<b><a href="http://www.pavatar.com" target="_blank">Pavatare</a></b> zeigen auf ein Bild, das der Besucher auf seiner Homepage hat, ' .
-        '<b><a href="http://www.splitbrain.org/go/monsterid" target="_blank">Monster ID</a></b>, <b><a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/" target="_blank">Identicon</a></b> und <b><a href="http://www.shamusyoung.com/twentysidedtale/?p=1462" target="_blank">Wavatar</a></b> Avatare sind lokal erstellte und für jeden Schreiber einzigartige Bilder.');
+        '<b>Favatare</b> sind die Favicons auf der Homepage, die der Kommentator angegeben hat, ' .
+        '<b><a href="http://pavatar.github.io/pavatar/" target="_blank">Pavatare</a></b> zeigen auf ein Bild, das der Besucher auf seiner Homepage hat, ' .
+        '<b><a href="https://www.splitbrain.org/go/monsterid" target="_blank">Monster ID</a></b>, <b><a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/" target="_blank">Identicon</a></b> und <b><a href="https://www.shamusyoung.com/twentysidedtale/?p=1462" target="_blank">Wavatar</a></b> Avatare sind lokal erstellte und für jeden Schreiber einzigartige Bilder.');
 @define('PLUGIN_EVENT_GRAVATAR_EXTLING_WARNING',    '<font color="red">ACHTUNG!</font> Dieses Plugin muss vor allen Plugins ausgeführt werden, die Links verändern (wie z.B. das Exit Tracking Plugin)!<br/>' .
         '<font color="red">Ansonsten werden Pavatare und Favatare nicht funktionieren!</font>');
 

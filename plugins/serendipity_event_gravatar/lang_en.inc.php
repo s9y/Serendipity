@@ -49,9 +49,9 @@
 @define('PLUGIN_EVENT_GRAVATAR_AUTOR_ALT_DESC',     'Normaly the authors name is displayed in the TITLE attribute of the avatar image, the ALT attribute is filled with an *. This prevents destroying the layout, when the browser is not able to load the image. But for blind people the ALT attribute is read, so if you want to support them, switch this option on.');
 
 @define('PLUGIN_EVENT_GRAVATAR_LONG_DESCRIPTION',   '<b><a href="http://www.gravatar.com" target="_blank">Gravatars</a></b> are central-served avatar images by email, ' .
-        '<b><a href="http://www.peej.co.uk/projects/favatars.html" target="_blank">Favatars</a></b> are favicons of the writer\'s site, ' .
-        '<b><a href="http://www.pavatar.com" target="_blank">Pavatars</a></b> are images at the writer\'s site, ' .
-        '<b><a href="http://www.splitbrain.org/go/monsterid" target="_blank">Monster ID</a></b>, <b><a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/" target="_blank">Identicon</a></b> and <b><a href="http://www.shamusyoung.com/twentysidedtale/?p=1462" target="_blank">Wavatar</a></b> Avatare are localy created monster images unique for each writer.');
+        '<b>Favatars</b> are favicons of the writer\'s site, ' .
+        '<b><a href="http://pavatar.github.io/pavatar/" target="_blank">Pavatars</a></b> are images at the writer\'s site, ' .
+        '<b><a href="https://www.splitbrain.org/go/monsterid" target="_blank">Monster ID</a></b>, <b><a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/" target="_blank">Identicon</a></b> and <b><a href="https://www.shamusyoung.com/twentysidedtale/?p=1462" target="_blank">Wavatar</a></b> Avatare are localy created monster images unique for each writer.');
 @define('PLUGIN_EVENT_GRAVATAR_EXTLING_WARNING',    '<font color="red">CAUTION!</font> This plugin has to be executed before any plugin changing links (like i.e. the exit tracking plugin)! ' .
         '<font color="red">Else Pavatars and Favatars avatars won\'t work!</font>');
 
