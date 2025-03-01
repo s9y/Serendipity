@@ -942,9 +942,12 @@ class serendipity_event_gravatar extends serendipity_event
         $size = $default['size'];
 
         // Save monster image
-        @mkdir($this->getCacheDirectory());
+        if (! file_exists($this->getCacheDirectory())) {
+            @mkdir($this->getCacheDirectory());
+        }
         $cache_file = $this->getCacheFilePath($eventData);
         $this->log("Caching monster avatar: " . $cache_file);
+        
         if (build_monster($cache_file, $seed, $size)) {
             $this->log("Success caching monster.");
             $this->avatarConfiguration['mime-type'] = "image/png";
@@ -973,10 +976,13 @@ class serendipity_event_gravatar extends serendipity_event
         $size = $default['size'];
 
         // Save monster image
-        @mkdir($this->getCacheDirectory());
+        if (! file_exists($this->getCacheDirectory())) {
+            @mkdir($this->getCacheDirectory());
+        }
         $cache_file = $this->getCacheFilePath($eventData);
         $this->log("Caching wavatar avatar: " . $cache_file);
-        if (wavatar_build($cache_file, $seed, $size)) {
+        wavatar_build($seed, $cache_file, $size);
+        if (file_exists($cache_file)) {
             $this->log("Success caching wavatar.");
             $this->avatarConfiguration['mime-type'] = "image/png";
             $this->show($cache_file);
@@ -1006,7 +1012,9 @@ class serendipity_event_gravatar extends serendipity_event
         $size = $default['size'];
 
         // Save monster image
-        @mkdir($this->getCacheDirectory());
+        if (! file_exists($this->getCacheDirectory())) {
+            @mkdir($this->getCacheDirectory());
+        }
         $cache_file = $this->getCacheFilePath($eventData);
         $this->log("Caching Identicon/Ycon avatar: " . $cache_file);
         if (build_ycon($cache_file,$seed,$size)) {
