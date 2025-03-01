@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 // Actual version of this plugin
-@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.63.1'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
+@define('PLUGIN_EVENT_GRAVATAR_VERSION', '2.0');
 
 // Defines the maximum available method  slots in the configuration.
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
@@ -20,10 +20,9 @@ class serendipity_event_gravatar extends serendipity_event
 {
     var $title = PLUGIN_EVENT_GRAVATAR_NAME;
 
-    // Holds MD5 code for the MyBlogLog dummy icon.
-    var $mybloglog_dummy_md5        = null;
     var $cache_dir                  = null;
     var $defaultImageConfiguration  = null;
+    var $defaultImageConfigurationdefault = null;
 
     var $avatarConfiguration        = array();
     var $cache_seconds              = 0;
@@ -39,10 +38,11 @@ class serendipity_event_gravatar extends serendipity_event
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
-            'php'         => '4.1.0'
+            'php'         => '8.0'
         ));
         $propbag->add('version',       PLUGIN_EVENT_GRAVATAR_VERSION);
         $propbag->add('groups',        array('IMAGES'));
+        $propbag->add('copyright',     'GPLv2 (or later)');
         $propbag->add('event_hooks',   array(
             'frontend_display' => true,
             'frontend_comment' => true,
@@ -62,14 +62,6 @@ class serendipity_event_gravatar extends serendipity_event
                 ),
                 'pavatar' => array(
                     'url'  => 'http://www.pavatar.com',
-                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
-                ),
-                'twitter' => array(
-                    'url'  => 'http://www.twitter.com',
-                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
-                ),
-                'identica' => array(
-                    'url'  => 'http://identi.ca',
                     'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
                 ),
                 'monsterid' => array(
@@ -123,8 +115,6 @@ class serendipity_event_gravatar extends serendipity_event
             'gravatar'  => "Gravatar",
             'favatar'   => "Favatar",
             'pavatar'   => "Pavatar",
-            'twitter'   => "Twitter",
-            'identica'  => "Identica",
             'monsterid' => "Monster ID",
             'wavatars'  => "Wavatars",
             'identicon' => "Identicon/YCon",
@@ -405,25 +395,16 @@ class serendipity_event_gravatar extends serendipity_event
                         $act_method = $this->get_config("method_".$methodnr);
                         switch ($act_method){
                             case 'gravatar':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.gravatar.com">Gravatar</a>';
+                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="https://www.gravatar.com">Gravatar</a>';
                                 break;
                             case 'favatar':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.peej.co.uk/projects/favatars.html">Favatar</a>';
+                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . 'Favatar (Favicons)';
                                 break;
                             case 'pavatar':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.pavatar.com">Pavatar</a>';
-                                break;
-                            case 'twitter':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.twitter.com">Twitter</a>';
-                                break;
-                            case 'identica':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://identi.ca">Identica</a>';
-                                break;
-                            case 'mybloglog':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.mybloglog.com">MyBlogLog</a>';
+                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://pavatar.github.io/pavatar/">Pavatar</a>';
                                 break;
                             case 'monsterid':
-                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://www.splitbrain.org/go/monsterid">Monster ID</a>';
+                                $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="https://www.splitbrain.org/go/monsterid">Monster ID</a>';
                                 break;
                             case 'identicon':
                                 $supported_methods .= (empty($supported_methods) ? '' : ', ') . '<a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/">Identicon/Ycon</a>';
@@ -444,6 +425,12 @@ class serendipity_event_gravatar extends serendipity_event
         } else {
             return false;
         }
+    }
+
+    // Hash the given value in the way expected for the gravatar fetch. The same hash
+    // can be used for contructing the cached urls
+    function pluginHash($value) {
+        return hash('sha256', trim(strtolower($value)));
     }
 
     /**
@@ -492,7 +479,7 @@ class serendipity_event_gravatar extends serendipity_event
         }
 
         if (isset($eventData['email']) && !empty($eventData['email'])) {
-            $email_md5 = md5(strtolower($eventData['email']));
+            $email_md5 = $this->pluginHash($eventData['email']);
         }
         else {
             $email_md5 = '';
@@ -500,17 +487,22 @@ class serendipity_event_gravatar extends serendipity_event
         if ($this->cache_seconds > 0) {
             $cache_file = $this->getCacheFilePath($eventData);
             // if no cache filename was generated, no usable user data was found.
-            // this meens: it won't be possible to generate any image, so break at this point.
+            // this means: it won't be possible to generate any image, so break at this point.
             if (!isset($cache_file)) {
                 return false;
             }
             $this->log("comment print: " . print_r($eventData, true));
-            // If there is a cache file that's new enough, return the image immidiatly
+            // If there is a cache file that's new enough, return the image immediately
             if (file_exists($cache_file) &&  (time() - filemtime($cache_file) < $this->cache_seconds)) {
                 $url = $serendipity['baseURL'] . $serendipity['indexFile'] . '?/'
-                    . $this->getPermaPluginPath() . '/cachedAvatar_' . md5($url) . '_' . $email_md5
-                    . '_' . md5($author);
+                    . $this->getPermaPluginPath() . '/cachedAvatar_' . $this->pluginHash($url) . '_' . $email_md5
+                    . '_' . $this->pluginHash($author);
             } else { // no image cached yet, call external plugin hook for fetching a new one
+                if (file_exists($cache_file)) {
+                    // On modern servers the filetime might not be updated. Deleting and recreating
+                    // it after a cache timeout will make the cache logic work again.
+                    unlink($cache_file);
+                }
                 $url = $serendipity['baseURL'] . $serendipity['indexFile'] . '?/'
                     . $this->getPermaPluginPath() . '/fetchAvatar_' . $this->urlencode($url) . '_' . $email_md5
                     . '_' . $this->urlencode($author) . '_' . $eventData['id'];
@@ -616,16 +608,10 @@ class serendipity_event_gravatar extends serendipity_event
                     $success = $this->fetchGravatar($eventData);
                     break;
                 case 'favatar':
-                    $success = $this->fetchPFavatar($eventData, 'F');
+                    $success = $this->fetchFavatar($eventData);
                     break;
                 case 'pavatar':
-                    $success = $this->fetchPFavatar($eventData, 'P');
-                    break;
-                case 'twitter':
-                    $success = $this->fetchTwitter($eventData);
-                    break;
-                case 'identica':
-                    $success = $this->fetchIdentica($eventData);
+                    $success = $this->fetchPavatar($eventData);
                     break;
                 case 'monsterid':
                     $success = $this->fetchMonster($eventData);
@@ -681,8 +667,8 @@ class serendipity_event_gravatar extends serendipity_event
                 return false;
             }
             else {
-                if (empty($eventData['url'])) $email_md5 = md5($eventData['author']);
-                else $email_md5 = md5($eventData['url']);
+                if (empty($eventData['url'])) $email_md5 = $this->pluginHash($eventData['author']);
+                else $email_md5 = $this->pluginHash($eventData['url']);
             }
         }
         else {
@@ -693,29 +679,97 @@ class serendipity_event_gravatar extends serendipity_event
         $gravatar_fallback = $this->get_config("gravatar_fallback");
         $fallback = "";
         if ($gravatar_fallback != 'none') {
-            $fallback = '&d=' . $gravatar_fallback;
+            $fallback = '?d=' . $gravatar_fallback;
         }
         else {
-            //$defaultavatar = urlencode((empty($default['defaultavatar'])?  $serendipity['baseURL'] . 'dummy.gif': 'http://' . $_SERVER['SERVER_NAME'] . $default['defaultavatar']));
             $defaultavatar = urlencode($serendipity['serendipityHTTPPath'] . 'dummy456.gif123'); // Add a not existing image to produce an error we can check
-            $fallback = '&d=' . $defaultavatar;
+            $fallback = '?d=' . $defaultavatar;
         }
-
-        $urltpl = 'http://www.gravatar.com/avatar.php?'
-            . 'gravatar_id=' . $email_md5
+        
+        $urltpl = 'https://www.gravatar.com/avatar/'
+            . $email_md5
             . $fallback
             . '&size='        . $default['size']
             . ($default['rating']=='-'?'':'&rating='. $default['rating']);
-
-        // Assure a default avatar, because we need it for testing if the avatar given by Gravatar is a dummy image.
+        
         $this->log("Gravatar Link: " . $urltpl) ;
-
         $success = $this->saveAndResponseAvatar($eventData, $urltpl, 1);
         $this->avatarConfiguration['gravatar_found'] = $success;
 
         return $success;
     }
 
+    /**
+     * Fetch the favicon from the commenter's url
+     *
+     * @param array eventdata the data given by the event
+     *
+     * @return boolean true, if Avatar was found and added to the comment buffer
+     * */
+    function fetchFavatar($eventData) {
+        if (! isset($eventData['url']) || empty($eventData['url'])) {
+            return false;
+        }
+        $userpage = serendipity_request_url($eventData['url']);
+        preg_match('/<link[^>]+rel="(?:shortcut )?icon"[^>]+?href="([^"]+?)"/si', $userpage, $matches);
+        if (isset($matches[1])) {
+            // we found a linked favicon
+            $favicon = $matches[1];
+            if (! str_starts_with($favicon, 'http')) {
+                // If the favicon is given as a relative url, we have to construct the abolute
+                $urlParts   = parse_url($eventData['url']);
+                $faviconURL = $urlParts['scheme'] . '://' . $urlParts['host'] . "/$favicon";
+            } else {
+                $faviconURL = $favicon;
+            }
+            return $this->saveAndResponseAvatar($eventData, $faviconURL);
+        } else {
+            $urlParts   = parse_url($eventData['url']);
+            $faviconURL = $urlParts['scheme'] . '://' . $urlParts['host'] . '/favicon.ico';
+            return $this->saveAndResponseAvatar($eventData, $faviconURL);
+        }
+
+        return false;
+    }
+
+    /**
+     * Fetch an image from the given url if it is decalred by the X-Pavatar header, linked by
+     * <link rel="pavatar" href="URL"> or stored as /pavatar.png as the webroot. See
+     * https://github.com/pavatar/pavatar/blob/master/Specification.md 
+     *
+     * @param array eventdata the data given by the event
+     *
+     * @return boolean true, if Avatar was found and added to the comment buffer
+     * */
+    function fetchPavatar($eventData) {
+        global $serendipity;
+        if (! isset($eventData['url']) || empty($eventData['url'])) {
+            return false;
+        }
+        
+        $userpage = serendipity_request_url($eventData['url']);
+        $header = $serendipity['last_http_request']['header'];
+
+        if (isset($header['X-Pavatar'])) {
+            return;
+            // Note that according to the spec, header content has to be the absolute url. We do not
+            // need to work with relative urls
+            return $this->saveAndResponseAvatar($eventData, $header['X-Pavatar']);
+        }
+
+        preg_match('/<link[^>]+rel="pavatar"[^>]+?href="([^"]+?)"/si', $userpage, $matches);
+        if (isset($matches[1])) {
+            // Again, the spec asks for an absolute URL here.
+            return $this->saveAndResponseAvatar($eventData, $matches[1]);
+        }
+
+        // If neither header nor link is set we can still guess
+        $urlParts   = parse_url($eventData['url']);
+        $pavatarURL = $urlParts['scheme'] . '://' . $urlParts['host'] . '/pavatar.png';
+
+        // If the pavatar does not exist this will properly return false
+        return $this->saveAndResponseAvatar($eventData, $pavatarURL);
+    }
 
     /**
      * Tries to add a favatar or pavatar (depending on the given mode) to the comment.
@@ -873,142 +927,6 @@ class serendipity_event_gravatar extends serendipity_event
         }
     }
 
-    function fetchTwitter(&$eventData)
-    {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
-
-        // Was lastrun successfull?
-        if (isset($this->avatarConfiguration['twitter_found']) && !$this->avatarConfiguration['twitter_found']) {
-            return false;
-        }
-
-        // Let other plugins fill metadata. CommentSpice is perhaps able to fetch twitter infos.
-        try {
-            $original_url = $eventData['url'];
-            $this->log("hook_event: avatar_fetch_userinfos");
-            $askforData = array("type" => "twitter");
-            serendipity_plugin_api::hook_event('avatar_fetch_userinfos', $eventData, $askforData);
-        } catch (Exception $e) {
-            $this->log($e);
-        }
-
-        if (empty($eventData['url'])) {
-            return false;
-        }
-        $url = $eventData['url'];
-        $eventData['url'] = $original_url;
-        $parts = @parse_url($url);
-        if (!is_array($parts)) {
-            return false;
-        }
-        if ($parts['host'] == 'twitter.com' || $parts['host'] == 'www.twitter.com') {
-            $path =  trim($parts['path']);
-            $dirs = explode('/',$path);
-            $twittername = $dirs[1];
-
-            $this->log("Twitteruser found ($url): $twittername");
-
-            $twitter_search = 'http://search.twitter.com/search.atom?q=from%3A' . $twittername . '&rpp=1';
-            serendipity_request_start();
-            $options = array();
-            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
-                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
-                $options['ssl_verify_peer'] = false;
-            }
-            $req = new HTTP_Request2($twitter_search, HTTP_Request2::METHOD_GET, $options);
-            try {
-                $response = $req->send();
-
-                $this->last_error = $response->getStatus();
-                if ($response->getStatus() != 200) {
-                    throw new HTTP_Request2_Exception("Could not search on twitter");
-                }
-                $response = trim($response->getBody());
-
-            } catch (HTTP_Request2_Exception $e) {
-                $this->last_error = $response->getStatus();
-                serendipity_request_end();
-                $this->log("Twitter Error: {$this->last_error}");
-                return false;
-            }
-                
-            serendipity_request_end();
-            $parser = xml_parser_create();
-            $vals=array(); $index=array();
-            $success = xml_parse_into_struct($parser, $response, $vals, $index);
-            xml_parser_free($parser);
-            if ($success) {
-                foreach ($index['LINK'] as $index) {
-                    if ($vals[$index]['attributes']['REL'] == 'image') {
-                        $img_url = $vals[$index]['attributes']['HREF'];
-                        $success = true;
-                        break;
-                    }
-                }
-                if ($success) {
-                    $success = $this->saveAndResponseAvatar($eventData, $img_url);
-                }
-            }
-            $this->avatarConfiguration['twitter_found'] = $success;
-            return $success;
-        }
-        return false;
-
-    }
-
-    function fetchIdentica(&$eventData)
-    {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
-
-        // Was lastrun successfull?
-        if (isset($this->avatarConfiguration['identica_found']) && !$this->avatarConfiguration['identica_found']) {
-            return false;
-        }
-        if (empty($eventData['url'])) {
-            return false;
-        }
-        $url = $eventData['url'];
-
-        if (preg_match('@^http://identi\.ca/notice/(\d+)$@',$url,$matches)) {
-            $status_id = $matches[1];
-            $search = "http://identi.ca/api/statuses/show/$status_id.xml";
-            serendipity_request_start();
-            $options = array();
-            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
-                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
-                $options['ssl_verify_peer'] = false;
-            }
-            $req = new HTTP_Request2($search, HTTP_Request2::METHOD_GET, $options);
-            try {
-                $response = $req->send();
-                $this->last_error = $response->getStatus();
-                if ($response->getStatus() != 200) {
-                    throw new HTTP_Request2_Exception("Could not search on identica");
-                }
-                $response = trim($response->getBody());
-            } catch (HTTP_Request2_Exception $e) {
-                $this->last_error = $response->getStatus();
-                serendipity_request_end();
-                $this->log("Identica Error: {$this->last_error}");
-                return false;
-            }
-            serendipity_request_end();
-            $parser = xml_parser_create();
-            $vals=array(); $index=array();
-            $success = xml_parse_into_struct($parser, $response, $vals, $index);
-            xml_parser_free($parser);
-            if ($success) {
-                $img_url = $vals[$index['PROFILE_IMAGE_URL'][0]]['value'];
-                $success = $this->saveAndResponseAvatar($eventData, $img_url);
-            }
-            $this->avatarConfiguration['identica_found'] = $success;
-            return $success;
-        }
-
-        return false;
-
-    }
-
     /**
      * Shows a monster id avatar.
      *
@@ -1020,14 +938,17 @@ class serendipity_event_gravatar extends serendipity_event
     {
         require_once dirname(__FILE__) . '/monsterid/monsterid.php';
 
-        $seed = md5($eventData['author']) . $eventData['email_md5'] . md5($eventData['url']);
+        $seed = $this->pluginHash($eventData['author']) . $eventData['email_md5'] . $this->pluginHash($eventData['url']);
         $default = $this->getDefaultImageConfiguration();
         $size = $default['size'];
 
         // Save monster image
-        @mkdir($this->getCacheDirectory());
+        if (! file_exists($this->getCacheDirectory())) {
+            @mkdir($this->getCacheDirectory());
+        }
         $cache_file = $this->getCacheFilePath($eventData);
         $this->log("Caching monster avatar: " . $cache_file);
+        
         if (build_monster($cache_file, $seed, $size)) {
             $this->log("Success caching monster.");
             $this->avatarConfiguration['mime-type'] = "image/png";
@@ -1051,15 +972,18 @@ class serendipity_event_gravatar extends serendipity_event
     {
         require_once dirname(__FILE__) . '/wavatars/wavatars.php';
 
-        $seed = md5($eventData['author']) . $eventData['email_md5'] . md5($eventData['url']);
+        $seed = $this->pluginHash($eventData['author']) . $eventData['email_md5'] . $this->pluginHash($eventData['url']);
         $default = $this->getDefaultImageConfiguration();
         $size = $default['size'];
 
         // Save monster image
-        @mkdir($this->getCacheDirectory());
+        if (! file_exists($this->getCacheDirectory())) {
+            @mkdir($this->getCacheDirectory());
+        }
         $cache_file = $this->getCacheFilePath($eventData);
         $this->log("Caching wavatar avatar: " . $cache_file);
-        if (wavatar_build($cache_file, $seed, $size)) {
+        wavatar_build($seed, $cache_file, $size);
+        if (file_exists($cache_file)) {
             $this->log("Success caching wavatar.");
             $this->avatarConfiguration['mime-type'] = "image/png";
             $this->show($cache_file);
@@ -1084,12 +1008,14 @@ class serendipity_event_gravatar extends serendipity_event
     {
         require_once dirname(__FILE__) . '/ycon/ycon.image.php';
 
-        $seed = md5($eventData['author']) . $eventData['email_md5'] . md5($eventData['url']);
+        $seed = $this->pluginHash($eventData['author']) . $eventData['email_md5'] . $this->pluginHash($eventData['url']);
         $default = $this->getDefaultImageConfiguration();
         $size = $default['size'];
 
         // Save monster image
-        @mkdir($this->getCacheDirectory());
+        if (! file_exists($this->getCacheDirectory())) {
+            @mkdir($this->getCacheDirectory());
+        }
         $cache_file = $this->getCacheFilePath($eventData);
         $this->log("Caching Identicon/Ycon avatar: " . $cache_file);
         if (build_ycon($cache_file,$seed,$size)) {
@@ -1164,7 +1090,7 @@ class serendipity_event_gravatar extends serendipity_event
         try {
             $response = $req->send();
             if ($response->getStatus() != '200') {
-                throw new HTTP_Request2_Exception("Could not search on identica");
+                throw new HTTP_Request2_Exception("Could not fetch avatar");
             }
             // Allow only images as Avatar!
             $mime = $response->getHeader("content-type");
@@ -1373,16 +1299,16 @@ class serendipity_event_gravatar extends serendipity_event
      */
     function urlencode($url)
     {
-        $hash = md5($this->instance . $url);
+        $hash = $this->pluginHash($this->instance . $url);
         return $hash . str_replace ('_', '%5F', urlencode($url));
     }
 
     function urldecode($url)
     {
-        $hash     = substr($url, 0, 32);
-        $real_url = urldecode(substr($url, 32));
+        $hash     = substr($url, 0, 64);
+        $real_url = urldecode(substr($url, 64));
 
-        if ($hash == md5($this->instance . $real_url)) {
+        if ($hash == $this->pluginHash($this->instance . $real_url)) {
             // Valid hash was found.
             return $real_url;
         } else {
@@ -1408,11 +1334,11 @@ class serendipity_event_gravatar extends serendipity_event
             $email_md5 = $eventData['email_md5'];
         }
         else if (isset($eventData['email'])) {
-            $email_md5 = md5(strtolower($eventData['email']));
+            $email_md5 = $this->pluginHash(strtolower($eventData['email']));
         }
 
-        $author_md5= isset($eventData['author'])? md5($eventData['author']) : '';
-        $url_md5 = isset($eventData['url'])? md5($eventData['url']) : '' ;
+        $author_md5= isset($eventData['author'])? $this->pluginHash($eventData['author']) : '';
+        $url_md5 = isset($eventData['url'])? $this->pluginHash($eventData['url']) : '' ;
 
         return $url_md5 . '_' . $email_md5 . '_' . $author_md5;
     }

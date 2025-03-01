@@ -1,3 +1,12 @@
+Version 2.0:
+------------------------------------------------------------------------
+    * Fix gravatar: Avatars could not be fetched
+    * Remove the defunct avatar options identica and twitter
+    * Reimplement favatar and pavatar options for better reliability
+    * Update wavatar generator
+    * Update documentation and translation
+    * Additional fixes for PH 8 compatibility
+
 Version 1.63.1:
 ------------------------------------------------------------------------
     * PHP 8 compatibility

@@ -7,7 +7,7 @@
  */
 
 @define('PLUGIN_EVENT_GRAVATAR_NAME',               'Avatar Plugin');
-@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Pokazuje avatary w komentarzach. Gravatars, Pavatars, Favatars und MyBlogLog avatars are supported.');
+@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Pokazuje avatary w komentarzach.');
 
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY',         'Produce smarty tag');
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY_DESC',    'If this option is switched on, the avatar images are not written directly into the comment output but a smarty tag {$comment.avatar} is produced. Only templates, that support this smarty tag, will display the avatar, if this option is set to true. The best way is to try it, if your template supports this smarty tag.');
