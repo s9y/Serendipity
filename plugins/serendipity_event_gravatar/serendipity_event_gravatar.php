@@ -42,6 +42,7 @@ class serendipity_event_gravatar extends serendipity_event
         ));
         $propbag->add('version',       PLUGIN_EVENT_GRAVATAR_VERSION);
         $propbag->add('groups',        array('IMAGES'));
+        $propbag->add('copyright',     'GPLv2 (or later)');
         $propbag->add('event_hooks',   array(
             'frontend_display' => true,
             'frontend_comment' => true,
