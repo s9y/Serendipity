@@ -1,5 +1,7 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+   * Avoid PHP 8 warning about incurrect reference return of db_query
+     function
 
    * PHP 8.4 fix: Remove deprecated constant E_STRICT
 

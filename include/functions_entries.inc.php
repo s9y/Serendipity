@@ -36,7 +36,7 @@ function serendipity_deleteCategory($category_range, $admin_category) {
 function serendipity_fetchCategoryRange($categoryid) {
     global $serendipity;
 
-    $res =& serendipity_db_query("SELECT category_left, category_right, hide_sub FROM {$serendipity['dbPrefix']}category WHERE categoryid='". (int)$categoryid ."'");
+    $res = serendipity_db_query("SELECT category_left, category_right, hide_sub FROM {$serendipity['dbPrefix']}category WHERE categoryid='". (int)$categoryid ."'");
     if (!is_array($res) || !isset($res[0]['category_left']) || !isset($res[0]['category_right'])) {
         $res = array(array('category_left' => 0, 'category_right' => 0));
     }
@@ -103,7 +103,7 @@ function serendipity_fetchCategoryInfo($categoryid, $categoryname = '') {
                     FROM {$serendipity['dbPrefix']}category AS c
                    WHERE category_name = '" . serendipity_db_escape_string($categoryname) . "'";
 
-        $ret =& serendipity_db_query($query);
+        $ret = serendipity_db_query($query);
         return $ret[0];
     } else {
         $query = "SELECT
@@ -117,7 +117,7 @@ function serendipity_fetchCategoryInfo($categoryid, $categoryname = '') {
                     FROM {$serendipity['dbPrefix']}category AS c
                    WHERE categoryid = " . (int)$categoryid;
 
-        $ret =& serendipity_db_query($query);
+        $ret = serendipity_db_query($query);
         return $ret[0];
     }
 }
@@ -145,7 +145,7 @@ function &serendipity_fetchEntryCategories($entryid) {
                    WHERE ec.entryid = {$entryid}
                 ORDER BY c.category_name ASC";
 
-        $cat =& serendipity_db_query($query,false,'assoc');
+        $cat = serendipity_db_query($query,false,'assoc');
         
         if (!is_array($cat)) {
             $arr = array();
@@ -487,7 +487,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         return $query;
     }
 
-    $ret =& serendipity_db_query($query, $fetch_single, 'assoc');
+    $ret = serendipity_db_query($query, $fetch_single, 'assoc');
 
     if (is_string($ret)) {
         die("Query failed: $ret");
@@ -550,7 +550,7 @@ function serendipity_fetchEntryData(&$ret) {
                WHERE " . serendipity_db_in_sql('ec.entryid', $search_ids) . "
             ORDER BY c.category_name ASC";
 
-    $search_ret =& serendipity_db_query($query, false, 'assoc');
+    $search_ret = serendipity_db_query($query, false, 'assoc');
 
     if (is_array($search_ret)) {
         serendipity_plugin_api::hook_event('multilingual_strip_langs', $search_ret, array('category_name','category_description'));
@@ -630,7 +630,7 @@ function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false
                             {$cond['single_orderby']}
                      LIMIT  1";
 
-    $ret =& serendipity_db_query($querystring, true, 'assoc');
+    $ret = serendipity_db_query($querystring, true, 'assoc');
 
     if (is_array($ret)) {
         $ret['categories'] =& serendipity_fetchEntryCategories($ret['id']);
@@ -657,7 +657,7 @@ function &serendipity_fetchEntryProperties($id) {
     $parts = array();
     serendipity_plugin_api::hook_event('frontend_entryproperties_query', $parts);
 
-    $_properties =& serendipity_db_query("SELECT property, value FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$id . " " . $parts['and']);
+    $_properties = serendipity_db_query("SELECT property, value FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$id . " " . $parts['and']);
     if (!is_array($_properties)) {
         $properties = array();
     } else {
@@ -767,7 +767,7 @@ function &serendipity_fetchCategories($authorid = null, $name = null, $order = n
         $querystring .= "\n ORDER BY $order";
     }
 
-    $ret =& serendipity_db_query($querystring);
+    $ret = serendipity_db_query($querystring);
     if (is_string($ret)) {
         echo "Query failed: $ret";
     } else {
@@ -950,7 +950,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
                   ORDER BY  {$cond['searchorderby']}
                     $limit";
 
-    $search =& serendipity_db_query($querystring);
+    $search = serendipity_db_query($querystring);
 
     //Add param searchresults at the top and remove duplicates.
     if (is_array($searchresults)) {
@@ -1059,7 +1059,7 @@ function serendipity_getTotalEntries() {
     if ($serendipity['fullCountQuery'] == '') {
         return 0;
     }
-    $query =& serendipity_db_query($querystring);
+    $query = serendipity_db_query($querystring);
 
     if (is_array($query) && isset($query[0])) {
         if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite' || $serendipity['dbType'] == 'sqlite3oo') {
@@ -1758,7 +1758,7 @@ function serendipity_printArchives() {
                 . (!empty($serendipity['GET']['viewAuthor']) ? ' AND e.authorid = ' . (int)$serendipity['GET']['viewAuthor'] : '')
                 . (!empty($cat_sql) ? " GROUP BY e.id, e.timestamp" : '');
     
-    $entries =& serendipity_db_query($q, false, 'assoc');
+    $entries = serendipity_db_query($q, false, 'assoc');
 
     $group = array();
     if (is_array($entries)) {
