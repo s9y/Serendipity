@@ -8,7 +8,7 @@
  */
 
 @define('PLUGIN_EVENT_GRAVATAR_NAME',               'Avatar Plugin');
-@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Zobrazuje avatary (ikona či obrázek přispěvatele) v komentářích. Podporovány jsou služby Gravatar, Pavatar, Favatar a MyBlogLog.');
+@define('PLUGIN_EVENT_GRAVATAR_DESC',               'Zobrazuje avatary (ikona či obrázek přispěvatele) v komentářích. Podporovány jsou služby Gravatar, Pavatar a Favatar.');
 
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY',         'Tvořit smarty tag');
 @define('PLUGIN_EVENT_GRAVATAR_USE_SMARTY_DESC',    'Pokud je tato volba zapnuta, obrázky avatarů nejsou zapsány přímo do textu komentáře, ale je místo toho vygenerován tag {$comment.avatar} pro šablonovací systém smarty. Pak budou avatary zobrazovat pouze styly vzhledu, které tento tag používají. Nejjednodušší způsob, jak zjistit, jestli Váš styl vzhledu podporuje avatary, je vyzkoušet zapnout toto nastavení.');
@@ -51,10 +51,9 @@
 
 @define('PLUGIN_EVENT_GRAVATAR_LONG_DESCRIPTION',   '<b><a href="http://www.gravatar.com" target="_blank">Gravatar</a></b> je centrální úložiště obrázků uživatelů spřažené s emailovou adresou, ' .
         '<b><a href="http://www.peej.co.uk/projects/favatars.html" target="_blank">Favatar</a></b> poskytuje favicony načtené z osobních stránek uživatele, <b><a href="http://www.pavatar.com" target="_blank">Pavatar</a></b> ' .
-        'jsou obrázky uložené na osobních stránkách pisatele, <b><a href="http://www.mybloglog.com" target="_blank">MyBlogLog avatar</a></b> jsou centrálně ukládané obrázky a ' .
         '<b><a href="http://www.splitbrain.org/go/monsterid" target="_blank">Monster ID</a></b>, <b><a href="http://scott.sherrillmix.com/blog/blogger/wp_identicon/" target="_blank">Identicon</a></b> a <b><a href="http://www.shamusyoung.com/twentysidedtale/?p=1462" target="_blank">Wavatar</a></b> avatary jsou nahrávané obrázky vytvořené jednotlivými uživateli.');
 @define('PLUGIN_EVENT_GRAVATAR_EXTLING_WARNING',    '<font color="red">POZOR!</font> Tento plugin musí být zařazen před všemi pluginy, které mění odkazy (jako např. plugin "exit tracking plugin")! ' .
-        '<font color="red">Jinak nebudou pracovat avatary služeb Pavatar, Favatar a MayBlogLog!</font>');
+        '<font color="red">Jinak nebudou pracovat avatary služeb Pavatar a Favatar!</font>');
 
 @define('PLUGIN_EVENT_GRAVATAR_FALLBACK',           'Gravatar fallback');
 @define('PLUGIN_EVENT_GRAVATAR_FALLBACK_DESC',      'Gravatar má implementovaných několik návratových metod pro případ, že pro požadovaného uživatele není znám žádný avatar. Implementovány jsou též Moster ID, Identicon a Wavatar. Pokud vyberete některý z těchto zíněných, nebudou uskutečňovány žádné další pokusy o načtení avataru, pokud uživatel zadá email.');

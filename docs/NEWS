@@ -10,6 +10,10 @@ Version 2.6-alpha1 ()
      have set a custom value for imagemagick_thumb_parameters in your
      local config file.
 
+   * Update bundled avatar plugin: Fix gravatar image fetching, remove
+     defunct options for identica and twitter avatars, and clean up
+     documentation,
+
    * PHP 8.4 fix: Remove deprecated constant E_STRICT
 
    * PHP 8 compatibility fixes for bundled XML/RPC.php
