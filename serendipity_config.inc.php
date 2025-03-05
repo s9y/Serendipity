@@ -496,7 +496,10 @@ if (!isset($serendipity['imagemagick_thumb_parameters'])) {
     // image quality when resizing.
     // 
     // Set a variable like below in your serendpity_config_local.inc.php with your own settings
-    $serendipity['imagemagick_thumb_parameters'] = '-sampling-factor 4:2:0 -unsharp 0x0.75+0.75+0.008 -strip -quality 85 -interlace JPEG';
+    $serendipity['imagemagick_thumb_parameters'] = [ 'image/jpeg' => '-sampling-factor 4:2:0 -unsharp 0x0.75+0.75+0.008 -strip -quality 85 -interlace JPEG',
+                            'image/avif' => '-sampling-factor 4:2:0 -unsharp 0x0.75+0.75+0.008 -strip -quality 60',
+                            'image/webp' => '-sampling-factor 4:2:0 -unsharp 0x0.75+0.75+0.008 -strip -quality 90'
+    ];
 }
 
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);
