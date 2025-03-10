@@ -245,7 +245,7 @@ function XML_RPC_se($parser_resource, $name, $attrs)
 {
     global $XML_RPC_xh, $XML_RPC_valid_parents;
 
-    $parser = (int) $parser_resource;
+    $parser = is_resource($parser_resource) ? ((int) $parser_resource) : spl_object_hash($parser_resource);
 
     // if invalid xmlrpc already detected, skip all processing
     if ($XML_RPC_xh[$parser]['isf'] >= 2) {
@@ -374,7 +374,7 @@ function XML_RPC_ee($parser_resource, $name)
 {
     global $XML_RPC_xh;
 
-    $parser = (int) $parser_resource;
+    $parser = is_resource($parser_resource) ? ((int) $parser_resource) : spl_object_hash($parser_resource);
 
     if ($XML_RPC_xh[$parser]['isf'] >= 2) {
         return;
@@ -511,7 +511,7 @@ function XML_RPC_cd($parser_resource, $data)
 {
     global $XML_RPC_xh, $XML_RPC_backslash;
 
-    $parser = (int) $parser_resource;
+    $parser = is_resource($parser_resource) ? ((int) $parser_resource) : spl_object_hash($parser_resource);
 
     if ($XML_RPC_xh[$parser]['lv'] != 3) {
         // "lookforvalue==3" means that we've found an entire value
@@ -1433,7 +1433,9 @@ class XML_RPC_Message extends XML_RPC_Base
 
         $encoding = $this->getEncoding($data);
         $parser_resource = xml_parser_create($encoding);
-        $parser = 1;
+        # xml_parser_create returns a resource before PHP 8, an object later. Only a resource can be
+        # casted to int
+        $parser = is_resource($parser_resource) ? ((int) $parser_resource) : spl_object_hash($parser_resource);
 
         $XML_RPC_xh = array();
         $XML_RPC_xh[$parser] = array();
@@ -1530,7 +1532,7 @@ class XML_RPC_Message extends XML_RPC_Base
                 $r = new XML_RPC_Response($v);
             }
         }
-        $r->hdrs = preg_split("@\r?\n@", $XML_RPC_xh[$parser]['ha']);
+        $r->hdrs = preg_split("@\r?\n@", $XML_RPC_xh[$parser]['ha'] ?? '');
         return $r;
     }
 }
