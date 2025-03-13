@@ -67,7 +67,6 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
     if (!$check && $serendipity['capabilities']['jquery']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
-    <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery-migrate.js"></script>
 <?php
         if ($serendipity['capabilities']['jquery-noconflict']) {
 ?>
@@ -89,7 +88,6 @@ function serendipity_plugin_api_backend_header($event_name, &$bag, &$eventData, 
     if (!$check && $serendipity['capabilities']['jquery_backend']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
-    <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery-migrate.js"></script>
 <?php
     }
 }
