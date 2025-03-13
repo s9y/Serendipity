@@ -2155,10 +2155,12 @@ function serendipity_getimagesize($file, $ft_mime = '', $suf = '') {
     if ($ft_mime == 'application/pdf') {
         $fdim = array(1000,1000,24, '', 'bits'=> 24, 'channels' => '3', 'mime' => 'application/pdf');
     } else {
-        $fdim = @getimagesize($file);
+        if (is_file($file)) {
+            $fdim = @getimagesize($file);
+        }
     }
 
-    if (is_array($fdim)) {
+    if (isset($fdim) && is_array($fdim)) {
         if (empty($fdim['mime'])) {
             $fdim['mime'] = $ft_mime;
         }
