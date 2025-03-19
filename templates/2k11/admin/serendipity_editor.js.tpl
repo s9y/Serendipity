@@ -1782,21 +1782,18 @@ $(function() {
     })
 
     // Tabs
-    if($('.tabs').length > 0) {
-        var currTabText = '{$CONST.CURRENT_TAB}';
-
-        $('.tabs').accessibleTabs({
-            wrapperClass: 'tabcontent',
-            currentClass: 'on',
-            tabhead: 'h3',
-            tabheadClass: 'visuallyhidden',
-            tabbody: '.panel',
-            fx: 'fadeIn',
-            currentInfoText: currTabText,
-            currentInfoClass: 'visuallyhidden',
-            syncheights: false,
-            saveState: true
+    if ($('.tabs').length > 0) {
+        // Restore the ptab that was active before
+        activeTab = serendipity.GetCookie('accessibletab_' + $('.tabs').attr('id') + '_active');        
+        $('.tabs-list li').click(function(e) {
+            // Remember the now active tab and show that visually
+            var $el = $(this);
+            $('.tabs-list').find('li').removeClass('on');
+            $el.addClass('on');
+            document.cookie = 'accessibletab_' + $('.tabs').attr('id') + '_active=' + $el.index() + ';expires=Session' ;
         });
+        $('.tabs-list li label').get(activeTab).click();
+        $('.tabs-list li').get(activeTab).click();
     }
 
     // Drag 'n' drop
@@ -1832,7 +1829,7 @@ $(function() {
     }
 
     // Equal Heights
-    $(window).load(function() {
+    $(window).on('load', function() {
         if(!Modernizr.flexbox) {
             if (mq_small) {
                 serendipity.sync_heights();
