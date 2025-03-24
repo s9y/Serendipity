@@ -6,7 +6,7 @@
 
 ## Installation
 
-On most hosters, everything needed to run Serendipity should already be installed. If you install it on your custom server, install PHP >= 7.0, MySQL/MariaDB, PostgreSQL or SQLite, and Apache. Imagemagick is also useful. Upload the files from [a release archive](https://github.com/s9y/Serendipity/releases) to your webroot and visit your URL to start the installer. 
+On most hosters, everything needed to run Serendipity should already be installed. If you install it on your custom server, install PHP >= 8.0, MySQL/MariaDB, PostgreSQL or SQLite, and Apache. Imagemagick is also useful. Upload the files from [a release archive](https://github.com/s9y/Serendipity/releases) to your webroot and visit your URL to start the installer. 
 
 For more details, please consult [the manual](https://docs.s9y.org/docs/users/getting-started/fresh-installation.html).
 
