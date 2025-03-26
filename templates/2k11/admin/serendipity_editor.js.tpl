@@ -1783,17 +1783,15 @@ $(function() {
 
     // Tabs
     if ($('.tabs').length > 0) {
-        // Restore the ptab that was active before
+        // Restore the tab that was active before
         activeTab = serendipity.GetCookie('accessibletab_' + $('.tabs').attr('id') + '_active');        
-        $('.tabs-list li').click(function(e) {
+        $('.tabs > details > summary').click(function(e) {
             // Remember the now active tab and show that visually
-            var $el = $(this);
-            $('.tabs-list').find('li').removeClass('on');
-            $el.addClass('on');
+            var $el = $(this).parent('details');
+            $('.tabs').find('details').removeAttr('open');
             document.cookie = 'accessibletab_' + $('.tabs').attr('id') + '_active=' + $el.index() + ';expires=Session' ;
         });
-        $('.tabs-list li label').get(activeTab).click();
-        $('.tabs-list li').get(activeTab).click();
+        $('.tabs > details > summary').get(activeTab).click();
     }
 
     // Drag 'n' drop

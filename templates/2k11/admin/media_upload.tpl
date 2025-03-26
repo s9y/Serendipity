@@ -15,16 +15,9 @@
     {$media.form_hidden}
 
     <div class="clearfix tabs" id="mediaupload_tabs">
-
-        <input checked="checked" id="upload_tab" type="radio" name="tabs" class="hidden">
-        <input id="download_tab" type="radio" name="tabs" class="hidden">
-
-        <ul class="nav clearfix tabs-list tabamount2">
-            <li><label for="upload_tab"><a>{$CONST.UPLOAD}</a></label></li><li><label for="download_tab"><a>{$CONST.DOWNLOAD}</a></label></li>
-        </ul>
-
-        <menu>
-            <li><div class="panel upload_tab">
+        <details name="tabs" open>
+            <summary><a>{$CONST.UPLOAD}</a></summary>
+            <div class="panel upload_tab">
                 <div id="uploads" class="zebra_list">
                     <div id="upload_form_1" class="upload_form">
                         <div class="form_field clearfix">
@@ -52,9 +45,12 @@
                 </div>
 
                 <button id="add_upload" class="button_link" type="button" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></button>
-            </div></li>
+            </div>
+        </details>
 
-            <li><div class="panel download_tab">
+        <details name="tabs">
+            <summary><a>{$CONST.DOWNLOAD}</a></summary>
+            <div class="panel download_tab">
                 <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
 
                 <div id="downloads">
@@ -86,8 +82,8 @@
                         </select>
                     </div>
                 </div>
-            </div></li>
-        </menu>
+            </div>
+        </details>
     </div>
 
     {serendipity_hookPlugin hook="backend_image_addform" hookAll=true}
