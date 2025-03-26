@@ -1784,12 +1784,14 @@ $(function() {
     // Tabs
     if ($('.tabs').length > 0) {
         // Restore the tab that was active before
-        activeTab = serendipity.GetCookie('accessibletab_' + $('.tabs').attr('id') + '_active');        
+        activeTab = serendipity.GetCookie('accessibletab_' + $('.tabs').attr('id') + '_active');
         $('.tabs > details > summary').click(function(e) {
             // Remember the now active tab and show that visually
             var $el = $(this).parent('details');
             $('.tabs').find('details').removeAttr('open');
+            $el.siblings().find('.panel').hide();
             document.cookie = 'accessibletab_' + $('.tabs').attr('id') + '_active=' + $el.index() + ';expires=Session' ;
+            $el.find('.panel').fadeIn();
         });
         $('.tabs > details > summary').get(activeTab).click();
     }
