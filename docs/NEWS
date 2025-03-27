@@ -18,6 +18,10 @@ Version 2.6-alpha1 ()
 
    * PHP 8 compatibility fixes for bundled XML/RPC.php
 
+   * The backend now creates its tab interfaces with a CSS approach,
+     instead of using the Accessible Tabs jQuery plugin. The plugin
+     got removed from the backend javascript file.
+   
    * Upgrade bundled jQuery to jQuery 3
 
    * Fix option to set a different theme as fallback option by setting
