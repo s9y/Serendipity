@@ -1,5 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+   * Fix pg_escape_string on PHP 8.1 and later (thanks to HQJaTu Jari
+     Turkia)
+
    * Avoid PHP 8 warning about incurrect reference return of db_query
      function
 
@@ -39,7 +42,7 @@ Version 2.6-alpha1 ()
      integrated search box when 2k11 is used as the default theme
 
    * Fix specific search terms (like a - at the end) causing an error
-     page when using MySQL/MariaDB (thanks to  GuillaumeValadas) 
+     page when using MySQL/MariaDB (thanks to GuillaumeValadas) 
 
    * Swap order of entries in the dashboard, so that upcoming
      entries are shown first
