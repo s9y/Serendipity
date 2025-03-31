@@ -1,5 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+   * Fix warning about dynamic properties in core plugins, relevant for
+     PHP 8.2 and later (thanks to HQJaTu Jari Turkia)
+
    * Fix pg_escape_string on PHP 8.1 and later (thanks to HQJaTu Jari
      Turkia)
 
