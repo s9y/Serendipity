@@ -9,6 +9,7 @@ if (IN_serendipity !== true) {
 class serendipity_event_templatechooser extends serendipity_event
 {
     var $title = PLUGIN_EVENT_TEMPLATECHOOSER_NAME;
+    protected $dependencies = array();
 
     function introspect(&$propbag)
     {

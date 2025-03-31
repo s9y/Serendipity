@@ -9,7 +9,7 @@ if (IN_serendipity !== true) {
 class serendipity_event_textile extends serendipity_event
 {
     var $title = PLUGIN_EVENT_TEXTILE_NAME;
-    var $markup_elements = [];
+    protected $markup_elements = array();
 
     function introspect(&$propbag)
     {
@@ -240,7 +240,7 @@ class serendipity_event_textile extends serendipity_event
                 '<font color="',
                 '</font>',
                 "\n ",
-                'Ê '
+                'ÃŠ '
             ),
             array(
                 ' ',
