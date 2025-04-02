@@ -1379,8 +1379,8 @@ function serendipity_url_allowed($url) {
     return true;
 }
 
-// Create the cache directory if necessary. Return false if that failed or the cache is disabled, or
-// return the path to the caching directory.
+// Create the cache directory if necessary. Return false if that failed or the cache is disabled.
+// Return 'apcu' if apcu caching can be used. If not, return the path to the caching directory.
 function serendipity_setupCache() {
     global $serendipity;
 
@@ -1388,11 +1388,16 @@ function serendipity_setupCache() {
         return false;
     }
 
+    if (function_exists('apcu_enabled') && apcu_enabled()) {
+        return 'apcu';
+    }
+
     $cache_dir = $serendipity['serendipityPath'] . '/templates_c/cache/';
 
     if (! file_exists($cache_dir)) {
         mkdir($cache_dir);
     }
+    
     return $cache_dir;
 }
 
@@ -1402,8 +1407,14 @@ function serendipity_cleanCache() {
         return false;
     }
 
+    if ($cache == 'apcu') {
+        apcu_clear_cache();
+    }
+
     foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($cache), RecursiveIteratorIterator::CHILD_FIRST) as $filename) {
-        if ($filename->isDir()) continue;
+        if ($filename->isDir()) {
+            continue;
+        }
         unlink($filename);
     }
 }
@@ -1414,6 +1425,10 @@ function serendipity_cacheItem($key, $item, $ttl = 3600) {
     if ($cache === false) {
         return false;
     }
+
+    if ($cache == 'apcu') {
+        return apcu_store($key, $item, $ttl);
+    }
     return file_put_contents($cache . $key, $item);
 }
 
@@ -1422,7 +1437,11 @@ function serendipity_getCacheItem($key) {
     if ($cache === false) {
         return false;
     }
-    if (file_exists($cache . $key) {
+    if ($cache == 'apcu') {
+        return apcu_fetch($key);
+    }
+    
+    if (file_exists($cache . $key)) {
         return file_get_contents($cache . $key);
     } else {
         return false;
