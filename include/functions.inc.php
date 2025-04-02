@@ -1477,7 +1477,7 @@ function serendipity_applyCacheLimits() {
     // The array_diff removes the . and .. directories if existing. array_values gives us new keys.
     $cachefiles  = array_values(array_diff(scandir($cache), array('..', '.')));
     $amount = count($cachefiles);
-    if (count($cachefiles) > 2000) {
+    if ($amount > 2000) {
         usort($cachefiles, function( $a, $b ) use ($cache) { return filemtime($cache . $b) <=> filemtime($cache . $a); } );
         for ($i=2000; $i < $amount; $i++) {
             unlink($cache . $cachefiles[$i]);
