@@ -1419,7 +1419,8 @@ function serendipity_cleanCache() {
     }
 }
 
-function serendipity_cacheItem($key, $item, $ttl = 3600) {
+// Cache the given data for one hour
+function serendipity_cacheItem($key, $item) {
     $cache = serendipity_setupCache();
 
     if ($cache === false) {
@@ -1442,7 +1443,16 @@ function serendipity_getCacheItem($key) {
     }
     
     if (file_exists($cache . $key)) {
-        return file_get_contents($cache . $key);
+        // This will usually also be the creation time under linux, since we never write to cache
+        // files:
+        $creation_time = filemtime($cache . $key);
+        if ((time() - $creation_time) > 3600) {
+            // The cache item is not valid anymore
+            unlink($cache . $key);
+            return false;
+        } else {
+            return file_get_contents($cache . $key);
+        }
     } else {
         return false;
     }
