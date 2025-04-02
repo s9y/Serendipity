@@ -1428,8 +1428,13 @@ function serendipity_cacheItem($key, $item) {
     }
 
     if ($cache == 'apcu') {
-        return apcu_store($key, $item, $ttl);
+        return apcu_store($key, $item, 3600);
     }
+    
+    if (rand(0, 100) == 1) {
+        serendipity_applyCacheLimits();
+    }
+    
     return file_put_contents($cache . $key, $item);
 }
 
@@ -1455,6 +1460,28 @@ function serendipity_getCacheItem($key) {
         }
     } else {
         return false;
+    }
+}
+
+// When caching to the file system, make sure that the cache directory is not overly full.
+// For that we limit the cache size to the 2000 newest entries.
+function serendipity_applyCacheLimits() {
+    $cache = serendipity_setupCache();
+    if ($cache === false) {
+        return true;
+    }
+    if ($cache == 'apcu') {
+        // APCu should handle its cache limits internally.
+        return true;
+    }
+    // The array_diff removes the . and .. directories if existing. array_values gives us new keys.
+    $cachefiles  = array_values(array_diff(scandir($cache), array('..', '.')));
+    $amount = count($cachefiles);
+    if (count($cachefiles) > 2000) {
+        usort($cachefiles, function( $a, $b ) use ($cache) { return filemtime($cache . $b) <=> filemtime($cache . $a); } );
+        for ($i=2000; $i < $amount; $i++) {
+            unlink($cache . $cachefiles[$i]);
+        }
     }
 }
 
