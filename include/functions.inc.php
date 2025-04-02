@@ -1468,11 +1468,11 @@ function serendipity_getCacheItem($key) {
 function serendipity_applyCacheLimits() {
     $cache = serendipity_setupCache();
     if ($cache === false) {
-        return true;
+        return;
     }
     if ($cache == 'apcu') {
         // APCu should handle its cache limits internally.
-        return true;
+        return;
     }
     // The array_diff removes the . and .. directories if existing. array_values gives us new keys.
     $cachefiles  = array_values(array_diff(scandir($cache), array('..', '.')));
