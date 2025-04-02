@@ -14,10 +14,6 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
     );
 
     public static $prefixLengthsPsr4 = array (
-        'v' => 
-        array (
-            'voku\\cache\\' => 11,
-        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
@@ -25,7 +21,6 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
         ),
         'P' => 
         array (
-            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
         ),
         'M' => 
@@ -39,10 +34,6 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
     );
 
     public static $prefixDirsPsr4 = array (
-        'voku\\cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache',
-        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -50,10 +41,6 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
         'Smarty\\' => 
         array (
             0 => __DIR__ . '/..' . '/smarty/smarty/src',
-        ),
-        'Psr\\SimpleCache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -221,9 +208,6 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
         'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
-        'Psr\\SimpleCache\\CacheException' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheException.php',
-        'Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheInterface.php',
-        'Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/simple-cache/src/InvalidArgumentException.php',
         'Smarty\\BlockHandler\\Base' => __DIR__ . '/..' . '/smarty/smarty/src/BlockHandler/Base.php',
         'Smarty\\BlockHandler\\BlockHandlerInterface' => __DIR__ . '/..' . '/smarty/smarty/src/BlockHandler/BlockHandlerInterface.php',
         'Smarty\\BlockHandler\\BlockPluginWrapper' => __DIR__ . '/..' . '/smarty/smarty/src/BlockHandler/BlockPluginWrapper.php',
@@ -387,34 +371,6 @@ class ComposerStaticInitcbda25b16bb8365467298ce193f0f30c
         'Smarty\\UndefinedVariable' => __DIR__ . '/..' . '/smarty/smarty/src/UndefinedVariable.php',
         'Smarty\\Variable' => __DIR__ . '/..' . '/smarty/smarty/src/Variable.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'voku\\cache\\AdapterApc' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterApc.php',
-        'voku\\cache\\AdapterApcu' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterApcu.php',
-        'voku\\cache\\AdapterArray' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterArray.php',
-        'voku\\cache\\AdapterFile' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterFile.php',
-        'voku\\cache\\AdapterFileAbstract' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterFileAbstract.php',
-        'voku\\cache\\AdapterFileSimple' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterFileSimple.php',
-        'voku\\cache\\AdapterMemcache' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterMemcache.php',
-        'voku\\cache\\AdapterMemcached' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterMemcached.php',
-        'voku\\cache\\AdapterOpCache' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterOpCache.php',
-        'voku\\cache\\AdapterPredis' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterPredis.php',
-        'voku\\cache\\AdapterXcache' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/AdapterXcache.php',
-        'voku\\cache\\Cache' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/Cache.php',
-        'voku\\cache\\CacheAdapterAutoManager' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/CacheAdapterAutoManager.php',
-        'voku\\cache\\CacheChain' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/CacheChain.php',
-        'voku\\cache\\CachePsr16' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/CachePsr16.php',
-        'voku\\cache\\Exception\\ChmodException' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/Exception/ChmodException.php',
-        'voku\\cache\\Exception\\FileErrorExceptionInterface' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/Exception/FileErrorExceptionInterface.php',
-        'voku\\cache\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/Exception/InvalidArgumentException.php',
-        'voku\\cache\\Exception\\RenameException' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/Exception/RenameException.php',
-        'voku\\cache\\Exception\\RuntimeException' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/Exception/RuntimeException.php',
-        'voku\\cache\\Exception\\WriteContentException' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/Exception/WriteContentException.php',
-        'voku\\cache\\SerializerDefault' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/SerializerDefault.php',
-        'voku\\cache\\SerializerIgbinary' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/SerializerIgbinary.php',
-        'voku\\cache\\SerializerMsgpack' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/SerializerMsgpack.php',
-        'voku\\cache\\SerializerNo' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/SerializerNo.php',
-        'voku\\cache\\iAdapter' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/iAdapter.php',
-        'voku\\cache\\iCache' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/iCache.php',
-        'voku\\cache\\iSerializer' => __DIR__ . '/..' . '/voku/simple-cache/src/voku/cache/iSerializer.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
