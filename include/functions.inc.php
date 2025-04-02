@@ -1379,10 +1379,8 @@ function serendipity_url_allowed($url) {
     return true;
 }
 
-use voku\cache\Cache;
-// Configure voku/simple-cache to use templates_c as directory for the opcache files, the fallback
-// when Memcached and Redis are not used. Returns the configured cache object. Used internally by
-// the other cache functions, you most likely never need to call this.
+// Create the cache directory if necessary. Return false if that failed or the cache is disabled, or
+// return the path to the caching directory.
 function serendipity_setupCache() {
     global $serendipity;
 
@@ -1390,36 +1388,12 @@ function serendipity_setupCache() {
         return false;
     }
 
-    $cacheManager = new \voku\cache\CacheAdapterAutoManager();
+    $cache_dir = $serendipity['serendipityPath'] . '/templates_c/cache/';
 
-    $cacheManager->addAdapter(
-        \voku\cache\AdapterOpCache::class,
-        static function () {
-            global $serendipity;
-            $cacheDir = $serendipity['serendipityPath'] . '/templates_c/simple_cache';
-
-            return $cacheDir;
-        }
-    );
-
-    $cacheManager->addAdapter(
-        \voku\cache\AdapterArray::class
-    );
-    
-    $cache = new Cache(
-        null,
-        null,
-        false,
-        true,
-        false,
-        false,
-        false,
-        false,
-        '',
-        $cacheManager,
-        false
-    );
-    return $cache;
+    if (! file_exists($cache_dir)) {
+        mkdir($cache_dir);
+    }
+    return $cache_dir;
 }
 
 function serendipity_cleanCache() {
@@ -1428,7 +1402,10 @@ function serendipity_cleanCache() {
         return false;
     }
 
-    return $cache->removeAll();
+    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($cache), RecursiveIteratorIterator::CHILD_FIRST) as $filename) {
+        if ($filename->isDir()) continue;
+        unlink($filename);
+    }
 }
 
 function serendipity_cacheItem($key, $item, $ttl = 3600) {
@@ -1437,8 +1414,7 @@ function serendipity_cacheItem($key, $item, $ttl = 3600) {
     if ($cache === false) {
         return false;
     }
-
-    return $cache->setItem($key, $item, $ttl);
+    return file_put_contents($cache . $key, $item);
 }
 
 function serendipity_getCacheItem($key) {
@@ -1446,8 +1422,11 @@ function serendipity_getCacheItem($key) {
     if ($cache === false) {
         return false;
     }
-
-    return $cache->getItem($key);
+    if (file_exists($cache . $key) {
+        return file_get_contents($cache . $key);
+    } else {
+        return false;
+    }
 }
 
 define("serendipity_FUNCTIONS_LOADED", true);
