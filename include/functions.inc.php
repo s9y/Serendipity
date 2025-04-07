@@ -1408,7 +1408,7 @@ function serendipity_cleanCache() {
     }
 
     if ($cache == 'apcu') {
-        apcu_clear_cache();
+        return apcu_clear_cache();
     }
 
     foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($cache), RecursiveIteratorIterator::CHILD_FIRST) as $filename) {
