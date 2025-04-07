@@ -1083,11 +1083,10 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     $initial_args = array_values(func_get_args());
-
     if ($serendipity['useInternalCache']) {
-        $key = md5(serialize($initial_args));
+        $cache_key = md5(serialize($initial_args) . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers'));
 
-        $cached = serendipity_getCacheItem($key);
+        $cached = serendipity_getCacheItem($cache_key);
         if ($cached && $cached !== false) {
             $serendipity['smarty']->assignByRef($smarty_block, $cached);
             return $cached;
@@ -1341,8 +1340,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
     if ($smarty_fetch === 'return') {
         if ($serendipity['useInternalCache']) {
-            $key = md5(serialize($initial_args));
-            serendipity_cacheItem($key, $dategroup);
+            serendipity_cacheItem($cache_key, $dategroup);
         }
         return $dategroup;
     }
@@ -1361,8 +1359,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     if ($serendipity['useInternalCache']) {
-        $key = md5(serialize($initial_args));
-        serendipity_cacheItem($key, $ret);
+        serendipity_cacheItem($cache_key, $ret);
     }
     return $ret;
     
