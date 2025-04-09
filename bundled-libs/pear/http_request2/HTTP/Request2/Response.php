@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -312,15 +312,15 @@ class HTTP_Request2_Response
         if (!strpos($cookieString, ';')) {
             // Only a name=value pair
             $pos = (int)strpos($cookieString, '=');
-            $cookie['name']  = trim(substr($cookieString, 0, $pos));
-            $cookie['value'] = trim(substr($cookieString, $pos + 1));
+            $cookie['name']  = trim((string)substr($cookieString, 0, $pos));
+            $cookie['value'] = trim((string)substr($cookieString, $pos + 1));
 
         } else {
             // Some optional parameters are supplied
             $elements = explode(';', $cookieString);
             $pos = (int)strpos($elements[0], '=');
-            $cookie['name']  = trim(substr($elements[0], 0, $pos));
-            $cookie['value'] = trim(substr($elements[0], $pos + 1));
+            $cookie['name']  = trim((string)substr($elements[0], 0, $pos));
+            $cookie['value'] = trim((string)substr($elements[0], $pos + 1));
 
             for ($i = 1; $i < count($elements); $i++) {
                 if (false === strpos($elements[$i], '=')) {
@@ -483,7 +483,7 @@ class HTTP_Request2_Response
      */
     public static function hasGzipIdentification($data)
     {
-        return 0 === strcmp(substr($data, 0, 2), "\x1f\x8b");
+        return 0 === strcmp((string)substr($data, 0, 2), "\x1f\x8b");
     }
 
     /**
@@ -515,14 +515,14 @@ class HTTP_Request2_Response
             );
         }
 
-        $method = ord(substr($data, 2, 1));
+        $method = ord((string)substr($data, 2, 1));
         if (8 != $method) {
             throw new HTTP_Request2_MessageException(
                 'Error parsing gzip header: unknown compression method',
                 HTTP_Request2_Exception::DECODE_ERROR
             );
         }
-        $flags = ord(substr($data, 3, 1));
+        $flags = ord((string)substr($data, 3, 1));
         if ($flags & 224) {
             throw new HTTP_Request2_MessageException(
                 'Error parsing gzip header: reserved bits are set',
@@ -540,8 +540,9 @@ class HTTP_Request2_Response
                     HTTP_Request2_Exception::DECODE_ERROR
                 );
             }
-            $extraLength = unpack('v', substr($data, 10, 2));
-            if ($length - $headerLength - 2 - $extraLength[1] < 0) {
+            if (false === ($extraLength = unpack('v', (string)substr($data, 10, 2)))
+                || $length - $headerLength - 2 - $extraLength[1] < 0
+            ) {
                 throw new HTTP_Request2_MessageException(
                     'Error parsing gzip header: data too short',
                     HTTP_Request2_Exception::DECODE_ERROR
@@ -557,7 +558,7 @@ class HTTP_Request2_Response
                     HTTP_Request2_Exception::DECODE_ERROR
                 );
             }
-            $filenameLength = strpos(substr($data, $headerLength), chr(0));
+            $filenameLength = strpos((string)substr($data, $headerLength), chr(0));
             if (false === $filenameLength
                 || $length - $headerLength - $filenameLength - 1 < 0
             ) {
@@ -576,7 +577,7 @@ class HTTP_Request2_Response
                     HTTP_Request2_Exception::DECODE_ERROR
                 );
             }
-            $commentLength = strpos(substr($data, $headerLength), chr(0));
+            $commentLength = strpos((string)substr($data, $headerLength), chr(0));
             if (false === $commentLength
                 || $length - $headerLength - $commentLength - 1 < 0
             ) {
@@ -595,9 +596,10 @@ class HTTP_Request2_Response
                     HTTP_Request2_Exception::DECODE_ERROR
                 );
             }
-            $crcReal   = 0xffff & crc32(substr($data, 0, $headerLength));
-            $crcStored = unpack('v', substr($data, $headerLength, 2));
-            if ($crcReal != $crcStored[1]) {
+            $crcReal = 0xffff & crc32((string)substr($data, 0, $headerLength));
+            if (false === ($crcStored = unpack('v', (string)substr($data, $headerLength, 2)))
+                || $crcReal != $crcStored[1]
+            ) {
                 throw new HTTP_Request2_MessageException(
                     'Header CRC check failed',
                     HTTP_Request2_Exception::DECODE_ERROR
@@ -636,14 +638,19 @@ class HTTP_Request2_Response
         }
 
         // unpacked data CRC and size at the end of encoded data
-        $tmp = unpack('V2', substr($data, -8));
+        if (false === $tmp = unpack('V2', (string)substr($data, -8))) {
+            throw new HTTP_Request2_MessageException(
+                'Failed to extract data CRC and size',
+                HTTP_Request2_Exception::DECODE_ERROR
+            );
+        }
         $dataCrc  = $tmp[1];
         $dataSize = $tmp[2];
 
         $headerLength = self::parseGzipHeader($data, true);
 
         // don't pass $dataSize to gzinflate, see bugs #13135, #14370
-        $unpacked = gzinflate(substr($data, $headerLength, -8));
+        $unpacked = gzinflate((string)substr($data, $headerLength, -8));
         if (false === $unpacked) {
             throw new HTTP_Request2_MessageException(
                 'gzinflate() call failed',
@@ -687,8 +694,12 @@ class HTTP_Request2_Response
         // while many applications send raw deflate stream from RFC 1951.
         // We should check for presence of zlib header and use gzuncompress() or
         // gzinflate() as needed. See bug #15305
-        $header = unpack('n', substr($data, 0, 2));
-        return (0 == $header[1] % 31)? gzuncompress($data): gzinflate($data);
+        $header = unpack('n', (string)substr($data, 0, 2));
+        return (string)(
+            (is_array($header) && 0 === $header[1] % 31)
+            ? gzuncompress($data)
+            : gzinflate($data)
+        );
     }
 }
 ?>

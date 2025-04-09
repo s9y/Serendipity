@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -129,7 +129,7 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
      */
     public static function createResponseFromString($str)
     {
-        $parts       = preg_split('!(\r?\n){2}!m', $str, 2);
+        $parts       = preg_split('!(\r?\n){2}!m', $str, 2) ?: [''];
         $headerLines = explode("\n", $parts[0]);
         $response    = new HTTP_Request2_Response(array_shift($headerLines));
         foreach ($headerLines as $headerLine) {
@@ -152,14 +152,14 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
      */
     public static function createResponseFromFile($fp)
     {
-        $response = new HTTP_Request2_Response(fgets($fp));
+        $response = new HTTP_Request2_Response((string)fgets($fp));
         do {
-            $headerLine = fgets($fp);
+            $headerLine = (string)fgets($fp);
             $response->parseHeaderLine($headerLine);
         } while ('' != trim($headerLine));
 
         while (!feof($fp)) {
-            $response->appendBody(fread($fp, 8192));
+            $response->appendBody((string)fread($fp, 8192));
         }
         return $response;
     }
