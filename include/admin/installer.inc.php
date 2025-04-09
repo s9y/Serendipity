@@ -268,18 +268,6 @@ if ( (int)($serendipity['GET']['step'] ?? null) == 0 ) {
         }
     }
 
-    if ( is_writable($basedir . 'archives/') ) {
-        $data['installerResultDiagnose_ARCHIVES'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
-    } else {
-        if ($basewritable && !is_dir($basedir . 'archives/')) {
-            $data['installerResultDiagnose_ARCHIVES'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
-            #This directory will be created later in the process
-        } else {
-            $data['installerResultDiagnose_ARCHIVES'] =  serendipity_installerResultDiagnose(S9Y_I_ERROR, NOT_WRITABLE);
-            $showWritableNote = true;
-        }
-    }
-
     if ( is_writable($basedir . 'plugins/') ) {
         $data['installerResultDiagnose_PLUGINS'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
     } else {

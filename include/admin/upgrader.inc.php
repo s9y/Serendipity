@@ -418,12 +418,11 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
         #Figure out if we're set up a little more securely
         #PATH_SMARTY_COMPILE/
         #uploads/
-        #archives/
         #.htaccess
         #serendipity_config_local.inc.php
         # For completeness we could test to make sure the directories
         # really are directories, but that's probably overkill
-        foreach (array('archives/', PATH_SMARTY_COMPILE . '/', 'uploads/', '.htaccess', 'serendipity_config_local.inc.php') as $path) {
+        foreach (array(PATH_SMARTY_COMPILE . '/', 'uploads/', '.htaccess', 'serendipity_config_local.inc.php') as $path) {
             if (!is_writeable($basedir . $path)) {
                 $data['upgraderResultDiagnose2'][] = serendipity_upgraderResultDiagnose(S9Y_U_ERROR, NOT_WRITABLE);
                 $showWritableNote = true;

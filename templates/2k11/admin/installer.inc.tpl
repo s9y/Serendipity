@@ -199,10 +199,6 @@
                             <td>{$installerResultDiagnose_COMPILE}</td>
                         </tr>
                         <tr>
-                            <td><h5>{$basedir}archives/</h5></td>
-                            <td>{$installerResultDiagnose_ARCHIVES}</td>
-                        </tr>
-                        <tr>
                             <td><h5>{$basedir}plugins</h5></td>
                             <td>{$installerResultDiagnose_PLUGINS}</td>
                         </tr>

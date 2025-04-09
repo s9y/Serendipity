@@ -9,7 +9,6 @@ plugins/additional_plugins*
 /.htaccess
 *.db
 private/*
-archives/*
 *~
 DEADJOE
 /.settings
