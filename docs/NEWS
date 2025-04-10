@@ -1,5 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+   * Mark the intl extension as a requirement in the installer. It is
+     needed to not have an error after the install
+
    * Fix warning about dynamic properties in core plugins, relevant for
      PHP 8.2 and later (thanks to HQJaTu Jari Turkia)
 

@@ -175,7 +175,7 @@ if ( (int)($serendipity['GET']['step'] ?? null) == 0 ) {
     if ( extension_loaded('intl') ) {
         $data['installerResultDiagnose_INTL'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, YES);
     } else {
-        $data['installerResultDiagnose_INTL'] =  serendipity_installerResultDiagnose(S9Y_I_WARNING, NO);
+        $data['installerResultDiagnose_INTL'] =  serendipity_installerResultDiagnose(S9Y_I_ERROR, NO);
     }
 
     if ( extension_loaded('zlib') ) {
