@@ -14,7 +14,7 @@
  * @package   HTTP_Request2
  * @author    Delian Krustev <krustev@krustev.net>
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -170,7 +170,7 @@ class HTTP_Request2_Observer_UncompressingDownload implements SplObserver
         $this->_stream = $stream;
         if ($maxDownloadSize) {
             $this->_maxDownloadSize = $maxDownloadSize;
-            $this->_startPosition   = ftell($this->_stream);
+            $this->_startPosition   = ftell($this->_stream) ?: 0;
         }
     }
 
@@ -204,9 +204,14 @@ class HTTP_Request2_Observer_UncompressingDownload implements SplObserver
             if (!$this->_streamFilter
                 && ($this->_encoding === 'deflate' || $this->_encoding === 'gzip')
             ) {
-                $this->_streamFilter = stream_filter_append(
-                    $this->_stream, 'zlib.inflate', STREAM_FILTER_WRITE
-                );
+                if (false === $filter = stream_filter_append(
+                    $this->_stream,
+                    'zlib.inflate',
+                    STREAM_FILTER_WRITE
+                )) {
+                    throw new HTTP_Request2_Exception("Failed to append 'zlib.inflate' stream filter");
+                }
+                $this->_streamFilter = $filter;
             }
             $encoded = true;
             // fall-through is intentional
@@ -223,11 +228,12 @@ class HTTP_Request2_Observer_UncompressingDownload implements SplObserver
                 $offset = 0;
                 $this->_possibleHeader .= $event['data'];
                 if ('deflate' === $this->_encoding) {
-                    if (2 > strlen($this->_possibleHeader)) {
+                    if (2 > strlen($this->_possibleHeader)
+                        || false === $header = unpack('n', (string)substr($this->_possibleHeader, 0, 2))
+                    ) {
                         break;
                     }
-                    $header = unpack('n', substr($this->_possibleHeader, 0, 2));
-                    if (0 == $header[1] % 31) {
+                    if (0 === $header[1] % 31) {
                         $offset = 2;
                     }
 
@@ -248,7 +254,7 @@ class HTTP_Request2_Observer_UncompressingDownload implements SplObserver
                 }
 
                 $this->_processingHeader = false;
-                $bytes = fwrite($this->_stream, substr($this->_possibleHeader, $offset));
+                $bytes = fwrite($this->_stream, (string)substr($this->_possibleHeader, $offset));
             }
 
             if (false === $bytes) {
@@ -256,7 +262,8 @@ class HTTP_Request2_Observer_UncompressingDownload implements SplObserver
             }
 
             if ($this->_maxDownloadSize
-                && ftell($this->_stream) - $this->_startPosition > $this->_maxDownloadSize
+                && (false !== $position = ftell($this->_stream))
+                && $position - $this->_startPosition > $this->_maxDownloadSize
             ) {
                 throw new HTTP_Request2_MessageException(
                     sprintf(

@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -195,7 +195,7 @@ class HTTP_Request2_CookieJar implements Serializable
 
         if ($setter && !$this->domainMatch((string)$setter->getHost(), $cookie['domain'])) {
             throw new HTTP_Request2_MessageException(
-                "Domain " . $setter->getHost() . " cannot set cookies for "
+                "Domain " . (string)$setter->getHost() . " cannot set cookies for "
                 . $cookie['domain']
             );
         }
@@ -433,13 +433,13 @@ class HTTP_Request2_CookieJar implements Serializable
     /**
      * Constructs the object from serialized string
      *
-     * @param string $serialized string representation
+     * @param string $data string representation
      *
      * @return void
      */
-    public function unserialize($serialized)
+    public function unserialize($data)
     {
-        $this->__unserialize(unserialize($serialized));
+        $this->__unserialize(unserialize($data));
     }
 
     /**
@@ -524,10 +524,12 @@ class HTTP_Request2_CookieJar implements Serializable
         if (empty(self::$psl)) {
             $path = '@data_dir@' . DIRECTORY_SEPARATOR . 'HTTP_Request2';
             if (0 === strpos($path, '@' . 'data_dir@')) {
-                $path = realpath(
-                    __DIR__ . DIRECTORY_SEPARATOR . '..'
-                    . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data'
-                );
+                if (false === $path = realpath(__DIR__ . '/../../data')) {
+                    throw new HTTP_Request2_LogicException(
+                        "Unable to locate directory containing Public Suffix List",
+                        HTTP_Request2_Exception::READ_ERROR
+                    );
+                }
             }
             self::$psl = include_once $path . DIRECTORY_SEPARATOR . 'public-suffix-list.php';
         }

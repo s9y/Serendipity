@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -59,7 +59,7 @@ class HTTP_Request2_SOCKS5 extends HTTP_Request2_SocketWrapper
         } else {
             $request = pack('C3', 5, 1, 0);
         }
-        $this->write($request);
+        $this->write((string)$request);
         $response = unpack('Cversion/Cmethod', (string)$this->read(3));
         if (!$response || 5 !== $response['version']) {
             throw new HTTP_Request2_MessageException(
@@ -93,8 +93,8 @@ class HTTP_Request2_SOCKS5 extends HTTP_Request2_SocketWrapper
      */
     protected function performAuthentication($username, $password)
     {
-        $request  = pack('C2', 1, strlen($username)) . $username
-                    . pack('C', strlen($password)) . $password;
+        $request  = (string)pack('C2', 1, strlen($username)) . $username
+                    . (string)pack('C', strlen($password)) . $password;
 
         $this->write($request);
         $response = unpack('Cvn/Cstatus', (string)$this->read(3));
@@ -117,8 +117,8 @@ class HTTP_Request2_SOCKS5 extends HTTP_Request2_SocketWrapper
      */
     public function connect($remoteHost, $remotePort)
     {
-        $request = pack('C5', 0x05, 0x01, 0x00, 0x03, strlen($remoteHost))
-                   . $remoteHost . pack('n', $remotePort);
+        $request = (string)pack('C5', 0x05, 0x01, 0x00, 0x03, strlen($remoteHost))
+                   . $remoteHost . (string)pack('n', $remotePort);
 
         $this->write($request);
         $response = unpack('Cversion/Creply/Creserved', (string)$this->read(1024));

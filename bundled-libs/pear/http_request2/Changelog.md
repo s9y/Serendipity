@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.7.0] - 2025-04-06
+
+### Added
+* Tested on PHP 8.4;
+* Psalm 6 used for static analysis;
+* Updated Public Suffix List.
+
+### Fixed
+* Prevent XSS when PHP files backing server-side tests are served from a publicly available website,
+  thanks to Peter Potrowl (peter017 at gmail dot com) for the report.
+* `data/generate-list.php` will only run with a command-line SAPI.
+* Better random value used for `cnonce` parameter in Digest authentication, see [issue #30].
+  Digest authentication should be considered deprecated, however.
+* `psalm.xml` configuration file is no longer installed by composer.
+
 ## 2.6.0 - 2023-11-01
 * Tested on PHP 8.2 and 8.3
 * Use [psalm] for static analysis, several minor issues fixed
@@ -57,5 +72,8 @@ no longer uses include-path and does not contain require_once statements
 [issue #20]: https://github.com/pear/HTTP_Request2/issues/20
 [issue #23]: https://github.com/pear/HTTP_Request2/issues/23
 [issue #25]: https://github.com/pear/HTTP_Request2/issues/25
+[issue #30]: https://github.com/pear/HTTP_Request2/issues/30
 [psalm]: https://psalm.dev/
 [pull request #26]: https://github.com/pear/HTTP_Request2/pull/26
+
+[2.7.0]: https://github.com/pear/HTTP_Request2/compare/v2.6.0...v2.7.0

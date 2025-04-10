@@ -14,7 +14,7 @@
  * @package   HTTP_Request2
  * @author    David Jean Louis <izi@php.net>
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -111,8 +111,11 @@ class HTTP_Request2_Observer_Log implements SplObserver
         }
         if (is_resource($target) || $target instanceof Log) {
             $this->target = $target;
-        } elseif (false === ($this->target = @fopen($target, 'ab'))) {
-            throw new HTTP_Request2_Exception("Unable to open '{$target}'");
+        } else {
+            if (false === $fp = @fopen($target, 'ab')) {
+                throw new HTTP_Request2_Exception("Unable to open '{$target}'");
+            }
+            $this->target = $fp;
         }
     }
 

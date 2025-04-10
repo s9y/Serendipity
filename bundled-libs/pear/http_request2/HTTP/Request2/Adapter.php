@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -106,7 +106,11 @@ abstract class HTTP_Request2_Adapter
         if (is_string($this->requestBody)) {
             $this->contentLength = strlen($this->requestBody);
         } elseif (is_resource($this->requestBody)) {
-            $stat = fstat($this->requestBody);
+            if (false === $stat = fstat($this->requestBody)) {
+                throw new HTTP_Request2_LogicException(
+                    "fstat() call failed", HTTP_Request2_Exception::READ_ERROR
+                );
+            }
             $this->contentLength = $stat['size'];
             rewind($this->requestBody);
         } else {

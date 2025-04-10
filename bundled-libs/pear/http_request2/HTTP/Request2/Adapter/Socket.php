@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -270,7 +270,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
                         $options['ssl']['peer_name']        = $reqHost;
 
                     } else {
-                        $options['ssl'][substr($name, 4)] = $value;
+                        $options['ssl'][(string)substr($name, 4)] = $value;
                     }
                 }
             }
@@ -504,18 +504,18 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
 
         $url    = $this->request->getUrl();
         $scheme = (string)$url->getScheme();
-        $host   = $scheme . '://' . $url->getHost();
+        $host   = $scheme . '://' . (string)$url->getHost();
         if ($port = $url->getPort()) {
             if ((0 === strcasecmp($scheme, 'http') && 80 != $port)
                 || (0 === strcasecmp($scheme, 'https') && 443 != $port)
             ) {
-                $host .= ':' . $port;
+                $host .= ':' . (string)$port;
             }
         }
 
         if (!empty($challenge['domain'])) {
             $prefixes = [];
-            foreach (preg_split('/\\s+/', $challenge['domain']) as $prefix) {
+            foreach (preg_split('/\\s+/', $challenge['domain']) ?: [] as $prefix) {
                 // don't bother with different servers
                 if ('/' == substr($prefix, 0, 1)) {
                     $prefixes[] = $host . $prefix;
@@ -699,7 +699,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         if (false !== ($q = strpos($url, '?'))
             && $this->request->getConfig('digest_compat_ie')
         ) {
-            $url = substr($url, 0, $q);
+            $url = (string)substr($url, 0, $q);
         }
 
         $a1 = md5($user . ':' . $challenge['realm'] . ':' . $password);
@@ -709,11 +709,18 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         if (empty($challenge['qop'])) {
             $digest = md5($a1 . ':' . $challenge['nonce'] . ':' . $a2);
         } else {
-            $challenge['cnonce'] = 'Req2.' . rand();
+            $randomBytes = null;
+            if (function_exists('random_bytes')) {
+                try {
+                    $randomBytes = bin2hex(random_bytes(6));
+                } catch (\Exception $e) {
+                }
+            }
+            $challenge['cnonce'] = 'Req2.' . ($randomBytes ?: mt_rand());
             if (empty($challenge['nc'])) {
                 $challenge['nc'] = 1;
             }
-            $nc     = sprintf('%08x', $challenge['nc']++);
+            $nc     = (string)sprintf('%08x', $challenge['nc']++);
             $digest = md5(
                 $a1 . ':' . $challenge['nonce'] . ':' . $nc . ':' .
                 $challenge['cnonce'] . ':auth:' . $a2
@@ -756,10 +763,9 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
 
         case HTTP_Request2::AUTH_DIGEST:
             unset($this->serverChallenge);
-            $fullUrl = ('/' == $requestUrl[0])?
-                       $this->request->getUrl()->getScheme() . '://' .
-                        $requestHost . $requestUrl:
-                       $requestUrl;
+            $fullUrl = '/' == $requestUrl[0]
+                ? (string)$this->request->getUrl()->getScheme() . '://' . $requestHost . $requestUrl
+                : $requestUrl;
             foreach (array_keys(self::$challenges) as $key) {
                 if ($key == substr($fullUrl, 0, strlen($key))) {
                     $headers['authorization'] = $this->createDigestResponse(
@@ -841,9 +847,10 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         $connect = HTTP_Request2::METHOD_CONNECT == $this->request->getMethod();
         $host    = (string)$url->getHost();
 
-        $defaultPort = 0 === strcasecmp((string)$url->getScheme(), 'https')? 443: 80;
-        if (($port = $url->getPort()) && $port != $defaultPort || $connect) {
-            $host .= ':' . (empty($port)? $defaultPort: $port);
+        $customPort  = (string)$url->getPort();
+        $defaultPort = 0 === strcasecmp((string)$url->getScheme(), 'https') ? '443' : '80';
+        if ('' !== $customPort && $defaultPort !== $customPort || $connect) {
+            $host .= ':' . ($customPort ?: $defaultPort);
         }
         // Do not overwrite explicitly set 'Host' header, see bug #16146
         if (!isset($headers['host'])) {
@@ -860,11 +867,11 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
             ) {
                 $requestUrl = '';
             } else {
-                $requestUrl = $url->getScheme() . '://' . $host;
+                $requestUrl = (string)$url->getScheme() . '://' . $host;
             }
-            $path        = $url->getPath();
-            $query       = $url->getQuery();
-            $requestUrl .= (empty($path)? '/': $path) . (empty($query)? '': '?' . $query);
+            $path        = (string)$url->getPath();
+            $query       = (string)$url->getQuery();
+            $requestUrl .= ('' === $path ? '/' : $path) . ('' === $query ? '' : '?' . $query);
         }
 
         if ('1.1' == $this->request->getConfig('protocol_version')
@@ -990,9 +997,9 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         $chunked    = isset($headers['transfer-encoding']);
         while ($position < $this->contentLength) {
             if (is_string($this->requestBody)) {
-                $str = substr($this->requestBody, $position, $bufferSize);
+                $str = (string)substr($this->requestBody, $position, $bufferSize);
             } elseif (is_resource($this->requestBody)) {
-                $str = fread($this->requestBody, $bufferSize);
+                $str = (string)fread($this->requestBody, $bufferSize);
             } else {
                 $str = $this->requestBody->read($bufferSize);
             }
