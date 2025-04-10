@@ -1379,10 +1379,8 @@ function serendipity_url_allowed($url) {
     return true;
 }
 
-use voku\cache\Cache;
-// Configure voku/simple-cache to use templates_c as directory for the opcache files, the fallback
-// when Memcached and Redis are not used. Returns the configured cache object. Used internally by
-// the other cache functions, you most likely never need to call this.
+// Create the cache directory if necessary. Return false if that failed or the cache is disabled.
+// Return 'apcu' if apcu caching can be used. If not, return the path to the caching directory.
 function serendipity_setupCache() {
     global $serendipity;
 
@@ -1390,36 +1388,17 @@ function serendipity_setupCache() {
         return false;
     }
 
-    $cacheManager = new \voku\cache\CacheAdapterAutoManager();
+    if (function_exists('apcu_enabled') && apcu_enabled()) {
+        return 'apcu';
+    }
 
-    $cacheManager->addAdapter(
-        \voku\cache\AdapterOpCache::class,
-        static function () {
-            global $serendipity;
-            $cacheDir = $serendipity['serendipityPath'] . '/templates_c/simple_cache';
+    $cache_dir = $serendipity['serendipityPath'] . '/templates_c/cache/';
 
-            return $cacheDir;
-        }
-    );
-
-    $cacheManager->addAdapter(
-        \voku\cache\AdapterArray::class
-    );
+    if (! file_exists($cache_dir)) {
+        mkdir($cache_dir);
+    }
     
-    $cache = new Cache(
-        null,
-        null,
-        false,
-        true,
-        false,
-        false,
-        false,
-        false,
-        '',
-        $cacheManager,
-        false
-    );
-    return $cache;
+    return $cache_dir;
 }
 
 function serendipity_cleanCache() {
@@ -1428,17 +1407,35 @@ function serendipity_cleanCache() {
         return false;
     }
 
-    return $cache->removeAll();
+    if ($cache == 'apcu') {
+        return apcu_clear_cache();
+    }
+
+    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($cache), RecursiveIteratorIterator::CHILD_FIRST) as $filename) {
+        if ($filename->isDir()) {
+            continue;
+        }
+        unlink($filename);
+    }
 }
 
-function serendipity_cacheItem($key, $item, $ttl = 3600) {
+// Cache the given data for one hour
+function serendipity_cacheItem($key, $item) {
     $cache = serendipity_setupCache();
 
     if ($cache === false) {
         return false;
     }
 
-    return $cache->setItem($key, $item, $ttl);
+    if ($cache == 'apcu') {
+        return apcu_store($key, $item, 3600);
+    }
+    
+    if (rand(0, 100) == 1) {
+        serendipity_applyCacheLimits();
+    }
+    
+    return file_put_contents($cache . $key, $item);
 }
 
 function serendipity_getCacheItem($key) {
@@ -1446,8 +1443,46 @@ function serendipity_getCacheItem($key) {
     if ($cache === false) {
         return false;
     }
+    if ($cache == 'apcu') {
+        return apcu_fetch($key);
+    }
+    
+    if (file_exists($cache . $key)) {
+        // This will usually also be the creation time under linux, since we never write to cache
+        // files:
+        $creation_time = filemtime($cache . $key);
+        if ((time() - $creation_time) > 3600) {
+            // The cache item is not valid anymore
+            unlink($cache . $key);
+            return false;
+        } else {
+            return file_get_contents($cache . $key);
+        }
+    } else {
+        return false;
+    }
+}
 
-    return $cache->getItem($key);
+// When caching to the file system, make sure that the cache directory is not overly full.
+// For that we limit the cache size to the 2000 newest entries.
+function serendipity_applyCacheLimits() {
+    $cache = serendipity_setupCache();
+    if ($cache === false) {
+        return;
+    }
+    if ($cache == 'apcu') {
+        // APCu should handle its cache limits internally.
+        return;
+    }
+    // The array_diff removes the . and .. directories if existing. array_values gives us new keys.
+    $cachefiles  = array_values(array_diff(scandir($cache), array('..', '.')));
+    $amount = count($cachefiles);
+    if ($amount > 2000) {
+        usort($cachefiles, function( $a, $b ) use ($cache) { return filemtime($cache . $b) <=> filemtime($cache . $a); } );
+        for ($i=2000; $i < $amount; $i++) {
+            unlink($cache . $cachefiles[$i]);
+        }
+    }
 }
 
 define("serendipity_FUNCTIONS_LOADED", true);
