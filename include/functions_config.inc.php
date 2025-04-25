@@ -444,7 +444,7 @@ function serendipity_issueAutologin($user) {
     $okeyCast = serendipity_db_cast('okey', 'unsigned');
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options 
                                 WHERE name = 'autologin_" . serendipity_db_escape_string($user) . "'
-                                   OR (name LIKE 'autologin_%' AND $okeyCast < {$threeWeeksAgo}");
+                                   OR (name LIKE 'autologin_%' AND $okeyCast < {$threeWeeksAgo})");
 
     // Issue new autologin cookie
     serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey) VALUES ('autologin_" . serendipity_db_escape_string($user) . "', '" . $rnd  . "', '" . time() . "')");

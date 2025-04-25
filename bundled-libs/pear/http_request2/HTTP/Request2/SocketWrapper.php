@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -127,7 +127,7 @@ class HTTP_Request2_SocketWrapper
         // connection still succeeds, albeit with a warning. Throw an Exception
         // with the warning text in this case as that connection is unlikely
         // to be what user wants and as Curl throws an error in similar case.
-        if ($this->connectionWarnings) {
+        if ($this->connectionWarnings || !$socket) {
             if ($socket) {
                 fclose($socket);
             }
@@ -209,7 +209,7 @@ class HTTP_Request2_SocketWrapper
             $w = [];
             $e = [];
             if (stream_select($r, $w, $e, $timeouts[0], $timeouts[1])) {
-                $line .= @fgets($this->socket, $bufferSize);
+                $line .= (string)@fgets($this->socket, $bufferSize);
             }
 
             if (null === $localTimeout) {
@@ -266,7 +266,7 @@ class HTTP_Request2_SocketWrapper
                     'Error writing request' . (null === $error ? '' : ': ' . $error)
                 );
             }
-            $data = substr($data, $written);
+            $data = (string)substr($data, $written);
             $totalWritten += $written;
         }
         return $totalWritten;
@@ -299,7 +299,7 @@ class HTTP_Request2_SocketWrapper
     public function setDeadline($deadline, $timeout)
     {
         if (null === $deadline && 0 < ($defaultTimeout = (int)ini_get('default_socket_timeout'))) {
-            $deadline = microtime(true) + $defaultTimeout;
+            $deadline = microtime(true) + (float)$defaultTimeout;
         }
         $this->deadline = $deadline;
         $this->timeout  = $timeout;

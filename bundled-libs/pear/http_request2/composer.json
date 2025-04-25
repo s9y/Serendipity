@@ -22,7 +22,8 @@
         "pear/pear_exception" : "^1.0.0"
     },
     "require-dev": {
-        "yoast/phpunit-polyfills" : "^1.0.0"
+        "yoast/phpunit-polyfills" : "^1.0.0",
+        "pear/log"                : "^1"
     },
     "suggest"     : {
         "ext-fileinfo" : "Adds support for looking up mime-types using finfo.",

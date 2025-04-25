@@ -4,18 +4,21 @@
  *
  * You can run this script to update PSL to the current version instead of
  * waiting for a new release of HTTP_Request2.
- *
- * NB: peer validation is DISABLED when downloading. If you want to enable it,
- * change ssl_verify_peer to true and provide CA file (see below)
  */
+
+if ('cli' !== PHP_SAPI) {
+    die("This file should only be run from the command line.");
+}
 
 /** URL to download Public Suffix List from */
 define('LIST_URL',    'https://publicsuffix.org/list/public_suffix_list.dat');
 /** Name of PHP file to write */
 define('OUTPUT_FILE', __DIR__ . '/public-suffix-list.php');
 
-if (file_exists('../vendor/autoload.php')) {
-    require_once '../vendor/autoload.php';
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../../../autoload.php')) {
+    require_once __DIR__ . '/../../../autoload.php';
 } else {
     require_once 'HTTP/Request2.php';
 }
@@ -61,9 +64,8 @@ function writeNode($fp, $valueTree, $key = null, $indent = 0)
 
 try {
     $request  = new HTTP_Request2(LIST_URL, HTTP_Request2::METHOD_GET, [
-        // Provide path to your CA file and change 'ssl_verify_peer' to true to enable peer validation
+        // Additional settings go here, e.g. path to your CA file
         // 'ssl_cafile' => '... path to your Certificate Authority file ...',
-        'ssl_verify_peer' => false
     ]);
     $response = $request->send();
     if (200 != $response->getStatus()) {

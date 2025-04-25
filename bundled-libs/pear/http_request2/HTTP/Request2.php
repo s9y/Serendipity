@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2023 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2025 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -41,6 +41,8 @@
  */
 class HTTP_Request2 implements SplSubject
 {
+    const VERSION = '2.7.0';
+
     /**
      * #@+
      * Constants for HTTP request methods
@@ -233,10 +235,11 @@ class HTTP_Request2 implements SplSubject
         if (!empty($method)) {
             $this->setMethod($method);
         }
-        $this->setHeader(
-            'user-agent', 'HTTP_Request2/2.6.0 ' .
-            '(https://github.com/pear/HTTP_Request2) PHP/' . phpversion()
-        );
+        $this->setHeader('user-agent', sprintf(
+            'HTTP_Request2/%s (https://github.com/pear/HTTP_Request2) PHP/%s',
+            self::VERSION,
+            phpversion() ?: '6.0'
+        ));
     }
 
     /**
@@ -640,7 +643,7 @@ class HTTP_Request2 implements SplSubject
             if (0 === strpos($this->headers['content-type'], 'application/x-www-form-urlencoded')) {
                 $body = http_build_query($this->postParams, '', '&');
                 if (!$this->getConfig('use_brackets')) {
-                    $body = preg_replace('/%5B\d+%5D=/', '=', $body);
+                    $body = (string)preg_replace('/%5B\d+%5D=/', '=', $body);
                 }
                 // support RFC 3986 by not encoding '~' symbol (request #15368)
                 return str_replace('%7E', '~', $body);

@@ -1,5 +1,11 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+   * Mark the intl extension as a requirement in the installer. It is
+     needed to not have an error after the install
+
+   * Fix warning about dynamic properties in core plugins, relevant for
+     PHP 8.2 and later (thanks to HQJaTu Jari Turkia)
+
    * Fix pg_escape_string on PHP 8.1 and later (thanks to HQJaTu Jari
      Turkia)
 
@@ -35,7 +41,7 @@ Version 2.6-alpha1 ()
 
    * Update Parser of textile plugin
 
-   * Update smarty from v4.3.5 to v5.4.3. This new major version has
+   * Update smarty from v4.3.5 to v5.4.5. This new major version has
      breaking changes, worked around as much as possible in the s9y core
 
    * Fix an often broken element of old themes by not adding the
