@@ -208,20 +208,6 @@ function &serendipity_fetchEntryCategories($entryid) {
  */
 function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array', $joinauthors = true, $joincategories = true, $joinown = null) {
     global $serendipity;
-
-    $initial_args = array_values(func_get_args());
-
-    if ($serendipity['useInternalCache']) {
-        $key = md5(serialize($initial_args) . ($serendipity['short_archives'] ?? '') . '||' . (serialize($serendipity['range'] ?? '')) . '||' . ($serendipity['GET']['category'] ?? '') . '||' . ($serendipity['GET']['hide_category'] ?? '') . '||' . ($serendipity['GET']['viewAuthor'] ?? '') . '||' .  ($serendipity['GET']['page'] ?? '') . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . ($serendipity['GET']['adminModule'] ?? '') . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . ($serendipity['plugindata']['smartyvars']['uriargs'] ?? '') );
-        
-        $entries = serendipity_getCacheItem($key);
-        if ($entries && $entries !== false) {
-            $serendipity['fullCountQuery'] = serendipity_getCacheItem($key . '_fullCountQuery');
-            $unserialized = unserialize($entries);
-            // Only variables returned by references
-            return $unserialized;
-        }
-    }
     
     $cond = array();
     $cond['orderby'] = $orderby;
@@ -504,12 +490,6 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         serendipity_fetchEntryData($ret);
     }
 
-    if ($serendipity['useInternalCache']) {
-        $key = md5(serialize($initial_args) . ($serendipity['short_archives'] ?? '') . '||' . (serialize($serendipity['range'] ?? '')) . '||' . ($serendipity['GET']['category'] ?? '') . '||' . ($serendipity['GET']['hide_category'] ?? '') . '||' . ($serendipity['GET']['viewAuthor'] ?? '') . '||' .  ($serendipity['GET']['page'] ?? '') . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . ($serendipity['GET']['adminModule'] ?? '') . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . ($serendipity['plugindata']['smartyvars']['uriargs'] ?? '') );
-
-        serendipity_cacheItem($key, serialize($ret));
-        serendipity_cacheItem($key . '_fullCountQuery', $serendipity['fullCountQuery']);
-    }
     return $ret;
 }
 
@@ -1101,6 +1081,17 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     if (!is_object($serendipity['smarty'] ?? null)) {
         serendipity_smarty_init(); // if not set, start Smarty templating to avoid member function "method()" on a non-object errors (was draft preview error, now at line 1239)
     }
+
+    $initial_args = array_values(func_get_args());
+    if ($serendipity['useInternalCache']) {
+        $cache_key = md5(serialize($initial_args) . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers'));
+
+        $cached = serendipity_getCacheItem($cache_key);
+        if ($cached && $cached !== false) {
+            $serendipity['smarty']->assignByRef($smarty_block, $cached);
+            return $cached;
+        }
+    }
     
     if ($use_hooks) {
         $addData = array('extended' => $extended, 'preview' => $preview);
@@ -1348,6 +1339,9 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     if ($smarty_fetch === 'return') {
+        if ($serendipity['useInternalCache']) {
+            serendipity_cacheItem($cache_key, $dategroup);
+        }
         return $dategroup;
     }
 
@@ -1359,10 +1353,16 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     ));
 
     if (isset($serendipity['short_archives']) && $serendipity['short_archives']) {
-        return serendipity_smarty_fetch($smarty_block, 'entries_summary.tpl', true);
+        $ret = serendipity_smarty_fetch($smarty_block, 'entries_summary.tpl', true);
     } elseif ($smarty_fetch == true) {
-        return serendipity_smarty_fetch($smarty_block, 'entries.tpl', true, $preview);
+        $ret = serendipity_smarty_fetch($smarty_block, 'entries.tpl', true, $preview);
     }
+
+    if ($serendipity['useInternalCache']) {
+        serendipity_cacheItem($cache_key, $ret);
+    }
+    return $ret;
+    
 
 } // end function serendipity_printEntries
 

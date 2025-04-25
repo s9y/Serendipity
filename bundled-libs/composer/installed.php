@@ -91,21 +91,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'psr/simple-cache' => array(
-            'pretty_version' => '1.0.1',
-            'version' => '1.0.1.0',
-            'reference' => '408d5eafb83c57f6365a3ca330ff23aa4a5fa39b',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../psr/simple-cache',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'psr/simple-cache-implementation' => array(
-            'dev_requirement' => false,
-            'provided' => array(
-                0 => '1.0',
-            ),
-        ),
         's9y/serendipity' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
@@ -130,15 +115,6 @@
             'reference' => '85181ba99b2345b0ef10ce42ecac37612d9fd341',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'voku/simple-cache' => array(
-            'pretty_version' => '4.1.0',
-            'version' => '4.1.0.0',
-            'reference' => 'd6578b2b1c7a1ed36c4a862cae826b703520e73b',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../voku/simple-cache',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
