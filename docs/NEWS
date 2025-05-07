@@ -1,5 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+   * Fix an error blocking double opt in on MySQL databases, caused by
+     an invalid cast to integer (@mariohommel)
+
    * Mark the intl extension as a requirement in the installer. It is
      needed to not have an error after the install
 
