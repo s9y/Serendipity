@@ -202,6 +202,11 @@ function serendipity_db_cast($columnName, $type) {
             $type = 'integer';
     }
 
+    // MySQL-Backend doesn't support cast as integer so it's better to use 'signed' instead
+    if (stristr($serendipity['dbType'], 'mysqli')) {
+        $type = 'signed';
+    } 
+    
     // Adds explicits casting for ANSI SQL -compliant DBs, like mysql and postgresql.
     return "cast($columnName as $type)";
 }
