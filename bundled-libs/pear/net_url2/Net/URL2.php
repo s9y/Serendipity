@@ -103,37 +103,51 @@ class Net_URL2
         );
 
     /**
-     * @var  string|bool
+     * The scheme, false for none
+     *
+     * @var string|bool
      */
     private $_scheme = false;
 
     /**
-     * @var  string|bool
+     * The user, false for no userinfo
+     *
+     * @var string|bool
      */
     private $_userinfo = false;
 
     /**
-     * @var  string|bool
+     * The host, false for no authority
+     *
+     * @var string|bool
      */
     private $_host = false;
 
     /**
-     * @var  string|bool
+     * The port number, false for no port number
+     *
+     * @var string|bool
      */
     private $_port = false;
 
     /**
-     * @var  string
+     * The path
+     *
+     * @var string
      */
     private $_path = '';
 
     /**
-     * @var  string|bool
+     * The query string without the leading "?" (search), false for no query
+     *
+     * @var string|bool
      */
     private $_query = false;
 
     /**
-     * @var  string|bool
+     * The fragment name without the leading "#" (anchor), false for no "#" fragment
+     *
+     * @var string|bool
      */
     private $_fragment = false;
 
@@ -143,7 +157,7 @@ class Net_URL2
      * @param string $url     an absolute or relative URL
      * @param array  $options an array of OPTION_xxx constants
      *
-     * @uses   self::parseUrl()
+     * @uses self::parseUrl()
      */
     public function __construct($url, array $options = array())
     {
@@ -369,8 +383,8 @@ class Net_URL2
      * false if there is no authority.
      *
      * @param string|bool $authority a hostname or an IP address, possibly
-     *                                with userinfo prefixed and port number
-     *                                appended, e.g. "foo:bar@example.org:81".
+     *                               with userinfo prefixed and port number
+     *                               appended, e.g. "foo:bar@example.org:81".
      *
      * @return $this
      */
@@ -428,8 +442,8 @@ class Net_URL2
      * Returns the query string (excluding the leading "?"), or false if "?"
      * is not present in the URL.
      *
-     * @return  string|bool
-     * @see     getQueryVariables
+     * @return string|bool
+     * @see    getQueryVariables
      */
     public function getQuery()
     {
@@ -480,6 +494,7 @@ class Net_URL2
      * $_GET in a PHP script. If the URL does not contain a "?", an empty array
      * is returned.
      *
+     * @throws Exception
      * @return array
      */
     public function getQueryVariables()
@@ -523,6 +538,7 @@ class Net_URL2
      * @param string $value query-value
      * @param array  $array of existing query variables (if any)
      *
+     * @throws Exception
      * @return mixed
      */
     private function _queryArrayByKey($key, $value, array $array = array())
@@ -549,7 +565,7 @@ class Net_URL2
             // array
             $brackets = substr($key, $offset);
             if (!isset($array[$name])) {
-                $array[$name] = null;
+                $array[$name] = array();
             }
             $array[$name] = $this->_queryArrayByBrackets(
                 $brackets, $value, $array[$name]
@@ -569,7 +585,7 @@ class Net_URL2
      * @throws Exception
      * @return array
      */
-    private function _queryArrayByBrackets($buffer, $value, array $array = null)
+    private function _queryArrayByBrackets($buffer, $value, array $array)
     {
         $entry = &$array;
 
@@ -667,6 +683,7 @@ class Net_URL2
      * @param string $name  variable name
      * @param mixed  $value variable value
      *
+     * @throws Exception
      * @return $this
      */
     public function setQueryVariable($name, $value)
@@ -682,6 +699,7 @@ class Net_URL2
      *
      * @param string $name a query string variable, e.g. "foo" in "?foo=1"
      *
+     * @throws Exception
      * @return void
      */
     public function unsetQueryVariable($name)
@@ -747,7 +765,7 @@ class Net_URL2
      * Returns a string representation of this URL.
      *
      * @return string
-     * @link https://php.net/language.oop5.magic#object.tostring
+     * @link   https://php.net/language.oop5.magic#object.tostring
      */
     public function __toString()
     {
@@ -834,8 +852,8 @@ class Net_URL2
      * @param string|array $mixed string or array of strings to normalize
      *
      * @return string|array
-     * @see normalize
-     * @see _normalizeCallback()
+     * @see    normalize
+     * @see    _normalizeCallback()
      */
     private function _normalize($mixed)
     {
@@ -851,8 +869,9 @@ class Net_URL2
      * @param array $matches as by preg_replace_callback
      *
      * @return string
-     * @see normalize
-     * @see _normalize
+     * @see    normalize
+     * @see    _normalize
+     *
      * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
      */
     private function _normalizeCallback($matches)
@@ -949,8 +968,9 @@ class Net_URL2
     /**
      * URL is fragment-only
      *
-     * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
      */
     private function _isFragmentOnly()
     {
@@ -1072,7 +1092,8 @@ class Net_URL2
     /**
      * Returns the URL used to retrieve the current request.
      *
-     * @return  string
+     * @throws Exception
+     * @return string
      */
     public static function getRequestedURL()
     {
@@ -1191,25 +1212,26 @@ class Net_URL2
      * @param string $url URL
      *
      * @return string
-     * @see parseUrl
-     * @see setAuthority
-     * @link https://pear.php.net/bugs/bug.php?id=20425
+     * @see    parseUrl
+     * @see    setAuthority
+     * @link   https://pear.php.net/bugs/bug.php?id=20425
      */
     private function _encodeData($url)
     {
         return preg_replace_callback(
-            '([\x-\x20\x22\x3C\x3E\x7F-\xFF]+)',
+            '([\x00-\x20\x22\x3C\x3E\x7F-\xFF]+)',
             array($this, '_encodeCallback'), $url
         );
     }
 
     /**
-     * callback for encoding character data
+     * Callback for encoding character data
      *
      * @param array $matches Matches
      *
      * @return string
-     * @see _encodeData
+     * @see    _encodeData
+     *
      * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
      */
     private function _encodeCallback(array $matches)
