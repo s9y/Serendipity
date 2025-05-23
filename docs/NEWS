@@ -1,5 +1,8 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+   * Fix an error in the spamblock log that could cause an mysql
+     exception about an unsigned entry id (Thanks to DLange)
+
    * Fix an error blocking double opt in on MySQL databases, caused by
      an invalid cast to integer (@mariohommel)
 
