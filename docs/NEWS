@@ -1,5 +1,12 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
+
+   * Changes to the internal cache, the one that can be configured in
+     the general settings. It will now use a custom implementation that
+     either caches to the file system or to APCu, if available. The
+     cache also now works on an outer layer, which vastly improved
+     performance in our tests.
+
    * Fix an error in the spamblock log that could cause an mysql
      exception about an unsigned entry id (Thanks to DLange)
 
