@@ -1,6 +1,9 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix pagination on /comments archive, so that not only the first
+     page shows comments
+
    * Changes to the internal cache, the one that can be configured in
      the general settings. It will now use a custom implementation that
      either caches to the file system or to APCu, if available. The
