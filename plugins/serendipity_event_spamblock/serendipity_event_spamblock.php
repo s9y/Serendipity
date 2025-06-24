@@ -239,7 +239,7 @@ class serendipity_event_spamblock extends serendipity_event
                 $propbag->add('type', 'radio');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_DESC);
-                $propbag->add('default', 'yes');
+                $propbag->add('default', 'no');
                 $propbag->add('radio', array(
                     'value' => array(true, 'no', 'scramble'),
                     'desc'  => array(YES, NO, PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_SCRAMBLE)
