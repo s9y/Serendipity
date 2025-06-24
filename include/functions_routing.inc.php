@@ -83,6 +83,18 @@ function serveComments() {
             continue;
         }
 
+        if (strlen($v) > 0) {
+            if ($v[0] == 'P') { /* Page */
+                $page = substr($v, 1);
+                if (is_numeric($page)) {
+                    $serendipity['GET']['page'] = $page;
+                    unset($_args[$k]);
+                    unset($serendipity['uriArguments'][$k]);
+                    continue;
+                }
+            }
+        }
+
         if (preg_match('@^(last|f|t|from|to)[\s_-]*([\d/ -]+)$@', strtolower(urldecode($v)), $m)) {
             if ($m[1] == 'last') {
                 $usetime = time() - ($m[2]*86400);
@@ -106,11 +118,11 @@ function serveComments() {
         } elseif ($v == 'trackbacks' || $v == 'comments_and_trackbacks' || $v == 'comments') {
             $serendipity['GET']['commentMode'] = $v;
         } elseif (!empty($v)) {
-            $serendipity['GET']['viewCommentAuthor'] .= urldecode($v);
+            $serendipity['GET']['viewCommentAuthor'] = ($serendipity['GET']['viewCommentAuthor'] ?? '') . urldecode($v);
         }
     }
 
-    $serendipity['head_title']    = COMMENTS_FROM . ' ' . serendipity_specialchars($serendipity['GET']['viewCommentAuthor']);
+    $serendipity['head_title']    = COMMENTS_FROM . ' ' . serendipity_specialchars($serendipity['GET']['viewCommentAuthor'] ?? '');
     if (isset($timedesc['start']) && isset($timedesc['end'])) {
         $serendipity['head_title'] .= ' (' . $timedesc['start'] . ' - ' . $timedesc['end'] . ')';
     } elseif (isset($timedesc['start'])) {
