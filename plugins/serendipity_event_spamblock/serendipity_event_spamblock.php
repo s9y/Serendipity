@@ -9,6 +9,8 @@ if (IN_serendipity !== true) {
 class serendipity_event_spamblock extends serendipity_event
 {
     var $filter_defaults;
+    var $logfile;
+    var $chars;
 
     function introspect(&$propbag)
     {
@@ -25,7 +27,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.89.5');
+        $propbag->add('version',       '1.89.6');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
