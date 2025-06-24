@@ -29,7 +29,7 @@ function serve404() {
 }
 
 
-/* Attempt to locate hidden variables within the URI */
+/** Attempt to locate hidden variables within the URI and set the corresponding global variables */
 function locateHiddenVariables($_args) {
     global $serendipity;
     foreach ($_args AS $k => $v){
@@ -75,24 +75,13 @@ function serveComments() {
     $serendipity['view'] = 'comments';
     $uri = $_SERVER['REQUEST_URI'];
     $_args = serendipity_getUriArguments($uri, true); // Need to also match "." character
+    $_args = locateHiddenVariables($_args);
     $timedesc = array();
 
     /* Attempt to locate hidden variables within the URI */
     foreach ($_args AS $k => $v){
         if ($v == PATH_COMMENTS) {
             continue;
-        }
-
-        if (strlen($v) > 0) {
-            if ($v[0] == 'P') { /* Page */
-                $page = substr($v, 1);
-                if (is_numeric($page)) {
-                    $serendipity['GET']['page'] = $page;
-                    unset($_args[$k]);
-                    unset($serendipity['uriArguments'][$k]);
-                    continue;
-                }
-            }
         }
 
         if (preg_match('@^(last|f|t|from|to)[\s_-]*([\d/ -]+)$@', strtolower(urldecode($v)), $m)) {
