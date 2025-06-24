@@ -1422,7 +1422,7 @@ function &serendipity_getGroups($authorid, $sequence = false) {
     if (!is_array($_groups)) {
         $groups = array();
     } else {
-        $groups =& $_groups;
+        $groups = $_groups;
     }
 
     if ($sequence) {
@@ -1431,7 +1431,7 @@ function &serendipity_getGroups($authorid, $sequence = false) {
             $rgroups[] = $grouprow['confkey'];
         }
     } else {
-        $rgroups =& $groups;
+        $rgroups = $groups;
     }
 
     return $rgroups;
