@@ -1246,7 +1246,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 $entry['categories'] = null;
             }
 
-            if (strlen($entry['extended'] ?? null)) {
+            if (strlen($entry['extended'] ?? '')) {
                 $entry['has_extended']      = true;
             } else {
                 $entry['has_extended']      = false;
