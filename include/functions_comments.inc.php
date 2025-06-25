@@ -435,12 +435,13 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
 }
 
 /**
- * Fetches and prints a listing of comments by author
+ * Fetches and prints a listing of comments by author, or a page of all comments if
+ * serendipity['GET']['viewCommentAuthor'] is empty
  */
 function serendipity_printCommentsByAuthor() {
     global $serendipity;
 
-    $type = serendipity_db_escape_string($serendipity['GET']['commentMode']);
+    $type = serendipity_db_escape_string($serendipity['GET']['commentMode'] ?? '');
 
     if ($type == 'comments' || empty($type)) {
         $type = 'NORMAL';
@@ -486,14 +487,6 @@ function serendipity_printCommentsByAuthor() {
     }
 
     $serendipity['smarty']->assignByRef('comments_by_authors', $entry_comments);
-
-    if (!empty($id)) {
-        $and .= " AND co.entry_id = '" . (int)$id ."'";
-    }
-
-    if (!$showAll) {
-        $and .= ' AND co.status = \'approved\'';
-    }
 
     $fc = "SELECT count(co.id) AS counter
                                   FROM {$serendipity['dbPrefix']}comments AS co
