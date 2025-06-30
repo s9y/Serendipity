@@ -254,9 +254,9 @@ function serendipity_reference_autodiscover($loc, $url, $author, $title, $text) 
 
     $u = parse_url($loc);
 
-    if ($u['scheme'] != 'http' && $u['scheme'] != 'https') {
+    if (($u['scheme'] ?? '') != 'http' && ($u['scheme'] ?? '') != 'https') {
         return;
-    } elseif ($u['scheme'] == 'https' && !extension_loaded('openssl')) {
+    } elseif (($u['scheme'] ?? '') == 'https' && !extension_loaded('openssl')) {
         return; // Trackbacks to HTTPS URLs can only be performed with openssl activated
     }
 
