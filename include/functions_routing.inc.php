@@ -29,7 +29,7 @@ function serve404() {
 }
 
 
-/* Attempt to locate hidden variables within the URI */
+/** Attempt to locate hidden variables within the URI and set the corresponding global variables */
 function locateHiddenVariables($_args) {
     global $serendipity;
     foreach ($_args AS $k => $v){
@@ -75,6 +75,7 @@ function serveComments() {
     $serendipity['view'] = 'comments';
     $uri = $_SERVER['REQUEST_URI'];
     $_args = serendipity_getUriArguments($uri, true); // Need to also match "." character
+    $_args = locateHiddenVariables($_args);
     $timedesc = array();
 
     /* Attempt to locate hidden variables within the URI */
@@ -106,11 +107,11 @@ function serveComments() {
         } elseif ($v == 'trackbacks' || $v == 'comments_and_trackbacks' || $v == 'comments') {
             $serendipity['GET']['commentMode'] = $v;
         } elseif (!empty($v)) {
-            $serendipity['GET']['viewCommentAuthor'] .= urldecode($v);
+            $serendipity['GET']['viewCommentAuthor'] = ($serendipity['GET']['viewCommentAuthor'] ?? '') . urldecode($v);
         }
     }
 
-    $serendipity['head_title']    = COMMENTS_FROM . ' ' . serendipity_specialchars($serendipity['GET']['viewCommentAuthor']);
+    $serendipity['head_title']    = COMMENTS_FROM . ' ' . serendipity_specialchars($serendipity['GET']['viewCommentAuthor'] ?? '');
     if (isset($timedesc['start']) && isset($timedesc['end'])) {
         $serendipity['head_title'] .= ' (' . $timedesc['start'] . ' - ' . $timedesc['end'] . ')';
     } elseif (isset($timedesc['start'])) {
