@@ -34,7 +34,7 @@
         "ext-xml": "*",
         "katzgrau/klogger": "^1.2.2",
         "pear/http_request2": "^2.6.0",
-        "pear/net_dns2": "^1.5.4",
+        "pear/net_dns2": "^2.0.3",
         "php81_bc/strftime": "^0.7.4",
         "smarty/smarty": "^5.4.3",
         "voku/simple-cache": "^4.1.0"
