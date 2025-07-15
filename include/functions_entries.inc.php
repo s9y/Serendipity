@@ -1084,7 +1084,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
     $initial_args = array_values(func_get_args());
     if ($serendipity['useInternalCache']) {
-        $cache_key = md5(serialize($initial_args) . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers'));
+        $cache_key = md5(serialize($initial_args) . '||' . $serendipity['GET']['subpage'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers'));
 
         $cached = serendipity_getCacheItem($cache_key);
         if ($cached && $cached !== false) {
@@ -1106,7 +1106,8 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 'plugin_clean_page' => true,
                 'view'              => $serendipity['view'])
             );
-            serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
+            $ret = serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
+            serendipity_cacheItem($cache_key, $ret);
             return; // no display of this item
         }
     }
