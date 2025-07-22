@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Smarty\\' => array($vendorDir . '/smarty/smarty/src'),
+    'SimplePie\\' => array($vendorDir . '/simplepie/simplepie/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
     'Katzgrau\\KLogger\\' => array($vendorDir . '/katzgrau/klogger/src'),
