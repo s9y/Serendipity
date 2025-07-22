@@ -27,7 +27,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.89.6');
+        $propbag->add('version',       '1.89.7');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -239,7 +239,7 @@ class serendipity_event_spamblock extends serendipity_event
                 $propbag->add('type', 'radio');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_DESC);
-                $propbag->add('default', 'yes');
+                $propbag->add('default', 'no');
                 $propbag->add('radio', array(
                     'value' => array(true, 'no', 'scramble'),
                     'desc'  => array(YES, NO, PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_SCRAMBLE)
