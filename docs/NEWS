@@ -1,8 +1,13 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
-   * Fix pagination on /comments archive, so that not only the first
-     page shows comments
+   * Remoterss plugin: 1.23.0 now uses the simplepie library both for
+     Atom and RSS feeds. This aims at deprecating the Onyx bundled lib
+     in the future.
+
+   * Update the simplepie bundled lib to 1.8.1, from 1.2.1. This fixes
+     an error under PHP 8.x if serendipity_plugin_remoterss is used to
+     show an Atom feed.
 
    * Changes to the internal cache, the one that can be configured in
      the general settings. It will now use a custom implementation that
