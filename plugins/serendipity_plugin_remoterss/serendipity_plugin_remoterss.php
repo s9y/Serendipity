@@ -539,7 +539,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin
                     $simplefeed->set_feed_url($rssuri);
                     $success = $simplefeed->init();
                     # native is the old default value, but current simplepie does not understand that. It needs a proper charset, so
-                    # we default to UTF-8 here now. Not changed above to not mess with Onyx
+                    # we default to UTF-8 here now.
                     $simplefeed->set_output_encoding($charset == 'native' ? 'UTF-8' : $charset);
                     $simplefeed->handle_content_type();
                     $this->encoding = $charset;
