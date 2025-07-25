@@ -41,26 +41,26 @@
     <section class="section_basic">
         <h3>{$CONST.STATICPAGE_SECTION_BASIC}</h3>
         <div id="edit_headline" class="form_field">
-            <label class="sp_label" title="{staticpage_input item="headline" what="desc"|escape:js}">{staticpage_input item="headline" what="name"|escape:js}</label>
+            <label class="sp_label" title="{staticpage_input item="headline" what="desc"|escape:javascript}">{staticpage_input item="headline" what="name"|escape:javascript}</label>
             {staticpage_input item="headline"}
         </div>
         <div id="articleformat_title" class="form_field">
-            <label class="sp_label" title="{staticpage_input item="articleformattitle" what="desc"|escape:js}">{staticpage_input item="articleformattitle" what="name"|escape:js}</label>
+            <label class="sp_label" title="{staticpage_input item="articleformattitle" what="desc"|escape:javascript}">{staticpage_input item="articleformattitle" what="name"|escape:javascript}</label>
             {staticpage_input item="articleformattitle"}
         </div>
         <div class="form_area">
-            <label class="sp_label" title="{staticpage_input item="content" what="desc"|escape:js}">{staticpage_input item="content" what="name"|escape:js}</label><br />
+            <label class="sp_label" title="{staticpage_input item="content" what="desc"|escape:javascript}">{staticpage_input item="content" what="name"|escape:javascript}</label><br />
             {staticpage_input item="content"}
         </div>
 {* CUSTOM TO THIS THEME - CUSTOM STATICPAGE HEADER IMAGE *}           
         <div class="serendipity_customfields clearfix">
             <div class="clearfix form_area media_choose" id="ep_column_staticpage_header_image">
                 <label for="staticpage_header_image">{$CONST.STATICPAGE_SPECIFIC_HEADER_IMAGE}</label>
-                <textarea data-configitem="staticpage_header_image" name="serendipity[plugin][custom][staticpage_header_image]" class="change_preview"  id="propstaticpage_header_image">{$form_values.custom.staticpage_header_image}</textarea>
+                <textarea data-configitem="staticpage_header_image" name="serendipity[plugin][custom][staticpage_header_image]" class="change_preview"  id="propstaticpage_header_image">{if $form_values.custom|is_array}{$form_values.custom.staticpage_header_image}{/if}</textarea>
                 <button title="{$CONST.MEDIA}" name="insImage" type="button" class="customfieldMedia"><span class="icon-picture"></span><span class="visuallyhidden">{$CONST.MEDIA}</span></button>
                 <figure id="staticpage_header_image_preview">
                     <figcaption>{$CONST.PREVIEW}</figcaption>
-                    <img alt="" src="{$form_values.custom.staticpage_header_image}">
+                    <img alt="" src="{if $form_values.custom|is_array}{$form_values.custom.staticpage_header_image}{/if}">
                 </figure>
             </div>
         </div>
@@ -71,15 +71,15 @@
         <p id="sp_toggle_optionall"><a style="border:0; text-decoration: none;" href="#" onClick="showConfig('el1'); return false" title="{$CONST.TOGGLE_OPTION}"><img src="{serendipity_getFile file="img/plus.png"}" id="optionel1" alt="+/-" border="0">&nbsp;{$CONST.TOGGLE_ALL}</a></p> 
         <div id="el1">            
             <div class="adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="title_element" what="desc"|escape:js}">{staticpage_input item="title_element" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="title_element" what="desc"|escape:javascript}">{staticpage_input item="title_element" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="title_element"}
             </div>
             <div class="adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="meta_description" what="desc"|escape:js}">{staticpage_input item="meta_description" what="name"|escape:js}</label>
+                <label class="sp_label" title="{staticpage_input item="meta_description" what="desc"|escape:javascript}">{staticpage_input item="meta_description" what="name"|escape:javascript}</label>
                 {staticpage_input item="meta_description"}
             </div>
             <div class="adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="meta_keywords" what="desc"|escape:js}">{staticpage_input item="meta_keywords" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="meta_keywords" what="desc"|escape:javascript}">{staticpage_input item="meta_keywords" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="meta_keywords"}
             </div>
         </div>
@@ -90,47 +90,47 @@
         <div id="el2">
             <div class="clearfix">
                 <div class="entryproperties_access_groups adv_opts_box form_select">
-                        <label class="sp_label" title="{staticpage_input item="authorid" what="desc"|escape:js}">{staticpage_input item="authorid" what="name"|escape:js}</label><br />
+                        <label class="sp_label" title="{staticpage_input item="authorid" what="desc"|escape:javascript}">{staticpage_input item="authorid" what="name"|escape:javascript}</label><br />
                         {staticpage_input item="authorid"}
                 </div>
                 <div class="entryproperties_access_groups adv_opts_box form_select">
-                    <label class="sp_label" title="{staticpage_input item="articletype" what="desc"|escape:js}">{staticpage_input item="articletype" what="name"|escape:js}</label><br />
+                    <label class="sp_label" title="{staticpage_input item="articletype" what="desc"|escape:javascript}">{staticpage_input item="articletype" what="name"|escape:javascript}</label><br />
                     {staticpage_input item="articletype"}
                 </div>
             </div>
             <div class="clearfix">
                 <div class="entryproperties_access_groups adv_opts_box form_select">
-                    <label class="sp_label" title="{staticpage_input item="language" what="desc"|escape:js}">{staticpage_input item="language" what="name"|escape:js}</label><br />
+                    <label class="sp_label" title="{staticpage_input item="language" what="desc"|escape:javascript}">{staticpage_input item="language" what="name"|escape:javascript}</label><br />
                     {staticpage_input item="language"}
                 </div>
                 <div class="entryproperties_access_groups adv_opts_box form_select">
-                    <label class="sp_label" title="{staticpage_input item="related_category_id" what="desc"|escape:js}">{staticpage_input item="related_category_id" what="name"|escape:js}</label><br />
+                    <label class="sp_label" title="{staticpage_input item="related_category_id" what="desc"|escape:javascript}">{staticpage_input item="related_category_id" what="name"|escape:javascript}</label><br />
                     {staticpage_input item="related_category_id"}
                 </div>
             </div>
             <div class="clearfix">
                 <div class="entryproperties_access_groups adv_opts_box form_select">
-                    <label class="sp_label" title="{staticpage_input item="parent_id" what="desc"|escape:js}">{staticpage_input item="parent_id" what="name"|escape:js}</label><br />
+                    <label class="sp_label" title="{staticpage_input item="parent_id" what="desc"|escape:javascript}">{staticpage_input item="parent_id" what="name"|escape:javascript}</label><br />
                     {staticpage_input item="parent_id"}
                 </div>
                 <div class="entryproperties_access_groups adv_opts_box form_select">
-                    <label class="sp_label" title="{staticpage_input item="show_childpages" what="desc"|escape:js}">{staticpage_input item="show_childpages" what="name"|escape:js}</label><br />
+                    <label class="sp_label" title="{staticpage_input item="show_childpages" what="desc"|escape:javascript}">{staticpage_input item="show_childpages" what="name"|escape:javascript}</label><br />
                     {staticpage_input item="show_childpages"}
                 </div>
             </div>
             <div class="clearfix">
                 <div class="entryproperties_access_groups adv_opts_box form_select">
-                   <label class="sp_label" title="{staticpage_input item="shownavi" what="desc"|escape:js}">{staticpage_input item="shownavi" what="name"|escape:js}</label><br />
+                   <label class="sp_label" title="{staticpage_input item="shownavi" what="desc"|escape:javascript}">{staticpage_input item="shownavi" what="name"|escape:javascript}</label><br />
                     {staticpage_input item="shownavi"}
                 </div>
                 <div class="entryproperties_access_groups adv_opts_box form_select">
-                    <label class="sp_label" title="{staticpage_input item="show_breadcrumb" what="desc"|escape:js}">{staticpage_input item="show_breadcrumb" what="name"|escape:js}</label>
+                    <label class="sp_label" title="{staticpage_input item="show_breadcrumb" what="desc"|escape:javascript}">{staticpage_input item="show_breadcrumb" what="name"|escape:javascript}</label>
                     {staticpage_input item="show_breadcrumb"}
                 </div>
             </div>
             <div class="clearfix">
                 <div class="entryoptions_customfields adv_opts_box">
-                    <label class="sp_label" title="{staticpage_input item="pre_content" what="desc"|escape:js}">{staticpage_input item="pre_content" what="name"|escape:js}</label><br />
+                    <label class="sp_label" title="{staticpage_input item="pre_content" what="desc"|escape:javascript}">{staticpage_input item="pre_content" what="name"|escape:javascript}</label><br />
                     {staticpage_input item="pre_content"}
                 </div>
             </div>
@@ -142,21 +142,21 @@
         <h3>{$CONST.STATICPAGE_SECTION_META}</h3>
         <div class="clearfix">
             <div class="entryproperties_access_groups adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="pagetitle" what="desc"|escape:js}">{staticpage_input item="pagetitle" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="pagetitle" what="desc"|escape:javascript}">{staticpage_input item="pagetitle" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="pagetitle"}
             </div>
             <div class="entryproperties_access_groups adv_opts_box form_select">            
-                <label class="sp_label" title="{staticpage_input item="permalink" what="desc"|escape:js}">{staticpage_input item="permalink" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="permalink" what="desc"|escape:javascript}">{staticpage_input item="permalink" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="permalink"}
             </div>
         </div>        
         <div class="clearfix">
             <div class="entryproperties_access_groups adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="pass" what="desc"|escape:js}">{staticpage_input item="pass" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="pass" what="desc"|escape:javascript}">{staticpage_input item="pass" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="pass"}
             </div>
              <div class="entryproperties_access_groups adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="timestamp" what="desc"|escape:js}">{staticpage_input item="timestamp" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="timestamp" what="desc"|escape:javascript}">{staticpage_input item="timestamp" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="timestamp"}
             </div>           
         </div>
@@ -166,31 +166,31 @@
         <h3>{$CONST.STATICPAGE_SECTION_OPT}</h3>
         <div class="clearfix">
             <div class="entryproperties_access_groups adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="publishstatus" what="desc"|escape:js}">{staticpage_input item="publishstatus" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="publishstatus" what="desc"|escape:javascript}">{staticpage_input item="publishstatus" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="publishstatus"}
             </div>
             <div class="entryproperties_access_groups adv_opts_box form_select">            
-                <label class="sp_label" title="{staticpage_input item="is_startpage" what="desc"|escape:js}">{staticpage_input item="is_startpage" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="is_startpage" what="desc"|escape:javascript}">{staticpage_input item="is_startpage" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="is_startpage"}
             </div>
         </div>         
         <div class="clearfix">
             <div class="entryproperties_access_groups adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="is_404_page" what="desc"|escape:js}">{staticpage_input item="is_404_page" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="is_404_page" what="desc"|escape:javascript}">{staticpage_input item="is_404_page" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="is_404_page"}
             </div>
             <div class="entryproperties_access_groups adv_opts_box form_select">            
-                <label class="sp_label" title="{staticpage_input item="showonnavi" what="desc"|escape:js}">{staticpage_input item="showonnavi" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="showonnavi" what="desc"|escape:javascript}">{staticpage_input item="showonnavi" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="showonnavi"}
             </div>
         </div>           
         <div class="clearfix">
             <div class="entryproperties_access_groups adv_opts_box form_select">
-                <label class="sp_label" title="{staticpage_input item="markup" what="desc"|escape:js}">{staticpage_input item="markup" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="markup" what="desc"|escape:javascript}">{staticpage_input item="markup" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="markup"}
             </div>
             <div class="entryproperties_access_groups adv_opts_box form_select">            
-                <label class="sp_label" title="{staticpage_input item="articleformat" what="desc"|escape:js}">{staticpage_input item="articleformat" what="name"|escape:js}</label><br />
+                <label class="sp_label" title="{staticpage_input item="articleformat" what="desc"|escape:javascript}">{staticpage_input item="articleformat" what="name"|escape:javascript}</label><br />
                 {staticpage_input item="articleformat"}
             </div>
         </div> 
@@ -198,17 +198,17 @@
         <div class="clearfix">
             <div class="entryproperties_access_groups adv_opts_box form_select">
                 <label class="sp_label" title="{$CONST.STATIC_SHOW_AUTHOR_TITLE}">{$CONST.STATIC_SHOW_AUTHOR_TEXT}</label><br />
-                <input id="author_yes" type="radio" name="serendipity[plugin][custom][show_author]" {if $form_values.custom.show_author == 'true'}checked="checked"{/if}value="true" />
+                <input id="author_yes" type="radio" name="serendipity[plugin][custom][show_author]" {if $form_values.custom|is_array AND $form_values.custom.show_author == 'true'}checked="checked"{/if}value="true" />
                 <label for="author_yes">{$CONST.YES}</label>
-                <input id="author_no" type="radio" name="serendipity[plugin][custom][show_author]" {if $form_values.custom.show_author != 'true'}checked="checked"{/if} value="false" />
+                <input id="author_no" type="radio" name="serendipity[plugin][custom][show_author]" {if $form_values.custom|is_array AND $form_values.custom.show_author != 'true'}checked="checked"{/if} value="false" />
                 <label for="author_no">{$CONST.NO}</label>
             </div>
 {* CUSTOM TO THIS THEME - OPTION TO SHOW/HIDE DATE *}
             <div class="entryproperties_access_groups adv_opts_box form_select">
                 <label class="sp_label" title="{$CONST.STATIC_SHOW_DATE_TITLE}">{$CONST.STATIC_SHOW_DATE_TEXT}</label><br />
-                <input id="date_yes" type="radio" name="serendipity[plugin][custom][show_date]" {if $form_values.custom.show_date == 'true'}checked="checked"{/if}value="true" />
+                <input id="date_yes" type="radio" name="serendipity[plugin][custom][show_date]" {if $form_values.custom|is_array AND  $form_values.custom.show_date == 'true'}checked="checked"{/if}value="true" />
                 <label for="date_yes">{$CONST.YES}</label>
-                <input id="date_no" type="radio" name="serendipity[plugin][custom][show_date]" {if $form_values.custom.show_date != 'true'}checked="checked"{/if}value="false" />
+                <input id="date_no" type="radio" name="serendipity[plugin][custom][show_date]" {if $form_values.custom|is_array AND  $form_values.custom.show_date != 'true'}checked="checked"{/if}value="false" />
                 <label for="date_no">{$CONST.NO}</label>
             </div>
         </div>        
