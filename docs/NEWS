@@ -1,6 +1,12 @@
 Version 2.6-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix static page plugin crashing when using the clean_blog theme
+     and switching between full and simplified page editor
+
+   * Fix pagination on /comments archive, so that not only the first
+     page shows comments
+
    * Remoterss plugin: 1.23.0 now uses the simplepie library both for
      Atom and RSS feeds. This aims at deprecating the Onyx bundled lib
      in the future.
