@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:admin="http://webns.net/mvcb/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+    
+    <title>Serendipity</title>
+    <link>https://blog.s9y.org/</link>
+    <description>The official Serendipity blog</description>
+    <dc:language>de</dc:language>
+    <generator>Serendipity 2.5.0 - http://www.s9y.org/</generator>
+    <pubDate>Wed, 21 Feb 2024 08:36:00 GMT</pubDate>
+
+    <image>
+    <url>https://blog.s9y.org/templates/2k11/img/s9y_banner_small.png</url>
+    <title>RSS: Serendipity - The official Serendipity blog</title>
+    <link>https://blog.s9y.org/</link>
+    <width>100</width>
+    <height>21</height>
+</image>
+
+<item>
+    <title>Update effort of Serendipity 3.0</title>
+    <link>https://blog.s9y.org/archives/296-Update-effort-of-Serendipity-3.0.html</link>
+    
+    <comments>https://blog.s9y.org/archives/296-Update-effort-of-Serendipity-3.0.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=296</wfw:comment>
+
+    <slash:comments>1</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=296</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Garvin Hicking)</author>
+    <content:encoded>
+    &lt;p&gt;There is yet work to be done!&lt;/p&gt;
+
+&lt;p&gt;We are trying to move Serendipity to properly utilizing composer and being installable via composer, as well as allowing official Docker images for Serendipity, so that it can be easily tried out or maintained.&lt;/p&gt;
+
+&lt;p&gt;That is a lot of work, and we can use any help we get.&lt;/p&gt;
+
+&lt;p&gt;Please check out &lt;a href="https://github.com/s9y/Serendipity/issues/821"&gt;the GitHub issue about this&lt;/a&gt; and the &lt;a href="https://github.com/s9y/Serendipity/blob/feature/composer/README.markdown#concept"&gt;Git Repository with README on the planned changes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The easiest way to get in touch with us about this is via the GitHub issue, if you are interested. Cheerio, onward and upward! To Serendipity and beyond! .... the class? anyone? anyone? Bueller?&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Wed, 21 Feb 2024 09:36:00 +0100</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/296-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.5.0 released (Maintenance and security)</title>
+    <link>https://blog.s9y.org/archives/295-Serendipity-2.5.0-released-Maintenance-and-security.html</link>
+    
+    <comments>https://blog.s9y.org/archives/295-Serendipity-2.5.0-released-Maintenance-and-security.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=295</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=295</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Garvin Hicking)</author>
+    <content:encoded>
+    &lt;p&gt;We are very happy to announce the availability of the final release for Serendipity 2.5.0, our new stable version! 2.5.0 contains the changes that were part of the 2.5-beta1, plus some additional changes.&lt;/p&gt;
+
+&lt;p&gt;With this version 2.5.0, Serendipity works with PHP 7.4 up to and including PHP 8.2. We also got positive reports about the compatibility with PHP 8.3, but this newest PHP version is not yet officially supported by us. The compatibility with PHP 8.2 is the main purpose of this release.&lt;/p&gt;
+
+&lt;p&gt;In this version, we further worked on how the bundled dependencies are managed. They got updated for PHP 8.x support, including some legacy dependencies where it was missed before, and more of them are now managed by the dependency management system composer. For those changes the file placement under bundled-libs/ has changed a bit, with wrappers added for compatibility. Despite those wrappers for backwards compatibility, authors of custom plugins that relied manually on files under bundled-libs/ are advised to check that their plugins still work.&lt;/p&gt;
+
+&lt;p&gt;The release contains some additional changes to 2.4.0, like bundling the webfonts used by the default theme 2k11, to avoid legal issues in Germany, fixes for an incompatibility with MySQL 5.7, fixes for the usergroup permission display and an improved russian translation.&lt;/p&gt;
+
+&lt;p&gt;It also fixes a potential security issue discovered for this project by @hannob, by removing the prior included composer.phar. That file was only useful for developers, but could be misused in some specific server environments. Though the necessary conditions for the attack are not a given, since this is a security fix a timely upgrade to 2.5.0 is highly recommended to all existing serendipity installations. As another possible mitigation, you can safely delete the file "composer.phar" in your root directory.&lt;/p&gt;
+
+&lt;p&gt;Upgrade hints: If you see errors when extracting this release archive that mention bundled-libs/, delete said folder in your old installation and extract the archive again. If you run an older version of serendipity than 2.4.0 and/or if you are not using PHP 8.x yet, please have a look at the PHP 8 upgrade guide.&lt;/p&gt;
+
+&lt;p&gt;If you encounter bugs, please report an issue here at Github or open a thread in our forum. The forum is also the right place for general questions and support.&lt;/p&gt;
+
+&lt;p&gt;The project thanks all contributors to the release, including the testers and issue reporters.&lt;/p&gt;
+
+&lt;p&gt;MD5: 1dfb1f34483038179ac511666de60b8f&lt;/p&gt;
+
+&lt;p&gt;Link: &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.5.0"&gt;https://github.com/s9y/Serendipity/releases/tag/2.5.0&lt;/a&gt;&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Wed, 21 Feb 2024 09:30:00 +0100</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/295-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.5-beta1 released!</title>
+    <link>https://blog.s9y.org/archives/294-Serendipity-2.5-beta1-released!.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+    
+    <comments>https://blog.s9y.org/archives/294-Serendipity-2.5-beta1-released!.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=294</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=294</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Malte Paskuda)</author>
+    <content:encoded>
+    &lt;p&gt;The project is happy to announce a first beta for &lt;strong&gt;Serendipiy 2.5&lt;/strong&gt;, featuring compatibility with PHP 8.2.&lt;/p&gt;
+
+&lt;p&gt;Serendipity 2.5-beta1 is the first release of Serendipity that targets compatibility with PHP 8.2. Unlike when version 2.4 initiated support for PHP 8, this time the code changes are minor - but still important to let Serendipity blogs run properly with PHP 8.2.&lt;/p&gt;
+
+&lt;p&gt;Besides various fixes, some significant changes to the latest stable 2.4.0 are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PHP 8.2 compatibility&lt;/strong&gt; for the core&lt;/li&gt;
+&lt;li&gt;Fixes for the &lt;strong&gt;multi-language support&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Local hosting of webfonts in 2k11&lt;/li&gt;
+&lt;li&gt;Fix for the usergroup permission display, a setting you should check in the admin backend if you saved those permissions with 2.4.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you currently still use PHP 7, please read &lt;a href="https://github.com/s9y/Serendipity/wiki/Upgrade-path-to-PHP-8"&gt;the PHP 8 upgrade hints&lt;/a&gt; in the Github wiki. Especially if you jump from 2.3.x to this version, that would be a big upgrade.&lt;/p&gt;
+
+&lt;p&gt;We would love to get feedback from our users! Please help us in reaching full support for PHP 8.2 by running this version with PHP 8.2 and report bugs (also and especially for plugins) in the forum or the Github issue tracker. Keep in mind that this is still a beta though, so production blogs should have a proper backup and you should be prepared that we might ask you to apply patches, or that we might have to release a new beta with fixes soon.&lt;/p&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.5-beta1"&gt;release statement&lt;/a&gt; on GitHub for more (technical) details.&lt;/p&gt;
+
+&lt;p&gt;You can download the release file and unzip it to your installation as usual.&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Thu, 28 Sep 2023 11:38:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/294-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.4.0 released</title>
+    <link>https://blog.s9y.org/archives/293-Serendipity-2.4.0-released.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+    
+    <comments>https://blog.s9y.org/archives/293-Serendipity-2.4.0-released.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=293</wfw:comment>
+
+    <slash:comments>1</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=293</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Malte Paskuda)</author>
+    <content:encoded>
+    &lt;p&gt;After a long beta, we release &lt;strong&gt;Serendipity 2.4.0&lt;/strong&gt;, featuring PHP 8 compatibility and database upgrades to enable full unicode input!&lt;/p&gt;
+
+&lt;p&gt;Serendipity 2.4.0 is the release you want to install when you need compatibility with PHP 8. Like its beta did, it changes a lot of code in the core of Serendipity that triggered warnings with recent versions of PHP 8, but now the changes saw more testing and more plugins got equally fixed. &lt;/p&gt;
+
+&lt;p&gt;Besides various fixes, some significant changes to the latest stable 2.3.5 are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PHP 8 compatibility for the core, current themes and many plugins hosted on Spartacus&lt;/li&gt;
+&lt;li&gt;Split date/time input in the editor, enabling browser support for entering time and date&lt;/li&gt;
+&lt;li&gt;Notifications for plugin updates&lt;/li&gt;
+&lt;li&gt;Fixes and enhancements for the multi-language support&lt;/li&gt;
+&lt;li&gt;Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, enabling full unicode input&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This version has seen a lot of testing, but it is also a very big release, especially concerning PHP 8 compatibility, database changes and multi-language support. So please have a backup ready if you upgrade from an older Serendipity version. Also please read the &lt;a href="https://github.com/s9y/Serendipity/wiki/Upgrade-path-to-PHP-8"&gt;PHP 8 upgrade hints&lt;/a&gt; in the Github wiki for details on how to manage the transition from PHP 7.&lt;/p&gt;
+
+&lt;p&gt;We would love to get feedback from our users! If you still encounter bugs when running this on your production blog, let us know in the forum or on Github - and more than ever, pull requests with patches to plugins you rely on would be welcomed (Spartacus plugins live &lt;a href="https://github.com/s9y/additional_plugins"&gt;in this repository&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Please see &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.4.0"&gt;the release statemen&lt;/a&gt;t on GitHub for more (technical) details.&lt;/p&gt;
+
+&lt;p&gt;You can download the release file and unzip it to your installation as usual, or update from within Serendipity using the Serendipity Autoupdate Plugin (&lt;code&gt;serendipity&amp;#95;event&amp;#95;autoupdate&lt;/code&gt;).&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Tue, 22 Nov 2022 23:23:00 +0100</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/293-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.4-beta1 released!</title>
+    <link>https://blog.s9y.org/archives/292-Serendipity-2.4-beta1-released!.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+    
+    <comments>https://blog.s9y.org/archives/292-Serendipity-2.4-beta1-released!.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=292</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=292</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;Long time no see - after about a year and a half, we're back with the first beta release of &lt;strong&gt;Serendipiy 2.4&lt;/strong&gt;, featuring PHP 8 compatibility and database upgrades to enable full unicode input!&lt;/p&gt;
+
+&lt;p&gt;Serendipity 2.4-beta1 is the first release of Serendipity that targets compatibility with PHP 8. It changes a lot of code in the core of Serendipity that triggered warnings with recent versions of PHP 8. At the same time, the Serendipity team fixed many compatibility issues in plugins and themes.&lt;/p&gt;
+
+&lt;p&gt;Besides various fixes, some significant changes to the latest stable 2.3.5 are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PHP 8 compatibility&lt;/strong&gt; for the core, current themes and many plugins hosted on Spartacus&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Split date/time input in the editor&lt;/strong&gt;, enabling browser support for entering time and date&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Notifications for plugin updates&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Fixes and enhancements for the &lt;strong&gt;multi-language support&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, enabling &lt;strong&gt;full unicode input&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This version of Serendipity has already seen production use in multiple blogs, but it's still a beta with rather large changes, especially concerning PHP 8 compatibility, database changes and multi-language support. So please handle it with care! Also please read &lt;a href="https://github.com/s9y/Serendipity/wiki/Upgrade-path-to-PHP-8"&gt;the PHP 8 upgrade hints&lt;/a&gt; in the Github wiki.&lt;/p&gt;
+
+&lt;p&gt;We would love to get feedback from our users! Please help us in reaching full support for PHP 8 by running this version with PHP 8 and report bugs (also and especially for plugins) in the forum or the Github issue tracker. But please be sure to try out the new release just on test/development blogs yet. If you absolutely want to test it on production blogs, make sure to have a backup (of your files, your media and your database) available.&lt;/p&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.4-beta1"&gt;release statement&lt;/a&gt; on GitHub for more (technical) details.&lt;/p&gt;
+
+&lt;p&gt;You can download the release file and unzip it to your installation as usual.&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Sun, 12 Sep 2021 16:56:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/292-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.3.5 released</title>
+    <link>https://blog.s9y.org/archives/291-Serendipity-2.3.5-released.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+    
+    <comments>https://blog.s9y.org/archives/291-Serendipity-2.3.5-released.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=291</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=291</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;About a month has passed since our last patch release - and here we are again, releasing &lt;strong&gt;Serendipity 2.3.5&lt;/strong&gt; with some fixes for new as well as longstanding bugs.  &lt;/p&gt;
+
+&lt;p&gt;We now truncate the file extension of media items to 5 characters - more will not fit in the database anyway, and PostgreSQL really didn't like longer extensions. Sometimes &lt;em&gt;Serendipity&lt;/em&gt; didn't show upgrades for your plugins even though Spartacus already had them ready; that's no fun, is it? On the other hand you sometimes could spot some funny characters in the backend entry overview, as &lt;em&gt;Serendipity&lt;/em&gt; really meant well and double-encoded special characters; which it doesn't do any longer. And we stopped &lt;em&gt;CK-Edit&lt;/em&gt;, our graphical editor, from dropping some HTML elements (&lt;code&gt;&amp;lt;details&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;summary&amp;gt;&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Last but not least we fixed a regression and some longstanding bugs in three bundled plugins: &lt;code&gt;serendipity_plugin_history&lt;/code&gt; started throwing database errors when displaying archive pages after our 2.3.3 release, and extended properties from &lt;code&gt;serendipity_event_entryproperties&lt;/code&gt; got lost in quite a lot of corner cases (and, for example, when publishing an entry from your backend dashboard) for a really long time. (The latter bug affected several other plugins, too, which were already updated via Spartacus.) Finally &lt;code&gt;serendipity_plugin_comments&lt;/code&gt; will now work together nicely with &lt;code&gt;serendipity_event_unstrip_tags&lt;/code&gt; (from Spartacus) which will keep HTML tags from comments for your sidebar display.    &lt;/p&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.3.5"&gt;release statement&lt;/a&gt; on GitHub for more (technical) details. &lt;/p&gt;
+
+&lt;p&gt;You can download the release file and unzip it to your installation as usual, or update from within &lt;em&gt;Serendipity&lt;/em&gt; using the &lt;em&gt;Serendipity Autoupdate&lt;/em&gt; Plugin (&lt;code&gt;serendipity_event_autoupdate&lt;/code&gt;).&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Sat, 25 Apr 2020 08:45:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/291-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.3.4 released (security update)</title>
+    <link>https://blog.s9y.org/archives/290-Serendipity-2.3.4-released-security-update.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+            <category>Security</category>
+    
+    <comments>https://blog.s9y.org/archives/290-Serendipity-2.3.4-released-security-update.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=290</wfw:comment>
+
+    <slash:comments>1</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=290</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;Just a few days after &lt;em&gt;Serendipity Camp&lt;/em&gt; and our last patch release we have to release &lt;strong&gt;Serendipity 2.3.4&lt;/strong&gt;, fixing a security flaw (present on Windows installations only and exploitable only for users with upload rights on the &lt;em&gt;Media library&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, it was possible to upload a malicious file "&lt;code&gt;file&lt;/code&gt;" (e.g. a PHP script or other executable content) without a file extension and then rename it afterwards to "&lt;code&gt;file.php&lt;/code&gt;" on Windows. Thanks to &lt;em&gt;Junyu Zhang&lt;/em&gt; for spotting and reporting this!&lt;/p&gt;
+
+&lt;p&gt;As we had to do a patch release anyway, we added some other fixes around &lt;em&gt;Media Library&lt;/em&gt; file renaming and improved the display of installable plugins by adding the plugin source (Spartacus, bundled with &lt;em&gt;Serendipity&lt;/em&gt; core or local).&lt;/p&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.3.4"&gt;release statement&lt;/a&gt; on GitHub for more (technical) details. &lt;/p&gt;
+
+&lt;p&gt;You can download the release file and unzip it to your installation as usual, or update from within &lt;em&gt;Serendipity&lt;/em&gt; using the &lt;em&gt;Serendipity Autoupdate&lt;/em&gt; Plugin (&lt;code&gt;serendipity_event_autoupdate&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Please &lt;strong&gt;do&lt;/strong&gt; install the update on Windows systems running &lt;em&gt;Serendipity&lt;/em&gt; due to the security fix.&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Wed, 25 Mar 2020 17:08:00 +0100</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/290-guid.html</guid>
+    
+</item>
+<item>
+    <title>Greetings from #s9ycamp 2020 (virtual edition)</title>
+    <link>https://blog.s9y.org/archives/289-Greetings-from-s9ycamp-2020-virtual-edition.html</link>
+            <category>Development</category>
+            <category>Personal</category>
+    
+    <comments>https://blog.s9y.org/archives/289-Greetings-from-s9ycamp-2020-virtual-edition.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=289</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=289</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;As every year since &lt;a href="https://blog.s9y.org/archives/262-Serendipity-Camp-2015-and-the-near-future-of-Serendipity.html"&gt;2015&lt;/a&gt;, we'd already booked our rooms at the &lt;a href="http://www.linuxhotel.de/"&gt;Linux-Hotel&lt;/a&gt; located in Essen (Germany) for our community meeting and developer retreat &lt;em&gt;Serendipity Camp&lt;/em&gt; (or &lt;em&gt;sy9camp&lt;/em&gt; for short).&lt;/p&gt;
+
+&lt;p&gt;We were looking forward to this great event very much, but unfortunately we had to cancel our plans to &lt;em&gt;#flattenthecurve&lt;/em&gt;.&lt;/p&gt;
+
+&lt;figure class="serendipity_imageComment_center" style="width: 778px"&gt;&lt;div class="serendipity_imageComment_img"&gt;&lt;!-- s9ymdb:69 --&gt;&lt;img class="serendipity_image_center" width="778" height="542"  src="https://blog.s9y.org/uploads/s9ycamp-2020-virtual.png" title="s9ycamp 2020 - virtual edition" alt=""&gt;&lt;/div&gt;&lt;figcaption class="serendipity_imageComment_txt"&gt;Meeting online instead at Essen.&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;So we decided to have a virtual meeting instead. It's not the same, especially as we were limited to audio only due to bandwith constraints, and we missed the chatter at breakfast and some deep thoughts over a glas (or two) of wine in the evenings, but we got something done nevertheless.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://blog.s9y.org/archives/288-Serendipity-2.3.3-released.html"&gt;Serendipity &lt;strong&gt;2.3.3&lt;/strong&gt;&lt;/a&gt; has been released (after fixing some last bugs).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;We moved this blog and some of our infrastructure to a new host, getting the Spartacus build process unstuck and moving to PHP 7.2 and a current version of s9y here.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;And we made some progress on our plans for Serendipity 2.4, our next feature release!&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Stay tuned - and if you want to drop by for our next camp, please see the forums and the &lt;a href="https://docs.s9y.org/camp.html"&gt;camp info page&lt;/a&gt; (currently German only).&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Sun, 22 Mar 2020 10:54:00 +0100</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/289-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.3.3 released</title>
+    <link>https://blog.s9y.org/archives/288-Serendipity-2.3.3-released.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+    
+    <comments>https://blog.s9y.org/archives/288-Serendipity-2.3.3-released.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=288</wfw:comment>
+
+    <slash:comments>3</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=288</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;About half a year after our last patch release we present &lt;strong&gt;Serendipity 2.3.3&lt;/strong&gt;, the next bugfix release for our current stable branch.&lt;/p&gt;
+
+&lt;p&gt;We made some small changes and fixed some bugs in our Media Library (including a nasty bug where renaming a file using an already existing file name deleted both files). We don't show non-existing (empty) archive pages any longer and don't render the whole page when just some JS should be rendered, speeding things up a bit. Deleting trackbacks from the frontend - when logged in - should now work again, and (last but not least) we updated some bundled plugins: &lt;em&gt;serendipity_event_mailer&lt;/em&gt; got some enhancements (you can add an introductory text to the generated mails and send them not just when publishing your entry, but for each change, too), &lt;em&gt;serendipity_plugin_comments&lt;/em&gt; won't add spurious whitespace in the middle of words any more, and &lt;em&gt;serendipity_event_bbcode&lt;/em&gt; has now (working) support for roman numerals in ordered lists.&lt;/p&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.3.3"&gt;release statement&lt;/a&gt; on GitHub for more (technical) details. &lt;/p&gt;
+
+&lt;p&gt;You can download the release file and unzip it to your installation as usual, or update from within &lt;em&gt;Serendipity&lt;/em&gt; using the &lt;em&gt;Serendipity Autoupdate&lt;/em&gt; Plugin (&lt;code&gt;serendipity_event_autoupdate&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;And please don't hesitate to report bugs in our &lt;a href="https://board.s9y.org/viewforum.php?f=3"&gt;forums&lt;/a&gt;!&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Sun, 22 Mar 2020 10:03:00 +0100</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/288-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.3.2 released (security update)</title>
+    <link>https://blog.s9y.org/archives/287-Serendipity-2.3.2-released-security-update.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+            <category>Security</category>
+    
+    <comments>https://blog.s9y.org/archives/287-Serendipity-2.3.2-released-security-update.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=287</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=287</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;&lt;strong&gt;Serendipity 2.3.2&lt;/strong&gt; is a bugfix and &lt;strong&gt;security fix&lt;/strong&gt; release for our current stable branch.&lt;/p&gt;
+
+&lt;p&gt;Two security related bugs were fixed, the pagination feature of templates like Timeline now really works, autologin now works again on MySQL, too, &lt;em&gt;all&lt;/em&gt; thumbnails are rotated with the original image, the WYSIWYG editor won't strip some needed elements, and auto-generated mails will now look right on all MTAs. &lt;/p&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.3.2"&gt;release statement&lt;/a&gt; on GitHub for more details. &lt;/p&gt;
+
+&lt;p&gt;You can download the release file and unzip it to your installation as usual, or update from within &lt;em&gt;Serendipity&lt;/em&gt; using the &lt;em&gt;Serendipity Autoupdate&lt;/em&gt; Plugin (&lt;code&gt;serendipity_event_autoupdate&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Please &lt;strong&gt;do&lt;/strong&gt; install the update due to the security fixes we have included.&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Wed, 16 Oct 2019 09:58:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/287-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.3.1 released</title>
+    <link>https://blog.s9y.org/archives/286-Serendipity-2.3.1-released.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+    
+    <comments>https://blog.s9y.org/archives/286-Serendipity-2.3.1-released.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=286</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=286</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;The first bugfix release for our new stable branch is out: &lt;strong&gt;Serendipity 2.3.1&lt;/strong&gt;, fixing some bugs that crept into the 2.3.0 release as well as some older faults.&lt;/p&gt;
+
+&lt;p&gt;Mass delete for the media library is working again, as well as the pagination feature of templates like Timeline that couldn't cope with the "stable archives" sorting order, and the plugin lists in the backend got links to their Spartacus entries (if they are installed from Spartacus, that is). &lt;/p&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.3.1"&gt;release statement&lt;/a&gt; on GitHub for more details. &lt;/p&gt;
+
+&lt;p&gt;You can download the release file and unzip it to your installation as usual, or update from within &lt;em&gt;Serendipity&lt;/em&gt; using the &lt;em&gt;Serendipity Autoupdate&lt;/em&gt; Plugin (&lt;code&gt;serendipity_event_autoupdate&lt;/code&gt;).&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Wed, 21 Aug 2019 07:44:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/286-guid.html</guid>
+    
+</item>
+<item>
+    <title>Translate plugins into your preferred language!</title>
+    <link>https://blog.s9y.org/archives/285-Translate-plugins-into-your-preferred-language!.html</link>
+            <category>Development</category>
+            <category>Plugins</category>
+    
+    <comments>https://blog.s9y.org/archives/285-Translate-plugins-into-your-preferred-language!.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=285</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=285</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;We have just added new German translations to 22 plugins, and you can do the same for your preferred language!&lt;/p&gt;
+
+&lt;h3 id="translating-plugins"&gt;Translating Plugins&lt;/h3&gt;
+
+&lt;p&gt;And that's actually pretty easy:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Find the code for your plugin and download it.&lt;/strong&gt;&lt;br /&gt;
+Most plugins are available via &lt;a href="http://spartacus.s9y.org/"&gt;&lt;em&gt;Spartacus&lt;/em&gt;&lt;/a&gt;; you can find them in our corresponding &lt;a href="https://github.com/s9y/additional_plugins"&gt;Github repository&lt;/a&gt;. The few plugins that are provided directly with &lt;em&gt;Serendipity&lt;/em&gt; can be found in the &lt;a href="https://github.com/s9y/Serendipity"&gt;Serendipity repository&lt;/a&gt; on Github in the &lt;code&gt;plugins&lt;/code&gt; directory.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Copy the English language file and rename it.&lt;/strong&gt;&lt;br /&gt;
+The English language file is always called &lt;code&gt;lang_en.inc.php&lt;/code&gt;. Copy the file and change the name of the copy to &lt;code&gt;lang_XX.inc.php&lt;/code&gt;, where &lt;code&gt;XX&lt;/code&gt; stands for the abbreviation of your language (in lower case). A &lt;a href="https://docs.s9y.org/docs/developers/internationalization.html"&gt;complete list&lt;/a&gt; of the abbreviations can be found in our online documentation.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Translate the texts into your preferred language.&lt;/strong&gt;&lt;br /&gt;
+If you find examples or HTML or the placeholder &lt;code&gt;%s&lt;/code&gt; in the English text, you should keep them.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Create a UTF-8 version.&lt;/strong&gt;&lt;br /&gt;
+Copy your language file into the &lt;code&gt;UTF-8/&lt;/code&gt; directory and convert this copy to UTF-8. If necessary, ask for advice in our &lt;a href="https://board.s9y.org/viewforum.php?f=4"&gt;Forums&lt;/a&gt;!&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Test your new translation.&lt;/strong&gt;&lt;br /&gt;
+You can now upload the language files - the file in the plugin directory and the second file in the &lt;code&gt;UTF-8/&lt;/code&gt; subdirectory - to the plugin directory on your blog and test your new language version.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Share your work with the &lt;em&gt;Serendipity&lt;/em&gt; community!&lt;/strong&gt;&lt;br /&gt;
+Send us a pull request on Github, or contact us via our &lt;a href="https://board.s9y.org/viewforum.php?f=4"&gt;Forums&lt;/a&gt; to send us your new translation. If the plugin you have translated is available on &lt;em&gt;Spartacus&lt;/em&gt;, your new translation may be available to all users the next day!&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+ &lt;a class="block_level" href="https://blog.s9y.org/archives/285-Translate-plugins-into-your-preferred-language!.html#extended"&gt;"Translate plugins into your preferred language!" vollständig lesen&lt;/a&gt;
+    </content:encoded>
+
+    <pubDate>Sun, 18 Aug 2019 11:28:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/285-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.3.0 released</title>
+    <link>https://blog.s9y.org/archives/284-Serendipity-2.3.0-released.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+    
+    <comments>https://blog.s9y.org/archives/284-Serendipity-2.3.0-released.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=284</wfw:comment>
+
+    <slash:comments>1</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=284</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;We are very happy to present &lt;strong&gt;Serendipity 2.3.0&lt;/strong&gt;, our new stable version, after more than two years of work.&lt;/p&gt;
+
+&lt;p&gt;Along with it, we have released &lt;strong&gt;Serendipity 2.1.6&lt;/strong&gt;, most probably the last bugfix release for our old 2.1.x branch.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Serendipity 2.3.0&lt;/strong&gt; ...&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;... has support for PHP 7.2 and 7.3 (minimal version is now PHP 7.0)!&lt;/li&gt;
+&lt;li&gt;... will upgrade Smarty to 3.1.33!&lt;/li&gt;
+&lt;li&gt;... has many updates and bug fixes to the media manager, adding a gallery function and responsive thumbnails!&lt;/li&gt;
+&lt;li&gt;... uses &lt;em&gt;voku/simple-cache&lt;/em&gt; for its internal cache!&lt;/li&gt;
+&lt;li&gt;... has a new maintenance mode option!&lt;/li&gt;
+&lt;li&gt;... will now receive multiple trackbacks and pingbacks!&lt;/li&gt;
+&lt;li&gt;... has improved plugins, e.g. the &lt;em&gt;nl2br&lt;/em&gt; plugin!&lt;/li&gt;
+&lt;li&gt;... changed some installation defaults!&lt;/li&gt;
+&lt;li&gt;... includes lots of other accumulated (security) fixes!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.3.0"&gt;release statement&lt;/a&gt; on GitHub for more details.&lt;/p&gt;
+
+&lt;p&gt;You can download the &lt;a href="https://github.com/s9y/Serendipity/releases/download/2.3.0/serendipity-2.3.0.zip"&gt;release file&lt;/a&gt; and unzip it to your installation as usual, or update from within Serendipity using the &lt;em&gt;Serendipity Autoupdate&lt;/em&gt; Plugin (&lt;code&gt;serendipity_event_autoupdate&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Serendipity 2.3.x&lt;/strong&gt; will be our new stable branch; development will continue on Serendipity 2.4.&lt;/p&gt;
+
+&lt;p&gt;Many thanks to all our contributers, theme and plugin developers, all you bug reporters and testers and forum users! Without your help this would not have been possible.&lt;/p&gt;
+
+&lt;p&gt;We are happy to hear your feedback about our new release - as always - on &lt;a href="https://board.s9y.org/"&gt;our forums&lt;/a&gt;! &lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Sat, 10 Aug 2019 12:47:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/284-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.3 - First Release Candidate published!</title>
+    <link>https://blog.s9y.org/archives/283-Serendipity-2.3-First-Release-Candidate-published!.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+    
+    <comments>https://blog.s9y.org/archives/283-Serendipity-2.3-First-Release-Candidate-published!.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=283</wfw:comment>
+
+    <slash:comments>0</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=283</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;We are happy to announce the availability of the first (and hopefully last) Release Candidate for Serendipity 2.3.&lt;/p&gt;
+
+&lt;p&gt;Please test it, if you can, especially on current PHP installations (PHP 7.2 up to PHP 7.4), and report all errors and (PHP) warnings. We feel comfortable with suggesting you to try out this release in a production environment, as long as you make a backup of your database and files first, as you should always do. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Serendipity 2.3&lt;/strong&gt; ...&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;... has support for PHP 7.2 and 7.3 (minimal version is now PHP 7.0)!&lt;/li&gt;
+&lt;li&gt;... will upgrade Smarty to 3.1.33!&lt;/li&gt;
+&lt;li&gt;... has many updates and bug fixes to the media manager, adding a gallery function and responsive thumbnails!&lt;/li&gt;
+&lt;li&gt;... uses &lt;em&gt;voku/simple-cache&lt;/em&gt; for its internal cache!&lt;/li&gt;
+&lt;li&gt;... has a new maintenance mode option!&lt;/li&gt;
+&lt;li&gt;... will now receive multiple trackbacks and pingbacks!&lt;/li&gt;
+&lt;li&gt;... has improved plugins, e.g. the &lt;em&gt;nl2br&lt;/em&gt; plugin!&lt;/li&gt;
+&lt;li&gt;... changed some installation defaults!&lt;/li&gt;
+&lt;li&gt;... includes lots of other accumulated (security) fixes!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Please see the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.3-rc1"&gt;release statement&lt;/a&gt; on GitHub for more details.&lt;/p&gt;
+
+&lt;p&gt;You can download the &lt;a href="https://github.com/s9y/Serendipity/releases/download/2.3-rc1/serendipity-2.3-rc1.zip"&gt;release file&lt;/a&gt; and unzip it to your installation as usual, or update from within Serendipity using the &lt;em&gt;Serendipity Autoupdate&lt;/em&gt; Plugin (&lt;code&gt;serendipity_event_autoupdate&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;We are happy to hear your feedback about this release candidate on &lt;a href="https://board.s9y.org/"&gt;our forums&lt;/a&gt;! Thanks on behalf of the dev team.&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Sat, 03 Aug 2019 20:28:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/283-guid.html</guid>
+    
+</item>
+<item>
+    <title>Serendipity 2.1.5 released</title>
+    <link>https://blog.s9y.org/archives/282-Serendipity-2.1.5-released.html</link>
+            <category>Announcements</category>
+            <category>Development</category>
+            <category>Security</category>
+    
+    <comments>https://blog.s9y.org/archives/282-Serendipity-2.1.5-released.html#comments</comments>
+    <wfw:comment>https://blog.s9y.org/wfwcomment.php?cid=282</wfw:comment>
+
+    <slash:comments>6</slash:comments>
+    <wfw:commentRss>https://blog.s9y.org/rss.php?version=2.0&amp;type=comments&amp;cid=282</wfw:commentRss>
+    
+
+    <author>nospam@example.com (Thomas Hochstein)</author>
+    <content:encoded>
+    &lt;p&gt;This bugfix release &lt;strong&gt;Serendipity 2.1.5&lt;/strong&gt; contains fixes for security issues and some bug fixes backported from our recent &lt;a href="https://blog.s9y.org/archives/281-Serendipity-2.3-beta1-released.html"&gt;2.3-beta1&lt;/a&gt; release:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fix XSS in Editor Preview by interpreted EXIF tags (thanks to Hanno Boeck!).&lt;/li&gt;
+&lt;li&gt;Fix XSS in Media Library by interpreted EXIF tags (thanks to Hanno Boeck!).&lt;/li&gt;
+&lt;li&gt;Fix mispositioned button in media db directory list.&lt;/li&gt;
+&lt;li&gt;Change default for comment subscription to full text.&lt;/li&gt;
+&lt;li&gt;Display errors if comment coulnd't be deleted.&lt;/li&gt;
+&lt;li&gt;Make it easier to drag plugins to other column.&lt;/li&gt;
+&lt;li&gt;Add fallback for broken JS in configuration screens.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can download the &lt;a href="https://github.com/s9y/Serendipity/releases/tag/2.1.5"&gt;release file&lt;/a&gt; and unzip it to your installation as usual, or update from within Serendipity using the &lt;i&gt;Serendipity Autoupdate&lt;/i&gt; Plugin (&lt;code&gt;serendipity_event_autoupdate&lt;/code&gt;).&lt;/p&gt;
+ 
+    </content:encoded>
+
+    <pubDate>Wed, 01 May 2019 19:59:00 +0200</pubDate>
+    <guid isPermaLink="false">https://blog.s9y.org/archives/282-guid.html</guid>
+    
+</item>
+
+</channel>
+</rss>

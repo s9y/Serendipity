@@ -278,7 +278,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.22.1');
+        $propbag->add('version',       '1.23.0');
         $propbag->add('requirements',  array(
             'serendipity' => '1.7',
             'smarty'      => '3.1.0',
@@ -525,130 +525,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin
                 if (!$this->urlcheck($rssuri)) {
                     $this->debug('URLCheck failed');
                     echo '<!-- No valid URL! -->';
-                } elseif ($feedtype == 'rss') {
-                    $this->debug('URLCheck succeeded. Touching ' . $feedcache);
-                    // Touching the feedcache file will prevent loops of death when the RSS target is the same URI than our blog.
-                    @touch($feedcache);
-                    require_once S9Y_PEAR_PATH . 'Onyx/RSS.php';
-                    $c = new Onyx_RSS($charset);
-                    $this->debug('Running Onyx Parser');
-                    $c->parse($rssuri);
-                    $this->encoding = $c->rss['encoding'];
-
-                    $use_rss_link = serendipity_db_bool($this->get_config('use_rss_link', 'true'));
-                    $rss_elements = explode(',', $this->get_config('show_rss_element'));
-                    $escape_rss   = serendipity_db_bool($this->get_config('escape_rss', 'true'));
-                    $i = 0;
-                    $content = '';
-                    $smarty_items = array();
-                    while (($showAll || ($i < $number)) && ($item = $c->getNextItem())) {
-                        if (empty($item['title'])) {
-                            continue;
-                        }
-
-                        $content .= '<div class="rss_item">';
-
-                        if ($use_rss_link) {
-                            $content .= '<div class="rss_link"><a href="' . serendipity_specialchars($this->decode($item['link'])) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
-                        }
-
-                        if (!empty($bulletimg)) {
-                            $content .= '<img src="' . $bulletimg . '" border="0" alt="*" /> ';
-                        }
-
-                        $is_first = true;
-                        foreach($rss_elements AS $rss_element) {
-                            $rss_element = trim($rss_element);
-
-                            if (!$is_first) {
-                                $content .= '<span class="rss_' . preg_replace('@[^a-z0-9]@imsU', '', $rss_element) . '">';
-                            }
-
-                            if ($escape_rss) {
-                                $content .= $this->decode($item[$rss_element]);
-                            } else {
-                                $content .= serendipity_specialchars($this->decode($item[$rss_element]));
-                            }
-
-                            if ($smarty) {
-                                $item['display_elements'][preg_replace('@[^a-z0-9]@imsU', '', $rss_element)] = $this->decode($item[$rss_element]);
-                            }
-
-                            if (!$is_first) {
-                                $content .= '</span>';
-                            }
-
-                            if ($is_first && $use_rss_link) {
-                                $content .= '</a></div>'; // end of first linked element
-                            }
-                            $is_first = false;
-                        }
-
-                        if ($is_first && $use_rss_link) {
-                            // No XML element has been configured.
-                            $content .= '</a></div>';
-                        }
-
-                        $content .= "<br />\n";
-                        $item['timestamp'] = @strtotime(isset($item['pubdate']) ? $item['pubdate'] : $item['dc:date']);
-                        if (!($item['timestamp'] == -1) AND $displaydate) {
-                            $content .= '<div class="serendipitySideBarDate">'
-                                      . serendipity_specialchars(serendipity_formatTime($dateformat, $item['timestamp'], false))
-                                      . '</div>';
-
-                        }
-
-                        if ($smarty) {
-                            $smarty_items['items'][$i] = $item;
-                            $smarty_items['items'][$i]['css_class'] = preg_replace('@[^a-z0-9]@imsU', '', $rss_element);
-                            foreach($item AS $key => $val) {
-                                $smarty_items['items'][$i]['decoded_' . str_replace(':', '_', $key)] = $this->decode($key);
-                            }
-                        }
-                        $content .= '</div>'; // end of rss_item
-                        ++$i;
-                    }
-
-                    if ($smarty) {
-                        $smarty_items['use_rss_link'] = $use_rss_link;
-                        $smarty_items['bulletimg']    = $bulletimg;
-                        $smarty_items['escape_rss']   = $escape_rss;
-                        $smarty_items['displaydate']  = $displaydate;
-                        $smarty_items['dateformat']   = $dateformat;
-                        $smarty_items['target']       = $target;
-
-                        $serendipity['smarty']->assignByRef('remoterss_items', $smarty_items);
-                        $tpl = $this->get_config('template');
-                        if (empty($tpl)) {
-                            $tpl = 'plugin_remoterss.tpl';
-                        }
-
-                        // Template specifics go here
-                        switch($tpl) {
-                            case 'plugin_remoterss_nasaiotd.tpl':
-                                $smarty_items['nasa_image'] = $c->getData('image');
-                            break;
-                        }
-                        $content = $this->parseTemplate($tpl);
-                    }
-
-                    $this->debug('Caching Feed (' . strlen($content) . ' bytes)');
-                    $fp = @fopen($feedcache, 'w');
-                    if (trim($content) != '' && $fp) {
-                        fwrite($fp, $content);
-                        fclose($fp);
-                        $this->debug('Feed cache written');
-                    } else {
-                        $this->debug('Could not write (empty?) cache.');
-                        echo '<!-- Cache failed to ' . $feedcache . ' in ' . getcwd() . ' --><br />';
-                        if (trim($content) == '') {
-                            $this->debug('Getting old feedcache');
-                            $content = @file_get_contents($feedcache);
-                        }
-                    }
-                    $this->debug('RSS Plugin finished.');
-
-                } elseif ($feedtype == 'atom') {
+                } elseif ($feedtype == 'rss' || $feedtype == 'atom') {
                     $this->debug('URLCheck succeeded. Touching ' . $feedcache);
                     // Touching the feedcache file will prevent loops of death when the RSS target is the same URI than our blog.
                     @touch($feedcache);
@@ -658,10 +535,12 @@ class serendipity_plugin_remoterss extends serendipity_plugin
                     $this->debug('Running simplepie Parser');
 
                     $simplefeed = new SimplePie();
-                    $simplefeed->cache=false;
+                    $simplefeed->enable_cache(false);
                     $simplefeed->set_feed_url($rssuri);
                     $success = $simplefeed->init();
-                    $simplefeed->set_output_encoding($charset);
+                    # native is the old default value, but current simplepie does not understand that. It needs a proper charset, so
+                    # we default to UTF-8 here now.
+                    $simplefeed->set_output_encoding($charset == 'native' ? 'UTF-8' : $charset);
                     $simplefeed->handle_content_type();
                     $this->encoding = $charset;
 

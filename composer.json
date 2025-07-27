@@ -37,6 +37,7 @@
         "pear/http_request2": "^2.5",
         "pear/net_dns2": "^1.5",
         "php81_bc/strftime": "^0.5.0",
+        "simplepie/simplepie": "^1.8",
         "smarty/smarty": "^5.1"
     },
     "minimum-stability": "dev",

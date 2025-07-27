@@ -64,6 +64,7 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase {
         $xmlrpc_result = $this->message->parseResponse($example_response);
         $this->assertEquals($example_response, $xmlrpc_result->serialize());
     }
+    
     #[Test]
     public function test_serendipity_xml_rpc_response_invalid()
     {
@@ -71,6 +72,22 @@ class bundledLibsTest extends PHPUnit\Framework\TestCase {
 
         $xmlrpc_result = $this->message->parseResponse($example_response);
         $this->assertEquals(2, $xmlrpc_result->faultCode());
+    }
+
+    #[Test]
+    public function test_serendipity_simplepie_can_parse()
+    {
+        require_once S9Y_PEAR_PATH . '/simplepie/simplepie.inc';
+
+        $testfile = new SimplePie_File(dirname(__FILE__) . '/../test.rss2');
+
+        $simplefeed = new SimplePie();
+        $simplefeed->enable_cache(false);
+        $simplefeed->set_file( $testfile);
+        $success = $simplefeed->init();
+        $simplefeed->handle_content_type();
+                    
+        $this->assertEquals(15, count($simplefeed->get_items()));
     }
 
 }

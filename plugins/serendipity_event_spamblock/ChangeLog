@@ -1,3 +1,5 @@
+1.89.7: Change the default for captchas to off, for accessibility
+
 1.89.6: More PHP 8 compatibility fixes
 
 1.89.3: PHP 8 compatibility
