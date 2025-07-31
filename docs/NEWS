@@ -1,4 +1,4 @@
-Version 2.6-alpha1 ()
+Version 2.6-beta1 (July 31th, 2025)
 ------------------------------------------------------------------------
 
    * Fix static page plugin crashing when using the clean_blog theme
