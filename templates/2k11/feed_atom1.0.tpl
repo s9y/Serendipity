@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
+<?xml-stylesheet type="text/xsl" href="{serendipity_getFile file="atom.xsl"}" media="screen" ?>
 <feed {$namespace_display_dat}
    xmlns="http://www.w3.org/2005/Atom"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
