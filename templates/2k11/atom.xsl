@@ -17,11 +17,19 @@
 
 			<link rel="shortcut icon" type="image/ico" href="{ link }favicon.png" />
 			<link rel="stylesheet" href="{ link }index.php?/serendipity.css" />
+			<style>
+				.rss_header {
+					background: #a5e7d9;
+					border: 2px solid #58afd9;
+					margin-top: 0.5em;
+					padding: 0.5em;
+				}
+			</style>
 		</head>
 		<body>
 			<div id="page" class="container">
-				<header id="banner" class="page_header serendipity_entry">
-					Subscribe to this feed with a feedreader to get notifications about new articles. See <a href="https://aboutfeeds.com/">this explanation</a>, if you need help.
+				<header id="banner" class="serendipity_entry">
+					<p class="rss_header">Subscribe to this feed with a feedreader to get notifications about new articles. See <a href="https://aboutfeeds.com/">this explanation</a>, if you need help.</p>
 
 					<h1 class="title">
 						<xsl:value-of select="atom:title" />
