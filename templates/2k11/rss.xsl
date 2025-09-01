@@ -52,6 +52,10 @@
 							</h2>
 
 							<p class="post_preview">
+								<xsl:value-of select="description" disable-output-escaping="yes" />
+							</p>
+
+							<p class="post_content">
 								<xsl:value-of select="content:encoded" disable-output-escaping="yes" />
 							</p>
 						</article>
