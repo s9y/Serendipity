@@ -62,7 +62,7 @@
 {$raw_data}
 {serendipity_hookPlugin hook="frontend_footer"}
 
-<div id="copyright">Design <a href="http://garv.in/">Garvin Hicking</a>, Icons <a href="http://tango-project.org/">Tango Project</a></div>
+<div id="copyright">Design <a href="http://garv.in/">Garvin Hicking</a>, Icons <a href="https://web.archive.org/web/20201024165718/http://tango-project.org/">Tango Project</a></div>
 
 {if $is_embedded != true}
 </body>
