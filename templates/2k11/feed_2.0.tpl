@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
+<?xml-stylesheet type="text/xsl" href="{serendipity_getFile file="rss.xsl"}" media="screen" ?>
 <rss version="2.0" 
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:admin="http://webns.net/mvcb/"
