@@ -409,7 +409,7 @@
             if ($('#'+id).children('*[selected="selected"]').length > 1) {
                 // when loading the page new for the preview and more than one category was
                 // selected, collapsing the category-selector would lose those categories
-                $('#'+id).attr("size", $('#'+id).children().size);
+                $('#'+id).attr("size", $('#'+id).children().length);
                 $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
                 return
             }
@@ -431,7 +431,7 @@
             
         } else {
             $('#'+id).attr("multiple", "");
-            $('#'+id).attr("size", $('#'+id).children().size);
+            $('#'+id).attr("size", $('#'+id).children().length);
             $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
 
             var selected_categories = categoryselector_stored_categories;
@@ -817,7 +817,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
 $(function() {
     // Fire responsive nav
-    if($('body').has('#main_menu').size() > 0) {
+    if($('body').has('#main_menu').length > 0) {
         $('#nav-toggle').click(function(e) {
             var $el = $(this);
             var $target = $('body');
@@ -846,7 +846,7 @@ $(function() {
     });
 
     // Editor-area
-    if($('body').has('#serendipityEntry').size() > 0) {
+    if($('body').has('#serendipityEntry').length > 0) {
         serendipity.categoryList();
         serendipity.toggle_category_selector('categoryselector');
         serendipity.toggle_extended();
@@ -865,7 +865,7 @@ $(function() {
     //
     // Make the timestamp readable in browser not supporting datetime-local.
     // Has no effect in those supporting it, as the timestamp is invalid in HTML5
-    if($('body').has('#serendipityEntry').size() > 0) {
+    if($('body').has('#serendipityEntry').length > 0) {
         if(!Modernizr.inputtypes.date) {
             $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
         }
@@ -921,7 +921,7 @@ $(function() {
     // NOTE: This probably should be rewritten as a general function which
     //       also works for advanced options (see below); also not sure if
     //       the localStorage stuff works here (seems to)
-    if($('body').has('#edit_entry_metadata').size() > 0) {
+    if($('body').has('#edit_entry_metadata').length > 0) {
         $('#toggle_metadata').click(function() {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
@@ -941,7 +941,7 @@ $(function() {
     }
 
     // Show category selector
-            if($('body').has('#serendipityEntry').size() > 0) {
+            if($('body').has('#serendipityEntry').length > 0) {
             var btnText = 'Done';
 
             $('#select_category').magnificPopup({
@@ -956,7 +956,7 @@ $(function() {
         }
     
     // Advanced options
-    if($('body').has('#advanced_options').size() > 0) {
+    if($('body').has('#advanced_options').length > 0) {
         $('#toggle_advanced').click(function() {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
@@ -981,7 +981,7 @@ $(function() {
     });
 
     // Collapsible configuration elements
-    if($('body').has('#serendipity_config_options, #serendipity_category, #image_directory_edit_form').size() > 0) {
+    if($('body').has('#serendipity_config_options, #serendipity_category, #image_directory_edit_form').length > 0) {
         var optsCollapsed = true;
 
         $('.show_config_option').click(function(e) {
@@ -1030,7 +1030,7 @@ $(function() {
     }
 
     // Config option add media
-    if($('body').has('.media_choose').size() > 0) {
+    if($('body').has('.media_choose').length > 0) {
         var $el = $('.media_choose');
         var $item = $el.find('> input');
         var configItem = $item.attr('data-configitem');
@@ -1083,7 +1083,7 @@ $(function() {
     // Category icon preview
     // NOTE: This is just to replace the old functionality; ideally, this should
     //       have a working no-js fallback
-    if($('body').has('#category_icon').size() > 0) {
+    if($('body').has('#category_icon').length > 0) {
         $('<button id="insert_image" type="button" name="insImage" title="Media library"><span class="icon-picture"></span><span class="visuallyhidden"> Media library</span></button>').insertAfter('#category_icon');
     }
 
@@ -1133,7 +1133,7 @@ $(function() {
     });
 
     // Limit width of media file info
-    if($('body').has('.media_pane').size() > 0) {
+    if($('body').has('.media_pane').length > 0) {
         var thumbsWidth = $('.media_pane').attr('data-thumbmaxwidth')  + 'px';
         $('.media_file_meta').css('maxWidth', thumbsWidth);
     }
@@ -1160,12 +1160,12 @@ $(function() {
     });
 
     // Show further links
-            if($('body').has('#dashboard').size() > 0) {
+            if($('body').has('#dashboard').length > 0) {
             $('.toggle_links').magnificPopup({ type: "inline" });
         }
     
     // Media file actions
-        if ($('body').has('.media_fullsize').size() > 0) {
+        if ($('body').has('.media_fullsize').length > 0) {
         $('.media_fullsize').magnificPopup({ type:'image' });
     }
     
@@ -1236,14 +1236,14 @@ $(function() {
     $('.karma_pane .pagination').clone().prependTo('.karma_pane');
 
     // close comment reply on button click
-    if ($('body').has('#comment_replied').size() > 0) {
+    if ($('body').has('#comment_replied').length > 0) {
         $('#comment_replied').click(function() {
             serendipity.closeCommentPopup();
         });
     }
 
     // reopen detail element after spamblock action
-    if ($('body').has('#serendipity_comments_list').size() > 0 && window.location.hash && $('body').has('#' + window.location.hash.replace('#', '')).size() > 0) {
+    if ($('body').has('#serendipity_comments_list').length > 0 && window.location.hash && $('body').has('#' + window.location.hash.replace('#', '')).length > 0) {
         $('#' + window.location.hash.replace('#', '')).find(".toggle_info").click();
     }
 
@@ -1257,7 +1257,7 @@ $(function() {
     })
 
     // Tabs
-    if($('body').has('.tabs').size() > 0) {
+    if($('body').has('.tabs').length > 0) {
         var currTabText = 'Current tab: ';
 
         $('.tabs').accessibleTabs({
@@ -1275,16 +1275,10 @@ $(function() {
     }
 
     // Equal Heights
-    $(window).load(function() {
-        if($('body').has('.equal_heights').size() > 0) {
-            if($('html').hasClass('lt-ie9')) {
-                $('.equal_heights').syncHeight({
-                    updateOnResize: false
-                });
-            } else {
-                $('.equal_heights').syncHeight({
-                    updateOnResize: true
-                });
+    $(window).on('load', function() {
+        if(!Modernizr.flexbox) {
+            if (mq_small) {
+                serendipity.sync_heights();
             }
         }
     });
