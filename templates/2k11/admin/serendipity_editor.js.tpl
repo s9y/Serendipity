@@ -445,7 +445,7 @@
             if ($('#'+id).children('*[selected="selected"]').length > 1) {
                 // when loading the page new for the preview and more than one category was
                 // selected, collapsing the category-selector would lose those categories
-                $('#'+id).attr("size", $('#'+id).children().size);
+                $('#'+id).attr("size", $('#'+id).children().length);
                 $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
                 return
             }
@@ -467,7 +467,7 @@
 
         } else {
             $('#'+id).attr("multiple", "");
-            $('#'+id).attr("size", $('#'+id).children().size);
+            $('#'+id).attr("size", $('#'+id).children().length);
             $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
 
             var selected_categories = categoryselector_stored_categories;
