@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix tooltips in installer not working and the installer's language
+     list using the wrong encoding
+
 Version 2.6-beta1 (July 31th, 2025)
 ------------------------------------------------------------------------
 
