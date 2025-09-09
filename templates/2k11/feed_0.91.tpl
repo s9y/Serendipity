@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
+<?xml-stylesheet type="text/xsl" href="{serendipity_getFile file="rss.xsl"}" media="screen" ?>
 <rss version="0.91" {$namespace_display_dat}>
 <channel>
 <title>{$metadata.title}</title>
