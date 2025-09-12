@@ -2074,13 +2074,14 @@ function serendipity_checkFormToken($output = true) {
         return false;
     }
 
-    if ($token != md5(session_id()) &&
-        $token != md5($serendipity['COOKIE']['old_session'])) {
-        if ($output) echo serendipity_reportXSRF('token', false);
-        return false;
+    $currentToken = serendipity_getOrCreateValidToken($serendipity['authorid']);
+    if ($token == $currentToken) {
+        return true;
     }
 
-    return true;
+    // If we are here, the token check failed.
+    if ($output) echo serendipity_reportXSRF('token', false);
+    return false;
 }
 
 /**
@@ -2103,13 +2104,39 @@ function serendipity_checkFormToken($output = true) {
 function serendipity_setFormToken($type = 'form') {
     global $serendipity;
 
+    $token = serendipity_getOrCreateValidToken($serendipity['authorid']);
     if ($type == 'form') {
-        return '<input type="hidden" name="serendipity[token]" value="' . md5(session_id()) . '" />'."\n";
+        return '<input type="hidden" name="serendipity[token]" value="' . $token . '" />'."\n";
     } elseif ($type == 'url') {
-        return 'serendipity[token]=' . md5(session_id());
+        return 'serendipity[token]=' . $token;
     } else {
-        return md5(session_id());
+        return $token;
     }
+}
+
+/**
+ * Get the currently active XSRF form token, or create and store a new one
+ * when the token does not exist or is no longer valid.
+ *
+ * The token gets stored in the database and bound to the current user. This
+ * allows the token to be not limited by the PHP session lifetime.
+ */
+function serendipity_getOrCreateValidToken($authorid) {
+    $tokenWithDuration = serendipity_get_user_config_var('formTokenWithDuration', $authorid, '');
+    if ($tokenWithDuration) {
+        $token = substr($tokenWithDuration, 0, strpos($tokenWithDuration, ":::"));
+        $duration = substr($tokenWithDuration, strpos($tokenWithDuration, ":::") + 3);
+        if (time() < (int)$duration) {
+            // The token was still valid, we can use it
+            return $token;
+        }
+    }
+    
+    //We had no stored valid token. So we need to create and store a new one.
+    $token = bin2hex(random_bytes(32));
+    $duration = time() + (60 * 60 * 4);  // 4 hours in the future, for long editing sessions
+    serendipity_set_config_var('formTokenWithDuration', "$token:::$duration", $authorid);
+    return $token;
 }
 
 /**
