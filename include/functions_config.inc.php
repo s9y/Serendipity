@@ -722,7 +722,7 @@ function serendipity_setCookie($name, $value, $securebyprot = true, $custom_time
         $custom_timeout = time() + 60*60*24*30;
     }
 
-    setcookie("serendipity[$name]", $value, ['expires' => $custom_timeout, 'path' => $serendipity['serendipityHTTPPath'], 'domain' => $host, 'secure' => $secure, 'httponly' => $httpOnly, 'samesite' => 'Strict']);
+    setcookie("serendipity[$name]", $value, ['expires' => $custom_timeout, 'path' => $serendipity['serendipityHTTPPath'], 'domain' => $host, 'secure' => $secure, 'httponly' => $httpOnly, 'samesite' => $samesite]);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
 }
