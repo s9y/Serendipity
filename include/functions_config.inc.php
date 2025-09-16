@@ -2076,7 +2076,7 @@ function serendipity_checkFormToken($output = true) {
 
     $duration = 0;
     $currentToken = serendipity_getOrCreateValidToken($serendipity['authorid'], $duration);
-    if ($token == $currentToken) {
+    if ($token === $currentToken) {
         # The token is valid. But it might be valid for only a little bit. In that case.
         # we extend its duration, to avoid the user running into a token error
         if (((int)$duration - time()) < (60 * 60)) {  # Valid for less than an hour
