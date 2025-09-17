@@ -2084,8 +2084,7 @@ function serendipity_checkFormToken($output = true) {
         # The token is valid. But it might be valid for only a little bit. In that case.
         # we extend its duration, to avoid the user running into a token error
         if (((int)$duration - time()) < (60 * 60)) {  # Valid for less than an hour
-            $duration = (int)$duration + (60 * 60);   # Extended for one hour
-            serendipity_set_config_var(XSRF_KEY, "$currentToken:::$duration", $serendipity['authorid']);
+            serendipity_getOrCreateValidToken($serendipity['authorid'], $duration, true);
         }
         
         return true;
@@ -2136,14 +2135,16 @@ function serendipity_setFormToken($type = 'form') {
  * Returns the token. Sets the optional section parameter $duration to the timestamp
  * marking the end of the token's validity
  */
-function serendipity_getOrCreateValidToken($authorid, &$duration = 0) {
-    $tokenWithDuration = serendipity_get_user_config_var(XSRF_KEY, $authorid, '');
-    if ($tokenWithDuration) {
-        $token = substr($tokenWithDuration, 0, strpos($tokenWithDuration, ":::"));
-        $duration = substr($tokenWithDuration, strpos($tokenWithDuration, ":::") + 3);
-        if (time() < (int)$duration) {
-            // The token was still valid, we can use it
-            return $token;
+function serendipity_getOrCreateValidToken($authorid, &$duration = 0, $force_renew = false) {
+    if (! $force_renew) {
+        $tokenWithDuration = serendipity_get_user_config_var(XSRF_KEY, $authorid, '');
+        if ($tokenWithDuration) {
+            $token = substr($tokenWithDuration, 0, strpos($tokenWithDuration, ":::"));
+            $duration = substr($tokenWithDuration, strpos($tokenWithDuration, ":::") + 3);
+            if (time() < (int)$duration) {
+                // The token was still valid, we can use it
+                return $token;
+            }
         }
     }
     
