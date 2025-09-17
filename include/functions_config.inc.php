@@ -348,11 +348,13 @@ function serendipity_load_configuration($author = null) {
  * @return null
  */
 function serendipity_logout() {
+    global $serendipity;
     $_SESSION['serendipityAuthedUser'] = false;
     serendipity_session_destroy();
     serendipity_deleteCookie('author_username');
     serendipity_deleteCookie('author_autologintoken');
     serendipity_deleteCookie('author_token');
+    serendipity_remove_config_var(XSRF_KEY, $serendipity['authorid']);
 }
 
 /**
