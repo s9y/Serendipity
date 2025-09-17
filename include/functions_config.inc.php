@@ -6,6 +6,8 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
+if (! defined("XSRF_KEY")) define("XSRF_KEY", "formTokenWithDuration");
+
 /**
  * Adds a new author account
  *
@@ -2081,7 +2083,7 @@ function serendipity_checkFormToken($output = true) {
         # we extend its duration, to avoid the user running into a token error
         if (((int)$duration - time()) < (60 * 60)) {  # Valid for less than an hour
             $duration = (int)$duration + (60 * 60);   # Extended for one hour
-            serendipity_set_config_var('formTokenWithDuration', "$currentToken:::$duration", $serendipity['authorid']);
+            serendipity_set_config_var(XSRF_KEY, "$currentToken:::$duration", $serendipity['authorid']);
         }
         
         return true;
@@ -2133,7 +2135,7 @@ function serendipity_setFormToken($type = 'form') {
  * marking the end of the token's validity
  */
 function serendipity_getOrCreateValidToken($authorid, &$duration = 0) {
-    $tokenWithDuration = serendipity_get_user_config_var('formTokenWithDuration', $authorid, '');
+    $tokenWithDuration = serendipity_get_user_config_var(XSRF_KEY, $authorid, '');
     if ($tokenWithDuration) {
         $token = substr($tokenWithDuration, 0, strpos($tokenWithDuration, ":::"));
         $duration = substr($tokenWithDuration, strpos($tokenWithDuration, ":::") + 3);
@@ -2146,7 +2148,7 @@ function serendipity_getOrCreateValidToken($authorid, &$duration = 0) {
     // We had no stored valid token. So we need to create and store a new one.
     $token = bin2hex(random_bytes(32));
     $duration = time() + (60 * 60 * 4);  // 4 hours in the future, for long editing sessions
-    serendipity_set_config_var('formTokenWithDuration', "$token:::$duration", $authorid);
+    serendipity_set_config_var(XSRF_KEY, "$token:::$duration", $authorid);
     return $token;
 }
 
