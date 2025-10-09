@@ -445,7 +445,7 @@
             if ($('#'+id).children('*[selected="selected"]').length > 1) {
                 // when loading the page new for the preview and more than one category was
                 // selected, collapsing the category-selector would lose those categories
-                $('#'+id).attr("size", $('#'+id).children().length);
+                $('#'+id).attr("size", $('#'+id).children().size);
                 $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
                 return
             }
@@ -467,7 +467,7 @@
 
         } else {
             $('#'+id).attr("multiple", "");
-            $('#'+id).attr("size", $('#'+id).children().length);
+            $('#'+id).attr("size", $('#'+id).children().size);
             $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
 
             var selected_categories = categoryselector_stored_categories;
@@ -1783,17 +1783,19 @@ $(function() {
 
     // Tabs
     if ($('.tabs').length > 0) {
-        // Restore the tab that was active before
+        // Restore the ptab that was active before
         activeTab = serendipity.GetCookie('accessibletab_' + $('.tabs').attr('id') + '_active');
-        $('.tabs > details > summary').click(function(e) {
+        $('.tabs-list li').click(function(e) {
             // Remember the now active tab and show that visually
-            var $el = $(this).parent('details');
-            $('.tabs').find('details').removeAttr('open');
+            var $el = $(this);
+            $('.tabs-list').find('li').removeClass('on');
             $el.siblings().find('.panel').hide();
+            $el.addClass('on');
             document.cookie = 'accessibletab_' + $('.tabs').attr('id') + '_active=' + $el.index() + ';expires=Session' ;
             $el.find('.panel').fadeIn();
         });
-        $('.tabs > details > summary').get(activeTab).click();
+        $('.tabs-list li label').get(activeTab).click();
+        $('.tabs-list li').get(activeTab).click();
     }
 
     // Drag 'n' drop

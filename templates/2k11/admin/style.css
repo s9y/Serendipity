@@ -505,6 +505,7 @@ form > button,
 .filters_toolbar li,
 #dashboard_entries .entry_status,
 .comment_status,
+.tabs > ul > li,
 .overviewListForm {
     display: inline-block;
 }
@@ -614,7 +615,7 @@ input[type="checkbox"] {
 }
 
 .button_link:focus,
-.tabs > details > summary a:focus,
+.tabs > ul a:focus,
 button:focus,
 #edit_entry_category button.mfp-close:focus,
 #edit_entry_freetags button.mfp-close:focus,
@@ -635,7 +636,7 @@ input[type="checkbox"]:active {
 }
 
 .button_link,
-.tabs > details > summary a,
+.tabs > ul a,
 button,
 #edit_entry_category button.mfp-close,
 #edit_entry_freetags button.mfp-close,
@@ -654,7 +655,7 @@ input[type="submit"] {
 }
 
 .button_link,
-.tabs > details > summary a,
+.tabs > ul a,
 button,
 button[type="submit"].publish_now,
 input[type="button"],
@@ -697,7 +698,7 @@ input[type="submit"].state_cancel:visited {
 }
 
 .button_link:hover,
-.tabs > details > summary a:hover,
+.tabs > ul a:hover,
 button:hover,
 button[type="submit"].publish_now:hover,
 input[type="button"]:hover,
@@ -732,9 +733,10 @@ input[type="submit"].state_cancel:focus {
 
 .active,
 input:checked + .media_selector,
+.tabs > ul .on a,
 .button_link:active,
 button[type="submit"].publish_now:active,
-.tabs > details:open > summary a,
+.tabs > ul a:active,
 button:active,
 input[type="button"]:active,
 input[type="color"]:active {
@@ -2564,18 +2566,18 @@ input[name="serendipity[filter][fileCategory]"] {
 }
 
 .media_selector,
-.tabs > details > summary a {
+.tabs > ul li a {
     border-radius: 0;
     border-right: 0 none;
 }
 
 .media_selector:first-of-type,
-.tabs > details:first-child > summary a {
+.tabs > ul li:first-child a {
     border-radius: 4px 0 0 4px;
 }
 
 .media_selector:last-of-type,
-.tabs > details:last-child > summary a {
+.tabs > ul li:last-child a {
     border-radius: 0 4px 4px 0;
     border-right: 1px solid #bbb;
 }
@@ -3077,8 +3079,8 @@ img.mfp-img {
         margin: 1em 0 0;
     }
 
-    #pluginlist_event > a,
-    #pluginlist_sidebar > a {
+    .tabcontent #pluginlist_event > a,
+    .tabcontent #pluginlist_sidebar > a {
         position: absolute;
         top: -1px;
         right: 0;
@@ -3745,24 +3747,31 @@ img.mfp-img {
     }
 }
 
-.tabs {
-    display: flex;
-    flex-wrap: wrap;
+.tabs menu {
+    padding: 0;
 }
 
-.tabs > details {
-    display: contents;
+.tabs menu > li {
+    display: none;
 }
 
-.tabs > details > summary {
-	position: relative;
-	justify-content: center;
-	display: flex;
-	flex-wrap: wrap;
+#event_tab:checked ~ menu li:has(.event_tab) {
+    display: block;
 }
 
-.tabs .panel {
-	order: 1; 
-	width: 100%;
+#sidebar_tab:checked ~ menu li:has(.sidebar_tab) {
+    display: block;
 }
 
+#upload_tab:checked ~ menu li:has(.upload_tab) {
+    display: block;
+}
+
+#download_tab:checked ~ menu li:has(.download_tab) {
+    display: block;
+}
+
+.tabs > .nav a {
+    font-weight: 400;
+    cursor: pointer;
+}
