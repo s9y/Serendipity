@@ -363,7 +363,7 @@ function serendipity_get_bool($item) {
 function serendipity_getCharset() {
     global $serendipity;
 
-    $charset = $serendipity['charset'] ?? '';
+    $charset = $serendipity['charset'] ?? 'UTF-8/';
     if (!empty($_POST['charset'])) {
         if ($_POST['charset'] == 'UTF-8/') {
             $charset = 'UTF-8/';
