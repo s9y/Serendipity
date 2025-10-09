@@ -3747,31 +3747,46 @@ img.mfp-img {
     }
 }
 
-.tabs menu {
-    padding: 0;
+.details-tab {
+  font-weight: 400;
+  display: block;
+  order: 0;
+  cursor: pointer;
 }
 
-.tabs menu > li {
-    display: none;
+.details-tab::-webkit-details-marker {
+  display: none;
 }
 
-#event_tab:checked ~ menu li:has(.event_tab) {
-    display: block;
+.details-tabs {
+  position: relative;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#sidebar_tab:checked ~ menu li:has(.sidebar_tab) {
-    display: block;
+.details-content {
+  order: 1;
+  padding: 1rem;
+  width: 100%;
+}
+.details-content details {
+  margin: 1.5rem;
+}
+.details-content details summary {
+  font-weight: 600;
 }
 
-#upload_tab:checked ~ menu li:has(.upload_tab) {
-    display: block;
+.details-item {
+  display: contents;
+}
+.details-item[open] > .details-tab {
+  background: #fff;
+  color: #333;
 }
 
-#download_tab:checked ~ menu li:has(.download_tab) {
-    display: block;
-}
-
-.tabs > .nav a {
-    font-weight: 400;
-    cursor: pointer;
+@supports selector(::details-content) {
+  .details-item[open]::details-content {
+    display: contents;
+  }
 }
