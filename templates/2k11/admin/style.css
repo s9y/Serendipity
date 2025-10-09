@@ -3767,11 +3767,9 @@ img.mfp-img {
   padding-top: 1rem;
   width: 100%;
 }
+
 .details-content details {
   margin: 1.5rem;
-}
-.details-content details summary {
-  font-weight: 600;
 }
 
 .details-item {
