@@ -6,6 +6,8 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
+if (! defined("XSRF_KEY")) define("XSRF_KEY", "formTokenWithDuration");
+
 /**
  * Adds a new author account
  *
@@ -346,11 +348,13 @@ function serendipity_load_configuration($author = null) {
  * @return null
  */
 function serendipity_logout() {
+    global $serendipity;
     $_SESSION['serendipityAuthedUser'] = false;
     serendipity_session_destroy();
     serendipity_deleteCookie('author_username');
     serendipity_deleteCookie('author_autologintoken');
     serendipity_deleteCookie('author_token');
+    serendipity_remove_config_var(XSRF_KEY, $serendipity['authorid']);
 }
 
 /**
@@ -699,7 +703,7 @@ function serendipity_restoreVar(&$source, &$target) {
  * @param   int         Cookie validity (unix timestamp)
  * @return null
  */
-function serendipity_setCookie($name, $value, $securebyprot = true, $custom_timeout = false, $httpOnly = false) {
+function serendipity_setCookie($name, $value, $securebyprot = true, $custom_timeout = false, $httpOnly = false, $samesite = 'Strict') {
     global $serendipity;
 
     $host = $_SERVER['HTTP_HOST'];
@@ -722,7 +726,7 @@ function serendipity_setCookie($name, $value, $securebyprot = true, $custom_time
         $custom_timeout = time() + 60*60*24*30;
     }
 
-    setcookie("serendipity[$name]", $value, $custom_timeout, $serendipity['serendipityHTTPPath'], $host, $secure, $httpOnly);
+    setcookie("serendipity[$name]", $value, ['expires' => $custom_timeout, 'path' => $serendipity['serendipityHTTPPath'], 'domain' => $host, 'secure' => $secure, 'httponly' => $httpOnly, 'samesite' => $samesite]);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
 }
@@ -2074,13 +2078,21 @@ function serendipity_checkFormToken($output = true) {
         return false;
     }
 
-    if ($token != md5(session_id()) &&
-        $token != md5($serendipity['COOKIE']['old_session'])) {
-        if ($output) echo serendipity_reportXSRF('token', false);
-        return false;
+    $duration = 0;
+    $currentToken = serendipity_getOrCreateValidToken($serendipity['authorid'], $duration);
+    if ($token === $currentToken) {
+        # The token is valid. But it might be valid for only a little bit. In that case.
+        # we extend its duration, to avoid the user running into a token error
+        if (((int)$duration - time()) < (60 * 60)) {  # Valid for less than an hour
+            serendipity_getOrCreateValidToken($serendipity['authorid'], $duration, true);
+        }
+        
+        return true;
     }
 
-    return true;
+    // If we are here, the token check failed.
+    if ($output) echo serendipity_reportXSRF('token', false);
+    return false;
 }
 
 /**
@@ -2103,13 +2115,44 @@ function serendipity_checkFormToken($output = true) {
 function serendipity_setFormToken($type = 'form') {
     global $serendipity;
 
+    $token = serendipity_getOrCreateValidToken($serendipity['authorid']);
     if ($type == 'form') {
-        return '<input type="hidden" name="serendipity[token]" value="' . md5(session_id()) . '" />'."\n";
+        return '<input type="hidden" name="serendipity[token]" value="' . $token . '" />'."\n";
     } elseif ($type == 'url') {
-        return 'serendipity[token]=' . md5(session_id());
+        return 'serendipity[token]=' . $token;
     } else {
-        return md5(session_id());
+        return $token;
     }
+}
+
+/**
+ * Get the currently active XSRF form token, or create and store a new one
+ * when the token does not exist or is no longer valid.
+ *
+ * The token gets stored in the database and bound to the current user. This
+ * allows the token to be not limited by the PHP session lifetime.
+ *
+ * Returns the token. Sets the optional section parameter $duration to the timestamp
+ * marking the end of the token's validity
+ */
+function serendipity_getOrCreateValidToken($authorid, &$duration = 0, $force_renew = false) {
+    if (! $force_renew) {
+        $tokenWithDuration = serendipity_get_user_config_var(XSRF_KEY, $authorid, '');
+        if ($tokenWithDuration) {
+            $token = substr($tokenWithDuration, 0, strpos($tokenWithDuration, ":::"));
+            $duration = substr($tokenWithDuration, strpos($tokenWithDuration, ":::") + 3);
+            if (time() < (int)$duration) {
+                // The token was still valid, we can use it
+                return $token;
+            }
+        }
+    }
+    
+    // We had no stored valid token. So we need to create and store a new one.
+    $token = bin2hex(random_bytes(32));
+    $duration = time() + (60 * 60 * 4);  // 4 hours in the future, for long editing sessions
+    serendipity_set_config_var(XSRF_KEY, "$token:::$duration", $authorid);
+    return $token;
 }
 
 /**

@@ -1,6 +1,11 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Rework of the XSRF token. The new one is now valid for 4 hours
+     instead of being linked to the (by default short) PHP session. This
+     will reduce the occurence of the invalid HTTP-Referrer error in the
+     backend, e.g. when saving or previewing entries.
+
    * Fix tooltips in installer not working and the installer's language
      list using the wrong encoding
 
