@@ -174,7 +174,7 @@
     <div class="details-tabs" id="pluginlist_tabs">
 
         <details name="tabs" class="details-item" open>
-        <summary class="details-tab">{$CONST.SIDEBAR_PLUGINS}</summary>
+        <summary class="details-tab"><a>{$CONST.SIDEBAR_PLUGINS}</a></summary>
         <section id="pluginlist_sidebar" class="details-content sidebar_tab">
             <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;{$urltoken}" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}'>{$CONST.INSTALL_NEW_SIDEBAR_PLUGIN}</a>
 
@@ -184,7 +184,7 @@
         </details>
 
         <details name="tabs" class="details-item">
-        <summary class="details-tab">{$CONST.EVENT_PLUGINS}</summary>
+        <summary class="details-tab"><a>{$CONST.EVENT_PLUGINS}</a></summary>
         <section id="pluginlist_event" class="details-content event_tab">
             <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event&amp;{$urltoken}" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}'>{$CONST.INSTALL_NEW_EVENT_PLUGIN}</a>
 

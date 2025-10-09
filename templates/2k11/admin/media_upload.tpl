@@ -17,7 +17,7 @@
     <div class="clearfix details-tabs" id="mediaupload_tabs">
 
         <details name="tabs" class="details-item" open>
-        	<summary class="details-tab">{$CONST.UPLOAD}</summary>
+        	<summary class="details-tab"><a>{$CONST.UPLOAD}</a></summary>
         
             <div class="details-content upload_tab">
                 <div id="uploads" class="zebra_list">
@@ -51,7 +51,7 @@
         </details>
 
         <details name="tabs" class="details-item">
-            <summary class="details-tab">{$CONST.DOWNLOAD}</summary>
+            <summary class="details-tab"><a>{$CONST.DOWNLOAD}</a></summary>
 
             <div class="details-content download_tab">
                 <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
