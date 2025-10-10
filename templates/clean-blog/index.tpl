@@ -36,7 +36,7 @@
     <link href="{serendipity_getFile file="css/regular.min.css"}" rel="stylesheet" />
     <link href="{serendipity_getFile file="css/solid.min.css"}" rel="stylesheet" />
     {if $template_option.use_googlefonts}
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600,800|Lora:400,400italic' rel='stylesheet' type='text/css'>
+        <link href="{serendipity_getFile file="css/webfonts.css"}" rel='stylesheet' type='text/css'>
     {/if}
    
 {* HEADER IMAGE *}
