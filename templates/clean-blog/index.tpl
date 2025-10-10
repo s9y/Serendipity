@@ -31,7 +31,10 @@
         <link rel="webmention" href="{$serendipityBaseURL}comment.php?type=webmention&amp;entry_id={$entry_id}" />
     {/if}   
 {* CUSTOM FONTS *}
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{serendipity_getFile file="css/fontawesome.min.css"}" rel="stylesheet" />
+    <link href="{serendipity_getFile file="css/brands.min.css"}" rel="stylesheet" />
+    <link href="{serendipity_getFile file="css/regular.min.css"}" rel="stylesheet" />
+    <link href="{serendipity_getFile file="css/solid.min.css"}" rel="stylesheet" />
     {if $template_option.use_googlefonts}
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600,800|Lora:400,400italic' rel='stylesheet' type='text/css'>
     {/if}
@@ -208,8 +211,8 @@
                             <li>
                                 <a href="{$template_option.rss_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-solid fa-rss fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
