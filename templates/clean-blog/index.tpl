@@ -223,7 +223,7 @@
             </div>
         </div>
     </footer>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="{serendipity_getFile file="js/bootstrap.min.js"}"></script>
     <script src={serendipity_getFile file="js/clean-blog.min.js"}></script>
 {/if}
 {$raw_data}
