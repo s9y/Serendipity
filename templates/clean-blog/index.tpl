@@ -20,7 +20,7 @@
        <link rel="canonical" href="{$serendipityBaseURL}">
     {/if}    
 {* BOOTSTRAP CORE CSS *}
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="{serendipity_getFile file="css/bootstrap.min.css"}" rel="stylesheet">
 {* S9Y CSS *}
     <link rel="stylesheet" href="{$head_link_stylesheet}"> 
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
