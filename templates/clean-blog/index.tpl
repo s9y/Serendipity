@@ -161,8 +161,8 @@
                             <li>
                                 <a href="{$template_option.twitter_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-x-twitter fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -171,8 +171,8 @@
                             <li>
                                 <a href="{$template_option.facebook_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-facebook fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -181,8 +181,8 @@
                             <li>
                                 <a href="{$template_option.github_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-github fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -191,8 +191,8 @@
                             <li>
                                 <a href="{$template_option.instagram_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-camera fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -201,8 +201,8 @@
                             <li>
                                 <a href="{$template_option.pinterest_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-pinterest-p fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-pinterest-p fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
