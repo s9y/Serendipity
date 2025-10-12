@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Move 2k11's url validation helper function into the load event, so
+     loading of jQuery itself can be delayed
+
    * Rework of the XSRF token. The new one is now valid for 4 hours
      instead of being linked to the (by default short) PHP session. This
      will reduce the occurence of the invalid HTTP-Referrer error in the
