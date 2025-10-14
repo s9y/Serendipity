@@ -564,6 +564,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Ett okänt fel inträffade och filen laddades inte upp. Filstorleken är kanske större än vad som tillåts av din serverinstallation. Kolla med din tjänsteleverantör eller ändra i filen php.ini för att tillåta uppladdning av större filer.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Fel: Du kan inte ladda upp filer större än %s byte!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Fel: Du kan inte ladda upp bildfiler större än %s x %s pixlar!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Filen länkad.<br />Klar.');
 @define('DELETE_HOTLINK_FILE', 'Ta bort den länkade filen <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Kunde inte utföra: "%s", fel: %s, retur var: %d');

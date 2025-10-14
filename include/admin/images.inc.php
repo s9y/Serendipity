@@ -44,7 +44,7 @@ if (isset($_SERVER['CONTENT_LENGTH']) &&
     (int) $_SERVER['CONTENT_LENGTH'] > (1024*1024*(int) ini_get('post_max_size'))) {
     # Other attributes are nuked, so we can not follow the regular code flow. Thus echo the error
     # and end this here.
-    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> Could not upload files because their total size was too big (check PHP\'s post_max_size setting)' . "</span>\n";
+    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_UPLOAD_POST_MAX_SIZEERROR . "</span>\n";
     return;
 }
 
