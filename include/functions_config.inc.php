@@ -533,8 +533,13 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
     }
 
     # We give each user only 5 tries a minute to login. This is to limit brute force attacks.
-    $login_try = (int) serendipity_getCacheItem('logintry' . $username);  # false == 0 when not set
-    serendipity_cacheItem('logintry' . $username, $login_try + 1, 60);
+    $loginID = 'logintry' . $username . preg_replace(
+             ['/\.\d*$/', '/[\da-f]*:[\da-f]*$/'],      # anonymize both IPv4 and IPv6
+             ['.XXX', 'XXXX:XXXX'],
+             $_SERVER['REMOTE_ADDR']
+            );
+    $login_try = (int) serendipity_getCacheItem($loginID);  # false == 0 when not set
+    serendipity_cacheItem($loginID, $login_try + 1, 60);
     if ($login_try > 4) {
         return false;
     }
