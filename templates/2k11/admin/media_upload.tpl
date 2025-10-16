@@ -14,10 +14,12 @@
     <input name="serendipity[adminAction]" type="hidden" value="add">
     {$media.form_hidden}
 
-    <div class="clearfix tabs" id="mediaupload_tabs">
-        <details name="tabs" open>
-            <summary><a>{$CONST.UPLOAD}</a></summary>
-            <div class="panel upload_tab">
+    <div class="clearfix details-tabs" id="mediaupload_tabs">
+
+        <details name="tabs" class="details-item" open>
+        	<summary class="details-tab"><a>{$CONST.UPLOAD}</a></summary>
+        
+            <div class="details-content upload_tab">
                 <div id="uploads" class="zebra_list">
                     <div id="upload_form_1" class="upload_form">
                         <div class="form_field clearfix">
@@ -48,9 +50,10 @@
             </div>
         </details>
 
-        <details name="tabs">
-            <summary><a>{$CONST.DOWNLOAD}</a></summary>
-            <div class="panel download_tab">
+        <details name="tabs" class="details-item">
+            <summary class="details-tab"><a>{$CONST.DOWNLOAD}</a></summary>
+
+            <div class="details-content download_tab">
                 <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
 
                 <div id="downloads">
