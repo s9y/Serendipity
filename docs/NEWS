@@ -1,6 +1,8 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix CSS based tabs in plugin and media upload area
+
    * Rework of the XSRF token. The new one is now valid for 4 hours
      instead of being linked to the (by default short) PHP session. This
      will reduce the occurence of the invalid HTTP-Referrer error in the
