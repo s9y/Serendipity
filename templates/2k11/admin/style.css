@@ -614,7 +614,7 @@ input[type="checkbox"] {
 }
 
 .button_link:focus,
-.tabs > details > summary a:focus,
+.details-tab a:focus,
 button:focus,
 #edit_entry_category button.mfp-close:focus,
 #edit_entry_freetags button.mfp-close:focus,
@@ -635,7 +635,7 @@ input[type="checkbox"]:active {
 }
 
 .button_link,
-.tabs > details > summary a,
+.details-tab a,
 button,
 #edit_entry_category button.mfp-close,
 #edit_entry_freetags button.mfp-close,
@@ -654,7 +654,8 @@ input[type="submit"] {
 }
 
 .button_link,
-.tabs > details > summary a,
+.details-tab a,
+.details-tab a:hover,
 button,
 button[type="submit"].publish_now,
 input[type="button"],
@@ -697,7 +698,7 @@ input[type="submit"].state_cancel:visited {
 }
 
 .button_link:hover,
-.tabs > details > summary a:hover,
+.details-tab a:hover,
 button:hover,
 button[type="submit"].publish_now:hover,
 input[type="button"]:hover,
@@ -734,7 +735,7 @@ input[type="submit"].state_cancel:focus {
 input:checked + .media_selector,
 .button_link:active,
 button[type="submit"].publish_now:active,
-.tabs > details:open > summary a,
+details:open > .details-tab a,
 button:active,
 input[type="button"]:active,
 input[type="color"]:active {
@@ -2564,18 +2565,18 @@ input[name="serendipity[filter][fileCategory]"] {
 }
 
 .media_selector,
-.tabs > details > summary a {
+.details-tab a {
     border-radius: 0;
     border-right: 0 none;
 }
 
 .media_selector:first-of-type,
-.tabs > details:first-child > summary a {
+details:first-child > .details-tab a {
     border-radius: 4px 0 0 4px;
 }
 
 .media_selector:last-of-type,
-.tabs > details:last-child > summary a {
+details:last-child .details-tab a {
     border-radius: 0 4px 4px 0;
     border-right: 1px solid #bbb;
 }
@@ -3745,24 +3746,38 @@ img.mfp-img {
     }
 }
 
-.tabs {
-    display: flex;
-    flex-wrap: wrap;
+.details-tab {
+  display: block;
+  order: 0;
+  cursor: pointer;
 }
 
-.tabs > details {
+.details-tab::-webkit-details-marker {
+  display: none;
+}
+
+.details-tabs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.details-content {
+  order: 1;
+  padding-top: 1rem;
+  width: 100%;
+}
+
+.details-content details {
+  margin: 1.5rem;
+}
+
+.details-item {
+  display: contents;
+}
+
+@supports selector(::details-content) {
+  .details-item[open]::details-content {
     display: contents;
+  }
 }
-
-.tabs > details > summary {
-	position: relative;
-	justify-content: center;
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.tabs .panel {
-	order: 1; 
-	width: 100%;
-}
-
