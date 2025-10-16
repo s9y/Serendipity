@@ -1416,7 +1416,7 @@ function serendipity_cleanCache() {
     }
 }
 
-// Cache the given data for one hour
+// Cache the given data, defaults to one hour.
 function serendipity_cacheItem($key, $item, $ttl = 3600) {
     $cache = serendipity_setupCache();
 
