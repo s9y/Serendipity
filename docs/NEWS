@@ -1,8 +1,10 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
+
    * clean blog: Updated to use newer versions of font awesome,
      bootstrap and its webfonts. Also hosts those files locally now and
-     drops the shims for old versions of the Internet Explorer.
+     drops the shims for old versions of the Internet Explorer. Add
+     option for a mastodon profile button.
 
    * Fix CSS based tabs in plugin and media upload area
 
