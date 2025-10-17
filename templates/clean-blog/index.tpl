@@ -167,6 +167,16 @@
                                 </a>
                             </li>
                         {/if}
+                        {if $template_option.mastodon_url}
+                            <li>
+                                <a href="{$template_option.twitter_url}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-mastodon fa-stack-1x"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        {/if}
                         {if $template_option.facebook_url}                        
                             <li>
                                 <a href="{$template_option.facebook_url}">
