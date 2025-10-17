@@ -1089,6 +1089,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
         $cached = serendipity_getCacheItem($cache_key);
         if ($cached && $cached !== false) {
             $serendipity['smarty']->assignByRef($smarty_block, $cached);
+            $serendipity['smarty']->assignByRef('entries', $entries);
             return $cached;
         }
     }
