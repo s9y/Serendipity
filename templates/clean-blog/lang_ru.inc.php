@@ -64,6 +64,7 @@
 @define('GITHUB_URL','URL-адрес GitHub.  Значок не отображается, если пусто.');
 @define('INSTAGRAM_URL','URL-адрес Instagram.  Значок не отображается, если пусто.');
 @define('PINTEREST_URL','URL-адрес Pinterest.  Значок не отображается, если пусто.');
+@define('MASTODON_URL','URL-адрес Mastodon.  Значок не отображается, если пусто.');
 @define('COPYRIGHT', 'Авторское право');
 
 //time ago in words function

@@ -20,7 +20,7 @@
        <link rel="canonical" href="{$serendipityBaseURL}">
     {/if}    
 {* BOOTSTRAP CORE CSS *}
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="{serendipity_getFile file="css/bootstrap.min.css"}" rel="stylesheet">
 {* S9Y CSS *}
     <link rel="stylesheet" href="{$head_link_stylesheet}"> 
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
@@ -31,17 +31,13 @@
         <link rel="webmention" href="{$serendipityBaseURL}comment.php?type=webmention&amp;entry_id={$entry_id}" />
     {/if}   
 {* CUSTOM FONTS *}
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{serendipity_getFile file="css/fontawesome.min.css"}" rel="stylesheet" />
+    <link href="{serendipity_getFile file="css/brands.min.css"}" rel="stylesheet" />
+    <link href="{serendipity_getFile file="css/regular.min.css"}" rel="stylesheet" />
+    <link href="{serendipity_getFile file="css/solid.min.css"}" rel="stylesheet" />
     {if $template_option.use_googlefonts}
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600,800|Lora:400,400italic' rel='stylesheet' type='text/css'>
+        <link href="{serendipity_getFile file="css/webfonts.css"}" rel='stylesheet' type='text/css'>
     {/if}
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
    
 {* HEADER IMAGE *}
     {if $view=="entry"}
@@ -165,8 +161,18 @@
                             <li>
                                 <a href="{$template_option.twitter_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-x-twitter fa-stack-1x"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        {/if}
+                        {if $template_option.mastodon_url}
+                            <li>
+                                <a href="{$template_option.twitter_url}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-mastodon fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -175,8 +181,8 @@
                             <li>
                                 <a href="{$template_option.facebook_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-facebook fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -185,8 +191,8 @@
                             <li>
                                 <a href="{$template_option.github_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-github fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -195,8 +201,8 @@
                             <li>
                                 <a href="{$template_option.instagram_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-instagram fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -205,8 +211,8 @@
                             <li>
                                 <a href="{$template_option.pinterest_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-pinterest-p fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-brands fa-pinterest-p fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -215,8 +221,8 @@
                             <li>
                                 <a href="{$template_option.rss_url}">
                                     <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                                        <i class="fa-regular fa-circle fa-stack-2x"></i>
+                                        <i class="fa-solid fa-rss fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
@@ -227,7 +233,7 @@
             </div>
         </div>
     </footer>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="{serendipity_getFile file="js/bootstrap.min.js"}"></script>
     <script src={serendipity_getFile file="js/clean-blog.min.js"}></script>
 {/if}
 {$raw_data}

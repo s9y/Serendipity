@@ -206,6 +206,12 @@ $template_config = array(
         'default'       => '',
     ),   
         array(
+        'var'           => 'mastodon_url',
+        'name'          => MASTODON_URL,
+        'type'          => 'string',
+        'default'       => '',
+    ),   
+        array(
         'var'           => 'copyright',
         'name'          => COPYRIGHT,
         'type'          => 'string',
@@ -227,7 +233,7 @@ $template_config_groups = array(
     THEME_README        => array('theme_instructions'),
     THEME_HEADERS       => array('default_header_image', 'entry_default_header_image', 'staticpage_header_image', 'contactform_header_image', 'archive_header_image'),
     THEME_PAGE_OPTIONS  => array('use_googlefonts', 'home_link_text', 'date_format', 'comment_time_format','subtitle_use_entrybody', 'entrybody_detailed_only', 'show_comment_link', 'categories_on_archive', 'tags_on_archive', 'copyright'),   
-    THEME_SOCIAL_LINKS  => array('twitter_url', 'facebook_url', 'rss_url', 'github_url', 'instagram_url', 'pinterest_url'),
+    THEME_SOCIAL_LINKS  => array('twitter_url', 'mastodon_url', 'facebook_url', 'rss_url', 'github_url', 'instagram_url', 'pinterest_url'),
     THEME_NAVIGATION    => $navlinks_collapse
 );
 
