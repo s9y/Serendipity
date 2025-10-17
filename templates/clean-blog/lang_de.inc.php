@@ -63,6 +63,7 @@
 @define('GITHUB_URL','GitHub-URL. Icon wird nicht angezeigt, falls leer.');
 @define('INSTAGRAM_URL','Instagram-URL. Icon wird nicht angezeigt, falls leer.');
 @define('PINTEREST_URL','Pinterest-URL. Icon wird nicht angezeigt, falls leer.');
+@define('MASTODON_URL','Mastodon-URL. Icon wird nicht angezeigt, falls leer.');
 @define('COPYRIGHT', 'Copyright');
 
 //time ago in words function
