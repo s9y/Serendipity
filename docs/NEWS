@@ -1,6 +1,8 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Show error when uploaded file is too big (PHP ini settings)
+   
    * clean blog: Updated to use newer versions of font awesome,
      bootstrap and its webfonts. Also hosts those files locally now and
      drops the shims for old versions of the Internet Explorer. Add

@@ -564,6 +564,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Óþekkt villa hefur komið upp, skrá ekki vistuð. Kannski var stærð skráarinnar meiri heldur en hámarksstærðin sem netjónninn skilgreinir. Hafðu samband við þjónustuaðilann þinn eða breytti php.ini skránni til að leyfa stærri skráarflutninga.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Skrá hotlinkuð.<br />Búin.');
 @define('DELETE_HOTLINK_FILE', 'Eyddi hotlinkaðri skrá, nefnd <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Gat ekki framkvæmt: "%s", villa: %s, return var: %d');

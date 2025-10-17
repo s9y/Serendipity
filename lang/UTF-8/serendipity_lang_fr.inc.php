@@ -567,6 +567,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Erreur : impossible d\'uploader le fichier. Peut-être que la taille du fichier est plus grande que ce que votre serveur autorise. Vérifiez avec votre administrateur système ou éditez votre fichier php.ini pour autoriser le téléchargement de fichiers plus volumineux.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Lien du fichier.<br />Fait.');
 @define('DELETE_HOTLINK_FILE', 'Suppression du fichier lié nommé <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Impossible d\'exécuter : "%s", erreur: %s, retourne la valeur: %d');

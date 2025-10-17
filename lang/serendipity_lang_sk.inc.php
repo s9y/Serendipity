@@ -576,6 +576,7 @@ $i18n_filename_to = array (
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Neznáma chyba, súbor sa nenahral. Mo¾ným dôvodom je, ¾e veµkos» súboru prekraèuje maximálnu veµkos» povolenú serverom. Spojte sa s va¹ím providerom alebo upravte súbor php.ini a povolte väè¹iu veµkos».');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Chyba: Nemô¾ete uploadova» súbory väè¹ie ako %s bytov!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Chyba: Nemô¾ete uploadova» súbory obrázkov väè¹ie ako %s x %s pixelov!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Súbor prepojený odkazom.<br />Dokonèené.');
 @define('DELETE_HOTLINK_FILE', 'Zmazaný odkazovaný súbor <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Nepodarilo sa spusti»: "%s", chyba: %s, vracia premennú: %d');

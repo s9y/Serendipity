@@ -576,6 +576,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Ocurrió un error desconocido, fichero no importado. Quizás el tamaño del fichero es mayor que el tamaño máximo permitido por tu instalación. Verifica con tu ISP o edita tu fichero php.ini para permitir transferir ficheros de tamaño más grande.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: ¡No puedes subir ficheros de más de %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: ¡No puedes subir imágenes de más de %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Fichero como recurso externo enlazado.<br />Hecho.');
 @define('DELETE_HOTLINK_FILE', 'Borrado el recurso enlazado externamente con el nombre <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Incapaz de ejecutar: "%s", error: %s, variable devuelta: %d');

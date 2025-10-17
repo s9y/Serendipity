@@ -565,6 +565,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'خطای ناشناخته، فایلی بالاگذاری نشد. ممکن است که حجم فایل شما بیشتر از ماکزیمم حجم اجازه داده شده باشد. لطفا ISP یا فایل php.ini خود را چک کنید.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'خطا: شما نمی توانید فایلی با حجمی بیشتر از %s بایت ارسال کنید!');
 @define('MEDIA_UPLOAD_DIMERROR', 'خطا: شما نمی توانید تصویری با  ابعاد بیشتر از %s x %s پیکسل ارسال کنید!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'به فایل مربوطه، لینک داده شد.');
 @define('DELETE_HOTLINK_FILE', 'لینک فایل <b>%s</b> حذف شد');
 @define('IMAGICK_EXEC_ERROR', 'توانایی اجرای "%s" نمی باشد، خطا: %s، مقدار بازگشتی: %d');

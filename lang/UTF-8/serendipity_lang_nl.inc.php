@@ -566,6 +566,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Er is een onbekende fout opgetreden, het bestand is niet verzonden. Misschien is het bestand groter dan uw server toestaat. Controleer dit bij uw provider of bewerk uw php.ini zodat deze grotere bestanden toelaat.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Fout: U kan geen bestanden uploaden die groter zijn dan %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Fout: U kan geen afbeeldingen uploaden die groter zijn dan %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Bestand is gehotlinkt.<br />Klaar.');
 @define('DELETE_HOTLINK_FILE', 'Verwijder het gehotlinkte bestand met de naam <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Niet uit te voeren: "%s", fout: %s, foutcode : %d');

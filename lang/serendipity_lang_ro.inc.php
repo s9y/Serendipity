@@ -565,6 +565,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Am dat peste o eroare necunoscuta, nu am încarcat fisierul. Poate ca marimea fisierului este mai mare decât maximul admis de server. Ia legatura cu ISP-ul tau sau editeaza fisierul php.ini pentru a permite imagini mai mari.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Fisier legat direct.<br />Gata.');
 @define('DELETE_HOTLINK_FILE', 'Am sters fisierul legat direct cu numele <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Nu pot executa: "%s", eroare: %s, return var: %d');

@@ -566,6 +566,7 @@ $i18n_unknown = 'tw';
 @define('ERROR_UNKNOWN_NOUPLOAD', '未知的錯誤發生, 檔案還沒上傳. 也許你的檔案大於限制的大小. 請詢問您的 ISP 或修改您的 php.ini 檔.');
 @define('MEDIA_UPLOAD_SIZEERROR', '錯誤：您不能上傳大於 %s 位元組的檔案！');
 @define('MEDIA_UPLOAD_DIMERROR', '錯誤：您不能上傳大於 %s x %s 的圖片！');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', '檔案外部連結<br />結束。');
 @define('DELETE_HOTLINK_FILE', '刪除外部連結的檔案 <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', '無法執行: "%s", 錯誤: %s, 傳回變數: %d');

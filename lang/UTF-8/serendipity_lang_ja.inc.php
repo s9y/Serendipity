@@ -564,6 +564,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', '未知のエラーが生じました。ファイルはアップロードしませんでした。おそらくファイルサイズがサーバーのインストールで許可された最大サイズを超えたと思われます。ISP に確認するか、php.ini ファイルで許可されたアップロード可能な最大ファイルサイズを編集してください。');
 @define('MEDIA_UPLOAD_SIZEERROR', 'エラー: %s バイトより大きなファイルはアップロードできません!');
 @define('MEDIA_UPLOAD_DIMERROR', 'エラー: %s x %s ピクセルより大きな画像はアップロードできません!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'ファイルをホットリンクしました。<br />完了です。');
 @define('DELETE_HOTLINK_FILE', '<b>%s</b> というファイ名のホットリンクを削除する');
 @define('IMAGICK_EXEC_ERROR', '実行できませんでした: "%s", エラー: %s, 返り値: %d');

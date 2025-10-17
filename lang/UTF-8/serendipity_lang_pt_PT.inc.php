@@ -567,6 +567,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Ocorreu um erro desconhecido, o arquivo não foi transferido. Talvez o tamanho do arquivo seja maior que o permitido pelo seu servidor. Verifique com o seu servidor de internet, ou edite o php.ini para permitir transferência de arquivos de maior tamanho.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Erro: Você não pode fazer upload de ficheiros maiores que %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Erro: Você não pode fazer upload de ficheiros maiores que %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Ficheiro hotlinked.<br />Feito.');
 @define('DELETE_HOTLINK_FILE', 'Apagado o ficheiro hotlinked intitulado <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Impossível executar: "%s", erro: %s, variável devolvida: %d');

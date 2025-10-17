@@ -565,6 +565,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Bilinmeyen hata oluştu, dosya yüklenemedi.Dosyanız sunucunuzda izin verilen boyuttan daha büyük olabilir.Servis sağlayıcınızdan araştırın ya da php.ini dosyanızı daha büyük boyutta dosya yüklenmesine izin verecek şekilde ayarlayın.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Dosya ilişkilendirmesi.<br />Tamamlandı.');
 @define('DELETE_HOTLINK_FILE', ' <b>%s</b> başlıklı dosyanın sıcak linklerini sil');
 @define('IMAGICK_EXEC_ERROR', 'Çalıştırılamıyor: "%s", hata: %s, değişkene dön : %d');
