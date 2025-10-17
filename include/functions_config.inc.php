@@ -2137,7 +2137,7 @@ function serendipity_setFormToken($type = 'form') {
  */
 function serendipity_getOrCreateValidToken($authorid, &$duration = 0, $force_renew = false) {
     if (! $force_renew) {
-        $tokenWithDuration = serendipity_get_user_config_var(XSRF_KEY, $authorid, '');
+        $tokenWithDuration = serendipity_get_user_config_var(XSRF_KEY, $authorid ?? 0, '');
         if ($tokenWithDuration) {
             $token = substr($tokenWithDuration, 0, strpos($tokenWithDuration, ":::"));
             $duration = substr($tokenWithDuration, strpos($tokenWithDuration, ":::") + 3);
@@ -2151,7 +2151,7 @@ function serendipity_getOrCreateValidToken($authorid, &$duration = 0, $force_ren
     // We had no stored valid token. So we need to create and store a new one.
     $token = bin2hex(random_bytes(32));
     $duration = time() + (60 * 60 * 4);  // 4 hours in the future, for long editing sessions
-    serendipity_set_config_var(XSRF_KEY, "$token:::$duration", $authorid);
+    serendipity_set_config_var(XSRF_KEY, "$token:::$duration", $authorid ?? 0);
     return $token;
 }
 
