@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Brute force protection for the logins. Logins now only accept 5
+     login attempts a minute, bound to the user's anonymized IP.
+
    * Fix CSS based tabs in plugin and media upload area
 
    * Rework of the XSRF token. The new one is now valid for 4 hours

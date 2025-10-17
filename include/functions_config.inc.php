@@ -532,6 +532,18 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
         if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Recall from session: ' . $username . ':' . $password . "\n");
     }
 
+    # We give each user only 5 tries a minute to login. This is to limit brute force attacks.
+    $loginID = 'logintry' . $username . preg_replace(
+             ['/\.\d*$/', '/[\da-f]*:[\da-f]*$/'],      # anonymize both IPv4 and IPv6
+             ['.XXX', 'XXXX:XXXX'],
+             $_SERVER['REMOTE_ADDR']
+            );
+    $login_try = (int) serendipity_getCacheItem($loginID);  # false == 0 when not set
+    serendipity_cacheItem($loginID, $login_try + 1, 60);
+    if ($login_try > 4) {
+        return false;
+    }
+
     if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login ext check' . "\n");
     $is_authenticated = false;
     if ($use_external) serendipity_plugin_api::hook_event('backend_login', $is_authenticated, NULL);
