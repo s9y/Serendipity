@@ -192,7 +192,7 @@
                                 <a href="{$template_option.instagram_url}">
                                     <span class="fa-stack fa-lg">
                                         <i class="fa-regular fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-camera fa-stack-1x"></i>
+                                        <i class="fa-brands fa-instagram fa-stack-1x"></i>
                                     </span>
                                 </a>
                             </li>
