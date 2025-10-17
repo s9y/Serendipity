@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Fix opengraph tags of the social plugin disappearing when entry was
+     cached
+
    * Fix CSS based tabs in plugin and media upload area
 
    * Rework of the XSRF token. The new one is now valid for 4 hours
