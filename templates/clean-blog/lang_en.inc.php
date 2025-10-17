@@ -64,6 +64,7 @@
 @define('GITHUB_URL','GitHub URL path.  Icon not displayed if blank.');
 @define('INSTAGRAM_URL','Instagram URL path.  Icon not displayed if blank.');
 @define('PINTEREST_URL','Pinterest URL path.  Icon not displayed if blank.');
+@define('MASTODON_URL','Mastodon URL path.  Icon not displayed if blank.');
 @define('COPYRIGHT', 'Copyright');
 
 //time ago in words function
