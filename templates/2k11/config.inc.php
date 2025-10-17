@@ -118,13 +118,14 @@ serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $t
 function serendipity_plugin_api_pre_event_hook_js($event, &$bag, &$eventData, &$addData) {
     // always add newlines to the end of last element, in case of other plugins using this hook and
     // always start at line Col 1, to populate the (virtual) serendipity.js file
-    echo "
+    echo "window.addEventListener('load', function () {
 jQuery(function() {
     jQuery('input[type=\"url\"]').change(function() {
         if (this.value != '' && ! (this.value.substr(0,7) == 'http://' || this.value.substr(0,8) == 'https://')) {
             this.value = 'http://' + this.value;
         }
     });
+});
 })\n\n";
 }
 
