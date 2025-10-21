@@ -1445,8 +1445,7 @@ function serendipity_getCacheItem($key) {
     }
     
     if (file_exists($cache . $key)) {
-        // This will usually also be the creation time under linux, since we never write to cache
-        // files:
+        // The time when the cache file was last written to (or created)
         $creation_time = filemtime($cache . $key);
         $item_and_ttl = file_get_contents($cache . $key);
         $ttl = substr($item_and_ttl, strrpos($item_and_ttl, S9Y_CACHE_TTL_SEPARATOR) + strlen(S9Y_CACHE_TTL_SEPARATOR));
@@ -1455,6 +1454,7 @@ function serendipity_getCacheItem($key) {
             unlink($cache . $key);
             return false;
         } else {
+            // It is valid, we just have to remove the ttl appendix from the cache content
             return substr($item_and_ttl, 0, - (strlen($ttl) + strlen(S9Y_CACHE_TTL_SEPARATOR)));
         }
     } else {

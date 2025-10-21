@@ -539,8 +539,10 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
              $_SERVER['REMOTE_ADDR']
             );
     $login_try = (int) serendipity_getCacheItem($loginID);  # false == 0 when not set
-    serendipity_cacheItem($loginID, $login_try + 1, 60);
+    
     if ($login_try > 4) {
+        // We are in block mode, user failed log in too often.
+        serendipity_cacheItem($loginID, $login_try + 1, 60); // Renew the block for 60 seconds
         return false;
     }
 
@@ -632,7 +634,9 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
 
         // Only reached, when proper login did not yet return true.
         if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - FAIL.' . "\n");
-
+        // Raise the count for failed attempts, to potentially trigger the brute force protection
+        // above.
+        serendipity_cacheItem($loginID, $login_try + 1, 60);
         $_SESSION['serendipityAuthedUser'] = false;
         serendipity_session_destroy();
     }
