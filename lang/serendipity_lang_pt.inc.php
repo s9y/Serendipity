@@ -179,6 +179,7 @@
 @define('DELETING_FILE', 'Excluindo arquivo %s...');
 @define('SETTINGS_SAVED_AT', 'As novas configurações foram salvas em %s');
 @define('INVERT_SELECTIONS', 'Inverter Seleção');
+
 @define('PERSONAL_SETTINGS', 'Preferências Pessoais');
 @define('DO_MARKUP_DESCRIPTION', 'Aplicar transformações de marcas no texto (carinhas, abreviaturas com *, /, _, ...). Desabilitando isso você preservará o código HTML no texto.');
 @define('BASE_DIRECTORY', 'Diretório base');
@@ -564,6 +565,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Ocorreu um erro desconhecido, o arquivo não foi transferido. Talvez o tamanho do arquivo seja maior que o permitido pelo seu servidor. Verifique com o seu servidor de Internet, ou edite o php.ini para permitir transferência de arquivos de maior tamanho.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Arquivo entrelaçado.<br />Feito.');
 @define('DELETE_HOTLINK_FILE', 'Apagar o entrelaçamento do arquivo de nome <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Impossível executar: "%s", erro: %s, retornou variável: %d');

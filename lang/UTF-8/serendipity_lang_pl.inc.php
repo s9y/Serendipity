@@ -565,6 +565,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Wystąpił nieznany błąd, plik nie został załadowany. Być może konfiguracja serwera nie zezwala na przesyłanie tak dużych plików. Sprawdź to u swojego ISP lub wyedytuj odpowiednio plik php.ini (jeśli masz dostęp do konfiguracji serwera) by zezwolić na przesyłanie większych plików.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Błąd: Nie możesz wysyłać na serwer plików większych niż %s bajtów!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Błąd: Nie możesz wysyłać na serwer obrazków większych niż %s x %s piksele!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Plik podlinkowany.<br />Zrobione.');
 @define('DELETE_HOTLINK_FILE', 'Skasuj podlinkowany plik o nazwie <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Nie można wykonać: %s, błąd: %s, zwrócona wartość: %d');

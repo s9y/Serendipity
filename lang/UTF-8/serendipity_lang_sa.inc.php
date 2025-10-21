@@ -564,6 +564,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'حصل خطأ غير معروف! ! ! لم يتمل رفع الملف – من الممكن أن يكون الملف أكبر من حجم الملف لمصرح برفعه ! ! ! أفحص ISP أو قم بتحرير ملف php.ini كي تسمح برفع الملفات الكبيرة');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'رابط فعال<br />تم');
 @define('DELETE_HOTLINK_FILE', 'تم حذف الرابط النشط والملف <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'غير قادر على تنفيذ "%s", خطأ: %s, مرجع الخطأ: %d');

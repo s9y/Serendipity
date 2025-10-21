@@ -1,6 +1,8 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Show error when uploaded file is too big (PHP ini settings)
+   
    * Move 2k11's url validation helper function into the load event, so
      loading of jQuery itself can be delayed
      

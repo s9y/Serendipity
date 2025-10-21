@@ -564,6 +564,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Pieleen meni, tiedostoa ei tuotu. Kenties tiedoston koko oli liian suuri. Kysy palveluntarjoajaltasi apua tai muokkaa php.ini tiedostoasi salliaksesi isompien tiedostojen tuonnin..');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Tiedostoa linkitetään.<br />Tehty.');
 @define('DELETE_HOTLINK_FILE', 'Poistettu linkitetty tiedosto nimeltä <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Suoritus epäonnistui: "%s", virhe: %s, paluuarvo: %d');

@@ -40,6 +40,15 @@ if ( $serendipity['GET']['adminAction'] == 'add' && ! ($serendipity['POST']['adm
     }
 }
 
+if (isset($_SERVER['CONTENT_LENGTH']) &&
+    (int) $_SERVER['CONTENT_LENGTH'] > (1024*1024*(int) ini_get('post_max_size'))) {
+    # Other attributes are nuked, so we can not follow the regular code flow. Thus echo the error
+    # and end this here.
+    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_UPLOAD_POST_MAX_SIZEERROR . "</span>\n";
+    return;
+}
+
+
 # php 8 compat array field initialization
 $data['case_doSync'] = false;
 $data['case_do_delete'] = false;
@@ -228,6 +237,7 @@ switch ($serendipity['GET']['adminAction']) {
             return;
         }
         $data['case_add'] = true;
+
 
         if (($serendipity['POST']['adminSubAction'] ?? null) == 'properties') {
             serendipity_restoreVar($serendipity['COOKIE']['serendipity_only_path'], $serendipity['GET']['only_path']); // restore last set directory path, see true parameter
@@ -435,8 +445,11 @@ switch ($serendipity['GET']['adminAction']) {
                         );
                         serendipity_plugin_api::hook_event('backend_image_add', $target, end($new_media));
                     } else {
-                        // necessary for the ajax-uplaoder to show upload errors
-                        header("Internal Server Error", true, 500);
+                        if ($serendipity['uploadResize']) {
+                            // Necessary for the ajax-uplaoder to show upload errors. But causes a
+                            // webserver error in the regular php flow
+                            header("Internal Server Error", true, 500);
+                        }
                         $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_UNKNOWN_NOUPLOAD . "</span>\n";
                     }
                 }
