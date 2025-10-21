@@ -565,6 +565,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', '알 수 없는 오류가 발생하여 파일이 업로드되지 않았습니다. 서버가 허용하는 파일 크기를 초과했을 수 있습니다. 호스팅 업체에 확인을 하거나 php.ini 파일을 수정하여 더 큰 파일을 업로드할 수 있도록 하십시오.');
 @define('MEDIA_UPLOAD_SIZEERROR', '오류: %s바이트보다 큰 파일을 올릴 수 없습니다!');
 @define('MEDIA_UPLOAD_DIMERROR', '오류: %s x %s 픽셀보다 큰 그림 파일을 올릴 수 없습니다!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', '파일이 핫링크 되었습니다.<br />완료.');
 @define('DELETE_HOTLINK_FILE', '<b>%s</b>(이)라는 핫링크 파일 삭제됨');
 @define('IMAGICK_EXEC_ERROR', '실행할 수 없음: "%s", 오류: %s, 리턴 변수: %d');

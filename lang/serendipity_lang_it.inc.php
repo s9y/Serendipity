@@ -565,6 +565,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Errore sconosciuto, file non inviato. Forse le dimensioni sono superiori al massimo consentito dall\'installazione del server. Chiedi al tuo provider o modifica php.ini per consentire upload più corposi.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'File hot-linkato.<br />Fatto.');
 @define('DELETE_HOTLINK_FILE', 'Cancellato il file hot-linkato intitolato <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Impossibile eseguire: "%s", errore: %s, valore restituito: %d');

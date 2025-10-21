@@ -564,6 +564,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Ismeretlen hiba történt, a fájl nincs feltöltve. Talán a fájl mérete nagyobb mint a szerveren beállított megengedett maximum érték. Ezt a beállítást a szerver üzemeltetője tudja megváltoztatni.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Hiba: Nem tölthetsz fel nagyobb méretű fájlt mint %s bájt!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Hiba: Nem tölthetsz fel nagyobb méretű képet mint %s x %s pixel!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Fájl közvetlen hivatkozás létrehozva.<br />Kész.');
 @define('DELETE_HOTLINK_FILE', 'Ezt a közvetlen hivatkozást használó fájlt töröltük <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Nem sikerült futtatni a következőt: "%s", hiba: %s, visszatérési érték: %d');

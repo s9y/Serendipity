@@ -566,6 +566,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', '发生错误, 文件没有上传，可能因为你的文件超过限制的大小， 请询问你的主机商或修改你的 php.ini 文件属性。');
 @define('MEDIA_UPLOAD_SIZEERROR', '错误：你不能上传大于 %s 字节的文件');
 @define('MEDIA_UPLOAD_DIMERROR', '错误：你不能上传大于 %s x %s 的图片');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', '文件外部连接<br />结束。');
 @define('DELETE_HOTLINK_FILE', '删除外部连接的文件 <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', '无法执行: "%s", 错误: %s, 系数: %d');

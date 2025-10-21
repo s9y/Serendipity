@@ -569,6 +569,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Възникна неизвестна грешка и файлът не е качен. Може би големината на файла е по-голяма от максимално допустимата от иснталацията на сървъра. Проверете вашия доставчик или редактирайте вашия файл php.ini, така че да позволява по-големи размери.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Грешка: Не можете да качвате файлове, по-големи от %s байта!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Грешка: Не можете да качвате изображения, по-големи от %s x %s пиксела.');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Файлът е гореща връзка.<br />Готово.');
 @define('DELETE_HOTLINK_FILE', 'Изтрит е горещо свързан файл, озаглавен <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Не може да бъде изпълнено: "%s", грешка: %s, върнат код: %d');

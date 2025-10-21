@@ -12,7 +12,6 @@
 // for example where the string has changed and to be back-set to english
 // or change definition name by changing the array key
 // remove this safety block
-exit;
 
 function getDef($line) {
     $matches = array();
