@@ -532,6 +532,20 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
         if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Recall from session: ' . $username . ':' . $password . "\n");
     }
 
+    # We give each user only 5 tries a minute to login. This is to limit brute force attacks.
+    $loginID = 'logintry' . $username . preg_replace(
+             ['/\.\d*$/', '/[\da-f]*:[\da-f]*$/'],      # anonymize both IPv4 and IPv6
+             ['.XXX', 'XXXX:XXXX'],
+             $_SERVER['REMOTE_ADDR']
+            );
+    $login_try = (int) serendipity_getCacheItem($loginID);  # false == 0 when not set
+    
+    if ($login_try > 4) {
+        // We are in block mode, user failed log in too often.
+        serendipity_cacheItem($loginID, $login_try + 1, 60); // Renew the block for 60 seconds
+        return false;
+    }
+
     if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login ext check' . "\n");
     $is_authenticated = false;
     if ($use_external) serendipity_plugin_api::hook_event('backend_login', $is_authenticated, NULL);
@@ -620,7 +634,9 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
 
         // Only reached, when proper login did not yet return true.
         if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - FAIL.' . "\n");
-
+        // Raise the count for failed attempts, to potentially trigger the brute force protection
+        // above.
+        serendipity_cacheItem($loginID, $login_try + 1, 60);
         $_SESSION['serendipityAuthedUser'] = false;
         serendipity_session_destroy();
     }

@@ -10,6 +10,7 @@ if (defined('S9Y_FRAMEWORK_FUNCTIONS')) {
     return;
 }
 @define('S9Y_FRAMEWORK_FUNCTIONS', true);
+@define('S9Y_CACHE_TTL_SEPARATOR', '::|::');
 
 $serendipity['imageList'] = array();
 
@@ -1384,10 +1385,6 @@ function serendipity_url_allowed($url) {
 function serendipity_setupCache() {
     global $serendipity;
 
-    if (!serendipity_db_bool($serendipity['useInternalCache'])) {
-        return false;
-    }
-
     if (function_exists('apcu_enabled') && apcu_enabled()) {
         return 'apcu';
     }
@@ -1419,8 +1416,8 @@ function serendipity_cleanCache() {
     }
 }
 
-// Cache the given data for one hour
-function serendipity_cacheItem($key, $item) {
+// Cache the given data, defaults to one hour.
+function serendipity_cacheItem($key, $item, $ttl = 3600) {
     $cache = serendipity_setupCache();
 
     if ($cache === false) {
@@ -1428,14 +1425,14 @@ function serendipity_cacheItem($key, $item) {
     }
 
     if ($cache == 'apcu') {
-        return apcu_store($key, $item, 3600);
+        return apcu_store($key, $item, $ttl);
     }
     
     if (rand(0, 100) == 1) {
         serendipity_applyCacheLimits();
     }
     
-    return file_put_contents($cache . $key, $item);
+    return file_put_contents($cache . $key, $item . S9Y_CACHE_TTL_SEPARATOR . "{$ttl}" );
 }
 
 function serendipity_getCacheItem($key) {
@@ -1448,15 +1445,17 @@ function serendipity_getCacheItem($key) {
     }
     
     if (file_exists($cache . $key)) {
-        // This will usually also be the creation time under linux, since we never write to cache
-        // files:
+        // The time when the cache file was last written to (or created)
         $creation_time = filemtime($cache . $key);
-        if ((time() - $creation_time) > 3600) {
+        $item_and_ttl = file_get_contents($cache . $key);
+        $ttl = substr($item_and_ttl, strrpos($item_and_ttl, S9Y_CACHE_TTL_SEPARATOR) + strlen(S9Y_CACHE_TTL_SEPARATOR));
+        if ((time() - $creation_time) > $ttl) {
             // The cache item is not valid anymore
             unlink($cache . $key);
             return false;
         } else {
-            return file_get_contents($cache . $key);
+            // It is valid, we just have to remove the ttl appendix from the cache content
+            return substr($item_and_ttl, 0, - (strlen($ttl) + strlen(S9Y_CACHE_TTL_SEPARATOR)));
         }
     } else {
         return false;
