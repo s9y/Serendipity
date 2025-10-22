@@ -1,8 +1,16 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
-   * Fix opengraph tags of the social plugin disappearing when entry was
-     cached
+   * Make smarty->entries also available when entry is cached. This 
+     fixes e.g. opengraph tags of the social plugin disappearing.
+     
+   * Brute force protection for the logins. Logins now only accept 5
+     login attempts a minute, bound to the user's anonymized IP.
+     
+   * Show error when uploaded file is too big (PHP ini settings)
+   
+   * Move 2k11's url validation helper function into the load event, so
+     loading of jQuery itself can be delayed
      
    * clean blog: Updated to use newer versions of font awesome,
      bootstrap and its webfonts. Also hosts those files locally now and

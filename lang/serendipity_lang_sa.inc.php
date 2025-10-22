@@ -564,6 +564,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'НХб ОШГ ЫнС гЪСжЭ! ! ! бг нКгб СЭЪ ЗбгбЭ – гд ЗбггЯд Гд нЯжд ЗбгбЭ ГЯИС гд НМг ЗбгбЭ бгХСН ИСЭЪе ! ! ! ГЭНХ ISP Гж Юг ИКНСнС гбЭ php.ini Ян КУгН ИСЭЪ ЗбгбЭЗК ЗбЯИнСЙ');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'СЗИШ ЭЪЗб<br />Кг');
 @define('DELETE_HOTLINK_FILE', 'Кг НРЭ ЗбСЗИШ ЗбдФШ жЗбгбЭ <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'ЫнС ЮЗПС Ъбм КдЭнР "%s", ОШГ: %s, гСМЪ ЗбОШГ: %d');

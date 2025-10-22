@@ -180,7 +180,7 @@
 @define('DELETING_FILE', 'Sletter fil %s...');
 @define('SETTINGS_SAVED_AT', 'De nye indstillinger er blevet gemt kl %s');
 @define('INVERT_SELECTIONS', 'Inverter valgte elementer');
-ådet visning');
+
 @define('PERSONAL_SETTINGS', 'Personlige indstillinger');
 @define('DO_MARKUP_DESCRIPTION', 'Tilføj markup-transformationer på teksten (smilies, shortcut markups via *, /, _, ...). Hvis du slår dette fra vil al HTML-kode i teksten blive bibeholdt.');
 @define('BASE_DIRECTORY', 'Rodmappe');
@@ -566,6 +566,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Der skete en ukendt fejl, filen blev ikke uploaded. Måske er din filstørrelse større end den maximale størrelse tilladt af din serveropsætning. Spørg din webudbyder eller rediger din php.ini fil for at tillade uploads af større filer.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Fejl: Du kan ikke uploade filer større end %s bytes!');
 @define('MEDIA_UPLOAD_DIMERROR', 'Fejl: Du kan ikke uploade billeder der er større end %s x %s pixels!');
+@define('MEDIA_UPLOAD_POST_MAX_SIZEERROR', 'Error: Could not upload files because their total size was too big (check PHP\'s post_max_size setting)');
 @define('HOTLINK_DONE', 'Fil blev hotlinked.<br />Færdig.');
 @define('DELETE_HOTLINK_FILE', 'Slet den hotlinkede fil ved navn <b>%s</b>');
 @define('IMAGICK_EXEC_ERROR', 'Kunne ikke eksekvere: "%s", fejl: %s, return var: %d');
