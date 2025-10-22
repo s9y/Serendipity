@@ -1089,6 +1089,11 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
         $cached = serendipity_getCacheItem($cache_key);
         if ($cached && $cached !== false) {
             $serendipity['smarty']->assignByRef($smarty_block, $cached);
+            // Plugins like event_social access entry data in the frontend header via smarty. They
+            // fail when entries is not assigned, so we set it here as well in a familiar format.
+            // NOTE: This has to be extended if correct dategroup keys are needed
+            $dategroup_structure = [(string)time() => ['entries' => $entries]];
+            $serendipity['smarty']->assignByRef('entries', $dategroup_structure);
             return $cached;
         }
     }

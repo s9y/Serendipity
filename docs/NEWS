@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Make smarty->entries also available when entry is cached. This 
+     fixes e.g. opengraph tags of the social plugin disappearing.
+     
    * Brute force protection for the logins. Logins now only accept 5
      login attempts a minute, bound to the user's anonymized IP.
      
