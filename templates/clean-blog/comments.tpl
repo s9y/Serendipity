@@ -38,7 +38,7 @@
                 <div class="comment-meta">
                     <a class="comment-source-trace btn btn-sm btn-default" href="#c{$comment.id}">#{$comment.trace}</a>
                     {if $entry.is_entry_owner}
-                        <a class="comment-source-ownerlink comment-reply-link btn btn-sm btn-default" href="{$comment.link_delete}" onclick="return confirm('{$CONST.COMMENT_DELETE_CONFIRM|@sprintf:$comment.id:$comment.author}');" title="{$CONST.DELETE}"><i class="fa fa-lg fa-trash-o"></i><span class="sr-only"> {$CONST.DELETE}</span></a>
+                        <a class="comment-source-ownerlink comment-reply-link btn btn-sm btn-default" href="{$comment.link_delete}" onclick="return confirm('{$CONST.COMMENT_DELETE_CONFIRM|@sprintf:$comment.id:$comment.author}');" title="{$CONST.DELETE}"><i class="fa fa-lg fa-trash"></i><span class="sr-only"> {$CONST.DELETE}</span></a>
                     {/if}                        
                     
                     {if $entry.allow_comments AND $comment.body != 'COMMENT_DELETED'}
