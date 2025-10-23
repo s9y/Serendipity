@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.6.0] - 2025-10-03
+- Added support for shorttags in functions [#1005](https://github.com/smarty-php/smarty/issues/1005)
+
+
+## [5.5.2] - 2025-08-26
+
+
+- Fixed escaping of array/object keys in debug_print_var
+
+## [5.5.1] - 2025-05-19
+- Fix missing support for loading modifiercompilers from plugin dir in BCPluginsAdapter [#1132](https://github.com/smarty-php/smarty/pull/1132)
+
+
+## [5.5.0] - 2025-05-03
+- Support trailing comma in array [#1013](https://github.com/smarty-php/smarty/issues/1013)
+
+
 ## [5.4.5] - 2025-04-15
 - Fixed deprecation notice in StringEval in PHP8.4 [#1119](https://github.com/smarty-php/smarty/issues/1119)
 

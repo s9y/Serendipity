@@ -35,7 +35,7 @@ class ComposerAutoloaderInitcbda25b16bb8365467298ce193f0f30c
         require __DIR__ . '/autoload_static.php';
         call_user_func(\Composer\Autoload\ComposerStaticInitcbda25b16bb8365467298ce193f0f30c::getInitializer($loader));
 
-        $loader->setApcuPrefix('3ea2771c8b690be9dcdd');
+        $loader->setApcuPrefix('c5ce525c18cd0010d703');
         $loader->register(true);
 
         $filesToLoad = \Composer\Autoload\ComposerStaticInitcbda25b16bb8365467298ce193f0f30c::$files;

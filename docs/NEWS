@@ -1,6 +1,8 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Update Smarty to current v5.6.0 (official support for PHP 8.4)
+
    * Make smarty->entries also available when entry is cached. This 
      fixes e.g. opengraph tags of the social plugin disappearing.
      
