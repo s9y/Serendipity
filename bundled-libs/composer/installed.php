@@ -3,7 +3,7 @@
         'name' => 's9y/serendipity',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'f59ecb3f77bc32cf7fec1c90782a79b5a443c18a',
+        'reference' => 'cb8b139bc1f8e638c91e57bc00096e099a8ccf88',
         'type' => 's9y-core',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -46,15 +46,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'pear/net_dns2' => array(
-            'pretty_version' => 'v1.5.4',
-            'version' => '1.5.4.0',
-            'reference' => 'c4a167ff1bc93aaae95601ebc86099376c994581',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../pear/net_dns2',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'pear/net_url2' => array(
             'pretty_version' => 'v2.2.3',
             'version' => '2.2.3.0',
@@ -94,7 +85,7 @@
         's9y/serendipity' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'f59ecb3f77bc32cf7fec1c90782a79b5a443c18a',
+            'reference' => 'cb8b139bc1f8e638c91e57bc00096e099a8ccf88',
             'type' => 's9y-core',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -7,6 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'SimplePie' => array($vendorDir . '/simplepie/simplepie/library'),
-    'Net_DNS2' => array($vendorDir . '/pear/net_dns2'),
     'HTTP_Request2' => array($vendorDir . '/pear/http_request2'),
 );
