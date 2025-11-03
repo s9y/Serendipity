@@ -37,7 +37,7 @@
         "pear/net_dns2": "^1.5.4",
         "php81_bc/strftime": "^0.7.4",
         "smarty/smarty": "^5.4.3",
-        "voku/simple-cache": "^4.1.0"
+        "voku/simple-cache": "^5.0.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

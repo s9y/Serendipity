@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "306f8732c005eddda210b71f8b8b8e1b",
+    "content-hash": "93fa32258faa407c343c65a02d6cb0bf",
     "packages": [
         {
             "name": "katzgrau/klogger",
@@ -594,16 +594,16 @@
         },
         {
             "name": "voku/simple-cache",
-            "version": "4.1.0",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/voku/simple-cache.git",
-                "reference": "d6578b2b1c7a1ed36c4a862cae826b703520e73b"
+                "reference": "71531e9a8f4bfb75a120a986ac12867af15c65be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/voku/simple-cache/zipball/d6578b2b1c7a1ed36c4a862cae826b703520e73b",
-                "reference": "d6578b2b1c7a1ed36c4a862cae826b703520e73b",
+                "url": "https://api.github.com/repos/voku/simple-cache/zipball/71531e9a8f4bfb75a120a986ac12867af15c65be",
+                "reference": "71531e9a8f4bfb75a120a986ac12867af15c65be",
                 "shasum": ""
             },
             "require": {
@@ -617,8 +617,8 @@
                 "phpunit/phpunit": "~6.0 || ~7.0 || ~9.0"
             },
             "suggest": {
-                "predis/predis": "~1.1",
-                "symfony/var-exporter": "~3.0 || ~4.0 || ~5.0"
+                "predis/predis": "~1.1 || ~2.0 || ~3.0",
+                "symfony/var-exporter": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0"
             },
             "type": "library",
             "autoload": {
@@ -647,7 +647,7 @@
             ],
             "support": {
                 "issues": "https://github.com/voku/simple-cache/issues",
-                "source": "https://github.com/voku/simple-cache/tree/4.1.0"
+                "source": "https://github.com/voku/simple-cache/tree/5.0.0"
             },
             "funding": [
                 {
@@ -667,13 +667,13 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-20T11:05:33+00:00"
+            "time": "2025-10-29T13:00:29+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -686,9 +686,9 @@
         "ext-session": "*",
         "ext-xml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.2.0"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
