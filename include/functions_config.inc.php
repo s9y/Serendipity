@@ -2153,7 +2153,7 @@ function serendipity_setFormToken($type = 'form') {
  */
 function serendipity_getOrCreateValidToken($authorid, &$duration = 0, $force_renew = false) {
     if (! $force_renew) {
-        if (IN_installer) {
+        if (defined('IN_installer') && IN_installer) {
             // The installer has no database to access, so no user config variables. Here we
             // fall back to session storage instead.
             $tokenWithDuration = $_SESSION[XSRF_KEY];
@@ -2173,7 +2173,7 @@ function serendipity_getOrCreateValidToken($authorid, &$duration = 0, $force_ren
     // We had no stored valid token. So we need to create and store a new one.
     $token = bin2hex(random_bytes(32));
     $duration = time() + (60 * 60 * 4);  // 4 hours in the future, for long editing sessions
-    if (IN_installer) {
+    if (defined('IN_installer') && IN_installer) {
         $_SESSION[XSRF_KEY] = "$token:::$duration";
     } else {
         serendipity_set_config_var(XSRF_KEY, "$token:::$duration", $authorid ?? 0);
