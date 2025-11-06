@@ -137,11 +137,7 @@ ul a {
   }
   .navbar-custom.is-visible {
     /* if the user changes the scrolling direction, we show the header */
-    -webkit-transform: translate3d(0, 100%, 0);
-    -moz-transform: translate3d(0, 100%, 0);
-    -ms-transform: translate3d(0, 100%, 0);
-    -o-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    top: 0;
   }
 }
 .intro-header {
