@@ -1,9 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
-   *  Fix: clean blog's sticky header (that appears when scrolling up)
-           was positioned with a gap, when it contained too many
-           navigation link
+   * Fix: clean blog's sticky header (that appears when scrolling up)
+          was positioned with a gap, when it contained too many
+          navigation links
 
    * Breaking Change: Removed Net/DNSBL.php, Net/CheckIP.php and 
      pear/net_dns2 from the bundled libs.
