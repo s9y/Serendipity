@@ -44,6 +44,27 @@
         {if $admin_vars.post_action != '' AND NOT $admin_vars.is_logged_in}
             <span class="msg_error">{$CONST.WRONG_USERNAME_OR_PASSWORD}</span>
         {/if}
+        {if $admin_vars.2faPrompt}
+            <form id="login" class="clearfix" action="serendipity_admin.php" method="post">
+                <input type="hidden" name="serendipity[action]" value="admin">
+                <fieldset>
+                    <span class="wrap_legend"><legend>{$CONST.PLEASE_ENTER_2FA}</legend></span>
+
+                    <div class="form_field">
+                        <label for="login_2fa">Code</label>
+                        <input id="login_2fa" name="serendipity[2fa]" type="text" autofocus>
+                    </div>
+
+                    <div class="form_buttons">
+                        <input id="login_send" name="submit" type="submit" value="{$CONST.LOGIN}">
+                        <a class="button_link" href="{$serendipityBaseURL}">{$CONST.BACK_TO_BLOG}</a>
+                    </div>
+                </fieldset>
+                {if isset($admin_vars.out.table)}
+                    {$admin_vars.out.table}
+                {/if}
+            </form>
+        {else}
             <form id="login" class="clearfix" action="serendipity_admin.php" method="post">
                 <input type="hidden" name="serendipity[action]" value="admin">
                 <fieldset>
@@ -72,9 +93,10 @@
                     {$admin_vars.out.table}
                 {/if}
             </form>
-            {if isset($admin_vars.out.footer)}
-                {$admin_vars.out.footer}
-            {/if}
+        {/if}
+        {if isset($admin_vars.out.footer)}
+            {$admin_vars.out.footer}
+        {/if}
     {else}
         {if NOT $admin_vars.no_sidebar}
         <nav id="main_menu">
