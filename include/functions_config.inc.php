@@ -499,6 +499,24 @@ function serendipity_setAuthorToken() {
     $_SESSION['author_token'] = $hash;
 }
 
+function serendipity_send2faCode() {
+    global $serendipity;
+    $secondFactor = bin2hex(random_bytes(6));
+    serendipity_cacheItem($serendipity['serendipityUser'] . '_2faCode', $secondFactor, 60 * 15);
+    $message = $secondFactor; // TODO: Use a template for a proper email text
+    $subject = 'Serendipity login code'; // TODO: Use a Language constant
+    return serendipity_sendMail($serendipity['serendipityEmail'], $subject, $message, $serendipity['blogMail']);
+}
+
+function serendipity_validate2faCoda() {
+    global $serendipity;
+    $storedSecondFactor = serendipity_getCacheItem($serendipity['serendipityUser'] . '_2faCode');
+    if ($storedSecondFactor && $storedSecondFactor === $serendipity['POST']['2fa']) {
+        $_SESSION['serendipity2faSuccess'] = true;
+        // TODO: This also needs to be part of the cookie and be loaded there (with authorToken?)
+    }
+}
+
 /**
  * Perform user authentication routine
  *
@@ -682,7 +700,8 @@ function serendipity_load_userdata($username) {
  * @return boolean  TRUE when logged in, FALSE when not.
  */
 function serendipity_userLoggedIn() {
-    if ($_SESSION['serendipityAuthedUser'] ?? false === true && IS_installed) {
+    // TODO: Only check for serendipity2faSuccess if config is active
+    if (($_SESSION['serendipityAuthedUser'] ?? false) === true && $_SESSION['serendipity2faSuccess'] && IS_installed) {
         return true;
     } else {
         return false;
