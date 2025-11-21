@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Administration Suite');
 @define('WRONG_USERNAME_OR_PASSWORD', 'You appear to have entered an invalid username or password');
 @define('PLEASE_ENTER_CREDENTIALS', 'Please enter your credentials below.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Save information');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');

@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Adminisztrációs Készlet');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Úgy tűnik, hogy hibás felhasználó-nevet vagy jelszót adtál meg');
 @define('PLEASE_ENTER_CREDENTIALS', 'Add meg az azonosításhoz szükséges adataidat.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Adatok megjegyzése');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'Megjegyzés: A felhasználó szintű attribútumok a visszafele kompatibilitás, néhány modul és az azonosítás néhány esete miatt szükségesek. A felhasználók jogosultsága a csoporttagságon keresztül állítható be!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Helytelenül adtad meg a jelenlegi jelszót, így nem változtathatod meg. A beállításokat nem mentettük.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'A felhasználói név nem lehet üres.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'Személyes beállítások elérése');

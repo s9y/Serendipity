@@ -311,6 +311,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('SERENDIPITY_ADMIN_SUITE', 'Panel Administracyjny Serendipity');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Wprowadzono błędną nazwę użytkownika lub hasło.');
 @define('PLEASE_ENTER_CREDENTIALS', 'Wprowadź swój login i hasło w polach poniżej.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Zapisz dane');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -909,6 +910,8 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('USERLEVEL_OBSOLETE', 'UWAGA: to ustawienie jest obecnie używane tylko dla celów kompatybilności ze starszymi wersjami wtyczek i silnika. Obecnie poziom dostępu regulują reguły grup użytkowników!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Wpisałeś(aś) niepoprawne stare hasło i nie jesteś upoważniona do zmiany nowego hasła. Twoje ustawienia NIE zostaną zapisane.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Pole nazwy użytkownika nie może być puste.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Dostęp do ustawień osobistych');

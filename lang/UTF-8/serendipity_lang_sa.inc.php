@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'حقيبة إدارة المجلة');
 @define('WRONG_USERNAME_OR_PASSWORD', 'اسم المستخدم أو كلمة المرور غير صحيحة');
 @define('PLEASE_ENTER_CREDENTIALS', 'الرجاء إدخال المعلومات الخاصة بك.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'حفظ المعلومات');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'ملاحظة: خاصية مستوى المستخدم الآن تتناسق مع ملفات الحث والصلاحيات.و ميزات المستخدم الآن يتم معالجتها مع عضوية المجموعة ! ! ! ');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'لم تدخل كلمة المرور الصحيحة الحالية .لذلك ليس من صلاحياتك تغيير كلمة المرور الى كلمة جيدة. ! ! ! تنبيه: لم يتم حفظ التغييرات');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Access personal configuration');

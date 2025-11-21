@@ -311,6 +311,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', '세렌디피티 관리 도구');
 @define('WRONG_USERNAME_OR_PASSWORD', '아이디 또는 암호가 잘못 입력되었습니다');
 @define('PLEASE_ENTER_CREDENTIALS', '인증 정보를 아래에 입력하십시오.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', '로그인 정보 저장');
 @define('MAIN_MENU', '주 메뉴');
 @define('MENU_PERSONAL', '개인 메뉴');
@@ -909,6 +910,8 @@
 @define('USERLEVEL_OBSOLETE', '주의: 사용자 레벨 속성은 플러그인의 하위 호환성 및 인증 대비책을 위해서만 사용되고 있습니다. 현재 사용자 권한 설정은 그룹 소속을 통해 이루어지고 있습니다.');
 @define('USERCONF_CHECK_PASSWORD_ERROR', '이전 암호가 올바르지 않으므로 새 암호로 변경할 권한이 없습니다. 설정이 저장되지 않았습니다.');
 @define('USERCONF_CHECK_USERNAME_ERROR', '사용자 이름은 비워둘 수 없습니다.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: 개인 설정 관리');

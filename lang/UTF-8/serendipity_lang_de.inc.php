@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Verwaltungsoberfläche');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Das Passwort oder der Username war falsch. Bitte wiederholen Sie die Eingabe.');
 @define('PLEASE_ENTER_CREDENTIALS', 'Bitte geben Sie die Zugangsdaten ein.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Daten speichern');
 @define('MAIN_MENU', 'Hauptmenü');
 @define('MENU_PERSONAL', 'Persönliches Menü');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'HINWEIS: Das Attribut "Benutzerrang" wird nur noch zwecks Abwärtskompatibilität zu Plugins benötigt. Sämtliche Benutzerrechte werden nun mittels Gruppenzugehörigkeiten verwaltet!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Sie haben kein gültiges derzeitiges Passwort angegeben und sind daher nicht berechtigt, das neue Passwort festzulegen. Ihre Einstellungen wurden nicht gespeichert.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Der Benutzername darf nicht leer gelassen werden.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Zugriff auf Persönliche Einstellungen');

@@ -341,6 +341,7 @@ $i18n_filename_to = array (
 @define('SERENDIPITY_ADMIN_SUITE', 'Administrátorská sekce');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Zøejmì jste vložil špatné jméno nebo heslo!');
 @define('PLEASE_ENTER_CREDENTIALS', 'Zadejte prosím pøihlašovací údaje.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Uložit informace');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -939,6 +940,8 @@ $i18n_filename_to = array (
 @define('USERLEVEL_OBSOLETE', 'UPOZORNÌNÍ: Atribut úroveò uživatele (userlevel) je nyní používán jen kvùli zpìtné kompatibilitì s pluginy a autorizaci. Uživatelská práva jsou nyní øízena pomocí èlenských skupin!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Nezadali jste správné staré heslo a nejste oprávnìni heslo zmìnit. Vaše nastavení nebylo uloženo.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Jméno uživatele nemùže být prázdné.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'osobníKonfigurace: Pøístup k osobní konfiguraci');

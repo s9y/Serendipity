@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity 管理スイート');
 @define('WRONG_USERNAME_OR_PASSWORD', '無効のユーザー名かパスワードを入力したように見えます。');
 @define('PLEASE_ENTER_CREDENTIALS', 'ログイン情報を下記に入力してください。');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', '情報を保存する');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', '注意: ユーザー レベル属性は現在プラグインと認証の後方互換性のみに使用されます。ユーザーの特権は現在グループ会員で扱います!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', '正しい古いパスワードを指定せず、新しいパスワードを変更することは許可されていません．設定は保存されませんでした。');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'ユーザー名は空にできません。');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', '個人設定: 個人設定のアクセス');

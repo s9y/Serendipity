@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Administration');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Du verkar ha fel användarnamn eller lösenord');
 @define('PLEASE_ENTER_CREDENTIALS', 'Ange dina inloggningsuppgifter nedan.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Spara information');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'NOTERA: Användarnivåattributet används nu endast för bakåtkompatibilitet med insticksmoduler och reservauktorisering. Användarprivilegier hanteras nu genom gruppmedlemskap!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Du har inte angett det gamla lösenordet på korrekt sätt och du har därför inte tillstånd att ändra lösenord. Dina inställningar sparades inte.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Användarnamnet kan inte utelämnas.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Tillgå personliga inställningar');

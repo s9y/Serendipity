@@ -312,6 +312,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SERENDIPITY_ADMIN_SUITE', 'Администрирование Serendipity');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Похоже, что Вы ввели неверное имя пользователя или пароль');
 @define('PLEASE_ENTER_CREDENTIALS', 'Пожалуйста, введите Ваши имя пользователя и пароль.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Запомнить эту информацию');
 @define('MAIN_MENU', 'Главное меню');
 @define('MENU_PERSONAL', 'Личные настройки');
@@ -910,6 +911,8 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('USERLEVEL_OBSOLETE', 'Замечание: атрибут "уровень пользователя" используется теперь только для обратной совместимости со старыми плагинами и старой схемой авторизации. Права пользователей теперь определяются принадлежностью к группам!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Вы не указали правильно текущий пароль, и потому Вам не разрешено изменить пароль на новый. Ваши настройки не были сохранены.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Имя пользователя не может оставаться пустым.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Доступ к персональным настройкам');

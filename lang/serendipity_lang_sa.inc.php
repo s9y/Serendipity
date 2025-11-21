@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'ÕﬁÌ»… ≈œ«—… «·„Ã·…');
 @define('WRONG_USERNAME_OR_PASSWORD', '«”„ «·„” Œœ„ √Ê ﬂ·„… «·„—Ê— €Ì— ’ÕÌÕ…');
 @define('PLEASE_ENTER_CREDENTIALS', '«·—Ã«¡ ≈œŒ«· «·„⁄·Ê„«  «·Œ«’… »ﬂ.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Õ›Ÿ «·„⁄·Ê„« ');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', '„·«ÕŸ…: Œ«’Ì… „” ÊÏ «·„” Œœ„ «·¬‰   ‰«”ﬁ „⁄ „·›«  «·ÕÀ Ê«·’·«ÕÌ« .Ê „Ì“«  «·„” Œœ„ «·¬‰ Ì „ „⁄«·Ã Â« „⁄ ⁄÷ÊÌ… «·„Ã„Ê⁄… ! ! ! ');
 @define('USERCONF_CHECK_PASSWORD_ERROR', '·„  œŒ· ﬂ·„… «·„—Ê— «·’ÕÌÕ… «·Õ«·Ì… .·–·ﬂ ·Ì” „‰ ’·«ÕÌ« ﬂ  €ÌÌ— ﬂ·„… «·„—Ê— «·Ï ﬂ·„… ÃÌœ…. ! ! !  ‰»ÌÂ: ·„ Ì „ Õ›Ÿ «· €ÌÌ—« ');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Access personal configuration');

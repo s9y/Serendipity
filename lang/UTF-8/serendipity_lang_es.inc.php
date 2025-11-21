@@ -321,6 +321,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Suite de Administración de Serendipity');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Usuario o contraseña erróneo');
 @define('PLEASE_ENTER_CREDENTIALS', 'Por favor introduce tus credenciales abajo.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Guardar información');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -919,6 +920,8 @@
 @define('USERLEVEL_OBSOLETE', 'AVISO: El atributo de nivel de acceso es ahora utilizado sólo con propósitos de compatibilidad con versiones anteriores de extensiones y autorización. ¡Los privilegios de usuarios son ahora manejados por membresías!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'No especificaste correctamente la contraseña actual, por lo tanto no estas autorizado para establecer una nueva. Tus cambios no fueron guardados.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'No puedes dejar el nombre de usuario en blanco.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Configuración de acceso personal');

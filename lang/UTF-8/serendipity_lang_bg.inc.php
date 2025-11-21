@@ -315,6 +315,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SERENDIPITY_ADMIN_SUITE', 'Администриране на Serendipity');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Въвели сте грешно име или парола');
 @define('PLEASE_ENTER_CREDENTIALS', 'Моля, въведете удостоверението си по-долу.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Запазване на тази информация.');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -913,6 +914,8 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('USERLEVEL_OBSOLETE', 'БЕЛЕЖКА: Атрибутът за потребителско ниво се използва само за обратна съвместимост с приставки и удостоверяване. Привилегиите на потребителите сега се управлява чрез членство в групи!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Не зададохте правилно старата си парола и не сте удостоверени за смяна с нова парола. Вашите настройки не са запазени.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Името на потребителя не може да бъде празно.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Достъп до лични настройки');

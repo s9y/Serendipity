@@ -312,6 +312,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Beheer');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Waarschijnlijk heeft u een ongeldige gebruikersnaam of wachtwoord ingevoerd.');
 @define('PLEASE_ENTER_CREDENTIALS', 'Voer hieronder uw gegevens in.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Bewaar deze informatie');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -910,6 +911,8 @@
 @define('USERLEVEL_OBSOLETE', 'OPMERKING: Het attribuut userlevel wordt alleen nog maar gebruikt om compatibiliteitsproblemen met plugins en autorisatie te voorkomen. Gebruikersprivileges worden nu afgehandeld door het groepslidmaatschap!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Het oude wachtwoord dat u heeft ingegeven klopt niet en u bent dus niet geautoriseerd om het wachtwoord te wijzigen. Uw instellingen worden niet bewaard.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'De gebruikersnaam mag niet leeg gelaten worden.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Toegang tot persoonlijke configuratie');
