@@ -239,7 +239,7 @@ if ($ajax) {
     $admin_vars['title']       = $admin_section ?? '';
     $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
     // Only check for serendipity2faSuccess if config is active:
-    $secondFactorEnabled = serendipity_get_user_config_var('second_factor', $serendipity['authorid'], false); 
+    $secondFactorEnabled = serendipity_db_bool(serendipity_get_user_config_var('second_factor', $serendipity['authorid'], false));
     $admin_vars['2faPrompt'] = $secondFactorEnabled && $_SESSION['serendipityAuthedUser'] && ! $_SESSION['serendipity2faSuccess'];
     if ($admin_vars['2faPrompt']) {
         serendipity_send2faCode();

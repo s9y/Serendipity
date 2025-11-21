@@ -66,7 +66,8 @@
                                           'description' => USERCONF_SECONDFACTOR_DESC,
                                           'type'        => 'bool',
                                           'default'     => false,
-                                          'permission'  => 'personalConfiguration'),
+                                          'permission'  => 'personalConfiguration',
+                                          'flags'       => array('config')),
 
                                     array('var'         => 'lang',
                                           'title'       => INSTALL_LANG,
