@@ -41,7 +41,7 @@
         {if isset($admin_vars.out.header)}
             {$admin_vars.out.header}
         {/if}
-        {if $admin_vars.post_action != '' AND NOT $admin_vars.is_logged_in}
+        {if $admin_vars.post_action != '' AND NOT $admin_vars.is_logged_in AND NOT $admin_vars.2faPrompt}
             <span class="msg_error">{$CONST.WRONG_USERNAME_OR_PASSWORD}</span>
         {/if}
         {if $admin_vars.2faPrompt}
