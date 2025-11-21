@@ -230,6 +230,7 @@ function serendipity_set_user_var($name, $val, $authorid, $copy_to_s9y = true) {
         case 'right_publish':
         case 'mail_comments':
         case 'mail_trackbacks':
+        case 'second_factor':
             $val = (serendipity_db_bool($val) ? 1 : '0');
             break;
     }
@@ -700,8 +701,10 @@ function serendipity_load_userdata($username) {
  * @return boolean  TRUE when logged in, FALSE when not.
  */
 function serendipity_userLoggedIn() {
-    // TODO: Only check for serendipity2faSuccess if config is active
-    if (($_SESSION['serendipityAuthedUser'] ?? false) === true && $_SESSION['serendipity2faSuccess'] && IS_installed) {
+    global $serendipity;
+    // Only check for serendipity2faSuccess if config is active
+    $secondFactorEnabled = serendipity_get_user_config_var('second_factor', $serendipity['authorid'], false); 
+    if (($_SESSION['serendipityAuthedUser'] ?? false) === true && (! $secondFactorEnabled || $secondFactorEnabled && $_SESSION['serendipity2faSuccess']) && IS_installed) {
         return true;
     } else {
         return false;

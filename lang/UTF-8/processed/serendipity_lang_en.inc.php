@@ -1,12 +1,11 @@
 <?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
-# Completely re-sorted by Stephan Brunker 2020
 /* vim: set sts=4 ts=4 expandtab : */
 
-@define('LANG_CHARSET', 'ISO-8859-1');
-@define('SQL_CHARSET', 'latin1');
-@define('DATE_LOCALES', 'en_US.ISO-8859-1, en_US.ISO8859-1, english, en, en_US');
+@define('LANG_CHARSET', 'UTF-8');
+@define('SQL_CHARSET', 'utf8');
+@define('DATE_LOCALES', 'en_US.UTF-8, en_US.UTF8, english, en, en_US');
 @define('DATE_FORMAT_ENTRY', '%A, %B %e. %Y');
 @define('DATE_FORMAT_SHORT', '%Y-%m-%d %H:%M');
 @define('WYSIWYG_LANG', 'en');
@@ -15,7 +14,7 @@
 @define('NUMBER_FORMAT_THOUSANDS', ',');
 @define('LANG_DIRECTION', 'ltr');
 // ISO 8601 compliant format for date conversion
-@define('DATE_FORMAT_2', 'Y-m-d H:i'); 
+@define('DATE_FORMAT_2', 'Y-m-d H:i');
 
 /* ONE AND TWO WORD CONSTANTS */
 @define('TYPE', 'Type');
@@ -264,7 +263,7 @@
 @define('SERENDIPITY_UPGRADER_WHY', 'You are seeing this message because you have just installed Serendipity %s, but have not yet upgraded your database installation to fit this version');
 @define('SERENDIPITY_UPGRADER_DATABASE_UPDATES', 'Database updates (%s)');
 @define('SERENDIPITY_UPGRADER_FOUND_SQL_FILES', 'I have found the following .sql files which needs to be run before you can continue normal operation of Serendipity');
-@define('SERENDIPITY_UPGRADER_VERSION_SPECIFIC',  'Version specific tasks');
+@define('SERENDIPITY_UPGRADER_VERSION_SPECIFIC', 'Version specific tasks');
 @define('SERENDIPITY_UPGRADER_NO_VERSION_SPECIFIC', 'No version specific tasks found');
 @define('SERENDIPITY_UPGRADER_PROCEED_QUESTION', 'Do you wish me to perform the above tasks?');
 @define('SERENDIPITY_UPGRADER_PROCEED_ABORT', 'No, I will run them manually');
@@ -438,7 +437,7 @@
 @define('SUBSCRIPTION_STATE', 'Subscription state');
 @define('SUBSCRIPTION_BLOG', 'Blog subscription');
 @define('SUBSCRIPTION_AUTHOR', 'Author subscription');
-@define('SUBSCRIPTION_CATEGORY', 'Author subscription');
+@define('SUBSCRIPTION_CATEGORY', 'Category subscription');
 @define('NO_SUBSCRIPTIONS_TO_PRINT', 'No subscriptions to print');
 @define('PAGE_BROWSE_SUBSCRIPTIONS', 'Page %s of %s, totally %s subscriptions');
 @define('OPTIN_PENDING', 'optin pending');
@@ -717,7 +716,7 @@
 @define('INSTALL_PASSWORD_DESC', 'Password for admin login');
 @define('INSTALL_PASSWORD2', 'Admin password (verify)');
 @define('INSTALL_PASSWORD2_DESC', 'Password for admin login, enter again to verify.');
-@define('USERCONF_REALNAME', 'Real name'); 
+@define('USERCONF_REALNAME', 'Real name');
 @define('USERCONF_REALNAME_DESC', 'The full name of the author. This is the name seen by readers');
 @define('INSTALL_EMAIL', 'Admin email');
 @define('INSTALL_EMAIL_DESC', 'Email for the blog administrator');
@@ -809,8 +808,8 @@
 @define('SYNDICATION_PLUGIN_SHOW_MAIL', 'Show E-Mail addresses?');
 @define('SYNDICATION_PLUGIN_MANAGINGEDITOR', 'Field "managingEditor"');
 @define('SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC', 'E-Mail address of the managing editor, if available. (empty: hidden) [RSS 2.0]');
-@define('SYNDICATION_PLUGIN_WEBMASTER',  'Field "webMaster"');
-@define('SYNDICATION_PLUGIN_WEBMASTER_DESC',  'E-Mail address of the webmaster, if available. (empty: hidden) [RSS 2.0]');
+@define('SYNDICATION_PLUGIN_WEBMASTER', 'Field "webMaster"');
+@define('SYNDICATION_PLUGIN_WEBMASTER_DESC', 'E-Mail address of the webmaster, if available. (empty: hidden) [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_TTL', 'Field "ttl" (time-to-live)');
 @define('SYNDICATION_PLUGIN_TTL_DESC', 'Amount of minutes after which your blog should not be cached any more by foreign sites/applications (empty: hidden) [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_PUBDATE', 'Field "pubDate"');
@@ -908,7 +907,7 @@
 @define('USERLEVEL_OBSOLETE', 'NOTICE: The userlevel attribute is now only used for backward compatibility to plugins and fallback authorisation. User privileges are now handled by group memberships!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'You did not specify the right old password, and are not authorized to change the new password. Your settings were not saved.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
-@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
 @define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
@@ -1002,7 +1001,7 @@
 @define('TRACKBACK_DELETED', 'Trackback #%s has successfully been deleted');
 @define('COMMENT_NOTOKENMATCH', 'Moderation link has expired or comment #%s has already been approved or deleted');
 @define('TRACKBACK_NOTOKENMATCH', 'Moderation link has expired or trackback #%s has already been approved or deleted');
-@define('BADTOKEN', 'Invalid Moderation Link'); 
+@define('BADTOKEN', 'Invalid Moderation Link');
 @define('TOP_LEVEL', 'Top level');
 @define('VIEW_COMMENT', 'View comment');
 @define('VIEW_ENTRY', 'View entry');
@@ -1034,7 +1033,7 @@
 @define('CONFIRMATION_MAIL_ALWAYS', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n");
 @define('CONFIRMATION_MAIL_ONCE', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled one-time mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n\nAfter you have done that, you can always post comments on that blog with your username and e-mail address without receiving such notifications.");
 @define('SUBSCRIPTION_MAIL_INTRO', 'In the blog %s a new article was posted:');
-@define('SUBSCRIPTION_MAIL_OUTRO', 'You get this email because you have subscribed to receive new articles of the blog %s. To unsubscribe, click here.');
+@define('SUBSCRIPTION_MAIL_OUTRO', 'You get this email because you have subscribed to receive new articles of the blog %s. To unsubscribe, click here: ');
 @define('SUBSCRIPTION_NEW_ARTICLE', 'New article');
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'New comment to subscribed entry "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nA new comment was made to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
@@ -1203,7 +1202,7 @@
 @define('HOLDS_A_BLAHBLAH', 'Holds a nugget of HTML in your sidebar');
 @define('THE_NUGGET', 'The Nugget of HTML!');
 @define('BACKEND_TITLE', 'Additional information in Plugin Configuration screen');
-@define('BACKEND_TITLE_FOR_NUGGET', 'Here you can define a custom string which is displayed in the Plugin Configuration screen together with the description of the HTML Nugget plugin. If you have multiple HTML nuggets with an empty title, this helps to distinct the plugins from another.'); // Translate
+@define('BACKEND_TITLE_FOR_NUGGET', 'Here you can define a custom string which is displayed in the Plugin Configuration screen together with the description of the HTML Nugget plugin. If you have multiple HTML nuggets with an empty title, this helps to distinct the plugins from another.');
 
 /* ORPHANED CONSTANTS */
 @define('INSTALL_TOP_AS_LINKS', 'Show Top Exits/Referrers as links?');
