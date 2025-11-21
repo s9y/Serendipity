@@ -68,8 +68,7 @@ function serendipity_db_connect() {
                                  $serendipity['dbName']
                                ),
                                $serendipity['dbUser'],
-                               $serendipity['dbPass'],
-                                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING)
+                               $serendipity['dbPass']
                              );
 
     return $serendipity['dbConn'];
