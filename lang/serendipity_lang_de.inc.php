@@ -1047,8 +1047,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'Folgende Möglichkeiten stehen zur Verfügung:');
 @define('NEW_TRACKBACK_TO', 'Neues Trackback für');
 @define('NEW_COMMENT_TO', 'Neuer Kommentar für');
-@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
-@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity-Logincode für %s');
+@define('SECOND_FACTOR_MAIL', "Hallo %s,\n\nBitte geben Sie den folgenden Code ein, um sich in Ihren Blog einzuloggen:\n\n%s\n\nIDer Code ist 15 Minuten gültig.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'Die angeforderte Seite konnte nicht gefunden werden (404). Dies ist die Standardseite.');
