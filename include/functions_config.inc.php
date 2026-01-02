@@ -502,7 +502,7 @@ function serendipity_setAuthorToken() {
 
 function serendipity_send2faCode() {
     global $serendipity;
-    $secondFactor = bin2hex(random_bytes(6));
+    $secondFactor = bin2hex(random_bytes(3));
     serendipity_cacheItem($serendipity['serendipityUser'] . '_2faCode', $secondFactor, 60 * 15);
     $message = $secondFactor; // TODO: Use a template for a proper email text
     $subject = 'Serendipity login code'; // TODO: Use a Language constant
