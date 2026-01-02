@@ -910,7 +910,7 @@
 @define('USERLEVEL_OBSOLETE', '주의: 사용자 레벨 속성은 플러그인의 하위 호환성 및 인증 대비책을 위해서만 사용되고 있습니다. 현재 사용자 권한 설정은 그룹 소속을 통해 이루어지고 있습니다.');
 @define('USERCONF_CHECK_PASSWORD_ERROR', '이전 암호가 올바르지 않으므로 새 암호로 변경할 권한이 없습니다. 설정이 저장되지 않았습니다.');
 @define('USERCONF_CHECK_USERNAME_ERROR', '사용자 이름은 비워둘 수 없습니다.');
-@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
 @define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
@@ -1048,6 +1048,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', '다음과 같은 옵션을 사용할 수 있습니다:');
 @define('NEW_TRACKBACK_TO', '다음 글에 새로운 트랙백을 만들었습니다:');
 @define('NEW_COMMENT_TO', '다음 글에 새 덧글을 달았습니다:');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

@@ -909,7 +909,7 @@
 @define('USERLEVEL_OBSOLETE', 'NOTERA: Användarnivåattributet används nu endast för bakåtkompatibilitet med insticksmoduler och reservauktorisering. Användarprivilegier hanteras nu genom gruppmedlemskap!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Du har inte angett det gamla lösenordet på korrekt sätt och du har därför inte tillstånd att ändra lösenord. Dina inställningar sparades inte.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Användarnamnet kan inte utelämnas.');
-@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
 @define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
@@ -1047,6 +1047,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'Du har följande alternativ:');
 @define('NEW_TRACKBACK_TO', 'Ny trackback skapad till');
 @define('NEW_COMMENT_TO', 'Ny kommentar skapad till');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

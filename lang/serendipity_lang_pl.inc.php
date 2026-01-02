@@ -910,7 +910,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('USERLEVEL_OBSOLETE', 'UWAGA: to ustawienie jest obecnie u¿ywane tylko dla celów kompatybilno¶ci ze starszymi wersjami wtyczek i silnika. Obecnie poziom dostêpu reguluj± regu³y grup u¿ytkowników!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Wpisa³e¶(a¶) niepoprawne stare has³o i nie jeste¶ upowa¿niona do zmiany nowego has³a. Twoje ustawienia NIE zostan± zapisane.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Pole nazwy u¿ytkownika nie mo¿e byæ puste.');
-@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
 @define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
@@ -1048,6 +1048,8 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('YOU_HAVE_THESE_OPTIONS', 'Masz do wyboru nastêpuj±ce opcje:');
 @define('NEW_TRACKBACK_TO', 'Nowy ¶lad (trackback) do');
 @define('NEW_COMMENT_TO', 'Nowy komentarz do');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

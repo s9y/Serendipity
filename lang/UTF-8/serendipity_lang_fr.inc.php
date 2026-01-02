@@ -912,7 +912,7 @@
 @define('USERLEVEL_OBSOLETE', 'NOTICE : l\'attribut "niveau d\'accès" n\'est plus utilisé que pour assurer la compatibilité descendante des plugins et comme système d\'autorisation de secours. Les niveaux d\'autorisation sont maintenant gérés par l\appartenance à un ou plusieurs groupes d\'utilisateurs !');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Vous n\'avez pas entré l\'ancien mot de passe correct, et vous n\'êtes pas autorisé à définir un nouveau mot de passe. Les données n\'ont pas été sauvegardées.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
-@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
 @define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
@@ -1050,6 +1050,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'Vous avez les possibilités suivantes :');
 @define('NEW_TRACKBACK_TO', 'Nouveau rétrolien fait sur');
 @define('NEW_COMMENT_TO', 'Nouveau commentaire posté sur');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

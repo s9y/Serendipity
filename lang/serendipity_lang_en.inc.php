@@ -1047,6 +1047,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'You have the following options available:');
 @define('NEW_TRACKBACK_TO', 'New trackback made to');
 @define('NEW_COMMENT_TO', 'New comment posted to');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

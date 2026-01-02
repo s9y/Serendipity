@@ -911,7 +911,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('USERLEVEL_OBSOLETE', 'Замечание: атрибут "уровень пользователя" используется теперь только для обратной совместимости со старыми плагинами и старой схемой авторизации. Права пользователей теперь определяются принадлежностью к группам!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Вы не указали правильно текущий пароль, и потому Вам не разрешено изменить пароль на новый. Ваши настройки не были сохранены.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Имя пользователя не может оставаться пустым.');
-@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
 @define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
@@ -1049,6 +1049,8 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('YOU_HAVE_THESE_OPTIONS', 'У Вас есть следующие варианты:');
 @define('NEW_TRACKBACK_TO', 'Новая обратная ссылка была создана к');
 @define('NEW_COMMENT_TO', 'Новый комментарий был добавлен к');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'Запрошенная страница не может быть найдена (404). Это страница по умолчанию.');

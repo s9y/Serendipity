@@ -940,7 +940,7 @@ $i18n_filename_to = array (
 @define('USERLEVEL_OBSOLETE', 'UPOZORNÌNÍ: Atribut úroveò uživatele (userlevel) je nyní používán jen kvùli zpìtné kompatibilitì s pluginy a autorizaci. Uživatelská práva jsou nyní øízena pomocí èlenských skupin!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Nezadali jste správné staré heslo a nejste oprávnìni heslo zmìnit. Vaše nastavení nebylo uloženo.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Jméno uživatele nemùže být prázdné.');
-@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
 @define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
@@ -1078,6 +1078,8 @@ $i18n_filename_to = array (
 @define('YOU_HAVE_THESE_OPTIONS', 'Máte k dispozici tyto volby:');
 @define('NEW_TRACKBACK_TO', 'Nová odezva na');
 @define('NEW_COMMENT_TO', 'Nový komentáø k');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
