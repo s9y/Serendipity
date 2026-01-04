@@ -1988,10 +1988,10 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
 }
 
 /**
- * Check for Cross-Site-Request-Forgery attacks because of missing HTTP Referer
+ * Check for Cross-Site-Request-Forgery via the Sec-Fetch-Site header.
  *
  * http://de.wikipedia.org/wiki/XSRF
- * This function checks the HTTP referer, and if it is part of the current Admin panel.
+ * This function checks the HTTP Sec-Fetch-Site header, and if it is part of the current Admin panel.
  *
  * @access public
  * @return  Returns true if XSRF was detected, false if not. The script should abort, if TRUE is returned.
@@ -1999,40 +1999,13 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
 function serendipity_checkXSRF() {
     global $serendipity;
 
-    // If no module was requested, the user has just logged in and no action will be performed.
-    if (empty($serendipity['GET']['adminModule'])) {
-        return false;
-    }
-
-    // The referrer was empty. Deny access.
-    if (empty($_SERVER['HTTP_REFERER'])) {
+    // The Sec-Fetch-Site header was set (=a modern browser is used), but reported context was
+    // not 'same-origin'
+    if ($_SERVER['HTTP_SEC_FETCH_SITE'] && $_SERVER['HTTP_SEC_FETCH_SITE'] != 'same-origin') {
         echo serendipity_reportXSRF(1, true, true);
-        return false;
-    }
-
-    // Parse the Referrer host. Abort if not parseable.
-    $hostinfo = @parse_url($_SERVER['HTTP_REFERER']);
-    if (!is_array($hostinfo)) {
-        echo serendipity_reportXSRF(2, true, true);
         return true;
     }
 
-    // Get the server against we will perform the XSRF check.
-    $server = '';
-    if (empty($_SERVER['HTTP_HOST'])) {
-        $myhost = @parse_url($serendipity['baseURL']);
-        if (is_array($myhost)) {
-            $server = $myhost['host'];
-        }
-    } else {
-        $server = $_SERVER['HTTP_HOST'];
-    }
-
-    // If the current server is different than the referred server, deny access.
-    if ($hostinfo['host'] != $server) {
-        echo serendipity_reportXSRF(3, true, true);
-        return true;
-    }
     return false;
 }
 
@@ -2046,139 +2019,41 @@ function serendipity_checkXSRF() {
  * @access public
  * @see serendipity_checkXSRF()
  * @param   string      The type of XSRF check that got hit. Used for CSS formatting.
- * @param   boolean     If true, the XSRF error should be fatal
- * @param   boolean     If true, tell Serendipity to check the $serendipity['referrerXSRF'] config option to decide if an error should be reported or not.
+ * @param   boolean     unused
+ * @param   boolean     unused
  * @return  string      Returns the HTML error report
  */
 function serendipity_reportXSRF($type = 0, $reset = true, $use_config = false) {
     global $serendipity;
 
-    // Set this in your serendipity_config_local.inc.php if you want HTTP Referrer blocking:
-    // $serendipity['referrerXSRF'] = true;
-
     $string = '<div class="msg_error XSRF_' . $type . '"><span class="icon-attention" aria-hidden="true"></span> ' . ERROR_XSRF . '</div>';
-    if ($reset) {
-        // Config key "referrerXSRF" can be set to enable blocking based on HTTP Referrer. Recommended for Paranoia.
-        if (($use_config && isset($serendipity['referrerXSRF']) && $serendipity['referrerXSRF']) || $use_config === false) {
-            $serendipity['GET']['adminModule'] = '';
-        } else {
-            // Paranoia not enabled. Do not report XSRF.
-            $string = '';
-        }
-    }
     return $string;
 }
 
 /**
- * Prevent XSRF attacks by checking for a form token
- *
- * http://de.wikipedia.org/wiki/XSRF
- *
- * This function checks, if a valid Form token was posted to the site.
+ * Prevent XSRF attacks, calls serendipity_checkXSRF for HTTP header check. Used a token check
+ * before and is kept for backwards compatibility, as it is used in plugins.
  *
  * @access public
  * @see serendipity_setFormToken()
  * @return  boolean     Returns true, if XSRF attempt was found and the token was missing
  */
 function serendipity_checkFormToken($output = true) {
-    global $serendipity;
-    $token = '';
-    if (!empty($serendipity['POST']['token'])) {
-        $token = $serendipity['POST']['token'];
-    } elseif (!empty($serendipity['GET']['token'])) {
-        $token = $serendipity['GET']['token'];
-    }
-
-    if (empty($token)) {
-        if ($output) echo serendipity_reportXSRF('token', false);
-        return false;
-    }
-
-    $duration = 0;
-    $currentToken = serendipity_getOrCreateValidToken($serendipity['authorid'], $duration);
-    if ($token === $currentToken) {
-        # The token is valid. But it might be valid for only a little bit. In that case.
-        # we extend its duration, to avoid the user running into a token error
-        if (((int)$duration - time()) < (60 * 60)) {  # Valid for less than an hour
-            serendipity_getOrCreateValidToken($serendipity['authorid'], $duration, true);
-        }
-        
-        return true;
-    }
-
-    // If we are here, the token check failed.
-    if ($output) echo serendipity_reportXSRF('token', false);
-    return false;
+    // We have to invert the returned bool here, as serendipity_checkFormToken returned false when
+    // the token mismatched, but serendipity_checkXSRF uses true to signal an XSRF attempt
+    return ! serendipity_checkXSRF();
 }
 
 /**
- * Prevent XSRF attacks by setting a form token within HTTP Forms
- *
- * http://de.wikipedia.org/wiki/XSRF
- *
- * By inserting a unique Form token that holds the session id, all requests
- * to serendipity HTTP forms can only be processed if the token is present.
- * This effectively makes XSRF attacks impossible. Only bundled with XSS
- * attacks it can be bypassed.
- *
- * 'form' type tokens can be embedded within the <form> script.
- * 'url' type token can be embedded within HTTP GET calls.
- *
+ * Does nothing. Prevented XSRF attacks by setting a form token within HTTP Forms. This is now done
+ * via a browser header check in serendipity_checkXSRF
+ * 
  * @access public
- * @param   string      The type of token to return (form|url|plain)
- * @return  string      Returns the form token to be used in your functions
+ * @param   string      unused
+ * @return  string      Returns an empty string
  */
 function serendipity_setFormToken($type = 'form') {
-    global $serendipity;
-
-    $token = serendipity_getOrCreateValidToken($serendipity['authorid']);
-    if ($type == 'form') {
-        return '<input type="hidden" name="serendipity[token]" value="' . $token . '" />'."\n";
-    } elseif ($type == 'url') {
-        return 'serendipity[token]=' . $token;
-    } else {
-        return $token;
-    }
-}
-
-/**
- * Get the currently active XSRF form token, or create and store a new one
- * when the token does not exist or is no longer valid.
- *
- * The token gets stored in the database and bound to the current user. This
- * allows the token to be not limited by the PHP session lifetime.
- *
- * Returns the token. Sets the optional section parameter $duration to the timestamp
- * marking the end of the token's validity
- */
-function serendipity_getOrCreateValidToken($authorid, &$duration = 0, $force_renew = false) {
-    if (! $force_renew) {
-        if (defined('IN_installer') && IN_installer) {
-            // The installer has no database to access, so no user config variables. Here we
-            // fall back to session storage instead.
-            $tokenWithDuration = $_SESSION[XSRF_KEY];
-        } else {
-            $tokenWithDuration = serendipity_get_user_config_var(XSRF_KEY, $authorid ?? 0, '');
-        }
-        if ($tokenWithDuration) {
-            $token = substr($tokenWithDuration, 0, strpos($tokenWithDuration, ":::"));
-            $duration = substr($tokenWithDuration, strpos($tokenWithDuration, ":::") + 3);
-            if (time() < (int)$duration) {
-                // The token was still valid, we can use it
-                return $token;
-            }
-        }
-    }
-    
-    // We had no stored valid token. So we need to create and store a new one.
-    $token = bin2hex(random_bytes(32));
-    $duration = time() + (60 * 60 * 4);  // 4 hours in the future, for long editing sessions
-    if (defined('IN_installer') && IN_installer) {
-        $_SESSION[XSRF_KEY] = "$token:::$duration";
-    } else {
-        serendipity_set_config_var(XSRF_KEY, "$token:::$duration", $authorid ?? 0);
-    }
-    return $token;
+    return '';
 }
 
 /**
