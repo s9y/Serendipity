@@ -1,6 +1,11 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Rework of the XSRF token protection, it was a replaced with a 
+     check on the Sec-Fetch-Site header. This should eliminate the
+     timeouts that caused referer error messages on entry previews and
+     saves.
+
    * Fix: clean blog's sticky header (that appears when scrolling up)
           was positioned with a gap, when it contained too many
           navigation links
@@ -27,11 +32,6 @@ Version 2.6-beta2 ()
      option for a mastodon profile button.
 
    * Fix CSS based tabs in plugin and media upload area
-
-   * Rework of the XSRF token. The new one is now valid for 4 hours
-     instead of being linked to the (by default short) PHP session. This
-     will reduce the occurence of the invalid HTTP-Referrer error in the
-     backend, e.g. when saving or previewing entries.
 
    * Fix tooltips in installer not working and the installer's language
      list using the wrong encoding
