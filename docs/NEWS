@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Removed Sourceforge from Spartacus' mirror list, as it caused HTML
+     to be written to the plugin files instead of the wanted PHP code.
+
    * Fix: clean blog's sticky header (that appears when scrolling up)
           was positioned with a gap, when it contained too many
           navigation links

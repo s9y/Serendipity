@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.39.3');
+        $propbag->add('version',       '2.39.4');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -62,10 +62,6 @@ class serendipity_event_spartacus extends serendipity_event
                 ),
                 's9y.org' => array(
                     'url'  => 'http://www.s9y.org',
-                    'desc' => 'Package server for plugin downloads'
-                ),
-                'sourceforge.net' => array(
-                    'url'  => 'http://www.sourceforget.net',
                     'desc' => 'Package server for plugin downloads'
                 ),
                 'gitlab.com' => array(
@@ -126,7 +122,6 @@ class serendipity_event_spartacus extends serendipity_event
 
             'files' => array(
                 'github.com',
-                'SourceForge.net',
                 's9y.org',
                 'gitlab.com'
             )
@@ -141,13 +136,11 @@ class serendipity_event_spartacus extends serendipity_event
 
             'files' => array(
                 'https://raw.github.com/s9y/',
-                'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/',
                 'http://s9y.org/mirror/',
                 'https://gitlab.com/s9y_blog/'
             ),
 
             'files_health' => array(
-                'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/serendipity/docs/LICENSE',
                 'http://s9y.org/'                       => 'http://s9y.org/',
                 'https://raw.github.com/'               => 'https://raw.github.com/',
                 'https://gitlab.com/'               => 'https://gitlab.com/',
@@ -894,7 +887,11 @@ class serendipity_event_spartacus extends serendipity_event
         $gitloc = '';
 
         $mirrors = $this->getMirrors('files', true);
-        $mirror  = $mirrors[$this->get_config('mirror_files', 0)];
+        $mirror_file_index = $this->get_config('mirror_files', 0);
+        if ($mirror_file_index > 2) {
+            $mirror_file_index = 0;
+        }
+        $mirror  = $mirrors[$mirror_file_index];
         if ($mirror == null) {
             $mirror = $mirrors[0];
         }
@@ -1064,7 +1061,11 @@ class serendipity_event_spartacus extends serendipity_event
         }
 
         $mirrors = $this->getMirrors('files', true);
-        $mirror  = $mirrors[$this->get_config('mirror_files', 0)];
+        $mirror_file_index = $this->get_config('mirror_files', 0);
+        if ($mirror_file_index > 2) {
+            $mirror_file_index = 0;
+        }
+        $mirror  = $mirrors[$mirror_file_index];
         if ($mirror == null) {
             $mirror = $mirrors[0];
         }

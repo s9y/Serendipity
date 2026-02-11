@@ -1,5 +1,10 @@
 2.39.3
 -------
+    * Fix: Sourceforge set as mirror caused HTML files being written to disk instead of the plugin
+           files when installing or updating plugins. Sourceforge has been removed.
+
+2.39.3
+-------
     * PHP8.2 compatibility
 
 2.39.2
