@@ -1,3 +1,7 @@
+Version 2.0.1:
+------------------------------------------------------------------------
+    * Remove obsolete Pragma http header
+
 Version 2.0:
 ------------------------------------------------------------------------
     * Fix gravatar: Avatars could not be fetched
@@ -5,7 +9,7 @@ Version 2.0:
     * Reimplement favatar and pavatar options for better reliability
     * Update wavatar generator
     * Update documentation and translation
-    * Additional fixes for PH 8 compatibility
+    * Additional fixes for PHP 8 compatibility
 
 Version 1.63.1:
 ------------------------------------------------------------------------
