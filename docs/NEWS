@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * 2k11 now shows examples for its multiple date format options in the
+     theme's configuration
+
    * Removed Sourceforge from Spartacus' mirror list, as it caused HTML
      to be written to the plugin files instead of the wanted PHP code.
 
