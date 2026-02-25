@@ -1,3 +1,5 @@
+2.21.12: * Fix an invalid check on isolation elements that occured with some
+           plugin configuration under PHP 8
 2.21.11: * Avoid warnings under PHP 8.2
 2.21.10: * hotfixes for PHP 8
 2.21.7: * add some newlines in output to make it better humanly readable

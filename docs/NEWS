@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * nl2br: Fix an error that occured on some configuration in nl2p mode
+            on the isolation tags check
+
    * Removed Sourceforge from Spartacus' mirror list, as it caused HTML
      to be written to the plugin files instead of the wanted PHP code.
 

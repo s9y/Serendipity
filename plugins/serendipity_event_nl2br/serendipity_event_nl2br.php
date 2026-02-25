@@ -20,7 +20,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team, Stephan Brunker');
-        $propbag->add('version',       '2.21.11');
+        $propbag->add('version',       '2.21.12');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -734,7 +734,7 @@ p.wl_notopbottom {
             }
             //isolation tag
             elseif($tag && !$isolation_flag && $this->is_starttag($textarray[$i]) 
-                && (in_array($tag, $this->isolation_block_elements) || in_array($tag, $this->isolationtags) ) )
+                && (is_array($this->isolation_block_elements) && in_array($tag, $this->isolation_block_elements)) || (is_array($this->isolationtags) && in_array($tag, $this->isolationtags)) )
             {
                 //merge previous content, apply nl2p if needed and concatenate
                 if (empty($tagstack) )
