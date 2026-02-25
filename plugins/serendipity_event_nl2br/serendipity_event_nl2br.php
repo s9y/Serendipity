@@ -258,7 +258,7 @@ class serendipity_event_nl2br extends serendipity_event
                             }
                         }
                         if (count($isolate) < 1) {
-                            $isolate = false;
+                            $isolate = array();
                         }
                     }
                     $this->isolationtags = $isolate;
