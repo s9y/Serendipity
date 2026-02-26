@@ -1,6 +1,10 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Maintenance action for clearing the template cache now also empties
+     the internal cache of serendipity and clears all smarty cache
+     files. It was thus renamed to "clear cache".
+
    * nl2br: Fix an error that occured on some configuration in nl2p mode
             on the isolation tags check
 
