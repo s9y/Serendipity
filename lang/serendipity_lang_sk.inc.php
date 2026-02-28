@@ -322,6 +322,7 @@ $i18n_filename_to = array (
 @define('SERENDIPITY_ADMIN_SUITE', 'Administrátorská oblas»');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Nespsrávne meno alebo heslo.');
 @define('PLEASE_ENTER_CREDENTIALS', 'Zadajte prosím prihlasovacie údaje.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Zapamäta» login');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -920,6 +921,8 @@ $i18n_filename_to = array (
 @define('USERLEVEL_OBSOLETE', 'UPOZORNENIE: Atribút úroveò prístupu pou¾ívateµa (userlevel) je teraz pou¾ívaný iba kvôli spätnej kompatibilite s doplnkami a autorizáciou. U¾ívateµské práva sa odteraz riadia pomocou èlenských skupín!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Nezadali ste správne staré heslo a tým pádom nemáte právo zmeni» heslo. Va¹e nastavenia neboli ulo¾ené.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Meno pou¾ívateµa nemô¾e by» prázdne.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'ersonalConfiguration: Prístup k osobnej konfigurácii');
@@ -1056,6 +1059,8 @@ $i18n_filename_to = array (
 @define('YOU_HAVE_THESE_OPTIONS', 'Máte k dispozícii tieto voµby:');
 @define('NEW_TRACKBACK_TO', 'Nová odozva na');
 @define('NEW_COMMENT_TO', 'Nový komentár ku');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

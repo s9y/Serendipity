@@ -60,6 +60,14 @@
                                           'type'        => 'string',
                                           'default'     => 'john@example.com',
                                           'permission'  => 'personalConfiguration'),
+                                          
+                                    array('var'         => 'second_factor',
+                                          'title'       => USERCONF_SECONDFACTOR,
+                                          'description' => USERCONF_SECONDFACTOR_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'permission'  => 'personalConfiguration',
+                                          'flags'       => array('config')),
 
                                     array('var'         => 'lang',
                                           'title'       => INSTALL_LANG,

@@ -230,6 +230,7 @@ function serendipity_set_user_var($name, $val, $authorid, $copy_to_s9y = true) {
         case 'right_publish':
         case 'mail_comments':
         case 'mail_trackbacks':
+        case 'second_factor':
             $val = (serendipity_db_bool($val) ? 1 : '0');
             break;
     }
@@ -499,6 +500,24 @@ function serendipity_setAuthorToken() {
     $_SESSION['author_token'] = $hash;
 }
 
+function serendipity_send2faCode() {
+    global $serendipity;
+    $secondFactor = bin2hex(random_bytes(3));
+    serendipity_cacheItem($serendipity['serendipityUser'] . '_2faCode', $secondFactor, 60 * 15);
+    $subject = sprintf(SECOND_FACTOR_MAIL_TITLE, $serendipity['serendipityUser']);
+    $message = sprintf(SECOND_FACTOR_MAIL, $serendipity['serendipityUser'], $secondFactor);
+    return serendipity_sendMail($serendipity['serendipityEmail'], $subject, $message, $serendipity['blogMail']);
+}
+
+function serendipity_validate2faCoda() {
+    global $serendipity;
+    $storedSecondFactor = serendipity_getCacheItem($serendipity['serendipityUser'] . '_2faCode');
+    if ($storedSecondFactor && $storedSecondFactor === $serendipity['POST']['2fa']) {
+        $_SESSION['serendipity2faSuccess'] = true;
+        // TODO: This also needs to be part of the cookie and be loaded there (with authorToken?)
+    }
+}
+
 /**
  * Perform user authentication routine
  *
@@ -682,11 +701,15 @@ function serendipity_load_userdata($username) {
  * @return boolean  TRUE when logged in, FALSE when not.
  */
 function serendipity_userLoggedIn() {
-    if ($_SESSION['serendipityAuthedUser'] ?? false === true && IS_installed) {
-        return true;
-    } else {
-        return false;
-    }
+    global $serendipity;
+    if (IS_installed) {
+		// Only check for serendipity2faSuccess if config is active
+		$secondFactorEnabled = serendipity_db_bool(serendipity_get_user_config_var('second_factor', $serendipity['authorid'], false)); 
+		if (($_SESSION['serendipityAuthedUser'] ?? false) === true && (! $secondFactorEnabled || $secondFactorEnabled && $_SESSION['serendipity2faSuccess'])) {
+			return true;
+		}     
+	}
+    return false;
 }
 
 /**

@@ -311,6 +311,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('SERENDIPITY_ADMIN_SUITE', 'Panel Administracyjny Serendipity');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Wprowadzono błędną nazwę użytkownika lub hasło.');
 @define('PLEASE_ENTER_CREDENTIALS', 'Wprowadź swój login i hasło w polach poniżej.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Zapisz dane');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -909,6 +910,8 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('USERLEVEL_OBSOLETE', 'UWAGA: to ustawienie jest obecnie używane tylko dla celów kompatybilności ze starszymi wersjami wtyczek i silnika. Obecnie poziom dostępu regulują reguły grup użytkowników!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Wpisałeś(aś) niepoprawne stare hasło i nie jesteś upoważniona do zmiany nowego hasła. Twoje ustawienia NIE zostaną zapisane.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Pole nazwy użytkownika nie może być puste.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Dostęp do ustawień osobistych');
@@ -1045,6 +1048,8 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('YOU_HAVE_THESE_OPTIONS', 'Masz do wyboru następujące opcje:');
 @define('NEW_TRACKBACK_TO', 'Nowy ślad (trackback) do');
 @define('NEW_COMMENT_TO', 'Nowy komentarz do');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

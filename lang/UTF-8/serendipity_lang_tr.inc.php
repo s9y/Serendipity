@@ -311,6 +311,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Site Yönetimi');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Hatalı kullanıcı adı veya şifre girdiniz.');
 @define('PLEASE_ENTER_CREDENTIALS', 'Yönetim için arabirime buradan girebilirsiniz.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Bilgiyi kaydet');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -909,6 +910,8 @@
 @define('USERLEVEL_OBSOLETE', 'NOT: Kullanıcı seviyesi tanımlamaları sadece geçmişe ve eklentilere uyumluluk amaçlıdır. Kullanıcı izinlerinin gelen düzenleme yeri Kullanıcı Gruplarıdır!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Eski şifrenizi doğru olarak girmediniz, bu nedenle şifre değiştirme işleminiz onaylanmadı.Yeni Ayarlarınız kaydedilmedi.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'Kişisel Yapılandırma: Kişisel yapılandırmaya erişim');
@@ -1045,6 +1048,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'Şu seçenekler mümkün:');
 @define('NEW_TRACKBACK_TO', 'Yeni iz bırakan');
 @define('NEW_COMMENT_TO', 'Yeni görüş gönderen');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

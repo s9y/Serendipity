@@ -29,6 +29,7 @@ if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModul
             $_SESSION['serendipityAuthedUser'] = false;
             serendipity_session_destroy();
         }
+        serendipity_validate2faCoda();
         if (!serendipity_userLoggedIn()) {
             // Try again to log in, this time with enabled external authentication event hook
             serendipity_login(true);
@@ -237,6 +238,12 @@ if ($ajax) {
     $admin_vars['no_create']   = $serendipity['no_create'] ?? null;
     $admin_vars['title']       = $admin_section ?? '';
     $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
+    // Only check for serendipity2faSuccess if config is active:
+    $secondFactorEnabled = serendipity_db_bool(serendipity_get_user_config_var('second_factor', $serendipity['authorid'], false));
+    $admin_vars['2faPrompt'] = $secondFactorEnabled && $_SESSION['serendipityAuthedUser'] && ! $_SESSION['serendipity2faSuccess'];
+    if ($admin_vars['2faPrompt']) {
+        serendipity_send2faCode();
+    }
 
     if ($serendipity['expose_s9y']) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());

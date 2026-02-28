@@ -311,6 +311,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Painel de Administração do Serendipity');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Você deve ter fornecido nome de usuário ou senha inválidos');
 @define('PLEASE_ENTER_CREDENTIALS', 'Por Favor insira suas credenciais abaixo.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Salvar informações');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -909,6 +910,8 @@
 @define('USERLEVEL_OBSOLETE', 'NOTÍCIA: Os atributos de permissões e autorização dos usuários estão sendo usados apenas por motivo de compatibilidade com os plugins. Os privilégios, a partir de agora, são geridos através das permissões dos grupos!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'You did not specify the right old password, and are not authorized to change the new password. Your settings were not saved.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Acesso as configurações pessoais');
@@ -1045,6 +1048,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'Você possui as seguintes opções disponíveis');
 @define('NEW_TRACKBACK_TO', 'Novo trackback feito para');
 @define('NEW_COMMENT_TO', 'Novo comentário enviado para');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

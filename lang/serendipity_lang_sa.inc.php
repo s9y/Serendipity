@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'ÍŞíÈÉ ÅÏÇÑÉ ÇáãÌáÉ');
 @define('WRONG_USERNAME_OR_PASSWORD', 'ÇÓã ÇáãÓÊÎÏã Ãæ ßáãÉ ÇáãÑæÑ ÛíÑ ÕÍíÍÉ');
 @define('PLEASE_ENTER_CREDENTIALS', 'ÇáÑÌÇÁ ÅÏÎÇá ÇáãÚáæãÇÊ ÇáÎÇÕÉ Èß.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'ÍİÙ ÇáãÚáæãÇÊ');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'ãáÇÍÙÉ: ÎÇÕíÉ ãÓÊæì ÇáãÓÊÎÏã ÇáÂä ÊÊäÇÓŞ ãÚ ãáİÇÊ ÇáÍË æÇáÕáÇÍíÇÊ.æ ãíÒÇÊ ÇáãÓÊÎÏã ÇáÂä íÊã ãÚÇáÌÊåÇ ãÚ ÚÖæíÉ ÇáãÌãæÚÉ ! ! ! ');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'áã ÊÏÎá ßáãÉ ÇáãÑæÑ ÇáÕÍíÍÉ ÇáÍÇáíÉ .áĞáß áíÓ ãä ÕáÇÍíÇÊß ÊÛííÑ ßáãÉ ÇáãÑæÑ Çáì ßáãÉ ÌíÏÉ. ! ! ! ÊäÈíå: áã íÊã ÍİÙ ÇáÊÛííÑÇÊ');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Access personal configuration');
@@ -1044,6 +1047,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'ãÊæİÑ áÏíß åĞÇ ÇáÎíÇÑÇÊ:');
 @define('NEW_TRACKBACK_TO', 'Êã Úãá ãÓÇÑ ÚæÏÉ ÌÏíÏ Çáì');
 @define('NEW_COMMENT_TO', 'Êã ÇÏÑÇÌ ÊÚáíŞ ÌÏíÏ Çáì');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

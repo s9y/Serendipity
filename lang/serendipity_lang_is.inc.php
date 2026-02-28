@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Stjórnborð Serendipity');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Þú virðist hafa slegið inn rangt notandanafn eða lykilorð');
 @define('PLEASE_ENTER_CREDENTIALS', 'Vinsamlegast auðkenndu þig.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Vista upplýsingar');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'TILKYNNING: Stjórnstigsbreytan er nú einungis notuð fyrir afturvirkan stuðning við viðbætur og varakerfisauðkenningu. Notendaréttindum er nú stjórnað af hvaða hóp notandi tilheyrir!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Þú slóst ekki inn rétt núverandi lykilorð, og getur því ekki breytt lykilorðinu. Nýjar stillingar ekki vistaðar.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Fara í persónustillingar');
@@ -1044,6 +1047,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'Þú hefur eftirfarandi valmöguleika fyrir hendi:');
 @define('NEW_TRACKBACK_TO', 'Ný tilvísun gerð á');
 @define('NEW_COMMENT_TO', 'Ný athugasemd send á');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
