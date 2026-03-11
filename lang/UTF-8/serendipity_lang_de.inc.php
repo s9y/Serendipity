@@ -466,8 +466,8 @@
 @define('CHECKSUM_FAILED', '%s beschädigt oder verändert: Überprüfung fehlgeschlagen');
 @define('CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');
 @define('CLEANCOMPILE_FAIL', 'Es sind derzeit keine Dateien zu löschen.');
-@define('CLEANCOMPILE_TITLE', 'Template-Cache leeren');
-@define('CLEANCOMPILE_INFO', 'Löscht alle kompilierten Template-Dateien des derzeit aktiven Themes. Die kompilierten Template-Dateien werden bei Bedarf vom Smarty-Framework automatisch neu erzeugt.');
+@define('CLEANCOMPILE_TITLE', 'Cache leeren');
+@define('CLEANCOMPILE_INFO', 'Löscht alle kompilierten Template-Dateien und leert den internen Cache. Die kompilierten Template-Dateien werden bei Bedarf vom Smarty-Framework automatisch neu erzeugt.');
 @define('IMPORT_ENTRIES', 'Daten importieren');
 @define('EXPORT_ENTRIES', 'Einträge exportieren');
 @define('EXPORT_FEED', 'Vollständigen RSS-Feed exportieren');

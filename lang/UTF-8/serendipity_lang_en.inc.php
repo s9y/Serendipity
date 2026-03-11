@@ -465,8 +465,8 @@
 @define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');
 @define('CLEANCOMPILE_FAIL', 'No files available for clearing.');
-@define('CLEANCOMPILE_TITLE', 'Clear template cache');
-@define('CLEANCOMPILE_INFO', 'This will purge all compiled template files of the currently active template. Compiled templates will be automatically re-created on demand by the Smarty framework.');
+@define('CLEANCOMPILE_TITLE', 'Clear cache');
+@define('CLEANCOMPILE_INFO', 'This will purge all compiled template files and empty the internal cache. Compiled templates will be automatically re-created on demand by the Smarty framework.');
 @define('IMPORT_ENTRIES', 'Import data');
 @define('EXPORT_ENTRIES', 'Export entries');
 @define('EXPORT_FEED', 'Export full RSS feed');
