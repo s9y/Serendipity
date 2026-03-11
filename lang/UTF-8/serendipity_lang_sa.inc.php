@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'حقيبة إدارة المجلة');
 @define('WRONG_USERNAME_OR_PASSWORD', 'اسم المستخدم أو كلمة المرور غير صحيحة');
 @define('PLEASE_ENTER_CREDENTIALS', 'الرجاء إدخال المعلومات الخاصة بك.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'حفظ المعلومات');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'ملاحظة: خاصية مستوى المستخدم الآن تتناسق مع ملفات الحث والصلاحيات.و ميزات المستخدم الآن يتم معالجتها مع عضوية المجموعة ! ! ! ');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'لم تدخل كلمة المرور الصحيحة الحالية .لذلك ليس من صلاحياتك تغيير كلمة المرور الى كلمة جيدة. ! ! ! تنبيه: لم يتم حفظ التغييرات');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Access personal configuration');
@@ -1044,6 +1047,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'متوفر لديك هذا الخيارات:');
 @define('NEW_TRACKBACK_TO', 'تم عمل مسار عودة جديد الى');
 @define('NEW_COMMENT_TO', 'تم ادراج تعليق جديد الى');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

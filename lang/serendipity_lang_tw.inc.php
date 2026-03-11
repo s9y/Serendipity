@@ -312,6 +312,7 @@ $i18n_unknown = 'tw';
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity 管理介面');
 @define('WRONG_USERNAME_OR_PASSWORD', '您輸入了錯誤的帳號或密碼');
 @define('PLEASE_ENTER_CREDENTIALS', '請輸入您的資料.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', '自動登入');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -910,6 +911,8 @@ $i18n_unknown = 'tw';
 @define('USERLEVEL_OBSOLETE', '注意: 會員權限的屬性只為了回溯的相容性和外掛的授權。系統現在使用了新的會員權限來管理權限。');
 @define('USERCONF_CHECK_PASSWORD_ERROR', '您提供了錯誤的舊密碼所以不能更改密碼。您的設定還未被儲存。');
 @define('USERCONF_CHECK_USERNAME_ERROR', '帳號不能空白。');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: 讀取私人設定');
@@ -1046,6 +1049,8 @@ $i18n_unknown = 'tw';
 @define('YOU_HAVE_THESE_OPTIONS', '您有以下選擇:');
 @define('NEW_TRACKBACK_TO', '新的引用到');
 @define('NEW_COMMENT_TO', '新的迴響到');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

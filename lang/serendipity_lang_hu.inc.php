@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Adminisztrációs Készlet');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Úgy tûnik, hogy hibás felhasználó-nevet vagy jelszót adtál meg');
 @define('PLEASE_ENTER_CREDENTIALS', 'Add meg az azonosításhoz szükséges adataidat.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Adatok megjegyzése');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'Megjegyzés: A felhasználó szintû attribútumok a visszafele kompatibilitás, néhány modul és az azonosítás néhány esete miatt szükségesek. A felhasználók jogosultsága a csoporttagságon keresztül állítható be!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Helytelenül adtad meg a jelenlegi jelszót, így nem változtathatod meg. A beállításokat nem mentettük.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'A felhasználói név nem lehet üres.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'Személyes beállítások elérése');
@@ -1044,6 +1047,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'A következõ opciók érhetõk el:');
 @define('NEW_TRACKBACK_TO', 'Új visszahivatkozás készült ehhez:');
 @define('NEW_COMMENT_TO', 'Az alábbi bejegyzéshez új hozzászólás érkezett:');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
