@@ -2,8 +2,8 @@ Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
    * Fix: The bootstrap4 theme now sets the serendipity_entry class.
-          This fixes the lightbox plugins photoswipe mode when in using
-          one gallery per entry and potentially other plugins.
+          This fixes the lightbox plugins photoswipe mode when using one
+          gallery per entry and potentially other plugins.
 
    * The 2k11 theme now shows examples for its multiple date format
      options in the configuration
