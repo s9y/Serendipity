@@ -1,8 +1,12 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
-   * 2k11 now shows examples for its multiple date format options in the
-     theme's configuration
+   * Fix: The bootstrap4 theme now sets the serendipity_entry class.
+          This fixes the lightbox plugins photoswipe mode when in using
+          one gallery per entry and potentially other plugins.
+
+   * The 2k11 theme now shows examples for its multiple date format
+     options in the configuration
      
    * Maintenance action for clearing the template cache now also empties
      the internal cache of serendipity and clears all smarty cache
