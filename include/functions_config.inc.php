@@ -705,7 +705,7 @@ function serendipity_userLoggedIn() {
     if (IS_installed) {
 		// Only check for serendipity2faSuccess if config is active
 		$secondFactorEnabled = serendipity_db_bool(serendipity_get_user_config_var('second_factor', $serendipity['authorid'], false)); 
-		if (($_SESSION['serendipityAuthedUser'] ?? false) === true && (! $secondFactorEnabled || $secondFactorEnabled && $_SESSION['serendipity2faSuccess'])) {
+		if (($_SESSION['serendipityAuthedUser'] ?? false) === true && (! $secondFactorEnabled || ($secondFactorEnabled && $_SESSION['serendipity2faSuccess']))) {
 			return true;
 		}     
 	}
