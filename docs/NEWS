@@ -1,6 +1,10 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Provide option for a second factor on login. Currently this
+     consists of a code sent to the autor's email that has to be entered
+     on login.
+
    * 2k11 now shows examples for its multiple date format options in the
      theme's configuration
      
