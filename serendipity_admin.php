@@ -29,7 +29,6 @@ if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModul
             $_SESSION['serendipityAuthedUser'] = false;
             serendipity_session_destroy();
         }
-        serendipity_validate2faCoda();
         if (!serendipity_userLoggedIn()) {
             // Try again to log in, this time with enabled external authentication event hook
             serendipity_login(true);
