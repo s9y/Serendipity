@@ -2,7 +2,7 @@
 {foreach from=$entries item="dategroup"}
     {foreach from=$dategroup.entries item="entry"}
     {assign var="entry" value=$entry scope=parent}
-    <article class="post{if $dategroup.is_sticky} post_sticky{/if} mb-4">
+    <article class="post serendipity_entry{if $dategroup.is_sticky} post_sticky{/if} mb-4">
         <header>
             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
 
