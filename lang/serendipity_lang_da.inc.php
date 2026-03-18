@@ -312,6 +312,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Administrationssuite');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Du har indtastet et forkert brugernavn eller adgangskode');
 @define('PLEASE_ENTER_CREDENTIALS', 'Indtast venligst dine adgangsoplysninger herunder.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Gem oplysningerne');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -910,6 +911,8 @@
 @define('USERLEVEL_OBSOLETE', 'BEMÆRK: Brugerniveau indstillingen anvendes nu kun til bagud kompatibilitet. Bruger privilegier angives nu ved hjælp af gruppe medlemskaber!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'Du indtastede ikke det rigtige nuværende kodeord, og kan derfor ikke ændre kodeord, din ændring blev ikke gemt.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Brugernavn skal indtastes.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Adgang til personlig konfiguration');
@@ -1046,6 +1049,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'Du har følgende muligheder:');
 @define('NEW_TRACKBACK_TO', 'Ny trackback lavet til');
 @define('NEW_COMMENT_TO', 'Ny kommentar lavet til');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
