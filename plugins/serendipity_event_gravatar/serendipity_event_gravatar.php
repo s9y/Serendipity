@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 // Actual version of this plugin
-@define('PLUGIN_EVENT_GRAVATAR_VERSION', '2.0');
+@define('PLUGIN_EVENT_GRAVATAR_VERSION', '2.0.1');
 
 // Defines the maximum available method  slots in the configuration.
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
@@ -1207,7 +1207,6 @@ class serendipity_event_gravatar extends serendipity_event
                 // HTTP 1.1
                 $max_age_seconds = $filemtime + $this->cache_seconds - time();
                 header("Cache-Control: public, max-age=" . $max_age_seconds, true); // delta seconds
-                header("Pragma:", true);
             }
             fpassthru($fp);
             fclose($fp);

@@ -131,7 +131,6 @@ function serveJS($js_mode) {
         header('Cache-Control: no-cache');
     } else {
         header('Cache-Control:');
-        header('Pragma:');
         header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time()+3600));
     }
 

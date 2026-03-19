@@ -59,7 +59,6 @@ if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false) {
     header('Cache-Control: no-cache');
 } else {
     header('Cache-Control:');
-    header('Pragma:');
     header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time()+3600));
 }
 header('Content-type: text/css; charset=' . LANG_CHARSET);

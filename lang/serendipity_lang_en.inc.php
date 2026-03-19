@@ -310,6 +310,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity Administration Suite');
 @define('WRONG_USERNAME_OR_PASSWORD', 'You appear to have entered an invalid username or password');
 @define('PLEASE_ENTER_CREDENTIALS', 'Please enter your credentials below.');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', 'Save information');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -466,8 +467,8 @@
 @define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');
 @define('CLEANCOMPILE_FAIL', 'No files available for clearing.');
-@define('CLEANCOMPILE_TITLE', 'Clear template cache');
-@define('CLEANCOMPILE_INFO', 'This will purge all compiled template files of the currently active template. Compiled templates will be automatically re-created on demand by the Smarty framework.');
+@define('CLEANCOMPILE_TITLE', 'Clear cache');
+@define('CLEANCOMPILE_INFO', 'This will purge all compiled template files and empty the internal cache. Compiled templates will be automatically re-created on demand by the Smarty framework.');
 @define('IMPORT_ENTRIES', 'Import data');
 @define('EXPORT_ENTRIES', 'Export entries');
 @define('EXPORT_FEED', 'Export full RSS feed');
@@ -908,6 +909,8 @@
 @define('USERLEVEL_OBSOLETE', 'NOTICE: The userlevel attribute is now only used for backward compatibility to plugins and fallback authorisation. User privileges are now handled by group memberships!');
 @define('USERCONF_CHECK_PASSWORD_ERROR', 'You did not specify the right old password, and are not authorized to change the new password. Your settings were not saved.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code'); 
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Access personal configuration');
@@ -1044,6 +1047,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', 'You have the following options available:');
 @define('NEW_TRACKBACK_TO', 'New trackback made to');
 @define('NEW_COMMENT_TO', 'New comment posted to');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');

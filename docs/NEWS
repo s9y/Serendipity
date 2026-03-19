@@ -4,7 +4,31 @@ Version 2.6-beta2 ()
    * Rework of the XSRF token protection, it was a replaced with a 
      check on the Sec-Fetch-Site header. This should eliminate the
      timeouts that caused referer error messages on entry previews and
-     saves.
+     saves.   
+
+   * Fix: The bootstrap4 theme now sets the serendipity_entry class.
+          This fixes the lightbox plugins photoswipe mode when using one
+          gallery per entry and potentially other plugins.
+     
+   * Provide option for a second factor on login. Currently this
+     consists of a code sent to the autor's email that has to be entered
+     on login.
+
+   * 2k11 now shows examples for its multiple date format options in the
+     theme's configuration
+     
+   * Maintenance action for clearing the template cache now also empties
+     the internal cache of serendipity and clears all smarty cache
+     files. It was thus renamed to "clear cache".
+
+   * nl2br: Fix an error that occured on some configuration in nl2p mode
+            on the isolation tags check
+
+   * Removed Sourceforge from Spartacus' mirror list, as it caused HTML
+     to be written to the plugin files instead of the wanted PHP code.
+
+   * Removed obsolete Pragma header from some responses, controlling
+     brwoser cache behaviour. Alternative headers were already set.
 
    * Fix: clean blog's sticky header (that appears when scrolling up)
           was positioned with a gap, when it contained too many

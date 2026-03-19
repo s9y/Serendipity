@@ -20,7 +20,6 @@ if ($serendipity['CacheControl']) {
         header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');
     }
     header('Expires: 0');
-    header('Pragma: no-cache');
 }
 $uri = $_SERVER['REQUEST_URI'];
 

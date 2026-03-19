@@ -312,6 +312,7 @@
 @define('SERENDIPITY_ADMIN_SUITE', 'Serendipity智能博客系统');
 @define('WRONG_USERNAME_OR_PASSWORD', '输入的帐号或密码有误');
 @define('PLEASE_ENTER_CREDENTIALS', '请输入正确的登陆帐号');
+@define('PLEASE_ENTER_2FA', 'Please enter the mailed login code.');
 @define('AUTOMATIC_LOGIN', '自动登入');
 @define('MAIN_MENU', 'Main menu');
 @define('MENU_PERSONAL', 'Personal menu');
@@ -910,6 +911,8 @@
 @define('USERLEVEL_OBSOLETE', '注意: 会员权限的属性只是为了区分回复的兼容和外挂授权。系统现在使用了新的会员权限。');
 @define('USERCONF_CHECK_PASSWORD_ERROR', '你提供了错误的久密码所以不能更改密码。你的设定未保存。');
 @define('USERCONF_CHECK_USERNAME_ERROR', '帐号不能空白');
+@define('USERCONF_SECONDFACTOR', 'Confirm login with email code');
+@define('USERCONF_SECONDFACTOR_DESC', 'Protect your login with a code sent to your email that needs to be entered in addition to the password. Only enable this if you get email notifications to your personal email from this blog.');
 
 /* PERMISSIONS - generated dynamically! */
 @define('PERMISSION_PERSONALCONFIGURATION', '读取私人设定');
@@ -1046,6 +1049,8 @@
 @define('YOU_HAVE_THESE_OPTIONS', '你有以下选择:');
 @define('NEW_TRACKBACK_TO', '新的引用到');
 @define('NEW_COMMENT_TO', '新的回复到');
+@define('SECOND_FACTOR_MAIL_TITLE', 'Serendipity login code for %s');
+@define('SECOND_FACTOR_MAIL', "Hello %s,\n\nTo complete the login to your blog please enter the following code:\n\n%s\n\nIt is valid for 15 minutes.");
 
 /* ROUTING */
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
