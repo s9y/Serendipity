@@ -2044,7 +2044,7 @@ function serendipity_checkXSRF() {
     
     // The Sec-Fetch-Site header was set (=a modern browser is used), but reported context was
     // not 'same-origin'
-    if ($_SERVER['HTTP_SEC_FETCH_SITE'] != 'same-origin') {
+    if ($_SERVER['HTTP_SEC_FETCH_SITE'] != 'same-origin' && $_SERVER['HTTP_SEC_FETCH_SITE'] != 'none') {
         echo serendipity_reportXSRF(1, true, true);
         return true;
     }
