@@ -2039,9 +2039,15 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
 function serendipity_checkXSRF() {
     global $serendipity;
 
+    // The Sec-Fetch-Site header is missing, so something is wrong and we assume an attack
+    if (! array_key_exists('HTTP_SEC_FETCH_SITE', $_SERVER)) {
+        echo serendipity_reportXSRF(1, true, true);
+        return true;
+    }
+    
     // The Sec-Fetch-Site header was set (=a modern browser is used), but reported context was
     // not 'same-origin'
-    if ($_SERVER['HTTP_SEC_FETCH_SITE'] && $_SERVER['HTTP_SEC_FETCH_SITE'] != 'same-origin') {
+    if ($_SERVER['HTTP_SEC_FETCH_SITE'] != 'same-origin') {
         echo serendipity_reportXSRF(1, true, true);
         return true;
     }
