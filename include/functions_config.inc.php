@@ -6,8 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (! defined("XSRF_KEY")) define("XSRF_KEY", "formTokenWithDuration");
-
 /**
  * Adds a new author account
  *
@@ -355,7 +353,6 @@ function serendipity_logout() {
     serendipity_deleteCookie('author_username');
     serendipity_deleteCookie('author_autologintoken');
     serendipity_deleteCookie('author_token');
-    serendipity_remove_config_var(XSRF_KEY, $serendipity['authorid']);
 }
 
 /**
