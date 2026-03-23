@@ -92,8 +92,11 @@ if (!$use_installer && $is_logged_in) {
         $serendipity['GET']['adminModule'] = (isset($serendipity['POST']['adminModule']) ? $serendipity['POST']['adminModule'] : '');
     }
 
+    if (serendipity_checkXSRF()) {
+        exit();
+    }
     ob_start();
-    serendipity_checkXSRF();
+    
 
     switch($serendipity['GET']['adminModule']) {
         case 'installer':
