@@ -6,6 +6,7 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
+
 /**
  * Adds a new author account
  *
@@ -2025,30 +2026,44 @@ function serendipity_ACL_SQL(&$cond, $append_category = false, $type = 'category
 }
 
 /**
- * Check for Cross-Site-Request-Forgery via the Sec-Fetch-Site header.
+ * Check for Cross-Site-Request-Forgery via the Sec-Fetch-Site header, with a fallback to ORIGIN.
  *
  * http://de.wikipedia.org/wiki/XSRF
  * This function checks the HTTP Sec-Fetch-Site header, and if it is part of the current Admin panel.
  *
  * @access public
- * @return  Returns true if XSRF was detected, false if not. The script should abort, if TRUE is returned.
+ * @return  Returns true if XSRF was detected, false if not. The script should abort if TRUE is returned.
  */
 function serendipity_checkXSRF() {
     global $serendipity;
 
-    // The Sec-Fetch-Site header is missing, so something is wrong and we assume an attack
-    if (! array_key_exists('HTTP_SEC_FETCH_SITE', $_SERVER)) {
-        echo serendipity_reportXSRF(1, true, true);
-        return true;
+    
+    if (array_key_exists('HTTP_SEC_FETCH_SITE', $_SERVER)) {
+        // The Sec-Fetch-Site header was set (=a modern browser is used), but reported context was
+        // not 'same-origin'
+        if ($_SERVER['HTTP_SEC_FETCH_SITE'] != 'same-origin' && $_SERVER['HTTP_SEC_FETCH_SITE'] != 'none') {
+            echo serendipity_reportXSRF(1, true, true);
+            return true;
+        }
+    } else {
+        // The Sec-Fetch-Site header is missing, so maybe an old browser is used
+
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
+            // We ignore GET requests as those are not supposed to be state changing, and all
+            // of this is very unlikely to happen, given the broad adoption of Sec_Fetch_Site. Most
+            // users GET requests would also be protected by the Sec_Fetch_Site check.
+            
+            // But we got not a GET. Now we need to protect this call. so we will try to use the
+            // ORIGIN header for that. It predates SEC_FETCH_SITE and is common since 2019.
+            $origin = filter_var($_SERVER['HTTP_ORIGIN'], FILTER_VALIDATE_URL); // HTTP_ORIGIN can also be null
+            if ((! $origin) || (parse_url($origin, PHP_URL_HOST) != parse_url($serendipity['baseURL'], PHP_URL_HOST))) {
+                // We got no origin or the origin does not match our configured baseURL, so we block:
+                echo serendipity_reportXSRF(2, true, true);
+                return true;
+            }
+        }
     }
     
-    // The Sec-Fetch-Site header was set (=a modern browser is used), but reported context was
-    // not 'same-origin'
-    if ($_SERVER['HTTP_SEC_FETCH_SITE'] != 'same-origin' && $_SERVER['HTTP_SEC_FETCH_SITE'] != 'none') {
-        echo serendipity_reportXSRF(1, true, true);
-        return true;
-    }
-
     return false;
 }
 
