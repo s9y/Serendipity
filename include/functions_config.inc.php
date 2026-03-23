@@ -760,7 +760,7 @@ function serendipity_restoreVar(&$source, &$target) {
 function serendipity_setCookie($name, $value, $securebyprot = true, $custom_timeout = false, $httpOnly = false, $samesite = 'Strict') {
     global $serendipity;
 
-    $host = $_SERVER['HTTP_HOST'];
+    $host = $serendipity['baseURL'];
     if ($securebyprot) {
         $secure = (array_key_exists('HTTPS', $_SERVER) && strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
         if ($pos = strpos($host, ":")) {
