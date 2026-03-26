@@ -760,7 +760,6 @@ function serendipity_restoreVar(&$source, &$target) {
 function serendipity_setCookie($name, $value, $securebyprot = true, $custom_timeout = false, $httpOnly = false, $samesite = 'Strict') {
     global $serendipity;
 
-    $host = $serendipity['baseURL'];
     if ($securebyprot) {
         $secure = (array_key_exists('HTTPS', $_SERVER) && strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
         if ($pos = strpos($host, ":")) {
@@ -780,7 +779,7 @@ function serendipity_setCookie($name, $value, $securebyprot = true, $custom_time
         $custom_timeout = time() + 60*60*24*30;
     }
 
-    setcookie("serendipity[$name]", $value, ['expires' => $custom_timeout, 'path' => $serendipity['serendipityHTTPPath'], 'domain' => $host, 'secure' => $secure, 'httponly' => $httpOnly, 'samesite' => $samesite]);
+    setcookie("serendipity[$name]", $value, ['expires' => $custom_timeout, 'path' => $serendipity['serendipityHTTPPath'], 'secure' => $secure, 'httponly' => $httpOnly, 'samesite' => $samesite]);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
 }
