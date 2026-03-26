@@ -545,7 +545,19 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
             $maildata['headers'][] = 'X-Mailer: ' . $maildata['version'];
             $maildata['headers'][] = 'X-Engine: PHP/'. phpversion();
         }
-        $maildata['headers'][] = 'Message-ID: <'. bin2hex(random_bytes(16)) .'@'. $_SERVER['HTTP_HOST'] .'>';
+
+        $host = parse_url(filter_var($serendipity['baseURL'], FILTER_VALIDATE_URL), PHP_URL_HOST);
+        // In case $serendipity['baseURL'] is autodetected, filter to avoid possible header injection attack
+        // by manipulated host headers
+        $host = filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME);
+        // So that we do not rely on PHP's domain filter exclusively:
+        $host = str_replace(array("\n", "\r", "\0", '>'), array('', '', '', ''), $host);
+        if ($host) {
+            $maildata['headers'][] = 'Message-ID: <'. bin2hex(random_bytes(16)) .'@'. $host .'>';
+        } else {
+            // The set baseURL was invalid, it might have been an attack. So we use a safe fallback
+            $maildata['headers'][] = 'Message-ID: <'. bin2hex(random_bytes(16)) .'@serendipityfallback>';
+        }
         $maildata['headers'][] = 'MIME-Version: 1.0';
         $maildata['headers'][] = 'Precedence: bulk';
         $maildata['headers'][] = 'Content-Type: text/plain; charset=' . LANG_CHARSET;
