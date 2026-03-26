@@ -762,17 +762,8 @@ function serendipity_setCookie($name, $value, $securebyprot = true, $custom_time
 
     if ($securebyprot) {
         $secure = (array_key_exists('HTTPS', $_SERVER) && strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
-        if ($pos = strpos($host, ":")) {
-            $host = substr($host, 0, $pos);
-        }
     } else {
         $secure = false;
-    }
-
-    // If HTTP-Hosts like "localhost" are used, current browsers reject cookies.
-    // In this case, we disregard the HTTP host to be able to set that cookie.
-    if (substr_count($host, '.') < 1) {
-        $host = '';
     }
 
     if ($custom_timeout === false) {
@@ -804,7 +795,7 @@ function serendipity_JSsetCookie($name, $value) {
 
 
 /**
- * Deletes an existing cookie value
+ * Deletes an existing cookie value by resetting it with an expired time
  *
  * LONG
  *
@@ -815,18 +806,7 @@ function serendipity_JSsetCookie($name, $value) {
 function serendipity_deleteCookie($name) {
     global $serendipity;
 
-    $host = $_SERVER['HTTP_HOST'];
-    if ($pos = strpos($host, ":")) {
-        $host = substr($host, 0, $pos);
-    }
-
-    // If HTTP-Hosts like "localhost" are used, current browsers reject cookies.
-    // In this case, we disregard the HTTP host to be able to set that cookie.
-    if (substr_count($host, '.') < 1) {
-        $host = '';
-    }
-
-    setcookie("serendipity[$name]", '', time()-4000, $serendipity['serendipityHTTPPath'], $host);
+    setcookie("serendipity[$name]", '', time()-4000, $serendipity['serendipityHTTPPath']);
     unset($_COOKIE[$name]);
     unset($serendipity['COOKIE'][$name]);
 }
