@@ -406,6 +406,7 @@ function serendipity_login($use_external = true) {
             // if we do not tie down the session here it will be recreated on every page reload, which will fuck op the form token system. That's why we need to load all data that makes the session stick. That's why we call setAuthorToken here.
             serendipity_setAuthorToken();
             serendipity_load_userdata($user);
+            $_SESSION['serendipity2faSuccess'] = true;
             return true;
         } else {
             serendipity_deleteCookie('author_username');
@@ -693,10 +694,6 @@ function serendipity_load_userdata($username) {
     $_SESSION['serendipityAuthedUser']   = $serendipity['serendipityAuthedUser']   = true;
     $_SESSION['serendipityRightPublish'] = $serendipity['serendipityRightPublish'] = $row['right_publish'];
     $_SESSION['serendipityHashType']     = $serendipity['serendipityHashType']     = $row['hashtype'];
-
-    # Equivalent how serendipityAuthedUser is set to true, we have to set serendipity2faSuccess to
-    # true here, otherwise user would have to enter a new 2fa code even when autologin succeeded
-    $_SESSION['serendipity2faSuccess'] = true; 
 
     serendipity_load_configuration($serendipity['authorid']);
     return true;
