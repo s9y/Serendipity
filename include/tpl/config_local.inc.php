@@ -132,6 +132,13 @@
                                           'permission'  => 'siteConfiguration',
                                           'default'     => false),
 
+                                    array('var'         => 'validBaseHosts',
+                                          'title'       => INSTALL_AUTODETECT_VALID_HOSTS,
+                                          'description' => INSTALL_AUTODETECT_VALID_HOSTS_DESC,
+                                          'type'        => 'string',
+                                          'permission'  => 'siteConfiguration',
+                                          'default'     => ''),
+
                                     array('var'         => 'indexFile',
                                           'title'       => INSTALL_INDEXFILE,
                                           'description' => INSTALL_INDEXFILE_DESC,
