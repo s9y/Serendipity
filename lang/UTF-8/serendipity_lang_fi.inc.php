@@ -678,6 +678,8 @@
 @define('INSTALL_URL_DESC', 'Serendipity-asennuksen osoite');
 @define('INSTALL_AUTODETECT_URL', 'Havaitse käytetty HTTP-isäntä automaattisesti');
 @define('INSTALL_AUTODETECT_URL_DESC', 'Jos valitset kyllä, Serendipity käyttää vierailijan käyttämäää HTTP-isäntänimeä BaseURL:ina. Tätä käyttämällä voit antaa blogillesi useamman verkkonimen ja käyttää samaa verkkonimeä kaikissa linkeissä, joita vierailija käyttää lukiessaan blogiasi.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Aloitustiedosto');
 @define('INSTALL_INDEXFILE_DESC', 'Serendipityn aloitustiedoston nimi');
 

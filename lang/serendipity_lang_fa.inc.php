@@ -679,6 +679,8 @@
 @define('INSTALL_URL_DESC', 'آدرس اصلی نصب سرندیپیتی');
 @define('INSTALL_AUTODETECT_URL', 'تشخیص خودکار استفاده از HTTP-Host');
 @define('INSTALL_AUTODETECT_URL_DESC', 'اگر روی "بله" تنظیم شود، سرندیپیتی قرار داشتن آدرس BaseURL که در بخش تنظیمات وارد کرده اید را در درخواست ارسالی بررسی می کند. فعال کردن این گزینه، باعث می شود که شما بتوانید از چندین دامنه برای دیدن وبلاگ سرندیپیتی و تمامی لینک های وابسته به آن استفاده کنید.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'فایل فهرست');
 @define('INSTALL_INDEXFILE_DESC', 'نام فایل فهرست (index) شما');
 

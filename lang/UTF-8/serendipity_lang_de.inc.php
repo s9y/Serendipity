@@ -678,6 +678,8 @@
 @define('INSTALL_URL_DESC', 'Stamm-URL zur Serendipity-Installation');
 @define('INSTALL_AUTODETECT_URL', 'HTTP-Hostnamen automatisch erkennen');
 @define('INSTALL_AUTODETECT_URL_DESC', 'Falls aktiviert, wird Serendipity sicherstellen, dass der vom Besucher gewählte HTTP-Hostname als BaseURL-Variable verwendet wird. Sofern diese Option aktiviert ist, ist es möglich, mehrere Domainnamen für das Weblog zu verwenden. Alle Links werden dann mit dem HTTP-Hostnamen umgeschrieben, der vom Besucher gewählt wurde.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Erlaubte automatische HTTP-Hostnamen');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Eine kommaseaparierte Liste erlaubter Hostnamen. Nur diese würden in automatisch erkannten Stamm-URLs akzeptiert. Das ist eine Sicherheitsoption für Server, die auf beliebige HTTO-Hostheader reagieren..');
 @define('INSTALL_INDEXFILE', 'Index-Datei');
 @define('INSTALL_INDEXFILE_DESC', 'Welche Datei wird als Index-Datei verwendet (index.php)');
 

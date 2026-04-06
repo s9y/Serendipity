@@ -678,6 +678,8 @@
 @define('INSTALL_URL_DESC', 'serendipity をインストールしたベース URL');
 @define('INSTALL_AUTODETECT_URL', '自動検知に HTTP-Host を使う');
 @define('INSTALL_AUTODETECT_URL_DESC', 'If set to "true", Serendipity will ensure that the HTTP Host which was used by your visitor is used as your BaseURL setting. Enabling this will let you be able to use multiple domain names for your Serendipity Blog, and use the domain for all follow-up links which the user used to access your blog.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'インデックスファイル');
 @define('INSTALL_INDEXFILE_DESC', 'serendipity インデックスファイルの名前');
 

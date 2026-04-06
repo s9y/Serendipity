@@ -680,6 +680,8 @@
 @define('INSTALL_URL_DESC', 'Grund URL for din Serendipity installation');
 @define('INSTALL_AUTODETECT_URL', 'Autoudregn anvendt HTTP-Host');
 @define('INSTALL_AUTODETECT_URL_DESC', 'Hvis denne er sat til "ja", vil Serendipity sikre at den HTTP Host der anvendes af dine besøgende, anvendes som din BaseURL indstilling. Aktiverer du dette, kan du bruge flere domænenavne på samme Serendipity Blog.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Index fil');
 @define('INSTALL_INDEXFILE_DESC', 'Navnet på din Serendipity index fil');
 
