@@ -374,14 +374,7 @@ if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendip
     if ($baseURLChecked) {
         $serendipity['baseURL'] = $constructedBaseURL;
     } else {
-        if (isset($_SESSION['serendipityAuthorid'])) {
-            echo "Careful: Invalid base URL. Logged out users would be blocked, change the configuration.";
-        } else {
-            echo "Invalid base URL";
-            header("HTTP/1.0 401 Unauthorized");
-            header("Status: 401 Unauthorized");
-            exit;
-        }
+        echo "Careful: Invalid base URL.";
     }
 }
 
