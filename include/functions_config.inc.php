@@ -508,11 +508,16 @@ function serendipity_send2faCode() {
     $storedSecondFactor = serendipity_getCacheItem($serendipity['serendipityUser'] . '_2faCode');
     if (! $storedSecondFactor) {
         $secondFactor = bin2hex(random_bytes(3));
-        serendipity_cacheItem($serendipity['serendipityUser'] . '_2faCode', $secondFactor, 60 * 15);
+        
         $subject = sprintf(SECOND_FACTOR_MAIL_TITLE, $serendipity['serendipityUser']);
         $message = sprintf(SECOND_FACTOR_MAIL, $serendipity['serendipityUser'], $secondFactor);
-        return serendipity_sendMail($serendipity['serendipityEmail'], $subject, $message, $serendipity['blogMail']);
+        if (serendipity_sendMail($serendipity['serendipityEmail'], $subject, $message, $serendipity['blogMail'])) {
+            return serendipity_cacheItem($serendipity['serendipityUser'] . '_2faCode', $secondFactor, 60 * 15);
+        } else {
+            return false;
+        }
     }
+    return false;
 }
 
 function serendipity_validate2faCode() {
