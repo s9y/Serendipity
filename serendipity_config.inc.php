@@ -361,10 +361,10 @@ if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendip
     if ($constructedBaseURL) {
         if (isset($serendipity['validBaseHosts']) && $serendipity['validBaseHosts']) {
             // Second, only go forward if the HOST is on the list. This we can only do if the user
-            // configured that list.
-            $autoHost = parse_url($constructedBaseURL, PHP_URL_HOST);
-            $validHosts = explode(',', $serendipity['validBaseHosts']);
-            if (in_array($autoHost,  $validHosts)) {
+            // configured that list. Lowercase everything since URLs are case insensitive
+            $autoHost = strtolower(parse_url($constructedBaseURL, PHP_URL_HOST));
+            $validHosts = array_map('strtolower', explode(',', $serendipity['validBaseHosts']));
+            if (in_array($autoHost,  $validHosts, true)) {
                 $baseURLChecked = true;
             }
         } else {
