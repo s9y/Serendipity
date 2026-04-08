@@ -499,13 +499,25 @@ function serendipity_setAuthorToken() {
     $_SESSION['author_token'] = $hash;
 }
 
+/**
+ * Send a login code to the user's email adress, if the user has not currently already an active
+ * login code.
+ */
 function serendipity_send2faCode() {
     global $serendipity;
-    $secondFactor = bin2hex(random_bytes(3));
-    serendipity_cacheItem($serendipity['serendipityUser'] . '_2faCode', $secondFactor, 60 * 15);
-    $subject = sprintf(SECOND_FACTOR_MAIL_TITLE, $serendipity['serendipityUser']);
-    $message = sprintf(SECOND_FACTOR_MAIL, $serendipity['serendipityUser'], $secondFactor);
-    return serendipity_sendMail($serendipity['serendipityEmail'], $subject, $message, $serendipity['blogMail']);
+    $storedSecondFactor = serendipity_getCacheItem($serendipity['serendipityUser'] . '_2faCode');
+    if (! $storedSecondFactor) {
+        $secondFactor = bin2hex(random_bytes(3));
+        
+        $subject = sprintf(SECOND_FACTOR_MAIL_TITLE, $serendipity['serendipityUser']);
+        $message = sprintf(SECOND_FACTOR_MAIL, $serendipity['serendipityUser'], $secondFactor);
+        if (serendipity_sendMail($serendipity['serendipityEmail'], $subject, $message, $serendipity['blogMail'])) {
+            return serendipity_cacheItem($serendipity['serendipityUser'] . '_2faCode', $secondFactor, 60 * 15);
+        } else {
+            return false;
+        }
+    }
+    return false;
 }
 
 function serendipity_validate2faCode() {
