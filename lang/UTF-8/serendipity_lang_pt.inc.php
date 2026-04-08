@@ -679,6 +679,8 @@
 @define('INSTALL_URL_DESC', 'URL base para a instalação do serendipity');
 @define('INSTALL_AUTODETECT_URL', 'Autodetectar usando HTTP-Host');
 @define('INSTALL_AUTODETECT_URL_DESC', 'Se marcado "true", o Serendipity assegurará que o HTTP Host que é usado pelo seu visitante é usado como definição de BaseURL. Permitir isto possibilita usar vários nomes de domínio para o seu blog, e usar o domínio para todos os links subseqüentes.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Arquivo inicial');
 @define('INSTALL_INDEXFILE_DESC', 'Nome do arquivo inicial do serendipity');
 

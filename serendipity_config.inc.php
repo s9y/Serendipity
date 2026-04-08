@@ -350,7 +350,32 @@ serendipity_initLog();
 
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
-    $serendipity['baseURL'] = 'http' . (S9Y_IS_HTTPS_SERVER ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
+    $constructedBaseURL = 'http' . (S9Y_IS_HTTPS_SERVER ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
+
+    // The autodetected baseURL can be manipulated in some server setups as $_SERVER['HTTP_HOST'] is
+    // choosable by the client. We now do some checks to limit this vector as much as possible.
+     $baseURLChecked = false;
+    
+    // First, check that the constructed URL looks at least vaguely correct
+    $constructedBaseURL = filter_var($constructedBaseURL, FILTER_VALIDATE_URL);
+    if ($constructedBaseURL) {
+        if (isset($serendipity['validBaseHosts']) && $serendipity['validBaseHosts']) {
+            // Second, only go forward if the HOST is on the list. This we can only do if the user
+            // configured that list. Lowercase everything since URLs are case insensitive
+            $autoHost = strtolower(parse_url($constructedBaseURL, PHP_URL_HOST));
+            $validHosts = array_map('strtolower', explode(',', $serendipity['validBaseHosts']));
+            if (in_array($autoHost,  $validHosts, true)) {
+                $baseURLChecked = true;
+            }
+        } else {
+            $baseURLChecked = true;
+        }
+    }
+    if ($baseURLChecked) {
+        $serendipity['baseURL'] = $constructedBaseURL;
+    } else {
+        echo "Careful: Invalid base URL.";
+    }
 }
 
 // If a user is logged in, fetch his preferences. He possibly wants to have a different language

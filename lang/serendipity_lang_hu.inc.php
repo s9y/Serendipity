@@ -678,6 +678,8 @@
 @define('INSTALL_URL_DESC', 'A blog-od URL-je');
 @define('INSTALL_AUTODETECT_URL', 'HTTP-Hoszt automatikus meghatározása');
 @define('INSTALL_AUTODETECT_URL_DESC', 'Ha ez "igen"-re van állítva, akkor a látogató által használt domain név kerül használatra  az általad beállított BaseURL helyett. Ezzel a beállítással több domain-es környezetben is használhatod a Serendipity blog-ot, így nem okoz gondot a linkek kezelése.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Index fájl');
 @define('INSTALL_INDEXFILE_DESC', 'A serendipity-d index fájlja');
 

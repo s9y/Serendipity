@@ -680,6 +680,8 @@ $i18n_unknown = 'tw';
 @define('INSTALL_URL_DESC', '您的 Serendipity 安裝的基本 URL');
 @define('INSTALL_AUTODETECT_URL', '自動偵測 HTTP-Host');
 @define('INSTALL_AUTODETECT_URL_DESC', '如果設定為 "true"，Serendipity 會確定讀者的 HTTP Host 跟您的基本 URL 設定相同。開啟這項功能可以允許您使用多數的網域名稱給您的網誌，和使用這個網域給跟進的連結。');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Index 檔案');
 @define('INSTALL_INDEXFILE_DESC', 'Serendipity 的 index 檔案');
 

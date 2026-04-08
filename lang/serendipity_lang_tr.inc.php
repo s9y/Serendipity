@@ -679,6 +679,8 @@
 @define('INSTALL_URL_DESC', 'Serendipity kurulumunuz için Temel URL adresi ');
 @define('INSTALL_AUTODETECT_URL', 'HTTP-Host Servisini otomatik belirle');
 @define('INSTALL_AUTODETECT_URL_DESC', 'Eğer "true" olarak seçilirse, Serendipity ziyaretçilerin HTTP Host adresini sizin BaseURL ayarlarınıza göre kesin olarak belirleyebilecek.Bu seçenek açık olursa çoklu domain kullanma imkanına da sahip olursunuz, ve tüm izleyen bağlantılarda hangi kullanıcı hangi site bölümünüze erişmek istiyorsa erişebilir.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Index dosyası');
 @define('INSTALL_INDEXFILE_DESC', 'Serendipity index dosyasının adı');
 

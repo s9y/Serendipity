@@ -678,6 +678,8 @@
 @define('INSTALL_URL_DESC', 'الرابط الاساسي لتثبيت و تركيب المجلة. الانستوليشن');
 @define('INSTALL_AUTODETECT_URL', 'التعرف التلقائي على نطاق (Domain) الموقع');
 @define('INSTALL_AUTODETECT_URL_DESC', 'أن أختر الخيار صحيح. سوف تتمكن المجلة من معرفة الرابط الذي يستخدمه الزوار على أنه الرابط الأساسي. باختيارك هذا الخيار يجعلك قادر على استخدام أكثر من أسم نطاق (دومين) للوصول إلى مدونتك. وسوف يستخدم أسم النطاق هذا لجميع الروابط التابعة للمدونة');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Index file');
 @define('INSTALL_INDEXFILE_DESC', 'أسم ملف الاندكس للمدونة');
 

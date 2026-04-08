@@ -1,6 +1,11 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Add an option to limit which hosts are accepted as automatically
+     detected baseURL, serendipity['validBaseHosts']. This is a security
+     measure for installations that run under multiple domains and also
+     accept arbitrary host headers.
+     
    * Security fix: Attackers could manipulate the mail headers of
                    notification mails, on some server setups.
                    Thanks to Marcelo Barbosa for the report.

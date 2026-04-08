@@ -679,6 +679,8 @@
 @define('INSTALL_URL_DESC', '세렌디피티가 설치된 기본 인터넷 주소(URL)');
 @define('INSTALL_AUTODETECT_URL', '사용된 HTTP 호스트를 자동 감지');
 @define('INSTALL_AUTODETECT_URL_DESC', '사용할 경우 방문자가 사용한 HTTP 호스트를 세렌디피티가 기본 인터넷 주소로 쓰게 됩니다. 이렇게 되면 세렌디피티 블로그를 여러 개의 도메인 이름 하에 사용할 수 있게 되며, 해당 도메인을 방문자가 블로그를 방문하는데 사용한 추가 링크에 사용할 수 있게 됩니다.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', '인덱스 파일');
 @define('INSTALL_INDEXFILE_DESC', '세렌디피티 인덱스 파일의 이름');
 

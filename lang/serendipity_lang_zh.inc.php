@@ -680,6 +680,8 @@
 @define('INSTALL_URL_DESC', '系统安装的基本地址');
 @define('INSTALL_AUTODETECT_URL', '自动检测 HTTP-Host');
 @define('INSTALL_AUTODETECT_URL_DESC', '如果设定为 "true"，HTTP Host 跟基本的地址设定相同。开启这项功能可以允许你使用多个的域名的日志和使用这个日志域名连接。');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Index 文件');
 @define('INSTALL_INDEXFILE_DESC', '系统的 index 文件');
 

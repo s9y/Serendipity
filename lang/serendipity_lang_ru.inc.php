@@ -680,6 +680,8 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALL_URL_DESC', 'Основной URL Вашего блога');
 @define('INSTALL_AUTODETECT_URL', 'Автоматически определять HTTP-Host');
 @define('INSTALL_AUTODETECT_URL_DESC', 'Если установлено "Да", Serendipity будет пытаться определить HTTP-Host, который был использован пользователем при обращении, как Ваш базовый URL. Активация этой опции позволит Вам использовать множество доменных имен для Вашего блога Serendipity и использовать доменное имя для всех пересылающих ссылок, использованных для доступа к Вашему блогу.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Индексный файл');
 @define('INSTALL_INDEXFILE_DESC', 'Имя индексного файла Вашего блога');
 

@@ -690,6 +690,8 @@ $i18n_filename_to = array (
 @define('INSTALL_URL_DESC', 'Základná URL Vašej inštalácie Serendipity');
 @define('INSTALL_AUTODETECT_URL', 'Autodetekcia použitej HTTP adresy na serveri');
 @define('INSTALL_AUTODETECT_URL_DESC', 'Pri voľbe "Áno" bude Serendipity predpokladať, že HTTP adresa použitá návštevníkom, je Vašé základné nastavenie URL. Zapnutie umožní používáníe rôznych domén k prístupu na Vaše stránky, a použitie téjto jednej domény pre všetky odkazy na sledovánie zmien na stránkách.');
+@define('INSTALL_AUTODETECT_VALID_HOSTS', 'Valid autodetected HTTP-Hosts');
+@define('INSTALL_AUTODETECT_VALID_HOSTS_DESC', 'Set this to a comma separated list of allowed HTTP Hosts. Only those will be used for the autodetected base URL. This is a security measure for server setups that accept arbitrary HTTP host headers.');
 @define('INSTALL_INDEXFILE', 'Indexový súbor');
 @define('INSTALL_INDEXFILE_DESC', 'Názov súboru použitého ako index');
 
