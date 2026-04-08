@@ -1,6 +1,9 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Security fix: The domain of the login cookie could be manipulated.
+                   Thanks to Marcelo Barbosa for the report.
+
    * Rework of the XSRF token protection, it was a replaced with a 
      check on the Sec-Fetch-Site header. This should eliminate the
      timeouts that caused referer error messages on entry previews and
