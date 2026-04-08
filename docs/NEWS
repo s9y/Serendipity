@@ -1,6 +1,11 @@
 Version 2.6-beta2 ()
 ------------------------------------------------------------------------
 
+   * Add an option to limit which hosts are accepted as automatically
+     detected baseURL, serendipity['validBaseHosts']. This is a security
+     measure for installations that run under multiple domains and also
+     accept arbitrary host headers.
+
    * Rework of the XSRF token protection, it was a replaced with a 
      check on the Sec-Fetch-Site header. This should eliminate the
      timeouts that caused referer error messages on entry previews and
