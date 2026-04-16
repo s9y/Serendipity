@@ -6,7 +6,11 @@ if (IN_serendipity !== true) {
 
 $data = array();
 
-$commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $serendipity['GET']['filter']['perpage'] : 10);
+$commentsPerPage = !empty($serendipity['GET']['filter']['perpage']) ? $serendipity['GET']['filter']['perpage'] : 10;
+if ($commentsPerPage != COMMENTS_FILTER_ALL) {
+    $commentsPerPage = (int)($commentsPerPage);
+}
+
 $summaryLength = 200;
 
 $errormsg = array();
@@ -257,7 +261,7 @@ $searchString .= '&amp;' . serendipity_setFormToken('url');
 $sql = serendipity_db_query("SELECT COUNT(*) AS total FROM {$serendipity['dbPrefix']}comments c WHERE 1 = 1 " . ($c_type !== null ? " AND c.type = '$c_type' " : '') . $and, true);
 
 $totalComments = $sql['total'];
-$pages = ($commentsPerPage == COMMENTS_FILTER_ALL ? 1 : ceil($totalComments/(int)$commentsPerPage));
+$pages = ($commentsPerPage === COMMENTS_FILTER_ALL ? 1 : ceil($totalComments/(int)$commentsPerPage));
 if (isset($serendipity['GET']['page'])) {
     $page = (int)$serendipity['GET']['page'];
 } else {
@@ -271,7 +275,7 @@ $linkPrevious = 'serendipity_admin.php?serendipity[adminModule]=comments&amp;ser
 $linkNext     = 'serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[page]='. ($page+1) . $searchString;
 $filter_vals  = array(10, 20, 50, COMMENTS_FILTER_ALL);
 
-if ($commentsPerPage == COMMENTS_FILTER_ALL) {
+if ($commentsPerPage === COMMENTS_FILTER_ALL) {
     $limit = '';
 } else {
     $limit = serendipity_db_limit_sql(serendipity_db_limit(($page-1)*(int)$commentsPerPage, (int)$commentsPerPage));
