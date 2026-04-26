@@ -1088,6 +1088,24 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
         $cached = serendipity_getCacheItem($cache_key);
         if ($cached && $cached !== false) {
+            if ($use_hooks && ($serendipity['view'] ?? '') === '404') {
+                // When the current view is '404', a plugin (e.g. staticpage) may have populated this
+                // cache entry by handling the URL as a clean page.  On cache hits the entry_display
+                // event is not re-fired, so its side effects – changing view to 'plugin', sending a
+                // 200 status header, and clearing the content_message – are lost. We detect this
+                // via a plugin page cache and restore those side effects
+                $plugin_page_cached = serendipity_getCacheItem($cache_key . '||pluginpage');
+                if ($plugin_page_cached) {
+                    $serendipity['view'] = 'plugin';
+                    serendipity_header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0') . ' 200 OK');
+                    serendipity_header('Status: 200 OK');
+                    $serendipity['content_message'] = '';
+                    $serendipity['smarty']->assign(array(
+                        'plugin_clean_page' => true,
+                        'view'              => $serendipity['view'])
+                    );
+                }
+            }
             $serendipity['smarty']->assignByRef($smarty_block, $cached);
             // Plugins like event_social access entry data in the frontend header via smarty. They
             // fail when entries is not assigned, so we set it here as well in a familiar format.
@@ -1113,6 +1131,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             );
             $ret = serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
             serendipity_cacheItem($cache_key, $ret);
+            serendipity_cacheItem($cache_key . '||pluginpage' , true);
             return; // no display of this item
         }
     }

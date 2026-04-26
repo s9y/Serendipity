@@ -1,6 +1,9 @@
 Version 2.7-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix error message and 404 status code on plugin pages when cache
+     was active (thanks to @fasterit/DLange)
+
 Version 2.6.0 (April 10th, 2026)
 ------------------------------------------------------------------------
 
