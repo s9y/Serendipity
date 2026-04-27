@@ -1083,7 +1083,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     $initial_args = array_values(func_get_args());
-        if ($serendipity['useInternalCache']) {
+    if ($serendipity['useInternalCache']) {
         $cache_key = md5(serialize($initial_args) . '||' . $serendipity['GET']['subpage'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers'));
 
         $cached = serendipity_getCacheItem($cache_key);
