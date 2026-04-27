@@ -1083,22 +1083,19 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     $initial_args = array_values(func_get_args());
-    if ($serendipity['useInternalCache']) {
+        if ($serendipity['useInternalCache']) {
         $cache_key = md5(serialize($initial_args) . '||' . $serendipity['GET']['subpage'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers'));
 
         $cached = serendipity_getCacheItem($cache_key);
         if ($cached && $cached !== false) {
-            // When the current view is '404', a plugin (e.g. staticpage) may have populated this
-            // cache entry by handling the URL as a clean page.  On cache hits the entry_display
-            // event is not re-fired, so its side effects – changing view to 'plugin', sending a
-            // 200 status header, and clearing the content_message – are lost.  Re-fire the event
-            // here (on a copy of $entries so the original is not mutated) and restore those side
-            // effects when a plugin claims the page via clean_page.
             if ($use_hooks && ($serendipity['view'] ?? '') === '404') {
-                $hookData = $entries;
-                $hookAddData = array('extended' => $extended, 'preview' => $preview);
-                serendipity_plugin_api::hook_event('entry_display', $hookData, $hookAddData);
-                if (isset($hookData['clean_page']) && $hookData['clean_page'] === true) {
+                // When the current view is '404', a plugin (e.g. staticpage) may have populated this
+                // cache entry by handling the URL as a clean page.  On cache hits the entry_display
+                // event is not re-fired, so its side effects – changing view to 'plugin', sending a
+                // 200 status header, and clearing the content_message – are lost. We detect this
+                // via a plugin page cache and restore those side effects
+                $plugin_page_cached = serendipity_getCacheItem($cache_key . '||pluginpage');
+                if ($plugin_page_cached) {
                     $serendipity['view'] = 'plugin';
                     serendipity_header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0') . ' 200 OK');
                     serendipity_header('Status: 200 OK');
@@ -1134,6 +1131,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             );
             $ret = serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
             serendipity_cacheItem($cache_key, $ret);
+            serendipity_cacheItem($cache_key . '||pluginpage' , true);
             return; // no display of this item
         }
     }
