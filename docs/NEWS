@@ -1,6 +1,9 @@
 Version 2.7-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix division by zero error when accessing all PHP comments on PHP 8
+     (thanks to @qbi)
+
 Version 2.6.0 (April 10th, 2026)
 ------------------------------------------------------------------------
 
