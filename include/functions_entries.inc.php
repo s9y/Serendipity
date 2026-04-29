@@ -1083,11 +1083,13 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     $initial_args = array_values(func_get_args());
+    // Bypass cache for comment preview and submission feedback
+    $bypass_cache = !empty($serendipity['POST']['preview']) || !empty($serendipity['POST']['submit']) || !empty($serendipity['GET']['csuccess']);
     if ($serendipity['useInternalCache']) {
         $cache_key = md5(serialize($initial_args) . '||' . $serendipity['GET']['subpage'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers'));
 
         $cached = serendipity_getCacheItem($cache_key);
-        if ($cached && $cached !== false) {
+        if (!$bypass_cache && $cached && $cached !== false) {
             if ($use_hooks && ($serendipity['view'] ?? '') === '404') {
                 // When the current view is '404', a plugin (e.g. staticpage) may have populated this
                 // cache entry by handling the URL as a clean page.  On cache hits the entry_display
@@ -1364,7 +1366,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     if ($smarty_fetch === 'return') {
-        if ($serendipity['useInternalCache']) {
+        if ($serendipity['useInternalCache'] && !$bypass_cache) {
             serendipity_cacheItem($cache_key, $dategroup);
         }
         return $dategroup;
@@ -1383,7 +1385,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
         $ret = serendipity_smarty_fetch($smarty_block, 'entries.tpl', true, $preview);
     }
 
-    if ($serendipity['useInternalCache']) {
+    if ($serendipity['useInternalCache'] && !$bypass_cache) {
         serendipity_cacheItem($cache_key, $ret);
     }
     return $ret;
