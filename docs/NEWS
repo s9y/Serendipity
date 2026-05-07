@@ -1,6 +1,9 @@
 Version 2.7-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Add cleanCache() on comment editing, deletion and category changes
+     (thanks to @fasterit/DLange)
+
    * Fix division by zero error when accessing all PHP comments on PHP 8
      (thanks to @qbi)
      

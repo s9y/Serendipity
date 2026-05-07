@@ -584,6 +584,7 @@ function serendipity_deleteComment($id, $entry_id, $type='comments', $token=fals
         $addData = array('cid' => $id, 'entry_id' => $entry_id);
         serendipity_plugin_api::hook_event('backend_deletecomment', $sql, $addData);
 
+        serendipity_cleanCache();
         return true;
     } else {
         return false;
@@ -609,6 +610,7 @@ function serendipity_allowCommentsToggle($entry_id, $switch = 'disable') {
 
         $query = "UPDATE {$serendipity['dbPrefix']}entries SET allow_comments = '" . ($switch == 'disable' ? 'false' : 'true') . "' WHERE id = '". (int)$entry_id ."' $admin";
         serendipity_db_query($query);
+        serendipity_cleanCache();
         if (serendipity_isResponseClean($_SERVER['HTTP_REFERER'])) {
             header('Status: 302 Found');
             header('Location: '. $_SERVER['HTTP_REFERER']);

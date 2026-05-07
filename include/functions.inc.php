@@ -1078,6 +1078,7 @@ function serendipity_addCategory($name, $desc, $authorid, $icon, $parentid) {
 
     serendipity_plugin_api::hook_event('multilingual_strip_langs',$data, array('category_name','category_description'));
     serendipity_insertPermalink($data, 'category');
+    serendipity_cleanCache();
     return $cid;
 }
 
@@ -1120,6 +1121,7 @@ function serendipity_updateCategory($cid, $name, $desc, $authorid, $icon, $paren
 
     serendipity_plugin_api::hook_event('multilingual_strip_langs',$data, array('category_name','category_description'));
     serendipity_updatePermalink($data, 'category');
+    serendipity_cleanCache();
 }
 
 /**

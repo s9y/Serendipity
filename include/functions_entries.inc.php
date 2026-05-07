@@ -23,6 +23,7 @@ function serendipity_deleteCategory($category_range, $admin_category) {
 
     serendipity_plugin_api::hook_event('backend_category_delete', $category_range);
 
+    serendipity_cleanCache();
     return serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}category WHERE category_left BETWEEN {$category_range} {$admin_category}");
 }
 

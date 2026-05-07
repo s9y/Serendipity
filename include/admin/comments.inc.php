@@ -48,6 +48,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
                   entry_id = " . (int)$serendipity['POST']['entry_id'];
     serendipity_db_query($sql);
     serendipity_plugin_api::hook_event('backend_updatecomment', $serendipity['POST'], $serendipity['GET']['id']);
+    serendipity_cleanCache();
     $msg[] = COMMENT_EDITED;
 }
 
