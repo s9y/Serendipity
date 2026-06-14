@@ -49,12 +49,12 @@ if (serendipity_isResponseClean($url)) {
         header('Location: ' . $url);
     } elseif ($open_redir) {
         // The destination here was supplied unauthenticated and base64-encoded
-        // via $_GET['url'] (trackexits "s9y" deflection of comment URLs, comment
-        // bodies, HTML nuggets and untracked entry links). Redirecting straight
-        // to it would be an open redirect (CWE-601) that lets attackers abuse the
-        // blog's trusted domain for phishing. Instead we show an interstitial
-        // confirmation page: the visitor sees the real destination and chooses to
-        // continue. This preserves every deflection case without an open redirect.
+        // via $_GET['url'] (trackexits "s9y" deflection of HTML nuggets, comment
+        // author URLs, and entry links not present in the references table).
+        // Redirecting straight to it would be an open redirect (CWE-601) that lets
+        // attackers abuse the blog's trusted domain for phishing. Instead we show
+        // an interstitial confirmation page: the visitor sees the real destination
+        // and chooses to continue.
         serendipity_exit_confirm_redirect($url);
     }
 }
@@ -82,7 +82,7 @@ function serendipity_exit_confirm_redirect($url)
         return;
     }
 
-    // Fallback strings so the page renders even before translators pick these up.
+    // Fallback strings for languages that do not yet have these translated.
     defined('EXIT_LEAVING_TITLE')    or define('EXIT_LEAVING_TITLE',    'Leaving this site');
     defined('EXIT_LEAVING_NOTICE')   or define('EXIT_LEAVING_NOTICE',   'You are about to leave this blog and open an external website. This link was supplied by a visitor and has not been verified. Continue only if you trust the destination shown below.');
     defined('EXIT_LEAVING_CONTINUE') or define('EXIT_LEAVING_CONTINUE', 'Continue to the external site');
@@ -91,6 +91,20 @@ function serendipity_exit_confirm_redirect($url)
     $safe_url  = serendipity_specialchars($url);
     $safe_base = serendipity_specialchars($serendipity['baseURL']);
 
+    // Render via the blog's Smarty template and active theme CSS when available.
+    $serendipity['smarty_file'] = 'exit_redirect.tpl';
+    if (serendipity_smarty_init() !== false) {
+        $tplfile = serendipity_getTemplateFile('exit_redirect.tpl', 'serendipityPath');
+        if ($tplfile !== false) {
+            $serendipity['smarty']->assign('exit_safe_url',  $safe_url);
+            $serendipity['smarty']->assign('exit_safe_base', $safe_base);
+            header('Content-Type: text/html; charset=' . LANG_CHARSET);
+            $serendipity['smarty']->display($tplfile);
+            return;
+        }
+    }
+
+    // Fallback: plain HTML when Smarty or the template is unavailable.
     header('Content-Type: text/html; charset=' . LANG_CHARSET);
     echo '<!DOCTYPE html>
 <html>
