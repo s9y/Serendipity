@@ -280,6 +280,11 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_upgradeUTF8_UTF8mb4',
                      'title'     => 'Enable full Unicode support for MySQL',
                      'desc'      => 'Move MySQL databases from MyIsam and UTF8 to InnoDB and utf8mb4, enabling full unicode input. Warning: Make a database backup before running this!'),
+
+               array('version'   => '2.7-alpha1',
+                     'function'  => 'serendipity_upgrader_unique_username',
+                     'title'     => 'Add UNIQUE constraint to authors.username (CVE / GHSA-v645-243f-jwgh)',
+                     'desc'      => 'Adds a UNIQUE constraint to the username column of the authors table. This closes an authentication context confusion vulnerability where an editor could rename themselves to an admin username and gain elevated privileges on login. Any duplicate usernames found will be renamed with a _conflict_N suffix before the constraint is applied.'),
 );
 
 /* Fetch SQL files which needs to be run */
