@@ -1,6 +1,11 @@
 Version 2.6.1 ()
 ------------------------------------------------------------------------
 
+   * Security fix: Close an open redirect in exit.php that was opened
+                   when the trackexit plugin was installed and the
+                   option was set to redirect comment links via the blog.
+                   Thanks to @DevVaibhav07 for the report and patch.
+    
    * Security fix: A new account could re-use the username of an
                    existing account and gain adming rights this way.
                    Thanks to @DevVaibhav07 for the report and patch.

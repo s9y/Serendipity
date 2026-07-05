@@ -1292,3 +1292,7 @@
 @define('PENDING_COMMENT_SUBSCRIPTION', '구독 대기 중');
 @define('NO_COMMENT_SUBSCRIPTION', '구독되지 않음');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Sorry, the confirmation of your subscription to new comments has failed.');
+@define('EXIT_LEAVING_TITLE',    'Leaving this site');
+@define('EXIT_LEAVING_NOTICE',   'You are about to leave this blog and open an external website. This link was supplied by a visitor and has not been verified. Continue only if you trust the destination shown below.');
+@define('EXIT_LEAVING_CONTINUE', 'Continue to the external site');
+@define('EXIT_LEAVING_BACK',     'Return to the blog');
