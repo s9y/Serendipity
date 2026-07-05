@@ -195,7 +195,8 @@ function serveSearch() {
     }
 
     $serendipity['GET']['action']     = 'search';
-    $serendipity['GET']['searchTerm'] = urldecode(serendipity_specialchars(strip_tags(implode(' ', $search))));
+    $term = urldecode( implode(' ', $search) );
+    $serendipity['GET']['searchTerm'] = serendipity_specialchars( strip_tags( $term ) );
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 }
 

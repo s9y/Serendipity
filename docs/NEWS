@@ -1,6 +1,13 @@
 Version 2.7-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Security fix: Reflected XSS in search clean-URL route. Thanks to
+                   @hutsbotnet for the report.
+
+   * Fix plugin drag'n drop not working on new installs
+
+   * Fix some PHP 8 code quality warnings
+
    * Add cleanCache() on comment editing, deletion and category changes
      (thanks to @fasterit/DLange)
 
