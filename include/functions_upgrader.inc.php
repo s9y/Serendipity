@@ -1,4 +1,4 @@
-<?php
+serendipity_upgrader_unique_username<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -591,14 +591,16 @@ function serendipity_upgrader_unique_username() {
 
     // Add the UNIQUE constraint using the appropriate syntax for each backend.
     switch ($serendipity['dbType']) {
-        case 'sqlite3oo':
-        case 'sqlite3':
         case 'sqlite':
+        case 'sqlite3':
+        case 'sqlite3oo':
+        case 'pdo-sqlite':
             serendipity_db_query(
                 "CREATE UNIQUE INDEX IF NOT EXISTS authors_username_unique ON {$prefix}authors (username)"
             );
             break;
 
+        case 'pdo-postgres':
         case 'postgres':
             serendipity_db_query(
                 "ALTER TABLE {$prefix}authors ADD CONSTRAINT authors_username_unique UNIQUE (username)"

@@ -1,8 +1,12 @@
-Version 2.7-alpha1 ()
+Version 2.6.1 ()
 ------------------------------------------------------------------------
 
+   * Security fix: A new account could re-use the username of an
+                   existing account and gain adming rights this way.
+                   Thanks to @DevVaibhav07 for the report and patch.
+
    * Security fix: Reflected XSS in search clean-URL route. Thanks to
-                   @hutsbotnet for the report.
+                   @hutsbotnet for the report and patch.
 
    * Fix plugin drag'n drop not working on new installs
 
