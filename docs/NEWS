@@ -1,6 +1,11 @@
 Version 2.6.1 ()
 ------------------------------------------------------------------------
 
+   * Security fix: The check for which URLs are allowed to be fetched
+                   when downloading images to the ML was outdated and
+                   did not catch e.g. AWS IMDS at 169.254.169.254.
+                   Thanks to @riodrwn for the report and patch.
+
    * Security fix: Close an open redirect in exit.php that was opened
                    when the trackexit plugin was installed and the
                    option was set to redirect comment links via the blog.
@@ -10,8 +15,8 @@ Version 2.6.1 ()
                    existing account and gain adming rights this way.
                    Thanks to @DevVaibhav07 for the report and patch.
 
-   * Security fix: Reflected XSS in search clean-URL route. Thanks to
-                   @hutsbotnet for the report and patch.
+   * Security fix: Reflected XSS in search clean-URL route.
+                   Thanks to @hutsbotnet for the report and patch.
 
    * Fix plugin drag'n drop not working on new installs
 

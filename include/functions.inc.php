@@ -1371,26 +1371,41 @@ function serendipity_url_allowed($url) {
         return false;
     }
  
-    $host = trim($parts['host'], '.');
-    if (preg_match('@^(([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)\.){3}([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)$@imsU', $host)) {
-        $ip = $host;
-    } else {
-        $ip = gethostbyname($host);
-        if ($ip === $host) {
-            $ip = false;
-        }
+    if (!in_array($parts['scheme'] ?? '', ['http', 'https'], true)) {
+        return false;
     }
-
-    if ($ip) {
-        $ipparts = array_map('intval', explode('.', $ip));
-        if ( 127 === $ipparts[0] || 10 === $ipparts[0] || 0 === $ipparts[0]
-            || ( 172 === $ipparts[0] && 16 <= $ipparts[1] && 31 >= $ipparts[1] )
-            || ( 192 === $ipparts[0] && 168 === $ipparts[1])
-        ) {
-            return false;
+ 
+    // Strip brackets from IPv6 host
+    $host = trim($parts['host'], '[].');
+ 
+    // Collect every IP this host resolves to (A and AAAA)
+    $ips = [];
+    if (filter_var($host, FILTER_VALIDATE_IP)) {
+        $ips[] = $host;
+    } else {
+        foreach ((array) @dns_get_record($host, DNS_A | DNS_AAAA) as $r) {
+            if (!empty($r['ip'])) {
+                $ips[] = $r['ip'];
+            }
+            if (!empty($r['ipv6'])) {
+                $ips[] = $r['ipv6'];
+            }
         }
     }
  
+    if (empty($ips)) {
+        return false; // unresolvable, treat as unsafe
+    }
+ 
+    foreach ($ips as $ip) {
+        // Rejects private (10/8, 172.16/12, 192.168/16, fc00::/7) and
+        // reserved (loopback, link-local 169.254/16 and fe80::/10,
+        // multicast, IPv4-mapped, etc.)
+        if (!filter_var($ip, FILTER_VALIDATE_IP,
+                FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+            return false;
+        }
+    }
     return true;
 }
 
