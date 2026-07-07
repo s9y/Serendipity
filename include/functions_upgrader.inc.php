@@ -1,4 +1,4 @@
-serendipity_upgrader_unique_username<?php
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -465,6 +465,7 @@ function serendipity_upgrader_move_syndication_config() {
 */
 function serendipity_upgradeUTF8_UTF8mb4() {
     global $serendipity;
+    $prefix = $serendipity['dbPrefix'];
 
     # are we even using mysql?
     if ($serendipity['dbType'] != 'mysqli') {
@@ -515,6 +516,7 @@ function serendipity_upgradeUTF8_UTF8mb4() {
 
 function serendipity_upgrade_native_utf8() {
     global $serendipity;
+    $prefix = $serendipity['dbPrefix'];
 
     # are we even using mysql?
     if ($serendipity['dbType'] != 'mysqli') {
