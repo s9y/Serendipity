@@ -1,5 +1,6 @@
 <?php
 if (IN_serendipity !== true) { die ("Don't hack!"); }
+use function PHP81_BC\strftime;
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -27,7 +28,6 @@ if (is_array($required_fieldlist)) {
 }
 
 $serendipity['smarty']->assign('is_templatechooser', $_SESSION['serendipityUseTemplate'] ?? null);
-use function PHP81_BC\strftime;
 
 $template_config = array(
     array(

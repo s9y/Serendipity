@@ -705,8 +705,10 @@ function serendipity_load_userdata($username, $validated_row = null) {
                         {$serendipity['dbPrefix']}authors
                       WHERE
                         username   = '" . serendipity_db_escape_string($username) . "'";
-        $rows = serendipity_db_query($query, false, 'assoc');
-        $row  = $rows[0];
+        $row = serendipity_db_query($query, true, 'assoc');
+        if (!is_array($row)) {
+            return false;
+        }
     }
     
     $_SESSION['serendipityUser']         = $serendipity['serendipityUser']         = $username;
