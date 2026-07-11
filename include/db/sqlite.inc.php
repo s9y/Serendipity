@@ -57,6 +57,13 @@ function serendipity_db_connect()
         $serendipity['dbConn'] = $function($serendipity['dbName'] . '.db');
     }
 
+    // Handle additional connection setup if set
+    if (isset($serendipity['sqlitePragmas'])) {
+        foreach($serendipity['sqlitePragmas'] as $sql) {
+            serendipity_db_query($sql);
+        }
+    }
+
     return $serendipity['dbConn'];
 }
 
