@@ -562,7 +562,7 @@ function serendipity_upgrader_unique_username() {
 
     // Find any usernames shared by more than one author row.
     $dupes = serendipity_db_query(
-        "SELECT username, COUNT(*) AS cnt FROM {$prefix}authors GROUP BY username HAVING cnt > 1",
+        "SELECT username FROM {$prefix}authors GROUP BY username HAVING COUNT(*) > 1",
         false, 'assoc'
     );
 
