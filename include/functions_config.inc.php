@@ -214,6 +214,13 @@ function serendipity_set_user_var($name, $val, $authorid, $copy_to_s9y = true) {
 
     // Special case for inserting a password
     switch($name) {
+        case 'username':
+            // Reject a rename that would collide with an existing username (CWE-284).
+            $taken = serendipity_db_query("SELECT authorid FROM {$serendipity['dbPrefix']}authors WHERE username = '" . serendipity_db_escape_string($val) . "' AND authorid != " . (int)$authorid, true);
+            if (is_array($taken)) {
+                return false;
+            }
+            break;
         case 'check_password':
             //Skip this field.  It doesn't need to be stored.
             return;
@@ -656,7 +663,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                     }
 
                     serendipity_load_userdata($username);
-                    if (($serendipity['POST']['2fa'] ?? false) || ($serendipity['POST']['user'] ?? false)) {
+                    if ($serendipity['POST']['2fa'] || $serendipity['POST']['user']) {
                         # serendipity_load_userdata sets serendipity2faSuccess to true for cookie logins,
                         # but here, on a POST login, it is always still false
                         $_SESSION['serendipity2faSuccess'] = false;
@@ -685,18 +692,24 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
     return false;
 }
 
-function serendipity_load_userdata($username) {
+function serendipity_load_userdata($username, $validated_row = null) {
     global $serendipity;
-    
-    $query = "SELECT DISTINCT
-                    email, password, realname, authorid, userlevel, right_publish, hashtype
-                  FROM
-                    {$serendipity['dbPrefix']}authors
-                  WHERE
-                    username   = '" . serendipity_db_escape_string($username) . "'";
-                    
-    $rows = serendipity_db_query($query, false, 'assoc');
-    $row = $rows[0];
+    if ($validated_row !== null) {
+        // Use the row whose password was just verified — avoids a second query
+        // and prevents session-loading a different row when duplicate usernames exist.
+        $row = $validated_row;
+    } else {
+        $query = "SELECT DISTINCT
+                        email, password, realname, authorid, userlevel, right_publish, hashtype
+                      FROM
+                        {$serendipity['dbPrefix']}authors
+                      WHERE
+                        username   = '" . serendipity_db_escape_string($username) . "'";
+        $row = serendipity_db_query($query, true, 'assoc');
+        if (!is_array($row)) {
+            return false;
+        }
+    }
     
     $_SESSION['serendipityUser']         = $serendipity['serendipityUser']         = $username;
     $_SESSION['serendipityRealname']     = $serendipity['serendipityRealname']     = $row['realname'];

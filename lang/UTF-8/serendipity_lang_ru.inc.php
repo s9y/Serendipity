@@ -1293,3 +1293,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Ожидающее подтверждения');
 @define('NO_COMMENT_SUBSCRIPTION', 'Не подписан');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Извините, не удалось подтвердить Вашу подписку на новые комментарии.');
+@define('EXIT_LEAVING_TITLE',    'Leaving this site');
+@define('EXIT_LEAVING_NOTICE',   'You are about to leave this blog and open an external website. This link was supplied by a visitor and has not been verified. Continue only if you trust the destination shown below.');
+@define('EXIT_LEAVING_CONTINUE', 'Continue to the external site');
+@define('EXIT_LEAVING_BACK',     'Return to the blog');

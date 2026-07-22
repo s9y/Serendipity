@@ -1291,3 +1291,7 @@
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Wartet auf Bestätigung');
 @define('NO_COMMENT_SUBSCRIPTION', 'Nicht abonniert');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Sorry, the confirmation of your subscription to new comments has failed.');
+@define('EXIT_LEAVING_TITLE', 'Diese Seite verlassen');
+@define('EXIT_LEAVING_NOTICE', 'Sie sind dabei, dieses Blog zu verlassen und eine externe Webseite zu öffnen. Dieser Link wurde von einem Besucher eingestellt und wurde nicht überprüft. Fahren Sie nur fort, wenn Sie dem unten angezeigten Ziel vertrauen.');
+@define('EXIT_LEAVING_CONTINUE', 'Zur externen Seite weiter');
+@define('EXIT_LEAVING_BACK', 'Zum Blog zurück');

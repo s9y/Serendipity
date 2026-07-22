@@ -465,6 +465,7 @@ function serendipity_upgrader_move_syndication_config() {
 */
 function serendipity_upgradeUTF8_UTF8mb4() {
     global $serendipity;
+    $prefix = $serendipity['dbPrefix'];
 
     # are we even using mysql?
     if ($serendipity['dbType'] != 'mysqli') {
@@ -515,6 +516,7 @@ function serendipity_upgradeUTF8_UTF8mb4() {
 
 function serendipity_upgrade_native_utf8() {
     global $serendipity;
+    $prefix = $serendipity['dbPrefix'];
 
     # are we even using mysql?
     if ($serendipity['dbType'] != 'mysqli') {
@@ -543,5 +545,76 @@ function serendipity_upgrade_native_utf8() {
     foreach ($targetTables AS $table) {
         serendipity_db_query('ALTER TABLE `' . $table . '` CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci');
     }
+    return true;
+}
+
+/**
+ * Add a UNIQUE constraint to serendipity_authors.username (GHSA-v645-243f-jwgh).
+ *
+ * Before adding the constraint, rename any duplicate usernames so the ALTER/CREATE
+ * succeeds. Duplicates are kept by priority: highest userlevel keeps the original
+ * name; lower-privilege duplicates get a _conflict_N suffix.
+ */
+function serendipity_upgrader_unique_username() {
+    global $serendipity;
+
+    $prefix = $serendipity['dbPrefix'];
+
+    // Find any usernames shared by more than one author row.
+    $dupes = serendipity_db_query(
+        "SELECT username, COUNT(*) AS cnt FROM {$prefix}authors GROUP BY username HAVING cnt > 1",
+        false, 'assoc'
+    );
+
+    if (is_array($dupes)) {
+        foreach ($dupes as $dupe) {
+            $uname = $dupe['username'];
+            // Load all rows for this username ordered by userlevel DESC so the
+            // highest-privilege row is first (and keeps the original name).
+            $rows = serendipity_db_query(
+                "SELECT authorid, userlevel FROM {$prefix}authors
+                  WHERE username = '" . serendipity_db_escape_string($uname) . "'
+                  ORDER BY userlevel DESC, authorid ASC",
+                false, 'assoc'
+            );
+            if (!is_array($rows)) continue;
+            // Skip the first row (highest privilege keeps the name); rename the rest.
+            array_shift($rows);
+            $n = 1;
+            foreach ($rows as $row) {
+                $new_name = serendipity_db_escape_string($uname . '_conflict_' . $n);
+                serendipity_db_query(
+                    "UPDATE {$prefix}authors SET username = '{$new_name}' WHERE authorid = " . (int)$row['authorid']
+                );
+                $n++;
+            }
+        }
+    }
+
+    // Add the UNIQUE constraint using the appropriate syntax for each backend.
+    switch ($serendipity['dbType']) {
+        case 'sqlite':
+        case 'sqlite3':
+        case 'sqlite3oo':
+        case 'pdo-sqlite':
+            serendipity_db_query(
+                "CREATE UNIQUE INDEX IF NOT EXISTS authors_username_unique ON {$prefix}authors (username)"
+            );
+            break;
+
+        case 'pdo-postgres':
+        case 'postgres':
+            serendipity_db_query(
+                "ALTER TABLE {$prefix}authors ADD CONSTRAINT authors_username_unique UNIQUE (username)"
+            );
+            break;
+
+        default: // mysqli / mysql
+            serendipity_db_query(
+                "ALTER TABLE {$prefix}authors ADD UNIQUE INDEX authors_username (username)"
+            );
+            break;
+    }
+
     return true;
 }
