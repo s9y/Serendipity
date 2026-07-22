@@ -24,7 +24,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.phpversion }}
-        extensions: pdo-sqlite intl-78.3
+        extensions: pdo-sqlite
         tools: phpunit
         coverage: none
       env:
