@@ -6,9 +6,6 @@ on:
   push:
   pull_request:
     types: [opened]
-# TODO: enable to run once a week regardless of commits, but this will expire if repo is inactive for a longer time
-#  schedule:
-#    - cron: '12 3 4 * *'
 
 jobs:
   test-php:
@@ -29,7 +26,6 @@ jobs:
         php-version: ${{ matrix.phpversion }}
         extensions: pdo-sqlite
         tools: phpunit
-        # TODO: enable coverage check
         coverage: none
       env:
         fail-fast: true

@@ -51,6 +51,11 @@ class functionsSmartyTest extends PHPUnit\Framework\TestCase
     {
         global $serendipity;
 
+        if (version_compare(PHP_VERSION, '8.1.0', '>') && version_compare(PHP_VERSION, '8.2.0', '<')) {
+            // the strftime polyfill fails in the pipeline because of a missing locale under PHP 8.1
+            @setlocale(LC_TIME, ['en_US', 'en_US.UTF-8', 'en-US']);
+        }
+
         $success = serendipity_smarty_init();
 
         $this->assertEquals(true, $success);
