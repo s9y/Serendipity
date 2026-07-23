@@ -132,7 +132,7 @@ if (!isset($serendipity['expose_s9y'])) {
 // If set to true (in serendipity_config_local.inc.php) this prevents using imap_8bit
 // functions to send a mail, and use base64 encoding instead
 if (!isset($serendipity['forceBase64'])) {
-    $serendipity['forceBase64'] = false; 
+    $serendipity['forceBase64'] = false;
 }
 
 // Should IFRAMEs be used for previewing entries and sending trackbacks?
@@ -303,7 +303,7 @@ if (!is_readable($local_config)) {
 include($local_config);
 
 if ($serendipity['production'] === 'debug') {
-    error_reporting(E_ALL ^ E_NOTICE); 
+    error_reporting(E_ALL ^ E_NOTICE);
 }
 if ($serendipity['production'] === false) {
     error_reporting(E_ALL & ~(E_NOTICE));
@@ -355,7 +355,7 @@ if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendip
     // The autodetected baseURL can be manipulated in some server setups as $_SERVER['HTTP_HOST'] is
     // choosable by the client. We now do some checks to limit this vector as much as possible.
      $baseURLChecked = false;
-    
+
     // First, check that the constructed URL looks at least vaguely correct
     $constructedBaseURL = filter_var($constructedBaseURL, FILTER_VALIDATE_URL);
     if ($constructedBaseURL) {
@@ -380,24 +380,26 @@ if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendip
 
 // If a user is logged in, fetch his preferences. He possibly wants to have a different language
 if (IS_installed === true && php_sapi_name() !== 'cli') {
-    // Import HTTP auth (mostly used for RSS feeds)
-    if ($serendipity['useHTTP-Auth'] && (isset($_REQUEST['http_auth']) || isset($_SERVER['PHP_AUTH_USER']))) {
-        if (!isset($_SERVER['PHP_AUTH_USER'])) {
-            header("WWW-Authenticate: Basic realm=\"Feed Login\"");
-            header("HTTP/1.0 401 Unauthorized");
-            header("Status: 401 Unauthorized");
-            exit;
-        } else {
-            if (!isset($serendipity['POST']['user'])) {
-                $serendipity['POST']['user'] = $_SERVER['PHP_AUTH_USER'];
+    if (!isset($serendipity['POST']['user']) || !isset($serendipity['POST']['pass'])) {
+        // Import HTTP auth (mostly used for RSS feeds)
+        if ($serendipity['useHTTP-Auth'] && (isset($_REQUEST['http_auth']) || isset($_SERVER['PHP_AUTH_USER']))) {
+            if (!isset($_SERVER['PHP_AUTH_USER'])) {
+                header("WWW-Authenticate: Basic realm=\"Feed Login\"");
+                header("HTTP/1.0 401 Unauthorized");
+                header("Status: 401 Unauthorized");
+                exit;
+            } else {
+                if (!isset($serendipity['POST']['user'])) {
+                    $serendipity['POST']['user'] = $_SERVER['PHP_AUTH_USER'];
+                }
+                if (!isset($serendipity['POST']['pass'])) {
+                    $serendipity['POST']['pass'] = $_SERVER['PHP_AUTH_PW'];
+                }
             }
-            if (!isset($serendipity['POST']['pass'])) {
-                $serendipity['POST']['pass'] = $_SERVER['PHP_AUTH_PW'];
-            }
+        } elseif (isset($_REQUEST['http_auth_user']) && isset($_REQUEST['http_auth_pw'])) {
+            $serendipity['POST']['user'] = $_REQUEST['http_auth_user'];
+            $serendipity['POST']['pass'] = $_REQUEST['http_auth_pw'];
         }
-    } elseif (isset($_REQUEST['http_auth_user']) && isset($_REQUEST['http_auth_pw'])) {
-        $serendipity['POST']['user'] = $_REQUEST['http_auth_user'];
-        $serendipity['POST']['pass'] = $_REQUEST['http_auth_pw'];
     }
 
     serendipity_login(false);
@@ -519,7 +521,7 @@ if (!isset($serendipity['useInternalCache'])) {
 if (!isset($serendipity['imagemagick_thumb_parameters'])) {
     // Sets a subset of the old lighthouse recommended jpeg settings, plus an unsharp filter to improve
     // image quality when resizing.
-    // 
+    //
     // Set a variable like below in your serendpity_config_local.inc.php with your own settings
     $serendipity['imagemagick_thumb_parameters'] = [ 'image/jpeg' => '-sampling-factor 4:2:0 -unsharp 0x0.75+0.75+0.008 -strip -quality 85 -interlace JPEG',
                             'image/avif' => '-sampling-factor 4:2:0 -unsharp 0x0.75+0.75+0.008 -strip -quality 60',
