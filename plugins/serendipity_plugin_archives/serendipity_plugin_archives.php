@@ -14,7 +14,7 @@ class serendipity_plugin_archives extends serendipity_plugin
         $propbag->add('description',   BROWSE_ARCHIVES);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.1');
+        $propbag->add('version',       '1.2');
         $propbag->add('configuration', array('title', 'frequency', 'count', 'show_count', 'hide_zero_count'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
@@ -94,7 +94,21 @@ class serendipity_plugin_archives extends serendipity_plugin
             $dist_sql = 'count(DISTINCT e.id) AS orderkey';
         }
 
-        for($x = 0; $x < $max_x; $x++) {
+         $entries_query = "SELECT
+                                timestamp
+                           FROM {$serendipity['dbPrefix']}entries
+                           ORDER BY timestamp ASC
+                           LIMIT 1";
+
+        $first_entry = serendipity_db_query($entries_query, true);
+        $first_timestamp = $ts;
+        if (is_array($first_entry)) {
+            $first_timestamp = $first_entry['timestamp'];
+        }
+
+        $output = [];
+        $last_round = false;
+        while(count($output) < $max_x && ($ts >= $first_timestamp || $last_round)) {
             $current_ts = $ts;
             switch($freq) {
                 case 'months' :
@@ -189,10 +203,21 @@ class serendipity_plugin_archives extends serendipity_plugin
             }
 
             if (!$hidden_by_zero_count) {
-                echo '    <li><a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a></li>' . "\n";
+                $output[] = '    <li><a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a></li>' . "\n";
             }
+
+            // With few entries, the timestamp of the last iteration can be before the first entry.
+            // So run one more time to be sure we got all entries.
+            if ($ts < $first_timestamp && $last_round) {
+                break;
+            }
+            if ($ts < $first_timestamp) {
+                $last_round = true;
+            } 
         }
 
+        $output = array_slice($output, 0, $max_x);
+        echo join($output);
         echo '    <li><a href="'. $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage">' . RECENT . '</a></li>' . "\n";
         echo '    <li><a href="'. serendipity_rewriteURL(PATH_ARCHIVE . $add_query) .'">' . OLDER . '</a></li>'. "\n";
         echo '</ul>' . "\n";
