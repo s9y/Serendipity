@@ -86,8 +86,8 @@ else
             echo "   - $2/upgrade.sh [744]"
             chmod 744 "$2/upgrade.sh"
 
-            echo "   - $2/bundled-libs/create_release.sh [766]"
-            chmod 766 "$2/bundled-libs/create_release.sh"
+            echo "   - $2/bundled-libs/create_release.sh [remove]"
+            rm -f "$2/bundled-libs/create_release.sh"
             
             echo "   - $2/.github [remove]"
             rm -rf "$2/.github"
