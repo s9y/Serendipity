@@ -89,8 +89,12 @@ else
             echo "   - $2/bundled-libs/create_release.sh [766]"
             chmod 766 "$2/bundled-libs/create_release.sh"
             
+            echo "   - $2/.github [remove]"
+            rm -rf "$2/.github"
+
             echo "   - $2/tests [remove]"
             rm -rf "$2/tests"
+
             echo "    [DONE]"
             echo ""
 
