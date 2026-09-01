@@ -112,19 +112,8 @@ else
                 fi
             fi
             echo ""
-        echo "7. Altering CVS to be useful for anonymous users..."
-            echo "   - Removing CVS branch tag, so that a user can upgrade to latest CVS"
-            find "$2" -type f -name Tag -exec rm {} \;
-            echo "       [DONE]"
 
-            echo "   - Inserting ANONYMOUS user instead of Developer account"
-            for i in `find $2 -type f -name Root` ; do
-                echo ':pserver:anonymous@cvs.sf.net:/cvsroot/php-blog' > $i;
-            done
-            echo "       [DONE]"
-            echo ""
-
-        echo "8. Creating .tgz file $1"
+        echo "7. Creating .tgz file $1"
             tar --owner=$3 --group=$4 -czf "$1" "$2"
             echo "    [DONE]"
             echo ""
