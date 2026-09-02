@@ -251,7 +251,7 @@ $metadata['template_file'] = 'feed_' . $file_version . '.tpl';
 serendipity_smarty_init();
 serendipity_plugin_api::hook_event('frontend_rss', $metadata);
 
-$self_url = ($_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . serendipity_specialchars($_SERVER['REQUEST_URI']);
+$self_url = ($_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . serendipity_specialchars($_SERVER['HTTP_HOST']) . serendipity_specialchars($_SERVER['REQUEST_URI']);
 if (!is_array($entries)) {
     $entries = array();
 }
