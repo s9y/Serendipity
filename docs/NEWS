@@ -4,6 +4,8 @@ Version 2.7-alpha1 ()
    * Add $serendipity['sqlitePragmas'] variable to configure the sqlite
      database file. Thanks to @mmitch
 
+   * Escape HTTP_HOST in RSS file (thanks to @arpitjain099)
+
 Version 2.6.1 (July 22th, 2026)
 ------------------------------------------------------------------------
 
