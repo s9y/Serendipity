@@ -16,7 +16,7 @@
 echo ""
 echo "-[serendipity create_release.sh START]---------------------------------"
 
-if [ "x$1" = "x" ] || [ "x$2" = "x" ] || [ "x$3" = "x" ] || [ "x$4" = "x" ];
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]
 then
     echo "usage: ./create_release.sh
             [tar.gz dump filename]
@@ -41,10 +41,10 @@ else
         echo "         to bundle a new release version!"
         echo ""
         echo "Hit [ENTER] to continue, or abort this script (CTRL-C)"
-        read -n 1
+        read -r _
         gensums=0
-        which php > /dev/null
-        if [ $? -ne 0 ]
+        
+        if which php > /dev/null;
         then
             gensums=-1
             echo "NOTICE: Checksums will not be generated because PHP is not available."
@@ -52,7 +52,7 @@ else
             echo "        run serendipity_generateFTPChecksums.php manually."
             echo ""
             echo "Hit [ENTER] to continue, or abort this script (CTRL-C)"
-            read -n 1
+            read -r _
         fi
 
         echo "1. Operating on basedirectory ../../$2"
@@ -103,7 +103,7 @@ else
             then
                 echo "    [SKIP]"
             else
-                if (echo "true" | php -B "define('IN_serendipity', true);" -F $2/bundled-libs/serendipity_generateFTPChecksums.php)
+                if (echo "true" | php -B "define('IN_serendipity', true);" -F "$2"/bundled-libs/serendipity_generateFTPChecksums.php)
                 then
                     echo "    [DONE]"
                 else
@@ -114,7 +114,7 @@ else
             echo ""
 
         echo "7. Creating .tgz file $1"
-            tar --owner=$3 --group=$4 -czf "$1" "$2"
+            tar --owner="$3" --group="$4" -czf "$1" "$2"
             echo "    [DONE]"
             echo ""
 
