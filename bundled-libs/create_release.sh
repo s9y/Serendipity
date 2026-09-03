@@ -34,7 +34,7 @@ then
     echo ""
     exit 1
 else
-    if test "../../$2"
+    if [ -d "../../$2" ]
     then
         echo "WARNING: Running this script in a productive blog environment will do"
         echo "         serious harm! Only use it, if you are a developer and about"
