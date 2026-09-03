@@ -34,7 +34,14 @@ then
     echo ""
     exit 1
 else
-    if [ -d "../../$2" ]
+    if [ -d "../../$2/.git" ]
+    then
+	echo "ERROR: The given installation directory contains a .git/ subdirectory"
+	echo "       at ../../$2/.git"
+	echo "       This is not supported.  Please follow the release instructions"
+	echo "       at https://github.com/s9y/Serendipity/wiki/Creating-a-release"
+	echo "       (eg. use 'git archive' and run this script on the export)"
+    elif [ -d "../../$2" ]
     then
         echo "WARNING: Running this script in a productive blog environment will do"
         echo "         serious harm! Only use it, if you are a developer and about"
