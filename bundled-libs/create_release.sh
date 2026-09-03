@@ -16,7 +16,7 @@
 echo ""
 echo "-[serendipity create_release.sh START]---------------------------------"
 
-if [ "x$1" = "x" ] || [ "x$2" = "x" ] || [ "x$3" = "x" ] || [ "x$4" = "x" ];
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]
 then
     echo "usage: ./create_release.sh
             [tar.gz dump filename]
@@ -34,17 +34,24 @@ then
     echo ""
     exit 1
 else
-    if test "../../$2"
+    if [ -d "../../$2/.git" ]
+    then
+	echo "ERROR: The given installation directory contains a .git/ subdirectory"
+	echo "       at ../../$2/.git"
+	echo "       This is not supported.  Please follow the release instructions"
+	echo "       at https://github.com/s9y/Serendipity/wiki/Creating-a-release"
+	echo "       (eg. use 'git archive' and run this script on the export)"
+    elif [ -d "../../$2" ]
     then
         echo "WARNING: Running this script in a productive blog environment will do"
         echo "         serious harm! Only use it, if you are a developer and about"
         echo "         to bundle a new release version!"
         echo ""
         echo "Hit [ENTER] to continue, or abort this script (CTRL-C)"
-        read -n 1
+        read -r _
         gensums=0
-        which php > /dev/null
-        if [ $? -ne 0 ]
+        
+        if which php > /dev/null;
         then
             gensums=-1
             echo "NOTICE: Checksums will not be generated because PHP is not available."
@@ -52,7 +59,7 @@ else
             echo "        run serendipity_generateFTPChecksums.php manually."
             echo ""
             echo "Hit [ENTER] to continue, or abort this script (CTRL-C)"
-            read -n 1
+            read -r _
         fi
 
         echo "1. Operating on basedirectory ../../$2"
@@ -86,11 +93,15 @@ else
             echo "   - $2/upgrade.sh [744]"
             chmod 744 "$2/upgrade.sh"
 
-            echo "   - $2/bundled-libs/create_release.sh [766]"
-            chmod 766 "$2/bundled-libs/create_release.sh"
+            echo "   - $2/bundled-libs/create_release.sh [remove]"
+            rm -f "$2/bundled-libs/create_release.sh"
             
+            echo "   - $2/.github [remove]"
+            rm -rf "$2/.github"
+
             echo "   - $2/tests [remove]"
             rm -rf "$2/tests"
+
             echo "    [DONE]"
             echo ""
 
@@ -99,7 +110,7 @@ else
             then
                 echo "    [SKIP]"
             else
-                if (echo "true" | php -B "define('IN_serendipity', true);" -F $2/bundled-libs/serendipity_generateFTPChecksums.php)
+                if (echo "true" | php -B "define('IN_serendipity', true);" -F "$2"/bundled-libs/serendipity_generateFTPChecksums.php)
                 then
                     echo "    [DONE]"
                 else
@@ -108,20 +119,9 @@ else
                 fi
             fi
             echo ""
-        echo "7. Altering CVS to be useful for anonymous users..."
-            echo "   - Removing CVS branch tag, so that a user can upgrade to latest CVS"
-            find "$2" -type f -name Tag -exec rm {} \;
-            echo "       [DONE]"
 
-            echo "   - Inserting ANONYMOUS user instead of Developer account"
-            for i in `find $2 -type f -name Root` ; do
-                echo ':pserver:anonymous@cvs.sf.net:/cvsroot/php-blog' > $i;
-            done
-            echo "       [DONE]"
-            echo ""
-
-        echo "8. Creating .tgz file $1"
-            tar --owner=$3 --group=$4 -czf "$1" "$2"
+        echo "7. Creating .tgz file $1"
+            tar --owner="$3" --group="$4" -czf "$1" "$2"
             echo "    [DONE]"
             echo ""
 
