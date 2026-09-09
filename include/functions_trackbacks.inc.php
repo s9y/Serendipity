@@ -122,12 +122,22 @@ function _serendipity_send($loc, $data, $contenttype = null) {
         $target['query'] = '?' . str_replace('&amp;', '&', $target['query']);
     }
 
-    if ($target['scheme'] == 'https' && empty($target['port'])) {
-       $uri = $target['scheme'] . '://' . $target['host'] . $target['path'] . $target['query'];
-    } elseif (!is_numeric($target['port'])) {
-       $target['port'] = 80;
-       $uri = $target['scheme'] . '://' . $target['host'] . ':' . $target['port'] . $target['path'] . $target['query'];
+    // Rebuild the URI. The previous form had two branches, one for https with no
+    // port and one for a non-numeric port, so a location carrying an explicit
+    // port matched neither and left $uri undefined: http://host:8080/tb,
+    // https://host:8443/tb and even https://host:443/tb all fell through. It
+    // also forced :80 onto every plain http location. Keep an explicit port,
+    // drop the scheme's default one, and default a missing path to '/'.
+    $uri = $target['scheme'] . '://' . $target['host'];
+    if (!empty($target['port']) && is_numeric($target['port'])) {
+        $port = (int)$target['port'];
+        $isDefaultPort = ($target['scheme'] == 'https' && $port == 443)
+                      || ($target['scheme'] == 'http'  && $port == 80);
+        if (!$isDefaultPort) {
+            $uri .= ':' . $port;
+        }
     }
+    $uri .= (empty($target['path']) ? '/' : $target['path']) . $target['query'];
 
     require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
     $options = array('follow_redirects' => true, 'max_redirects' => 5);
