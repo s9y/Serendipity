@@ -1,6 +1,12 @@
 Version 2.7-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix trackback and pingback delivery to a URL carrying an explicit port.
+     The request URI was only built for https without a port, or for a
+     non-numeric port, so http://host:8080/, https://host:8443/ and even
+     https://host:443/ matched neither branch and left the URI undefined.
+     Plain http locations no longer get a redundant :80 either.
+
    * Add $serendipity['sqlitePragmas'] variable to configure the sqlite
      database file. Thanks to @mmitch
 
